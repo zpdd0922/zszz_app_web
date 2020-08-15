@@ -1,0 +1,62 @@
+.help-center-list {
+  width: 100%;
+  min-height: 100%;
+  background-color: $color-block-bg;
+  
+  .list-item {
+
+    h3 {
+      line-height: 1.5em;
+      display: flex;
+      font-weight: 500;
+      padding: .15rem;
+      border-bottom: 1px solid $color-separate-line;
+      font-size: .14rem;
+
+
+      span {
+        position: relative;
+        padding-left: .12rem;
+        flex: 1;
+
+        &::before {
+          @include prefix-icon(.044rem, .044rem, 45deg);
+          background-color: $color-prefix-icon;
+        }
+      }
+
+      i {
+        @include arrow('right', .08rem, 1px, $color-arrow);
+      }
+
+      &.active i {
+        @include arrow('bottom', .08rem, 1px, $color-arrow);
+      }
+    }
+
+  }
+
+  .item {
+    position: relative;
+    padding: .1rem .15rem .1rem .27rem;
+    line-height: 1.5em;
+    color: $color-link-txt;
+    background-color: $color-bg;
+    font-size: .13rem;
+  }
+
+  .item::before {
+    content: " ";
+    position: absolute;
+    left: .15rem;
+    right: .15rem;
+    height: 1px;
+    color: $color-separate-line;
+    bottom: -1px;
+    border-bottom: 1px solid $color-separate-line;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+  }
+}
