@@ -1,0 +1,91 @@
+.com-base-app-dialog {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .com-dialog-mark {
+    position: fixed;
+    z-index: 98;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+  }
+
+  .com-dialog-body {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99; // padding: 0 15px 15px;
+    width: 65%;
+    max-height: 85%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    &>.content {
+      flex: auto;
+      width: 100%;
+      background: $dialog-content-background;
+      border-radius: 4px;
+      padding: 0 .16rem;
+      box-sizing: border-box;
+    }
+  }
+
+  .close-outframe {
+    flex: none;
+    height: .5rem;
+    .close-frame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+     
+      .column-line {
+        display: block;
+        width: 1px;
+        height: .25rem;
+        background-color: $dialog-content-background;
+      }
+
+      .icon-none-1 {
+        font-size: .25rem;
+
+        &::before {
+          color: $dialog-content-background; 
+        }
+      }
+    }
+
+  }
+
+
+
+  // 对话框进度动画
+  .com-drop-enter-active {
+    transition: all 0.5s ease;
+  }
+
+  .com-drop-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  .com-drop-enter {
+    transform: translateY(-80%);
+    opacity: 0;
+  }
+
+  .com-drop-leave-active {
+    transform: translateY(-80%);
+    opacity: 0;
+  }
+}

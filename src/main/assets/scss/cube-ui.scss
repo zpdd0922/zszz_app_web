@@ -1,0 +1,143 @@
+.cube-form {
+  background-color: inherit;
+}
+
+.cube-radio-group,
+.cube-checkbox-group {
+  background-color: inherit;
+}
+
+.cube-form-group-legend {
+  position: relative;
+}
+
+.cube-checkbox-wrap {
+  padding: .075rem 0;
+}
+
+.cube-input {
+  background-color: inherit;
+}
+
+.cube-select-text {
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.cube-switch {
+  .cube-switch-ui {
+    font-size: .12rem;
+    width: 4em;
+    height: 2em;
+    line-height: 2em;
+    text-indent: .5em;
+    font-style: normal;
+    color: $color-form-normal;
+
+    &:after,
+    &:before {
+      background-color: $color-form-normal;
+      border-color: $color-form-normal;
+    }
+
+  }
+
+  .cube-switch-input:checked+.cube-switch-ui {
+    background-color: $color-form-active;
+    border-color: $color-form-active;
+
+    &:after {
+      transform: translateX(2em);
+    }
+  }
+}
+
+
+
+.cube-checkbox_checked .cube-checkbox-ui i {
+  color: $color-form-active;
+}
+
+.cube-radio-group[data-col=true] .cube-radio,
+.cube-radio-group[data-horz=true] .cube-radio {
+  padding-left: .05rem;
+  padding-right: .05rem;
+}
+
+.cube-radio_selected .cube-radio-ui {
+  background-color: $color-form-active;
+}
+
+.cube-radio-hollow.cube-radio_selected .cube-radio-ui:before {
+  color: $color-form-active;
+}
+
+.cube-radio-hollow.cube-radio_selected .cube-radio-ui i:before {
+  background-color: $color-form-active;
+}
+
+
+.cube-btn {
+  background-color: $color-btn-bg;
+  padding: 1em;
+  font-size: .15rem;
+
+  &:active {
+    background-color: $color-btn-bg-active;
+  }
+}
+
+.cube-btn_disabled,
+.cube-btn_disabled:hover,
+.cube-btn_disabled:active {
+  background-color: $color-btn-bg-disable;
+}
+
+.cube-slide-dots>span.active {
+  background: $color-form-active;
+}
+
+.cube-dialog-main{
+  width: .8 * $screen-width;
+  background-color: $color-dialog-bg;
+  color: $color-dialog-txt;
+  font-size: .13rem;
+}
+
+.cube-dialog-title {
+  background-color: $color-dialog-title-bg;
+  color: $color-dialog-title-txt;
+  padding: .17rem .08rem .1rem;
+  font-size: .15rem;
+
+  .cube-dialog-title-def{
+    margin: 0;
+  }
+}
+
+.cube-dialog-content{
+  font-size: .13rem;
+}
+
+.cube-dialog-btn,
+.cube-dialog-btn:hover,
+.cube-dialog-btn:active {
+  padding: .12rem .05rem;
+  font-size: .14rem;
+  background-color: $color-dialog-btn-bg;
+  color: $color-dialog-btn-txt-disable;
+}
+
+.cube-dialog-btn_highlight{
+  color: $color-dialog-btn-txt;
+}
+
+.cube-dialog-btn_highlight:hover,
+.cube-dialog-btn_highlight:active {
+  color: $color-dialog-btn-txt-active;
+}
+
+

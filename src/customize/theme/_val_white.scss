@@ -1,0 +1,135 @@
+/*
+  ---- 颜色定义规范
+  ----
+  ---- 色
+*/
+@import './val';
+
+$color-main: #9e0b0f;
+
+
+/* 主色 */
+$color-bg: #f8f8f8; // 默认背景色
+$color-txt: #333; // 默认字体
+$color-txt-rev: #fff; // 默认字体反转
+$color-txt-sub: #ccc; // 默认二级字体
+$color-txt-highlight: $color-main;
+
+/* 头部 */
+$color-header-bg: #c3a55b;
+$color-header-txt: $color-txt;
+
+/* 内容 */
+$color-content-bg: #fff;
+$color-content-txt: $color-txt;
+
+/* 底部 */
+$color-footer-bg: #333;
+$color-footer-txt: #dcdcdc;
+
+/* 导航 */
+$color-nav-bg: #c3a55b;
+$color-nav-txt: #fff;
+$color-nav-txt-active: $color-main;
+$color-nav-icon: #f1f1f1;
+
+/* 可操作块 */
+$color-block-bg: #fff;
+$color-block-bg-active: rgba(204, 204, 204, 0.1);
+
+/* 超链接 */
+$color-link-txt: #6a9cf8;
+$color-link-txt-active: $color-main;
+$color-link-txt-disable: #666;
+
+/* 分割线颜色 */
+$color-separate-line: #EEF2F7;
+$color-arrow: #A1AEC3;
+$color-prefix-icon: #6a9cf8;
+
+$color-normal: #fff;
+$color-flat: #b5b4b4;     // 置灰字体色
+$color-rise: #fb3c3c; // 涨颜色
+$color-fall: #39d335; // 跌颜色
+$color-success: #57bd51; // 成功颜色
+$color-error: #ef5a61; // 错误颜色
+$color-warning: #ff9844; // 警告颜色
+$color-prompt: #2eccfc; // 提示颜色
+$color-prompt-bg: #b3e1f0; // 提示背景颜色
+
+$color-mask: #333;
+$color-mask-opacity: rgba(51, 51, 51, 0.3);
+
+
+/* 公共按钮组件 */ // 如果按钮不设置背景色，则颜色作为按钮颜色
+$color-btn-txt: $color-txt-rev;
+$color-btn-bg-disable: #ccc; 
+$color-btn-bg: $color-main;
+$color-btn-bg-active: #620306;
+
+/* 公共input组件 */
+$color-input-bg: #f0f0f0;
+$color-input-border: #ccc;
+$color-input-border-highlight: $color-main;
+$color-input-txt: #c7cce6; // input placeholder颜色
+$color-input-txt-placeholder: #7b8191; // input placeholder颜色
+$color-input-icon: #a7acb9; // input icon颜色
+
+/* 自定义冒泡提示颜色 */
+$color-toast-bg: #70b9e4;
+$color-toast-bg-success: #70b9e4;
+$color-toast-bg-error: #ef5a61;
+$color-toast-border: #fff;
+$color-toast-txt: $color-txt-rev;
+
+/* cube from 组件 */
+$color-form-lengend-txt: #999;
+$color-form-lengend-highlight-txt: $color-main;
+$color-form-item-label-txt: $color-txt;
+$color-form-item-field-txt: $color-txt;
+$color-form-bg: inherit;
+$color-form-normal: #fff;
+$color-form-active: $color-main;
+
+/* 弹出对话框颜色 */
+$color-dialog-bg: #fff;
+$color-dialog-txt: $color-txt;
+$color-dialog-title-bg: #fff;
+$color-dialog-title-txt: $color-txt;
+$color-dialog-btn-bg: #f0f0f0;
+$color-dialog-btn-txt: #ff9844;
+$color-dialog-btn-txt-disable: #999;
+$color-dialog-btn-txt-active: #f07c1d;
+
+$color-progress-bg: #fff;
+$color-progress-item-bg: #8f8f8f;
+$color-progress-item-txt: #8f8f8f;
+$color-progress-item-bg-active: #29a1f9;
+$color-progress-item-txt-active: $color-txt;
+$color-progress-item-bg-success: #29a1f9;
+$color-progress-item-txt-success: $color-txt;
+
+$color-top-nav-bg: #fff;
+$color-top-nav-item-bg: #fff;
+$color-top-nav-item-txt: #29a1f9;
+$color-top-nav-item-bg-active: #29a1f9;
+$color-top-nav-item-txt-active: $color-txt-rev;
+$color-top-nav-item-bg-disable: #eee;
+$color-top-nav-item-txt-disable: $color-txt-sub;
+
+$color-camera-title-txt: #999;
+$color-camera-btn-bg: #29a1f9;
+$color-camera-btn-txt: #fff;
+$color-camera-update-txt: #fff;
+$color-camera-reload-bg: #ccc;
+$color-camera-reload-txt: #d7761e;
+
+$color-triangle-icon-bg: $color-main;
+$color-triangle-icon-txt: #fff;
+
+$color-signature-title-txt: #999;
+$color-signature-btn-bg: #29a1f9;
+$color-signature-btn-txt: #fff;
+$color-signature-update-txt: #fff;
+$color-signature-reload-bg: #ccc;
+$color-signature-reload-txt: #d7761e;

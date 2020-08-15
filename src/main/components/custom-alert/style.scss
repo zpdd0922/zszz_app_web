@@ -1,0 +1,19 @@
+.custom-dialog {
+    .cube-dialog-main {
+        width: 80%;
+        margin: auto;
+    }
+
+    .cube-dialog-content {
+        max-height: 50vh;
+        overflow-y: scroll;
+        overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cube-popup-content {
+        transform: none;
+        margin-left: -50%;
+        margin-top: -50%;
+    }
+}

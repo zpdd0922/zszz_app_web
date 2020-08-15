@@ -1,0 +1,86 @@
+.base-tips-toast {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+
+  .base-tips-mask {
+    pointer-events: auto;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: $color-mask;
+    opacity: .1;
+    pointer-events: auto
+  }
+
+  .base-tips-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translate(100%, 100%);
+  }
+
+  .base-tips-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    pointer-events: auto;
+    top: -50%;
+    left: -50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    padding: 13px 16px;
+
+    background-color: $color-toast-bg;
+    color: $color-toast-txt;
+    box-shadow: 0px 0px 3px $color-toast-border;
+    border-radius: 2px;
+  }
+
+  .toast-txt {
+    font-size: 13px;
+  }
+
+}
+
+.base-tips-toast-error {
+  .base-tips-content {
+    background-color: $color-toast-bg-error;
+  }
+}
+
+.base-tips-toast-drop-enter-active {
+  animation: base-tips-toast-in .2s;
+}
+
+.base-tips-toast-drop-leave-active {
+  animation: base-tips-toast-out .2s;
+}
+
+@keyframes base-tips-toast-in {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes base-tips-toast-out {
+  0% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,27 @@
+
+.base-com-cells {
+  position: relative;
+  line-height: 1.5;
+  font-size: inherit;
+  overflow: hidden;
+}
+
+.base-com-cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.base-com-cell-hd {
+  display: block;
+}
+
+.base-com-cell-bd {
+  flex: 1;
+  min-width: 0;
+}
+
+.base-com-cell-ft {
+  position: relative;
+  text-align: right;
+}

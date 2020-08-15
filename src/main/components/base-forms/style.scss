@@ -1,0 +1,39 @@
+.base-form-group {
+  position: relative;
+  line-height: 1.5;
+  font-size: inherit;
+  overflow: hidden;
+}
+
+.base-form-group-legend {
+  font-size: $form-lengend-font;
+  color: $color-form-lengend-txt;
+  padding: 0 $padding-lr;
+  line-height: 2;
+}
+
+.base-form-group-content {
+  padding: 0 $padding-lr;
+}
+
+.base-form-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  @include border-1px;
+}
+
+.base-form-item-label {
+  width: 8em;
+  padding-right: 1em;
+  font-size: $form-item-label-font;
+  text-align: left;
+  color: $color-form-item-label-txt;
+}
+
+.base-form-item-field {
+  font-size: $form-item-field-font;
+  color: $color-form-item-field-txt;
+  flex: 1;
+
+}

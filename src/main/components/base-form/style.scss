@@ -1,0 +1,97 @@
+.base-form-list {
+  padding-top: .1rem;
+
+  .form-item {
+    margin: .05rem .2rem;
+  }
+}
+
+.base-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: $color-input-bg;
+
+  input {
+    background-color: $color-input-bg;
+    height: .5rem;
+    width: 100%;
+    line-height: 1.5em;
+    font-size: .15rem;
+    border-radius: 4px;
+    padding-left: 1em;
+    padding-right: 1em;
+    border: none;
+    outline: none;
+  }
+
+
+  .input-code {
+    width: 1.3rem;
+    height: .5rem;
+    font-size: .15rem;
+    display: block;
+    text-align: center;
+    line-height: .5rem;
+    color: $color-btn-txt;
+    background-color: $color-btn-bg-disable;
+
+    &.active {
+      background-color: $color-btn-bg;
+
+      &:active {
+        background-color: $color-btn-bg-active;
+      }
+    }
+  }
+
+  .input-captcha {
+    width: 1.5rem;
+    height: .5rem;
+    display: block;
+    overflow: hidden;
+  }
+
+  .input-country {
+    position: relative;
+    padding-left: .16rem;
+    padding-right: .25rem;
+    @include border-name(1px, $color-input-border, solid, right);
+
+    &:after {
+      content: '';
+      border-left: .06rem solid transparent;
+      border-right: .06rem solid transparent;
+      border-top: .06rem solid $color-input-border;
+      position: absolute;
+      right: .07rem;
+      bottom: .03rem;
+    }
+  }
+
+
+
+  .input-icon {
+    width: .45rem;
+    height: .45rem;
+    display: block;
+    position: relative;
+
+    .icon-eye {
+      width: .2rem;
+      height: .2rem;
+      @include posCenter();
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    .icon-eye-open {
+      background-image: url('~@/main/assets/images/icon-eye-open.png');
+    }
+
+    .icon-eye-close {
+      background-image: url('~@/main/assets/images/icon-eye-close.png');
+    }
+  }
+}

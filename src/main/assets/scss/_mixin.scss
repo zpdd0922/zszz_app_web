@@ -1,0 +1,290 @@
+/* stylelint-disabled */
+@mixin bg-image($names, $ratio:1) {
+
+  @each $cls,
+  $name in $names {
+    $ratioString: if($ratio !=1, "@#{$ratio}x", "");
+
+    @if $name {
+      #{$cls} {
+        background-image: url('#{$name}#{$ratioString}.png');
+      }
+    }
+
+    @else {
+      background-image: url('#{$cls}#{$ratioString}.png');
+    }
+  }
+}
+
+@mixin retina-image($names, $ratios) {
+  @each $r in $ratios {
+    @if $r !=1 {
+      @media only screen and (-webkit-min-device-pixel-ratio: $r) {
+        @include bg-image($names, $r);
+      }
+    }
+
+    @else {
+      @include bg-image($names);
+    }
+  }
+}
+
+
+@mixin retina-images($names) {
+  @include retina-image($names, (2, 3));
+}
+
+
+// 多行溢出
+@mixin mult-line-ellipsis($line:2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
+// 背景图自适应
+@mixin bg-size() {
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+// 边框
+@mixin border-name($width: 2px, $color:#d7d7d7, $style: solid, $dir:'') {
+  @if $dir==top {
+    border-top: $width $style $color;
+  }
+
+  @else if $dir==bottom {
+    border-bottom: $width $style $color;
+  }
+
+  @else if ($dir==left) {
+    border-left: $width $style $color;
+  }
+
+  @else if ($dir==right) {
+    border-right: $width $style $color;
+  }
+
+  @else {
+    border: $width $style $color;
+  }
+}
+
+// 1px边框
+@mixin border-1px($dir: bottom, $color: $color-separate-line) {
+  position: relative;
+
+  &:after {
+    content: '\0020';
+    position: absolute;
+    background-color: $color;
+
+    @if ($dir==top) {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      transform: scaleY(0.5);
+    }
+
+    @else if ($dir==left) {
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      transform: scaleX(0.5);
+    }
+
+    @else if ($dir==right) {
+      right: 0;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      transform: scaleX(0.5);
+    }
+
+    @else {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      transform: scaleY(0.5);
+    }
+  }
+}
+
+// 锁定图片尺寸
+@mixin fix-image-size() {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+// 前缀icon
+@mixin prefix-icon($width:0, $height:0, $rotate: 0) {
+  content: '\0020';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: $height;
+  width: $width;
+  transform: translateY(-50%) rotate($rotate);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+// 不换行
+@mixin no-wrap() {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 清楚按钮默认样式
+@mixin btn-normal() {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  padding: 0;
+
+  &::after {
+    display: none;
+  }
+}
+
+// 扩展点击区域
+@mixin extend-click() {
+  position: relative;
+
+  &::before {
+    content: '\0020';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
+// 清除浮动
+@mixin clearfix() {
+
+  &:before,
+  &:after {
+    content: '\0020';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+// 仅水平居中
+@mixin pos-x() {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// 水平垂直居中
+@mixin posCenter() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 垂直居中
+@mixin posY($offset:0, $left:true) {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  @if ($left) {
+    left: $offset;
+    right: auto;
+  }
+
+  @else {
+    left: auto;
+    right: $offset;
+  }
+}
+
+// 箭头
+@mixin arrow($dir: 'right', $width:10px, $border:2px, $color:$color-arrow, $poa:($width / 2)) {
+  position: relative;
+
+  &:after {
+    content: '\0020';
+    display: block;
+    width: $width;
+    height: $width;
+    border-top: $border solid $color;
+    border-right: $border solid $color;
+    position: absolute;
+    top: 50%;
+    margin-top: $poa * -1;
+
+    @if ($dir==bottom) {
+      right: 0;
+      transform: rotate(135deg);
+    }
+
+    @else if ($dir==top) {
+      right: 0;
+      transform: rotate(-45deg);
+    }
+
+    @else if ($dir==left) {
+      left: 0;
+      transform: rotate(-135deg);
+    }
+
+    @else {
+      right: 0;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+// 等腰三角形
+@mixin triangle($width, $height, $color, $dir) {
+  $width: $width / 2;
+  $color-border-style: $height solid $color;
+  $transparent-border-style: $width solid transparent;
+  height: 0;
+  width: 0;
+
+  @if ($dir==up) {
+    border-bottom: $color-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  }
+
+  @else if ($dir==right) {
+    border-left: $color-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  }
+
+  @else if ($dir==down) {
+    border-top: $color-border-style;
+    border-left: $transparent-border-style;
+    border-right: $transparent-border-style;
+  }
+
+  @else if ($dir==left) {
+    border-right: $color-border-style;
+    border-top: $transparent-border-style;
+    border-bottom: $transparent-border-style;
+  }
+}
