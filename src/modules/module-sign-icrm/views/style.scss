@@ -1,0 +1,131 @@
+.sign-page-wrap{
+  padding-top: .2rem;
+  .sign-form {
+    padding-top: .1rem;
+  }
+  
+  .form-item {
+    margin: .05rem .2rem;
+    font-size: $form-item-field-font;
+  
+    &.form-btn {
+      margin-top: .25rem;
+    }
+  
+    .item-input {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background-color: $color-input-bg;
+  
+      input {
+        background-color: $color-input-bg;
+        height: .44rem;
+        width: 100%;
+        line-height: 1.5em;
+        font-size: $form-item-field-font;
+        color: $color-form-item-field-txt;
+        border-radius: 4px;
+        padding-left: 1em;
+        padding-right: 1em;
+        border: none;
+        outline: none;
+      }
+    }
+  
+    .item-code {
+      width: 1.3rem;
+      height: .44rem;
+      font-size: $form-item-field-font;
+      color: $color-form-item-field-txt;
+      display: block;
+      text-align: center;
+      line-height: .44rem;
+      color: $color-btn-txt;
+      background-color: $color-btn-bg-disable;
+  
+      &.active {
+        background-color: $color-btn-bg;
+        
+        &:active {
+          background-color: $color-btn-bg-active;
+        }
+      }
+    }
+  
+  
+    .item-captcha {
+      width: 1.5rem;
+      height: .5rem;
+      display: block;
+      overflow: hidden;
+    }
+  
+    .item-country {
+      position: relative;
+      padding-left: .16rem;
+      padding-right: .25rem;
+      @include border-name(1px, $color-input-border, solid, right);
+  
+      &:after {
+        content: '';
+        border-left: .06rem solid transparent;
+        border-right: .06rem solid transparent;
+        border-top: .06rem solid $color-input-border;
+        position: absolute;
+        right: .07rem;
+        bottom: .03rem;
+      }
+    }
+  
+    .item-icon {
+      width: .45rem;
+      height: .45rem;
+      display: block;
+      position: relative;
+  
+      .icon-eye {
+        width: .2rem;
+        height: .2rem;
+        @include posCenter();
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+  
+      .icon-eye-open {
+        background-image: url('~@/modules/module-sign-icrm/assets/images/icon-eye-open.png');
+      }
+  
+      .icon-eye-close {
+        background-image: url('~@/modules/module-sign-icrm/assets/images/icon-eye-close.png');
+      }
+    }
+  
+    .item-link {
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+  
+      a {
+        color: $color-link-txt;
+      }
+    }
+  
+    .item-tips {
+      width: 100%;
+      font-size: .14rem;
+      line-height: 1.5em;
+      margin-top: .05rem;
+      height: 1.5em;
+      background: none;
+      // color: $color-999;
+    }
+  
+    .error-msg {
+      color: $color-error;
+    }
+  }
+  
+}
+
