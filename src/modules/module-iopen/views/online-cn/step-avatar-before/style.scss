@@ -1,0 +1,139 @@
+.olcn-step-avatar-before {
+  .step-content-avatar-upload {
+    padding: .15rem .05rem;
+
+    .avatar-example-box {
+      position: relative;
+      height: 1.8rem;
+      width: 100%;
+  
+      
+      // .avatar-example-center {
+      //   display: inline-block;
+      //   width: 100%;
+      //   height: 100%;
+      //   background-position: center;
+      //   background-size: auto 100%;
+      //   background-repeat: no-repeat;
+      //   background-image: url('~@/modules/module-iopen/assets/images/avatar/mobile.png');
+      // }
+
+    
+      
+      .avatar-example {
+        vertical-align: top;
+        font-size: 0;
+        display: inline-block;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: auto 1.5rem;
+      }
+  
+      .avatar-example-left {
+        width: 30%;
+        background-position: top right;
+        background-size: .35rem 1.5rem;
+        background-image: url('~@/modules/module-iopen/assets/images/avatar/avatar_example_left.png');
+      }
+  
+      .avatar-example-center {
+        width: 40%;
+        background-position: top center;
+        background-size: auto 1.5rem;
+        background-image: url('~@/modules/module-iopen/assets/images/avatar/avatar_example_center.png');
+      }
+  
+      .avatar-example-right {
+        width: 30%;
+        background-position: top left;
+        background-size: .35rem 1.5rem;
+        background-image: url('~@/modules/module-iopen/assets/images/avatar/avatar_example_right.png');
+      }
+
+      // .avatar-example-center-head {
+      //   display: inline-block;
+      //   width: 100%;
+      //   height: 1.5rem;
+      //   background-position: center;
+      //   background-size: auto 50%;
+      //   background-repeat: no-repeat;
+      //   background-image: url('~@/modules/module-iopen/assets/images/avatar/head.png');
+      // }
+    }
+  
+    .tips-true {
+      text-align: center;
+  
+      span {
+        display: inline-block;
+        padding-left: 1.5em;
+        background-image: url('~@/modules/module-iopen/assets/images/avatar/icon-ok.png');
+        background-size: .16rem;
+        background-repeat: no-repeat;
+        background-position: left center;
+        font-size: .16rem;
+      }
+    }
+  }
+
+  
+
+  .avatar-before-desc {
+    padding: .2rem $padding-lr;
+
+    .desc-title {
+      font-size: .13rem;
+    }
+
+    .desc-tips {
+      margin-top: .15rem;
+      font-size: .12rem;
+      line-height: .2rem;
+      letter-spacing: .005rem;
+    }
+    
+    .desc-list {
+      margin-top: .15rem;
+
+      ul {
+        display: flex;
+        justify-content: center;
+
+        li {
+          flex: 1;
+          text-align: center;
+
+          &:not(:last-child) {
+            padding-right: .15rem;
+          }
+        }
+      }
+
+      .item-img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: auto;
+      }
+
+      .item-txt {
+        font-size: .12rem;
+        padding-left: .16rem;
+        margin-top: .05rem;
+        display: inline-block;
+        background-size: .12rem;
+        background-repeat: no-repeat;
+        background-position: left center;
+      }
+
+      .icon-ok {
+        background-image: url('~@/modules/module-iopen/assets/images/id-card/icon-ok.jpg');
+      }
+
+      .icon-err {
+        background-image: url('~@/modules/module-iopen/assets/images/id-card/icon-err.jpg');
+      }
+    }
+  }
+
+}

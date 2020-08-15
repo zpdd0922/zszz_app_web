@@ -1,0 +1,44 @@
+.olhk-step-id-card {
+  .cube-form{
+    border-bottom: 1px solid $color-separate-line;
+  }
+
+  .step-content-upload-tips {
+    padding: .1rem $padding-lr;
+    font-size: $form-lengend-font;
+    color: $color-form-lengend-highlight-txt;
+  }
+  
+  .step-content-id-card-upload {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    padding: .15rem;
+
+    &>li {
+      display: inline-block;
+      // flex: 1;
+      width: 50%;
+      padding: 0 .05rem;
+      .op-com-photo-img{
+        height: 1rem;
+        line-height: 1rem;
+      }
+    }
+  }
+
+  .id-card-desc {
+    padding: .2rem $padding-lr;
+
+    .desc-title {
+      font-size: .13rem;
+    }
+
+    .desc-tips {
+      margin-top: .15rem;
+      font-size: .12rem;
+      line-height: .2rem;
+      letter-spacing: .005rem;
+    }
+  }
+}

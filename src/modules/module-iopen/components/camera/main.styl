@@ -1,0 +1,77 @@
+@import '~assets/stylus/variable'
+@import '~assets/stylus/mixin'
+
+.wrap-item
+  padding 38px 45px 42px
+  background $color-fff
+  &:not(:last-child)
+    border-bottom 2px solid $color-border
+  .item-txt
+    margin-bottom 1em
+    font-size 28px
+    color $color-999
+  .item-photo
+    border 2px solid $color-sub-theme
+    border-radius 5px
+    border-bottom none
+    overflow hidden
+  .photo-tips
+    font-size 28px
+  .photo-img
+    padding 32px
+    height 360px
+    text-align center
+    position relative
+    img
+      vertical-align middle
+      max-width 100%
+      max-height 100%
+      // min-width 60%
+      // min-height 60%
+      width auto
+      height auto
+  .photo-reload
+    position absolute
+    left 0
+    bottom 0
+    background rgb(204, 204, 204)
+    width 100%
+    line-height 2em
+    z-index 1
+    color #d7761e
+    opacity .8
+  .photo-rate
+    position absolute
+    left 0
+    top 0
+    right 0
+    bottom 0
+    text-align center
+    z-index 2
+    line-height 360px
+    background rgba(51, 51, 51, .7)
+    color #fff
+    font-size 50px
+  .photo-bg
+    width 100%
+    height 100%
+    background-repeat no-repeat
+    background-position center center
+    background-size auto 80%
+  .photo-btn
+    height 60px
+    text-align center
+    line-height 60px
+    ul
+      display flex
+      width 100%
+    .btn-item
+      background $color-sub-theme
+      flex 1
+      font-size 28px
+      color $color-fff
+      &:not(:first-child)
+        border-left 2px solid $color-fff
+    span
+      display block
+

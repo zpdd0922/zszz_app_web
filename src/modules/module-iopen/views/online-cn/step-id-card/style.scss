@@ -1,0 +1,78 @@
+.olcn-step-id-card {
+  .item-title {
+    padding-bottom: .1rem;
+    text-align: center;
+    font-size: $form-lengend-font;
+    color: $color-form-lengend-txt;
+  }
+  
+  .step-content-id-card-upload {
+    display: flex;
+    align-items: stretch;
+    padding: .1rem .05rem;
+
+    &>li {
+      flex: 1;
+      padding: 0 .05rem;
+    
+    }
+  }
+
+  .id-card-desc {
+    padding: .2rem $padding-lr;
+
+    .desc-title {
+      font-size: .13rem;
+    }
+
+    .desc-tips {
+      margin-top: .15rem;
+      font-size: .12rem;
+      line-height: .2rem;
+      letter-spacing: .005rem;
+    }
+    
+    .desc-list {
+      margin-top: .15rem;
+
+      ul {
+        display: flex;
+        justify-content: center;
+
+        li {
+          flex: 1;
+          text-align: center;
+
+          &:not(:last-child) {
+            padding-right: .1rem;
+          }
+        }
+      }
+
+      .item-img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: auto;
+      }
+
+      .item-txt {
+        font-size: .12rem;
+        padding-left: .16rem;
+        margin-top: .05rem;
+        display: inline-block;
+        background-size: .12rem;
+        background-repeat: no-repeat;
+        background-position: left center;
+      }
+
+      .icon-ok {
+        background-image: url('~@/modules/module-iopen/assets/images/id-card/icon-ok.jpg');
+      }
+
+      .icon-err {
+        background-image: url('~@/modules/module-iopen/assets/images/id-card/icon-err.jpg');
+      }
+    }
+  }
+}

@@ -1,0 +1,104 @@
+@import '../components/styles.scss';
+
+.op-page-wrap {
+  .op-page-title {
+    padding: .15rem;
+    font-size: .18rem;
+    line-height: 2em;
+  }
+  
+  .step-content {
+    background-color: $color-content-bg;
+  }
+
+  .custom-form-group {
+    .cube-form-group-legend {
+      font-size: $form-lengend-font;
+      color: $color-form-lengend-txt;
+      padding: 0 $padding-lr;
+      line-height: 2;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        transform: scaleY(0.5);
+        background-color: $color-separate-line;
+      }
+    }
+
+
+    .cube-form-item {
+      padding: 0 $padding-lr;
+    }
+
+    .cube-form-label {
+      padding-right: 1em;
+      font-size: $form-item-label-font;
+      color: $color-form-item-label-txt;
+    }
+
+
+    .cube-form-field {
+      font-size: $form-item-field-font;
+      color: $color-form-item-field-txt;
+    }
+
+    .cube-input,
+    .cube-select {
+      font-size: $form-item-field-font;
+      color: $color-form-item-field-txt;
+    }
+
+    .cube-textarea-wrapper {
+      padding: 0;
+      font-size: $form-item-field-font;
+      color: $color-form-item-field-txt;
+
+      &.cube-textarea_expanded {
+        padding: .1rem 0;
+        line-height: 1.3;
+      }
+    }
+    
+    .label-width-3em .cube-form-label{
+      width: 3em;
+    }
+    .label-width-4em .cube-form-label{
+      width: 4em;
+    }
+    .label-width-5em .cube-form-label{
+      width: 5em;
+    }
+    .label-width-6em .cube-form-label{
+      width: 6em;
+    }
+    .label-width-7em .cube-form-label{
+      width: 7em;
+    }
+    .label-width-8em .cube-form-label{
+      width: 8em;
+    }
+    .label-width-9em .cube-form-label{
+      width: 9em;
+    }
+    .label-width-10em .cube-form-label{
+      width: 10em;
+    }
+  } 
+  
+  .telephone {
+    color: $color-link-txt-active;
+  }
+}
+
+
+
+@import './guide/style.scss';
+@import './open-way/style.scss';
+@import './online-cn/style.scss';
+@import './online-hk/style.scss';
