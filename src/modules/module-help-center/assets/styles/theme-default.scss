@@ -1,0 +1,9 @@
+@import '~@/customize/theme/_val_default.scss'; // 引入公共变量
+
+/* 自有颜色变量 */
+$sec-title-bg: #f0f0f0;
+$sec-title-icon: $color-main;
+$sec-title-txt: #666;
+
+
+@import './app.scss';
