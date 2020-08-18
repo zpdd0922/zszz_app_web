@@ -7,19 +7,19 @@
  -->
 <template>
   <div id="root" class="root-wrap">
-    <Header :isShow="false" />
+    <!-- <Header :isShow="false" /> -->
     <section class="root-main">
       <router-view/>
     </section>
   </div>
 </template>
 <script>
-import Header from '@/main/components/header/header';
+// import Header from '@/main/components/header/header';
 
 export default {
   name: 'App',
   components: {
-    Header
+    // Header
   },
   data() {
     return {

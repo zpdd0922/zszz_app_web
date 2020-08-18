@@ -10,7 +10,7 @@ import paramsData from '@/main/request/utils/wrap';
 import auth from '@/main/request/utils/auth';
 
 const envConfig = window._GLOBAL_ENV_CONFIG || {};
-console.log(envConfig)
+
 const baseURL = envConfig.serverInformation;
 
 

@@ -1,39 +1,47 @@
+/*
+ * @Author: Jim
+ * @Date: 2019-12-17 12:08:11
+ * @LastEditors: Jim
+ * @LastEditTime: 2019-12-17 13:04:55
+ * @Description:
+ */
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import zhCN from './i18n/zh_CN';
-import enUS from './i18n/en_US';
-import zhHK from './i18n/zh_HK';
-import commonZhCN from '@/common/locale/zh';
-import commonEnUS from '@/common/locale/en';
-import commonZhHK from '@/common/locale/el';
-import getDefaultLang from '@/common/locale/default_language';
+import helpCenterZhCN from '@/modules/module-help-center/locale/i18n/zh_CN';
+import helpCenterEnUS from '@/modules/module-help-center/locale/i18n/en_US';
+import helpCenterZhHK from '@/modules/module-help-center/locale/i18n/zh_HK';
+import commonZhCN from '@/main/locale/i18n/zh_CN';
+import commonEnUS from '@/main/locale/i18n/en_US';
+import commonZhHK from '@/main/locale/i18n/zh_HK';
+import customizeZhCN from '@/customize/locale/i18n/zh_CN';
+import customizeEnUS from '@/customize/locale/i18n/en_US';
+import customizeZhHK from '@/customize/locale/i18n/zh_HK';
+import { getDefaultLang } from '@/main/locale/helper';
 
 Vue.use(VueI18n);
 
 const lang = getDefaultLang();
 
-export const i18n = new VueI18n({
+export default new VueI18n({
   locale: lang,
   messages: {
     zh_CN: {
-      ...zhCN,
       ...commonZhCN,
+      ...customizeZhCN,
+      ...helpCenterZhCN,
       lan: 'zh_CN'
     },
     en_US: {
-      ...enUS,
       ...commonEnUS,
-      lan: 'en_US'
+      ...customizeEnUS,
+      ...helpCenterEnUS,
+      lan: 'zh_HK'
     },
-    el_GR: {
-      ...zhHK,
+    zh_HK: {
       ...commonZhHK,
-      lan: 'el_GR'
+      ...customizeZhHK,
+      ...helpCenterZhHK,
+      lan: 'zh_HK'
     }
   }
 });
-
-export function changeLanguage(lang) {
-  i18n.locale = lang;
-  localStorage.setItem('lan', lang);
-}

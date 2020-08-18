@@ -15,7 +15,7 @@
       <div v-html="content"/>
     </section>
     <section v-else>
-      <com-waiting/>
+      <base-waiting/>
     </section>
   </article>
 </template>

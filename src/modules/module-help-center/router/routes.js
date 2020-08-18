@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 // 路由懒加载
-const _import = file => () => import('@/model-help-center/views/' + file + '/index.vue');
+const _import = file => () => import('@/modules/module-help-center/views/' + file + '/index.vue');
 
 // 路由配置表
 const routers = [

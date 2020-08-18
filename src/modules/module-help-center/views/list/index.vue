@@ -17,7 +17,7 @@
       </li>
     </ul>
     <div v-else>
-      <com-waiting/>
+      <base-waiting/>
     </div>
   </div>
 </template>

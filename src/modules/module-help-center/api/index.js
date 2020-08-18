@@ -1,7 +1,7 @@
-import Axios from '@/modules/common/api/axios/';
+import Axios from '@/main/request/axios/';
 
 const envConfig = window._GLOBAL_ENV_CONFIG || {};
-const baseURL = envConfig.baseURL;
+const baseURL = envConfig.serverHelpCenter;
 
 const axios = new Axios(baseURL);
 

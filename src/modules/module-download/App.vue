@@ -5,7 +5,7 @@
         <DownloadMain />
       </section>
       <footer class="copyright">
-        <base-copyright />
+      <base-copyright :content="$t('customize.company.copyright')" />
       </footer>
     </div>
   </div>

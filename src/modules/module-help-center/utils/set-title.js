@@ -1,6 +1,6 @@
 import uaInfo from '@/main/utils/common/ua-info';
 import BroadCast, { BROADCAST_ENUMS } from '@/main/utils/common/broadcast';
-import { shareAppBtn } from '@/common/native-api/';
+import { shareAppBtn } from '@/main/utils/native-app/';
 
 function setTitle(title, isShare) {
   if (!uaInfo.isApp()) {
