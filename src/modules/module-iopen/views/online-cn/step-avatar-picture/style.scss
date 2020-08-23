@@ -1,0 +1,32 @@
+.olcn-step-avatar-picture {
+  
+  .step-content-avatar-upload {
+    display: flex;
+    align-items: stretch;
+    padding: .1rem .05rem;
+
+    &>li {
+      flex: 1;
+      padding: 0 .05rem;
+      
+      .op-com-photo-img{
+        height: 2rem;
+        line-height: 2rem;
+      }
+    }
+  }
+  .camera-title {
+    display: inline-block;
+    width: 100%;
+    line-height: 2em;
+    margin: .1rem 0;
+    text-align: center;
+    font-size: .15rem;
+
+    .num {
+      font-size: .22rem;
+      margin: 0 4px;
+    }
+  }
+
+}

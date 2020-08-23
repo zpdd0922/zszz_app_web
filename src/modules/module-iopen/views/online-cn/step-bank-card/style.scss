@@ -1,0 +1,37 @@
+.olcn-step-bank-card {
+  .cube-form-label {
+    width: 7em;
+  }
+
+  .bank-card-desc {
+    padding: .15rem $padding-lr;
+
+    .desc-title {
+      font-size: .13rem;
+    }
+
+    .desc-tips {
+      margin-top: .1rem;
+      font-size: .12rem;
+      line-height: 1.5em;
+    }
+  }
+
+  .input-country {
+    position: relative;
+    padding-left: .16rem;
+    padding-right: .25rem;
+    @include border-name(1px, $color-input-border, solid, right);
+
+    &:after {
+      content: '';
+      border-left: .06rem solid transparent;
+      border-right: .06rem solid transparent;
+      border-top: .06rem solid $color-input-border;
+      position: absolute;
+      right: .07rem;
+      bottom: .03rem;
+    }
+  }
+
+}

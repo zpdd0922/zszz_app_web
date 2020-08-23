@@ -1,0 +1,84 @@
+.olcn-step {
+
+  .custom-checkbox-group {
+    .cube-checkbox-wrap {
+      justify-content: start;
+    }
+  }
+
+  .custom-textarea textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    line-height: 18px;
+    text-align: justify;
+  }
+
+
+  .margin-bottom {
+    width: 100%;
+    height: .1rem;
+    background-color: $color-bg;
+  }
+
+  .triangle-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid;
+    border-width: .13rem;
+    border-color: $color-triangle-icon-bg transparent transparent $color-triangle-icon-bg;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: .1rem;
+      height: .1rem;
+      line-height: .1rem;
+      font-size: .12rem;
+      text-align: center;
+      color: $color-triangle-icon-txt;
+      transform: translate3d(-.1rem, -.1rem, 0);
+
+    }
+  }
+
+  .triangle-icon-1:before {
+    content: '1';
+  }
+
+  .triangle-icon-2:before {
+    content: '2';
+  }
+
+  .triangle-icon-3:before {
+    content: '3';
+  }
+
+  .triangle-icon-4:before {
+    content: '4';
+  }
+
+  .triangle-icon-5:before {
+    content: '5';
+  }
+
+}
+
+@import './step-avatar-before/style.scss';
+@import './step-avatar-picture/style.scss';
+@import './step-bank-card/style.scss';
+@import './step-id-card/style.scss';
+@import './step-id-card-info/style.scss';
+@import './step-info-contact/style.scss';
+@import './step-info-declare/style.scss';
+@import './step-info-disclosure/style.scss';
+@import './step-info-experience/style.scss';
+@import './step-info-finance/style.scss';
+@import './step-protocol-confirm/style.scss';
+@import './step-risk/style.scss';
+@import './step-select-account/style.scss';

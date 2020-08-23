@@ -1,0 +1,128 @@
+@import '~assets/stylus/variable'
+@import '~assets/stylus/mixin'
+
+.progress-bar
+  padding 22px 0
+  .list
+    height inherit
+    display flex
+    justify-content space-between
+    align-items center
+    text-align center
+    font-size 24px
+    .item
+      position relative
+      padding-top 45px
+      flex 1
+      &:before
+        pos-x()
+        top 0
+        z-index 9
+        content ''
+        box-sizing border-box
+        width 32px
+        height 32px
+        background-repeat no-repeat
+        background-position center
+        border-radius 50%
+      .text, .desc
+        padding-top 4px
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
+        display block
+    .line
+      width 100%
+      position absolute
+      left 50%
+      top 15px
+      z-index 1
+      height 2px
+
+// 开户流程
+.progress-bar-0
+  position fixed
+  left 0
+  top 0
+  width 100%
+  z-index 99
+  background linear-gradient(to right, #ff823b, #ffb83d)
+  .list
+    color #fff
+    .item
+      &:before
+        background-color #ffe8c5
+      &.current
+        &:before
+          background-color rgba(254, 144, 7, 1)
+          border 8px solid #fff
+      &.done
+        .line
+          background-color #ffe8c5
+        &:before
+          background-size 19px 19px
+          background-image url('../../assets/images/guide/finish.png')
+    .line
+      background-color #ccc
+
+// 开户状态
+.progress-bar-1
+  .list
+    color #999
+  .item
+    .text
+      margin-bottom 8px
+    .line
+      height 4px
+
+// 白色主题
+.progress-bar-1
+  $orange = #f95a29
+  $dark = #ddd
+  $text = #333
+  $bg = #fff
+  background $bg
+  .line
+    background-color $dark
+  .item
+    &:before
+      background-color $dark
+    .text
+      color $text
+    &.current, &.done
+      .text
+        color $orange
+      &:before
+        background-color $orange
+    &.done
+      .line
+        background-color $orange
+    &.current
+      .line
+        background linear-gradient(to right, $orange 50%, $dark 50%)
+
+// 黑色主题
+.progress-bar-black
+  $orange = #f95a29
+  $dark = #3b3b3d
+  $text = #ccc
+  $bg = #252528
+  background $bg
+  .line
+    background-color $dark
+  .item
+    &:before
+      background-color $dark
+    .text
+      color $text
+    &.current, &.done
+      .text
+        color $orange
+      &:before
+        background-color $orange
+    &.done
+      .line
+        background-color $orange
+    &.current
+      .line
+        background linear-gradient(to right, $orange 50%, $dark 50%)

@@ -1,0 +1,32 @@
+.olhk-step-info-finance {
+  .suffer-form-group{
+    .cube-form-label {
+      width: 10em;
+    }
+    
+  }
+
+  .cube-select:after,
+  .cube-radio-group:after,
+  .cube-radio:after {
+    display: none;
+  }
+
+  
+  .step-content-derivative {
+    .cube-form-label {
+      width: 10em;
+    }
+
+    .cube-radio-group[data-col=true] .cube-radio-wrap, 
+    .cube-radio-group[data-horz=true] .cube-radio-wrap {
+      justify-content: start;
+    }
+  }
+
+  .derivative-item-content{
+    padding: .15rem .15rem .1rem;
+    font-size: .15rem;;
+  }
+
+}

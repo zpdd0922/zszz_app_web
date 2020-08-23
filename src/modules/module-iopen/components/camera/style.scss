@@ -1,0 +1,90 @@
+.op-com-camera-wrap {
+  height: 100%;
+}
+
+.op-com-camera-item {
+  border:solid 1px $color-separate-line;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+
+  .op-com-item-title {
+    font-size: .12rem;
+    padding-top: .1rem;
+    text-align: center;
+    color: $color-camera-title-txt;
+  }
+
+  .op-com-item-photo {
+    border-radius: 5px;
+    border-bottom: none;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .op-com-photo-tips {
+    font-size: .14rem;
+  }
+
+  .op-com-photo-img {
+    box-sizing: content-box;
+    padding: .1rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    position: relative;
+
+    img {
+      // vertical-align: middle;
+      max-width: 100%;
+      max-height: 100%;
+      // min-width: 60%;
+      // min-height: 60%;
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .op-com-photo-reload {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: $color-camera-reload-bg;
+    width: 100%;
+    line-height: 2em;
+    z-index: 1;
+    color: $color-camera-reload-txt;
+    opacity: 0.8;
+  }
+
+  .op-com-photo-rate {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background: $color-mask-opacity;
+    color: $color-camera-update-txt;
+    display: flex;
+    align-items: center;
+
+    span{
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      font-size: .2rem;
+    }
+  }
+
+  .op-com-photo-bg {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: auto 80%;
+  }
+  
+}
+

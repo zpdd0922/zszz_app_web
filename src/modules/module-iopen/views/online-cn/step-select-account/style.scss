@@ -1,0 +1,29 @@
+.olcn-step-select-account {
+
+  .cube-select:after,
+  .cube-radio-group:after,
+  .cube-radio:after {
+    display: none;
+  }
+
+  .step-content-accounts {
+    .select-account-list {
+      padding: .05rem .15rem .1rem;
+
+      .custom-checkbox-group {
+
+        &:before,
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .step-content-derivative {
+    .cube-form-label {
+      width: 10em;
+    }
+  }
+
+}

@@ -1,0 +1,67 @@
+.op-com-progress{
+  background-color: $color-progress-bg;
+  .bar-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    .bar-item{
+      flex: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: .1rem 0;
+      position: relative;
+
+      i {
+        font-size: .18rem;
+        line-height: .2rem;
+        background-color: $color-progress-bg;
+        padding: 0 .05rem;
+        z-index :2;
+        color: $color-progress-item-bg;
+      }
+
+      .text{
+        line-height: 2em;
+        color: $color-progress-item-txt;
+      }
+    }
+
+    .line{
+      width: 100%;
+      position :absolute;
+      left :50%;
+      top :.2rem;
+      height :1px;
+      background-color: #ccc;
+    }
+
+    .done{
+      i{
+        color: $color-progress-item-bg-success;
+      }
+
+      .text{
+        color: $color-progress-item-txt-success;
+      }
+      .line {
+        background-color: $color-progress-item-bg-success;
+      }
+    }  
+    .current{
+      i{
+        color: $color-progress-item-bg-active;
+      }
+
+      .text{
+        color: $color-progress-item-txt-active;
+      }
+      .line{
+        background: linear-gradient(to right, $color-progress-item-bg-success 50%, $color-progress-item-bg 50%)
+      }
+    }
+  }
+}

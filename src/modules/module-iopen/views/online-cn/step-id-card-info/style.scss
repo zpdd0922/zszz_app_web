@@ -1,0 +1,35 @@
+.olcn-step-id-card-info {
+  .cube-form-label {
+    width: 7em;
+  }
+
+  .custom-form-separator {
+    display: table-cell;
+
+    &+.custom-form-date {
+      padding-left: .2em
+    }
+  }
+
+  .custom-form-date {
+    display: table-cell;
+    min-width: 5.4em;
+  }
+
+  .cube-form-field{
+    position: relative;
+  }
+
+  .custom-form-switch {
+    @include posY();
+    left: auto;
+    right: 0;
+    .cube-switch-ui{
+      width: 5em;
+    }
+
+    .cube-switch-input:checked+.cube-switch-ui:after {
+      transform: translateX(3em);
+    }
+  }
+}

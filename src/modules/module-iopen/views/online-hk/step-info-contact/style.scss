@@ -1,0 +1,29 @@
+.olhk-step-info-contact {
+  
+  .step-content-upload-tips {
+    padding: .1rem $padding-lr;
+    font-size: $form-lengend-font;
+    color: $color-form-lengend-highlight-txt;
+  }
+
+  
+  .step-content-address-img-upload {
+    display: flex;
+    align-items: stretch;
+    justify-content: start;
+    padding: .1rem;
+
+    &>li {
+      display: inline-block;
+      // flex: 1;
+      width: .84rem;
+      height: .74rem;
+      padding: 0 .05rem;
+      .op-com-photo-img{
+        height: .64rem;
+        line-height: .64rem;
+        padding: .05rem;
+      }
+    }
+  }
+}
