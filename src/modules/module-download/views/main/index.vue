@@ -55,8 +55,8 @@ export default {
   data() {
     return {
       isTipsOpenBrower: false,
-      tipsOpening: "正在尝试打开策略大咖客户端...",
-      tipsToOpen: "亲，可以直接点击下载策略大咖或打开策略大咖"
+      tipsOpening: "正在尝试打开立桥证券客户端...",
+      tipsToOpen: "亲，可以直接点击下载立桥证券或打开立桥证券"
     };
   },
   mounted() {

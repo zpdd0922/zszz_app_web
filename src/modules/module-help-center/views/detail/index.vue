@@ -49,11 +49,11 @@ export default {
             const { content, title, updateTime } = res;
             this.title = title;
             setTitle(title);
-            this.time = dateFormat(updateTime, 'yyyy-MM-dd HH:mm:ss');
+            this.time = dateFormat(updateTime, 'yyyy-mm-dd HH:MM:SS');
             this.content = content;
           } else {
             this.title = `Error ID: ${id}`;
-            this.time = dateFormat(+new Date(), 'yyyy-MM-dd HH:mm:ss');
+            this.time = dateFormat(+new Date(), 'yyyy-mm-dd HH:MM:SS');
             this.content = `Error code: ${res.code} <br /> Error Msg: ${
               res.msg
             }`;
@@ -62,7 +62,7 @@ export default {
         .catch(e => {
           this.isFetched = true;
           this.title = `Error ID: ${this.$route.query.id}`;
-          this.time = dateFormat(+new Date(), 'yyyy-MM-dd HH:mm:ss');
+          this.time = dateFormat(+new Date(), 'yyyy-mm-dd HH:MM:SS');
           this.content = `Error type: ${e.type} <br /> Error Msg: ${e.message}`;
         });
     }

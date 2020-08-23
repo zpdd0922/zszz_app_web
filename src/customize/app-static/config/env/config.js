@@ -1,5 +1,6 @@
 (function (window) {
   var GLOBAL_ENV_CONFIG = {
+    debug: false,
     serverUser: 'http://192.168.1.251:8901/securities',
     serveriOpen: 'http://192.168.1.251:8901/securities',
     // serverInformation: 'https://sns.9fstock.com:9003/',

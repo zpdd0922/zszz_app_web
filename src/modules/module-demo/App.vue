@@ -1,26 +1,28 @@
 <template>
   <div id="root" class="root-wrap">
-    <header-custom :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]" />
+    <!-- <header-custom :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]" />
     <template v-if="isChecking">
       <base-waiting />
     </template>
     <template v-else>
       <router-view v-if="isRouterAlive" />
-    </template>
+    </template> -->
+    <Test />
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
 import BaseCopyright from "@/main/components/base-copyright/";
+import Test from "./views/test/test.vue";
 import { getURLParameters } from "@/main/utils/format/url";
 import HeaderCustom from "@/customize/components/header-custom/";
 import { setLanguage } from "@/main/locale/helper";
 export default {
-  components: { BaseCopyright, HeaderCustom },
+  components: { BaseCopyright, HeaderCustom, Test },
   created() {
-    this.setTitle(this.$t("demo.main.pageName"));
-    this.checkLogin();
+    // this.setTitle(this.$t("demo.main.pageName"));
+    // this.checkLogin();
   },
   computed: {
     isZhCN() {

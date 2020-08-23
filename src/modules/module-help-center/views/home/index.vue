@@ -1,7 +1,7 @@
 <template>
   <div class="help-center-home">
     <header class="search">
-      <help-search :onClick="toSearch" :disabled="true" placeholder="请输入问题关键字" />
+      <help-search :onClick="toSearch" placeholder="请输入问题关键字" />
     </header>
     <section v-if="isFetched">
       <ul class="classify-box">
@@ -26,18 +26,15 @@
           >{{frequently.title}}</li>
         </ul>
       </div>
-      <footer>
-        <base-copyright :content="$t('customize.company.copyright')" />
-      </footer>
     </section>
     <template v-else>
       <section>
         <base-waiting />
       </section>
-      <footer>
-        <base-copyright :content="$t('customize.company.copyright')" />
-      </footer>
     </template>
+    <footer>
+      <base-copyright :content="$t('customize.company.copyright')" />
+    </footer>
   </div>
 </template>
 

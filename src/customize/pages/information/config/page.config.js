@@ -12,7 +12,7 @@ module.exports = {
   serverPort: 28003,
   pages: [
     {
-      name: 'detail',
+      name: 'newsdetail',
       template: 'src/customize/pages/information/template/index.html',
       entry: 'src/modules/module-information/index.js',
       title: '资讯详情',

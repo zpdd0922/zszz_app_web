@@ -48,7 +48,7 @@ export function dateFormat(t, format) {
   };
 
   try {
-    return format.replace(/(yyyy|MM?|dd?|HH?|mm?|ss?)/g, f => dict[f]);
+    return format.replace(/(yyyy|mm?|dd?|HH?|MM?|SS?)/g, f => dict[f]);
   } catch (e) {
     return rdate;
   }

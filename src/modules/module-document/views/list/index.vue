@@ -18,7 +18,7 @@
         <p class="risk-tips">
           风险提示：
           上文所示之内容和数据，仅代表作者或嘉宾个人观点，不构成投资建议。
-          策略大咖虽竭力但亦不能保证以上内容之准确可靠，亦不会承担因任何不准确或遗漏而引起的任何损失或损害。
+          立桥证券虽竭力但亦不能保证以上内容之准确可靠，亦不会承担因任何不准确或遗漏而引起的任何损失或损害。
         </p>
         <p class="num">
           <span>阅读 {{formatNum(readNum)}}</span>
@@ -76,29 +76,29 @@ export default {
               content,
               title,
               date,
-              media = "策略大咖",
+              media = "立桥证券",
               readNum = 0,
               laudNum = 0,
               favorNum = 0
             } = res;
             this.title = title;
             this.setTitle(title);
-            this.time = dateFormat(date, "yyyy-MM-dd HH:mm:ss");
-            this.source = media.length ? media : "策略大咖";
+            this.time = dateFormat(date, "yyyy-mm-dd HH:MM:SS");
+            this.source = media.length ? media : "立桥证券";
             this.content = content;
             this.readNum = readNum;
             this.laudNum = laudNum;
             this.favorNum = favorNum;
           } else {
             this.title = `Error ID: ${id}`;
-            this.time = dateFormat(+new Date(), "yyyy-MM-dd HH:mm:ss");
+            this.time = dateFormat(+new Date(), "yyyy-mm-dd HH:MM:SS");
             this.content = `Error code: ${res.code} <br /> Error Msg: ${res.msg}`;
           }
         })
         .catch(e => {
           this.isFetched = true;
           this.title = `Error ID: ${this.$route.query.id}`;
-          this.time = dateFormat(+new Date(), "yyyy-MM-dd HH:mm:ss");
+          this.time = dateFormat(+new Date(), "yyyy-mm-dd HH:MM:SS");
           this.content = `Error type: ${e.type} <br /> Error Msg: ${e.message}`;
         });
     }

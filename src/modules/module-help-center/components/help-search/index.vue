@@ -1,9 +1,9 @@
 <template>
   <div class="help-search">
-    <div class="search-form" @click.stop="handleClick">
+    <div class="search-form" @click.prevent="handleClick">
       <i class="query-icon" />
       <input
-        v-show="focused"
+        :class="{unactive: !focused, active: focused}"
         :disabled="disabled"
         type="search"
         placeholder="请输入问题关键字"
@@ -76,16 +76,17 @@ export default {
     },
   },
   mounted() {
-    if (this.focused && this.$refs["input"]) this.$refs["input"].focus();
+    console.log("mounted, ", this.$refs["input"]);
+    if (this.focused) this.$refs["input"].focus();
   },
   methods: {
     handleClick() {
+      console.log("handleclick", this.focused);
       this.onClick();
       if (!this.focused) {
         this.focused = true;
-        this.$nextTick(() => {
-          if (this.$refs["input"]) this.$refs["input"].focus();
-        });
+        console.log(this.$refs["input"]);
+        this.$refs["input"].focus();
       }
     },
     handleFocus() {

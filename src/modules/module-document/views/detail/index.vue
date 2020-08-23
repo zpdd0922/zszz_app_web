@@ -56,18 +56,18 @@ export default {
             const { documentContent, documentTitle, updateTime } = res;
             this.title = documentTitle;
             this.setTitle(documentTitle);
-            this.time = dateFormat(updateTime, "yyyy-MM-dd HH:mm:ss");
+            this.time = dateFormat(updateTime, "yyyy-mm-dd HH:MM:SS");
             this.content = documentContent;
           } else {
             this.title = `Error ID: ${this.key}`;
-            this.time = dateFormat(+new Date(), "yyyy-MM-dd HH:mm:ss");
+            this.time = dateFormat(+new Date(), "yyyy-mm-dd HH:MM:SS");
             this.content = `Error code: ${res.code} <br /> Error Msg: ${res.msg}`;
           }
         })
         .catch(e => {
           this.isFetched = true;
           this.title = `Error ID: ${this.key}`;
-          this.time = dateFormat(+new Date(), "yyyy-MM-dd HH:mm:ss");
+          this.time = dateFormat(+new Date(), "yyyy-mm-dd HH:MM:SS");
           this.content = `Error type: ${e.type} <br /> Error Msg: ${e.message}`;
         });
     }

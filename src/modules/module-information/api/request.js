@@ -14,8 +14,20 @@ const envConfig = window._GLOBAL_ENV_CONFIG || {};
 const baseURL = envConfig.serverInformation;
 
 
+
+// api接口公用参数
+const WRAP = (params = {}) => {
+  return {
+    id: +new Date(),
+    version: '1.0',
+    requestSrc: auth.getPlateform(),
+    src: auth.getPlateform(),
+    ...params
+  };
+};
+
 const axios = new Axios(baseURL, {});
 
 export const post = (url, params = {}, key = "") => {
-  return axios.post(url, paramsData.WRAP({ sessionId: auth.getAuthSession(), ...params }, key));
+  return axios.post(url, WRAP({ sessionId: auth.getAuthSession(), ...params }, key));
 }
