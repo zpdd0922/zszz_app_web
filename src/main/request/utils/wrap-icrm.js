@@ -18,6 +18,22 @@ const WRAP = (params = {}, key = "") => {
   };
 };
 
+const WRAP_APP = (data = {}) => {
+  const sessionId = auth.getAuthToken()
+  const params = {
+    sessionId: sessionId,
+    ...data
+  }
+  const signParams = getSHASign(sessionId, params)
+  return {
+    id: +new Date(),
+    version: '1.0',
+    requestSrc: auth.getPlateform(),
+    params: params,
+    sign: signParams
+  }
+};
+
 // 接口数据包裹层
 const COMMON = (data = {}) => ({
   requestSrc: auth.getPlateform(),
@@ -49,6 +65,7 @@ const PHONE = (data = {}) => ({
 
 export default {
   WRAP,
+  WRAP_APP,
   OPTIONS,
   COMMON,
   CHECK,

@@ -189,12 +189,24 @@ export default {
       );
     },
     isDisabled() {
-      if(this.model.bankId === this.bankValue.OHTERS){
-        return false;
+      // todo 原因不明，逻辑有问题
+      // if(this.model.bankId === this.bankValue.OHTERS){
+      //   return false;
+      // }
+
+      // const result = Object.values(this.model).every(
+      //   (val) => String(val).length
+      // );
+
+      let result
+      if(this.model.bankId === this.bankValue.OTHERS){
+        result = Object.values(this.model).every(
+          (val) => String(val).length
+        );
+      } else {
+        result = Object.keys(this.model).filter(val => val !== 'otherBankName')
+          .every(val => String(this.model[val]).length)
       }
-      const result = Object.values(this.model).every(
-        (val) => String(val).length
-      );
 
       // const cardFile = Object.values(this.BankCardFile);
       // const len = 1;
@@ -209,6 +221,7 @@ export default {
     },
   },
   created() {
+    console.log('bankValue', bankValue)
     this.updateInfo();
   },
   methods: {

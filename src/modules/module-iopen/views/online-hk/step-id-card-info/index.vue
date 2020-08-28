@@ -395,15 +395,15 @@ export default {
           this.$store
             .dispatch("checkIdCard", { idCard, userName, cardType: 1 })
             .then((res) => {
-              const { isValid = false, remark = "" } = res;
-              if (isValid) {
-                resolve(isValid);
+              const { verify = false, remark = "" } = res;
+              if (verify) {
+                resolve(verify);
               } else {
                 alert({
                   title: "温馨提示",
                   content: remark,
                 });
-                reject(isValid);
+                reject(verify);
               }
             })
             .catch((err) => {
@@ -414,9 +414,9 @@ export default {
           this.$store
             .dispatch("checkIdCard", { idCard, userName, cardType: 0 })
             .then((res) => {
-              const { isValid = false, remark = "" } = res;
-              if (isValid) {
-                resolve(isValid);
+              const { verify = false, remark = "" } = res;
+              if (verify) {
+                resolve(verify);
               } else {
                 alert({
                   title: "温馨提示",

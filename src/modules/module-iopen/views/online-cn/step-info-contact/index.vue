@@ -976,15 +976,17 @@ export default {
         this.$store
           .dispatch("checkEmail", { email: this.model.email })
           .then((res) => {
-            const { isValid = false, remark = "校验邮箱失败" } = res;
-            if (isValid) {
-              resolve(isValid);
-            } else {
-              toast({ type: "error", txt: remark, time: 1000 });
-              reject(isValid);
-            }
+            resolve()
+            // const { isValid = false, remark = "校验邮箱失败" } = res;
+            // if (isValid) {
+            //   resolve(isValid);
+            // } else {
+            //   toast({ type: "error", txt: remark, time: 1000 });
+            //   reject(isValid);
+            // }
           })
           .catch((err) => {
+            toast({ type: "error", txt: err.message, time: 1000 });
             reject(err);
           });
       });

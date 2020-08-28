@@ -24,7 +24,7 @@
           <com-success :skin="skin"></com-success>
         </template>
         <!-- 开户失败 -->
-        <template v-else-if="openStatus === OPEN_STATUS.FAILED">
+        <template v-else-if="openStatus === OPEN_STATUS.FAILED || openStatus === OPEN_STATUS.FAILED_1 || openStatus === OPEN_STATUS.FAILED_2">
           <com-fail :skin="skin" @click="onOpenClick"></com-fail>
         </template>
         <!-- 销户 -->
@@ -101,7 +101,7 @@ export default {
     progressComponent() {}
   },
   created() {
-    this.getOpenProgress({ flag: 0 });
+    this.getOpenProgress({ openType: 0 });
   },
   methods: {
     ...mapActions(["getOpenProgress"]),

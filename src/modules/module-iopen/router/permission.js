@@ -38,16 +38,17 @@ router.beforeEach((to, from, next) => {
       // 非APP内，检测用户信息是否失效
       next();
     } else {
+      next();
       // 跳转到登录界面
-      store.commit('updateLoadingStatus', { isLoading: false });
-      if (from.name !== 'login') {
-        NProgress.start();
-      }
-      next({
-        name: 'login',
-        query: { redirect: to.fullPath },
-        replace: true
-      });
+      // store.commit('updateLoadingStatus', { isLoading: false });
+      // if (from.name !== 'login') {
+      //   NProgress.start();
+      // }
+      // next({
+      //   name: 'login',
+      //   query: { redirect: to.fullPath },
+      //   replace: true
+      // });
     }
   }
 });

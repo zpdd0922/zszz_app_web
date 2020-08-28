@@ -44,7 +44,8 @@ export default {
       saveImage:'saveImage',
     }),
     getStepI18nValue(step, key) {
-      return this.$t(`openAccount.openCn.${step}.${key}`);
+      // return this.$t(`openAccount.openCn.${step}.${key}`);
+      return this.$t(`iOpen.openCn.${step}.${key}`);
     },
   },
 };

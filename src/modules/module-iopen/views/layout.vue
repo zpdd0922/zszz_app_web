@@ -34,7 +34,8 @@ export default {
   methods: {
     ...mapActions(["getOpenProgress"]),
     init() {
-      this.getOpenProgress({ flag: 0 });
+      // this.getOpenProgress({ flag: 0 });
+      this.getOpenProgress({ openType: 0 });
     }
   }
 };

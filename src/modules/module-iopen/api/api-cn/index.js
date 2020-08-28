@@ -1,4 +1,5 @@
 import { post, postImg } from '../request';
+import paramsData from '@/main/request/utils/wrap-icrm';
 
 export default {
   /**
@@ -11,14 +12,16 @@ export default {
    * OFFLINE(3, "线下（开户宝）");
    * @return JSON { code: integer, message: string, result: { lastStep: integer, cacheInfos:{}, cacheImages: [],} }
   */
-  getCacheData: data => post('/open_api_cn/get_cache_data', data),
+  // getCacheData: data => post('/open_api_cn/get_cache_data', data),
+  getCacheData: data => post('/open_api/findUserTemp', paramsData.WRAP_APP(data)),
 
   /**
    * @param step
    * @param info  --> JSON字符串
    *
    */
-  saveCacheInfo: data => post('/open_api_cn/save_cache_info', data),
+  // saveCacheInfo: data => post('/open_api_cn/save_cache_info', data),
+  saveCacheInfo: data => post('/open_api/save_user_info_temp', paramsData.WRAP_APP(data)),
 
   /**
    * @param ocr
@@ -27,7 +30,8 @@ export default {
    * @param location
    *
    */
-  saveCacheImg: (data, options) => postImg('/open_api_cn/save_cache_img', data, options),
+  // saveCacheImg: (data, options) => postImg('/open_api_cn/save_cache_img', data, options),
+  saveCacheImg: (data, options) => postImg('/open_api/saveimg', data, options),
 
   /**
    * @param info --> JSON字符串
@@ -37,20 +41,21 @@ export default {
    * @param otherInfo --> {}
    *
    */
-  toCommitAllData: data => post('/open_api_cn/submit_open_info', data),
+  // toCommitAllData: data => post('/open_api_cn/submit_open_info', paramsData.WRAP_APP(data)),
+  toCommitAllData: data => post('/open_api/saveuinfo', paramsData.WRAP_APP(data)),
 
   /**
    * 获取PIN码
    */
-  getCaPin: data => post('/open_api/get_ca_pin', data),
+  getCaPin: data => post('/open_api/get_ca_pin', paramsData.WRAP_APP(data)),
 
   /**
    * 保存pin码
    */
-  saveCaPin: data => post('/open_api/save_ca_pin', data),
+  saveCaPin: data => post('/open_api/save_ca_pin', paramsData.WRAP_APP(data)),
 
   /**
    * CA补录数据接口
    */
-  getCaUpdateOpeninfo: data => post('/open_api/ca_update_openinfo', data)
+  getCaUpdateOpeninfo: data => post('/open_api/ca_update_openinfo', paramsData.WRAP_APP(data))
 };

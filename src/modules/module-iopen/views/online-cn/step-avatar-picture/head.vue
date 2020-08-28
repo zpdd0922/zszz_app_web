@@ -87,8 +87,8 @@ export default {
       const params = { imgType, imgBase64: file, callback };
       this.$set(this.upload, idFlag, file);
       this.saveImage(params).then((res) => {
-        const { imgUrl } = res;
-        this.$set(this.file, idFlag, imgUrl);
+        const { path } = res;
+        this.$set(this.file, idFlag, path);
       });
     },
     handleNext() {

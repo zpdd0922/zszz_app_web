@@ -4,6 +4,7 @@ import paramsData from '@/main/request/utils/wrap-icrm';
 import { SUFFIX, IMAGE_REQUEST_LIST } from '@/modules/module-iopen/api/params-define';
 import { arrayToObject } from '@/main/utils/format/array';
 import * as types from './mutation-cn-types';
+import _ from 'lodash';
 
 const state = {
   openInfoInit: {},
@@ -63,10 +64,10 @@ const actions = {
     return new Promise((resolve, reject) => {
       openCNApi.getCacheData(params)
         .then(res => {
-          const { cacheInfos, cacheImages } = res || {};
+          const { userInfo, userImg } = res || {};
           commit(types.OPEN_INFO_INIT, { result: res });
-          commit(types.OPEN_IMG, { userImg: cacheImages });
-          commit(types.OPEN_INFO, { info: cacheInfos });
+          commit(types.OPEN_IMG, { userImg: userImg });
+          commit(types.OPEN_INFO, { info: userInfo });
           resolve(res);
         })
         .catch(err => {
@@ -77,8 +78,10 @@ const actions = {
   },
   saveCnCacheInfo({ commit, state }, params) {
     const { info } = params;
+    const paramsCopy = _.clone(params)
+    const obj = { ...params, info: JSON.stringify(paramsCopy.info) }
     return new Promise((resolve, reject) => {
-      openCNApi.saveCacheInfo(params)
+      openCNApi.saveCacheInfo(obj)
         .then(res => {
           commit(types.OPEN_INFO, { info });
           resolve(res);
@@ -101,7 +104,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       openCNApi.saveCacheImg(params, { imgType, callback })
         .then(res => {
-          const updateImg = { [`${imgType}${SUFFIX}`]: res.imgUrl };
+          const updateImg = { [`${imgType}${SUFFIX}`]: res.path };
           commit(types.OPEN_IMG, { updateImg });
           resolve(res);
         })

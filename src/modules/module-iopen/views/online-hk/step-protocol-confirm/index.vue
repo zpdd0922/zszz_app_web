@@ -156,10 +156,11 @@ export default {
         } = getURLParameters();
 
         const normalData = {
-          activeId,
-          channelId,
-          inviteId,
-          language: this.$t("customize.languageValue"),
+          actId: activeId
+          // activeId,
+          // channelId,
+          // inviteId,
+          // language: this.$t("customize.languageValue"),
         };
 
         const data = this.formatCommitData(this.openInfo, normalData);
@@ -182,7 +183,8 @@ export default {
 
         // console.log(data);
 
-        this.toCommitAllData(data).then((res) => {
+        // this.toCommitAllData(data).then((res) => {
+        this.toCommitAllDataHK(data).then((res) => {
           toast({
             type: "correct",
             txt: this.getI18n("success"),

@@ -185,15 +185,15 @@ export default {
             phone,
           })
           .then((res) => {
-            const { isValid = false } = res;
-            if (isValid) {
-              resolve(isValid);
+            const { verify = false } = res;
+            if (verify) {
+              resolve(verify);
             } else {
               alert({
                 title: this.$t("common.alertTitle"),
                 content: this.getI18n("errorTips"),
               });
-              reject(isValid);
+              reject(verify);
             }
           })
           .catch((err) => {
@@ -213,7 +213,7 @@ export default {
       }
     },
     handleBankePhoneNum() {
-      this.handleUpdatePhone(this.openProgress.phone, "bankPhoneNum");
+      this.handleUpdatePhone(this.openProgress.phoneNumber, "bankPhoneNum");
     },
   },
   watch: {},

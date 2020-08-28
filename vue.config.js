@@ -75,7 +75,17 @@ module.exports = {
     }
   },
   devServer: {
+    host: '0.0.0.0',
     port: vueConfig.serverPort, // 端口
+    proxy: {
+      '/dev-open': {
+        target: 'http://106.52.75.112:6003',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/dev-open': ''
+        }
+      }
+    }
     // proxy: {
     //   '/mktinfos': { //将www.exaple.com印射为/apis
     //     target: 'http://localhost:9001/', // 接口域名

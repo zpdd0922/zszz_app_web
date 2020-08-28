@@ -121,6 +121,9 @@ export default {
         }
       });
 
+      console.log('fileName', fileName)
+      console.log('this.openImg', this.openImg)
+
       // 更新图片 - 优先本地，其次服务端
       const signImgData = this.openImg[fileName];
       // 若存在签名图
@@ -156,10 +159,11 @@ export default {
         } = getURLParameters();
 
         const normalData = {
-          activeId,
-          channelId,
-          inviteId,
-          language: this.$t("customize.languageValue"),
+          actId: activeId
+          // activeId,
+          // channelId,
+          // inviteId,
+          // language: this.$t("customize.languageValue"),
         };
 
         const data = this.formatCommitData(this.openInfo,normalData);
@@ -180,7 +184,7 @@ export default {
         //   ? Object.assign({}, paramsInfo, paramsSt)
         //   : paramsInfo;
 
-        // console.log(data);
+        console.log(data);
 
         this.toCommitAllData(data).then((res) => {
           toast({

@@ -39,12 +39,13 @@ export default {
   methods: {
     formatCommitData,
     ...mapActions({
-      toCommitAllData: "toCommitAllData",
+      // toCommitAllData: "toCommitAllData",
+      toCommitAllDataHK: "toCommitAllDataHK",
       saveCacheInfo: "saveHkCacheInfo",
       saveImage: "saveImageHK",
     }),
     getStepI18nValue(step, key) {
-      return this.$t(`openAccount.openHk.${step}.${key}`);
+      return this.$t(`iOpen.openHk.${step}.${key}`);
     },
   },
 };

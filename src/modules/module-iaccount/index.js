@@ -21,9 +21,6 @@ import setTitle from '@/main/utils/common/set-title';
 import '@/main/utils/common/rem';
 import '@/main/utils/common/v-console.js';
 
-// 公用组件注册
-import './components/register'
-
 // 引入路由控制
 import './router/permission';
 

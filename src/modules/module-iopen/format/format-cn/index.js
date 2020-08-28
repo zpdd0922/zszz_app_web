@@ -215,14 +215,15 @@ export const formatCommitData = (args, normalData = {}) => {
   const normal = {
     ...normalData,
     openType: 1, // 1、线上预约开户，2、香港预约开户，2、线下（开户宝）
-    accessWay: 4, // 开户接入方式[1=H5开户 2=App]
-    fundAccountType: args.fundAccountType, // 账户类型 1：现金账户 2：融资账户
-    accountMarkets: accountMkts
+    // accessWay: 4, // 开户接入方式[1=H5开户 2=App]
+    // fundAccountType: args.fundAccountType, // 账户类型 1：现金账户 2：融资账户
+    // accountMarkets: accountMkts
   };
 
   const data = {
     ...normal,
-    formData,
+    // formData,
+    info: JSON.stringify(formData),
   };
   return data;
 };

@@ -5,15 +5,30 @@
  * @LastEditTime: 2020-01-14 14:12:27
  * @Description: 
  */
+// export const OPEN_STATUS = {
+//   UN_START: -1, // 未开始
+//   UN_SUBMIT: 0, // 未提交
+//   PENDING: 1, // 开户中
+//   CANCELED: 2, // 开户已取消
+//   SUCCESS: 3, // 开户成功
+//   FAILED: 4, // 开户失败
+//   ACCOUNT_OFF: 5, // 销户
+//   ACCOUNT_ABO: 6, // 账户异常
+// };
+
 export const OPEN_STATUS = {
-  UN_START: -1, // 未开始
+  UN_START: 6, // 未开始
   UN_SUBMIT: 0, // 未提交
   PENDING: 1, // 开户中
-  CANCELED: 2, // 开户已取消
-  SUCCESS: 3, // 开户成功
-  FAILED: 4, // 开户失败
-  ACCOUNT_OFF: 5, // 销户
-  ACCOUNT_ABO: 6, // 账户异常
+  CANCELED: 8, // 开户已取消
+  SUCCESS: 0, // 开户成功
+  FAILED: 3, // 开户失败
+  FAILED_1: 4, // 开户失败
+  FAILED_2: 5, // 开户失败
+  START_CA: 9, // 进行CA认证
+  CA_PENG: 10, // CA状态审核
+  // ACCOUNT_OFF: 5, // 销户
+  // ACCOUNT_ABO: 6, // 账户异常
 };
 
 export const FAIL_STATUS_TYPE = {

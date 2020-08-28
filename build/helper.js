@@ -1,6 +1,8 @@
 const spawn = require('child_process').spawnSync;
 const path = require('path');
-const isWin = process.platform === 'win32';
+// const isWin = process.platform === 'win32';
+const isWin = process.platform === 'win32' || process.platform === 'darwin';
+// const isWin = process.platform === 'darwin';
 
 module.exports = class Helper {
   constructor() {

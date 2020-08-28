@@ -184,6 +184,7 @@ export default {
               {
                 value: 2,
                 label: this.getI18n("accounts.accountMargin"),
+                // label: this.$t("iOpen.openCn.selectAccount.pageName"),
               },
             ],
             shape: "square",

@@ -3,6 +3,7 @@ import paramsData from '@/main/request/utils/wrap-icrm';
 import { SUFFIX, IMAGE_REQUEST_LIST } from '@/modules/module-iopen/api/params-define';
 import { arrayToObject } from '@/main/utils/format/array';
 import * as types from './mutation-hk-types';
+import _ from 'lodash';
 
 const state = {
   openInfoInitHK: {},
@@ -54,10 +55,11 @@ const actions = {
     return new Promise((resolve, reject) => {
       openHKApi.getCacheData(params)
         .then(res => {
-          const { cacheInfos, cacheImages } = res || {};
+          // const { cacheInfos, cacheImages } = res || {};
+          const { userInfo, userImg } = res || {};
           commit(types.OPEN_INFO_INIT_HK, { result: res });
-          commit(types.OPEN_IMG_HK, { userImg: cacheImages });
-          commit(types.OPEN_INFO_HK, { info: cacheInfos });
+          commit(types.OPEN_IMG_HK, { userImg: userImg });
+          commit(types.OPEN_INFO_HK, { info: userInfo });
           resolve(res);
         })
         .catch(err => {
@@ -69,8 +71,10 @@ const actions = {
   saveHkCacheInfo({ commit, state }, params) {
     console.log(123123);
     const { info } = params;
+    const paramsCopy = _.clone(params)
+    const obj = { ...params, info: JSON.stringify(paramsCopy.info) }
     return new Promise((resolve, reject) => {
-      openHKApi.saveCacheInfo(params)
+      openHKApi.saveCacheInfo(obj)
         .then(res => {
           commit(types.OPEN_INFO_HK, { info });
           resolve(res);
@@ -101,7 +105,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       openHKApi.saveCacheImg({ ...params, imgType, callback })
         .then(res => {
-          const updateImg = { [`${imgType}${SUFFIX}`]: res.imgUrl };
+          const updateImg = { [`${imgType}${SUFFIX}`]: res.path };
           commit(types.OPEN_IMG_HK, { updateImg });
           resolve(res);
         })

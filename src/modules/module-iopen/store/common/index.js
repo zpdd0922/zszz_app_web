@@ -254,7 +254,7 @@ const actions = {
   // 获取后台数据字典
   getDictionary({ commit, state }, mark) {
     return new Promise((resolve, reject) => {
-      openApi.getDictionary({ mark })
+      openApi.getDictionary(mark)
         .then(res => {
           const re = res || [];
           commit(types.OPEN_INDUSTRY, { result: re });
