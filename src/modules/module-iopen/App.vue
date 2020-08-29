@@ -24,7 +24,8 @@ export default {
   },
   computed: {
     isZhCN() {
-      if (this.$t("language") === "zh_CN") {
+      // if (this.$t("lan") === "zh_CN") {
+      if (this.$i18n.locale === "zh_CN") {
         return true;
       }
       return false;
@@ -57,6 +58,7 @@ export default {
     },
     ...mapActions(["login"]),
     changeLang() {
+      console.log(this.isZhCN)
       const nextLangStr = this.isZhCN ? "zh_HK" : "zh_CN";
       const realLang = setLanguage(nextLangStr);
       this.$i18n.locale = realLang;
