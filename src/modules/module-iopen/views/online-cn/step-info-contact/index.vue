@@ -209,7 +209,7 @@ export default {
         homeOtherProvince: "", // 选择其他国家省
         homeOtherCity: "", // 选择其他国家市
         homeOtherArea: "", // 选择其他国家区
-        homeTelePhone: "", // 选择其他国家区
+        homeTelePhone: "", // 住址电话
 
         contactRadio: optionsList.radioListValue.home, // 通讯地址单选
         contactCity: [], // 通讯地址省市区

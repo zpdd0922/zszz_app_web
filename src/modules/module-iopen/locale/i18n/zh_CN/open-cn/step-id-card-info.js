@@ -1,9 +1,8 @@
 import customizeI18n from '@/customize/locale/i18n/zh_CN';
 import commonI18n from '@/main/locale/i18n/zh_CN';
 
-
 export default {
-    pageName: '中国大陆身份证验证',
+    pageName: '基本信息',
     tips: '请确认您的身份信息，若有误请手动修改',
     name: {
         label: '中文姓名',
@@ -19,6 +18,10 @@ export default {
         familyNamePlaceholder: '请输入拼音姓',
         givenNamePlaceholder: '请输入拼音名',
     },
+    // nationality: {
+    //     label: '国籍',
+    //     placeholder: '请输入民族'
+    // },
     nation: {
         label: '民族',
         placeholder: '请输入民族'
@@ -42,4 +45,24 @@ export default {
         label: '签发机关',
         placeholder: '请输入签发机关'
     },
+    educationLevel: {
+        label: '教育程度',
+        placeholder: '请选择教育程度',
+        options: {
+            a: '小学',
+            b: '中学',
+            c: '专上学院',
+            d: '大学或以上',
+        }
+    },
+    maritalStatus: {
+        label: '婚姻状况',
+        placeholder: '请选择婚姻状况',
+        options: {
+            a: '未婚',
+            b: '已婚',
+            c: '离婚',
+            d: '鳏寡',
+        }
+    }
 }

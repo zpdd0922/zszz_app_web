@@ -2,7 +2,7 @@ import customizeI18n from '@/customize/locale/i18n/zh_HK';
 import commonI18n from '@/main/locale/i18n/zh_HK';
 
 export default {
-    pageName: '中国大陆身份证验证',
+    pageName: '基本信息',
     tips: '请确认您的身份信息，若有误请手动修改',
     name: {
         label: '中文姓名',
