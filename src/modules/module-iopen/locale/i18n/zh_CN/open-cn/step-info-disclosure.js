@@ -23,7 +23,7 @@ export default {
         // isNotOurStaff: `本人不是${customizeI18n.customize.company.securityFullName}及其联系公司的董事、雇员或持牌代表。`,
         // ourStaffJob: '职位',
 
-        isNotOurStaffKin: `本人不是${customizeI18n.customize.company.securityFullName}及其联系公司之董事/员工的直系家庭成员。`,
+        isNotOurStaffKin: `本人与${customizeI18n.customize.company.securityFullName}及其关联公司之董事/员工无关。`,
         ourStaffKinName: '董事/员工',
         ourStaffKinRelation: '与本人关系',
 
@@ -40,6 +40,10 @@ export default {
         isNotConsortWithMargin: `本人的配偶不是${customizeI18n.customize.company.securityFullName}的保证金客户。`,
         withMarginName: '姓名',
         withMarginAccount: '账号',
+
+        isNotBOorPG: `本人及本人的配偶不是${customizeI18n.customize.company.securityFullName}其他保证金账户的实际拥有人或担保人`,
+        otherBOorPGAccountName: '账户名称',
+        otherBOorPGAccountNumber: '账户号码',
 
         isNotConsortWithOtherMargin: `本人及本人的配偶没有${customizeI18n.customize.company.securityFullName}任何保证金客户中控制其百分之三十五或以上股权或表决权。`,
         withOtherMarginName: '姓名',
@@ -62,6 +66,7 @@ export default {
         isNotHkexParterStaffAlert: `${customizeI18n.customize.company.securityName}暂不支持对香港证券及期货事务监察委员会的持牌或注册人士，或任何持牌或注册人士的董事、员工、代表或代理人提供线上开户业务。`,
         // isNotCompanyControllerAlert: `${customizeI18n.customize.company.securityName}暂不支持对上市公司的董事、首席执行官或主要股东提供线上开户业务。`,
         isNotConsortWithMarginAlert: `${customizeI18n.customize.company.securityName}暂不支持对本公司保证金客户之配偶提供线上开户业务。`,
+        isNotPOorBGAlert: `${customizeI18n.customize.company.securityName}暂不支持对本公司保证金客户实际拥有人或者担保人提供线上开户业务。`,
         isNotConsortWithMarginOtherAlert: `${customizeI18n.customize.company.securityName}暂不支持对本公司保证金客户中控制其百分之三十五或以上股权或表决权之人士及其配偶提供线上开户业务。`,
         isNotUsGreenCardHolderAlert: `${customizeI18n.customize.company.securityName}暂不支持对美国居民或美国税务居民提供线上开户业务。`,
         inputPlaceholder: '请输入',

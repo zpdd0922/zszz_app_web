@@ -1,8 +1,28 @@
 .olcn-step-info-contact {
-    .custom-form-group{
-      .cube-form-label {
-        width: 7em;
-      }
-      
+  .custom-form-group{
+    .cube-form-label {
+      width: 7em;
     }
-}
+    
+  }
+  .tips {
+    position: relative;
+    padding: 0 15px 0 25px;
+    font-size: 10px;
+    color: #666;
+    font-family: PingFang SC, STHeitiSC-Light, Helvetica-Light, arial, sans-serif;
+
+    span {
+      color: rgb(187, 64, 64);
+    }
+  }
+  .tips::before {
+    position: absolute;
+    content: '*';
+    display: inline-block;
+    line-height: 20px;
+    font-size: 20px;
+    color: rgb(187, 64, 64);
+    left: 15px;
+  }
+} 

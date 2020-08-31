@@ -49,20 +49,20 @@ export default {
         label: '教育程度',
         placeholder: '请选择教育程度',
         options: {
-            a: '小学',
-            b: '中学',
-            c: '专上学院',
-            d: '大学或以上',
+            primary: '小学',
+            secondary: '中学',
+            diploma: '专上学院',
+            universtyOrAbove: '大学或以上',
         }
     },
     maritalStatus: {
         label: '婚姻状况',
         placeholder: '请选择婚姻状况',
         options: {
-            a: '未婚',
-            b: '已婚',
-            c: '离婚',
-            d: '鳏寡',
+            single: '未婚',
+            married: '已婚',
+            divorced: '离婚',
+            widowed: '鳏寡',
         }
     }
 }
