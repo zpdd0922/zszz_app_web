@@ -8,9 +8,9 @@
           <!-- 年收入 income-->
           <cube-form-item :field="fieldsFinance.income"></cube-form-item>
           <!-- 投资年期 investmentHorizon-->
-          <cube-form-item :field="fieldsFinance.investmentHorizon"></cube-form-item>
+          <!-- <cube-form-item :field="fieldsFinance.investmentHorizon"></cube-form-item> -->
           <!-- 净资产 assets -->
-          <!-- <cube-form-item :field="fieldsFinance.assetsValue"></cube-form-item> -->
+          <cube-form-item :field="fieldsFinance.totalAssets"></cube-form-item>
           <!-- 不动产 realValue -->
           <!-- <cube-form-item :field="fieldsFinance.realValue"></cube-form-item> -->
           <!-- 資金來源 capitalTxt -->
@@ -42,22 +42,29 @@
           <template v-if="isShowTargetInput">
             <cube-form-item :field="fieldsFinance.investTargetOther"></cube-form-item>
           </template>
+          <!-- 住房产权-->
+          <cube-form-item :field="fieldsFinance.residence"></cube-form-item>
+          <!-- 其他住房产权 investTargetOther -->
+          <template v-if="isShowResidenceInput">
+            <cube-form-item :field="fieldsFinance.residenceOther"></cube-form-item>
+          </template>
         </cube-form-group>
         <div class="margin-bottom"></div>
+
         <!-- 财产种类 -->
-        <cube-form-group class="step-content custom-form-group">
+        <!-- <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.assets"></head-title>
           <div class="cube-form-item border-bottom-1px">
             <div class="cube-form-label">
               <cube-checkbox
-                v-model="model.allCheck"
+                v-model="model.totalAssets"
                 :disabled="true"
                 shape="square"
               >{{fieldsAssets.all.label}}</cube-checkbox>
             </div>
             <div class="cube-form-field">
               <cube-select
-                v-if="model.allCheck"
+                v-if="model.totalAssets"
                 :placeholder="fieldsAssets.all.props.placeholder"
                 :options="fieldsAssets.all.props.options"
                 v-model="model.allValue"
@@ -77,7 +84,7 @@
               ></cube-select>
             </div>
           </div>
-        </cube-form-group>
+        </cube-form-group> -->
         <div class="margin-bottom"></div>
         <cube-form-group class="step-content step-content-derivative custom-form-group">
           <head-title :title="titleValues.derivative"></head-title>
@@ -110,17 +117,18 @@ import validate from "@/main/utils/format/validate";
 
 const defaultModel = {
   income: 1,
-  investmentHorizon: 1,
+  totalAssets: 1,
   capital: [1],
-  investTarget: 3,
-  allCheck: true,
-  allValue: 1,
-  realCheck: false,
-  realValue: "",
+  investTarget: 1,
+  residence: 1,
+  // investmentHorizon: 1,
+  // allValue: 1,
+  // realCheck: false,
+  // realValue: "",
   derivative: 0, // 是否有意进行衍生品买卖
-  derivativeTrade: true, // 三五年内买卖衍生品复选框
-  derivativeCourse: true, // 学习过衍生品相关课程复选框
-  derivativeIndustry: true, // 从事衍生品相关行业复选框
+  derivativeTrade: false, // 三五年内买卖衍生品复选框
+  derivativeCourse: false, // 学习过衍生品相关课程复选框
+  derivativeIndustry: false, // 从事衍生品相关行业复选框
 };
 
 export default {
@@ -129,25 +137,26 @@ export default {
     return {
       validity: {},
       valid: undefined,
-      msg: "",
-      stockBlur: false,
-      realBlur: false,
       isShowCapitalList: false,
       model: {
         income: "", // 年收入
-        investmentHorizon: "", // 投资年期
         capitalTxt: "",
         capital: [],
         investTarget: "",
         investTargetOther: "",
-        allCheck: true, // 净资产選擇框
-        allValue: "", // 净资产數值
-        realCheck: false, // 不动产选择框
-        realValue: "", // 不动产数值
+        totalAssets: "", // 净资产數值
+        residence: "", //住房产权
+        residenceOther: "", //其他住房产权
+      // validity: {},
+      // valid: undefined,
+        // totalAssets: true, // 净资产選擇框
+        // investmentHorizon: "", // 投资年期
+        // realCheck: false, // 不动产选择框
+        // realValue: "", // 不动产数值
         derivative: 0, // 是否有意进行衍生品买卖
-        derivativeTrade: true, // 三五年内买卖衍生品复选框
-        derivativeCourse: true, // 学习过衍生品相关课程复选框
-        derivativeIndustry: true, // 从事衍生品相关行业复选框
+        derivativeTrade: false, // 三五年内买卖衍生品复选框
+        derivativeCourse: false, // 学习过衍生品相关课程复选框
+        derivativeIndustry: false, // 从事衍生品相关行业复选框
       },
       // 财务状况
       fieldsFinance: {
@@ -166,21 +175,36 @@ export default {
             required: false,
           },
         },
-        investmentHorizon: {
+        totalAssets: {
           type: "select",
-          modelKey: "investmentHorizon",
-          label: this.getI18n("finance.investmentHorizon.label"),
+          modelKey: "totalAssets",
+          label: this.getI18n("finance.totalAssets.label"),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("finance.investmentHorizon.placeholder"),
-            options: optionsList.investmentHorizonOptions(),
+            placeholder: this.getI18n("finance.totalAssets.placeholder"),
+            options: optionsList.totalAssetsOptions(),
           },
           rules: {
             required: false,
           },
         },
+        // investmentHorizon: {
+        //   type: "select",
+        //   modelKey: "investmentHorizon",
+        //   label: this.getI18n("finance.investmentHorizon.label"),
+        //   props: {
+        //     title: this.$t("common.cubeComponents.select.title"),
+        //     cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+        //     confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+        //     placeholder: this.getI18n("finance.investmentHorizon.placeholder"),
+        //     options: optionsList.investmentHorizonOptions(),
+        //   },
+        //   rules: {
+        //     required: false,
+        //   },
+        // },
         capitalTxt: {
           type: "input",
           modelKey: "capitalTxt",
@@ -227,46 +251,69 @@ export default {
           },
           rules: { required: false, maxlength: 50 },
         },
-      },
-      fieldsAssets: {
-        all: {
-          // type: "select",
-          // modelKey: "allValue",
-          label: this.getI18n("assets.all.label"),
+        residence: {
+          type: "select",
+          modelKey: "residence",
+          label: this.getI18n("finance.residence.label"),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("assets.all.placeholder"),
-            options: optionsList.assetsAllOptions(),
+            placeholder: this.getI18n("finance.residence.placeholder"),
+            options: optionsList.residenceOptions(),
           },
           rules: {
             required: false,
           },
         },
-        real: {
-          // type: "select",
-          // modelKey: "realValue",
-          label: this.getI18n("assets.real.label"),
+        residenceOther: {
+          type: "input",
+          modelKey: "residenceOther",
+          label: this.getI18n("finance.residenceOther.label"),
           props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("assets.real.placeholder"),
-            options: optionsList.assetsRealOptions(),
+            placeholder: this.getI18n("finance.residenceOther.placeholder"),
           },
-          rules: {
-            required: false,
-          },
+          rules: { required: false, maxlength: 50 },
         },
       },
+      // fieldsAssets: {
+      //   all: {
+      //     // type: "select",
+      //     // modelKey: "allValue",
+      //     label: this.getI18n("assets.all.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n("assets.all.placeholder"),
+      //       options: optionsList.assetsAllOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      //   real: {
+      //     // type: "select",
+      //     // modelKey: "realValue",
+      //     label: this.getI18n("assets.real.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n("assets.real.placeholder"),
+      //       options: optionsList.assetsRealOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      // },
       filedsDerivative: {
         derivative: {
           type: "radio-group",
           modelKey: "derivative",
           props: {
             colNum: 2,
-            investmentHorizontal: true,
             options: [
               {
                 label: this.getI18n("derivative.yes"),
@@ -287,7 +334,7 @@ export default {
           modelKey: "derivativeCourse",
           props: {
             option: {
-              value: true,
+              value: false,
               label: this.getI18n("derivative.derivativeCourse"),
             },
             shape: "square",
@@ -301,7 +348,7 @@ export default {
           modelKey: "derivativeIndustry",
           props: {
             option: {
-              value: true,
+              value: false,
               label: this.getI18n("derivative.derivativeIndustry"),
             },
             shape: "square",
@@ -315,7 +362,7 @@ export default {
           modelKey: "derivativeTrade",
           props: {
             option: {
-              value: true,
+              value: false,
               label: this.getI18n("derivative.derivativeTrade"),
             },
             shape: "square",
@@ -333,15 +380,20 @@ export default {
       return this.model.derivative === 1;
     },
     isShowTargetInput() {
-      // 投资目标选择其他时候显示输入框 | 6: 代表其他
+      // 投资目标选择其他时候显示输入框 | 5: 代表其他
       // return false;
-      return this.model.investTarget === 6;
+      return this.model.investTarget === 5;
+    },
+    isShowResidenceInput() {
+      // 投资目标选择其他时候显示输入框 | 5: 代表其他
+      // return false;
+      return this.model.residence === 6;
     },
     // 返回title
     titleValues() {
       return {
         finance: this.getI18n("finance.title"),
-        assets: this.getI18n("assets.title"),
+        // assets: this.getI18n("assets.title"),
         derivative: this.getI18n("derivative.title"),
       };
     },
@@ -358,22 +410,22 @@ export default {
       return !status.includes(false);
     },
     // 验证财产种类
-    validAsset() {
-      const data = this.model;
-      // 验证至少有一个值
-      const status = validForm.assetValidator.map((val) => {
-        if (data[val.key]) {
-          if (data[val.valueKey]) {
-            return true;
-          }
-          return false;
-        }
-        return true;
-      });
-      // 验证选项框
-      const value = validForm.assetValidator.some((val) => data[val.key]);
-      return value ? !status.includes(false) : false;
-    },
+    // validAsset() {
+    //   const data = this.model;
+    //   // 验证至少有一个值
+    //   const status = validForm.assetValidator.map((val) => {
+    //     if (data[val.key]) {
+    //       if (data[val.valueKey]) {
+    //         return true;
+    //       }
+    //       return false;
+    //     }
+    //     return true;
+    //   });
+    //   // 验证选项框
+    //   const value = validForm.assetValidator.some((val) => data[val.key]);
+    //   return value ? !status.includes(false) : false;
+    // },
     validDerivative() {
       const {
         derivative,
@@ -393,7 +445,7 @@ export default {
     // 验证提交按钮
     submitStatus() {
       const status =
-        this.validCapital && this.validAsset && this.validDerivative;
+        this.validCapital && this.validDerivative;
       return !status;
     },
   },
@@ -435,17 +487,17 @@ export default {
       this.valid = result.valid;
     },
     // 获取后台数据字典
-    async fetchDataDesin() {
-      const result = await this.$store.dispatch(
-        "getDictionary",
-        AO_INVEST_TARGET
-      );
-      // this.model.investTarget = result.map(v => v.value)
-      this.fieldsFinance.investTarget.props.options = result.map((res) => ({
-        text: res.name,
-        value: res.value,
-      }));
-    },
+  //   async fetchDataDesin() {
+  //     const result = await this.$store.dispatch(
+  //       "getDictionary",
+  //       AO_INVEST_TARGET
+  //     );
+  //     // this.model.investTarget = result.map(v => v.value)
+  //     this.fieldsFinance.investTarget.props.options = result.map((res) => ({
+  //       text: res.name,
+  //       value: res.value,
+  //     }));
+  //   },
   },
   watch: {
     "model.capital"(newVal, oldVal) {
