@@ -9,7 +9,7 @@
           <cube-form-item :field="fieldsExperience.warrantsInvestmentExperience"></cube-form-item>
           <cube-form-item :field="fieldsExperience.optionsExperience"></cube-form-item>
           <cube-form-item :field="fieldsExperience.futuresInvestmentExperience"></cube-form-item>
-          <cube-form-item :field="fieldsExperience.unitTrustsExperience"></cube-form-item>
+          <cube-form-item :field="fieldsExperience.CCBCExperience"></cube-form-item>
           <cube-form-item :field="fieldsExperience.otherProductsExperience"></cube-form-item>
           <template
             v-if="modelExperience.otherProductsExperience &&  modelExperience.otherProductsExperience !== 0"
@@ -20,33 +20,33 @@
       </cube-form>
       <div class="margin-bottom"></div>
       <!-- 交易頻率 -->
-      <cube-form :model="modelTrade" @validate="validateHandler" @submit="submitHandler">
+      <!-- <cube-form :model="modelTrade" @validate="validateHandler" @submit="submitHandler">
         <cube-form-group class="step-content custom-form-group experience-form-group">
           <head-title :title="titleValues.trade"></head-title>
-          <cube-form-item :field="fieldsTrade.tradeStockFrequency">
+          <cube-form-item :field="fieldsTrade.tradeStockFrequency"> -->
             <!-- <cube-select
               v-model="modelTrade.tradeStockFrequency"
               :options="fieldsTrade.tradeStockFrequency.props.options"
               :placeholder="fieldsTrade.tradeStockFrequency.props.placeholder"
             ></cube-select>-->
-          </cube-form-item>
+          <!-- </cube-form-item> -->
           <!-- <template v-if="modelExperience.warrantsInvestmentExperience && modelExperience.warrantsInvestmentExperience !== 0"> -->
-          <cube-form-item :field="fieldsTrade.tradeWarrantsFrequency"></cube-form-item>
+          <!-- <cube-form-item :field="fieldsTrade.tradeWarrantsFrequency"></cube-form-item> -->
           <!-- </template> -->
           <!-- <template v-if="modelExperience.optionsExperience &&  modelExperience.optionsExperience !== 0"> -->
-          <cube-form-item :field="fieldsTrade.tradeOptionsFrequency"></cube-form-item>
+          <!-- <cube-form-item :field="fieldsTrade.tradeOptionsFrequency"></cube-form-item> -->
           <!-- </template> -->
           <!-- <template v-if="modelExperience.futuresInvestmentExperience &&  modelExperience.futuresInvestmentExperience !== 0"> -->
-          <cube-form-item :field="fieldsTrade.tradeFuturesFrequency"></cube-form-item>
+          <!-- <cube-form-item :field="fieldsTrade.tradeFuturesFrequency"></cube-form-item> -->
           <!-- </template> -->
-          <!-- <template v-if="modelExperience.unitTrustsExperience &&  modelExperience.unitTrustsExperience !== 0"> -->
-          <cube-form-item :field="fieldsTrade.tradeUnitTrustsFrequency"></cube-form-item>
+          <!-- <template v-if="modelExperience.CCBCExperience &&  modelExperience.CCBCExperience !== 0"> -->
+          <!-- <cube-form-item :field="fieldsTrade.tradeUnitTrustsFrequency"></cube-form-item> -->
           <!-- </template> -->
           <!-- <template v-if="modelExperience.otherProductsExperience &&  modelExperience.otherProductsExperience !== 0"> -->
-          <cube-form-item :field="fieldsTrade.tradeOtherProductsFrequency"></cube-form-item>
+          <!-- <cube-form-item :field="fieldsTrade.tradeOtherProductsFrequency"></cube-form-item> -->
           <!-- </template> -->
-        </cube-form-group>
-      </cube-form>
+        <!-- </cube-form-group> -->
+      <!-- </cube-form> -->
     </div>
   </op-wrap>
 </template>
@@ -64,18 +64,18 @@ const defaultModelExperience = {
   warrantsInvestmentExperience: 0,
   futuresInvestmentExperience: 0,
   optionsExperience: 0,
-  unitTrustsExperience: 0,
+  CCBCExperience: 0,
   otherProductsExperience: 0,
 };
 
-const defaultModelTrade = {
-  tradeStockFrequency: 1,
-  tradeWarrantsFrequency: 1,
-  tradeFuturesFrequency: 1,
-  tradeOptionsFrequency: 1,
-  tradeUnitTrustsFrequency: 1,
-  tradeOtherProductsFrequency: 1,
-};
+// const defaultModelTrade = {
+//   tradeStockFrequency: 1,
+//   tradeWarrantsFrequency: 1,
+//   tradeFuturesFrequency: 1,
+//   tradeOptionsFrequency: 1,
+//   tradeUnitTrustsFrequency: 1,
+//   tradeOtherProductsFrequency: 1,
+// };
 
 export default {
   mixins: [onlineMixin],
@@ -92,18 +92,18 @@ export default {
         warrantsInvestmentExperience: "",
         futuresInvestmentExperience: "",
         optionsExperience: "",
-        unitTrustsExperience: "",
+        CCBCExperience: "",
         otherProductsExperience: "",
         otherProductsName: "",
       },
-      modelTrade: {
-        tradeStockFrequency: "",
-        tradeWarrantsFrequency: "",
-        tradeFuturesFrequency: "",
-        tradeOptionsFrequency: "",
-        tradeUnitTrustsFrequency: "",
-        tradeOtherProductsFrequency: "",
-      },
+      // modelTrade: {
+      //   tradeStockFrequency: "",
+      //   tradeWarrantsFrequency: "",
+      //   tradeFuturesFrequency: "",
+      //   tradeOptionsFrequency: "",
+      //   tradeUnitTrustsFrequency: "",
+      //   tradeOtherProductsFrequency: "",
+      // },
       // 投资经验
       fieldsExperience: {
         stocksInvestmentExperience: {
@@ -111,7 +111,8 @@ export default {
           modelKey: "stocksInvestmentExperience",
           label: this.getI18n("experience.stocksInvestmentExperience.label"),
           props: {
-            title: this.$t("common.cubeComponents.select.title"),
+            title: this.$t("common.cubeComponents.select.title")
+            + this.getI18n("experience.experienceUnit"),
             cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n(
@@ -174,16 +175,16 @@ export default {
             required: false,
           },
         },
-        unitTrustsExperience: {
+        CCBCExperience: {
           type: "select",
-          modelKey: "unitTrustsExperience",
-          label: this.getI18n("experience.unitTrustsExperience.label"),
+          modelKey: "CCBCExperience",
+          label: this.getI18n("experience.CCBCExperience.label"),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n(
-              "experience.unitTrustsExperience.placeholder"
+              "experience.CCBCExperience.placeholder"
             ),
             options: optionsList.yearOptions(),
           },
@@ -224,121 +225,116 @@ export default {
         },
       },
       // 投资頻率
-      fieldsTrade: {
-        tradeStockFrequency: {
-          type: "select",
-          modelKey: "tradeStockFrequency",
-          label: this.getI18n("trade.tradeStockFrequency.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("trade.tradeStockFrequency.placeholder"),
-            options: optionsList.tradeOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },  
-        tradeWarrantsFrequency: {
-          type: "select",
-          modelKey: "tradeWarrantsFrequency",
-          label: this.getI18n("trade.tradeWarrantsFrequency.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n(
-              "trade.tradeWarrantsFrequency.placeholder"
-            ),
-            options: optionsList.tradeOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
-        tradeFuturesFrequency: {
-          type: "select",
-          modelKey: "tradeFuturesFrequency",
-          label: this.getI18n("trade.tradeFuturesFrequency.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n(
-              "trade.tradeFuturesFrequency.placeholder"
-            ),
-            options: optionsList.tradeOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
-        tradeOptionsFrequency: {
-          type: "select",
-          modelKey: "tradeOptionsFrequency",
-          label: this.getI18n("trade.tradeOptionsFrequency.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n(
-              "trade.tradeOptionsFrequency.placeholder"
-            ),
-            options: optionsList.tradeOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
-        tradeUnitTrustsFrequency: {
-          type: "select",
-          modelKey: "tradeUnitTrustsFrequency",
-          label: this.getI18n("trade.tradeUnitTrustsFrequency.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n(
-              "trade.tradeUnitTrustsFrequency.placeholder"
-            ),
-            options: optionsList.tradeOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
-        tradeOtherProductsFrequency: {
-          type: "select",
-          modelKey: "tradeOtherProductsFrequency",
-          label: this.getI18n("trade.tradeOtherProductsFrequency.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n(
-              "trade.tradeOtherProductsFrequency.placeholder"
-            ),
-            options: optionsList.tradeOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
-      },
+      // fieldsTrade: {
+      //   tradeStockFrequency: {
+      //     type: "select",
+      //     modelKey: "tradeStockFrequency",
+      //     label: this.getI18n("trade.tradeStockFrequency.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n("trade.tradeStockFrequency.placeholder"),
+      //       options: optionsList.tradeOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },  
+      //   tradeWarrantsFrequency: {
+      //     type: "select",
+      //     modelKey: "tradeWarrantsFrequency",
+      //     label: this.getI18n("trade.tradeWarrantsFrequency.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n(
+      //         "trade.tradeWarrantsFrequency.placeholder"
+      //       ),
+      //       options: optionsList.tradeOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      //   tradeFuturesFrequency: {
+      //     type: "select",
+      //     modelKey: "tradeFuturesFrequency",
+      //     label: this.getI18n("trade.tradeFuturesFrequency.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n(
+      //         "trade.tradeFuturesFrequency.placeholder"
+      //       ),
+      //       options: optionsList.tradeOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      //   tradeOptionsFrequency: {
+      //     type: "select",
+      //     modelKey: "tradeOptionsFrequency",
+      //     label: this.getI18n("trade.tradeOptionsFrequency.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n(
+      //         "trade.tradeOptionsFrequency.placeholder"
+      //       ),
+      //       options: optionsList.tradeOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      //   tradeUnitTrustsFrequency: {
+      //     type: "select",
+      //     modelKey: "tradeUnitTrustsFrequency",
+      //     label: this.getI18n("trade.tradeUnitTrustsFrequency.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n(
+      //         "trade.tradeUnitTrustsFrequency.placeholder"
+      //       ),
+      //       options: optionsList.tradeOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      //   tradeOtherProductsFrequency: {
+      //     type: "select",
+      //     modelKey: "tradeOtherProductsFrequency",
+      //     label: this.getI18n("trade.tradeOtherProductsFrequency.label"),
+      //     props: {
+      //       title: this.$t("common.cubeComponents.select.title"),
+      //       cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+      //       confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+      //       placeholder: this.getI18n(
+      //         "trade.tradeOtherProductsFrequency.placeholder"
+      //       ),
+      //       options: optionsList.tradeOptions(),
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      // },
     };
   },
   computed: {
-    isShowTargetInput() {
-      // 投资目标选择其他时候显示输入框 | 6: 代表其他
-      // return false;
-      return this.model.investTarget === 6;
-    },
     // 返回title
     titleValues() {
       return {
         experience: this.getI18n("experience.title"),
-        trade: this.getI18n("trade.title"),
+        // trade: this.getI18n("trade.title"),
       };
     },
     // 投资经验
@@ -348,7 +344,7 @@ export default {
         warrantsInvestmentExperience,
         futuresInvestmentExperience,
         optionsExperience,
-        unitTrustsExperience,
+        CCBCExperience,
         otherProductsExperience,
         otherProductsName = "",
       } = this.modelExperience;
@@ -357,7 +353,7 @@ export default {
         (warrantsInvestmentExperience || warrantsInvestmentExperience === 0) &&
         (futuresInvestmentExperience || futuresInvestmentExperience === 0) &&
         (optionsExperience || optionsExperience === 0) &&
-        (unitTrustsExperience || unitTrustsExperience === 0) &&
+        (CCBCExperience || CCBCExperience === 0) &&
         !(
           otherProductsExperience &&
           otherProductsExperience !== 0 &&
@@ -384,13 +380,13 @@ export default {
     // 数据回填
     initData() {
       const userInfo = this.openInfo;
-      const defaultDataTrade = this.modelTrade;
+      // const defaultDataTrade = this.modelTrade;
       const defaultDataExperience = this.modelExperience;
 
       console.log(
-        defaultDataTrade,
+        // defaultDataTrade,
         defaultDataExperience,
-        userInfo.tradeStockFrequency
+        // userInfo.tradeStockFrequency
       );
       Object.keys(defaultDataExperience).forEach((val) => {
         defaultDataExperience[val] =
@@ -401,14 +397,14 @@ export default {
             : defaultDataExperience[val];
       });
 
-      Object.keys(defaultDataTrade).forEach((val) => {
-        defaultDataTrade[val] =
-          userInfo[val] !== undefined
-            ? userInfo[val]
-            : defaultModelTrade[val] !== undefined
-            ? defaultModelTrade[val]
-            : defaultDataTrade[val];
-      });
+      // Object.keys(defaultDataTrade).forEach((val) => {
+      //   defaultDataTrade[val] =
+      //     userInfo[val] !== undefined
+      //       ? userInfo[val]
+      //       : defaultModelTrade[val] !== undefined
+      //       ? defaultModelTrade[val]
+      //       : defaultDataTrade[val];
+      // });
     },
     // 下一步
     submitHandler(e) {
@@ -416,7 +412,7 @@ export default {
       // 保存数据&下一步
       const params = {
         step: this.step,
-        info: { ...this.modelExperience, ...this.modelTrade },
+        info: {...this.modelExperience},
       };
       this.saveCacheInfo(params).then(() => {
         this.$router.push({ name: this.nextStep });
@@ -427,50 +423,50 @@ export default {
       this.valid = result.valid;
     },
     // 获取后台数据字典
-    async fetchDataDesin() {
-      const result = await this.$store.dispatch(
-        "getDictionary",
-        AO_INVEST_TARGET
-      );
-      // this.model.investTarget = result.map(v => v.value)
-      this.fieldsFinance[4].props.options = result.map((res) => ({
-        text: res.name,
-        value: res.value,
-      }));
-    },
+    // async fetchDataDesin() {
+    //   const result = await this.$store.dispatch(
+    //     "getDictionary",
+    //     AO_INVEST_TARGET
+    //   );
+    //   // this.model.investTarget = result.map(v => v.value)
+    //   this.fieldsFinance[4].props.options = result.map((res) => ({
+    //     text: res.name,
+    //     value: res.value,
+    //   }));
+    // },
   },
-  watch: {
-    "modelExperience.stocksInvestmentExperience"(newVal, oldVal) {
-      if (newVal === 0) {
-        this.modelTrade.tradeStockFrequency = 0;
-      }
-    },
-    "modelExperience.warrantsInvestmentExperience"(newVal, oldVal) {
-      if (newVal === 0) {
-        this.modelTrade.tradeWarrantsFrequency = 0;
-      }
-    },
-    "modelExperience.futuresInvestmentExperience"(newVal, oldVal) {
-      if (newVal === 0) {
-        this.modelTrade.tradeFuturesFrequency = 0;
-      }
-    },
-    "modelExperience.optionsExperience"(newVal, oldVal) {
-      if (newVal === 0) {
-        this.modelTrade.tradeOptionsFrequency = 0;
-      }
-    },
-    "modelExperience.unitTrustsExperience"(newVal, oldVal) {
-      if (newVal === 0) {
-        this.modelTrade.tradeUnitTrustsFrequency = 0;
-      }
-    },
-    "modelExperience.otherProductsExperience"(newVal, oldVal) {
-      if (newVal === 0) {
-        this.modelTrade.tradeOtherProductsFrequency = 0;
-      }
-    },
-  },
+  // watch: {
+  //   "modelExperience.stocksInvestmentExperience"(newVal, oldVal) {
+  //     if (newVal === 0) {
+  //       this.modelTrade.tradeStockFrequency = 0;
+  //     }
+  //   },
+  //   "modelExperience.warrantsInvestmentExperience"(newVal, oldVal) {
+  //     if (newVal === 0) {
+  //       this.modelTrade.tradeWarrantsFrequency = 0;
+  //     }
+  //   },
+  //   "modelExperience.futuresInvestmentExperience"(newVal, oldVal) {
+  //     if (newVal === 0) {
+  //       this.modelTrade.tradeFuturesFrequency = 0;
+  //     }
+  //   },
+  //   "modelExperience.optionsExperience"(newVal, oldVal) {
+  //     if (newVal === 0) {
+  //       this.modelTrade.tradeOptionsFrequency = 0;
+  //     }
+  //   },
+  //   "modelExperience.CCBCExperience"(newVal, oldVal) {
+  //     if (newVal === 0) {
+  //       this.modelTrade.tradeUnitTrustsFrequency = 0;
+  //     }
+  //   },
+  //   "modelExperience.otherProductsExperience"(newVal, oldVal) {
+  //     if (newVal === 0) {
+  //       this.modelTrade.tradeOtherProductsFrequency = 0;
+  //     }
+  //   },
+  // },
   created() {},
   mounted() {
     this.initData();
