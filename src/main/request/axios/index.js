@@ -72,7 +72,6 @@ export default class Axios {
         const reqApi = reqUrl.replace(host, "");
         const langKey = _.get(response, ['config', 'headers', 'X-Accept-Language'], 'zk_CN');
         const data = response.data;
-
         // 接口请求数据格式固定
         const { code, message = getMessage("failBusy", langKey), result = {} } = data;
 

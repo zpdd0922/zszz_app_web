@@ -1,7 +1,8 @@
 // 验证财务状况字段(用于校验)
 export const capitalValidator = [
   'income',
-  'investmentHorizon',
+  'totalAssets',
+  // 'investmentHorizon',
   'capital',
   'investTarget',
 ];

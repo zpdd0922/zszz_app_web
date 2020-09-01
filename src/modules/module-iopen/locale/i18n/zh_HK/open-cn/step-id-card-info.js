@@ -2,7 +2,7 @@ import customizeI18n from '@/customize/locale/i18n/zh_HK';
 import commonI18n from '@/main/locale/i18n/zh_HK';
 
 export default {
-    pageName: '中國大陸身份證驗證',
+    pageName: '基本資訊',
     tips: '請確認您的身份信息，若有誤請手動修改',
     name: {
         label: '中文姓名',
@@ -41,4 +41,24 @@ export default {
         label: '簽發機關',
         placeholder: '請輸入簽發機關'
     },
+    educationLevel: {
+        label: '教育程度',
+        placeholder: '請選擇教育程度',
+        options: {
+            primary: '小學',
+            secondary: '中學',
+            diploma: '專上學院',
+            universtyOrAbove: '大學或以上',
+        }
+    },
+    maritalStatus: {
+        label: '婚姻状况',
+        placeholder: '請選擇婚姻狀況',
+        options: {
+            single: '未婚',
+            married: '已婚',
+            divorced: '離婚',
+            widowed: '鳏寡',
+        }
+    }
 }

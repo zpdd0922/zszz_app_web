@@ -17,16 +17,16 @@ export default {
             label: '邮箱',
             placeholder: '请填写您的电子邮箱'
         },
-        educationLevel: {
-            label: '教育程度',
-            placeholder: '请选择教育程度',
-            options: {
-                a: '小学',
-                b: '中学',
-                c: '专上学院',
-                d: '大学或以上',
-            }
-        },
+        // educationLevel: {
+        //     label: '教育程度',
+        //     placeholder: '请选择教育程度',
+        //     options: {
+        //         a: '小学',
+        //         b: '中学',
+        //         c: '专上学院',
+        //         d: '大学或以上',
+        //     }
+        // },
         homeRadio: {
             label: '现时住址',
             placeholder: '请选择',
@@ -87,7 +87,10 @@ export default {
                 employed: '受雇',
                 selfEmployed: '自雇',
                 retired: '退休',
-                others: '其他',
+                // others: '其他',
+                housewife: '家庭主妇',
+                student: '学生',
+                umemployed: '待业',
             }
         },
         professionCodeOther: { label: '其他就业情况', placeholder: '请填写' },
@@ -97,21 +100,30 @@ export default {
             label: '职位级别',
             placeholder: '请选择职位级别',
             options: {
-                a: '高层管理',
-                b: '中层管理',
-                c: '普通员工',
+                topManagement: '高层管理',
+                middleManagement: '中层管理',
+                generalStaff: '普通员工',
             }
         },
         workingSeniority: {
             label: '从业年限',
             placeholder: '请选择',
             options: {
-                a: '少于5年',
-                b: '5-10年',
-                c: '10年以上',
+                ltFive: '少于5年',
+                fiveToTen: '5-10年',
+                mtTen: '10年以上',
             }
         },
         companyTelePhone: { label: '办公室电话', placeholder: '请填写(选填)' },
         companyAddress: { label: '公司地址', placeholder: '请填写' },
+        modeOfCorrespondence: {
+            label: '收取接单及书信方式',
+            placeholder: '请选择',
+            options: {
+                email: '电邮',
+                residentalAddress: '居住地址',
+                correspondenceAddress: '通讯地址',
+            }
+        },
     },
 }

@@ -17,6 +17,8 @@ class Auth {
    * @return string
    */
   getPlateform = () => {
+    //TODO:删除这一行
+    return 'ios'
     if (UaInfo.isApp()) {
       if (UaInfo.isAndroid()) {
         return 'android';
@@ -50,6 +52,7 @@ class Auth {
   * @return string
   */
   getAuthToken = () => {
+    return '55d3ce34d20f463ba8465408b9e9f20e122880';
     // return 'e57f3825fa574b97b5690f7b9d6de26d134614';
     // 获取地址栏token，有则更新本地
     const urlParams = getURLParameters() || {};

@@ -8,7 +8,7 @@
           <!-- 郵箱 -->
           <cube-form-item :field="fieldsContact.email"></cube-form-item>
           <!-- 教育程度 -->
-          <cube-form-item :field="fieldsContact.educationLevel"></cube-form-item>
+          <!-- <cube-form-item :field="fieldsContact.educationLevel"></cube-form-item> -->
           <!-- 住宅地址选择 -->
           <cube-form-item :field="fieldsContact.homeRadio"></cube-form-item>
           <!-- 住址地址选择省市区 -->
@@ -65,6 +65,7 @@
           <cube-form-item :field="fieldsContact.homeTelePhone"></cube-form-item>
 
           <!-- 通訊地址 -->
+          <!-- TODO:可以做一个选择同现时住址的显示框 -->
           <cube-form-item :field="fieldsContact.contactRadio"></cube-form-item>
           <template v-if="isContactAddress">
             <cube-form-item :field="fieldsContact.contactCity" v-if="model.contactRadio !== 3">
@@ -123,6 +124,9 @@
             </template>
             <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
           </template>
+          <p class="tips">若客户选择通过<span>居住地址</span>或<span>通讯地址</span>接收交易确认通知书或账户结单，将收取每月<span>五十元</span>服务费</p>
+          <!-- 收取节单方式 -->
+          <cube-form-item :field="fieldsContact.modeOfCorrespondence"></cube-form-item>
         </cube-form-group>
       </cube-form>
       <div class="margin-bottom"></div>
@@ -131,11 +135,11 @@
         <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.professionTitle"></head-title>
           <cube-form-item :field="fieldsProfession.professionCode"></cube-form-item>
-          <template
+          <!-- <template
             v-if="professionModel.professionCode === optionsList.professionCodeValue.others"
           >
             <cube-form-item :field="fieldsProfession.professionCodeOther"></cube-form-item>
-          </template>
+          </template> -->
           <template
             v-if="professionModel.professionCode === optionsList.professionCodeValue.employed || professionModel.professionCode === optionsList.professionCodeValue.selfEmployed"
           >
@@ -186,19 +190,19 @@ export default {
   data() {
     return {
       optionsList,
-      validity: {},
-      valid: undefined,
-      msg: "",
-      bankBlur: false, // 银行存款失去焦点
-      stockBlur: false,
-      realBlur: false,
+      // validity: {},
+      // valid: undefined,
+      // msg: "",
+      // bankBlur: false, // 银行存款失去焦点
+      // stockBlur: false,
+      // realBlur: false,
       defaultContactValue: {},
       defaultProfessionValue: {},
       radioListValue: optionsList.radioListValue,
       model: {
         // 联络信息字段
         email: "", // 邮箱地址
-        educationLevel: "", // 教育程度
+        // educationLevel: "", // 教育程度
         homeRadio: optionsList.radioListValue.hk, // 住宅地址单选
         homeCity: [], // 住宅地址省市区
         homeAddressDetail: "", // 住宅地址省市区详细
@@ -209,7 +213,7 @@ export default {
         homeOtherProvince: "", // 选择其他国家省
         homeOtherCity: "", // 选择其他国家市
         homeOtherArea: "", // 选择其他国家区
-        homeTelePhone: "", // 选择其他国家区
+        homeTelePhone: "", // 住址电话
 
         contactRadio: optionsList.radioListValue.home, // 通讯地址单选
         contactCity: [], // 通讯地址省市区
@@ -233,6 +237,7 @@ export default {
         workingSeniority: "", // 從業年限
         industryRange: "", // 所属行业
         jobPosition: "", // 职位级别
+        modeOfCorrespondence: '' //收取节点及书信方式
       },
       // 联络信息
       fieldsContact: {
@@ -246,18 +251,18 @@ export default {
           },
           trigger: "blur",
         },
-        educationLevel: {
-          type: "select",
-          modelKey: "educationLevel",
-          label: this.getI18n("contact.educationLevel.label"),
-          props: {
-            placeholder: this.getI18n("contact.educationLevel.placeholder"),
-            options: optionsList.educationLevelOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
+        // educationLevel: {
+        //   type: "select",
+        //   modelKey: "educationLevel",
+        //   label: this.getI18n("contact.educationLevel.label"),
+        //   props: {
+        //     placeholder: this.getI18n("contact.educationLevel.placeholder"),
+        //     options: optionsList.educationLevelOptions(),
+        //   },
+        //   rules: {
+        //     required: false,
+        //   },
+        // },
         homeRadio: {
           type: "select",
           modelKey: "homeRadio",
@@ -403,6 +408,24 @@ export default {
             required: false,
           },
           trigger: "blur",
+        },
+        modeOfCorrespondence: {
+        type: "select",
+        modelKey: "modeOfCorrespondence",
+        label: this.getI18n("profession.modeOfCorrespondence.label"),
+        props: {
+          title: this.$t("common.cubeComponents.select.title"),
+          cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+          confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+          placeholder: this.getI18n(
+            "profession.modeOfCorrespondence.placeholder"
+          ),
+          options: optionsList.modeOfCorrespondenceOptions(),
+        },
+        rules: {
+          required: false,
+        },
+        trigger: "blur",
         },
       },
       // 住址选择其他
@@ -887,7 +910,7 @@ export default {
       }
     },
     changeProfess(args) {
-   const userInfo = this.openInfo;
+      const userInfo = this.openInfo;
       const defaultData = this.professionModel;
 
       // 切换职业类型清空数据以及数据回填
