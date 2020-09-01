@@ -174,7 +174,7 @@ export default {
       filedsAccounts: {
         fundAccountType: {
           type: "radio-group",
-          modelKey: "fundAccountType",
+          modelKey: "fundAccountType", 
           props: {
             options: [
               {

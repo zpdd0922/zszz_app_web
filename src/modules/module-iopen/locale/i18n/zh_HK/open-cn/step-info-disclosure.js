@@ -5,7 +5,8 @@ export default {
     pageName: '個人聲明',
     nextBtn: '下一步',
     other: {
-        title: '身份資料申報',
+        declareTitle: '身份資料申報',
+        greenCardTitle: '美國居民身份申報',
         isAccountOwner: '本人是該帳戶之最終實益擁有人。',
         otherOwnerName: '姓名',
         otherOwnerCardType: '證件類型',
@@ -72,5 +73,16 @@ export default {
         selectPlaceholder: '請選擇',
         add: '繼續添加',
         remove: '刪除上條',
+
+        isNotUsGreenCardHolder: {
+            title: '請選擇下列選項之一：',
+            usGreenCardHoldStatusOptions: {
+                greenCardHolder: '本人就課稅目的而言為美國公民或美國居民。',
+                notAmericanBornInUS: '本人在美國出生但不再屬於美國公民，原因是本人自願放棄本人的公民身份，並以美國【喪失原有國籍證明】為憑證。',
+                notGreenCardHolder: '本人就課稅目的而言不是美國公民或者美國居民。'
+            },
+
+        }
+
     },
 };
