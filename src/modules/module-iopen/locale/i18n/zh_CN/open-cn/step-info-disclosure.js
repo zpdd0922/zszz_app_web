@@ -2,7 +2,7 @@ import customizeI18n from '@/customize/locale/i18n/zh_CN';
 import commonI18n from '@/main/locale/i18n/zh_CN';
 
 export default {
-    pageName: '身份披露',
+    pageName: '个人声明',
     nextBtn: '下一步',
     other: {
         title: '身份资料申报',
@@ -49,15 +49,14 @@ export default {
         withOtherMarginName: '姓名',
         withOtherMarginAccount: '账号',
         
-        isNotUsGreenCardHolder: '本人不是美国居民或美国税务居民。',
         usGreenCardCode: '美国纳税人识别号码',
-
+        
         // isNotCompanyController: '本人不是任何上市公司的董事、首席执行官或主要股东。',
         // companyControllerName: '公司/机构名称',
         // companyControllerJob: '职位',
         // companyControllerExchange: '交易所/市场',
         // companyControllerCode: '股份代码',
-
+        
         isAccountOwnerAlert: `${customizeI18n.customize.company.securityName}暂不支持非本证券账户之最终实益拥有人提供线上开户业务。`,
         isAccountManagerAlert: `${customizeI18n.customize.company.securityName}暂不支持非本证券账户之最初负责发出交易指示的人士提供线上开户业务。`,
         // isNotOurStaffAlert: `${customizeI18n.customize.company.securityName}暂不支持本公司及其联系公司的董事、雇员或持牌代表提供线上开户业务。`,
@@ -73,5 +72,16 @@ export default {
         selectPlaceholder: '请选择',
         add: '继续添加',
         remove: '删除上条',
+
+        isNotUsGreenCardHolder: {
+            title: '是否美国居民',
+            placeholder: '请选择',
+            usGreenCardHoldStatusOptions: {
+                greenCardHolder: '本人确认，本人就课税目的而言为美国公民或美国居民。',
+                notAmericanBornInUS: '本人确认，本人在美国出生但不再属于美国公民，原因是本人自愿放弃本人的公民身份，并以美国【丧失原有国籍证明】为凭证。',
+                notGreenCardHolder: '本人确认，本人就课税目的而言不是美国公民或者美国居民。'
+            },
+
+        }
     },
 };

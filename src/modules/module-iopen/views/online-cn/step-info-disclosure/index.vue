@@ -93,14 +93,28 @@
         </cube-form-group>
 
         <!-- 是否美國綠卡 -->
-        <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsUsGreenCard.isNotUsGreenCardHolder"></cube-form-item>
-          <template
+        <cube-radio-group :field="fieldUsGreenCard">
+          <cube-radio
+            v-model="isNotUsGreenCardHolder"
+            :option="greenCardOptionsList.notGreenCardHolder"
+          ></cube-radio>
+          <cube-radio
+            v-model="isNotUsGreenCardHolder"
+            :option="greenCardOptionsList.notAmericanBornInUS"
+          ></cube-radio>
+          <cube-radio
+            v-model="isNotUsGreenCardHolder"
+            :option="greenCardOptionsList.greenCardHolder"
+          ></cube-radio>
+        </cube-radio-group>
+        <!-- <cube-form-group class="custom-form-group">
+          <cube-form-item :field="fieldsUsGreenCard.isNotUsGreenCardHolder"></cube-form-item> -->
+          <!-- <template
             v-if="disclosureDefine.isNotUsGreenCardHolder.isCanFalse &&  !model.isNotUsGreenCardHolder"
           >
             <cube-form-item class="label-width-10em" :field="fieldsUsGreenCard.usGreenCardCode"></cube-form-item>
-          </template>
-        </cube-form-group>
+          </template> -->
+        <!-- </cube-form-group> -->
       </cube-form>
       <div class="margin-bottom"></div>
     </div>
@@ -111,6 +125,7 @@
 import onlineMixin from "../mixins/online";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import { disclosureDefine } from "@/modules/module-iopen/format/format-cn/other";
+import * as optionsList from "./option-list";
 
 const emtpy = ["null", "undefined", "", undefined, null];
 
@@ -119,6 +134,7 @@ export default {
   components: {},
   data() {
     return {
+      greenCardOptionsList: optionsList.getUsGreenCardOptions(),
       model: {
         isAccountOwner: true,
         otherOwnerName: "",
@@ -152,8 +168,8 @@ export default {
         withOtherMarginName: "",
         withOtherMarginAccount: "",
 
-        isNotUsGreenCardHolder: true,
-        usGreenCardCode: "",
+        isNotUsGreenCardHolder: "",
+        // usGreenCardCode: "",
       },
 
       // 1 是否本账号唯一受益人
@@ -420,27 +436,21 @@ export default {
         },
       },
       // 7
-      fieldsUsGreenCard: {
-        isNotUsGreenCardHolder: {
-          type: "checkbox",
-          modelKey: "isNotUsGreenCardHolder",
-          props: {
-            option: {
-              label: this.getI18n("other.isNotUsGreenCardHolder"),
-              value: true,
-            },
-            shape: "square",
-          },
-        },
-        usGreenCardCode: {
-          type: "input",
-          modelKey: "usGreenCardCode",
-          label: this.getI18n("other.usGreenCardCode"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
+      fieldUsGreenCard: {
+        type: "radio-group",
+        modelKey: "isNotUsGreenCardHolder",
+        props: {
+          options: optionsList.getUsGreenCardOptions()
+        }
       },
+        // usGreenCardCode: {
+        //   type: "input",
+        //   modelKey: "usGreenCardCode",
+        //   label: this.getI18n("other.usGreenCardCode"),
+        //   props: {
+        //     placeholder: this.getI18n("other.inputPlaceholder"),
+        //   },
+        // },
       disclosureDefine: disclosureDefine,
     };
   },
@@ -627,6 +637,9 @@ export default {
     handleNext() {
       // 保存数据&下一步
       // const obj = { ...this.model, ...this.taxModel };
+      console.log(1)
+      console.log(this.model)
+      console.log(2)
       const obj = { ...this.model};
       const params = {
         step: this.step,

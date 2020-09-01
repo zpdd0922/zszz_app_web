@@ -16,8 +16,7 @@ export default {
         },
         otherAccounts: {
             title: '其他市場賬戶',
-            accountStockOptions: '股票期權交易',
-            accountForward: '期貨交易賬戶'
+            accountOptions: '期貨交易帳戶'
         },
         secMarkets: {
             marketHK: '港股',

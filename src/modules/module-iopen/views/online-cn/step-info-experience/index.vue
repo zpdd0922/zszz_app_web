@@ -55,8 +55,6 @@
 import onlineMixin from "../mixins/online.vue";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import * as optionsList from "./options-list";
-import * as validForm from "./validator";
-import { AO_INVEST_TARGET } from "@/modules/module-iopen/api/params-define";
 import validate from "@/main/utils/format/validate";
 
 const defaultModelExperience = {
@@ -111,8 +109,7 @@ export default {
           modelKey: "stocksInvestmentExperience",
           label: this.getI18n("experience.stocksInvestmentExperience.label"),
           props: {
-            title: this.$t("common.cubeComponents.select.title")
-            + this.getI18n("experience.experienceUnit"),
+            title: this.$t("common.cubeComponents.select.title"),
             cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n(
