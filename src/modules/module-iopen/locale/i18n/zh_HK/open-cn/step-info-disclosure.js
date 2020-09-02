@@ -2,7 +2,7 @@ import customizeI18n from '@/customize/locale/i18n/zh_HK';
 import commonI18n from '@/main/locale/i18n/zh_HK';
 
 export default {
-    pageName: '個人聲明',
+    pageName: '身份披露',
     nextBtn: '下一步',
     other: {
         declareTitle: '身份資料申報',
@@ -60,7 +60,7 @@ export default {
         // companyControllerCode: '股份代碼',
 
         isAccountOwnerAlert: `${customizeI18n.customize.company.securityName}暫不支持非本證券賬戶之最終實益擁有人提供線上開戶業務。`,
-        isAccountManagerAlert: `${customizeI18n.customize.company.securityName}暫不支持非本證券賬戶之最初負責發出交易指示的人士提供線上開戶業務。`,
+        // isAccountManagerAlert: `${customizeI18n.customize.company.securityName}暫不支持非本證券賬戶之最初負責發出交易指示的人士提供線上開戶業務。`,
         // isNotOurStaffAlert: `${customizeI18n.customize.company.securityName}暫不支持本公司及其聯繫公司的董事、僱員或持牌代表提供線上開戶業務。`,
         isNotOurStaffKinAlert: `${customizeI18n.customize.company.securityName}暫不支持本公司及其聯繫公司之董事/員工的直系家庭成員提供線上開戶業務。`,
         // isNotExchangeParterAlert: `${customizeI18n.customize.company.securityName}暫不支持對證券或期貨交易所的註冊人士或參與者提供線上開戶業務。`,

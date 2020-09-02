@@ -81,9 +81,6 @@ export default {
     return {
       validity: {},
       valid: undefined,
-      msg: "",
-      stockBlur: false,
-      realBlur: false,
       isShowCapitalList: false,
       modelExperience: {
         stocksInvestmentExperience: "",

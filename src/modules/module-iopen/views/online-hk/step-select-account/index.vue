@@ -208,7 +208,7 @@ export default {
   watch: {},
   computed: {
     isCanNext() {
-      return this.fundAccountType === 1 || 2;
+      return this.fundAccountType === 1 || this.fundAccountType === 2;
     },
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <op-wrap @handleNext="handleNext">
+  <op-wrap :isDisabled="isDisabled" @handleNext="handleNext">
     <div class="olcn-step olcn-step-select-account">
       <cube-form :model="model" @validate="validateHandler" @submit="handleNext">
         <!-- <cube-form-group class="step-content step-content-accounts custom-form-group">
@@ -206,7 +206,11 @@ export default {
       },
     };
   },
-  watch: {},
+  computed: {
+    isDisabled() {
+      return this.fundAccountType === 1 || this.fundAccountType === 2;
+    },
+  },
   methods: {
     getI18n(key) {
       return this.getStepI18nValue("selectAccount", key);

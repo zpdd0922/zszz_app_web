@@ -2,7 +2,7 @@ import customizeI18n from '@/customize/locale/i18n/zh_CN';
 import commonI18n from '@/main/locale/i18n/zh_CN';
 
 export default {
-    pageName: '个人声明',
+    pageName: '身份披露',
     nextBtn: '下一步',
     other: {
         declareTitle: '身份资料申报',
