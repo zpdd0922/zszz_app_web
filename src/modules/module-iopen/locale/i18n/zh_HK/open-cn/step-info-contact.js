@@ -77,6 +77,16 @@ export default {
             label: '區域',
             placeholder: '請輸入區域'
         },
+        modeOfCorrespondenceWarning: '若客戶選擇通過<span>居住地址</span>或<span>通訊地址</span>接收交易確認通知書或帳戶結單，將收取每月<span>五十元</span>服務費',
+        modeOfCorrespondence: {
+            label: '收取接單及書信方式',
+            placeholder: '請選擇',
+            options: {
+                email: '電郵',
+                residentalAddress: '居住地址',
+                correspondenceAddress: '通訊地址',
+            }
+        },
     },
     profession: {
         title: '工作狀況',
@@ -116,14 +126,5 @@ export default {
         },
         companyTelePhone: { label: '辦公室電話', placeholder: '請填寫(選填)' },
         companyAddress: { label: '公司地址', placeholder: '請填寫' },
-        modeOfCorrespondence: {
-            label: '收取接單及書信方式',
-            placeholder: '請選擇',
-            options: {
-                email: '電郵',
-                residentalAddress: '居住地址',
-                correspondenceAddress: '通訊地址',
-            }
-        },
     },
 }

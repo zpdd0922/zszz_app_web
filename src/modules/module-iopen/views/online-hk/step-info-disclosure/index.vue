@@ -97,7 +97,7 @@
 <script type="text/ecmascript-6">
 import onlineMixin from "../mixins/online";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
-import { disclosureDefine } from "@/modules/module-iopen/format/format-cn/other";
+import { disclosureDefine } from "@/modules/module-iopen/format/format-hk/other";
 
 const emtpy = ["null", "undefined", "", undefined, null];
 

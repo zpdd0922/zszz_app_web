@@ -10,20 +10,13 @@ export const radioListValue = {
 }
 
 export const professionCodeValue = {
-  employed: 1,
-  selfEmployed: 2,
+  selfEmployed: 1,
+  employed: 2,
   retired: 3,
-  others: 4
+  housewife: 4,
+  student: 5,
+  umemployed: 6,
 };
-
-// 學歷
-export const educationLevelOptions = () => [
-  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.a"), value: 1 },
-  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.b"), value: 2 },
-  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.c"), value: 3 },
-  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.d"), value: 4 },
-];
-
 
 // 职业类型选项
 export const professionCodeOptions = () => [
@@ -40,17 +33,25 @@ export const professionCodeOptions = () => [
     text: getStepI18nValue("infoContact", "profession.professionCode.options.retired"),
   },
   {
-    value: professionCodeValue.others,
-    text: getStepI18nValue("infoContact", "profession.professionCode.options.others"),
+    value: professionCodeValue.housewife,
+    text: getStepI18nValue("infoContact", "profession.professionCode.options.housewife"),
+  },
+  {
+    value: professionCodeValue.student,
+    text: getStepI18nValue("infoContact", "profession.professionCode.options.student"),
+  },
+  {
+    value: professionCodeValue.umemployed,
+    text: getStepI18nValue("infoContact", "profession.professionCode.options.umemployed"),
   },
 ];
 
 
 // 职位级别
 export const jobPositionOptions = () => [
-  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.c"), value: 1 },
-  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.b"), value: 2 },
-  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.a"), value: 3 }
+  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.topManagement"), value: 1 },
+  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.middleManagement"), value: 2 },
+  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.generalStaff"), value: 3 }
 ];
 
 
@@ -95,7 +96,14 @@ export const contactRadioOptions = () => [
 
 // 從業年限
 export const workingSeniorityOptions = () => [
-  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.a"), value: 1 },
-  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.b"), value: 2 },
-  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.c"), value: 3 }
+  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.ltFive"), value: 1 },
+  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.fiveToTen"), value: 2 },
+  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.mtTen"), value: 3 }
 ];
+
+// 收取节点及书信方式
+export const modeOfCorrespondenceOptions = () => [
+  { text:  getStepI18nValue("infoContact", "contact.modeOfCorrespondence.options.email"), value: 1},
+  { text:  getStepI18nValue("infoContact", "contact.modeOfCorrespondence.options.residentalAddress"), value: 2},
+  { text:  getStepI18nValue("infoContact", "contact.modeOfCorrespondence.options.correspondenceAddress"), value: 3},
+]
