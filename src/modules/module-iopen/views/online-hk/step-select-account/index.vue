@@ -56,7 +56,7 @@
         <cube-form-group class="step-content step-content-accounts custom-form-group">
           <head-title :title="contentTitle.otherAccounts"></head-title>
           <cube-form-item :field="filedsAccounts.isOpenFutures"></cube-form-item>
-          <cube-form-item :field="filedsAccounts.isOpenOptions"></cube-form-item>
+          <!-- <cube-form-item :field="filedsAccounts.isOpenOptions"></cube-form-item> -->
         </cube-form-group>
         <!-- <div class="margin-bottom"></div>
         <cube-form-group class="step-content step-content-accounts custom-form-group">
@@ -92,18 +92,17 @@ export default {
       model: {
         fundAccountType: 1,
         isOpenFutures: false,
-        isOpenOptions: false,
         fundAccountCashMarkets: ["1"],
         fundAccountMarginMarkets: ["1"],
-        personalType: 1,
-        tradingWay: 1,
+        // personalType: 1,
+        // tradingWay: 1,
       },
-      typeList: [
-        {
-          label: this.getI18n("type.individual"),
-          value: "1",
-          disabled: true,
-        },
+      // typeList: [
+      //   {
+      //     label: this.getI18n("type.individual"),
+      //     value: "1",
+      //     disabled: true,
+      //   },
         // {
         //   label: this.getI18n("type.joint"),
         //   value: "0",
@@ -114,8 +113,8 @@ export default {
         //   value: "0",
         //   disabled: true,
         // },
-      ],
-      tradingWayList: [],
+      // ],
+      // tradingWayList: [],
       secMarketList: [
         {
           label: this.getI18n("secMarkets.marketHK"),
@@ -135,42 +134,42 @@ export default {
         //   value: "3",
         // },
       ],
-      filedsMore: {
-        personalType: {
-          type: "radio-group",
-          modelKey: "personalType",
-          props: {
-            options: [
-              {
-                label: this.getI18n("personalType.individual"),
-                value: 1,
-                disabled: true,
-              },
-            ],
-            shape: "square",
-          },
-          rules: {
-            required: false,
-          },
-        },
-        tradingWay: {
-          type: "radio-group",
-          modelKey: "tradingWay",
-          props: {
-            options: [
-              {
-                label: this.getI18n("tradingWay.internet"),
-                value: 1,
-                disabled: true,
-              },
-            ],
-            shape: "square",
-          },
-          rules: {
-            required: false,
-          },
-        },
-      },
+      // filedsMore: {
+      //   personalType: {
+      //     type: "radio-group",
+      //     modelKey: "personalType",
+      //     props: {
+      //       options: [
+      //         {
+      //           label: this.getI18n("personalType.individual"),
+      //           value: 1,
+      //           disabled: true,
+      //         },
+      //       ],
+      //       shape: "square",
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      //   tradingWay: {
+      //     type: "radio-group",
+      //     modelKey: "tradingWay",
+      //     props: {
+      //       options: [
+      //         {
+      //           label: this.getI18n("tradingWay.internet"),
+      //           value: 1,
+      //           disabled: true,
+      //         },
+      //       ],
+      //       shape: "square",
+      //     },
+      //     rules: {
+      //       required: false,
+      //     },
+      //   },
+      // },
       filedsAccounts: {
         fundAccountType: {
           type: "radio-group",
@@ -192,23 +191,12 @@ export default {
             required: false,
           },
         },
-        isOpenOptions: {
-          type: "checkbox",
-          modelKey: "isOpenOptions",
-          props: {
-            option: {
-              label: this.getI18n("otherAccounts.accountStockOptions"),
-              value: true,
-            },
-            shape: "square",
-          },
-        },
         isOpenFutures: {
           type: "checkbox",
           modelKey: "isOpenFutures",
           props: {
             option: {
-              label: this.getI18n("otherAccounts.accountForward"),
+              label: this.getI18n("otherAccounts.accountOptions"),
               value: true,
             },
             shape: "square",
@@ -219,25 +207,8 @@ export default {
   },
   watch: {},
   computed: {
-    // 有意进行衍生品买卖
-    isShowDerivative() {
-      return this.model.derivative === 1;
-    },
     isCanNext() {
-      const {
-        derivative,
-        derivativeTrade,
-        derivativeCourse,
-        derivativeIndustry,
-      } = this.model;
-      if (
-        derivative === 1 &&
-        !derivativeTrade &&
-        !derivativeCourse &&
-        !derivativeIndustry
-      )
-        return false;
-      return true;
+      return this.fundAccountType === 1 || 2;
     },
   },
   methods: {

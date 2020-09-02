@@ -243,6 +243,7 @@ export default {
     },
     updateInfo() {
       const userInfo = this.openInfo;
+      console.log(this.openInfo);
       Object.keys(this.model).forEach((val) => {
         if (val == "bankUserName" && !userInfo[val]) {
           this.model[val] = this.openInfo.enNameValue;

@@ -4,8 +4,8 @@
       <div class="step-content user-info">
         <cube-form :model="model">
           <div class="info-wrap">
-            <!-- <cube-form-group class="custom-form-group" :legend="getI18n('tips')"> -->
-            <cube-form-group class="custom-form-group">
+            <cube-form-group class="custom-form-group" :legend="getI18n('tips')">
+            <!-- <cube-form-group class="custom-form-group"> -->
               <cube-form-item :field="{label: getI18n('name.label')}">
                 <div class="custom-date-box">
                   <div class="custom-form-separator">{{fields.familyName.label}}</div>
@@ -143,8 +143,8 @@ export default {
         dateStartValue: "",
         dateEndValue: "", //证件有效期
         authority: "", //证件签发地
-        nation: "", //民族
-        isLonger: false,
+        // nation: "", //民族
+        // isLonger: false,
         educationLevel: "", //教育程度
         maritalStatus: "", //婚姻状况
       },

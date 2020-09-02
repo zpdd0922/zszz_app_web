@@ -2,7 +2,8 @@ import customizeI18n from '@/customize/locale/i18n/zh_CN';
 import commonI18n from '@/main/locale/i18n/zh_CN';
 
 export default {
-    pageName: '个人资料验证',
+    pageName: '基本信息',
+    tips: '请确认您的身份信息，若有误请手动修改',
     placeholderMore: '(选填)',
     familyName: {
         label: '中文姓氏',
@@ -14,13 +15,11 @@ export default {
     },
     familyNameSpell: {
         label: '英文姓氏',
-        placeholder: '请输入姓氏拼音',
-        placeholder2: '请输入英文姓氏',
+        placeholder: '请输入英文姓氏',
     },
     givenNameSpell: {
         label: '英文名字',
-        placeholder: '请输入名字拼音',
-        placeholder2: '请输入英文名字',
+        placeholder: '请输入英文名字',
     },
     idCardValue: {
         label: '证件号码',
@@ -48,4 +47,24 @@ export default {
         label: '签发机关',
         placeholder: '请输入签发机关'
     },
+    educationLevel: {
+        label: '教育程度',
+        placeholder: '请选择教育程度',
+        options: {
+            primary: '小学',
+            secondary: '中学',
+            diploma: '专上学院',
+            universtyOrAbove: '大学或以上',
+        }
+    },
+    maritalStatus: {
+        label: '婚姻状况',
+        placeholder: '请选择婚姻状况',
+        options: {
+            single: '未婚',
+            married: '已婚',
+            divorced: '离婚',
+            widowed: '鳏寡',
+        }
+    }
 }

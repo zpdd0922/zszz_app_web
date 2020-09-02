@@ -92,7 +92,6 @@ export default {
       model: {
         fundAccountType: 1,
         isOpenFutures: false,
-        isByInternet: false,
         fundAccountCashMarkets: ["1"],
         fundAccountMarginMarkets: ["1"],
         personalType: 1,
