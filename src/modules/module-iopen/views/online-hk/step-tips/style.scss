@@ -1,0 +1,45 @@
+.olhk-step-tips {
+
+  .step-content-list {
+    padding: .1rem 0;
+    font-size:.15rem;
+    .icon{
+      display: inline-block;
+      border-radius: 50%;
+      padding: .1rem;
+      background-color: $color-main;
+      margin: .1rem .15rem;
+    }
+    .icon em{
+      display: inline-block;
+      width: .32rem;
+      height: .32rem;
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  
+    .icon-id-card em {
+      background-image: url("~@/modules/module-iopen/assets/images/guide/icon-user-card.svg");
+      // @include retina-images('~@/modules/module-iopen/assets/images/guide/icon-user-card');
+    }
+    .icon-bank-card em {
+      background-image: url("~@/modules/module-iopen/assets/images/guide/icon-bank-card.svg");
+      // @include retina-images('~@/modules/module-iopen/assets/images/guide/icon-bank-card');
+    }
+    .icon-wifi em {
+      background-image: url("~@/modules/module-iopen/assets/images/guide/icon-wifi.svg");
+      // @include retina-images('~@/modules/module-iopen/assets/images/guide/icon-wifi');
+    }
+  }
+  
+  .risk-com-agreement{
+    width: $screen-width * .8;
+    background-color: $color-content-bg;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+}
