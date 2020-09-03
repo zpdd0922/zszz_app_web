@@ -8,6 +8,8 @@ export default {
     ready: '提交申請',
     approve: '資料審核',
     ca: 'CA認證',
+    deposit: '身份認證',
+    auth: '身份認證',
     open: '櫃枱開戶'
   },
   ready: {
@@ -24,7 +26,7 @@ export default {
       title: '溫馨提示',
       content: [
         '3分鐘申請，7x24小時實時審批',
-        '雲頓智能盯盤股市，隨時獲取股市變化情況',
+        // '雲頓智能盯盤股市，隨時獲取股市變化情況',
       ]
     },
     btn: '立即開通',
@@ -38,13 +40,10 @@ export default {
       title: '資料審核中',
       content: '您的申請已受理，正在核對您提交的資料'
     },
-    ca: {
-      title: 'CA認證中',
-      content: '您的資料已審核通過，正在申請SZCA數字證書'
-    },
+    
     open: {
       title: '櫃枱開戶中',
-      content: `您已成功簽署數字證書，正在為您開立證券賬戶`
+      content: `您已成功身份認證，正在為您開立證券賬戶`
     },
     desc: {
       title: '溫馨提示',
@@ -58,6 +57,38 @@ export default {
         '賬戶審核通過後，通過開戶本人同名銀行賬戶首筆入金一萬港幣或以上即開戶成功（不支持第三方和現金入金）',
         '屆時請及時修改交易密碼',
       ],
+    },
+    
+  },
+  authing:{
+    ca_waiting: {
+      title: '申請數字證書',
+      btn: '同意申請數字證書',
+      content: '您的資料已審核通過，請申請數字證書'
+    },
+    ca_doing: {
+      title: 'CA認證中',
+      content: '您的資料已審核通過，正在申請SZCA數字證書'
+    },
+    deposit_waiting: {
+      title: '身份認證',
+      btn: '已完成入金',
+      content: '您的資料已審核通過，請入金完成身份認證'
+    },
+    deposit_doing: {
+      title: '銀行處理中',
+      content: '您已經完成入金，等待銀行處理中'
+    },
+    desc: {
+      title: '溫馨提示',
+      cn: [
+        '申請電子證書不產生任何費用',
+        `該電子證書僅限於與${customizeI18n.customize.company.securityName}簽署開戶電子協定,並不應用於與任何其他協力廠商的電子認證或協定簽署`,
+      ],
+      hk: [
+        '請通過開戶本人同名銀行賬戶首筆入金一萬港幣或以上即完成身份認證（不支持第三方和現金入金）',
+        `完成入金以後，請點擊下方【已完成入金】通知${customizeI18n.customize.company.securityName}進行後續審核`,
+      ],
     }
   },
   fail: {
@@ -67,7 +98,6 @@ export default {
     titleAccountOff: '您的賬戶已註銷',
     titleAccountAbo: '您的賬戶異常',
     descTitle: '失敗原因',
-
   },
   success: {
     title: "開戶成功",

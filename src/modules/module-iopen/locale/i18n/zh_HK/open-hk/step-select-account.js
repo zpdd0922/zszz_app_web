@@ -10,14 +10,16 @@ export default {
             corporate: '公司賬戶',
         },
         accounts: {
-            title: '證券市場賬戶',
+            title: '證券賬戶類型',
             accountCash: '現金賬戶',
             accountMargin: '保證金賬戶',
         },
         otherAccounts: {
-            title: '其他市場賬戶',
-            // accountStockOptions: '股票期權交易',
-            accountOptions: '期貨交易賬戶'
+            title: '其他交易市場',
+            accountHk: '香港證券市場交易',
+            accountUs: '美國證券市場交易',
+            accountStockOptions: '股票期權交易',
+            accountForward: '期貨交易',
         },
         secMarkets: {
             marketHK: '港股',
@@ -28,5 +30,4 @@ export default {
             internet: '互聯網交易',
             discretionary: '全權委託交易'
         },
-
 };

@@ -1,11 +1,11 @@
 <template>
   <div class="op-guide-com op-guide-com-ready">
     <header class="head">
-      <img src="~@/customize/assets/images/logo_full.png" />
+      <img src="~@/customize/assets/images/logo_full.svg" />
       <p>{{$t('iOpen.guide.ready.ad')}}</p>
     </header>
     <section class="content">
-      <head-title :title="$t('iOpen.guide.ready.tips.title')"></head-title>
+      <!-- <head-title :title="$t('iOpen.guide.ready.tips.title')"></head-title>
       <ul class="tips">
         <li>
           <em class="icon icon-id-card" />
@@ -19,13 +19,13 @@
           <em class="icon icon-wifi" />
           <span>{{$t('iOpen.guide.ready.tips.content[2]')}}</span>
         </li>
-      </ul>
+      </ul> -->
       <div class="desc">
         <div class="desc-title">{{$t('iOpen.guide.ready.desc.title')}}</div>
         <div class="desc-tips">
           <ul>
             <li>{{$t('iOpen.guide.ready.desc.content[0]')}}</li>
-            <li>{{$t('iOpen.guide.ready.desc.content[1]')}}</li>
+            <!-- <li>{{$t('iOpen.guide.ready.desc.content[1]')}}</li> -->
           </ul>
         </div>
       </div>

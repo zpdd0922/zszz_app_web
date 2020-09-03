@@ -1,6 +1,8 @@
 import customizeI18n from '@/customize/locale/i18n/zh_HK';
 import commonI18n from '@/main/locale/i18n/zh_HK';
 
+import tips from './step-tips';
+
 import selectAccount from './step-select-account';
 import idCard from './step-id-card';
 import idCardInfo from './step-id-card-info';
@@ -17,6 +19,7 @@ import protocolConfirm from './step-protocol-confirm';
 
 
 export default {
+    tips,
     selectAccount,
     idCard,
     idCardInfo,

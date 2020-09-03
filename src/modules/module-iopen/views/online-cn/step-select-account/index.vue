@@ -1,5 +1,5 @@
 <template>
-  <op-wrap :isDisabled="isDisabled" @handleNext="handleNext">
+  <op-wrap :isDisabled="!isCanNext" @handleNext="handleNext">
     <div class="olcn-step olcn-step-select-account">
       <cube-form :model="model" @validate="validateHandler" @submit="handleNext">
         <!-- <cube-form-group class="step-content step-content-accounts custom-form-group">
@@ -21,42 +21,20 @@
                 v-model="model.fundAccountType"
                 :option="filedsAccounts.fundAccountType.props.options[1]"
               />
-              <div
-                v-if="model.fundAccountType === 2 && secMarketList.length >1"
-                class="select-account-list"
-              >
-                <cube-checkbox-group
-                  shape="square"
-                  v-model="model.fundAccountMarginMarkets"
-                  :options="secMarketList"
-                  :col-num="3"
-                  class="custom-checkbox-group"
-                ></cube-checkbox-group>
-              </div>
               <cube-radio
                 v-model="model.fundAccountType"
                 :option="filedsAccounts.fundAccountType.props.options[0]"
               />
-              <div
-                v-if="model.fundAccountType === 1 && secMarketList.length >1"
-                class="select-account-list"
-              >
-                <cube-checkbox-group
-                  shape="square"
-                  v-model="model.fundAccountCashMarkets"
-                  :options="secMarketList"
-                  :col-num="3"
-                  class="custom-checkbox-group"
-                />
-              </div>
             </cube-radio-group>
           </cube-form-item>
         </cube-form-group>
         <div class="margin-bottom"></div>
         <cube-form-group class="step-content step-content-accounts custom-form-group">
           <head-title :title="contentTitle.otherAccounts"></head-title>
+          <cube-form-item :field="filedsAccounts.isOpenHk"></cube-form-item>
+          <cube-form-item :field="filedsAccounts.isOpenUs"></cube-form-item>
+          <cube-form-item :field="filedsAccounts.isOpenOptions"></cube-form-item>
           <cube-form-item :field="filedsAccounts.isOpenFutures"></cube-form-item>
-          <!-- <cube-form-item :field="filedsAccounts.isByInternet"></cube-form-item> -->
         </cube-form-group>
         <!-- <div class="margin-bottom"></div>
         <cube-form-group class="step-content step-content-accounts custom-form-group">
@@ -86,94 +64,76 @@ export default {
       contentTitle: {
         accounts: this.getI18n("accounts.title"),
         otherAccounts: this.getI18n("otherAccounts.title"),
-        // personalType: this.getI18n("personalType.title"),
-        // tradingWay: this.getI18n("otherAccounts.title"),
+        personalType: this.getI18n("personalType.title"),
+        tradingWay: this.getI18n("otherAccounts.title"),
       },
       model: {
         fundAccountType: 1,
+        isOpenHk: true,
+        isOpenUs: false,
         isOpenFutures: false,
-        fundAccountCashMarkets: ["1"],
-        fundAccountMarginMarkets: ["1"],
-        // personalType: 1,
-        // tradingWay: 1,
+        isOpenOptions: false,
+        personalType: 1,
+        tradingWay: 1,
       },
-      // typeList: [
-      //   {
-      //     label: this.getI18n("type.individual"),
-      //     value: "1",
-      //     disabled: true,
-      //   },
-      //   {
-      //     label: this.getI18n("type.joint"),
-      //     value: "0",
-      //     disabled: true,
-      //   },
-      //   {
-      //     label: this.getI18n("type.corporate"),
-      //     value: "0",
-      //     disabled: true,
-      //   },
-      // ],
-      // tradingWayList: [],
-      secMarketList: [
+      typeList: [
         {
-          label: this.getI18n("secMarkets.marketHK"),
+          label: this.getI18n("type.individual"),
           value: "1",
           disabled: true,
         },
-        {
-          label: this.getI18n("secMarkets.marketUS"),
-          value: "2"
-        },
         // {
-        //   label: this.getI18n("secMarkets.marketHKOptions"),
-        //   value: "2",
+        //   label: this.getI18n("type.joint"),
+        //   value: "0",
+        //   disabled: true,
         // },
         // {
-        //   label: this.getI18n("secMarkets.marketCN"),
-        //   value: "3",
+        //   label: this.getI18n("type.corporate"),
+        //   value: "0",
+        //   disabled: true,
         // },
       ],
-      // filedsMore: {
-      //   personalType: {
-      //     type: "radio-group",
-      //     modelKey: "personalType",
-      //     props: {
-      //       options: [
-      //         {
-      //           label: this.getI18n("personalType.individual"),
-      //           value: 1,
-      //           disabled: true,
-      //         },
-      //       ],
-      //       shape: "square",
-      //     },
-      //     rules: {
-      //       required: false,
-      //     },
-      //   },
-      //   tradingWay: {
-      //     type: "radio-group",
-      //     modelKey: "tradingWay",
-      //     props: {
-      //       options: [
-      //         {
-      //           label: this.getI18n("tradingWay.internet"),
-      //           value: 1,
-      //           disabled: true,
-      //         },
-      //       ],
-      //       shape: "square",
-      //     },
-      //     rules: {
-      //       required: false,
-      //     },
-      //   },
-      // },
+      tradingWayList: [],
+      filedsMore: {
+        personalType: {
+          type: "radio-group",
+          modelKey: "personalType",
+          props: {
+            options: [
+              {
+                label: this.getI18n("personalType.individual"),
+                value: 1,
+                disabled: true,
+              },
+            ],
+            shape: "square",
+          },
+          rules: {
+            required: false,
+          },
+        },
+        tradingWay: {
+          type: "radio-group",
+          modelKey: "tradingWay",
+          props: {
+            options: [
+              {
+                label: this.getI18n("tradingWay.internet"),
+                value: 1,
+                disabled: true,
+              },
+            ],
+            shape: "square",
+          },
+          rules: {
+            required: false,
+          },
+        },
+      },
       filedsAccounts: {
         fundAccountType: {
           type: "radio-group",
-          modelKey: "fundAccountType", 
+          modelKey: "fundAccountType",
           props: {
             options: [
               {
@@ -183,7 +143,6 @@ export default {
               {
                 value: 2,
                 label: this.getI18n("accounts.accountMargin"),
-                // label: this.$t("iOpen.openCn.selectAccount.pageName"),
               },
             ],
             shape: "square",
@@ -192,12 +151,46 @@ export default {
             required: false,
           },
         },
+        isOpenHk: {
+          type: "checkbox",
+          modelKey: "isOpenHk",
+          props: {
+            option: {
+              disabled: true,
+              label: this.getI18n("otherAccounts.accountHk"),
+              value: true,
+            },
+            shape: "square",
+          },
+        },
+        isOpenUs: {
+          type: "checkbox",
+          modelKey: "isOpenUs",
+          props: {
+            option: {
+              label: this.getI18n("otherAccounts.accountUs"),
+              value: true,
+            },
+            shape: "square",
+          },
+        },
+        isOpenOptions: {
+          type: "checkbox",
+          modelKey: "isOpenOptions",
+          props: {
+            option: {
+              label: this.getI18n("otherAccounts.accountStockOptions"),
+              value: true,
+            },
+            shape: "square",
+          },
+        },
         isOpenFutures: {
           type: "checkbox",
           modelKey: "isOpenFutures",
           props: {
             option: {
-              label: this.getI18n("otherAccounts.accountOptions"),
+              label: this.getI18n("otherAccounts.accountForward"),
               value: true,
             },
             shape: "square",
@@ -206,9 +199,27 @@ export default {
       },
     };
   },
+  watch: {},
   computed: {
-    isDisabled() {
-      return this.fundAccountType === 1 || this.fundAccountType === 2;
+    // 有意进行衍生品买卖
+    isShowDerivative() {
+      return this.model.derivative === 1;
+    },
+    isCanNext() {
+      const {
+        derivative,
+        derivativeTrade,
+        derivativeCourse,
+        derivativeIndustry,
+      } = this.model;
+      if (
+        derivative === 1 &&
+        !derivativeTrade &&
+        !derivativeCourse &&
+        !derivativeIndustry
+      )
+        return false;
+      return true;
     },
   },
   methods: {
@@ -236,7 +247,7 @@ export default {
       // 保存数据&下一步
       const params = {
         step: this.step,
-        info: paramsNeeded,
+        info: this.model,
       };
       this.saveCacheInfo(params).then(() => {
         this.$router.push({ name: this.nextStep });

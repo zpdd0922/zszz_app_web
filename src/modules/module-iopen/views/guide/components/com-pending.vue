@@ -15,7 +15,6 @@
         <template v-if="openType=='cn'">
           <p class="desc-tips">{{$t("iOpen.guide.pending.desc.cn[0]")}}</p>
           <p class="desc-tips">{{$t("iOpen.guide.pending.desc.cn[1]")}}</p>
-          <p class="desc-tips">{{$t("iOpen.guide.pending.desc.cn[2]")}}</p>
         </template>
         <template v-if="openType=='hk'">
           <p class="desc-tips">{{$t("iOpen.guide.pending.desc.hk[0]")}}</p>
@@ -24,6 +23,9 @@
         </template>
       </div>
     </section>
+    <footer class="foot">
+      <cube-button @click="onClick">{{$t("iOpen.guide.pending.btn")}}</cube-button>
+    </footer>
   </div>
 </template>
 
@@ -32,71 +34,84 @@ import { mapGetters, mapActions } from "vuex";
 import {
   OPEN_STATUS,
   PENDING_STATUS_TYPE,
-  FAIL_STATUS_TYPE
+  FAIL_STATUS_TYPE,
 } from "@/modules/module-iopen/enums/open-progress";
 export default {
   props: {
     skin: {
       // 皮肤
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   data() {
     return {
-      progressList: [
-        { key: "ready", text: this.$t("iOpen.guide.progress.ready") },
-        { key: "approve", text: this.$t("iOpen.guide.progress.approve") },
-        { key: "ca", text: this.$t("iOpen.guide.progress.ca") },
-        { key: "open", text: this.$t("iOpen.guide.progress.open") }
-      ],
       pendingStatusInfo: {
         // 预批中
         [PENDING_STATUS_TYPE.DOING]: {
           title: this.$t("iOpen.guide.pending.doing.title"),
           content: this.$t("iOpen.guide.pending.doing.content"),
-          current: 0
+          current: 0,
         },
         // 审批中
         [PENDING_STATUS_TYPE.APPROVE]: {
           title: this.$t("iOpen.guide.pending.approve.title"),
           content: this.$t("iOpen.guide.pending.approve.content"),
-          current: 1
-        },
-        // CA认证中
-        [PENDING_STATUS_TYPE.CA]: {
-          title: this.$t("iOpen.guide.pending.ca.title"),
-          content: this.$t("iOpen.guide.pending.ca.content"),
-          current: 2
+          current: 1,
         },
         // 柜台开户中
         [PENDING_STATUS_TYPE.OPEN]: {
           title: this.$t("iOpen.guide.pending.open.title"),
           content: this.$t("iOpen.guide.pending.open.content"),
-          current: 3
-        }
-      }
+          current: 3,
+        },
+      },
     };
   },
   computed: {
     ...mapGetters(["openProgress"]),
+    progressList() {
+      if (this.openType === "cn") {
+        return [
+          { key: "ready", text: this.$t("iOpen.guide.progress.ready") },
+          {
+            key: "approve",
+            text: this.$t("iOpen.guide.progress.approve"),
+          },
+          { key: "ca", text: this.$t("iOpen.guide.progress.ca") },
+          { key: "open", text: this.$t("iOpen.guide.progress.open") },
+        ];
+      }
+      return [
+        { key: "ready", text: this.$t("iOpen.guide.progress.ready") },
+        {
+          key: "approve",
+          text: this.$t("iOpen.guide.progress.approve"),
+        },
+        { key: "auth", text: this.$t("iOpen.guide.progress.deposit") },
+        { key: "open", text: this.$t("iOpen.guide.progress.open") },
+      ];
+    },
     // 开户类型
     openType() {
       if (!this.openProgress) return "";
       if (this.openProgress.openType == 1) return "cn";
-      if (this.openProgress.openType == 3) return "hk";
+      if (this.openProgress.openType == 2) return "hk";
       return "";
     },
-    pendingStatusType() {
-      return this.openProgress.pendType;
-    },
     resultData() {
-      const data = this.pendingStatusInfo[this.pendingStatusType];
+      const data = this.pendingStatusInfo[this.openProgress.pendType];
       if (typeof data !== "object") {
         return this.pendingStatusInfo[PENDING_STATUS_TYPE.DOING];
       }
       return data;
-    }
-  }
+    },
+  },
+   methods: {
+    // 点击跳转'极速开户'
+    onClick() {
+      this.$emit("click");
+    },
+  },
 };
 </script>

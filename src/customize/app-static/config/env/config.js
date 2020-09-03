@@ -1,9 +1,11 @@
 (function (window) {
   var GLOBAL_ENV_CONFIG = {
     debug: false,
-    serverUser: 'http://192.168.1.251:8901/securities',
+    serverUser: 'http://106.52.75.112:6012',
+    // serverUser: 'http://localhost:6012',
     // serveriOpen: 'http://192.168.1.251:8901/securities',
-    serveriOpen: 'http://106.52.75.112:6003',
+    serveriOpen: 'http://106.52.75.112:6012',
+    // serveriOpen: 'http://localhost:6012',
     // serverInformation: 'https://sns.9fstock.com:9003/',
     serverInformation: 'http://106.52.75.112:6003',
     // serverHelpCenter: 'https://sns.9fstock.com:9003/',

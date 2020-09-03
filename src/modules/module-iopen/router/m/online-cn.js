@@ -5,9 +5,15 @@ const onlineCnRouter = [
   {
     path: 'online-cn/:origin(h5|app)',
     name: 'opaOnlineCn',
-    redirect: 'online-cn/:origin(h5|app)/step1',
+    redirect: 'online-cn/:origin(h5|app)/step0',
     component: OnlineCN,
     children: [
+      {
+        name: 'optStep0',
+        path: 'step0',
+        component: _import('step-tips'),
+        meta: { pageName: 'iOpen.openCn.tips.pageName', step: 99, nextStep: 'opaStep1' }
+      },
       {
         name: 'opaStep1',
         path: 'step1',
@@ -90,7 +96,7 @@ const onlineCnRouter = [
         name: 'opaStep12Head',
         path: 'step12-head',
         component: _import('step-avatar-picture', 'head'),
-        meta: { pageName: 'iOpen.openCn.avatarPicture.pageNameHead', step: 12, nextStep: 'opaStep13' }
+        meta: { pageName: 'iOpen.openCn.avatarPicture.pageNameHead', step: 12, nextStep: 'opaStep14' }
       },
       {
         name: 'opaStep13',

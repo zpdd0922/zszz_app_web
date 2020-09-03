@@ -8,6 +8,8 @@ export default {
     ready: '提交申请',
     approve: '资料审核',
     ca: 'CA认证',
+    deposit: '身份认证',
+    auth: '身份认证',
     open: '柜台开户'
   },
   ready: {
@@ -24,7 +26,7 @@ export default {
       title: '温馨提示',
       content: [
         '3分钟申请，7x24小时实时审批',
-        '云顿智能盯盘股市，随时获取股市变化情况',
+        // '云顿智能盯盘股市，随时获取股市变化情况',
       ]
     },
     btn: '立即开通',
@@ -38,13 +40,10 @@ export default {
       title: '资料审核中',
       content: '您的申请已受理，正在核对您提交的资料'
     },
-    ca: {
-      title: 'CA认证中',
-      content: '您的资料已审核通过，正在申请SZCA数字证书'
-    },
+    
     open: {
       title: '柜台开户中',
-      content: `您已成功签署数字证书，正在为您开立证券账户`
+      content: `您已成功身份认证，正在为您开立证券账户`
     },
     desc: {
       title: '温馨提示',
@@ -58,6 +57,38 @@ export default {
         '账户审核通过后，通过开户本人同名银行账户首笔入金一万港币或以上即开户成功（不支持第三方和现金入金）',
         '届时请及时修改交易密码',
       ],
+    },
+    
+  },
+  authing:{
+    ca_waiting: {
+      title: '申请数字证书',
+      btn: '同意申请数字证书',
+      content: '您的资料已审核通过，请申请数字证书'
+    },
+    ca_doing: {
+      title: 'CA认证中',
+      content: '您的资料已审核通过，正在申请SZCA数字证书'
+    },
+    deposit_waiting: {
+      title: '身份认证',
+      btn: '已完成入金',
+      content: '您的资料已审核通过，请入金完成身份认证'
+    },
+    deposit_doing: {
+      title: '银行处理中',
+      content: '您已经完成入金，等待银行处理中'
+    },
+    desc: {
+      title: '温馨提示',
+      cn: [
+        '申请电子证书不产生任何费用',
+        `该电子证书仅限于与${customizeI18n.customize.company.securityName}签署开户电子协定,并不应用于与任何其他协力厂商的电子认证或协定签署`,
+      ],
+      hk: [
+        '请通过开户本人同名银行账户首笔入金一万港币或以上即完成身份认证（不支持第三方和现金入金）',
+        `完成入金以后，请点击下方【已完成入金】通知${customizeI18n.customize.company.securityName}进行后续审核`,
+      ],
     }
   },
   fail: {
@@ -67,7 +98,6 @@ export default {
     titleAccountOff: '您的账户已注销',
     titleAccountAbo: '您的账户异常',
     descTitle: '失败原因',
-
   },
   success: {
     title: "开户成功",

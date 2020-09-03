@@ -1,5 +1,4 @@
 import { post, postImg } from '../request';
-import paramsData from '@/main/request/utils/wrap-icrm';
 
 export default {
   /**
@@ -13,7 +12,7 @@ export default {
    * @return JSON { code: integer, message: string, result: { lastStep: integer, cacheInfos:{}, cacheImages: [],} }
   */
 //  getCacheData: data => post('/open_api_hk/get_cache_data', data),
- getCacheData: data => post('/open_api_hk/get_open_info_temp', paramsData.WRAP_APP(data)),
+ getCacheData: data => post('/open_api_hk/get_open_info_temp', data),
 
  /**
   * @param step
@@ -21,7 +20,7 @@ export default {
   *
   */
 //  saveCacheInfo: data => post('/open_api_hk/save_cache_info', data),
- saveCacheInfo: data => post('/open_api_hk/save_open_info_temp', paramsData.WRAP_APP(data)),
+ saveCacheInfo: data => post('/open_api_hk/save_open_info_temp', data),
 
  /**
   * @param ocr
@@ -41,12 +40,12 @@ export default {
   *
   */
 //  toCommitAllData: data => post('/open_api_hk/submit_open_info', data),
- toCommitAllData: data => post('/open_api_hk/save_open_info', paramsData.WRAP_APP(data)),
+ toCommitAllData: data => post('/open_api_hk/save_open_info', data),
 
   /**
    * 手机号唯一性校验
    * @param phoneNumber
    */
   // checkPhone: data => post('/open_api_hk/phone_verify', data),
-  checkPhone: data => post('/open_api_hk/phone_verify', paramsData.WRAP_APP(data)),
+  checkPhone: data => post('/open_api_hk/phone_verify', data),
 };

@@ -1,12 +1,22 @@
 <template>
   <section class="op-page-wrap op-page-wrap-ow">
     <header class="op-page-title">{{$t('iOpen.authWay.pageName')}}</header>
-    <ul class="ow-ways">
-      <li v-for="item in ways" :key="item.type" class="ow-way-item" @click="handleNext(item)">
-        <em :class="`ow-icon ow-icon-${item.type}`" />
-        <span>{{item.label}}</span>
-      </li>
-    </ul>
+    <base-cells class="ow-ways">
+      <base-cell
+        v-for="item in ways"
+        :key="item.type"
+        class="ow-way-item"
+        @click="handleNext(item)"
+      >
+        <base-cell-header>
+          <em :class="`ow-icon ow-icon-${item.type}`" />
+        </base-cell-header>
+        <base-cell-body>
+          <span class="ow-label">{{item.label}}</span>
+          <span class="ow-tips">{{item.tips}}</span>
+        </base-cell-body>
+      </base-cell>
+    </base-cells>
   </section>
 </template>
 
@@ -45,12 +55,14 @@ export default {
             type: "cn",
             code: 1,
             label: this.$t("iOpen.authWay.wayCN"),
+            tips: this.$t("iOpen.authWay.wayCNTips"),
             nextRoute: "opaOnlineCn",
           },
           {
             type: "hk",
             code: 2,
             label: this.$t("iOpen.authWay.wayHK"),
+            tips: this.$t("iOpen.authWay.wayHKTips"),
             nextRoute: "opaOnlineHk",
           },
           // {

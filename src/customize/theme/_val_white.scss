@@ -5,7 +5,7 @@
 */
 @import './val';
 
-$color-main: #9e0b0f;
+$color-main: #5A2AB8;
 
 
 /* 主色 */
@@ -16,7 +16,7 @@ $color-txt-sub: #ccc; // 默认二级字体
 $color-txt-highlight: $color-main;
 
 /* 头部 */
-$color-header-bg: #c3a55b;
+$color-header-bg: #5A2AB8;
 $color-header-txt: $color-txt;
 
 /* 内容 */
@@ -28,9 +28,9 @@ $color-footer-bg: #333;
 $color-footer-txt: #dcdcdc;
 
 /* 导航 */
-$color-nav-bg: #c3a55b;
+$color-nav-bg: #5A2AB8;
 $color-nav-txt: #fff;
-$color-nav-txt-active: $color-main;
+$color-nav-txt-active: #fff;
 $color-nav-icon: #f1f1f1;
 
 /* 可操作块 */
@@ -65,7 +65,7 @@ $color-mask-opacity: rgba(51, 51, 51, 0.3);
 $color-btn-txt: $color-txt-rev;
 $color-btn-bg-disable: #ccc; 
 $color-btn-bg: $color-main;
-$color-btn-bg-active: #620306;
+$color-btn-bg-active: #4a15b2;
 
 /* 公共input组件 */
 $color-input-bg: #f0f0f0;

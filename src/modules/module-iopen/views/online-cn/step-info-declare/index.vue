@@ -96,7 +96,7 @@ export default {
           modelKey: "isAllowProvidePrivacy",
           props: {
             colNum: 2,
-            investmentHorizontal: true,
+            horizontal: true,
             options: [
               {
                 label: this.getI18n("agreen"),
@@ -114,7 +114,7 @@ export default {
           type: "radio-group",
           modelKey: "northTrade",
           props: {
-            investmentHorizontal: true,
+            horizontal: true,
             colNum: 2,
             options: [
               {

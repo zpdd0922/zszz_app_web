@@ -6,9 +6,15 @@ const onlineHkRouter = [
   {
     path: 'online-hk/:origin(h5|app)',
     name: 'opaOnlineHk',
-    redirect: 'online-hk/:origin(h5|app)/step1',
+    redirect: 'online-hk/:origin(h5|app)/step0',
     component: OnlineHK,
     children: [
+      {
+        name: 'optStep0-hk',
+        path: 'step0',
+        component: _import('step-tips'),
+        meta: { pageName: 'iOpen.openHk.tips.pageName', step: 99, nextStep: 'opaStep1-hk' }
+      },
       {
         name: 'opaStep1-hk',
         path: 'step1',
@@ -67,13 +73,13 @@ const onlineHkRouter = [
         name: 'opaStep10-hk',
         path: 'step10',
         component: _import('step-info-experience'),
-        meta: { pageName: 'iOpen.openHk.infoExperience.pageName', step: 10, nextStep: 'opaStep11-hk' }
+        meta: { pageName: 'iOpen.openHk.infoExperience.pageName', step: 10, nextStep: 'opaStep12-hk' }
       },
       {
         name: 'opaStep11-hk',
         path: 'step11',
         component: _import('step-signature'),
-        meta: { pageName: 'iOpen.openHk.selectAccount.pageName', step: 11, nextStep: 'opaStep12-hk', isHeader: false, isFooter: false }
+        meta: { pageName: 'iOpen.openHk.selectAccount.pageName', step: 11, nextStep: 'opaStep12-hk' }
       },
       {
         name: 'opaStep12-hk',

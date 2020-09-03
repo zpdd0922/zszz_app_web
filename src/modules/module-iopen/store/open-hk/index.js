@@ -31,11 +31,11 @@ const mutations = {
 
     const userImgList = {};
     if (userImg && Array.isArray(userImg) && userImg.length !== 0) {
-      const userImgObj = arrayToObject(userImg, 'type');
+      const userImgObj = arrayToObject(userImg, 'imageLocationType');
       Object.keys(IMAGE_REQUEST_LIST).forEach(key => {
         const itemImgInfo = userImgObj[IMAGE_REQUEST_LIST[key].type];
         if (itemImgInfo) {
-          userImgList[`${key}${SUFFIX}`] = itemImgInfo.imgUrl;
+          userImgList[`${key}${SUFFIX}`] = itemImgInfo.imgPath;
         }
       });
     }
