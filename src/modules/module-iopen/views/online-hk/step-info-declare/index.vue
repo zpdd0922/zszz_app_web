@@ -122,8 +122,8 @@ export default {
           type: "radio-group",
           modelKey: "isAllowProvidePrivacy",
           props: {
-            colNum: 2,
-            investmentHorizontal: true,
+            // colNum: 2,
+            horizontal: true,
             options: [
               {
                 label: this.getI18n("agreen"),
@@ -142,7 +142,8 @@ export default {
           modelKey: "northTrade",
           props: {
             investmentHorizontal: true,
-            colNum: 2,
+            // colNum: 2,
+            horizontal: true,
             options: [
               {
                 label: this.getI18n("agreen"),
@@ -161,6 +162,7 @@ export default {
           modelKey: "fatca",
           props: {
             colNum: 2,
+            // horizontal: true,
             options: [
               {
                 label: this.getI18n("agreen"),

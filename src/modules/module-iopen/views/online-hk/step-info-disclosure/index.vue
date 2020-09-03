@@ -1,6 +1,6 @@
 <template>
   <op-wrap :isDisabled="isDisableNext" :btnText="getI18n('nextBtn')" @handleNext="handleNext">
-    <div class="olcn-step olcn-step-info-other">
+    <div class="olhk-step olhk-step-info-other">
       <cube-form :model="model" class="step-content">
         <head-title :title="titleValues.declareTitle"></head-title>
         <!-- 是否唯一收益拥有人 -->

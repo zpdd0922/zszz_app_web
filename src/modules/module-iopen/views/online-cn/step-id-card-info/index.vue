@@ -237,6 +237,9 @@ export default {
           modelKey: "educationLevel",
           label: this.getI18n("educationLevel.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("educationLevel.placeholder"),
             options: optionsList.educationLevelOptions(),
           },
@@ -249,6 +252,9 @@ export default {
           modelKey: "maritalStatus",
           label: this.getI18n("maritalStatus.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("maritalStatus.placeholder"),
             options: optionsList.maritalStatusOptions(),
           },

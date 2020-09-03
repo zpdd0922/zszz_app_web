@@ -124,6 +124,9 @@ export default {
             },
           },
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("bankId.placeholder"),
             options: bankOptions(),
           },
@@ -152,6 +155,9 @@ export default {
           modelKey: "bankCurrency",
           label: this.getI18n("bankCurrency.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("bankCurrency.placeholder"),
             options: [
               {

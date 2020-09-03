@@ -1,6 +1,6 @@
 <template>
   <op-wrap :isDisabled="submitStatus" @handleNext="submitHandler">
-    <div class="olcn-step olcn-step-info-finance">
+    <div class="olhk-step olhk-step-info-finance">
       <!-- 投资经验 -->
       <cube-form :model="modelExperience" @validate="validateHandler" @submit="submitHandler">
         <cube-form-group class="step-content custom-form-group experience-form-group">

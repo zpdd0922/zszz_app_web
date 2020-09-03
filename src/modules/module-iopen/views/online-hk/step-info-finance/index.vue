@@ -1,6 +1,6 @@
 <template>
   <op-wrap :isDisabled="submitStatus" @handleNext="submitHandler">
-    <div class="olcn-step olcn-step-info-finance">
+    <div class="olhk-step olhk-step-info-finance">
       <cube-form :model="model" @validate="validateHandler" @submit="submitHandler">
         <!-- 財務狀況 -->
         <cube-form-group class="step-content custom-form-group">
@@ -313,7 +313,8 @@ export default {
           type: "radio-group",
           modelKey: "derivative",
           props: {
-            colNum: 2,
+            // colNum: 2,
+            horizontal: true,
             options: [
               {
                 label: this.getI18n("derivative.yes"),

@@ -288,6 +288,9 @@ export default {
           modelKey: "homeRadio",
           label: this.getI18n("contact.homeRadio.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("contact.homeRadio.placeholder"),
             options: optionsList.homeRadioOptions(),
           },
@@ -361,6 +364,9 @@ export default {
           modelKey: "contactRadio",
           label: this.getI18n("contact.contactRadio.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("contact.contactRadio.placeholder"),
             options: optionsList.contactRadioOptions(),
           },

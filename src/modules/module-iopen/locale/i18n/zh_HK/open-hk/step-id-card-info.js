@@ -3,6 +3,7 @@ import commonI18n from '@/main/locale/i18n/zh_HK';
 
 export default {
     pageName: '基本資訊',
+    tips: '請確認您的身份信息，若有誤請手動修改',
     placeholderMore: '(選填)',
     familyName: {
         label: '中文姓氏',
