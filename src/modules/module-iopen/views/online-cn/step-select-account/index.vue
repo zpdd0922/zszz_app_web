@@ -212,12 +212,6 @@ export default {
     },
   },
   methods: {
-    showmodel(){
-      console.log(this.model)
-    },
-    clear() {
-      Object.keys(this.model).forEach((key)=>{this.$set(this.model, key, '')})
-    },
     getI18n(key) {
       return this.getStepI18nValue("selectAccount", key);
     },

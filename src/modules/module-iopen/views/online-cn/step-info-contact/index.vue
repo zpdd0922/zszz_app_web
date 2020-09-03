@@ -1,5 +1,6 @@
 <template>
   <op-wrap :isDisabled="isDisabled" :handleBefore="handleBefore" @handleNext="handleNext">
+    <p @click="showModel">123</p>
     <div class="olcn-step olcn-step-info-contact">
       <!-- 联系信息 -->
       <cube-form :model="model">
@@ -872,6 +873,9 @@ export default {
     },
   },
   methods: {
+    showModel() {
+      console.log(this.model)
+    },
     showmsg() {
       console.log(this.model)
     },
