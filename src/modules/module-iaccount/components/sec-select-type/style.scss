@@ -1,0 +1,42 @@
+.sec-select-type {
+
+  .title {
+    font-size: .14rem;
+    text-align: center;
+    padding: .2rem 0 .3rem;
+  }
+
+  .item {
+    display: flex;
+    width: 70%;
+    height: 1rem;
+    align-items: center;
+    margin: 0 auto .35rem;
+    padding: .15rem .2rem;
+    background-color: $color-block-bg;
+
+    & > img {
+      width: .45rem;
+      height: .45rem;
+      margin-right: .1rem;
+    }
+
+    & > div {
+      flex: 1;
+      line-height: 1.5em;
+
+      .label-sub {
+        font-size: .13rem;
+        color: $color-txt-sub;
+      }
+    }
+
+    & > i {
+      @include arrow('right', .1rem, 1px);
+    }
+  }
+
+  .item:active{
+    background-color: $color-block-bg-active;
+  }
+}

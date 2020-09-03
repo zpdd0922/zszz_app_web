@@ -1,0 +1,50 @@
+$channelIconList: ('ipo_history','xgxx','sqgg','ipo','other_fee','quotas','pro','password','transfer','statement', 'deposit', 'withdraw', 'exchange', 'fund_history', 'enter', 'out', 'stock_history', 'account', 'fund_list', 'dayly');
+
+.sec-home {
+  background-color: $color-block-bg;
+  .sec-list-box {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid $color-separate-line;
+  }
+
+  .sec-list-item {
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+    padding: .05rem 0;
+    border-right: 1px solid $color-separate-line;
+    border-bottom: 1px solid $color-separate-line;
+    font-size: 0;
+    
+    i {
+      display: inline-block;
+      width: .25rem;
+      height: .25rem;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    span {
+      display: inline-block;
+      width: 100%;
+      font-size: .12rem;
+      line-height: 2em;
+    }
+  }
+
+  .sec-list-item-last-line {
+    border-bottom: none;
+  }
+
+  .sec-list-item:active {
+    background-color: $color-block-bg-active;
+  }
+
+  @each $channelIcon in $channelIconList {
+    i.sec-icon-#{$channelIcon} {
+      background-image: url('~@/modules/module-iaccount/assets/img/home/home_#{$channelIcon}.png');
+    }
+  }
+}

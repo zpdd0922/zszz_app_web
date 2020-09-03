@@ -1,0 +1,73 @@
+$bankList: ('alipay','dbs', 'boc', 'ccb', 'ceb', 'check', 'cmb', 'cmbc', 'comm', 'hsbc', 'hase', 'icbc', 'other');
+
+.sec-bank {
+  .title {
+    font-size: .14rem;
+    text-align: center;
+    padding: .2rem 0 .2rem;
+  }
+    .bank-item {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin: 0 auto;
+        padding: .1rem .15rem;
+        background-color: $color-block-bg;
+        @include border-1px('bottom');
+
+        & > i {
+            display: inline-block;
+            width: .2rem;
+            height: .2rem;
+            margin-right: .1rem;
+            border-radius: 50%;
+            background-position: center;
+            background-size: 100%;
+        }
+
+        & > div {
+            flex: 1;
+            line-height: 1.5em;
+            font-size: .13rem;
+
+            .sub {
+              font-size: .12rem;
+              color: $color-txt-sub;
+            }
+        }
+
+        & > b {
+          @include arrow('right', .1rem, 1px);
+
+            // display: inline-block;
+            // position: relative;
+            // width: .15rem;
+            // height: .15rem;
+            // margin-right: .05rem;
+            // border: solid 1px $color-main;
+            // border-radius: 3px;
+        }
+        // .active{
+        //     background-color: $color-main;
+
+        //     &::after{
+        //         content: '';
+        //         position: absolute;
+        //         top: 0;
+        //         left: 0;
+        //         width: 100%;
+        //         height: 100%;
+        //         background-image: url('@/../../img/finish.png');
+        //         background-size: 60%;
+        //         background-repeat: no-repeat;
+        //         background-position: center;
+        //       }
+        // }
+    }
+
+    @each $bank in $bankList {
+        i.bank-icon-#{$bank} {
+          background-image: url('@/../../img/bank-logo/#{$bank}.png');
+        }
+      }
+}
