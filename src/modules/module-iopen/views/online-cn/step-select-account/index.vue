@@ -86,16 +86,16 @@ export default {
       contentTitle: {
         accounts: this.getI18n("accounts.title"),
         otherAccounts: this.getI18n("otherAccounts.title"),
-        personalType: this.getI18n("personalType.title"),
-        tradingWay: this.getI18n("otherAccounts.title"),
+        // personalType: this.getI18n("personalType.title"),
+        // tradingWay: this.getI18n("otherAccounts.title"),
       },
       model: {
         fundAccountType: 1,
         isOpenFutures: false,
         fundAccountCashMarkets: ["1"],
         fundAccountMarginMarkets: ["1"],
-        personalType: 1,
-        tradingWay: 1,
+        // personalType: 1,
+        // tradingWay: 1,
       },
       // typeList: [
       //   {
@@ -212,6 +212,12 @@ export default {
     },
   },
   methods: {
+    showmodel(){
+      console.log(this.model)
+    },
+    clear() {
+      Object.keys(this.model).forEach((key)=>{this.$set(this.model, key, '')})
+    },
     getI18n(key) {
       return this.getStepI18nValue("selectAccount", key);
     },
@@ -236,7 +242,7 @@ export default {
       // 保存数据&下一步
       const params = {
         step: this.step,
-        info: this.model,
+        info: paramsNeeded,
       };
       this.saveCacheInfo(params).then(() => {
         this.$router.push({ name: this.nextStep });
