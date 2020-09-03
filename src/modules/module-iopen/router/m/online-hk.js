@@ -6,9 +6,15 @@ const onlineHkRouter = [
   {
     path: 'online-hk/:origin(h5|app)',
     name: 'opaOnlineHk',
-    redirect: 'online-hk/:origin(h5|app)/step1',
+    redirect: 'online-hk/:origin(h5|app)/step0',
     component: OnlineHK,
     children: [
+      {
+        name: 'optStep0-hk',
+        path: 'step0',
+        component: _import('step-tips'),
+        meta: { pageName: 'iOpen.openHk.tips.pageName', step: 99, nextStep: 'opaStep1-hk' }
+      },
       {
         name: 'opaStep1-hk',
         path: 'step1',

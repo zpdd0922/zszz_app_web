@@ -18,15 +18,16 @@ export default {
         idCardHkTemp: "香港居民身份证与签证身份书",
         passport: "护照",
       },
-      // nationlityCode: 'AO_NATIONALITY_HK'
-      nationlityCode: 'AO_NATIONALITY'
+      nationlityCode: 'AO_NATIONALITY_CN'
     },
     guide,
     authWay: {
       title: '认证方式',
       pageName: '选择您的认证方式',
-      wayCN: '大陆CA认证',
-      wayHK: '香港银行卡入金认证',
+      wayCN: '数字证书认证',
+      wayCNTips: '适用于大陆身份证持有者',
+      wayHK: '香港银行账户入金认证',
+      wayHKTips: '适用于香港及其他地区身份',
       wayOther: '线下见证',
     },
     cameraInfo: {

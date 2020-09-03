@@ -5,9 +5,15 @@ const onlineCnRouter = [
   {
     path: 'online-cn/:origin(h5|app)',
     name: 'opaOnlineCn',
-    redirect: 'online-cn/:origin(h5|app)/step1',
+    redirect: 'online-cn/:origin(h5|app)/step0',
     component: OnlineCN,
     children: [
+      {
+        name: 'optStep0',
+        path: 'step0',
+        component: _import('step-tips'),
+        meta: { pageName: 'iOpen.openCn.tips.pageName', step: 99, nextStep: 'opaStep1' }
+      },
       {
         name: 'opaStep1',
         path: 'step1',

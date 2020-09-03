@@ -15,12 +15,12 @@
             class="highlight"
           >{{tradeAccount}}</span>
         </h4>
-        <h4 class="desc-title">
+        <!-- <h4 class="desc-title">
           {{$t("iOpen.guide.success.desc.fundAccountPre")}}
           <span
             class="highlight"
           >{{fundAccount}}</span>
-        </h4>
+        </h4>-->
         <template v-if="openType=='cn'">
           <p class="desc-tips">{{$t("iOpen.guide.success.desc.cn[0]")}}</p>
           <p class="desc-tips">{{$t("iOpen.guide.success.desc.cn[1]")}}</p>
@@ -39,6 +39,9 @@
         </p>
       </div>
     </section>
+    <footer class="foot">
+      <cube-button @click="onClick">{{$t("iOpen.guide.pending.btn")}}</cube-button>
+    </footer>
   </div>
 </template>
 
@@ -49,8 +52,8 @@ export default {
     skin: {
       // 皮肤
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   data() {
     return {};
@@ -61,20 +64,34 @@ export default {
     openType() {
       if (!this.openProgress) return "";
       if (this.openProgress.openType == 1) return "cn";
-      if (this.openProgress.openType == 3) return "hk";
+      if (this.openProgress.openType == 2) return "hk";
       return "";
     },
     telePhone() {
-      return this.$t("common.company.telePhone");
+      return this.$t("customize.company.telePhone");
     },
     tradeAccount() {
       if (!this.openProgress) return "";
-      return this.openProgress.tradeAccount;
+      const account = this.openProgress.tradeAccount;
+      let pre = "";
+      if (this.openProgress.fundAccountType === 1) {
+        pre = "P";
+      } else if (this.openProgress.fundAccountType === 2) {
+        pre = "M";
+      }
+
+      return pre + account;
     },
     fundAccount() {
       if (!this.openProgress) return "";
       return this.openProgress.fundAccount;
-    }
-  }
+    },
+  },
+  methods: {
+    // 点击跳转'极速开户'
+    onClick() {
+      this.$emit("click");
+    },
+  },
 };
 </script>

@@ -13,6 +13,9 @@
         </p>
       </div>
     </section>
+    <footer class="foot">
+      <cube-button @click="onClick">{{$t("iOpen.guide.pending.btn")}}</cube-button>
+    </footer>
   </section>
 </template>
 
@@ -27,8 +30,8 @@ export default {
     skin: {
       // 皮肤
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   computed: {
     ...mapGetters(["openProgress"]),
@@ -42,7 +45,13 @@ export default {
       }
       // 账户异常
       return this.$t("iOpen.guide.fail.titleAccountAbo");
-    }
-  }
+    },
+  },
+  methods: {
+    // 点击跳转'极速开户'
+    onClick() {
+      this.$emit("click");
+    },
+  },
 };
 </script>

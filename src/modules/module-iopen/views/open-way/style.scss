@@ -33,6 +33,20 @@
       @include retina-images('~@/modules/module-iopen/assets/images/open-way/icon-other');
 
     }
+
+    .ow-label{
+      display: inline-block;
+      width: 100%;
+      font-size:.17rem;
+    }
+
+    .ow-tips{
+      display: inline-block;
+      width: 100%;
+      font-size:.13rem;
+      padding-top: .06rem;
+      color: $color-txt-sub;
+    }
   }
 
 }

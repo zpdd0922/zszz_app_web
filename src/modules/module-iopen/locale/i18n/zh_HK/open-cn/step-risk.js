@@ -16,7 +16,7 @@ export default {
         ]
     },
     agreement: {
-        linkStart: '本人已詳細閱讀並同意',
+        linkStart: '本人已詳細閱讀並同意上述聲明',
         linkContent: `《${customizeI18n.customize.company.securityName}客戶協議書》`,
         linkEnd: '',
         dialogTitle: '客戶協議書',

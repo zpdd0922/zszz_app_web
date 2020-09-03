@@ -13,7 +13,7 @@ export default {
    * @return JSON { code: integer, message: string, result: { lastStep: integer, cacheInfos:{}, cacheImages: [],} }
   */
   // getCacheData: data => post('/open_api_cn/get_cache_data', data),
-  getCacheData: data => post('/open_api/findUserTemp', paramsData.WRAP_APP(data)),
+  getCacheData: data => post('/open_api/findUserTemp', data),
 
   /**
    * @param step
@@ -21,7 +21,7 @@ export default {
    *
    */
   // saveCacheInfo: data => post('/open_api_cn/save_cache_info', data),
-  saveCacheInfo: data => post('/open_api/save_user_info_temp', paramsData.WRAP_APP(data)),
+  saveCacheInfo: data => post('/open_api/save_user_info_temp', data),
 
   /**
    * @param ocr
@@ -41,21 +41,21 @@ export default {
    * @param otherInfo --> {}
    *
    */
-  // toCommitAllData: data => post('/open_api_cn/submit_open_info', paramsData.WRAP_APP(data)),
-  toCommitAllData: data => post('/open_api/saveuinfo', paramsData.WRAP_APP(data)),
+  // toCommitAllData: data => post('/open_api_cn/submit_open_info', data),
+  toCommitAllData: data => post('/open_api/saveuinfo', data),
 
   /**
    * 获取PIN码
    */
-  getCaPin: data => post('/open_api/get_ca_pin', paramsData.WRAP_APP(data)),
+  getCaPin: data => post('/open_api/get_ca_pin', data),
 
   /**
    * 保存pin码
    */
-  saveCaPin: data => post('/open_api/save_ca_pin', paramsData.WRAP_APP(data)),
+  saveCaPin: data => post('/open_api/save_ca_pin', data),
 
   /**
    * CA补录数据接口
    */
-  getCaUpdateOpeninfo: data => post('/open_api/ca_update_openinfo', paramsData.WRAP_APP(data))
+  getCaUpdateOpeninfo: data => post('/open_api/ca_update_openinfo', data)
 };

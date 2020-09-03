@@ -18,7 +18,7 @@ BroadCast.onmessage(BROADCAST_ENUMS.LOGIN_EXPRIS, () => {
     .then(() => {
       console.log(router)
       router.replace({
-        name: 'login'
+        name: 'loginByCaptcha'
       });
     })
 });
