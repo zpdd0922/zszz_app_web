@@ -66,7 +66,7 @@ export default {
     },
     checkLogin() {
       const params = getURLParameters();
-      const userToken = params["user_token"] || "";
+      const userToken = params["sessionId"] || "";
       if (userToken && userToken !== "") {
         const params = {
           certType: 0,
