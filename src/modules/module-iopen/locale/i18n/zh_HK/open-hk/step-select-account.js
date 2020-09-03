@@ -30,5 +30,4 @@ export default {
             internet: '互聯網交易',
             discretionary: '全權委託交易'
         },
-
 };

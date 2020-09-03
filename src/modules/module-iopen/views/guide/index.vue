@@ -65,7 +65,7 @@ import {
   PENDING_STATUS_TYPE,
 } from "@/modules/module-iopen/enums/open-progress";
 
-const envConfig = JSON.parse(process.env.VUE_APP_ENV_CONFIG);
+const envConfig = window._GLOBAL_ENV_CONFIG || {};
 const selfURL = envConfig.selfURL;
 
 export default {
@@ -114,7 +114,7 @@ export default {
     progressComponent() {},
   },
   created() {
-    this.getOpenProgress({ flag: 0 });
+    this.getOpenProgress({ openType: 0 });
   },
   methods: {
     ...mapActions(["getOpenProgress", "updateAuthStatus"]),
@@ -124,7 +124,7 @@ export default {
     },
     onAuthClick() {
       this.updateAuthStatus({ flag: 1 }).then(
-        this.getOpenProgress({ flag: 0 })
+        this.getOpenProgress({ openType: 0 })
       );
     },
     handleLogout() {

@@ -2,11 +2,11 @@
   <op-wrap :isDisabled="isDisableNext" :btnText="getI18n('nextBtn')" @handleNext="handleNext">
     <div class="olhk-step olhk-step-info-other">
       <cube-form :model="model" class="step-content">
-        <head-title :title="titleValues.title"></head-title>
+        <head-title :title="titleValues.declareTitle"></head-title>
         <!-- 是否唯一收益拥有人 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsAccountOwner[0]"></cube-form-item>
-          <template v-if="disclosureDefine.isAccountOwner.isCanFalse && !model.isAccountOwner">
+          <cube-form-item :field="fieldsAccountOwner.isAccountOwner"></cube-form-item>
+          <!-- <template v-if="disclosureDefine.isAccountOwner.isCanFalse && !model.isAccountOwner">
             <cube-form-item :field="fieldsAccountOwner[1]"></cube-form-item>
             <cube-form-item :field="fieldsAccountOwner[2]"></cube-form-item>
             <cube-form-item :field="fieldsAccountOwner[3]"></cube-form-item>
@@ -18,12 +18,13 @@
                 :indicator="false"
               ></cube-textarea>
             </cube-form-item>
-          </template>
+          </template> -->
         </cube-form-group>
 
-        <!-- 是否唯一指示人 -->
+        <!-- 是否与本公司员工有关系 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsAccountManager[0]"></cube-form-item>
+          <cube-form-item :field="fieldsOurStaffKin.unrelatedToWLSStaff"></cube-form-item>
+                    <!-- <cube-form-item :field="fieldsAccountManager[0]"></cube-form-item>
           <template v-if="disclosureDefine.isAccountManager.isCanFalse && !model.isAccountManager">
             <cube-form-item :field="fieldsAccountManager[1]"></cube-form-item>
             <cube-form-item :field="fieldsAccountManager[2]"></cube-form-item>
@@ -37,57 +38,68 @@
               ></cube-textarea>
             </cube-form-item>
           </template>
-        </cube-form-group>
-
+        </cube-form-group> -->
         <!-- 是否本公司員工親屬關係 -->
-        <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsOurStaffKin[0]"></cube-form-item>
+        <!-- <cube-form-group class="custom-form-group">
+          <cube-form-item :field="fieldsOurStaffKin[0]"></cube-form-item> -->
+
           <template v-if="disclosureDefine.isNotOurStaffKin.isCanFalse &&  !model.isNotOurStaffKin">
-            <cube-form-item :field="fieldsOurStaffKin[1]"></cube-form-item>
-            <cube-form-item :field="fieldsOurStaffKin[2]"></cube-form-item>
+            <cube-form-item :field="fieldsOurStaffKin.relatedStaffName"></cube-form-item>
+            <cube-form-item :field="fieldsOurStaffKin.relationship"></cube-form-item>
           </template>
         </cube-form-group>
 
         <!-- 是否港交所參與者僱員 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsHkexParterStaff[0]"></cube-form-item>
+          <cube-form-item :field="fieldsHkexParterStaff.isNotHkexParterStaff"></cube-form-item>
           <template
             v-if="disclosureDefine.isNotHkexParterStaff.isCanFalse &&  !model.isNotHkexParterStaff"
           >
-            <cube-form-item :field="fieldsHkexParterStaff[1]"></cube-form-item>
-            <cube-form-item :field="fieldsHkexParterStaff[2]"></cube-form-item>
+            <cube-form-item :field="fieldsHkexParterStaff.hkexParterName"></cube-form-item>
+            <cube-form-item :field="fieldsHkexParterStaff.hkexParterCENo"></cube-form-item>
           </template>
         </cube-form-group>
 
+        <!-- 配偶是否拥有保证金账户 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsConsortWithMargin[0]"></cube-form-item>
+          <cube-form-item :field="fieldsConsortWithMargin.isNotConsortWithMargin"></cube-form-item>
           <template
             v-if="disclosureDefine.isNotConsortWithMargin.isCanFalse &&  !model.isNotConsortWithMargin"
           >
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin[1]"></cube-form-item>
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin[2]"></cube-form-item>
+            <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin.withMarginName"></cube-form-item>
+            <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin.withMarginAccount"></cube-form-item>
           </template>
         </cube-form-group>
 
+        <!-- 本人或配偶是否是其他账户的实际拥有人或担保人 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsConsortWithOtherMargin[0]"></cube-form-item>
+          <cube-form-item :field="fieldsOtherPOorPGWithMargin.isNotBOorPG"></cube-form-item>
+          <template
+            v-if="disclosureDefine.isNotBOorPG.isCanFalse &&  !model.isNotBOorPG"
+          >
+            <cube-form-item class="label-width-5em" :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginName"></cube-form-item>
+            <cube-form-item class="label-width-5em" :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginAccount"></cube-form-item>
+          </template>
+        </cube-form-group>
+        
+        <!-- 是否大于35% -->
+        <cube-form-group class="custom-form-group">
+          <cube-form-item :field="fieldsConsortWithOtherMargin.isNotConsortWithOtherMargin"></cube-form-item>
           <template
             v-if="disclosureDefine.isNotConsortWithOtherMargin.isCanFalse &&  !model.isNotConsortWithOtherMargin"
           >
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithOtherMargin[1]"></cube-form-item>
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithOtherMargin[2]"></cube-form-item>
+            <cube-form-item class="label-width-4em" :field="fieldsConsortWithOtherMargin.withOtherMarginName"></cube-form-item>
+            <cube-form-item class="label-width-4em" :field="fieldsConsortWithOtherMargin.withOtherMarginAccount"></cube-form-item>
           </template>
         </cube-form-group>
+        <div class="margin-bottom"></div>
 
         <!-- 是否美國綠卡 -->
-        <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsUsGreenCard[0]"></cube-form-item>
-          <template
-            v-if="disclosureDefine.isNotUsGreenCardHolder.isCanFalse &&  !model.isNotUsGreenCardHolder"
-          >
-            <cube-form-item class="label-width-10em" :field="fieldsUsGreenCard[1]"></cube-form-item>
-          </template>
-        </cube-form-group>
+        <section>
+          <head-title :title="titleValues.greenCardTitle"></head-title>
+          <h3 class="greenCardDeclare">{{ greenCardDeclare }}</h3>
+          <cube-form-item :field="fieldUSGreenCard"></cube-form-item>
+        </section>
       </cube-form>
       <div class="margin-bottom"></div>
     </div>
@@ -97,7 +109,8 @@
 <script type="text/ecmascript-6">
 import onlineMixin from "../mixins/online";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
-import { disclosureDefine } from "@/modules/module-iopen/format/format-cn/other";
+import { disclosureDefine } from "@/modules/module-iopen/format/format-hk/other";
+import * as optionsList from "./option-list";
 
 const emtpy = ["null", "undefined", "", undefined, null];
 
@@ -106,18 +119,20 @@ export default {
   components: {},
   data() {
     return {
+      greenCardDeclare: this.getI18n("other.isNotUsGreenCardHolder.title"),
       model: {
-        isAccountOwner: true,
-        otherOwnerName: "",
-        otherOwnerCardType: "",
-        otherOwnerCardNum: "",
-        otherOwnerAddress: "",
+        // otherOwnerName: "",
+        // otherOwnerCardType: "",
+        // otherOwnerCardNum: "",
+        // otherOwnerAddress: "",
 
-        isAccountManager: true,
-        otherManagerName: "",
-        otherManagerCardType: "",
-        otherManagerCardNum: "",
-        otherManagerAddress: "",
+        // isAccountManager: true,
+        // otherManagerName: "",
+        // otherManagerCardType: "",
+        // otherManagerCardNum: "",
+        // otherManagerAddress: "",
+
+        isAccountOwner: true,
 
         isNotOurStaffKin: true,
         ourStaffKinName: "",
@@ -131,17 +146,20 @@ export default {
         withMarginName: "",
         withMarginAccount: "",
 
+        isNotBOorPG: true,
+        otherPOorBGMarginName: '',
+        otherPOorBGMarginAccount: '',
+
         isNotConsortWithOtherMargin: true,
         withOtherMarginName: "",
         withOtherMarginAccount: "",
 
-        isNotUsGreenCardHolder: true,
-        usGreenCardCode: "",
+        isNotUsGreenCardHolder: "",
       },
 
       // 1 是否本账号唯一受益人
-      fieldsAccountOwner: [
-        {
+      fieldsAccountOwner: {
+        isAccountOwner: {
           type: "checkbox",
           modelKey: "isAccountOwner",
           props: {
@@ -152,108 +170,10 @@ export default {
             shape: "square",
           },
         },
-        {
-          type: "input",
-          modelKey: "otherOwnerName",
-          label: this.getI18n("other.otherOwnerName"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "select",
-          modelKey: "otherOwnerCardType",
-          label: this.getI18n("other.otherOwnerCardType"),
-          props: {
-            options: [
-              {
-                text: this.getI18n("other.otherOwnerCardTypeOptions")[0],
-                value: "身份证",
-              },
-              {
-                text: this.getI18n("other.otherOwnerCardTypeOptions")[1],
-                value: "护照",
-              },
-            ],
-            placeholder: this.getI18n("other.selectPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: "otherOwnerCardNum",
-          label: this.getI18n("other.otherOwnerCardNum"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: "otherOwnerAddress",
-          label: this.getI18n("other.otherOwnerAddress"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-      ],
-      // 2 是否本账号唯一指示人
-      fieldsAccountManager: [
-        {
-          type: "checkbox",
-          modelKey: "isAccountManager",
-          props: {
-            option: {
-              label: this.getI18n("other.isAccountManager"),
-              value: true,
-            },
-            shape: "square",
-          },
-        },
-        {
-          type: "input",
-          modelKey: "otherManagerName",
-          label: this.getI18n("other.otherManagerName"),
-          props: {
-            placeholder: this.getI18n("other.otherManagerName"),
-          },
-        },
-        {
-          type: "select",
-          modelKey: "otherManagerCardType",
-          label: this.getI18n("other.otherManagerCardType"),
-          props: {
-            options: [
-              {
-                text: this.getI18n("other.otherManagerCardTypeOptions")[0],
-                value: "身份证",
-              },
-              {
-                text: this.getI18n("other.otherManagerCardTypeOptions")[1],
-                value: "护照",
-              },
-            ],
-            placeholder: this.getI18n("other.selectPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: "otherManagerCardNum",
-          label: this.getI18n("other.otherManagerCardNum"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: "otherManagerAddress",
-          label: this.getI18n("other.otherManagerAddress"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-      ],
-      // 3 是否本公司员工亲属关系
-      fieldsOurStaffKin: [
-        {
+      },
+      // 3 是否本公司员工有关
+      fieldsOurStaffKin: {
+        unrelatedToWLSStaff: {
           type: "checkbox",
           modelKey: "isNotOurStaffKin",
           props: {
@@ -264,7 +184,7 @@ export default {
             shape: "square",
           },
         },
-        {
+        relatedStaffName: {
           type: "input",
           modelKey: "ourStaffKinName",
           label: this.getI18n("other.ourStaffKinName"),
@@ -272,7 +192,7 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-        {
+        relationship: {
           type: "input",
           modelKey: "ourStaffKinRelation",
           label: this.getI18n("other.ourStaffKinRelation"),
@@ -280,10 +200,10 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-      ],
+      },
       // 4
-      fieldsHkexParterStaff: [
-        {
+      fieldsHkexParterStaff: {
+        isNotHkexParterStaff: {
           type: "checkbox",
           modelKey: "isNotHkexParterStaff",
           props: {
@@ -294,7 +214,7 @@ export default {
             shape: "square",
           },
         },
-        {
+        hkexParterName:{
           type: "input",
           modelKey: "hkexParterName",
           label: this.getI18n("other.hkexParterName"),
@@ -302,7 +222,7 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-        {
+        hkexParterCENo:{
           type: "input",
           modelKey: "hkexParterCENo",
           label: this.getI18n("other.hkexParterCENo"),
@@ -310,10 +230,10 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-      ],
+      },
       // 5
-      fieldsConsortWithMargin: [
-        {
+      fieldsConsortWithMargin: {
+        isNotConsortWithMargin: {
           type: "checkbox",
           modelKey: "isNotConsortWithMargin",
           props: {
@@ -324,7 +244,7 @@ export default {
             shape: "square",
           },
         },
-        {
+        withMarginName: {
           type: "input",
           modelKey: "withMarginName",
           label: this.getI18n("other.withMarginName"),
@@ -332,7 +252,7 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-        {
+        withMarginAccount: {
           type: "input",
           modelKey: "withMarginAccount",
           label: this.getI18n("other.withMarginAccount"),
@@ -340,10 +260,40 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-      ],
+      },
+      //不是担保人
+      fieldsOtherPOorPGWithMargin: {
+        isNotBOorPG: {
+          type: "checkbox",
+          modelKey: "isNotBOorPG",
+          props: {
+            option: {
+              label: this.getI18n("other.isNotBOorPG"),
+              value: true,
+            },
+            shape: "square",
+          },
+        },
+        otherPOorBGMarginName: {
+          type: "input",
+          modelKey: "otherPOorBGMarginName",
+          label: this.getI18n("other.otherBOorPGAccountName"),
+          props: {
+            placeholder: this.getI18n("other.inputPlaceholder"),
+          },
+        },
+        otherPOorBGMarginAccount: {
+          type: "input",
+          modelKey: "otherPOorBGMarginAccount",
+          label: this.getI18n("other.otherBOorPGAccountNumber"),
+          props: {
+            placeholder: this.getI18n("other.inputPlaceholder"),
+          },
+        },
+      },
       // 6
-      fieldsConsortWithOtherMargin: [
-        {
+      fieldsConsortWithOtherMargin: {
+        isNotConsortWithOtherMargin: {
           type: "checkbox",
           modelKey: "isNotConsortWithOtherMargin",
           props: {
@@ -354,7 +304,7 @@ export default {
             shape: "square",
           },
         },
-        {
+        withOtherMarginName: {
           type: "input",
           modelKey: "withOtherMarginName",
           label: this.getI18n("other.withOtherMarginName"),
@@ -362,7 +312,7 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-        {
+        withOtherMarginAccount: {
           type: "input",
           modelKey: "withOtherMarginAccount",
           label: this.getI18n("other.withOtherMarginAccount"),
@@ -370,87 +320,37 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-      ],
+      },
       // 7
-      fieldsUsGreenCard: [
-        {
-          type: "checkbox",
-          modelKey: "isNotUsGreenCardHolder",
-          props: {
-            option: {
-              label: this.getI18n("other.isNotUsGreenCardHolder"),
-              value: true,
-            },
-            shape: "square",
-          },
-        },
-        {
-          type: "input",
-          modelKey: "usGreenCardCode",
-          label: this.getI18n("other.usGreenCardCode"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-      ],
+      fieldUSGreenCard: {
+        type: "radio-group",
+        modelKey: "isNotUsGreenCardHolder",
+        props: {
+          options: optionsList.getUsGreenCardOptions()
+        }
+      },
       disclosureDefine: disclosureDefine,
     };
   },
   computed: {
     titleValues() {
       return {
-        title: this.getI18n("other.title"),
+        declareTitle: this.getI18n("other.declareTitle"),
+        greenCardTitle: this.getI18n("other.greenCardTitle"),
       };
     },
-    // 是否显示增加按钮
-    isAddBtnForCompanyController() {
-      return this.companyInfoArray.length < 5;
-    },
-    // 是否显删除按钮
-    isRemoveBtnForCompanyController() {
-      return this.companyInfoArray.length > 1;
-    },
-    isGrayRemoveBtnForTax() {
-      return this.privacyArray.length <= 0;
-    },
     // 第一个复选框校验
-    statusCheck1() {
+    accountOwnerStatusCheck() {
       const {
         isAccountOwner,
-        otherOwnerName,
-        otherOwnerCardType,
-        otherOwnerCardNum,
-        otherOwnerAddress,
       } = this.model;
       if (isAccountOwner) {
         return true;
       }
 
-      if (otherOwnerName && otherOwnerCardType && otherOwnerCardNum && otherOwnerAddress) {
-        return true;
-      }
       return false;
     },
-    // 第2个复选框校验
-    statusCheck2() {
-      const {
-        isAccountManager,
-        otherManagerName,
-        otherManagerCardType,
-        otherManagerCardNum,
-        otherManagerAddress,
-      } = this.model;
-      if (isAccountManager) {
-        return true;
-      }
-
-      if (otherManagerName && otherManagerCardType && otherManagerCardNum && otherManagerAddress) {
-        return true;
-      }
-      return false;
-    },
-    // 第3个复选框校验
-    statusCheck3() {
+    ourStaffKInStatusCheck() {
       const {
         isNotOurStaffKin,
         ourStaffKinName,
@@ -465,7 +365,7 @@ export default {
       return false;
     },
     // 第4个复选框校验
-    statusCheck4() {
+    HKexParternerStaffStatusCheck() {
       const {
         isNotHkexParterStaff,
         hkexParterName,
@@ -480,7 +380,7 @@ export default {
       return false;
     },
     // 第5个复选框校验
-    statusCheck5() {
+    consortWithMarginStatusCheck() {
       const {
         isNotConsortWithMargin,
         withMarginName,
@@ -494,8 +394,22 @@ export default {
       }
       return false;
     },
+    BOorPGStatusCheck() {
+      const {
+        isNotBOorPG,
+        otherPOorBGMarginName,
+        otherPOorBGMarginAccount,
+      } = this.model;
+      if (isNotBOorPG) {
+        return true;
+      }
+      if (otherPOorBGMarginName && otherPOorBGMarginAccount) {
+        return true;
+      }
+      return false;
+    },
     // 第五个复选框校验
-    statusCheck6() {
+    consortWithOtherStatusCheck() {
       const {
         isNotConsortWithOtherMargin,
         withOtherMarginName,
@@ -510,25 +424,23 @@ export default {
       return false;
     },
     // 第六个复选框校验
-    statusCheck7() {
-      const { isNotUsGreenCardHolder, usGreenCardCode } = this.model;
+    greenCardStatusCheck() {
+      const { isNotUsGreenCardHolder } = this.model;
       if (isNotUsGreenCardHolder) {
-        return true;
-      }
-      if (usGreenCardCode) {
         return true;
       }
       return false;
     },
     // 提交按钮是否可点击
     isDisableNext() {
-      const check1 = this.statusCheck1;
-      const check2 = this.statusCheck2;
-      const check3 = this.statusCheck3;
-      const check4 = this.statusCheck4;
-      const check5 = this.statusCheck5;
-      const check6 = this.statusCheck6;
-      const check7 = this.statusCheck7;
+      const check1 = this.accountOwnerStatusCheck;
+      // const check2 = this.statusCheck2;
+      const check2 = this.BOorPGStatusCheck;
+      const check3 = this.ourStaffKInStatusCheck;
+      const check4 = this.HKexParternerStaffStatusCheck;
+      const check5 = this.consortWithMarginStatusCheck;
+      const check6 = this.consortWithOtherStatusCheck;
+      const check7 = this.greenCardStatusCheck;
       if (check1 && check2 && check3 && check4 && check5 && check6 && check7) {
         return false;
       }
@@ -553,7 +465,8 @@ export default {
     // 提交方法
     handleNext() {
       // 保存数据&下一步
-      const obj = { ...this.model, ...this.taxModel };
+      // const obj = { ...this.model, ...this.taxModel };
+      const obj = { ...this.model};
       const params = {
         step: this.step,
         info: obj,
@@ -561,64 +474,6 @@ export default {
       this.saveCacheInfo(params).then(() => {
         this.$router.push({ name: this.nextStep });
       });
-    },
-    // 增加公司信息
-    addCompanyControllerInfo() {
-      const idx = this.companyInfoArray.length;
-      const array = [
-        {
-          type: "input",
-          modelKey: `companyControllerName${idx}`,
-          label: this.getI18n("other.companyControllerName"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: `companyControllerJob${idx}`,
-          label: this.getI18n("other.companyControllerJob"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: `companyControllerExchange${idx}`,
-          label: this.getI18n("other.companyControllerExchange"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: `companyControllerCode${idx}`,
-          label: this.getI18n("other.companyControllerCode"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-      ];
-      this.companyInfoArray = [...this.companyInfoArray, array];
-    },
-    // 删除公司信息
-    removeCompanyControllerInfo() {
-      const idx = this.companyInfoArray.length - 1;
-      this.companyInfoArray.pop();
-      this.model[`companyControllerName${idx}`] = "";
-      this.model[`companyControllerJob${idx}`] = "";
-      this.model[`companyControllerExchange${idx}`] = "";
-      this.model[`companyControllerCode${idx}`] = "";
-    },
-
-    // 显示tips
-    showToast(txt) {
-      const toast = this.$createToast({
-        type: "warn",
-        time: 1000,
-        txt,
-      });
-      toast.show();
     },
 
     handlerCheckAlert(val, key) {
@@ -628,7 +483,7 @@ export default {
         title: this.$t("common.alertTitle"),
         content,
         callback: () => {
-          this.model[key] = true;
+          this.model[key] = typeof val === 'boolean' ? true : 1;
         },
       });
     },
@@ -640,9 +495,6 @@ export default {
     "model.isAccountOwner"(newVal, oldVal) {
       this.handlerCheckAlert(newVal, "isAccountOwner");
     },
-    "model.isAccountManager"(newVal, oldVal) {
-      this.handlerCheckAlert(newVal, "isAccountManager");
-    },
     "model.isNotOurStaffKin"(newVal, oldVal) {
       this.handlerCheckAlert(newVal, "isNotOurStaffKin");
     },
@@ -651,6 +503,9 @@ export default {
     },
     "model.isNotConsortWithMargin"(newVal, oldVal) {
       this.handlerCheckAlert(newVal, "isNotConsortWithMargin");
+    },
+    "model.isNotBOorPG"(newVal, oldVal) {
+      this.handlerCheckAlert(newVal, "isNotBOorPG");
     },
     "model.isNotConsortWithOtherMargin"(newVal, oldVal) {
       this.handlerCheckAlert(newVal, "isNotConsortWithOtherMargin");

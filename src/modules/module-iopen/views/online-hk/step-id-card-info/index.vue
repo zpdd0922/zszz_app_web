@@ -4,8 +4,8 @@
       <div class="step-content user-info">
         <cube-form :model="model">
           <div class="info-wrap">
-            <cube-form-group class="custom-form-group">
-              <cube-form-item :field="fields[0]">
+            <cube-form-group class="custom-form-group" :legend="getI18n('tips')">
+              <cube-form-item :field="fields.familyName">
                 <div class="cube-input">
                   <input
                     v-model="model.familyName"
@@ -14,7 +14,7 @@
                   />
                 </div>
               </cube-form-item>
-              <cube-form-item :field="fields[1]">
+              <cube-form-item :field="fields.givenName">
                 <div class="cube-input">
                   <input
                     v-model.trim="model.givenName"
@@ -23,31 +23,31 @@
                   />
                 </div>
               </cube-form-item>
-              <cube-form-item :field="fields[2]"></cube-form-item>
-              <cube-form-item :field="fields[3]"></cube-form-item>
-              <cube-form-item :field="fields[4]">
+              <cube-form-item :field="fields.familyNameSpell"></cube-form-item>
+              <cube-form-item :field="fields.givenNameSpell"></cube-form-item>
+              <cube-form-item :field="fields.idCardValue">
                 <div class="cube-input">
                   <input
-                    :type="fields[4].props.type"
+                    :type="fields.idCardValue.props.type"
                     v-model="model.idCardValue"
                     class="cube-input-field"
                     maxlength="50"
-                    :placeholder="fields[4].props.placeholder"
+                    :placeholder="fields.idCardValue.props.placeholder"
                   />
                 </div>
               </cube-form-item>
 
               <!-- 证件类型 == 大陆身份证 OCR获取有效期限-->
               <template v-if="isNeedCnName">
-                <cube-form-item :field="fields[5]">
+                <cube-form-item :field="fields.addressValue">
                   <cube-textarea
                     v-model="model.addressValue"
-                    :placeholder="fields[5].props.placeholder"
+                    :placeholder="fields.addressValue.props.placeholder"
                     :maxlength="50"
                     :indicator="false"
                   ></cube-textarea>
                 </cube-form-item>
-                <cube-form-item :field="fields[6]">
+                <cube-form-item :field="fields.dateStartValue">
                   <div class="custom-date-box">
                     <div @click="showStartDatePicker" class="custom-form-date">
                       <template v-if="model.dateStartValue">
@@ -90,7 +90,7 @@
               <template v-else>
                 <!-- 当选择护照时候出现有效期（必填） -->
                 <template v-if="isPassport">
-                  <cube-form-item :field="fields[6]">
+                  <cube-form-item :field="fields.dateStartValue">
                     <div class="custom-date-box">
                       <div @click="showPassPortStartDatePicker" class="custom-form-date">
                         <template v-if="model.passportStartValue">
@@ -118,19 +118,23 @@
                     </div>
                   </cube-form-item>
                 </template>
-                <cube-form-item :field="fields[7]">
+                <cube-form-item :field="fields.birthday">
                   <div @click="showBrithDatePicker" class="cube-select" :class="isSelectIcon">
                     <template v-if="model.birthday">
                       <span class="cube-select-text">{{model.birthday}}</span>
                     </template>
                     <template v-else>
-                      <span class="cube-select-placeholder">{{fields[7].props.placeholder}}</span>
+                      <span class="cube-select-placeholder">{{fields.birthday.props.placeholder}}</span>
                     </template>
                     <i class="cube-select-icon"></i>
                   </div>
                 </cube-form-item>
-                <cube-form-item :field="fields[8]"></cube-form-item>
+                <cube-form-item :field="fields.sex"></cube-form-item>
               </template>
+              <!-- 教育程度 -->
+              <cube-form-item :field="fields.educationLevel"></cube-form-item>
+              <!-- 婚姻状况 -->
+              <cube-form-item :field="fields.maritalStatus"></cube-form-item>
             </cube-form-group>
           </div>
         </cube-form>
@@ -148,6 +152,8 @@ import { getPreDay } from "@/main/utils/format/date";
 import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
+import * as optionsList from "./options-list";
+
 
 export default {
   mixins: [onlineMixin],
@@ -169,9 +175,11 @@ export default {
         sex: "",
         passportStartValue: "", // 护照起始日期
         passportEndValue: "", // 护照截止日期
+        educationLevel: "", //教育程度
+        maritalStatus: "", //婚姻状况
       },
-      fields: [
-        {
+      fields: {
+        familyName: {
           type: "input",
           modelKey: "familyName",
           label: this.getI18n("familyName.label"),
@@ -180,7 +188,7 @@ export default {
             maxlength: 50,
           },
         },
-        {
+        givenName: {
           type: "input",
           modelKey: "givenName",
           label: this.getI18n("givenName.label"),
@@ -189,7 +197,7 @@ export default {
             maxlength: 50,
           },
         },
-        {
+        familyNameSpell: {
           type: "input",
           modelKey: "familyNameSpell",
           label: this.getI18n("familyNameSpell.label"),
@@ -198,7 +206,7 @@ export default {
             maxlength: 50,
           },
         },
-        {
+        givenNameSpell: {
           type: "input",
           modelKey: "givenNameSpell",
           label: this.getI18n("givenNameSpell.label"),
@@ -207,7 +215,7 @@ export default {
             maxlength: 50,
           },
         },
-        {
+        idCardValue: {
           type: "input",
           modelKey: "idCardValue",
           label: this.getI18n("idCardValue.label"),
@@ -215,7 +223,7 @@ export default {
             placeholder: this.getI18n("idCardValue.placeholder"),
           },
         },
-        {
+        addressValue: {
           modelKey: "addressValue",
           label: this.getI18n("addressValue.label"),
           props: {
@@ -223,11 +231,11 @@ export default {
             maxlength: 50,
           },
         },
-        {
+        dateStartValue: {
           modelKey: "dateStartValue",
           label: this.getI18n("dateStartValue.label"),
         },
-        {
+        birthday: {
           type: "date",
           modelKey: "birthday",
           label: this.getI18n("birthday.label"),
@@ -235,7 +243,7 @@ export default {
             placeholder: this.getI18n("birthday.placeholder"),
           },
         },
-        {
+        sex: {
           type: "select",
           modelKey: "sex",
           label: this.getI18n("sex.label"),
@@ -244,18 +252,48 @@ export default {
             options: sexOptions,
           },
         },
-      ],
+        educationLevel: {
+          type: "select",
+          modelKey: "educationLevel",
+          label: this.getI18n("educationLevel.label"),
+          props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            placeholder: this.getI18n("educationLevel.placeholder"),
+            options: optionsList.educationLevelOptions(),
+          },
+          rules: {
+            required: false,
+          },
+        },
+        maritalStatus: {
+          type: "select",
+          modelKey: "maritalStatus",
+          label: this.getI18n("maritalStatus.label"),
+          props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            placeholder: this.getI18n("maritalStatus.placeholder"),
+            options: optionsList.maritalStatusOptions(),
+          },
+          rules: {
+            required: false,
+          },
+        },
+      }
     };
   },
   computed: {
     familyNamePlaceHolder() {
-      const tips = this.fields[0].props.placeholder;
+      const tips = this.fields.familyName.props.placeholder;
       return this.isNeedCnName
         ? tips
         : `${tips}${this.getI18n("placeholderMore")}`;
     },
     givenNamePlaceHolder() {
-      const tips = this.fields[1].props.placeholder;
+      const tips = this.fields.givenName.props.placeholder;
       return this.isNeedCnName
         ? tips
         : `${tips}${this.getI18n("placeholderMore")}`;
@@ -296,6 +334,8 @@ export default {
         sex,
         passportStartValue,
         passportEndValue,
+        educationLevel,
+        maritalStatus,
       } = this.model;
       let arr = [familyNameSpell, givenNameSpell, idCardValue, birthday, sex];
 
@@ -324,7 +364,7 @@ export default {
       }
       const result = arr.every((val) => String(val).length);
       // return this.isNeedCnName ? !(result && cnNameValue.length > 1) : !result
-      return !result;
+      return !(result && educationLevel && maritalStatus);
     },
   },
   created() {

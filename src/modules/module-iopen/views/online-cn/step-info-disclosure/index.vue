@@ -2,43 +2,12 @@
   <op-wrap :isDisabled="isDisableNext" :btnText="getI18n('nextBtn')" @handleNext="handleNext">
     <div class="olcn-step olcn-step-info-other">
       <cube-form :model="model" class="step-content">
-        <head-title :title="titleValues.title"></head-title>
+        <head-title :title="titleValues.declareTitle"></head-title>
         <!-- 是否唯一收益拥有人 -->
         <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsAccountOwner.isAccountOwner"></cube-form-item>
-          <template v-if="disclosureDefine.isAccountOwner.isCanFalse && !model.isAccountOwner">
-            <cube-form-item :field="fieldsAccountOwner.otherOwnerName"></cube-form-item>
-            <cube-form-item :field="fieldsAccountOwner.otherOwnerCardType"></cube-form-item>
-            <cube-form-item :field="fieldsAccountOwner.otherOwnerCardNum"></cube-form-item>
-            <cube-form-item :field="fieldsAccountOwner.otherOwnerAddress">
-              <cube-textarea
-                v-model="model.otherOwnerAddress"
-                :placeholder="fieldsAccountOwner.otherOwnerAddress.props.placeholder"
-                :maxlength="50"
-                :indicator="false"
-              ></cube-textarea>
-            </cube-form-item>
-          </template>
         </cube-form-group>
 
-        <!-- 是否唯一指示人 -->
-        <!-- <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsAccountManager[0]"></cube-form-item>
-          <template v-if="disclosureDefine.isAccountManager.isCanFalse && !model.isAccountManager">
-            <cube-form-item :field="fieldsAccountManager[1]"></cube-form-item>
-            <cube-form-item :field="fieldsAccountManager[2]"></cube-form-item>
-            <cube-form-item :field="fieldsAccountManager[3]"></cube-form-item>
-            <cube-form-item :field="fieldsAccountManager[3]">
-              <cube-textarea
-                v-model="model.otherManagerAddress"
-                :placeholder="fieldsAccountManager[3].props.placeholder"
-                :maxlength="50"
-                :indicator="false"
-              ></cube-textarea>
-            </cube-form-item>
-          </template>
-        </cube-form-group>
- -->
         <!-- 是否与本公司员工有关系 -->
         <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsOurStaffKin.unrelatedToWLSStaff"></cube-form-item>
@@ -91,30 +60,14 @@
             <cube-form-item class="label-width-4em" :field="fieldsConsortWithOtherMargin.withOtherMarginAccount"></cube-form-item>
           </template>
         </cube-form-group>
+        <div class="margin-bottom"></div>
 
         <!-- 是否美國綠卡 -->
-        <cube-radio-group :field="fieldUsGreenCard">
-          <cube-radio
-            v-model="isNotUsGreenCardHolder"
-            :option="greenCardOptionsList.notGreenCardHolder"
-          ></cube-radio>
-          <cube-radio
-            v-model="isNotUsGreenCardHolder"
-            :option="greenCardOptionsList.notAmericanBornInUS"
-          ></cube-radio>
-          <cube-radio
-            v-model="isNotUsGreenCardHolder"
-            :option="greenCardOptionsList.greenCardHolder"
-          ></cube-radio>
-        </cube-radio-group>
-        <!-- <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsUsGreenCard.isNotUsGreenCardHolder"></cube-form-item> -->
-          <!-- <template
-            v-if="disclosureDefine.isNotUsGreenCardHolder.isCanFalse &&  !model.isNotUsGreenCardHolder"
-          >
-            <cube-form-item class="label-width-10em" :field="fieldsUsGreenCard.usGreenCardCode"></cube-form-item>
-          </template> -->
-        <!-- </cube-form-group> -->
+        <section>
+          <head-title :title="titleValues.greenCardTitle"></head-title>
+          <h3 class="greenCardDeclare">{{ greenCardDeclare }}</h3>
+          <cube-form-item :field="fieldUSGreenCard"></cube-form-item>
+        </section>
       </cube-form>
       <div class="margin-bottom"></div>
     </div>
@@ -134,19 +87,9 @@ export default {
   components: {},
   data() {
     return {
-      greenCardOptionsList: optionsList.getUsGreenCardOptions(),
+      greenCardDeclare: this.getI18n("other.isNotUsGreenCardHolder.title"),
       model: {
         isAccountOwner: true,
-        otherOwnerName: "",
-        otherOwnerCardType: "",
-        otherOwnerCardNum: "",
-        otherOwnerAddress: "",
-
-        isAccountManager: true,
-        otherManagerName: "",
-        otherManagerCardType: "",
-        otherManagerCardNum: "",
-        otherManagerAddress: "",
 
         isNotOurStaffKin: true,
         ourStaffKinName: "",
@@ -169,7 +112,6 @@ export default {
         withOtherMarginAccount: "",
 
         isNotUsGreenCardHolder: "",
-        // usGreenCardCode: "",
       },
 
       // 1 是否本账号唯一受益人
@@ -185,106 +127,7 @@ export default {
             shape: "square",
           },
         },
-        otherOwnerName: {
-          type: "input",
-          modelKey: "otherOwnerName",
-          label: this.getI18n("other.otherOwnerName"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        otherOwnerCardType: {
-          type: "select",
-          modelKey: "otherOwnerCardType",
-          label: this.getI18n("other.otherOwnerCardType"),
-          props: {
-            options: [
-              {
-                text: this.getI18n("other.otherOwnerCardTypeOptions")[0],
-                value: "身份证",
-              },
-              {
-                text: this.getI18n("other.otherOwnerCardTypeOptions")[1],
-                value: "护照",
-              },
-            ],
-            placeholder: this.getI18n("other.selectPlaceholder"),
-          },
-        },
-        otherOwnerCardNum: {
-          type: "input",
-          modelKey: "otherOwnerCardNum",
-          label: this.getI18n("other.otherOwnerCardNum"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        otherOwnerAddress: {
-          type: "input",
-          modelKey: "otherOwnerAddress",
-          label: this.getI18n("other.otherOwnerAddress"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
       },
-      // // 2 是否本账号唯一指示人
-      // fieldsAccountManager: [
-      //   {
-      //     type: "checkbox",
-      //     modelKey: "isAccountManager",
-      //     props: {
-      //       option: {
-      //         label: this.getI18n("other.isAccountManager"),
-      //         value: true,
-      //       },
-      //       shape: "square",
-      //     },
-      //   },
-      //   {
-      //     type: "input",
-      //     modelKey: "otherManagerName",
-      //     label: this.getI18n("other.otherManagerName"),
-      //     props: {
-      //       placeholder: this.getI18n("other.otherManagerName"),
-      //     },
-      //   },
-      //   {
-      //     type: "select",
-      //     modelKey: "otherManagerCardType",
-      //     label: this.getI18n("other.otherManagerCardType"),
-      //     props: {
-      //       options: [
-      //         {
-      //           text: this.getI18n("other.otherManagerCardTypeOptions")[0],
-      //           value: "身份证",
-      //         },
-      //         {
-      //           text: this.getI18n("other.otherManagerCardTypeOptions")[1],
-      //           value: "护照",
-      //         },
-      //       ],
-      //       placeholder: this.getI18n("other.selectPlaceholder"),
-      //     },
-      //   },
-      //   {
-      //     type: "input",
-      //     modelKey: "otherManagerCardNum",
-      //     label: this.getI18n("other.otherManagerCardNum"),
-      //     props: {
-      //       placeholder: this.getI18n("other.inputPlaceholder"),
-      //     },
-      //   },
-        
-      //   {
-      //     type: "input",
-      //     modelKey: "otherManagerAddress",
-      //     label: this.getI18n("other.otherManagerAddress"),
-      //     props: {
-      //       placeholder: this.getI18n("other.inputPlaceholder"),
-      //     },
-      //   },
-      // ],
       // 3 是否本公司员工有关
       fieldsOurStaffKin: {
         unrelatedToWLSStaff: {
@@ -436,88 +279,34 @@ export default {
         },
       },
       // 7
-      fieldUsGreenCard: {
+      fieldUSGreenCard: {
         type: "radio-group",
         modelKey: "isNotUsGreenCardHolder",
         props: {
           options: optionsList.getUsGreenCardOptions()
         }
       },
-        // usGreenCardCode: {
-        //   type: "input",
-        //   modelKey: "usGreenCardCode",
-        //   label: this.getI18n("other.usGreenCardCode"),
-        //   props: {
-        //     placeholder: this.getI18n("other.inputPlaceholder"),
-        //   },
-        // },
       disclosureDefine: disclosureDefine,
     };
   },
   computed: {
     titleValues() {
       return {
-        title: this.getI18n("other.title"),
+        declareTitle: this.getI18n("other.declareTitle"),
+        greenCardTitle: this.getI18n("other.greenCardTitle"),
       };
-    },
-    // 是否显示增加按钮
-    isAddBtnForCompanyController() {
-      return this.companyInfoArray.length < 5;
-    },
-    // 是否显删除按钮
-    isRemoveBtnForCompanyController() {
-      return this.companyInfoArray.length > 1;
-    },
-    isGrayRemoveBtnForTax() {
-      return this.privacyArray.length <= 0;
     },
     // 第一个复选框校验
     accountOwnerStatusCheck() {
       const {
         isAccountOwner,
-        otherOwnerName,
-        otherOwnerCardType,
-        otherOwnerCardNum,
-        otherOwnerAddress,
       } = this.model;
       if (isAccountOwner) {
         return true;
       }
 
-      if (
-        otherOwnerName &&
-        otherOwnerCardType &&
-        otherOwnerCardNum &&
-        otherOwnerAddress
-      ) {
-        return true;
-      }
       return false;
     },
-    // // 第2个复选框校验
-    // statusCheck2() {
-    //   const {
-    //     isAccountManager,
-    //     otherManagerName,
-    //     otherManagerCardType,
-    //     otherManagerCardNum,
-    //     otherManagerAddress,
-    //   } = this.model;
-    //   if (isAccountManager) {
-    //     return true;
-    //   }
-
-    //   if (
-    //     otherManagerName &&
-    //     otherManagerCardType &&
-    //     otherManagerCardNum &&
-    //     otherManagerAddress
-    //   ) {
-    //     return true;
-    //   }
-    //   return false;
-    // },
-    // 第3个复选框校验
     ourStaffKInStatusCheck() {
       const {
         isNotOurStaffKin,
@@ -593,11 +382,8 @@ export default {
     },
     // 第六个复选框校验
     greenCardStatusCheck() {
-      const { isNotUsGreenCardHolder, usGreenCardCode } = this.model;
+      const { isNotUsGreenCardHolder } = this.model;
       if (isNotUsGreenCardHolder) {
-        return true;
-      }
-      if (usGreenCardCode) {
         return true;
       }
       return false;
@@ -637,9 +423,6 @@ export default {
     handleNext() {
       // 保存数据&下一步
       // const obj = { ...this.model, ...this.taxModel };
-      console.log(1)
-      console.log(this.model)
-      console.log(2)
       const obj = { ...this.model};
       const params = {
         step: this.step,
@@ -649,64 +432,6 @@ export default {
         this.$router.push({ name: this.nextStep });
       });
     },
-    // 增加公司信息
-    addCompanyControllerInfo() {
-      const idx = this.companyInfoArray.length;
-      const array = [
-        {
-          type: "input",
-          modelKey: `companyControllerName${idx}`,
-          label: this.getI18n("other.companyControllerName"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: `companyControllerJob${idx}`,
-          label: this.getI18n("other.companyControllerJob"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: `companyControllerExchange${idx}`,
-          label: this.getI18n("other.companyControllerExchange"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-        {
-          type: "input",
-          modelKey: `companyControllerCode${idx}`,
-          label: this.getI18n("other.companyControllerCode"),
-          props: {
-            placeholder: this.getI18n("other.inputPlaceholder"),
-          },
-        },
-      ];
-      this.companyInfoArray = [...this.companyInfoArray, array];
-    },
-    // 删除公司信息
-    removeCompanyControllerInfo() {
-      const idx = this.companyInfoArray.length - 1;
-      this.companyInfoArray.pop();
-      this.model[`companyControllerName${idx}`] = "";
-      this.model[`companyControllerJob${idx}`] = "";
-      this.model[`companyControllerExchange${idx}`] = "";
-      this.model[`companyControllerCode${idx}`] = "";
-    },
-
-    // 显示tips
-    showToast(txt) {
-      const toast = this.$createToast({
-        type: "warn",
-        time: 1000,
-        txt,
-      });
-      toast.show();
-    },
 
     handlerCheckAlert(val, key) {
       if (this.disclosureDefine[key].isCanFalse || val) return;
@@ -715,7 +440,7 @@ export default {
         title: this.$t("common.alertTitle"),
         content,
         callback: () => {
-          this.model[key] = true;
+          this.model[key] = typeof val === 'boolean' ? true : 1;
         },
       });
     },

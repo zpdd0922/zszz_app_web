@@ -96,7 +96,7 @@ const onlineCnRouter = [
         name: 'opaStep12Head',
         path: 'step12-head',
         component: _import('step-avatar-picture', 'head'),
-        meta: { pageName: 'iOpen.openCn.avatarPicture.pageNameHead', step: 12, nextStep: 'opaStep13' }
+        meta: { pageName: 'iOpen.openCn.avatarPicture.pageNameHead', step: 12, nextStep: 'opaStep14' }
       },
       {
         name: 'opaStep13',

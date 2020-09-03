@@ -124,7 +124,7 @@
             </template>
             <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
           </template>
-          <p class="tips">若客户选择通过<span>居住地址</span>或<span>通讯地址</span>接收交易确认通知书或账户结单，将收取每月<span>五十元</span>服务费</p>
+          <p @click="showmsg" class="tips" v-html="modeOfCorrespondenceWarning"></p>
           <!-- 收取节单方式 -->
           <cube-form-item :field="fieldsContact.modeOfCorrespondence"></cube-form-item>
         </cube-form-group>
@@ -202,8 +202,7 @@ export default {
       model: {
         // 联络信息字段
         email: "", // 邮箱地址
-        // educationLevel: "", // 教育程度
-        homeRadio: optionsList.radioListValue.hk, // 住宅地址单选
+        homeRadio: optionsList.radioListValue.cn, // 住宅地址单选
         homeCity: [], // 住宅地址省市区
         homeAddressDetail: "", // 住宅地址省市区详细
         homeAddressNumber: "", // 住宅地址门牌号
@@ -226,7 +225,9 @@ export default {
         contactOtherCity: "", // 选择其他国家市
         contactOtherArea: "", // 选择其他国家区域
         contactTelePhone: "", // 选择其他国家区
+        modeOfCorrespondence: '' //收取节点及书信方式
       },
+      modeOfCorrespondenceWarning: this.getI18n("contact.modeOfCorrespondenceWarning"),
       // 职业类型字段
       professionModel: {
         professionCode: "", // 职业类型选择
@@ -237,7 +238,6 @@ export default {
         workingSeniority: "", // 從業年限
         industryRange: "", // 所属行业
         jobPosition: "", // 职位级别
-        modeOfCorrespondence: '' //收取节点及书信方式
       },
       // 联络信息
       fieldsContact: {
@@ -412,13 +412,13 @@ export default {
         modeOfCorrespondence: {
         type: "select",
         modelKey: "modeOfCorrespondence",
-        label: this.getI18n("profession.modeOfCorrespondence.label"),
+        label: this.getI18n("contact.modeOfCorrespondence.label"),
         props: {
           title: this.$t("common.cubeComponents.select.title"),
           cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
           confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
           placeholder: this.getI18n(
-            "profession.modeOfCorrespondence.placeholder"
+            "contact.modeOfCorrespondence.placeholder"
           ),
           options: optionsList.modeOfCorrespondenceOptions(),
         },
@@ -701,7 +701,6 @@ export default {
     // 验证联络信息
     validContact() {
       const data = this.model;
-      console.log(123123, data.homeCity)
       const status = validForm.contactValidator.map((val) => {
         // 住址地址同身份证
         if (data.homeRadio === this.radioListValue.idCard) {
@@ -798,14 +797,11 @@ export default {
           ) {
             return true;
           }
-        console.log(123213,val.key, data[val.key])
-
           return Boolean(data[val.key].length);
         }
-        console.log(2313212, val.key, data[val.key])
         return Boolean(data[val.key]);
       });
-      return !status.includes(false);
+      return !status.includes(false) && Boolean(data.modeOfCorrespondence);
     },
     // 验证职业类型
     validProfession() {
@@ -876,6 +872,9 @@ export default {
     },
   },
   methods: {
+    showmsg() {
+      console.log(this.model)
+    },
     getI18n(key, type = "") {
       return this.getStepI18nValue("infoContact", key);
     },

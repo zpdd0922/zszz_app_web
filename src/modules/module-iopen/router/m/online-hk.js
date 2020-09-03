@@ -73,13 +73,13 @@ const onlineHkRouter = [
         name: 'opaStep10-hk',
         path: 'step10',
         component: _import('step-info-experience'),
-        meta: { pageName: 'iOpen.openHk.infoExperience.pageName', step: 10, nextStep: 'opaStep11-hk' }
+        meta: { pageName: 'iOpen.openHk.infoExperience.pageName', step: 10, nextStep: 'opaStep12-hk' }
       },
       {
         name: 'opaStep11-hk',
         path: 'step11',
         component: _import('step-signature'),
-        meta: { pageName: 'iOpen.openHk.selectAccount.pageName', step: 11, nextStep: 'opaStep12-hk', isHeader: false, isFooter: false }
+        meta: { pageName: 'iOpen.openHk.selectAccount.pageName', step: 11, nextStep: 'opaStep12-hk' }
       },
       {
         name: 'opaStep12-hk',

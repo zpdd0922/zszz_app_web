@@ -6,6 +6,27 @@
     color: $color-form-lengend-highlight-txt;
   }
 
+  .tips {
+    position: relative;
+    padding: .1rem .15rem 0 .25rem;
+    font-size: $weak-font-3;
+    color: $color-flat;
+    font-family: PingFang SC, STHeitiSC-Light, Helvetica-Light, arial, sans-serif;
+
+    span {
+      color: $color-form-lengend-highlight-txt;
+    }
+  }
+  .tips::before {
+    position: absolute;
+    content: '*';
+    display: inline-block;
+    line-height: $imp-font;
+    font-size: $imp-font;
+    color: $color-form-lengend-highlight-txt;
+    left: .15rem;
+  }
+
   
   .step-content-address-img-upload {
     display: flex;

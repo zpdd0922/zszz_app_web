@@ -18,16 +18,6 @@ export default {
             label: '郵箱',
             placeholder: '請填寫您的電子郵箱'
         },
-        educationLevel: {
-            label: '教育程度',
-            placeholder: '請選擇教育程度',
-            options: {
-                a: '小學',
-                b: '中學',
-                c: '專上學院',
-                d: '大學或以上',
-            }
-        },
         homeRadio: {
             label: '現時住址',
             placeholder: '請選擇',
@@ -78,6 +68,16 @@ export default {
             label: '區域',
             placeholder: '請輸入區域'
         },
+        modeOfCorrespondenceWarning: '若客戶選擇通過<span>居住地址</span>或<span>通訊地址</span>接收交易確認通知書或帳戶結單，將收取每月<span>五十元</span>服務費',
+        modeOfCorrespondence: {
+            label: '收取接單及書信方式',
+            placeholder: '請選擇',
+            options: {
+                email: '電郵',
+                residentalAddress: '居住地址',
+                correspondenceAddress: '通訊地址',
+            }
+        },
     },
     profession: {
         title: '工作狀況',
@@ -88,7 +88,10 @@ export default {
                 employed: '受僱',
                 selfEmployed: '自僱',
                 retired: '退休',
-                others: '其他',
+                housewife: '家庭主婦',
+                student: '學生',
+                umemployed: '待業',
+                // others: '其他',
             }
         },
         professionCodeOther: { label: '其他就業情況', placeholder: '請填寫' },
@@ -98,18 +101,18 @@ export default {
             label: '職位級別',
             placeholder: '請選擇職位級別',
             options: {
-                a: '高層管理',
-                b: '中層管理',
-                c: '普通員工',
+                topManagement: '高層管理',
+                middleManagement: '中層管理',
+                generalStaff: '普通員工',
             }
         },
         workingSeniority: {
             label: '從業年限',
             placeholder: '請選擇',
             options: {
-                a: '少於5年',
-                b: '5-10年',
-                c: '10年以上',
+                ltFive: '少於5年',
+                fiveToTen: '5-10年',
+                mtTen: '10年以上',
             }
         },
         companyTelePhone: { label: '辦公室電話', placeholder: '請填寫(選填)' },

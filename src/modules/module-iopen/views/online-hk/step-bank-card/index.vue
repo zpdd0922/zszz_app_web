@@ -124,6 +124,9 @@ export default {
             },
           },
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("bankId.placeholder"),
             options: bankOptions(),
           },
@@ -152,6 +155,9 @@ export default {
           modelKey: "bankCurrency",
           label: this.getI18n("bankCurrency.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("bankCurrency.placeholder"),
             options: [
               {
@@ -243,6 +249,7 @@ export default {
     },
     updateInfo() {
       const userInfo = this.openInfo;
+      console.log(this.openInfo);
       Object.keys(this.model).forEach((val) => {
         if (val == "bankUserName" && !userInfo[val]) {
           this.model[val] = this.openInfo.enNameValue;

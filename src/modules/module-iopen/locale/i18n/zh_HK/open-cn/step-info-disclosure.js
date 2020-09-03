@@ -2,10 +2,11 @@ import customizeI18n from '@/customize/locale/i18n/zh_HK';
 import commonI18n from '@/main/locale/i18n/zh_HK';
 
 export default {
-    pageName: '個人聲明',
+    pageName: '身份披露',
     nextBtn: '下一步',
     other: {
-        title: '身份資料申報',
+        declareTitle: '身份資料申報',
+        greenCardTitle: '美國居民身份申報',
         isAccountOwner: '本人是該帳戶之最終實益擁有人。',
         otherOwnerName: '姓名',
         otherOwnerCardType: '證件類型',
@@ -59,7 +60,7 @@ export default {
         // companyControllerCode: '股份代碼',
 
         isAccountOwnerAlert: `${customizeI18n.customize.company.securityName}暫不支持非本證券賬戶之最終實益擁有人提供線上開戶業務。`,
-        isAccountManagerAlert: `${customizeI18n.customize.company.securityName}暫不支持非本證券賬戶之最初負責發出交易指示的人士提供線上開戶業務。`,
+        // isAccountManagerAlert: `${customizeI18n.customize.company.securityName}暫不支持非本證券賬戶之最初負責發出交易指示的人士提供線上開戶業務。`,
         // isNotOurStaffAlert: `${customizeI18n.customize.company.securityName}暫不支持本公司及其聯繫公司的董事、僱員或持牌代表提供線上開戶業務。`,
         isNotOurStaffKinAlert: `${customizeI18n.customize.company.securityName}暫不支持本公司及其聯繫公司之董事/員工的直系家庭成員提供線上開戶業務。`,
         // isNotExchangeParterAlert: `${customizeI18n.customize.company.securityName}暫不支持對證券或期貨交易所的註冊人士或參與者提供線上開戶業務。`,
@@ -72,5 +73,16 @@ export default {
         selectPlaceholder: '請選擇',
         add: '繼續添加',
         remove: '刪除上條',
+
+        isNotUsGreenCardHolder: {
+            title: '請選擇下列選項之一：',
+            usGreenCardHoldStatusOptions: {
+                greenCardHolder: '本人就課稅目的而言為美國公民或美國居民。',
+                notAmericanBornInUS: '本人在美國出生但不再屬於美國公民，原因是本人自願放棄本人的公民身份，並以美國【喪失原有國籍證明】為憑證。',
+                notGreenCardHolder: '本人就課稅目的而言不是美國公民或者美國居民。'
+            },
+
+        }
+
     },
 };

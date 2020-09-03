@@ -1,5 +1,4 @@
 import { post, postImg } from '../request';
-import paramsData from '@/main/request/utils/wrap-icrm';
 
 export default {
   /**

@@ -1,7 +1,7 @@
 export default {
     pageName: '投资经验',
     experience: {
-        title: '投资经验',
+        title: '投资年资',
         yearOptions: {
             noExperience: '没有经验',
             mtTenyears: '大于10年',

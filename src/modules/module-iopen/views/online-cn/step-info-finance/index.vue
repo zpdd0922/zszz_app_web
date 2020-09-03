@@ -314,6 +314,7 @@ export default {
           modelKey: "derivative",
           props: {
             colNum: 2,
+            horizontal: true,
             options: [
               {
                 label: this.getI18n("derivative.yes"),

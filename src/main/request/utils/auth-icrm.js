@@ -50,6 +50,8 @@ class Auth {
   * @return string
   */
   getAuthToken = () => {
+    // return '3b31c5d9fda0442b859a89b738c846a1122893';
+    // return 'e57f3825fa574b97b5690f7b9d6de26d134614';
     // 获取地址栏token，有则更新本地
     const urlParams = getURLParameters() || {};
     const urlToken = urlParams.token || '';

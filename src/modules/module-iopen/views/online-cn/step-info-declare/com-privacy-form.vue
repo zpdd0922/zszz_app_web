@@ -26,7 +26,7 @@
         <div class="cube-form-field">
           <cube-radio-group
             position="left"
-            :investmentHorizontal="true"
+            :horizontal="true"
             @input="changeOfferNum($event, index)"
             :value="val.offerPrivacyKey"
             :options="[{

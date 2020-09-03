@@ -4,12 +4,10 @@
       <!-- 联系信息 -->
       <cube-form :model="model">
 
-        <cube-form-group class="step-content custom-form-group">
+        <cube-form-group class="step-content custom-form-group border-bottom-1px">
           <head-title :title="titleValues.contactTitle"></head-title>
           <!-- 郵箱 -->
           <cube-form-item :field="fieldsContact.email"></cube-form-item>
-          <!-- 教育程度 -->
-          <cube-form-item :field="fieldsContact.educationLevel"></cube-form-item>
           <!-- 住宅地址选择 -->
           <cube-form-item :field="fieldsContact.homeRadio"></cube-form-item>
           <!-- 住址地址选择省市区 -->
@@ -129,6 +127,9 @@
             </template>
             <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
           </template>
+          <!-- 收取节单方式 -->
+          <p class="tips" v-html="modeOfCorrespondenceWarning"></p>
+          <cube-form-item :field="fieldsContact.modeOfCorrespondence"></cube-form-item>
         </cube-form-group>
       </cube-form>
       <p class="step-content step-content-upload-tips">{{getI18n('contact.tips')}}</p>
@@ -150,11 +151,11 @@
         <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.professionTitle"></head-title>
           <cube-form-item :field="fieldsProfession.professionCode"></cube-form-item>
-          <template
+          <!-- <template
             v-if="professionModel.professionCode === optionsList.professionCodeValue.others"
           >
             <cube-form-item :field="fieldsProfession.professionCodeOther"></cube-form-item>
-          </template>
+          </template> -->
           <template
             v-if="professionModel.professionCode === optionsList.professionCodeValue.employed || professionModel.professionCode === optionsList.professionCodeValue.selfEmployed"
           >
@@ -167,7 +168,10 @@
             <cube-form-item :field="fieldsProfession.workingSeniority"></cube-form-item>
             <cube-form-item :field="fieldsProfession.companyTelePhone"></cube-form-item>
             <!-- 公司地址 -->
-            <cube-form-item :field="fieldsProfession.companyAddress">
+            <cube-form-item 
+              :field="fieldsProfession.companyAddress"
+              v-if="professionModel.areaType !== 3"
+            >
               <cube-textarea
                 v-model="professionModel.companyAddress"
                 :placeholder="fieldsProfession.companyAddress.props.placeholder"
@@ -201,6 +205,7 @@ import {
   IMAGE_REQUEST_LIST,
   AO_NATIONALITY,
 } from "../../../api/params-define";
+import { professionValidator } from '../../online-cn/step-info-contact/validator';
 
 const defaultAddressImgHK = {
   [Address]: IMAGE_REQUEST_LIST[Address],
@@ -214,16 +219,15 @@ export default {
       validity: {},
       valid: undefined,
       msg: "",
-      bankBlur: false, // 银行存款失去焦点
-      stockBlur: false,
-      realBlur: false,
+      // bankBlur: false, // 银行存款失去焦点
+      // stockBlur: false,
+      // realBlur: false,
       defaultContactValue: {},
       defaultProfessionValue: {},
       radioListValue: optionsList.radioListValue,
       model: {
         // 联络信息字段
         email: "", // 邮箱地址
-        educationLevel: "", // 教育程度
         homeRadio: optionsList.radioListValue.hk, // 住宅地址单选
         homeCity: [], // 住宅地址省市区
         homeAddressDetail: "", // 住宅地址省市区详细
@@ -247,7 +251,10 @@ export default {
         contactOtherCity: "", // 选择其他国家市
         contactOtherArea: "", // 选择其他国家区域
         contactTelePhone: "", // 选择其他国家区
+        modeOfCorrespondence: '' //收取节点及书信方式
       },
+      modeOfCorrespondenceWarning: this.getI18n("contact.modeOfCorrespondenceWarning"),
+      
       AddressImgFile: {},
       AddressImgUpload: {},
       AddressImgUploadFiles: defaultAddressImgHK,
@@ -276,23 +283,14 @@ export default {
           },
           trigger: "blur",
         },
-        educationLevel: {
-          type: "select",
-          modelKey: "educationLevel",
-          label: this.getI18n("contact.educationLevel.label"),
-          props: {
-            placeholder: this.getI18n("contact.educationLevel.placeholder"),
-            options: optionsList.educationLevelOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
         homeRadio: {
           type: "select",
           modelKey: "homeRadio",
           label: this.getI18n("contact.homeRadio.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("contact.homeRadio.placeholder"),
             options: optionsList.homeRadioOptions(),
           },
@@ -366,6 +364,9 @@ export default {
           modelKey: "contactRadio",
           label: this.getI18n("contact.contactRadio.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("contact.contactRadio.placeholder"),
             options: optionsList.contactRadioOptions(),
           },
@@ -428,6 +429,24 @@ export default {
           props: {
             placeholder: this.getI18n("contact.contactTelePhone.placeholder"),
             maxlength: 50,
+          },
+          rules: {
+            required: false,
+          },
+          trigger: "blur",
+        },
+        modeOfCorrespondence: {
+          type: "select",
+          modelKey: "modeOfCorrespondence",
+          label: this.getI18n("contact.modeOfCorrespondence.label"),
+          props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            placeholder: this.getI18n(
+              "contact.modeOfCorrespondence.placeholder"
+            ),
+            options: optionsList.modeOfCorrespondenceOptions(),
           },
           rules: {
             required: false,
@@ -808,7 +827,7 @@ export default {
         }
         return Boolean(data[val.key]);
       });
-      return !status.includes(false);
+      return !status.includes(false) && Boolean(data.modeOfCorrespondence);
     },
     // 验证职业类型
     validProfession() {

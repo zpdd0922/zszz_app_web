@@ -2,10 +2,11 @@ import customizeI18n from '@/customize/locale/i18n/zh_CN';
 import commonI18n from '@/main/locale/i18n/zh_CN';
 
 export default {
-    pageName: '个人声明',
+    pageName: '身份披露',
     nextBtn: '下一步',
     other: {
-        title: '身份资料申报',
+        declareTitle: '身份资料申报',
+        greenCardTitle: '美国居民身份申报',
         isAccountOwner: '本人是该账户之最终实益拥有人。',
         otherOwnerName: '姓名',
         otherOwnerCardType: '证件类型',
@@ -74,12 +75,11 @@ export default {
         remove: '删除上条',
 
         isNotUsGreenCardHolder: {
-            title: '是否美国居民',
-            placeholder: '请选择',
+            title: '请选择下列选项之一：',
             usGreenCardHoldStatusOptions: {
-                greenCardHolder: '本人确认，本人就课税目的而言为美国公民或美国居民。',
-                notAmericanBornInUS: '本人确认，本人在美国出生但不再属于美国公民，原因是本人自愿放弃本人的公民身份，并以美国【丧失原有国籍证明】为凭证。',
-                notGreenCardHolder: '本人确认，本人就课税目的而言不是美国公民或者美国居民。'
+                greenCardHolder: '本人就课税目的而言为美国公民或美国居民。',
+                notAmericanBornInUS: '本人在美国出生但不再属于美国公民，原因是本人自愿放弃本人的公民身份，并以美国【丧失原有国籍证明】为凭证。',
+                notGreenCardHolder: '本人就课税目的而言不是美国公民或者美国居民。'
             },
 
         }

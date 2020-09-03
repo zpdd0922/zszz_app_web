@@ -42,7 +42,7 @@
             <cube-radio-group
               position="left"
               :hollow-style="true"
-              :investmentHorizontal="true"
+              :horizontal="true"
               v-model="model.derivative"
               :options="filedsDerivative.derivative.props.options"
             />

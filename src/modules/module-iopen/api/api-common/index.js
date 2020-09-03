@@ -1,5 +1,6 @@
 // import axios from '../axios';
-import { post, postImg } from '../request';
+import { post, postImg, postOption } from '../request';
+import paramsData from '@/main/request/utils/wrap';
 
 export default {
 
@@ -129,7 +130,7 @@ export default {
    * @return JSON { code: integer, message: string, result: {} }
    */
   // getDictionary: data => post('/open_api/get_dictionary', data),
-  getDictionary: data => post('/open_api/get_industry', paramsData.OPTIONS(data)),
+  getDictionary: data => postOption('/open_api/get_industry', data),
 
   /**
    * 是否能参加赠股活动

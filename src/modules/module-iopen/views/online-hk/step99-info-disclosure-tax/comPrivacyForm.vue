@@ -27,7 +27,7 @@
           <cube-radio-group
             position="left"
             :hollow-style="true"
-            :investmentHorizontal="true"
+            :horizontal="true"
             @input="changeOfferNum($event, index)"
             :value="val.offerPrivacyKey"
             :options="[{
