@@ -49,8 +49,8 @@ export default {
             placeholder: '请选择省市区'
         },
         addressDetail: {
-            label: '街道地址',
-            placeholder: '详细地址(楼层/门牌号请写在下方)',
+            label: '详细地址',
+            placeholder: '请填写详细地址信息',
             placeholderOther: '请填写详细地址信息',
         },
         addressNumber: {
@@ -77,8 +77,8 @@ export default {
             label: '区域',
             placeholder: '请输入区域'
         },
-        modeOfCorrespondenceWarning: '若客户选择通过<span>居住地址</span>或<span>通讯地址</span>接收交易确认通知书或账户结单，将收取每月<span>五十元</span>服务费',
-        modeOfCorrespondence: {
+        dStatementReceiveModeWarning: '若客户选择通过<span>居住地址</span>或<span>通讯地址</span>接收交易确认通知书或账户结单，将收取每月<span>五十元</span>服务费',
+        dStatementReceiveMode: {
             label: '收取接单及 书信方式',
             placeholder: '请选择',
             options: {

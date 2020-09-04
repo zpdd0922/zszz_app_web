@@ -1,7 +1,8 @@
 <template>
   <section class="op-guide">
     <template v-if="!openProgress">
-      <base-waiting />
+      123213
+      <!-- <base-waiting /> -->
     </template>
     <template v-else>
       <div class="box">
@@ -13,12 +14,12 @@
         </template>
         <!-- 开户中 -->
         <template v-else-if="openStatus === OPEN_STATUS.PENDING">
-          <template v-if="isAuthing">
+          <!-- <template v-if="isAuthing">
             <com-authing :skin="skin" @click="handleLogout"></com-authing>
           </template>
-          <template v-else>
+          <template v-else> -->
             <com-pending :skin="skin" @click="handleLogout"></com-pending>
-          </template>
+          <!-- </template> -->
         </template>
         <!-- 开户已取消 -->
         <template v-else-if="openStatus === OPEN_STATUS.CANCELED">
@@ -29,7 +30,9 @@
           <com-success :skin="skin" @click="handleLogout"></com-success>
         </template>
         <!-- 开户失败 -->
-        <template v-else-if="openStatus === OPEN_STATUS.FAILED">
+        <template
+          v-else-if="openStatus === OPEN_STATUS.FAILED || openStatus === OPEN_STATUS.FAILED_1 || openStatus === OPEN_STATUS.FAILED_2"
+        >
           <com-fail :skin="skin" @click="onOpenClick"></com-fail>
         </template>
         <!-- 销户 -->

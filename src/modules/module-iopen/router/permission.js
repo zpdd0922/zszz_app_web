@@ -10,7 +10,7 @@ import 'nprogress/nprogress.css';
 
 import router from './index';
 import store from '../store';
-import auth from '@/main/request/utils/auth-icrm';
+import auth from '@/main/request/utils/auth';
 import BroadCast, { BROADCAST_ENUMS } from '@/main/utils/common/broadcast';
 
 BroadCast.onmessage(BROADCAST_ENUMS.LOGIN_EXPRIS, () => {
@@ -33,22 +33,21 @@ router.beforeEach((to, from, next) => {
     next();
   } else {
     // 用户信息
-    const token = auth.getAuthToken();
+    const token = auth.getAuthSession();
     if (token) {
       // 非APP内，检测用户信息是否失效
       next();
     } else {
-      next();
       // 跳转到登录界面
-      // store.commit('updateLoadingStatus', { isLoading: false });
-      // if (from.name !== 'login') {
-      //   NProgress.start();
-      // }
-      // next({
-      //   name: 'login',
-      //   query: { redirect: to.fullPath },
-      //   replace: true
-      // });
+      store.commit('updateLoadingStatus', { isLoading: false });
+      if (from.name !== 'login') {
+        NProgress.start();
+      }
+      next({
+        name: 'login',
+        query: { redirect: to.fullPath },
+        replace: true
+      });
     }
   }
 });

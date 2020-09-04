@@ -32,8 +32,9 @@ export const formatCommitData = (args, normalData = {}) => {
 
   // 用户基本数据
   const userCommonInfo = {
-    isBankrupted: 0, // TODO: 你是否曾经破产或被送达要将你破产的申请[0、否   1是]
-    dStatementReceiveMode: 1, // 日结单及月结单发送方式[0、未知  1、电子邮箱  2、邮寄到住宅地址  3、邮寄到营业地址]
+    // isBankrupted: 0, // TODO: 你是否曾经破产或被送达要将你破产的申请[0、否   1是]
+    openAccountType: 1,
+    openAccountAccessWay: 1,
     // language: 1, // TODO:添加语言
     // phoneNumber: toDBC(args.bankPhoneNum), // 手机号 TODO,缓存数据没有手机号码~~~！！！！
   };
@@ -48,13 +49,12 @@ export const formatCommitData = (args, normalData = {}) => {
     accountType: 1, // 账户类型[0、未知  1、个人账户  2、联名账户   3、公司账户]
     optionsAccUsageScenarios: 1, //证券交易使用场景 [1、互联网交易（默认）   2、全权委托交易]
     futuresAccUsageScenarios: 1, //期货交易使用场景 [1、互联网交易（默认）  2、全权委托交易]
-
     fundAccountType: args.fundAccountType, // 账户类型 1：现金账户 2：融资账户
     isOpenHkStockMarket: Number(accountMkts.includes(1)), // 港股交易 1 同意 or 0 不同意
     isOpenUsaStockMarket: Number(accountMkts.includes(2)) || 0, // 美股交易 1 同意 or 0 不同意
     isOpenOptions: 0, //是否开通期权 [0、不同意    1、同意]
     isOpenFutures: Number(args.isOpenFutures),//是否开通期货 [0、不同意    1、同意]
-    
+
     accountTypeRemarks: '', //账户类型备注
   }
 
@@ -77,8 +77,8 @@ export const formatCommitData = (args, normalData = {}) => {
     signingOrganization: toDBC(args.authority), // 签发机关
     // nation: toDBC(args.nation), // 名族,
     maritalStatus: args.maritalStatus, //婚姻状况
-    countryOfBirth: '', //出生国家
-    placeOfBirth: '', //出生地址
+    placeOfBirth: "1",
+    countryOfBirth: "1",
   };
 
   // 银行卡信息
@@ -97,6 +97,7 @@ export const formatCommitData = (args, normalData = {}) => {
   const infoContact = {
     email: toDBC(args.email.trim()), // 邮箱地址
     educationLevel: args.educationLevel, // 教育程度[0、未知  1、小学   2、中学   3、专上学院   4、大学或以上]
+    dStatementReceiveMode: args.dStatementReceiveMode, // 日结单及月结单发送方式[0、未知  1、电子邮箱  2、邮寄到住宅地址  3、邮寄到营业地址]
 
     // 家庭住址
     familyRepublicName: familyRepublicNameFunc(args), // 住宅地址的国家
@@ -136,7 +137,7 @@ export const formatCommitData = (args, normalData = {}) => {
     // contactAddress: args.contactAddress,
 
     // 職業信息
-    professionCode: args.professionCode === 'OTH'? 7 : args.professionCode, // 职业类型
+    professionCode: args.professionCode === 'OTH' ? 7 : args.professionCode, // 职业类型
     otherProfession: args.professionCode === 'OTH' ? args.professionCodeOther : '', // 其它职业类型
     companyName: toDBC(args.companyName), // 公司名称
     companyAddress: args.companyAddress,
@@ -225,9 +226,6 @@ export const formatCommitData = (args, normalData = {}) => {
   const normal = {
     ...normalData,
     openType: 1, // 1、线上预约开户，2、香港预约开户，2、线下（开户宝）
-    // accessWay: 4, // 开户接入方式[1=H5开户 2=App]
-    // fundAccountType: args.fundAccountType, // 账户类型 1：现金账户 2：融资账户
-    // accountMarkets: accountMkts
   };
 
   const data = {

@@ -22,7 +22,7 @@ export default {
    * 7 开户被拒绝
    * 8 用户取消开户
    */
-  getOpenProgress: data => post('/open_api/processstep', data),
+  getOpenProgress: data => post('/open_api/get_open_progress', data),
 
   /**
    * OCR识别
@@ -30,8 +30,8 @@ export default {
    * @param location
    * @param openType
    */
-  // getOcrData: data => post('/open_api/ocr_by_image', data),
-  getOcrData: data => post('/open_api/ocr', data),
+  getOcrData: data => post('/open_api/ocr_by_image', data),
+  // getOcrData: data => post('/open_api/ocr', data),
 
   /**
    * 身份证唯一性校验 - 大陆开户
@@ -39,8 +39,8 @@ export default {
    * @param name
    * @param cardType : 1
    */
-  // checkIdCard: data => post('/open_api/verify_id_card', data),
-  checkIdCard: data => post('/open_api/rn', data),
+  checkIdCard: data => post('/open_api/verify_id_card', data),
+  // checkIdCard: data => post('/open_api/rn', data),
 
   /**
    * 四要素校验 - 大陆开户
@@ -49,15 +49,15 @@ export default {
    * @param idCard
    * @param name
    */
-  // checkBankCard: data => post('/open_api/verify_bank_card_4e', data),
-  checkBankCard: data => post('/open_api/cardverify', data),
+  checkBankCard: data => post('/open_api/verify_bank_card_4e', data),
+  // checkBankCard: data => post('/open_api/cardverify', data),
 
   /**
    * 邮箱唯一性校验
    * @param email
    */
-  // checkEmail: data => post('/open_api/verify_email', data),
-  checkEmail: data => post('/open_api/emailVerify', data),
+  checkEmail: data => post('/open_api/valid_email', data),
+  // checkEmail: data => post('/open_api/emailVerify', data),
 
   /**
    * 查询手机号是否已绑定
@@ -79,12 +79,12 @@ export default {
   /**
    * 收听语音
    */
-  startPlayRiskAudio: data => post('/open_api/riskstart', data),
+  startPlayRiskAudio: data => post('/open_api/radio_start', data),
 
   /**
    * 暂停语音
    */
-  endPlayRiskAudio: data => post('/open_api/riskend', data),
+  endPlayRiskAudio: data => post('/open_api/radio_end', data),
 
   /**
    * 衍生品开户状态

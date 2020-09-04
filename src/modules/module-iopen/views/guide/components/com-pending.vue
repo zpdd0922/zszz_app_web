@@ -24,7 +24,7 @@
       </div>
     </section>
     <footer class="foot">
-      <cube-button @click="onClick">{{$t("iOpen.guide.pending.btn")}}</cube-button>
+      <cube-button @click="onClick">{{$t("iOpen.guide.btnLogout")}}</cube-button>
     </footer>
   </div>
 </template>

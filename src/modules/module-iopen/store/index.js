@@ -11,7 +11,7 @@ import Vuex from 'vuex';
 import viewLoadModules from '@/main/store/modules/view-load';
 import commonPlugins from '@/main/store/plugins';
 
-import userModules from '@/modules/module-sign-icrm/store/user/';
+import userModules from '@/modules/module-sign/store/user/';
 import openCommonModules from '@/modules/module-iopen/store/common';
 import openCNModules from '@/modules/module-iopen/store/open-cn';
 import openHKModules from '@/modules/module-iopen/store/open-hk';

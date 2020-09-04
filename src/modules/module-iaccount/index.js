@@ -29,7 +29,7 @@ import { BaseFormGroup, BaseFormItem } from '@/main/components/base-forms';
 import { BaseCells, BaseCell, BaseCellHeader, BaseCellBody, BaseCellFooter } from '@/main/components/base-cell';
 
 // 引入項目組件
-// import '@/modules/module-iopen/components/register';
+import '@/modules/module-iaccount/components/register';
 
 // 引入样式
 require('./assets/styles/theme-white.scss');

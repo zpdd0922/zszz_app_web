@@ -4,6 +4,7 @@ import commonI18n from '@/main/locale/i18n/zh_HK';
 export default {
   title: '引導頁',
   contactPre: "如有疑問，請聯繫客服：",
+  btnLogout:"退出登錄",
   progress: {
     ready: '提交申請',
     approve: '資料審核',

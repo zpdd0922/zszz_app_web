@@ -19,7 +19,7 @@ import { setLanguage } from "@/main/locale/helper";
 export default {
   components: { BaseCopyright, HeaderCustom },
   created() {
-    this.setTitle(this.$t("iOpen.common.title"));
+    this.setTitle(this.$t("iAccount.main.pageName"));
     this.checkLogin();
   },
   computed: {
@@ -64,7 +64,7 @@ export default {
     },
     checkLogin() {
       const params = getURLParameters();
-      const userToken = params["user_token"] || "";
+      const userToken = params["sessionId"] || "";
       if (userToken && userToken !== "") {
         const params = {
           certType: 0,

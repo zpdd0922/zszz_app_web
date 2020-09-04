@@ -40,8 +40,8 @@ export default {
             placeholder: '請選擇省市區'
         },
         addressDetail: {
-            label: '街道地址',
-            placeholder: '詳細地址(樓層/門牌號請寫在下方)',
+            label: '詳細地址',
+            placeholder: '請填寫詳細地址信息',
             placeholderOther: '請填寫詳細地址信息',
         },
         addressNumber: {
@@ -68,8 +68,8 @@ export default {
             label: '區域',
             placeholder: '請輸入區域'
         },
-        modeOfCorrespondenceWarning: '若客戶選擇通過<span>居住地址</span>或<span>通訊地址</span>接收交易確認通知書或帳戶結單，將收取每月<span>五十元</span>服務費',
-        modeOfCorrespondence: {
+        dStatementReceiveModeWarning: '若客戶選擇通過<span>居住地址</span>或<span>通訊地址</span>接收交易確認通知書或帳戶結單，將收取每月<span>五十元</span>服務費',
+        dStatementReceiveMode: {
             label: `收取接單及 書信方式`,
             placeholder: '請選擇',
             options: {
@@ -91,7 +91,7 @@ export default {
                 housewife: '家庭主婦',
                 student: '學生',
                 umemployed: '待業',
-                others: '其他',
+                other: '其他',
             }
         },
         professionCodeOther: { label: '其他就業情況', placeholder: '請填寫' },
