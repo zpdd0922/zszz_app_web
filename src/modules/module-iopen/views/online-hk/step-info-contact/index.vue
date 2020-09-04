@@ -151,11 +151,11 @@
         <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.professionTitle"></head-title>
           <cube-form-item :field="fieldsProfession.professionCode"></cube-form-item>
-          <!-- <template
-            v-if="professionModel.professionCode === optionsList.professionCodeValue.others"
+          <template
+            v-if="professionModel.professionCode === 'OTH'"
           >
             <cube-form-item :field="fieldsProfession.professionCodeOther"></cube-form-item>
-          </template> -->
+          </template>
           <template
             v-if="professionModel.professionCode === optionsList.professionCodeValue.employed || professionModel.professionCode === optionsList.professionCodeValue.selfEmployed"
           >
@@ -424,7 +424,7 @@ export default {
         },
         contactTelePhone: {
           type: "input",
-          modelKey: "homeTelePhone",
+          modelKey: "contactTelePhone",
           label: this.getI18n("contact.contactTelePhone.label"),
           props: {
             placeholder: this.getI18n("contact.contactTelePhone.placeholder"),

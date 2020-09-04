@@ -70,7 +70,7 @@ export default {
         },
         modeOfCorrespondenceWarning: '若客户选择通过<span>居住地址</span>或<span>通讯地址</span>接收交易确认通知书或账户结单，将收取每月<span>五十元</span>服务费',
         modeOfCorrespondence: {
-            label: '收取接单及书信方式',
+            label: '收取接单及 书信方式',
             placeholder: '请选择',
             options: {
                 email: '电邮',
@@ -88,7 +88,7 @@ export default {
                 employed: '受雇',
                 selfEmployed: '自雇',
                 retired: '退休',
-                // others: '其他',
+                other: '其他',
                 housewife: '家庭主妇',
                 student: '学生',
                 umemployed: '待业',

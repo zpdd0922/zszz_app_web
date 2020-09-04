@@ -3,21 +3,20 @@
  * @param {*} args
  */
 export const accountMarkets = (args) => {
-    const { fundAccountType, fundAccountCashMarkets, fundAccountMarginMarkets } = args;
-    
+    const { isOpenHk, isOpenUs, isOpenOptions, isOpenFutures } = args;
+
     let selectedMkts = [];
-    if (fundAccountType === 1) {
-        selectedMkts = fundAccountCashMarkets;
+    if (Number(isOpenHk) === 1) {
+        selectedMkts.push(1);
     }
-    if (fundAccountType === 2) {
-        selectedMkts = fundAccountMarginMarkets;
+    if (Number(isOpenUs) === 1) {
+        selectedMkts.push(2);
     }
-
+    if (Number(isOpenOptions) === 1) {
+        selectedMkts.push(3);
+    }
+    if (Number(isOpenFutures) === 1) {
+        selectedMkts.push(4);
+    }
     return selectedMkts;
-
-    // const isOpenHkStockMarket = selectedMkts.includes('1') ? 1 : 0;
-    // const isOpenUsaStockMarket = selectedMkts.includes('2') ? 1 : 0;
-    // const northTrade = selectedMkts.includes('3') ? 1 : 0;
-
-    // return { northTrade, isOpenHkStockMarket, isOpenUsaStockMarket };
 };

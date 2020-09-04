@@ -70,7 +70,7 @@ export default {
         },
         modeOfCorrespondenceWarning: '若客戶選擇通過<span>居住地址</span>或<span>通訊地址</span>接收交易確認通知書或帳戶結單，將收取每月<span>五十元</span>服務費',
         modeOfCorrespondence: {
-            label: '收取接單及書信方式',
+            label: `收取接單及 書信方式`,
             placeholder: '請選擇',
             options: {
                 email: '電郵',
@@ -91,7 +91,7 @@ export default {
                 housewife: '家庭主婦',
                 student: '學生',
                 umemployed: '待業',
-                // others: '其他',
+                others: '其他',
             }
         },
         professionCodeOther: { label: '其他就業情況', placeholder: '請填寫' },

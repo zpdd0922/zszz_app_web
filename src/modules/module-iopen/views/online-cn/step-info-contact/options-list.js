@@ -16,6 +16,7 @@ export const professionCodeValue = {
   housewife: 4,
   student: 5,
   umemployed: 6,
+  other: 'OTH'
 };
 
 // 學歷
@@ -52,6 +53,10 @@ export const professionCodeOptions = () => [
   {
     value: professionCodeValue.umemployed,
     text: getStepI18nValue("infoContact", "profession.professionCode.options.umemployed"),
+  },
+  {
+    value: professionCodeValue.other,
+    text: getStepI18nValue("infoContact", "profession.professionCode.options.other"),
   },
 ];
 

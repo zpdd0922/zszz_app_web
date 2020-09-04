@@ -76,7 +76,6 @@ export default {
         // actId, // 活动ID
         openType: 1 // 1、线上预约开户，2、线下（开户宝）3、香港预约开户
       };
-
       // 扫描信息 -- 线上开户，且是APP环境内，需要传递后台
       const paramsSt = { infoSt: JSON.stringify(this.openSt) };
       const params = UserAge.isApp()

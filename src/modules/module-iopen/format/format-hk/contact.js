@@ -394,12 +394,12 @@ export const capitalSource = (args) => {
  */
 export const propertyType = (args) => {
   const validArray = [
-    { key: 'allCheck', valueKey: 'allValue', type: 0 },
-    { key: 'realCheck', valueKey: 'realValue', type: 1 }
+    { key: 'totalAssetsCheck', valueKey: 'totalAssets', type: 0 },
+    // { key: 'realCheck', valueKey: 'realValue', type: 1 }
   ];
   let dataArray = [];
   validArray.forEach((val, idx) => {
-    if (args[val.key]) {
+  if (args[val.key]) {
       dataArray.push({ propertyType: val.type, propertyAmount: args[val.valueKey] });
     }
   });

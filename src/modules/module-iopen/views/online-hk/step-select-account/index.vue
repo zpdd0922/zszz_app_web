@@ -33,7 +33,7 @@
           <head-title :title="contentTitle.otherAccounts"></head-title>
           <cube-form-item :field="filedsAccounts.isOpenHk"></cube-form-item>
           <cube-form-item :field="filedsAccounts.isOpenUs"></cube-form-item>
-          <cube-form-item :field="filedsAccounts.isOpenOptions"></cube-form-item>
+          <!-- <cube-form-item :field="filedsAccounts.isOpenOptions"></cube-form-item> -->
           <cube-form-item :field="filedsAccounts.isOpenFutures"></cube-form-item>
         </cube-form-group>
         <!-- <div class="margin-bottom"></div>

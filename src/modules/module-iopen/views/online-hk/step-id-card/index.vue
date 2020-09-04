@@ -251,6 +251,9 @@ export default {
           modelKey: "idKindKey",
           label: this.getI18n("idKindKey.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("idKindKey.placeholder"),
             options: [
               {
@@ -281,6 +284,9 @@ export default {
           modelKey: "nationType",
           label: "国家/地区",
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: "请选择国家/地区",
             options: [],
           },

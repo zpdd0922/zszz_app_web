@@ -3,8 +3,7 @@ export default {
     experience: {
         title: '投资年资',
         yearOptions: {
-            noExperience: '没有经验',
-            mtTenyears: '大于10年',
+            noExperience: '無經驗',
         },
         stocksInvestmentExperience: { label: '股票', placeholder: '请选择' },
         warrantsInvestmentExperience: { label: '衍生权证', placeholder: '请选择' },
