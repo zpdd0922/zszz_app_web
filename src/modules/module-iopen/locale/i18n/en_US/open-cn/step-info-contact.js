@@ -49,8 +49,8 @@ export default {
             placeholder: '請選擇省市區'
         },
         addressDetail: {
-            label: '街道地址',
-            placeholder: '詳細地址(樓層/門牌號請寫在下方)',
+            label: '詳細地址',
+            placeholder: '請填寫詳細地址信息',
             placeholderOther: '請填寫詳細地址信息',
         },
         addressNumber: {

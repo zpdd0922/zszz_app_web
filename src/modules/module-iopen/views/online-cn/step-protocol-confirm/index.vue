@@ -159,32 +159,13 @@ export default {
         } = getURLParameters();
 
         const normalData = {
-          actId: activeId
-          // activeId,
-          // channelId,
-          // inviteId,
-          // language: this.$t("customize.languageValue"),
+          actId: activeId,
+          sourceChannelId: channelId,
+          inviterId: inviteId,
+          lang: this.$t("customize.languageValue"),
         };
 
         const data = this.formatCommitData(this.openInfo,normalData);
-
-        // const paramsInfo = {
-        //   // actId, // 活动ID
-        //   openType: 1, // 1、线上预约开户，2、香港预约开户，2、线下（开户宝）
-        //   accessWay: 1, // 开户接入方式: 1:H5开户 2:APP开户
-        //   accountMarkets: [], // 账户类型：1：港股 2：美股 3：中华通
-        //   accountMarkets: [], // 账户类型：1：港股 2：美股 3：中华通
-        //   accountType: 1, // 账户类型 1：现金账户 2：融资账户
-        //   info: data // 表单信息
-        // };
-
-        // 扫描信息 -- 线上开户，且是APP环境内，需要传递后台
-        // const paramsSt = { infoSt: JSON.stringify(this.openSt) };
-        // const params = UserAge.isApp()
-        //   ? Object.assign({}, paramsInfo, paramsSt)
-        //   : paramsInfo;
-
-        console.log(data);
 
         this.toCommitAllData(data).then((res) => {
           toast({

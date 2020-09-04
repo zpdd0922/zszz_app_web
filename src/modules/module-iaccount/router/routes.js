@@ -5,12 +5,12 @@ const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iacc
 const routes = [
   {
     path: "/iaccount",
-    // redirect: { name: 'iaccountHome' },
+    redirect: { name: 'iaccountHome' },
     component: () => import(/* webpackChunkName:"iaccount-common" */ `../views/layout.vue`),
     children: [
       // 主页面
       {
-        path: '/home',
+        path: 'home',
         name: 'iaccountHome',
         meta: {
           title: '首页',

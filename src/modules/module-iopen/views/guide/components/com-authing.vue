@@ -36,7 +36,7 @@
       </div>
     </section>
     <footer class="foot">
-      <cube-button @click="onClick">{{$t("iOpen.guide.pending.btn")}}</cube-button>
+      <cube-button @click="onClick">{{$t("iOpen.guide.btnLogout")}}</cube-button>
     </footer>
     <!-- <footer class="foot" v-if="isAuthWaiting">
       <cube-button @click="onClick">{{btnContent}}</cube-button>

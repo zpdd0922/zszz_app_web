@@ -59,7 +59,7 @@
             <cube-form-item :field="fieldsContact.homeAddressDetail"></cube-form-item>
             <template v-if="model.homeRadio !== optionsList.radioListValue.oth">
               <!-- 门牌号 -->
-              <cube-form-item :field="fieldsContact.homeAddressNumber"></cube-form-item>
+              <!-- <cube-form-item :field="fieldsContact.homeAddressNumber"></cube-form-item> -->
             </template>
           </template>
           <cube-form-item :field="fieldsContact.homeTelePhone"></cube-form-item>
@@ -120,13 +120,13 @@
 
             <template v-if="model.contactRadio !== 3">
               <!-- 门牌号 -->
-              <cube-form-item :field="fieldsContact.contactAddressNumber"></cube-form-item>
+              <!-- <cube-form-item :field="fieldsContact.contactAddressNumber"></cube-form-item> -->
             </template>
             <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
           </template>
-          <p class="tips" v-html="modeOfCorrespondenceWarning"></p>
+          <p class="tips" v-html="dStatementReceiveModeWarning"></p>
           <!-- 收取节单方式 -->
-          <cube-form-item :field="fieldsContact.modeOfCorrespondence"></cube-form-item>
+          <cube-form-item :field="fieldsContact.dStatementReceiveMode"></cube-form-item>
         </cube-form-group>
       </cube-form>
       <div class="margin-bottom"></div>
@@ -225,9 +225,9 @@ export default {
         contactOtherCity: "", // 选择其他国家市
         contactOtherArea: "", // 选择其他国家区域
         contactTelePhone: "", // 选择其他国家区
-        modeOfCorrespondence: '' //收取节点及书信方式
+        dStatementReceiveMode: '' //收取节点及书信方式
       },
-      modeOfCorrespondenceWarning: this.getI18n("contact.modeOfCorrespondenceWarning"),
+      dStatementReceiveModeWarning: this.getI18n("contact.dStatementReceiveModeWarning"),
       // 职业类型字段
       professionModel: {
         professionCode: 0, // 职业类型选择
@@ -409,18 +409,18 @@ export default {
           },
           trigger: "blur",
         },
-        modeOfCorrespondence: {
+        dStatementReceiveMode: {
         type: "select",
-        modelKey: "modeOfCorrespondence",
-        label: this.getI18n("contact.modeOfCorrespondence.label"),
+        modelKey: "dStatementReceiveMode",
+        label: this.getI18n("contact.dStatementReceiveMode.label"),
         props: {
           title: this.$t("common.cubeComponents.select.title"),
           cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
           confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
           placeholder: this.getI18n(
-            "contact.modeOfCorrespondence.placeholder"
+            "contact.dStatementReceiveMode.placeholder"
           ),
-          options: optionsList.modeOfCorrespondenceOptions(),
+          options: optionsList.dStatementReceiveModeOptions(),
         },
         rules: {
           required: false,
@@ -801,7 +801,7 @@ export default {
         }
         return Boolean(data[val.key]);
       });
-      return !status.includes(false) && Boolean(data.modeOfCorrespondence);
+      return !status.includes(false) && Boolean(data.dStatementReceiveMode);
     },
     // 验证职业类型
     validProfession() {

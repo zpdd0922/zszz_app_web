@@ -84,14 +84,12 @@
               ></cube-select>
             </div>
           </div>
-        </cube-form-group> -->
+        </cube-form-group>-->
         <div class="margin-bottom"></div>
         <cube-form-group class="step-content step-content-derivative custom-form-group">
           <head-title :title="titleValues.derivative"></head-title>
           <p class="derivative-item-content">{{getI18n("derivative.derivative")}}</p>
-          <cube-form-item :field="filedsDerivative.derivative">
-        
-          </cube-form-item>
+          <cube-form-item :field="filedsDerivative.derivative"></cube-form-item>
           <template v-if="isShowDerivative">
             <!-- 衍生品课程学习 -->
             <cube-form-item :field="filedsDerivative.derivativeCourse"></cube-form-item>
@@ -149,8 +147,8 @@ export default {
         totalAssets: "", // 净资产數值
         residence: "", //住房产权
         residenceOther: "", //其他住房产权
-      // validity: {},
-      // valid: undefined,
+        // validity: {},
+        // valid: undefined,
         // totalAssets: true, // 净资产選擇框
         // investmentHorizon: "", // 投资年期
         // realCheck: false, // 不动产选择框
@@ -221,6 +219,8 @@ export default {
         capital: {
           type: "checkbox-group",
           modelKey: "capital",
+          colNum: 3,
+          horizontal: true,
           props: {
             options: optionsList.capitalOptions(),
             shape: "square",
@@ -447,8 +447,7 @@ export default {
     },
     // 验证提交按钮
     submitStatus() {
-      const status =
-        this.validCapital && this.validDerivative;
+      const status = this.validCapital && this.validDerivative;
       return !status;
     },
   },
@@ -490,17 +489,17 @@ export default {
       this.valid = result.valid;
     },
     // 获取后台数据字典
-  //   async fetchDataDesin() {
-  //     const result = await this.$store.dispatch(
-  //       "getDictionary",
-  //       AO_INVEST_TARGET
-  //     );
-  //     // this.model.investTarget = result.map(v => v.value)
-  //     this.fieldsFinance.investTarget.props.options = result.map((res) => ({
-  //       text: res.name,
-  //       value: res.value,
-  //     }));
-  //   },
+    //   async fetchDataDesin() {
+    //     const result = await this.$store.dispatch(
+    //       "getDictionary",
+    //       AO_INVEST_TARGET
+    //     );
+    //     // this.model.investTarget = result.map(v => v.value)
+    //     this.fieldsFinance.investTarget.props.options = result.map((res) => ({
+    //       text: res.name,
+    //       value: res.value,
+    //     }));
+    //   },
   },
   watch: {
     "model.capital"(newVal, oldVal) {

@@ -4,7 +4,7 @@ export const contactValidator = [
   { key: 'homeRadio' },
   { key: 'homeCity' },
   { key: 'homeAddressDetail' },
-  { key: 'homeAddressNumber' },
+  // { key: 'homeAddressNumber' },
   { key: 'homeOtherCountry' },
   { key: 'homeOtherProvince' },
   { key: 'homeOtherCity' },
@@ -17,7 +17,7 @@ export const contactValidator = [
   { key: 'contactOtherCity' },
   { key: 'contactOtherArea' },
   { key: 'contactAddressDetail' },
-  { key: 'contactAddressNumber' },
+  // { key: 'contactAddressNumber' },
   { key: 'otherContactRepublic' } 
 ];
 

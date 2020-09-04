@@ -107,8 +107,8 @@ export const workingSeniorityOptions = () => [
 ];
 
 // 收取节点及书信方式
-export const modeOfCorrespondenceOptions = () => [
-  { text:  getStepI18nValue("infoContact", "contact.modeOfCorrespondence.options.email"), value: 1},
-  { text:  getStepI18nValue("infoContact", "contact.modeOfCorrespondence.options.residentalAddress"), value: 2},
-  { text:  getStepI18nValue("infoContact", "contact.modeOfCorrespondence.options.correspondenceAddress"), value: 3},
+export const dStatementReceiveModeOptions = () => [
+  { text:  getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.email"), value: 1},
+  { text:  getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.residentalAddress"), value: 2},
+  { text:  getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.correspondenceAddress"), value: 3},
 ]

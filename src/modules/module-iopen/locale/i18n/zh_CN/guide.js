@@ -4,6 +4,7 @@ import commonI18n from '@/main/locale/i18n/zh_CN';
 export default {
   title: '引导页',
   contactPre: "如有疑问，请联系客服：",
+  btnLogout:"退出登录",
   progress: {
     ready: '提交申请',
     approve: '资料审核',
