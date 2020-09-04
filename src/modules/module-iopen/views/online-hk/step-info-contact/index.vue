@@ -96,7 +96,8 @@
             </cube-form-item>
 
             <!-- 联系地址选择其他国家 -->
-            <template v-if="model.contactRadio === optionsList.professionCodeValue.oth">
+            <!-- <template v-if="model.contactRadio === optionsList.professionCodeValue.oth"> -->
+            <template v-else>
               <cube-form-item :field="fieldsContactOther.contactOhterCountry"></cube-form-item>
               <template v-if="model.contactOhterCountry === 'OTH'">
                 <cube-form-item
@@ -852,7 +853,7 @@ export default {
           }
           return Boolean(item);
         } else if (
-          data.professionCode === this.optionsList.professionCodeValue.others
+          data.professionCode === 'OTH'
         ) {
           return !!(
             data.professionCodeOther && data.professionCodeOther.trim().length
