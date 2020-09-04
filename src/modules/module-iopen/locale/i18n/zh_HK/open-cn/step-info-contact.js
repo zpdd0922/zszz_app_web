@@ -100,7 +100,7 @@ export default {
                 housewife: '家庭主婦',
                 student: '學生',
                 umemployed: '待業',
-                // others: '其他',
+                other: '其他',
             }
         },
         professionCodeOther: { label: '其他就業情況', placeholder: '請填寫' },
