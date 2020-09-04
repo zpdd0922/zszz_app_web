@@ -164,6 +164,7 @@ export default {
         };
 
         const data = this.formatCommitData(this.openInfo, normalData);
+        console.log(data);
 
         // const paramsInfo = {
         //   // actId, // 活动ID

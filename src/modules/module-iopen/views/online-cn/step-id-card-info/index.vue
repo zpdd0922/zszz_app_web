@@ -323,6 +323,7 @@ export default {
         step: this.step,
         info: this.model,
       };
+      console.log(params);
       this.saveCacheInfo(params).then(() => {
         this.$router.push({ name: this.nextStep });
       });

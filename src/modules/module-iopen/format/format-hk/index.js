@@ -49,11 +49,13 @@ export const formatCommitData = (args, normalData = {}) => {
     optionsAccUsageScenarios: 1, //证券交易使用场景 [1、互联网交易（默认）   2、全权委托交易]
     futuresAccUsageScenarios: 1, //期货交易使用场景 [1、互联网交易（默认）  2、全权委托交易]
 
-    fundAccountType: args.accountType, // 账户类型 1：现金账户 2：融资账户
-    isOpenHkStockMarket: accountMkts.isOpenHkStockMarket, // 港股交易 1 同意 or 0 不同意
-    isOpenUsaStockMarket: accountMkts.isOpenUsaStockMarket || 0, // 美股交易 1 同意 or 0 不同意
+    fundAccountType: args.fundAccountType, // 账户类型 1：现金账户 2：融资账户
+    isOpenHkStockMarket: Number(accountMkts.includes(1)), // 港股交易 1 同意 or 0 不同意
+    isOpenUsaStockMarket: Number(accountMkts.includes(2)) || 0, // 美股交易 1 同意 or 0 不同意
     isOpenOptions: Number(args.isOpenOptions), //是否开通期权 [0、不同意    1、同意]
     isOpenFutures: Number(args.isOpenFutures),//是否开通期货 [0、不同意    1、同意]
+    
+    accountTypeRemarks: '',//账户类型备注
   }
 
   // 用户身份信息
@@ -73,6 +75,9 @@ export const formatCommitData = (args, normalData = {}) => {
     idCardAddress: toDBC(args.addressValue), // 身份证地址
     idCardValidDateStart: args.dateStartValue, // 生效日期
     idCardValidDateEnd: args.dateEndValue, // 失效日期
+    maritalStatus: args.maritalStatus, //婚姻状况[1=未婚 2=已婚 3=离婚 4=鳏寡]
+    placeOfBirth: '',
+    countryOfBirth: '',
   };
 
   // 银行卡信息 - 产品v1.7 去除香港银行卡表单信息
@@ -120,21 +125,23 @@ export const formatCommitData = (args, normalData = {}) => {
     contactCityName: contactNameSplit(args, 1), // 通讯地址城市
     contactCountyName: contactNameSplit(args, 2), // 通讯地址区域
     contactDetailAddress: toDBC(contactDetailType(args)), // 通讯地址详细
-    contactPhone: contactPhone(args), // 住址电话
+    phoneNumber: contactPhone(args), // 住址电话
 
     // 通讯地址(新)
     // familyAddress: args.contactAddress,
     // contactAddress: args.contactAddress,
 
     // 職業信息
-    professionCode: args.professionCode, // 职业类型
-    otherProfession: args.professionCode === professionCodeValue.others ? args.professionCodeOther : '', // 其它职业类型
+    professionCode: args.professionCode === 'OTH'? 7 : args.professionCode, // 职业类型
+    otherProfession: args.professionCode === 'OTH' ? args.professionCodeOther : '', // 其它职业类型
     companyName: toDBC(args.companyName), // 公司名称
     companyAddress: args.companyAddress,
     companyPhoneNumber: companyPhoneNumber(args), // 办公室电话
     industryRange: args.industryRange, // 所属行业
     workingSeniority: args.workingSeniority, // 从业年限[0、未知  1、1-2年   2、2-5年   3、5-10年   4、>10年]
     jobPosition: args.jobPosition, // 职位级别
+    freelanceCode: 0,//自由职业细化类型
+    freelanceOther: args.professionCode === 'OTH' ? args.professionCodeOther : '',// 自由职业
   };
 
   const infoDisclosure = {
@@ -145,19 +152,22 @@ export const formatCommitData = (args, normalData = {}) => {
   const infoDeclare = {
     isAllowProvidePrivacy: Number(args.isAllowProvidePrivacy), // 同意 or 不同意
     northTrade: Number(args.northTrade), // 北向交易 同意 or 不同意
-    taxationInfo: taxInformation(args) // 个人税务列表
+    taxationInfo: taxInformation(args), // 个人税务列表
+    fatca: args.isNotUsGreenCardHolder //是否是美国居民[1=不是 2=美国出生但不是 3=是美国人]
   };
 
   // 资产相关信息
   // TODO: 投资目标选择其他的逻辑处理
   const infoFinance = {
     annualIncome: args.income, // 年收入
-    investmentHorizon: args.investmentHorizon, // 投資年期
+    investmentHorizon: args.investmentHorizon || 0, // 投資年期
     propertyType: propertyType(args), // 财产种类（净资产）
     capitalSource: capitalSourceNew(args), // 资金来源
     investTarget: [args.investTarget], // 投资目标
-    investTargetOther: '',
+    investTargetOther: args.investTargetOther,// 其他投资目的
     // investTargetOther: args.investTarget.includes('4') && args.investTargetOther ? args.investTargetOther : '', // 其他投资目标
+    residence: args.residence, //住宿选项 [0=无 1=租用物业 2=自制物业 3=按揭物业 4=公司宿舍 5=与家人同住 6=其他]
+    otherResidence: args.residenceOther, // 住宿其他描述
 
     isTradedDerivativeProducts: args.derivative, // 衍生产品交易
     isKnowDerivativeProducts: args.derivative, // 是否了解衍生产品
@@ -173,7 +183,7 @@ export const formatCommitData = (args, normalData = {}) => {
     financingInstitutionWorkExperienceTypeOther: '',
 
     // 是否在过去三年曾买卖过至少五次任何衍生产品的交易
-    isTradedDerivativeProducts: args.derivative ? Number(args.derivativeTrade) : '',
+    isTradedDerivativeProducts: args.derivative ? Number(args.derivativeTrade) : 0,
   };
 
   const infoExperience = {
@@ -181,17 +191,18 @@ export const formatCommitData = (args, normalData = {}) => {
     warrantsInvestmentExperienceType: args.warrantsInvestmentExperience, // 认证股权经验
     futuresInvestmentExperienceType: args.futuresInvestmentExperience, // 期货投资经验
     optionsExperience: args.optionsExperience,   // 期权投资经验 [0、未知 1、没有  2、<1年   3、 1-2年   4、>2年]
-    unitTrustsExperience: args.unitTrustsExperience, // 单位信托基金/互惠基金[0、未知 1、没有  2、<1年   3、 1-2年   4、>2年]
+    ccbcExperience: args.CCBCExperience, //牛熊证投资经验
+    unitTrustsExperience: args.unitTrustsExperience || 0, // 单位信托基金/互惠基金[0、未知 1、没有  2、<1年   3、 1-2年   4、>2年]
     otherProductsExperience: args.otherProductsExperience,   //其它投资产品 [0、未知  1、<10年  2、10-40年   3、 >40年]
     otherProductsName: args.otherProductsExperience && args.otherProductsExperience !== 0 ? args.otherProductsName : '', // 其它投资产品名称
 
     // TODO:互斥條件處理？？
-    tradeWarrantsFrequency: args.tradeWarrantsFrequency,   // //认股证交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
-    tradeStockFrequency: args.tradeStockFrequency,//股票交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
-    tradeOptionsFrequency: args.tradeOptionsFrequency, //期权交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
-    tradeFuturesFrequency: args.tradeFuturesFrequency, //期货交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
-    tradeUnitTrustsFrequency: args.tradeUnitTrustsFrequency, //单位信托基金/互惠基金交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
-    tradeOtherProductsFrequency: args.tradeOtherProductsFrequency, //其它投资产品交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
+    // tradeWarrantsFrequency: args.tradeWarrantsFrequency,   // //认股证交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
+    // tradeStockFrequency: args.tradeStockFrequency,//股票交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
+    // tradeOptionsFrequency: args.tradeOptionsFrequency, //期权交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
+    // tradeFuturesFrequency: args.tradeFuturesFrequency, //期货交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
+    // tradeUnitTrustsFrequency: args.tradeUnitTrustsFrequency, //单位信托基金/互惠基金交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
+    // tradeOtherProductsFrequency: args.tradeOtherProductsFrequency, //其它投资产品交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
   };
 
 
@@ -223,5 +234,5 @@ export const formatCommitData = (args, normalData = {}) => {
     info: JSON.stringify(formData),
   };
   return data;
-
+  // return formData
 };

@@ -88,7 +88,7 @@ export default {
                 employed: '受雇',
                 selfEmployed: '自雇',
                 retired: '退休',
-                // others: '其他',
+                other: '其他',
                 housewife: '家庭主妇',
                 student: '学生',
                 umemployed: '待业',

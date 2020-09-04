@@ -1,6 +1,5 @@
 <template>
   <op-wrap :isDisabled="isDisabled" :handleBefore="handleBefore" @handleNext="handleNext">
-    <p @click="showModel">123</p>
     <div class="olcn-step olcn-step-info-contact">
       <!-- 联系信息 -->
       <cube-form :model="model">
@@ -125,7 +124,7 @@
             </template>
             <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
           </template>
-          <p @click="showmsg" class="tips" v-html="modeOfCorrespondenceWarning"></p>
+          <p class="tips" v-html="modeOfCorrespondenceWarning"></p>
           <!-- 收取节单方式 -->
           <cube-form-item :field="fieldsContact.modeOfCorrespondence"></cube-form-item>
         </cube-form-group>
@@ -136,11 +135,11 @@
         <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.professionTitle"></head-title>
           <cube-form-item :field="fieldsProfession.professionCode"></cube-form-item>
-          <!-- <template
-            v-if="professionModel.professionCode === optionsList.professionCodeValue.others"
+          <template
+            v-if="professionModel.professionCode === 'OTH'"
           >
             <cube-form-item :field="fieldsProfession.professionCodeOther"></cube-form-item>
-          </template> -->
+          </template>
           <template
             v-if="professionModel.professionCode === optionsList.professionCodeValue.employed || professionModel.professionCode === optionsList.professionCodeValue.selfEmployed"
           >
@@ -231,8 +230,8 @@ export default {
       modeOfCorrespondenceWarning: this.getI18n("contact.modeOfCorrespondenceWarning"),
       // 职业类型字段
       professionModel: {
-        professionCode: "", // 职业类型选择
-        professionCodeOther: "", // 职业类型选择
+        professionCode: 0, // 职业类型选择
+        professionCodeOther: "", // 其他职业
         companyName: "", // 公司名称
         companyAddress: "", // 公司地址详细
         companyTelePhone: "", // 辦公室電話
@@ -873,12 +872,6 @@ export default {
     },
   },
   methods: {
-    showModel() {
-      console.log(this.model)
-    },
-    showmsg() {
-      console.log(this.model)
-    },
     getI18n(key, type = "") {
       return this.getStepI18nValue("infoContact", key);
     },

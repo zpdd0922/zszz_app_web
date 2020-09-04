@@ -118,6 +118,7 @@ import validate from "@/main/utils/format/validate";
 const defaultModel = {
   income: 1,
   totalAssets: 1,
+  totalAssetsCheck: 1, // 净资产數值
   capital: [1],
   investTarget: 1,
   residence: 1,
@@ -144,6 +145,7 @@ export default {
         capitalTxt: "",
         investTarget: "",
         investTargetOther: "",
+        totalAssetsCheck: "", // 净资产數值
         totalAssets: "", // 净资产數值
         residence: "", //住房产权
         residenceOther: "", //其他住房产权
