@@ -69,7 +69,7 @@ import {
 } from "@/modules/module-iopen/enums/open-progress";
 
 const envConfig = window._GLOBAL_ENV_CONFIG || {};
-const selfURL = envConfig.selfURL;
+const selfURL = envConfig.webIOpen;
 
 export default {
   components: {
@@ -140,7 +140,7 @@ export default {
       const { path, name } = urlInfo;
       // 自定义APP内，且需要新开窗口，使用完整路径
       if (this.UaInfo.isApp() && this.urlObj["isnew"] === "y") {
-        const url = `${selfURL}index.html#/opa/${path}`;
+        const url = `${selfURL}#/opa/${path}`;
         const opts = {
           url,
           bottomTab: false, // 是否需要底部导航栏  //仅限于首页

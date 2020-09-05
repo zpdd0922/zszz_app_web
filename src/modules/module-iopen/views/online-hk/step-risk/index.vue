@@ -45,10 +45,10 @@
         <div class="square">
           <cube-checkbox v-model="model.riskAgreement" shape="square">
             {{getI18n('agreement.linkStart')}}
-            <span
+            <!-- <span
               @click.stop="handleToAgreement"
               class="base-links"
-            >{{getI18n('agreement.linkContent')}}</span>
+            >{{getI18n('agreement.linkContent')}}</span> -->
             {{getI18n('agreement.linkEnd')}}
           </cube-checkbox>
         </div>

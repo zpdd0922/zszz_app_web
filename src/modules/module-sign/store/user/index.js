@@ -64,7 +64,16 @@ const actions = {
         });
     });
   },
-
+    /**
+   * APP内模拟登录 --> 直接获取用户信息
+   */
+  appLogin({ commit, state }, params) {
+    console.log(12312, params);
+    return new Promise((resolve, reject) => {
+      commit(types.SET_USER_INFO, { result: params })
+      resolve()
+    })
+  },
   /**
    * 登出 --> 后台
    */

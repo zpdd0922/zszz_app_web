@@ -166,17 +166,17 @@ export default {
         };
 
         const data = this.formatCommitData(this.openInfo,normalData);
-        console.log(data);
-        // this.toCommitAllData(data).then((res) => {
-        //   toast({
-        //     type: "correct",
-        //     txt: this.getI18n("success"),
-        //     time: 1000,
-        //     callback: () => {
-        //       this.$router.push({ name: "opaGuide" });
-        //     },
-        //   });
-        // });
+
+        this.toCommitAllData(data).then((res) => {
+          toast({
+            type: "correct",
+            txt: this.getI18n("success"),
+            time: 1000,
+            callback: () => {
+              this.$router.push({ name: "opaGuide" });
+            },
+          });
+        });
       }
     },
   },

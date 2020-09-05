@@ -56,7 +56,6 @@
         <div class="cube-form-field">
           <cube-radio-group
             position="left"
-            @input="changeNoOfferNum($event, index)"
             :value="val.noOfferPrivacyKey"
           >
             <cube-radio

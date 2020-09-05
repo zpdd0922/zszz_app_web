@@ -3,10 +3,10 @@ export default {
     defaultNavigator: '',
     languageValue: '1',
     company: {
-      name: '小牛犇腾',
-      securityName: '小牛犇腾',
-      securityFullName: '深圳市小牛犇腾网络科技有限公司',
-      copyright: 'Copyright © 策略大师 2020',
+      name: '立橋證券',
+      securityName: '立橋證券',
+      securityFullName: '立橋證券有限公司',
+      copyright: 'Copyright © 立橋證券 2020',
       telePhone: "+852 3150 7728"
     }
   }

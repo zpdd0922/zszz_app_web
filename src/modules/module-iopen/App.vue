@@ -1,9 +1,11 @@
 <template>
-  <div id="root" class="root-wrap">
-    <header-custom :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]" />
+  <div id="root" :class="['root-wrap', {'root-wrap-app': isApp}]">
+    <header-custom
+      :isShow="!isApp"
+      :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]"
+    />
     <template v-if="isChecking">
-      342432
-      <!-- <base-waiting /> -->
+      <base-waiting />
     </template>
     <template v-else>
       <router-view v-if="isRouterAlive" />
@@ -24,6 +26,9 @@ export default {
     // this.checkLogin();
   },
   computed: {
+    isApp() {
+      return this.UaInfo.isApp();
+    },
     isZhCN() {
       // if (this.$t("lan") === "zh_CN") {
       if (this.$i18n.locale === "zh_CN") {
@@ -59,38 +64,38 @@ export default {
     },
     ...mapActions(["login"]),
     changeLang() {
-      console.log(this.isZhCN)
+      console.log(this.isZhCN);
       const nextLangStr = this.isZhCN ? "zh_HK" : "zh_CN";
       const realLang = setLanguage(nextLangStr);
       this.$i18n.locale = realLang;
       this.reload();
     },
-    // checkLogin() {
-    //   const params = getURLParameters();
-    //   const userToken = params["sessionId"] || "";
-    //   if (userToken && userToken !== "") {
-    //     const params = {
-    //       certType: 0,
-    //       certCode: userToken,
-    //       passwordType: 0,
-    //       password: "",
-    //     };
-    //     this.login(params)
-    //       .then((res) => {
-    //         if (this.$route.name === "login") {
-    //           this.$router.replace({ name: "opaGuide" });
-    //         }
-    //         this.isChecking = false;
-    //       })
-    //       .catch(() => {
-    //         // 4.3是否需要验证码
-    //         this.$router.replace({ name: "login" });
-    //         this.isChecking = false;
-    //       });
-    //   } else {
-    //     this.isChecking = false;
-    //   }
-    // },
+    checkLogin() {
+      const params = getURLParameters();
+      const userToken = params["sessionId"] || "";
+      if (userToken && userToken !== "") {
+        const params = {
+          certType: 0,
+          certCode: userToken,
+          passwordType: 0,
+          password: "",
+        };
+        this.login(params)
+          .then((res) => {
+            if (this.$route.name === "login") {
+              this.$router.replace({ name: "opaGuide" });
+            }
+            this.isChecking = false;
+          })
+          .catch(() => {
+            // 4.3是否需要验证码
+            this.$router.replace({ name: "login" });
+            this.isChecking = false;
+          });
+      } else {
+        this.isChecking = false;
+      }
+    },
   },
 };
 </script>
@@ -100,6 +105,10 @@ export default {
   position: relative;
   padding-top: 0.44rem;
   min-width: 300px;
+}
+
+.root-wrap-app {
+  padding-top: 0;
 }
 
 .header-custom {
