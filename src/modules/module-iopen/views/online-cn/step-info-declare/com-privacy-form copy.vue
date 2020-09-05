@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="cube-form-item privacy-block-item border-bottom-1px">
-            <label class="cube-form-label">{{$t('iOpen.openCn.infoDeclare.tax.privacyNum.label')}}</label>
+        <label class="cube-form-label">{{$t('iOpen.openCn.infoDeclare.tax.privacyNum.label')}}</label>
         <div class="cube-form-field">
           <cube-radio-group
             position="left"
@@ -56,17 +56,23 @@
         <div class="cube-form-field">
           <cube-radio-group
             position="left"
+            @input="changeNoOfferNum($event, index)"
             :value="val.noOfferPrivacyKey"
+            v-model="reasonIndex"
+            :options="options"
           >
             <cube-radio
+
+            >
+
+            </cube-radio>
+            <!-- <cube-radio
               :hollow-style="true"
               :option="{
                 label: $t('iOpen.openCn.infoDeclare.tax.privacyNum.reasonA'),
                 value: 'A'
               }"
               :value="val.noOfferPrivacyKey"
-              @input="changeNoOfferNum($event, index)"
-
             />
             <cube-radio
               :hollow-style="true"
@@ -75,7 +81,6 @@
                 value: 'B'
               }"
               :value="val.noOfferPrivacyKey"
-              @input="changeNoOfferNum($event, index)"
             />
             <div class="big-text-area-wrap border-bottom-1px" v-if="val.noOfferPrivacyKey === 'B'">
               <textarea
@@ -85,7 +90,7 @@
                 :value="val.reasonDescKey"
                 @input="changeReasonDesc($event, index)"
               />
-            </div>            
+            </div>
             <cube-radio
               :hollow-style="true"
               :option="{
@@ -93,8 +98,7 @@
                 value: 'C'
               }"
               :value="val.noOfferPrivacyKey"
-              @input="changeNoOfferNum($event, index)"
-            />
+            /> -->
           </cube-radio-group>
         </div>
       </div>
@@ -115,7 +119,21 @@ export default {
   },
   data() {
     return {
-      reasonIndex: null
+      reasonIndex: null,
+      options: [
+        {
+          label: $t('iOpen.openCn.infoDeclare.tax.privacyNum.reasonA'),
+          value: 'A'
+        },
+        {
+          label: $t('iOpen.openCn.infoDeclare.tax.privacyNum.reasonB'),
+          value: 'B'
+        },
+        {
+          label: $t('iOpen.openCn.infoDeclare.tax.privacyNum.reasonC'),
+          value: 'C'
+        }
+      ]
     };
   },
   watch: {},

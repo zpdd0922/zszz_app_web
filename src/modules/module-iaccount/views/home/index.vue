@@ -107,6 +107,7 @@ export default {
               key: "statement",
               label: "傭金方案",
               iconType: "statement",
+              path: "fee/statement"
             },
             {
               key: "account",

@@ -66,6 +66,7 @@
                 value: 'A'
               }"
               :value="val.noOfferPrivacyKey"
+              @input="changeNoOfferNum($event, index)"
             />
             <cube-radio
               :hollow-style="true"
@@ -74,6 +75,7 @@
                 value: 'B'
               }"
               :value="val.noOfferPrivacyKey"
+              @input="changeNoOfferNum($event, index)"
             />
             <div class="big-text-area-wrap border-bottom-1px" v-if="val.noOfferPrivacyKey === 'B'">
               <textarea
@@ -91,6 +93,7 @@
                 value: 'C'
               }"
               :value="val.noOfferPrivacyKey"
+              @input="changeNoOfferNum($event, index)"
             />
           </cube-radio-group>
         </div>

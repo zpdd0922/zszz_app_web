@@ -274,6 +274,7 @@ export default {
       if (Number(this.taxModel.infoCardCount) === 0) {
         return true;
       }
+      console.log(this.privacyArray)
       let isCanNextInfo;
       for (let i = 0; i < this.privacyArray.length; i++) {
         if (
@@ -385,7 +386,7 @@ export default {
 
     // 不能提供税号的理由
     changeNoOfferNum(index, type) {
-      this.taxModel[`noOfferPrivacy${index + 1}`] = type;
+       this.taxModel[`noOfferPrivacy${index + 1}`] = type;
       if (type !== "B" && this.reasonIndex !== index) {
         this.taxModel.reasonIndex = index;
         this.taxModel[`reasonDesc${index + 1}`] = "";

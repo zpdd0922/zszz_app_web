@@ -44,7 +44,7 @@ export default {
       return this.UaInfo.isApp() ? "app" : "h5";
     },
     isCanOpenCn() {
-      // const phone = this.openProgress.phone;
+      // const phone = this.openProgress.phoneNumber;
       // return validate.isCnMobile(phone);
       return true;
     },

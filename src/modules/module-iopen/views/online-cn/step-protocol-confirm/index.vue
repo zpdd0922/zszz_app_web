@@ -115,7 +115,7 @@ export default {
       this.formList.forEach((item) => {
         const { key, value } = item;
         if (key == "phoneNum") {
-          item.value = this.openProgress.phone;
+          item.value = this.openProgress.phoneNumber;
         } else {
           item.value = userInfo[key] ? userInfo[key] : value;
         }
@@ -166,17 +166,17 @@ export default {
         };
 
         const data = this.formatCommitData(this.openInfo,normalData);
-
-        this.toCommitAllData(data).then((res) => {
-          toast({
-            type: "correct",
-            txt: this.getI18n("success"),
-            time: 1000,
-            callback: () => {
-              this.$router.push({ name: "opaGuide" });
-            },
-          });
-        });
+        console.log(data);
+        // this.toCommitAllData(data).then((res) => {
+        //   toast({
+        //     type: "correct",
+        //     txt: this.getI18n("success"),
+        //     time: 1000,
+        //     callback: () => {
+        //       this.$router.push({ name: "opaGuide" });
+        //     },
+        //   });
+        // });
       }
     },
   },

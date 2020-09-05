@@ -126,7 +126,7 @@ export default {
     },
   },
   created() {
-    this.updateInfo();
+    this.updateInfo()
   },
   methods: {
     getI18n(key) {
@@ -134,13 +134,16 @@ export default {
     },
     updateInfo() {
       const userInfo = this.openInfo;
+      // const userInfo = {};
       Object.keys(this.model).forEach((val) => {
         const res = userInfo[val] ? userInfo[val] : this.model[val];
+        console.log(val)
         // 处理手机号
         if (val === "bankPhoneNum") {
           if (userInfo[val]) {
             this.handleUpdatePhone(userInfo[val], "bankPhoneNum");
           } else {
+            console.log(12312);
             this.handleBankePhoneNum();
           }
         } else {

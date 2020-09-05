@@ -115,7 +115,7 @@ export default {
       this.formList.forEach((item) => {
         const { key, value } = item;
         if (key == "phoneNum") {
-          item.value = this.openProgress.phone;
+          item.value = this.openProgress.phoneNumber;
         } else {
           item.value = userInfo[key] ? userInfo[key] : value;
         }

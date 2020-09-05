@@ -223,7 +223,7 @@ export const formatCommitData = (args, normalData = {}) => {
 
   // 需要单独增加字段（基本上都是一些写死的数据  方便以后拓展用）
   const normal = {
-    openType: 2, // 1、线上预约开户，2、香港预约开户，2、线下（开户宝）
+    openType: 3, // 1、线上预约开户，2、香港预约开户，2、线下（开户宝）
     ...normalData,
   };
 

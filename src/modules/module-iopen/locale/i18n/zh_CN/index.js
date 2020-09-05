@@ -18,7 +18,7 @@ export default {
         idCardHkTemp: "香港居民身份证与签证身份书",
         passport: "护照",
       },
-      nationlityCode: 'AO_NATIONALITY_CN'
+      nationlityCode: 'AO_NATIONALITY'
     },
     guide,
     authWay: {

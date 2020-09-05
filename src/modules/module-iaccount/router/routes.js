@@ -1,3 +1,4 @@
+// import feeRoutes from './fee';
 
 const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iaccount" */ `../views/${path}/${file}.vue`);
 
@@ -83,6 +84,13 @@ const routes = [
       // 转入股票页面
       // 转出股票页面
       // 股票历史页面
+
+      //费用->佣金
+      {
+        path: 'fee/statement',
+        name: 'fee-statement',
+        component: _import('fee-statement')
+      }
     ]
   },
 
