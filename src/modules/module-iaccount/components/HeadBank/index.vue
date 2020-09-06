@@ -82,37 +82,37 @@ export default {
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .head {
-  padding: 20px 30px;
+  padding: .1rem .15rem;
   background: $color-theme;
   .head-media {
     @include flex-box($col: center);
-    height: 162px;
-    padding-left: 40px;
-    border-radius: 4px;
+    height: .81rem;
+    padding-left: .2rem;
+    border-radius: .02rem;
     background: $color-mybank-bg;
   }
   .bank-img {
-    width: 66px;
-    height: 66px;
+    width: .33rem;
+    height: .33rem;
     border-radius: 50%;
     background: $color-theme;
   }
   .bank-txt {
     .title {
       color: $color-head-title;
-      font-size: 32px;
-      margin-left: 24px;
+      font-size: .16rem;
+      margin-left: .12rem;
     }
     .txt {
       @include flex-box();
       flex-wrap: wrap;
       color: $color-theme-m;
-      font-size: 24px;
+      font-size: .12rem;
     }
     .desc {
       @include flex-box($col: center);
-      margin-left: 24px;
-      margin-top: 14px;
+      margin-left: .12rem;
+      margin-top: .07rem;
     }
   }
 }

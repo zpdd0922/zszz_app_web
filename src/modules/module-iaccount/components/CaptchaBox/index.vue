@@ -110,19 +110,19 @@ export default {
 .Captcha {
   width: 100%;
   height: 100%;
-  padding-top: 10px;
+  padding-top: .05rem;
   .captcha-title {
-    font-size: 28px;
+    font-size: .14rem;
     line-height: 1.2;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: .15rem;
 
     .title {
       color: #111a34;
-      font-size: 36px;
+      font-size: .18rem;
       font-weight: 400;
       line-height: 1.15;
-      margin: 0 0 10px;
+      margin: 0 0 .05rem;
 
     }
   }
@@ -134,11 +134,11 @@ export default {
 
       .box-item {
         @include flex-box($row: center, $col: center);
-        font-size: 36px;
+        font-size: .18rem;
         flex: 1 1 0%;
         position: relative;
-        width: 60px;
-        height: 60px;
+        width: .3rem;
+        height: .3rem;
         font-weight: 400;
         line-height: 1.2;
         color: #111a34;
@@ -152,16 +152,16 @@ export default {
       .codebox-dot {
         display: block;
         background-color: #111a34;
-        width: 20px;
-        height: 20px;
+        width: .1rem;
+        height: .1rem;
         border-radius: 50%;
       }
 
       .codebox-blink {
         display: block;
         background-color: #111a34;
-        width: 2px;
-        height: 32px;
+        width: .01rem;
+        height: .16rem;
         animation: codebox-flash 1s steps(2) infinite;
       }
 
@@ -175,8 +175,8 @@ export default {
 
     .footer {
       @include flex-box($row: space-between, $col: center);
-      font-size: 24px;
-      margin-top: 20px;
+      font-size: .12rem;
+      margin-top: .1rem;
 
       .brief {
         color: #858b9c;
@@ -191,7 +191,7 @@ export default {
         display: inline-block;
         color: #2f86f6;
         padding: 0;
-        margin: 0 0 0 12px;
+        margin: 0 0 0 .06rem;
         border: 0;
         border-radius: 0;
         background: none;

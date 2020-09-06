@@ -95,18 +95,18 @@ export default {
 }
 .jf-wrap {
   &.pb {
-    padding-bottom: 160px;
+    padding-bottom: .8rem;
   }
 }
 
 .common-btn {
-  width: 700px;
-  margin: 20px auto;
+  width: 3.5rem;
+  margin: .1rem auto;
   &.fixed {
     position: fixed;
-    left: 25px;
-    right: 25px;
-    bottom: 40px;
+    left: .125rem;
+    right: .125rem;
+    bottom: .2rem;
     z-index: 10;
     margin: auto;
   }

@@ -239,9 +239,9 @@
 }
 
 
-@mixin triangle($width: 10px, $color: $color-text, $dir: 'top') {
+@mixin triangle($width: .05rem, $color: $color-text, $dir: 'top') {
   position: relative;
-  padding-right: ($width * 2 + 10px);
+  padding-right: ($width * 2 + .05rem);
   &:after {
     content: '';
     height: 0;

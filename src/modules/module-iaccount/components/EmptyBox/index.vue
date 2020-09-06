@@ -40,7 +40,7 @@ export default {
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .empty {
-  height: 500px;
+  height: 2.5rem;
   position: relative;
   text-align: center;
   .empty-wrap {
@@ -48,7 +48,7 @@ export default {
   }
   .empty-txt {
     color: $color-999;
-    margin-top: 50px;
+    margin-top: .25rem;
   }
 }
 </style>

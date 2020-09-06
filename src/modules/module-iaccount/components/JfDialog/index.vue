@@ -116,12 +116,12 @@ export default {
     background: url('./images/dialog-close.png') center center;
     background-repeat: no-repeat;
     background-size: contain;
-    width: 28px;
-    height: 28px;
+    width: .14rem;
+    height: .14rem;
     cursor: pointer;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: .05rem;
+    top: .05rem;
     z-index: 1;
   }
   .dialog-inner {
@@ -130,33 +130,33 @@ export default {
   }
   .inner-content {
     background: $color-theme;
-    width: 620px;
-    border-radius: 8px;
+    width: 3.10rem;
+    border-radius: .04rem;
     position: relative;
   }
   .content-wrap {
     color: $color-text;
-    font-size: 28px;
-    line-height: 44px;
-    padding: 30px 40px;
+    font-size: .14rem;
+    line-height: .22rem;
+    padding: .15rem .2rem;
   }
   .wrap-title {
     color: $color-text;
-    font-size: 32px;
+    font-size: .16rem;
     text-align: center;
     font-weight: bold;
   }
   .wrap-scroll {
-    height: 890px;
+    height: 4.45rem;
   }
   .scroll-item {
-    padding-top: 10px;
-    margin-bottom: 20px;
+    padding-top: .05rem;
+    margin-bottom: .1rem;
   }
   .content-btn {
     color: $color-theme-active;
-    font-size: 28px;
-    line-height: 84px;
+    font-size: .14rem;
+    line-height: .42rem;
     text-align: center;
     .txt {
       display: block;

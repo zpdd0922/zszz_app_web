@@ -79,24 +79,24 @@ export default {
 
 .detail-list {
   background: $color-theme;
-  padding: 20px 30px 24px;
+  padding: .1rem .15rem .12rem;
   li {
     @include flex-box();
-    font-size: 30px;
-    line-height: 44px;
+    font-size: .15rem;
+    line-height: .22rem;
     &:not(:first-child) {
-      margin-top: 20px;
+      margin-top: .1rem;
     }
     .label {
-      width: 160px;
-      margin-right: 24px;
+      width: .8rem;
+      margin-right: .12rem;
     }
     .filed {
       color: $color-text;
       flex: 1;
     }
     .jf-icon {
-      margin-top: -4px;
+      margin-top: -.02rem;
     }
   }
 }

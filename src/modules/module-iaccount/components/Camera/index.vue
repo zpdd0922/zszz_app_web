@@ -302,9 +302,9 @@ export default {
 
 .camera {
   @include border-1px();
-  width: 216px;
-  height: 226px;
-  border-radius: 4px;
+  width: 1.08rem;
+  height: 1.13rem;
+  border-radius: .02rem;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
@@ -323,8 +323,8 @@ export default {
       position: absolute;;
       top: 50%;
       left: 50%;
-      width: 64px;
-      height: 4px;
+      width: .32rem;
+      height: .02rem;
       background-color: $color-upload-cross;
       transform: translate(-50%,-50%);
     };
@@ -350,17 +350,17 @@ export default {
     bottom: 0;
     z-index:2;
     text-align: center;
-    line-height: 226px;
+    line-height: 1.13rem;
     background :rgba(51, 51, 51, .7);
     color: $color-theme;
-    font-size: 50px;
+    font-size: .25rem;
   };
   .file-action {
     color: $color-theme;
     background: $color-upload-action-bg;
-    font-size: 24px;
-    height: 44px;
-    line-height: 44px;
+    font-size: .12rem;
+    height: .22rem;
+    line-height: .22rem;
     text-align: center;
     border-radius: 0px 0px 4px 4px;
     opacity: 0.6;

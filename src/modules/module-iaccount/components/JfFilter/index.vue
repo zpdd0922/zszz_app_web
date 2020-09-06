@@ -78,18 +78,18 @@ export default {
 .jf-filter {
   .title {
     color: $color-text;
-    font-size: 28px;
+    font-size: .14rem;
     .txt {
       display: block;
-      @include triangle(12px, $color-999, bottom);
+      @include triangle(.06rem, $color-999, bottom);
       &:after {
-        margin-top: 8px;
+        margin-top: .04rem;
       };
     };
     .selected_active {
-      @include triangle(12px, $color-999, top);
+      @include triangle(.06rem, $color-999, top);
       &:after {
-        margin-top: -4px;
+        margin-top: -.02rem;
       };
     };
   };
@@ -99,7 +99,7 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-    width: 750px;
+    width: 3.75rem;
     margin: auto;
     z-index: 99;
     .menu-mask {
@@ -119,8 +119,8 @@ export default {
       @include flex-box($row: space-between, $col: center);
       background: $color-theme;
       color: $color-text;
-      font-size: 26px;
-      padding: 30px 28px;
+      font-size: .13rem;
+      padding: .15rem .14rem;
       line-height: 1;
       &.active {
         color: $color-link;

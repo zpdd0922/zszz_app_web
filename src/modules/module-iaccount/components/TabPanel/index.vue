@@ -75,22 +75,22 @@ export default {
   .tab-bar {
     @include flex-box();
     background: $color-theme;
-    height: 72px;
-    line-height: 72px;
+    height: .36rem;
+    line-height: .36rem;
   }
   .bar-item {
     @include no-wrap();
     color: $color-999;
     flex: 1;
-    font-size: 30px;
+    font-size: .15rem;
     text-align: center;
     position: relative;
     &.active {
       color: $color-link;
       &:after {
         content: '';
-        width:36px;
-        height:6px;
+        width:.18rem;
+        height:.03rem;
         background: $color-link;
         @include pos-x();
         bottom: 0;

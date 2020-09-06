@@ -101,8 +101,8 @@ export default {
   .sheet-item {
     background: $color-theme;
     color: $color-text;
-    font-size: 30px;
-    padding: 40px 0;
+    font-size: .15rem;
+    padding: .2rem 0;
     text-align: center;
     &:not(:last-child) {
       @include border-x(bottom);

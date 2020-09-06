@@ -54,20 +54,20 @@ export default {
 // 指引样式
 .guide-link {
   background: $color-theme;;
-  padding: 24px 30px;
+  padding: .12rem .15rem;
   .link-wrap {
-    padding-left: 20px;
-    height: 90px;
-    line-height: 90px;
-    border-radius: 4px;
+    padding-left: .1rem;
+    height: .45rem;
+    line-height: .45rem;
+    border-radius: .02rem;
     background: linear-gradient(-90deg,rgba(255,228,216,1),rgba(255,236,228,1));
     position: relative;
     overflow: hidden;
   };
   .link-txt {
-    @include arrow($width: 16px, $border: 3px, $color: $color-link, $poa: -30px, $mt: 10px);
+    @include arrow($width: .08rem, $border: .015rem, $color: $color-link, $poa: -.15rem, $mt: .05rem);
     color: $color-link;
-    font-size: 26px;
+    font-size: .13rem;
   };
   .link-label {
     position: absolute;

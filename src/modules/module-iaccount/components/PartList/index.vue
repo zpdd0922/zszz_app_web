@@ -93,36 +93,36 @@ export default {
 .part-list {
   .list-item {
     &.link {
-      @include arrow($dir: right, $border: 2px, $width: 16px, $poa: 38px);
+      @include arrow($dir: right, $border: 2px, $width: .08rem, $poa: .19rem);
       &:active {
         background: $color-theme-bg;
       }
     }
     &+.list-item {
-      @include border-x(top, $left: 30px);
+      @include border-x(top, $left: .15rem);
     }
   }
   .item-media {
     @include flex-box($col: center);
     font-weight: 500;
-    padding: 30px 30px;
+    padding: .15rem .15rem;
   }
   .media-img {
-    margin-left: 20px;
-    width: 40px;
+    margin-left: .1rem;
+    width: .2rem;
   }
   .media-txt {
-    margin-left: 30px;
+    margin-left: .15rem;
     .title {
       @include flex-box($col: center);
-      font-size: 32px;
+      font-size: .16rem;
     }
     .txt {
-      margin-top: 22px;
-      font-size: 26px;
+      margin-top: .11rem;
+      font-size: .13rem;
       color: $color-999;
       span+span {
-        margin-left: 36px;
+        margin-left: .18rem;
       }
     }
       

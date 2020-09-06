@@ -30,11 +30,11 @@ export default {
 .part {
   color: $color-text;
   background: $color-theme;
-  margin-top: 10px;
+  margin-top: .05rem;
   .part-title {
-    padding: 0 30px;
-    font-size: 28px;
-    line-height: 66px;
+    padding: 0 .15rem;
+    font-size: .14rem;
+    line-height: .33rem;
     font-weight: 500;
     @include border-x(bottom);
   }

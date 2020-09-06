@@ -44,11 +44,11 @@ export default {
 
 .foot {
   color: $color-999;
-  margin-top: 36px;
-  padding-left: 30px;
-  padding-right: 40px;
-  font-size: 24px;
-  line-height: 44px;
+  margin-top: .18rem;
+  padding-left: .15rem;
+  padding-right: .2rem;
+  font-size: .12rem;
+  line-height: .22rem;
   text-align: justify;
 }
 </style>
