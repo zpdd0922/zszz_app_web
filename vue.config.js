@@ -79,7 +79,8 @@ module.exports = {
     port: vueConfig.serverPort, // 端口
     proxy: {
       '/dev-open': {
-        target: 'http://106.52.75.112:6003',
+        // target: 'http://106.52.75.112:6003',
+        target: 'http://121.35.249.14:9011',
         // target: 'http://localhost:6012',
         changeOrigin: true,
         pathRewrite: {

@@ -15,10 +15,13 @@ import Storage from '@/main/utils/cache/localstorage';
 import BroadCast, { BROADCAST_ENUMS } from '@/main/utils/common/broadcast';
 import CustomToast from '@/main/components/custom-toast/index.vue'
 import CustomAlert from '@/main/components/custom-alert/index.vue'
+// 引入自定义组件
+import JfDialog from './components/JfDialog/index.vue'
 
 // 引入项目公共功能
 import setTitle from '@/main/utils/common/set-title';
 import '@/main/utils/common/rem';
+// import './assets/lib/rem';
 import '@/main/utils/common/v-console.js';
 
 // 引入路由控制
@@ -46,7 +49,7 @@ Vue.prototype.CUSTOMIZE_GLOBAL_DEFINE = CUSTOMIZE_GLOBAL_DEFINE;
 
 Cube.createAPI(Vue, CustomToast, ['timeout'], true)
 Cube.createAPI(Vue, CustomAlert, ['confirm'], true)
-
+Cube.createAPI(Vue, JfDialog, ['onConfirm'], true)
 Vue.use(Cube);
 
 FastClick.attach(document.body);
