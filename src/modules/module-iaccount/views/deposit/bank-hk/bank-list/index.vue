@@ -53,18 +53,18 @@ export default {
     ]),
     bank_CMBCHK() {
       return [
-        {
-          value: CMBC_HK,
-          title: this.$t('deposit.bank_list.cmbchk'),
-          symbol: this.$t('deposit.cmbchk.text_1'),
-          icon: 'cmbc_logo'
-        },
-        {
-          value: CMB_WLB,
-          title: this.$t('deposit.bank_list.cmbwlb'),
-          symbol: this.$t('deposit.cmbwlb.text_1'),
-          icon: 'cmb_wlb_logo'
-        }
+        // {
+        //   value: CMBC_HK,
+        //   title: this.$t('deposit.bank_list.cmbchk'),
+        //   symbol: this.$t('deposit.cmbchk.text_1'),
+        //   icon: 'cmbc_logo'
+        // },
+        // {
+        //   value: CMB_WLB,
+        //   title: this.$t('deposit.bank_list.cmbwlb'),
+        //   symbol: this.$t('deposit.cmbwlb.text_1'),
+        //   icon: 'cmb_wlb_logo'
+        // }
       ]
     }
   },

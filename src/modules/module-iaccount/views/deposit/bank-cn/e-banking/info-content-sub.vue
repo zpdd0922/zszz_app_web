@@ -45,7 +45,7 @@ export default {
       if (this.isDisabled) return
       this.isDisabled = true
       this.btnText = i18n.t('deposit.eBanking.text_14')
-
+      debugger
       const { tradeAccount, fundAccount = [], clientNameCn, clientNameEn } = this.accInfo
       const params = {
         clientId: tradeAccount,
@@ -86,9 +86,9 @@ export default {
   .account-tips {
     color: $color-666;
     background: $color-theme;
-    font-size: 26px;
-    line-height: 48px;
-    padding: 30px 30px 44px;
+    font-size: .13rem;
+    line-height: .24rem;
+    padding: .15rem .15rem .22rem;
   }
 }
 </style>

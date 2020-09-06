@@ -37,7 +37,7 @@ const OPTIONS = (str) => ({
 // 查询开户状态
 const CHECK = (data = {}) => ({
   requestSrc: auth.getPlateform(),
-  sessionId: auth.getAuthToken()
+  sessionId: auth.getAuthToken(),
 });
 
 // 更新/绑定 手机号

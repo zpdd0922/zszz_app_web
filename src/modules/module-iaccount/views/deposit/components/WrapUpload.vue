@@ -69,16 +69,16 @@ export default {
 
 
 .upload-wrap {
-  padding: 0 30px 0;
+  padding: 0 .15rem 0;
   background :$color-theme;
   .wrap-camera {
     @include clearfix();
-    padding-top: 46px;
-    padding-bottom:36px;
+    padding-top: .23rem;
+    padding-bottom: .18rem;
   }
   .camera-item {
     float: left;
-    margin-right: 20px;
+    margin-right: .1rem;
     &:last-child {
       margin-right: 0;
     }

@@ -152,6 +152,7 @@ const actions = {
 
   // 申请子账号
   apiGetCollectionNo({ commit, state }, data) {
+    debugger
     return new Promise((resolve, reject) => {
       SecuritiesApi.getCollectionNo(data).then(res => {
         commit(types.GET_DEPOSIT_SUBACCOUNT, res)
