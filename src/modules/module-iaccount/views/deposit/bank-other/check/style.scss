@@ -1,0 +1,32 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.check {
+  .detail-check {
+    background: $color-theme;
+    padding: 20px 30px 20px;
+    li {
+      margin-top: 22px;
+      margin-bottom: 34px;
+      &:last-child {
+        margin-bottom: 10px;
+      }
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    .check-label {
+      color: $color-999;
+      font-size: 24px;
+    }
+    .check-filed {
+      color: $color-text;
+      font-size: 30px;
+      line-height: 44px;
+      margin-top: 32px;
+      p+p {
+        margin-top: 10px;
+      }
+    }
+  }
+}

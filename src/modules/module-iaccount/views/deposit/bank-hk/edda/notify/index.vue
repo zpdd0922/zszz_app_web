@@ -1,0 +1,59 @@
+<template>
+  <div class="notify">
+    <div class="notify-status">
+      <jf-icon name="success"></jf-icon>
+      <p class="status-title">{{ $t('deposit.edda.notify.text_1') }}</p>
+      <p class="status-txt" v-if="query">{{ $t('deposit.edda.notify.text_3') }}</p>
+      <p class="status-txt" v-else>{{ $t('deposit.edda.notify.text_2') }}</p>
+    </div>
+    <div class="notify-btn" v-if="query">
+        <cube-button @click="handleNext">{{$t('deposit.edda.notify.text_4')}}</cube-button>
+    </div>
+  </div>
+</template>
+
+<script>
+import { DEV } from '@/modules/module-iaccount/api/config'
+import commonMixin from '@/modules/module-iaccount/mixins/common'
+
+const ROUTE_NAME = {
+  funds: 'history-funds',
+  deposit: 'currency-type',
+  home: 'home'
+}
+export default {
+  // 返回 - 前往证券首页
+  beforeRouteLeave (to, from, next) {
+    const names = Object.values(ROUTE_NAME)
+    if (names.indexOf(to.name) !== -1) {
+      next()
+    } else {
+      if (DEV) {
+        next({ name: ROUTE_NAME.home })
+      } else {
+        this.closeBack(window.MAIN_URL + window.HASH_SECRRITY_SERVICE)
+      }
+    }
+  },
+  mixins: [commonMixin],
+  data() {
+    return {
+    }
+  },
+  computed: {
+    query () {
+      const { type = '' } = this.$route.query
+      return type
+    }
+  },
+  methods: {
+    handleNext() {
+      this.$router.push({ name: 'history-funds' })
+    }
+  }
+}
+</script>
+
+<style scoped>
+/* @import './main' */
+</style>

@@ -1,0 +1,39 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.ways {
+  & >>> .media-txt {
+    margin-left: 0;
+    .title {
+      font-size: 30px;
+    }
+  }
+  .desc {
+    font-size: 24px;
+    margin-top: 22px;
+    color: $color-999;
+    .txt+.txt {
+      margin-left: 36px;
+    }
+  }
+  & >>> .font-strong {
+    color: $color-888;
+  }
+  & >>> .part {
+    margin-top: 0;
+  }
+  .title {
+    font-size: 32px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  .content {
+    margin-top: 10px;
+  }
+  li {
+    font-size: 28px;
+    line-height: 45px;
+  }
+}

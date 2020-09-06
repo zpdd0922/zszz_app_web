@@ -1,0 +1,41 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.deposit {
+  // 提交页
+  .remit {
+    .inner-detail {
+      &:before {
+        content: none;
+      }
+    }
+  }
+  // 入金视图
+  .content {
+    .inner-title {
+      @include border-x(bottom);
+      background: $color-theme;
+      color: $color-999;
+      font-size: 26px;
+      line-height: 38px;
+      padding: 20px 30px;
+    }
+    .inner-detail {
+      @include border-x(bottom, $style: dashed, $left: 30px, $right: 30px);
+      color: $color-999;
+    }
+
+    .detail-title {
+      background: $color-theme;
+      color: $color-text;
+      font-size: 28px;
+      padding: 24px 30px 0;
+    }
+
+    .detail-tips {
+      background: $color-theme;
+      font-size: 24px;
+      padding: 26px 30px 0;
+    }
+  }
+}
