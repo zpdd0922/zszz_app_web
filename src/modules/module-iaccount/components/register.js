@@ -14,7 +14,9 @@ requireComponent.keys().forEach(fileName => {
 
   // 获取组件名，这里我们去掉头和尾，利用正则匹配
   // 示例： 文件 ./Skeleton/index.vue --> Skeleton
-  const tempName = fileName.match(/\/(\w+)\//i)[1]
+  const tempName = fileName.split('/')[1];
+
+  // const tempName = fileName.match(/\/(\w+)\//i)[1]
 
   const componentName = capitalizeFirstLetter(tempName)
 
