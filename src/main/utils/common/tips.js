@@ -100,3 +100,19 @@ export const customToast = ({ type, txt, time, styleObj, callback }) => {
   });
   tips.show();
 };
+
+export const jfDialog = ({ content, onConfirm, render, ...params }) => {
+  const instance = vm.$createJfDialog({
+    show: true,
+    content,
+    ...params
+  }, render)
+
+  // 销毁实例
+  const remove = () => instance.remove()
+
+  instance.$on('onConfirm', (e) => {
+    onConfirm && onConfirm(e)
+    remove()
+  })
+}

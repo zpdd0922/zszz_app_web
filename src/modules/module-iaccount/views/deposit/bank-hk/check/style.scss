@@ -1,0 +1,33 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+
+.check {
+  .detail-check {
+    background: $color-theme;
+    padding: .1rem .15rem .1rem;
+    li {
+      margin-top: .11rem;
+      margin-bottom: .17rem;
+      &:last-child {
+        margin-bottom: .05rem;
+      }
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    .check-label {
+      color: $color-999;
+      font-size: .12rem;
+    }
+    .check-filed {
+      color: $color-text;
+      font-size: .15rem;
+      line-height: .22rem;
+      margin-top: .16rem;
+      p+p {
+        margin-top: .05rem;
+      }
+    }
+  }
+}

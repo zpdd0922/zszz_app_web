@@ -172,6 +172,14 @@
   }
 }
 
+// 弹性布局
+@mixin flex-box($row: 'flex-start', $col: 'flex-start', $main: 'row') {
+  display: flex;
+  justify-content: $row;
+  align-items: $col;
+  flex-direction: $main;
+}
+
 // 清除浮动
 @mixin clearfix() {
 
@@ -195,11 +203,12 @@
 }
 
 // 水平垂直居中
-@mixin posCenter() {
+@mixin posCenter($zIndex: 1) {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: zIndex;
 }
 
 // 垂直居中
@@ -216,6 +225,43 @@
   @else {
     left: auto;
     right: $offset;
+  }
+}
+
+// 满屏
+@mixin fixed-full($zIndex: 2) {
+  position: fixed;
+  z-index: $zIndex;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+  
+
+// 水平(上下)边框
+@mixin border-x($dir: 'top', $color: '#e5e5e5', $left: 0, $right: 0, $style: 'solid') {
+  position: relative;
+  &:before {
+    content: '\0020';
+    height: 1px;
+    transform: scaleY(0.5);
+    position: absolute;
+    left: $left;
+    right: $right;
+    @if ($dir == 'top') {
+      top: 0;
+      border-top: 1px $color $style;
+      transform-origin: 0 top;
+    }
+    @else {
+      bottom: 0;
+      border-bottom: 1px $color $style;
+      transform-origin: 0 bottom;
+    }
+    @media (min-resolution: 3dppx) {
+      transform: scaleY(0.33333);
+    }
   }
 }
 
@@ -255,6 +301,7 @@
     }
   }
 }
+
 
 // 等腰三角形
 @mixin triangle($width, $height, $color, $dir) {

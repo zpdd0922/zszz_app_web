@@ -1,0 +1,23 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.bank-type {
+  & >>> .item-media {
+    padding: .25rem .15rem;
+    .title {
+      font-size: .17rem;
+    }
+  }
+  .btn-link {
+    margin-top: .3rem;
+    text-align: center;
+    .txt {
+      color: $color-link;
+      font-size: 24px;
+    }
+  }
+  .type-img {
+    width: .5rem;
+    margin-left: .1rem;
+  }
+}

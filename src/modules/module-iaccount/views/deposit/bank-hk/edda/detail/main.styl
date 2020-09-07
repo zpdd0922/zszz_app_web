@@ -1,0 +1,48 @@
+@import '~assets/stylus/variable.styl'
+@import '~assets/stylus/mixin.styl'
+
+
+.error-info
+  background-color:$color-theme
+  padding 20px 30px
+  .info-wrap
+    width:690px;
+    height:148px;
+    background:rgba(255,255,255,0.4);
+    border-radius:8px;
+    border:2px solid rgba(252,114,76,1);
+    .box
+      padding 30px 0 30px 30px
+    .title
+      flex-box($col: center)
+      height:44px;
+      font-size:32px;
+      font-family:PingFangSC-Medium,PingFang SC;
+      font-weight:500;
+      color:rgba(241,91,90,1);
+      line-height:44px;
+      .img
+        bg-image('fail-icon')
+      & > p:last-child
+        padding-left 20px
+    .desc
+      height:34px;
+      font-size:24px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(241,91,90,1);
+      line-height:34px;
+      padding-top 10px
+.btn
+  width:690px;
+  height:92px;
+  margin 20px auto
+  border-radius:46px;
+  border:2px solid $color-link;
+  text-align: center
+  line-height 92px
+  color: $color-link
+  font-size: 30px
+                                    
+
+

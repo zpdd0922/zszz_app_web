@@ -37,8 +37,8 @@
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {
-    "@vue/cli-service": "^3.2.0",
     "@vue/cli-plugin-babel": "^4.5.3",
+    "@vue/cli-service": "^3.2.0",
     "@vue/eslint-config-standard": "^3.0.5",
     "async": "^2.6.1",
     "chalk": "^2.4.1",
@@ -51,6 +51,7 @@
     "less-loader": "^4.1.0",
     "lint-staged": "^7.2.2",
     "node-sass": "^4.14.1",
+    "postcss-pxtorem": "^5.1.1",
     "rimraf": "^2.6.0",
     "sass-loader": "^7.1.0",
     "vconsole": "^3.2.0",

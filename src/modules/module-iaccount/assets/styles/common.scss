@@ -1,0 +1,190 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+// body, html
+//   max-width 750PX
+//   margin auto
+//   background $color-theme-bg
+//   font-size 24px
+//   line-height 1
+//   font-family 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback'
+//   user-select none
+//   -webkit-tap-highlight-color transparent
+//   -webkit-font-smoothing antialiased
+//   -moz-osx-font-smoothing grayscale
+
+// input, textarea
+//   outline none
+//   &::-webkit-input-placeholder
+//     color $color-ccc
+//     line-height 44px
+
+// input[type='text'], textarea
+//   width 100%
+
+// 清浮动
+// .clear-fix
+//   &::after
+//     content: ""
+//     display: table
+//     clear: both
+
+// 全局的入场动画
+// .fade-enter-active, .fade-leave-active
+//   transition all 0.2s
+// .fade-enter, .fade-leave-to
+//   transform translate3d(35%, 0, 0)
+//   opacity 0
+
+// 字体颜色
+.font-red {
+  color: $color-red;
+}
+
+.font-link {
+  color: $color-link;
+}
+
+.font-strong {
+  font-weight: bold;
+}
+
+.account-info {
+  .font-strong {
+    color: $color-text ;
+  }
+}
+
+// 表单样式
+.detail-form {
+  background: $color-theme;
+  padding: 0 .15rem 0;
+  li {
+    @include flex-box($col: center);
+    font-size: .15rem;
+  }
+  .form-label {
+    width: .75rem;
+    color: $color-text;
+    &+.form-filed {
+      margin-left: .14rem;
+    }
+  }
+  .form-filed {
+    @include flex-box($col: center);
+    color: $color-text;
+    flex: 1;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+  }
+  .filed-item {
+    flex: 1;
+    &:after {
+      border-color: $color-upload-bg;
+      bottom: -.2rem;
+      right: -.15rem;
+    }
+    input {
+      display: block;
+    }
+    .txt {
+      color: $color-999;
+    }
+  }
+  .filed-msg {
+    color: $color-text;
+    margin-left: .2rem;
+    .font-link {
+      font-size: .12rem;
+    }
+    .font-link-size {
+      font-size: .12rem;
+    }
+  }
+
+  .form-select {
+    @include arrow($dir: bottom, $border: .015rem, $width: .08rem);
+    width: 100%;
+    height: 100%;
+  }
+
+  .radio-group {
+    @include flex-box();
+    &.horizontal {
+      .form-radio+.form-radio {
+        margin-left: .55rem;
+      }
+    }
+    .form-radio {
+      &.radio_selected {
+        .radio-ui {
+          // bg-image('icon/selected', true);
+        }
+      }
+    }
+    .radio-ui {
+      display: inline-block;
+      // bg-image('icon/unselect', true);
+    }
+    .radio-wrap {
+      @include flex-box($col: center);
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    .radio-txt {
+      color: $color-text;
+      margin-left: .09rem;
+    }
+    input[type='radio'] {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      opacity: 0;
+    }
+  }
+}
+
+// 出入金记录页
+.funds-detail {
+  .detail-list {
+    margin-top: .05rem;
+    .label {
+      color: $color-999;
+    }
+  }
+}
+
+.detail-form-new {
+  background: $color-theme;
+  padding: 0 .15rem 0;
+  li {
+    font-size: .14rem;
+    color: $color-text;
+  }
+  .form-label {
+    line-height: .45rem;
+  }
+  .form-filed {
+    position: relative;
+    @include flex-box();
+    height: .35rem;
+    @include border-x(bottom);
+    i {
+      position: absolute;
+      right: 0;
+      font-size: .2rem;
+    }
+  }
+  .form-items {
+    input {
+      flex: 1;
+    }
+  }
+  .form-jc {
+    justify-content: space-between;
+  }
+}
