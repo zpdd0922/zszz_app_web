@@ -36,9 +36,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/main/assets/scss/mixin.scss';
-@import '~@/modules/module-iaccount/assets/styles/variable.scss';
-@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+@import '~@/modules/module-iaccount/assets/styles/theme-white.scss';
+// @import '~@/main/assets/scss/mixin.scss';
+// @import '~@/modules/module-iaccount/assets/styles/variable.scss';
+// @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .jf-icon {
   display: inline-block;

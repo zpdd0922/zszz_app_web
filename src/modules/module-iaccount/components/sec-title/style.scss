@@ -1,0 +1,31 @@
+.sec-title {
+  padding: .11rem 0;
+  font-size: .14rem;
+  color: $color-txt-sub;
+
+  span {
+    padding-left: .1rem;
+    border-left: .02rem solid $color-prefix-icon;
+  }
+  // position: relative;
+  // width: 100%;
+  // font-size: .15rem;
+  // height: 2.8em;
+  // line-height: 2.8em;
+  // // font-weight: 600;
+  // color: $sec-title-txt;
+  // background-color: $sec-title-bg;
+  // padding-left: $main-padding-l;
+
+  // &::before{
+  //   content: '';
+  //   position: absolute;
+  //   display:block;
+  //   left: 0;
+  //   height: 36%;
+  //   top: 32%;
+  //   width: .02rem;
+  //   background-color: $sec-title-icon;;
+
+  // }
+}
