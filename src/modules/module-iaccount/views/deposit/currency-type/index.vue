@@ -76,6 +76,7 @@ export default {
         state: CURRENCY_STATUS.options[3].value // 已完成
       }
       SecuritiesApi.getFundsHistory(params).then(res => {
+        console.log(res)
         this._handleResData(res || {})
       }).catch(() => {
         this.hisData = []
@@ -83,9 +84,14 @@ export default {
     },
     // 处理入金历史记录 - 匹配出OMS目前支持的入金记录
     async _handleResData(data) {
+      console.log(data)
       const arr = data.moneyList || []
+            console.log(arr)
+
       if (!arr.length) return false
       // 获取入金银行
+            console.log(4)
+
       const { bank_hk, bank_cn, bank_other } = await this.fetchDepositBankList()
       // 匹配支持入金银行的所有记录
       const his = arr.filter(item => {

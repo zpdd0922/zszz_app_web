@@ -20,7 +20,8 @@ export default {
   components: { BaseCopyright, HeaderCustom },
   created() {
     this.setTitle(this.$t("iAccount.main.pageName"));
-    this.checkLogin();
+    //TODO:
+    // this.checkLogin();
   },
   computed: {
     isZhCN() {
@@ -39,7 +40,8 @@ export default {
   data() {
     return {
       isRouterAlive: true, //控制视图是否显示的变量
-      isChecking: true,
+      //TODO:
+      isChecking: false
     };
   },
   // provide() {

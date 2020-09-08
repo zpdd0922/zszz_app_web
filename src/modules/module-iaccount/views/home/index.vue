@@ -42,7 +42,7 @@ export default {
               key: "deposit",
               label: "存入資金",
               iconType: "deposit",
-              path: "/funds_deposit",
+              path: "/deposit",
             },
             // { key: "exchange", label: "貨幣兌換", iconType: "exchange" },
             {
@@ -109,11 +109,11 @@ export default {
               iconType: "statement",
               path: "fee/statement"
             },
-            {
-              key: "account",
-              label: "計算傭金",
-              iconType: "account",
-            },
+            // {
+            //   key: "account",
+            //   label: "計算傭金",
+            //   iconType: "account",
+            // },
             {
               key: "dayly",
               label: "日月結單",
