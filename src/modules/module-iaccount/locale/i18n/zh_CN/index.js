@@ -30,6 +30,12 @@ import { brokerageCalculate } from './brokerage-calculate'
 import { BANK_NAME_OPTIONS } from './info-remit'
 
 export default {
+  iAccount: {
+    main: {
+      pageName: '证券服务'
+    }
+  },
+  language: 'zh_CN',
   // 佣金计算
   brokerageCalculate,
   define: {

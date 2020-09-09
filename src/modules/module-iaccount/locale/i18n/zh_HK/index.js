@@ -28,6 +28,7 @@ import {
 import { BANK_NAME_OPTIONS } from './info-remit'
 
 export default {
+  language: 'zh_HK',
   define: {
     BANK_HK,
     BANK_CN,

@@ -5,7 +5,7 @@
       <base-waiting />
     </template>
     <template v-else>
-      <router-view v-if="isRouterAlive" />
+      <router-view v-if="isRouterAlive" /> 
     </template>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     isZhCN() {
-      if (this.$t("language") === "zh_CN") {
+      if (this.$i18n.locale === "zh_CN") {
         return true;
       }
       return false;
