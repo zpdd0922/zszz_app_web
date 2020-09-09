@@ -75,7 +75,7 @@ export default {
           key: "stocks",
           label: "股票",
           channel: [
-            { key: "enter", label: "轉入股票", iconType: "enter", path: "" },
+            { key: "enter", label: "轉入股票", iconType: "enter", path: "/stock-enter" },
             { key: "out", label: "轉出股票", iconType: "out" },
             {
               key: "history-stocks",

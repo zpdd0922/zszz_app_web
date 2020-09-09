@@ -13,6 +13,8 @@ import BankHK from '../views/deposit/bank-hk/layout'
 import BankOhter from '../views/deposit/bank-other/layout'
 // eDDA入金
 import BankEdda from '../views/deposit/bank-hk/edda/layout'
+// 股票转入
+import StockEnter from '../views/stock-enter/layout'
 
 const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iaccount" */ `../views/${path}/${file}.vue`);
 
@@ -243,6 +245,20 @@ const routes = [
         path: 'fee/statement',
         name: 'fee-statement',
         component: _import('fee-statement')
+      },
+      // 股票->转入股票
+      {
+        path: '/stock-enter',
+        name: 'stock-enter',
+        redirect: '/stock-enter/enter-way',
+        component: StockEnter,
+        children: [
+          {
+            path: 'enter-way',
+            name: 'stock-enter',
+            component: _import('stock-enter/enter-way')
+          },
+        ]
       }
     ]
   },
