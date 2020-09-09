@@ -1,0 +1,13 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.bank-list {
+  & /deep/ .list-item {
+    .item-media {
+      padding: .21rem .15rem;
+    }
+    .media-img {
+      margin-left: 0;
+    }
+  }
+}

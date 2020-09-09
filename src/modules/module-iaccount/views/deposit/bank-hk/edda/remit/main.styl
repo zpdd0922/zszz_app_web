@@ -1,0 +1,95 @@
+@import '~assets/stylus/variable.styl'
+@import '~assets/stylus/mixin.styl'
+
+.tips
+  font-size:24px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:$color-tips
+  line-height:34px;
+
+.select-wrap
+  position: fixed
+  top: 0
+  left 0
+  right 0
+  bottom: 0
+  background:rgba(0,0,0,0.5);
+  .list
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color $color-theme
+    .item
+      li
+        flex-box($col: center)
+        height 100px
+        padding 0 30px
+        border-x(bottom)
+        .account
+          padding-right 22px
+      .active
+        background:rgba(81,203,245,.3);
+  .flag-0
+    width:126px;
+    height:32px;
+    background#BFB9BA
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+  .flag-1
+    width:126px;
+    height:32px;
+    background:#51CBF5
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+  .flag-2
+    width:126px;
+    height:32px;
+    background:#F15B5A
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+  .flag-3
+    width:126px;
+    height:32px;
+    background:#7CB716
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+.flag
+  .flag-3
+      display: inline-block
+      width:126px;
+      height:32px;
+      background:#7CB716
+      border-radius:200px 2px 200px 2px;
+      text-align: center
+      line-height:32px;
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+      margin-left 22px
