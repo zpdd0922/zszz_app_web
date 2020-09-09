@@ -25,9 +25,13 @@ import {
   EDDA_STATUS
 } from './edda'
 
+import { brokerageCalculate } from './brokerage-calculate'
+
 import { BANK_NAME_OPTIONS } from './info-remit'
 
 export default {
+  // 佣金计算
+  brokerageCalculate,
   define: {
     BANK_HK,
     BANK_CN,
@@ -504,9 +508,6 @@ export default {
   brokerage: {
     name: '我的佣金'
   },
-  statement: {
-    name: '我的结单'
-  },
   quotes: {
     name: '行情购买'
   },
@@ -549,5 +550,5 @@ export default {
       text_32: '证券存取',
       text_33: '证券流向'
     }
-  }
+  },
 }
