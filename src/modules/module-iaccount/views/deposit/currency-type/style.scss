@@ -2,7 +2,7 @@
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .currency-type {
-  & > .item-media {
+  & /deep/ .item-media {
     padding: .25rem .15rem;
     .title {
       font-size: .17rem;

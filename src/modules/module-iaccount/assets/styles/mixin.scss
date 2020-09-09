@@ -1,5 +1,11 @@
 @import './variable.scss';
 
+@mixin jf-icon-img($width: .5rem, $height: .5rem) {
+  width: $width;
+  height: $height;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 // 锁定图片尺寸
 @mixin max-size ($size: 100%) {

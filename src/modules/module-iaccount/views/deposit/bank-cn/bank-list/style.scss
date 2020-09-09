@@ -2,9 +2,9 @@
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .bank-list {
-  & >>> .list-item {
+  & /deep/ .list-item {
     .item-media {
-      padding: 42px 30px;
+      padding: .21rem .15rem;
     }
     .media-img {
       margin-left: 0;

@@ -57,77 +57,77 @@ export default {
   }
   .icon-tips_gray {
     margin-left: 10px;
+    @include jf-icon-img(.14rem, .14rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/tips_gray');
-    // bg-image('icon/tips_gray', true);
   }
   .icon-tips_white {
     margin-left: 10px;
+    @include jf-icon-img(.12rem, .12rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/tips_white');
-    // bg-image('icon/tips_white', true);
   }
   .icon-del {
+    @include jf-icon-img(.18rem, .18rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/del');
-    // bg-image('icon/del', true)
   }
   .icon-success {
+    @include jf-icon-img(.55rem, .55rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/status_success');
-    // bg-image('icon/status_success', true)
   }
   .icon-empty {
+    @include jf-icon-img(.86rem, .625rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/empty');
-    // bg-image('icon/empty', true)
   }
   .icon-us {
+    @include jf-icon-img(.5rem, .5rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/us');
-    // bg-image('icon/us', true)
   }
   .icon-hk {
+    @include jf-icon-img(.5rem, .5rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/hk');
-    // bg-image('icon/hk', true)
   }
   .icon-cn {
+    @include jf-icon-img(.5rem, .5rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/cn');
-    // bg-image('icon/cn', true)
   }
   .icon-other {
+    @include jf-icon-img(.5rem, .5rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/other');
-    // bg-image('icon/other', true)
   }
   .icon-selected_arrow {
+    @include jf-icon-img(.155rem, .1rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/selected_arrow');
-    // bg-image('icon/selected_arrow', true)
   }
   .icon-cmbc_yz {
+    @include jf-icon-img(.33rem, .33rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/cmbc_yz');
-    // bg-image('icon/cmbc_yz', true)
   }
   .icon-cmbc_logo {
+    @include jf-icon-img(.23rem, .23rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/cmbc_logo');
-    // bg-image('icon/cmbc_logo', true)
   }
   .icon-cmb_wlb_logo {
+    @include jf-icon-img(.23rem, .23rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/cmb_wlb_logo');
-    // bg-image('icon/cmb_wlb_logo', true)
   }
   .icon-cmb_wlb_yz {
+    @include jf-icon-img(.33rem, .33rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/cmb_wlb_yz');
-    // bg-image('icon/cmb_wlb_yz', true)
   }
   .icon-cmbc {
+    @include jf-icon-img(.45rem, .34rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/cmbc');
-    // bg-image('icon/cmbc', true)
   }
   .icon-fps {
+    @include jf-icon-img(.635rem, .205rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/fps');
-    // bg-image('icon/fps', true)
   }
   .icon-bank {
+    @include jf-icon-img(.445rem, .33rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/bank');
-    // bg-image('icon/bank', true)
   }
   .icon-check {
+    @include jf-icon-img(.445rem, .32rem);
     @include retina-images('~@/modules/module-iaccount/assets/img/icon/check');
-    // bg-image('icon/check', true)
   }
 }
 </style>

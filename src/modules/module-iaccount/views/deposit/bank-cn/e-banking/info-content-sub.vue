@@ -45,7 +45,6 @@ export default {
       if (this.isDisabled) return
       this.isDisabled = true
       this.btnText = i18n.t('deposit.eBanking.text_14')
-      debugger
       const { tradeAccount, fundAccount = [], clientNameCn, clientNameEn } = this.accInfo
       const params = {
         clientId: tradeAccount,
@@ -77,7 +76,7 @@ export default {
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .apply-account {
-  &>>>.inner-detail {
+  & /deep/ .inner-detail {
     &:before {
       content: none;
     }

@@ -2,7 +2,7 @@
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .ways {
-  & >>> .media-txt {
+  & /deep/ .media-txt {
     margin-left: 0;
     .title {
       font-size: .15rem;

@@ -2,6 +2,9 @@
  * 中文 - 繁体
  *
  */
+import mainizeI18n from '@/main/locale/i18n/zh_HK';
+import customizeI18n from '@/customize/locale/i18n/zh_HK';
+
 import {
   BANK_HK,
   BANK_CN,
@@ -28,6 +31,8 @@ import {
 import { BANK_NAME_OPTIONS } from './info-remit'
 
 export default {
+  ...mainizeI18n,
+  ...customizeI18n,
   define: {
     BANK_HK,
     BANK_CN,
@@ -43,6 +48,9 @@ export default {
     DEPOSIT_ACCOUNT_TYPE,
     BANK_ID_KIND,
     EDDA_STATUS
+  },
+  main: {
+    pageName: '證券服務'
   },
   home: {
     text_1: '資金管理',

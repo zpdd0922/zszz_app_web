@@ -19,7 +19,7 @@ import { setLanguage } from "@/main/locale/helper";
 export default {
   components: { BaseCopyright, HeaderCustom },
   created() {
-    this.setTitle(this.$t("iAccount.main.pageName"));
+    this.setTitle(this.$t("main.pageName"));
     this.checkLogin();
   },
   computed: {
