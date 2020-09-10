@@ -1,0 +1,25 @@
+.op-header-title {
+
+  padding: .1rem 0;
+  font-size: .14rem;
+  color: $color-txt-sub;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .op-header-title-main {
+    padding-left: .1rem;
+    border-left: .02rem solid $color-prefix-icon;
+  }
+
+  .op-header-title-tips {
+    font-size: .12rem;
+    height: 1.5em;
+    line-height: 1.6em;
+
+    margin-right: .1rem;
+    color: $color-link-txt-active;
+  }
+  
+}

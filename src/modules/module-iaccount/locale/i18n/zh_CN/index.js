@@ -51,16 +51,72 @@ export default {
             placeholder: '转出券商的账户姓名',
             label: '账户姓名',
           },
+          otherTransferOutCompanyName: {
+            placeholder: '转出券商的名称',
+            label: '券商名称',
+          },
+          numberOfCCASS: {
+            placeholder: '中央结算编号',
+            label: 'CCASS号码',
+          },
+          contactName: {
+            placeholder: '转出券商的联系人',
+            label: '联系人',
+          },
+          contactPhone: {
+            placeholder: '转出券商的联系人电话',
+            label: '联系人电话',
+          },
         },
         recieverInfo: {
           title: '接收方信息',
-
+          recieverCompany: {
+            placeholder: '立桥证券',
+            label: '接收账户',
+          },
+          recieverAccount: {
+            placeholder: '请选择',
+            label: '接收账户',
+          },
         }
       }
-    }
+    },
+    stockDetail: {
+      title: '股票资讯',
+      stockName: '股票',
+      stockNamePlaceholder: '输入股票代码',
+      quantity: '数量',
+      quantityPlaceholder: '输入股票数量',
+    },
+    nextBtn: '下一步',
   },
   //TODO:
   language: 'zh_CN',
+  common: {
+    defaultNavigator: '',
+    alertTitle: "温馨提示",
+    toast: {
+      success: '调用成功',
+      failBusy: '网络繁忙，请稍后再试',
+      failLogin: '登录信息已失效，请先登录',
+      failOvertime: '网络请求超时，请稍后重试录',
+    },
+    comfire: {
+      cancelTxt: '否',
+      confirmTxt: '是',
+    },
+    picker: {
+      placeholder: '请选择省市区',
+    },
+    cubeComponents: {
+      select: {
+        title: '请选择',
+        cancelTxt: '取消',
+        confirmTxt: '确认',
+      }
+    },
+  },
+
   // 佣金计算
   brokerageCalculate,
   define: {

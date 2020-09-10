@@ -264,6 +264,11 @@ const routes = [
             component: _import('into-stock/transfer-info'),
             // meta: { pageName: 'iaccount.intoStock.pageName', step: 1, nextStep: 'stockDetail' },
             props: true,
+          },
+          {
+            path: 'stock-detail',
+            name: 'stockDetail',
+            component: _import('into-stock/stock-detail')
           }
         ]
       }

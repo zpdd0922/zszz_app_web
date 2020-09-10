@@ -1,7 +1,8 @@
 <template>
   <div class="deposit">
     <!-- Loading -->
-    <template v-if='!accInfo'>
+    <!-- <template v-if='!accInfo'> -->
+    <template v-if='false'>
       <loading />
     </template>
 
@@ -28,9 +29,10 @@ export default {
   },
   methods: {},
   created() {
-    this.$store.dispatch('apiFindAccInfo').then(res => {
-      this.getAccountStatus(res)
-    })
+    //TODO:
+    // this.$store.dispatch('apiFindAccInfo').then(res => {
+    //   this.getAccountStatus(res)
+    // })
   }
 }
 

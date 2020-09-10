@@ -1,19 +1,26 @@
 <template>
-  <op-wrap :isDisabled="isDisabled" @handleNext="handleNext">
+  <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
     <div class="olcn-step olcn-step-info-finance">
-      <!-- 转出方信息 -->
       <cube-form-group class="step-content custom-form-group experience-form-group">
           <!-- 转出方信息 -->
         <cube-form :model="transferOutInfoModel">
           <head-title :title="titleValues.transferOut"></head-title>
           <cube-form-item :field="fieldsTransferOut.transferOutCompany"></cube-form-item>
+          <template
+            v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
+          >
+            <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
+          </template>
           <cube-form-item :field="fieldsTransferOut.transferOutAccount"></cube-form-item>
           <cube-form-item :field="fieldsTransferOut.transferOutName"></cube-form-item>
           <template
-            v-if="transferOutInfoModel.otherProductsExperience &&  modelExperience.otherProductsExperience !== 0"
+            v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
           >
-            <cube-form-item :field="fieldsExperience.otherProductsName"></cube-form-item>
+            <cube-form-item :field="fieldsTransferOut.numberOfCCASS"></cube-form-item>
+            <cube-form-item :field="fieldsTransferOut.contactName"></cube-form-item>
+            <cube-form-item :field="fieldsTransferOut.contactPhone"></cube-form-item>
           </template>
+          <!-- 提醒 -->
           <div class="tips"></div>
           <div class="tips"></div>
         </cube-form>
@@ -21,8 +28,8 @@
         <cube-form :model="recieverInfoModel">
           <head-title :title="titleValues.reciever"></head-title>
           <div></div>
-          <cube-form-item :field="recieverInfoModel.recieverCompany"></cube-form-item>
-          <cube-form-item :field="recieverInfoModel.recieverAccount"></cube-form-item>
+          <cube-form-item :field="fieldsReciever.recieverCompany"></cube-form-item>
+          <cube-form-item :field="fieldsReciever.recieverAccount"></cube-form-item>
         </cube-form>
       </cube-form-group>
       <div class="margin-bottom"></div>
@@ -31,37 +38,32 @@
 </template>
 
 <script type="text/ecmascript-6">
-import onlineMixin from "../mixins/online.vue";
+// import onlineMixin from "../mixins/online.vue";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import * as optionsList from "./options-list";
 import validate from "@/main/utils/format/validate";
 
-// const defaultModelExperience = {
-//   stocksInvestmentExperience: 0,
-//   warrantsInvestmentExperience: 0,
-//   futuresInvestmentExperience: 0,
-//   optionsExperience: 0,
-//   CCBCExperience: 0,
-//   otherProductsExperience: 0,
-// };
-
 export default {
-  mixins: [onlineMixin],
+  // mixins: [onlineMixin],
   data() {
     return {
       validity: {},
       valid: undefined,
+      //TODO:根据港美股入口换券商列表
+      isHk: true,
       // isShowCapitalList: false,
       transferOutInfoModel: {
         transferOutCompany: '',
         transferOutAccount: '',
+        transferOutName: '',
         otherTransferOutCompanyName: '',
         numberOfCCASS: '',
         contactName: '',
         contactPhone: '',
       },
       recieverInfoModel: {
-
+        recieverCompany: '立桥证券',
+        recieverAccount: '',
       },
 
       // 转出方信息
@@ -72,9 +74,9 @@ export default {
           modelKey: "transferOutCompany",
           label: this.getI18n("transferOutInfo.transferOutCompany.label"),
           props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            // title: this.$t("common.cubeComponents.select.title"),
+            // cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            // confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n(
               "transferOutInfo.transferOutCompany.placeholder"
             ),
@@ -92,7 +94,7 @@ export default {
           props: {
             // title: this.$t("common.cubeComponents.select.title"),
             placeholder: this.getI18n(
-              "transferOutAccount.placeholder"
+              "transferOutInfo.transferOutAccount.placeholder"
             ),
           },
           rules: {
@@ -103,7 +105,7 @@ export default {
         transferOutName: {
           type: "input",
           modelKey: "transferOutName",
-          label: this.getI18n("experience.transferOutAccount.label"),
+          label: this.getI18n("transferOutInfo.transferOutName.label"),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             placeholder: this.getI18n(
@@ -118,89 +120,98 @@ export default {
         otherTransferOutCompanyName: {
           type: "input",
           modelKey: "otherTransferOutCompanyName",
-          label: this.getI18n("experience.otherProductsName.label"),
+          label: this.getI18n("transferOutInfo.otherTransferOutCompanyName.label"),
           props: {
             placeholder: this.getI18n(
-              "experience.otherProductsName.placeholder"
-            ),
-          },
-          rules: {
-            required: false,
-          },
-        otherCompanyName: {
-          type: "input",
-          modelKey: "otherProductsName",
-          label: this.getI18n("experience.otherProductsName.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            placeholder: this.getI18n(
-              "experience.otherProductsName.placeholder"
-            ),
-          },
-          rules: {
-            required: false,
-          },
-        otherCompanyName: {
-          type: "input",
-          modelKey: "otherProductsName",
-          label: this.getI18n("experience.otherProductsName.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            placeholder: this.getI18n(
-              "experience.otherProductsName.placeholder"
-            ),
-          },
-          rules: {
-            required: false,
-          },
-        otherCompanyName: {
-          type: "input",
-          modelKey: "otherProductsName",
-          label: this.getI18n("experience.otherProductsName.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            placeholder: this.getI18n(
-              "experience.otherProductsName.placeholder"
+              "transferOutInfo.otherTransferOutCompanyName.placeholder"
             ),
           },
           rules: {
             required: false,
           },
         },
-
+        //CCASS号码
+        numberOfCCASS: {
+          type: "input",
+          modelKey: "numberOfCCASS",
+          label: this.getI18n("transferOutInfo.numberOfCCASS.label"),
+          props: {
+            placeholder: this.getI18n(
+              "transferOutInfo.numberOfCCASS.placeholder"
+            ),
+          },
+          rules: {
+            required: false,
+          },
+        },
+        //联系人
+        contactName: {
+          type: "input",
+          modelKey: "contactName",
+          label: this.getI18n("transferOutInfo.contactName.label"),
+          props: {
+            placeholder: this.getI18n(
+              "transferOutInfo.contactName.placeholder"
+            ),
+          },
+          rules: {
+            required: false,
+          },
+        },
+        //联系人电话
+        contactPhone: {
+          type: "input",
+          modelKey: "contactPhone",
+          label: this.getI18n("transferOutInfo.contactPhone.label"),
+          props: {
+            placeholder: this.getI18n(
+              "transferOutInfo.contactPhone.placeholder"
+            ),
+          },
+          rules: {
+            required: false,
+          },
+        },
       },
+      
       //接收方信息
-      recieverInfoModel: {
+      fieldsReciever: {
         recieverCompany: {
           type: "input",
-          modelKey: "transferOutAccount",
-          label: this.getI18n("experience.transferOutAccount.label"),
+          modelKey: "recieverCompany",
+          label: this.getI18n("recieverInfo.recieverCompany.label"),
           props: {
-            title: this.$t("common.cubeComponents.select.title"),
             placeholder: this.getI18n(
-              "experience.otherProductsName.placeholder"
+              "recieverInfo.recieverCompany.placeholder"
             ),
+            disabled: true
           },
           rules: {
             required: false,
           },
         },
         recieverAccount: {
-          type: "input",
-          modelKey: "transferOutAccount",
-          label: this.getI18n("experience.transferOutAccount.label"),
+          type: "select",
+          modelKey: "recieverAccount",
+          label: this.getI18n("recieverInfo.recieverAccount.label"),
           props: {
-            title: this.$t("common.cubeComponents.select.title"),
             placeholder: this.getI18n(
-              "experience.otherProductsName.placeholder"
+              "recieverInfo.recieverAccount.placeholder"
             ),
+            options: optionsList.companyOptions(),
           },
           rules: {
             required: false,
           },
         },
       },
-    };
+    }
+  },
+  props: {
+    intoType: {
+      type: String,
+      default: 'hk'
+    }
   },
   computed: {
     // 返回title
@@ -210,91 +221,122 @@ export default {
         reciever: this.getI18n("recieverInfo.title"),
       };
     },
-    // 投资经验
-    validExperience() {
-      const {
-        stocksInvestmentExperience,
-        warrantsInvestmentExperience,
-        futuresInvestmentExperience,
-        optionsExperience,
-        CCBCExperience,
-        otherProductsExperience,
-        otherProductsName = "",
-      } = this.modelExperience;
-      if (
-        (stocksInvestmentExperience || stocksInvestmentExperience === 0) &&
-        (warrantsInvestmentExperience || warrantsInvestmentExperience === 0) &&
-        (futuresInvestmentExperience || futuresInvestmentExperience === 0) &&
-        (optionsExperience || optionsExperience === 0) &&
-        (CCBCExperience || CCBCExperience === 0) &&
-        !(
-          otherProductsExperience &&
-          otherProductsExperience !== 0 &&
-          otherProductsName.trim() === ""
-        )
-      ) {
-        return true;
+    // 判断路由入口是美股还是港股
+    isHK() {
+      if (this.intoType === 'hk') {
+        return true
       }
-      return false;
+      return false
     },
+
     // 验证提交按钮
-    submitStatus() {
-      const status = this.validExperience;
-      return !status;
+    isDisabled() {
+      let data = {
+        ...this.transferOutInfoModel,
+        ...this.recieverInfoModel
+      };
+      //TODO:校验要做优化，CCASS要不要后台做校验
+      // 证券转出商不为其他
+      if (this.transferOutInfoModel.otherTransferOutCompanyName !== 'OTH') {
+        const {
+          otherTransferOutCompanyName,
+          numberOfCCASS,
+          contactName,
+          contactPhone,
+          ...objTemp
+        } = data;
+        // 证券转出商未选择
+        if (!objTemp.transferOutCompany) {
+          return false
+        }
+        //未选择接收账户
+        if (!objTemp.recieverAccount) {
+          return false
+        }
+        //每项都大于两个字符时通过
+        for (let item in Object.keys(objTemp)) {
+          if ((item !== 'transferOutCompany' && item !== 'recieverAccount') && String(objTemp[item]).length <2) {
+            return false
+          }
+        };
+        return true
+      } else {
+        //证券转出商为其他
+        // 证券转出商未选择
+        if (!data.transferOutCompany) {
+          return false
+        }
+        //未选择接收账户
+        if (!data.recieverAccount) {
+          return false
+        }
+        //每项都大于两个字符时通过
+        for (let item in Object.keys(data)) {
+          if ((item !== 'transferOutCompany' && item !== 'recieverAccount') && String(data[item]).length <2) {
+            return false
+          }
+        };
+        return true
+
+      }
     },
   },
   methods: {
     getI18n(key) {
-      return this.$t(`iaccount.intoStock.transferInfo.${key}`);
+      return this.$t(`iAccount.intoStock.transferInfo.${key}`);
     },
     handlerShowCapital() {
       this.isShowCapitalList = !this.isShowCapitalList;
     },
     // 数据回填
-    initData() {
-      const userInfo = this.openInfo;
-      // const defaultDataTrade = this.modelTrade;
-      const defaultDataExperience = this.modelExperience;
+    // initData() {
+    //   const userInfo = this.openInfo;
+    //   // const defaultDataTrade = this.modelTrade;
+    //   const defaultDataExperience = this.modelExperience;
 
-      console.log(
-        // defaultDataTrade,
-        defaultDataExperience,
-        // userInfo.tradeStockFrequency
-      );
-      Object.keys(defaultDataExperience).forEach((val) => {
-        defaultDataExperience[val] =
-          userInfo[val] !== undefined
-            ? userInfo[val]
-            : defaultModelExperience[val] !== undefined
-            ? defaultModelExperience[val]
-            : defaultDataExperience[val];
-      });
+    //   console.log(
+    //     // defaultDataTrade,
+    //     defaultDataExperience,
+    //     // userInfo.tradeStockFrequency
+    //   );
+    //   Object.keys(defaultDataExperience).forEach((val) => {
+    //     defaultDataExperience[val] =
+    //       userInfo[val] !== undefined
+    //         ? userInfo[val]
+    //         : defaultModelExperience[val] !== undefined
+    //         ? defaultModelExperience[val]
+    //         : defaultDataExperience[val];
+    //   });
 
-      // Object.keys(defaultDataTrade).forEach((val) => {
-      //   defaultDataTrade[val] =
-      //     userInfo[val] !== undefined
-      //       ? userInfo[val]
-      //       : defaultModelTrade[val] !== undefined
-      //       ? defaultModelTrade[val]
-      //       : defaultDataTrade[val];
-      // });
-    },
+    //   Object.keys(defaultDataTrade).forEach((val) => {
+    //     defaultDataTrade[val] =
+    //       userInfo[val] !== undefined
+    //         ? userInfo[val]
+    //         : defaultModelTrade[val] !== undefined
+    //         ? defaultModelTrade[val]
+    //         : defaultDataTrade[val];
+    //   });
+    // },
     // 下一步
-    submitHandler(e) {
+    handleNext(e) {
       e.preventDefault();
       // 保存数据&下一步
       const params = {
-        step: this.step,
-        info: {...this.modelExperience},
+        // step: this.step,
+        info: {
+          ...this.transferOutInfoModel,
+          ...this.recieverInfoModel,
+        },
       };
-      this.saveCacheInfo(params).then(() => {
-        this.$router.push({ name: this.nextStep });
-      });
+      // this.saveCacheInfo(params).then(() => {
+      //   this.$router.push({ name: this.nextStep });
+      // });
+      this.$router.push('stock-detail')
     },
-    validateHandler(result) {
-      this.validity = result.validity;
-      this.valid = result.valid;
-    },
+    // validateHandler(result) {
+    //   this.validity = result.validity;
+    //   this.valid = result.valid;
+    // },
     // 获取后台数据字典
     // async fetchDataDesin() {
     //   const result = await this.$store.dispatch(
@@ -309,11 +351,6 @@ export default {
     // },
   },
   // watch: {
-  //   "modelExperience.stocksInvestmentExperience"(newVal, oldVal) {
-  //     if (newVal === 0) {
-  //       this.modelTrade.tradeStockFrequency = 0;
-  //     }
-  //   },
   //   "modelExperience.warrantsInvestmentExperience"(newVal, oldVal) {
   //     if (newVal === 0) {
   //       this.modelTrade.tradeWarrantsFrequency = 0;
@@ -342,9 +379,10 @@ export default {
   // },
   created() {},
   mounted() {
-    this.initData();
+    // this.initData();
   },
-};
+}
 </script>
-
-
+<style scoped>
+@import './style.scss';
+</style>
