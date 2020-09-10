@@ -1,3 +1,8 @@
+
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
 .op-page-wrap-ow {
   .ow-ways {
     padding: .15rem .25rem;
@@ -23,15 +28,11 @@
       background-repeat: no-repeat;
     }
 
-    .ow-icon-cn {
-      @include retina-images('~@/modules/module-iopen/assets/images/open-way/icon-cn');
+    .ow-icon-us {
+      background-image: url('~@/modules/module-iaccount/assets/img/select-type/icon_us.png');
     }
     .ow-icon-hk {
-      @include retina-images('~@/modules/module-iopen/assets/images/open-way/icon-hk');
-    }
-    .ow-icon-other {
-      @include retina-images('~@/modules/module-iopen/assets/images/open-way/icon-other');
-
+      background-image: url('~@/modules/module-iaccount/assets/img/select-type/icon_hk.png');
     }
 
     .ow-label{

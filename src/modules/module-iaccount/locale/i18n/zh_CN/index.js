@@ -33,8 +33,33 @@ export default {
   iAccount: {
     main: {
       pageName: '证券服务'
+    },
+    intoStock: {
+      intoWayTitle: '请选择转入股票',
+      transferInfo: {
+        transferOutInfo: {
+          title: '转出方信息',
+          transferOutCompany: {
+            placeholder: '请选择',
+            label: '转出券商',
+          },
+          transferOutAccount: {
+            placeholder: '转出券商的账户号码',
+            label: '账户号码',
+          },
+          transferOutName: {
+            placeholder: '转出券商的账户姓名',
+            label: '账户姓名',
+          },
+        },
+        recieverInfo: {
+          title: '接收方信息',
+
+        }
+      }
     }
   },
+  //TODO:
   language: 'zh_CN',
   // 佣金计算
   brokerageCalculate,

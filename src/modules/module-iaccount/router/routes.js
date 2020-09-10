@@ -14,7 +14,7 @@ import BankOhter from '../views/deposit/bank-other/layout'
 // eDDA入金
 import BankEdda from '../views/deposit/bank-hk/edda/layout'
 // 股票转入
-import StockEnter from '../views/stock-enter/layout'
+import IntoStock from '../views/into-stock/layout'
 
 const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iaccount" */ `../views/${path}/${file}.vue`);
 
@@ -248,16 +248,23 @@ const routes = [
       },
       // 股票->转入股票
       {
-        path: '/stock-enter',
-        name: 'stock-enter',
-        redirect: '/stock-enter/enter-way',
-        component: StockEnter,
+        path: '/into-stock',
+        name: 'into-stock',
+        redirect: '/into-stock/into-way',
+        component: IntoStock,
         children: [
           {
-            path: 'enter-way',
-            name: 'stock-enter',
-            component: _import('stock-enter/enter-way')
+            path: 'into-way',
+            name: 'into-way',
+            component: _import('into-stock/into-way')
           },
+          {
+            path: 'transfer-info',
+            name: 'transferInfo',
+            component: _import('into-stock/transfer-info'),
+            // meta: { pageName: 'iaccount.intoStock.pageName', step: 1, nextStep: 'stockDetail' },
+            props: true,
+          }
         ]
       }
     ]
