@@ -1,0 +1,103 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+@import '~@/main/assets/scss/mixin.scss';
+
+.capital-flow {
+  font-size: .14rem;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling : touch;
+  // 出入金总额
+  .total-amount {
+    padding: 0 .15rem .08rem;
+    background: $color-theme;
+    position: relative;
+    z-index: 10;
+    >div {
+      display: flex;
+      align-tiems: center;
+      justify-content: flex-start;
+      &.title {
+        p {
+          height: .4rem;
+          line-height: normal;
+          display: flex;
+          align-items: center;
+          flex:1;
+          span {
+            flex: 1;
+          }
+        }
+      }
+      &.amount-card {
+        >div {
+          flex :1;
+          span {
+            height: .3rem;
+            line-height: normal ;
+            display: flex;
+            align-items: center;
+            &+span {
+              margin-top: .05rem;
+            }
+            i {
+              display:  inline-block;
+              margin-right :.05rem;
+              &.icon-hk {
+                @include jf-icon-img(.2rem, .2rem);
+                @include retina-images('~@/modules/module-iaccount/views/capital-flow/images/icon-hk');
+                // @include bg-image('icon-hk');
+              }
+              &.icon-us {
+                @include jf-icon-img(.2rem, .2rem);
+                @include retina-images('~@/modules/module-iaccount/views/capital-flow/images/icon-us');
+                // @include bg-image('icon-us');
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 资金流水
+  .list-wrap {
+    background: $color-theme;
+    position: relative;
+  }
+  .bottom-tip {
+    color: $color-arrow;
+    font-size:.12rem;
+    height:.47rem;
+    line-height: .47rem;
+    text-align: center;
+    background: $color-theme-bg;
+  }
+  .mask {
+    position :fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom :0;
+    background :rgba(0,0,0,0.5);
+    z-index: 5;
+  }
+  // 下拉按钮
+  .arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: .07rem solid $color-arrow;
+    border-left: .07rem solid transparent;
+    border-right: .07rem solid transparent;
+    border-bottom: none;
+    border-radius: .025rem;
+    &.active {
+      border-top: none;
+      border-bottom: .07rem solid $color-link;
+    }
+  }
+}

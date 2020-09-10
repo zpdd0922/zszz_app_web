@@ -1,0 +1,25 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.withdraw {
+  .request {
+    .wrap-tips {
+      color: $color-999;
+      font-size: .12rem;
+      padding: .07rem .15rem;
+      text-align: justify;
+      .cell {
+        @include flex-box($row: space-between);
+        margin-top: .08rem;
+        line-height: .2rem;
+        &>div {
+          @include flex-box($col: center);
+        }
+      }
+      .money {
+        color: $color-text;
+        font-style: normal;
+      }
+    }
+  }
+}
