@@ -6,22 +6,40 @@
   width: 100%;
   background-color: $color-theme-s;
 
+  .stock-detail-title {
+    padding: 0.15rem .15rem;
+    font-size: 0.17rem;
+  }
   .addBtn {
     width: 100%;
     padding: 0.1rem 0;
     text-align: center; 
     margin-bottom: 0.1rem;
     background-color: $color-block-bg;
+    font-size: 0.17rem;
+
   }
   .addBtn-active {
     color: $color-dialog-btn-txt;
   }
 
-  &/deep/.form {
+  .form {
     width: 100%;
     background-color: $color-block-bg;
     margin-bottom: 0.2rem;
+
+    .inputColumn {
+      width: 100%;
+      padding: 0.15rem 0.2rem;
+      font-size: 0.17rem;
+      border-bottom: 0.01rem solid $color-eee;
+
+      label {
+        padding-right: 0.2rem;
+      }
+    }
   }
+  
   
   
   /*按钮*/
@@ -30,7 +48,8 @@
     justify-content: space-between;
     width: 100%;
     background-color: $color-block-bg;
-    padding: 0.05rem 0.15rem;
+    padding: 0.15rem 0.2rem;
     color: $color-dialog-btn-txt;
+    font-size: 0.17rem;
   }
 }
