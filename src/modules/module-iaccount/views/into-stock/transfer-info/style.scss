@@ -1,7 +1,17 @@
-.olcn-step-info-finance {
-  .experience-form-group{
-    .cube-form-label {
-      width: 10em;
-    }
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
+.transfer-info-wrap {
+  width: 100%;
+  background-color: $color-theme-m;
+
+  .form {
+    background-color: $color-theme;
+  }
+
+  .transfer-info-title {
+    font-size: 0.17rem;
+    padding: 0.12rem 0.14rem;
   }
 }

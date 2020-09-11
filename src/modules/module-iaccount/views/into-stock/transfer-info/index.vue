@@ -1,37 +1,36 @@
 <template>
   <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
-    <div class="olcn-step olcn-step-info-finance">
-      <cube-form-group class="step-content custom-form-group experience-form-group">
+    <div class="transfer-info-wrap">
           <!-- 转出方信息 -->
-        <cube-form :model="transferOutInfoModel">
-          <head-title :title="titleValues.transferOut"></head-title>
-          <cube-form-item :field="fieldsTransferOut.transferOutCompany"></cube-form-item>
-          <template
-            v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
-          >
-            <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
-          </template>
-          <cube-form-item :field="fieldsTransferOut.transferOutAccount"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut.transferOutName"></cube-form-item>
-          <template
-            v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
-          >
-            <cube-form-item :field="fieldsTransferOut.numberOfCCASS"></cube-form-item>
-            <cube-form-item :field="fieldsTransferOut.contactName"></cube-form-item>
-            <cube-form-item :field="fieldsTransferOut.contactPhone"></cube-form-item>
-          </template>
-          <!-- 提醒 -->
-          <div class="tips"></div>
-          <div class="tips"></div>
-        </cube-form>
-          <!-- 接收方信息 -->
-        <cube-form :model="recieverInfoModel">
-          <head-title :title="titleValues.reciever"></head-title>
-          <div></div>
-          <cube-form-item :field="fieldsReciever.recieverCompany"></cube-form-item>
-          <cube-form-item :field="fieldsReciever.recieverAccount"></cube-form-item>
-        </cube-form>
-      </cube-form-group>
+      <div class="transfer-info-title">{{titleValues.transferOut}}</div>
+      <cube-form :model="transferOutInfoModel" class="form">
+        <cube-form-item :field="fieldsTransferOut.transferOutCompany"></cube-form-item>
+        <!-- 转出公司为其他时弹出 -->
+        <template
+          v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
+        >
+          <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
+        </template>
+        <cube-form-item :field="fieldsTransferOut.transferOutAccount"></cube-form-item>
+        <cube-form-item :field="fieldsTransferOut.transferOutName"></cube-form-item>
+        <template
+          v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
+        >
+          <cube-form-item :field="fieldsTransferOut.numberOfCCASS"></cube-form-item>
+          <cube-form-item :field="fieldsTransferOut.contactName"></cube-form-item>
+          <cube-form-item :field="fieldsTransferOut.contactPhone"></cube-form-item>
+        </template>
+        <!-- 提醒 -->
+        <div class="tips"></div>
+        <div class="tips"></div>
+      </cube-form>
+        <!-- 接收方信息 -->
+      <div class="transfer-info-title">{{titleValues.reciever}}</div>
+      <cube-form :model="recieverInfoModel">
+        <div></div>
+        <cube-form-item :field="fieldsReciever.recieverCompany"></cube-form-item>
+        <cube-form-item :field="fieldsReciever.recieverAccount"></cube-form-item>
+      </cube-form>
       <div class="margin-bottom"></div>
     </div>
   </op-wrap>
@@ -68,7 +67,7 @@ export default {
 
       // 转出方信息
       fieldsTransferOut: {
-        // 转出券商名字
+        // 转出券商选择
         transferOutCompany: {
           type: "select",
           modelKey: "transferOutCompany",
@@ -237,7 +236,7 @@ export default {
       };
       //TODO:校验要做优化，CCASS要不要后台做校验
       // 证券转出商不为其他
-      if (this.transferOutInfoModel.otherTransferOutCompanyName !== 'OTH') {
+      if (this.transferOutInfoModel.transferOutCompany !== 'OTH') {
         const {
           otherTransferOutCompanyName,
           numberOfCCASS,
@@ -245,48 +244,44 @@ export default {
           contactPhone,
           ...objTemp
         } = data;
-        // 证券转出商未选择
-        if (!objTemp.transferOutCompany) {
-          return false
-        }
-        //未选择接收账户
-        if (!objTemp.recieverAccount) {
-          return false
-        }
+        for (let item of Object.keys(objTemp)) {
+          // 证券转出商未选择
+          if (!objTemp.transferOutCompany) {
+            return false
+          }
+          //未选择接收账户
+          if (!objTemp.recieverAccount) {
+            return false
+          }
         //每项都大于两个字符时通过
-        for (let item in Object.keys(objTemp)) {
-          if ((item !== 'transferOutCompany' && item !== 'recieverAccount') && String(objTemp[item]).length <2) {
+          if (objTemp[item].length <2) {
             return false
           }
         };
         return true
       } else {
         //证券转出商为其他
-        // 证券转出商未选择
-        if (!data.transferOutCompany) {
-          return false
-        }
-        //未选择接收账户
-        if (!data.recieverAccount) {
-          return false
-        }
+        for (let item of Object.keys(data)) {
+          // 证券转出商未选择
+          if (!data.transferOutCompany) {
+            return false
+          }
+          //未选择接收账户
+          if (!data.recieverAccount) {
+            return false
+          }
         //每项都大于两个字符时通过
-        for (let item in Object.keys(data)) {
-          if ((item !== 'transferOutCompany' && item !== 'recieverAccount') && String(data[item]).length <2) {
+          if (data[item].length <2) {
             return false
           }
         };
         return true
-
       }
     },
   },
   methods: {
     getI18n(key) {
       return this.$t(`iAccount.intoStock.transferInfo.${key}`);
-    },
-    handlerShowCapital() {
-      this.isShowCapitalList = !this.isShowCapitalList;
     },
     // 数据回填
     // initData() {
@@ -383,6 +378,6 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 @import './style.scss';
 </style>
