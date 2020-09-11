@@ -1,0 +1,59 @@
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
+.info-confirm {
+  width: 100%;
+  background-color: $color-theme-s;
+
+  .info-confirm-title {
+    padding: 0.12rem 0.12rem;
+    width: 100%;
+    color: $color-text;
+  }
+
+  .block {
+    width: 100%;
+    background-color: $color-theme;
+
+    .title {
+      width: 100%;
+      padding: 0.12rem 0.12rem;
+    }
+
+    .content-wrap {
+      padding: 0 0.12rem 0.12rem;
+      width: 100%;
+
+      .line {
+        line-height: 0.18rem;
+        
+        .content-title {
+          color: $color-999
+        }
+        .content-info {
+          padding-left: 0.2rem;
+        }
+      }
+    }
+  }
+  .block:not(:last-child) {
+    border-bottom: 1px dashed $color-eee;
+  }
+  .block:last-child {
+    margin-bottom: 0.2rem;
+    
+    .content-wrap {
+      display: flex;
+      justify-content: space-between;
+
+      .line {
+
+        span {
+          display: block;
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

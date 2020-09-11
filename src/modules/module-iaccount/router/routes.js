@@ -269,6 +269,11 @@ const routes = [
             path: 'stock-detail',
             name: 'stockDetail',
             component: _import('into-stock/stock-detail')
+          },
+          {
+            path: 'info-confirm',
+            name: 'infoConfirm',
+            component: _import('into-stock/info-confirm')
           }
         ]
       }

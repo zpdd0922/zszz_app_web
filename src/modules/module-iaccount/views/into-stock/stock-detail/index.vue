@@ -15,8 +15,8 @@
           :key="item.id"
           class="form"
         >
-          <cube-form-item :field="stockField" :disabled="!isAddBtnActive && activeStockId === item.id"></cube-form-item>
-          <cube-form-item :field="numberField" :disabled="!isAddBtnActive && activeStockId === item.id"></cube-form-item>
+          <cube-form-item :field="stockField"></cube-form-item>
+          <cube-form-item :field="numberField" :disabled="isAddBtnActive || activeStockId === item.id"></cube-form-item>
           <div class="btn-wrap" v-if="isAddBtnActive" @click="handleClick($event, item.id)"
           >
             <div
@@ -48,14 +48,13 @@
 export default {
   data() {
     return {
-      isAddBtnActive: true,
-      activeStockId: '',
-      number: 0,
-      activeIdx: 0,
-      isAdd:false,
+      isDisabled:  true, //下一步按钮状态
+      isAddBtnActive: true, //添加按钮激活状态
+      number: 0, //记录最后一个数组元素的index
+      // activeIndex: 0,
       model: {
         stockName: "",
-        quantity: 0,
+        quantity: "",
         stockList: []
       },
       stockField: {
@@ -64,6 +63,7 @@ export default {
         label: this.getI18n('stockName'),
         props: {
           placeholder: this.getI18n('stockNamePlaceholder'),
+          disabled : this.isInputDisabled,
         },
         rules: {
           required: false
@@ -75,6 +75,7 @@ export default {
         label: this.getI18n('quantity'),
         props: {
           placeholder: this.getI18n('quantityPlaceholder'),
+          disabled : this.isInputDisabled,
         },
         rules: {
           required: false
@@ -83,16 +84,20 @@ export default {
     }
   },
   computed: {
-    isDisabled() {
-      return false
-    },
+    isInputDisabled() {
+      // return isAddBtnActive && this.model.stockList.
+      return true
+    }
+    // isDisabled() {
+    //   return false
+    // },
   },
   methods: {
     getI18n(key) {
-      return this.$t(`iAccount.stockDetail.${key}`)
+      return this.$t(`iAccount.intoStock.stockDetail.${key}`)
     },
     handleNext() {
-
+      this.$router.push({name: 'infoConfirm'})
     },
     // 增加税务信息
     addStock() {
@@ -102,10 +107,12 @@ export default {
       const list = this.model.stockList;
       this.model.stockList = [
         {
-        id: this.number++,
-        stockName: '',
-        quatity: '',
-      },
+          id: this.number++,
+          stockName: '',
+          quatity: '',
+          isInputActive: true, //输入框状态
+          isBtnActive: true, //操作按钮状态
+        },
       ...list
       ]
       // this.model.stockList.push({
@@ -128,6 +135,7 @@ export default {
         this.cancel();
       }
     },
+    //删除事件
     deleteStock(itemId) {
       const idx= null;
       this.model.stockList.find((itemId, index) => {
@@ -138,16 +146,23 @@ export default {
       });
       this.model.stockList.splice(idx, 1);
     },
-    edit(id) {
-
-      this.activeStockId = id;
-
+    // 编辑
+    edit(itemId) {
+      this.model.stockList.forEach((item) => {
+        if (item.id === itemId) {
+          item.isInputActive = true;
+        } else {
+          item.isInputActive =false;
+        }
+      })
     },
+    // 取消
     cancel() {
       this.model.stockList.pop();
       this.number--;
       this.isAddBtnActive = true;
     },
+    // 保存
     saveStock(itemId) {
       const obj = this.model.stockList.find((item) => {
         if (item.id === itemId) {
@@ -168,7 +183,7 @@ export default {
       }
       console.log(1)
       this.isAddBtnActive = true;
-      this.isDisabled = true;
+      // this.isDisabled = true;
     },
   },
 }

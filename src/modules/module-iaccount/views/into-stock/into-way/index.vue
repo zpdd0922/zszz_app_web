@@ -1,22 +1,24 @@
 <template>
-  <section class="op-page-wrap op-page-wrap-ow">
-    <header class="op-page-title">{{$t('iAccount.intoStock.intoWayTitle')}}</header>
-    <base-cells class="ow-ways">
-      <base-cell
+  <section class="into-way-wrap">
+    <header class="page-title">{{$t('iAccount.intoStock.intoWay.title')}}</header>
+    <div class="ways">
+      <div
         v-for="item in ways"
         :key="item.type"
-        class="ow-way-item"
+        class="way-item"
         @click="handleNext(item)"
       >
-        <base-cell-header>
-          <em :class="`ow-icon ow-icon-${item.type}`" />
-        </base-cell-header>
-        <base-cell-body>
-          <span class="ow-label">{{item.label}}</span>
-          <span class="ow-tips">{{item.tips}}</span>
-        </base-cell-body>
-      </base-cell>
-    </base-cells>
+        <div>
+          <em :class="`icon icon-${item.type}`" />
+        </div>
+        <div class="cell-body">
+          <span class="label">{{item.label}}</span>
+          <span class="eng">{{item.engLabel}}</span>
+          <!-- <span class="tips">{{item.tips}}</span> -->
+        </div>
+        <div class="arrow"></div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -75,13 +77,15 @@ export default {
         {
           type: "hk",
           code: 1,
-          label: this.$t("iOpen.authWay.wayHK"),
+          label: this.$t("iAccount.intoStock.intoWay.wayHK"),
+          engLabel: 'Into HK stocks',
           // nextRouteName: 'transferInfo',
         },
         {
           type: "us",
           code: 2,
-          label: this.$t("iOpen.authWay.wayOther"),
+          label: this.$t("iAccount.intoStock.intoWay.wayUS"),
+          engLabel: 'Into US stocks',
           // nextRouteName: 'transferInfo',
         },
       ];

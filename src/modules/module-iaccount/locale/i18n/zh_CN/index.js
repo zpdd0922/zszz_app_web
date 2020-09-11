@@ -35,7 +35,11 @@ export default {
       pageName: '证券服务'
     },
     intoStock: {
-      intoWayTitle: '请选择转入股票',
+      intoWay: {
+        title: '请选择转入股票',
+        wayHK: '转入港股股票',
+        wayUS: '转入美股股票',
+      },
       transferInfo: {
         transferOutInfo: {
           title: '转出方信息',
@@ -79,16 +83,37 @@ export default {
             label: '接收账户',
           },
         }
-      }
-    },
-    stockDetail: {
-      title: '股票资讯',
-      stockName: '股票',
-      stockNamePlaceholder: '输入股票代码',
-      quantity: '数量',
-      quantityPlaceholder: '输入股票数量',
+      },
+      stockDetail: {
+        title: '股票资讯',
+        stockName: '股票',
+        stockNamePlaceholder: '输入股票代码',
+        quantity: '数量',
+        quantityPlaceholder: '输入股票数量',
+      },  
+      infoConfirm: {
+        confirmTitle: '请确认所填信息无误后提交',
+        transferOut: {
+          title: '转出方信息',
+          companyName: '券商名称',
+          accountNumber: '账户号码',
+          accountName: '账户姓名',
+        },
+        reciever: {
+          title: '接收方信息',
+          companyName: '券商名称',
+          accountNumber: '接收账户',
+        },
+        stockInfo: {
+          title: '股票信息',
+          stockCode: '股票代码',
+          stockName: '股票名称',
+          quantity: '股票数量',
+        }
+      },  
     },
     nextBtn: '下一步',
+    confirmBtn: '确认提交',
   },
   //TODO:
   language: 'zh_CN',
