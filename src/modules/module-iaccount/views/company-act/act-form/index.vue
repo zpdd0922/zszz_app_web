@@ -3,7 +3,7 @@
     <div class="header border-bottom-1px border-top-1px">
       <div class="input-btn" @click="searchHandle">
         <i class="cubeic-search icon"></i>
-        <span class="txt">{{ $t('company_act.placeholder.text_1') }}</span>
+        <span class="txt">{{ $t('iAccount.company_act.placeholder.text_1') }}</span>
       </div>
     </div>
     <div class="stock-info">
@@ -12,7 +12,7 @@
     </div>
     <div class="form">
       <div class="form-item">
-        <div class="label">{{ $t('company_act.label.text_1') }}</div>
+        <div class="label">{{ $t('iAccount.company_act.label.text_1') }}</div>
         <p class="require-status">*</p>
         <div class="content border-bottom-1px">
           <cube-select
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="form-item">
-        <div class="label">{{ $t('company_act.label.text_2') }}</div>
+        <div class="label">{{ $t('iAccount.company_act.label.text_2') }}</div>
         <p class="require-status">*</p>
         <div class="content border-bottom-1px">
           <cube-select
@@ -34,7 +34,7 @@
       </div>
       <template v-if="nameValue && nameValue !== 'OTH'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_3') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_3') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
             <cube-select
@@ -47,204 +47,204 @@
       </template>
       <template v-if="nameValue === 'OTH'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_4') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_4') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input v-model="otherValue" :placeholder="$t('company_act.placeholder.text_2')"></cube-input>
+            <cube-input v-model="otherValue" :placeholder="$t('iAccount.company_act.placeholder.text_2')"></cube-input>
           </div>
         </div>
       </template>
       <!-- 附選擇權的股息權益 -->
       <template v-if="activeSelect === 'DSO3'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_5') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_5') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="scriptStockNum" :placeholder="$t('company_act.placeholder.text_3')" ></cube-input>
+            <cube-input type="tel" v-model="scriptStockNum" :placeholder="$t('iAccount.company_act.placeholder.text_3')" ></cube-input>
           </div>
         </div>
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_6') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_6') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="scriptCashNum" :placeholder="$t('company_act.placeholder.text_4')"></cube-input>
+            <cube-input type="tel" v-model="scriptCashNum" :placeholder="$t('iAccount.company_act.placeholder.text_4')"></cube-input>
           </div>
         </div>
       </template>
       <!-- 附選擇權的股份轉換 -->
       <template v-if="activeSelect === 'OSE2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_7') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_7') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="shareExchangeNum" :placeholder="$t('company_act.placeholder.text_5')"></cube-input>
+            <cube-input type="tel" v-model="shareExchangeNum" :placeholder="$t('iAccount.company_act.placeholder.text_5')"></cube-input>
           </div>
         </div>
       </template>
       <!-- 供股 -->
       <template v-if="activeSelect === 'RS2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_8') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_8') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="rightSubscriptionNum2" :placeholder="$t('company_act.placeholder.text_6')"></cube-input>
+            <cube-input type="tel" v-model="rightSubscriptionNum2" :placeholder="$t('iAccount.company_act.placeholder.text_6')"></cube-input>
           </div>
         </div>
       </template>
       <template v-if="activeSelect === 'RS1' || activeSelect === 'RS2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_9') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_9') }}</div>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="rightSubscriptionNum3" :placeholder="$t('company_act.placeholder.text_7')"></cube-input>
+            <cube-input type="tel" v-model="rightSubscriptionNum3" :placeholder="$t('iAccount.company_act.placeholder.text_7')"></cube-input>
           </div>
         </div>
       </template>
       <!-- 公開配售 -->
       <template v-if="activeSelect === 'OOS2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_8') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_8') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="offerSubscriptionNum2" :placeholder="$t('company_act.placeholder.text_6')"></cube-input>
+            <cube-input type="tel" v-model="offerSubscriptionNum2" :placeholder="$t('iAccount.company_act.placeholder.text_6')"></cube-input>
           </div>
         </div>
       </template>
       <template v-if="activeSelect === 'OOS1' || activeSelect === 'OOS2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_9') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_9') }}</div>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="offerSubscriptionNum3" :placeholder="$t('company_act.placeholder.text_7')"></cube-input>
+            <cube-input type="tel" v-model="offerSubscriptionNum3" :placeholder="$t('iAccount.company_act.placeholder.text_7')"></cube-input>
           </div>
         </div>
       </template>
       <!-- 現金收購 -->
       <template v-if="activeSelect === 'CO2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_10') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_10') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="cashOfferNum" :placeholder="$t('company_act.placeholder.text_9')"></cube-input>
+            <cube-input type="tel" v-model="cashOfferNum" :placeholder="$t('iAccount.company_act.placeholder.text_9')"></cube-input>
           </div>
         </div>
       </template>
       <!-- 認股權證的轉換 -->
       <template v-if="activeSelect === 'WC2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_33') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_33') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="warrantsConversionNum" :placeholder="$t('company_act.placeholder.text_10')"></cube-input>
+            <cube-input type="tel" v-model="warrantsConversionNum" :placeholder="$t('iAccount.company_act.placeholder.text_10')"></cube-input>
           </div>
         </div>
       </template>
       <!-- 優先認購 -->
       <template v-if="activeSelect === 'PO2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_8') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_8') }}</div>
           <p class="require-status">*</p>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="preferentialOfferNum2" :placeholder="$t('company_act.placeholder.text_6')"></cube-input>
+            <cube-input type="tel" v-model="preferentialOfferNum2" :placeholder="$t('iAccount.company_act.placeholder.text_6')"></cube-input>
           </div>
         </div>
       </template>
       <template v-if="activeSelect === 'PO1' || activeSelect === 'PO2'">
         <div class="form-item">
-          <div class="label">{{ $t('company_act.label.text_9') }}</div>
+          <div class="label">{{ $t('iAccount.company_act.label.text_9') }}</div>
           <div class="content border-bottom-1px">
-            <cube-input type="tel" v-model="preferentialOfferNum3" :placeholder="$t('company_act.placeholder.text_7')"></cube-input>
+            <cube-input type="tel" v-model="preferentialOfferNum3" :placeholder="$t('iAccount.company_act.placeholder.text_7')"></cube-input>
           </div>
         </div>
       </template>
       <div class="form-item">
-        <div class="label">{{ $t('company_act.label.text_12') }}</div>
+        <div class="label">{{ $t('iAccount.company_act.label.text_12') }}</div>
         <div class="content border-bottom-1px">
-          <cube-input v-model="remark" :placeholder="$t('company_act.placeholder.text_11')"></cube-input>
+          <cube-input v-model="remark" :placeholder="$t('iAccount.company_act.placeholder.text_11')"></cube-input>
         </div>
       </div>
     </div>
     <div class="btn">
-      <cube-button primary :disabled="disableBtn" @click="submitHandle">{{ $t('company_act.label.text_13') }}</cube-button>
+      <cube-button primary :disabled="disableBtn" @click="submitHandle">{{ $t('iAccount.company_act.label.text_13') }}</cube-button>
     </div>
     <template v-if="dialogStatus">
       <div class="dialog">
         <div class="box">
-          <div class="title">{{ $t('company_act.label.text_14') }}</div>
+          <div class="title">{{ $t('iAccount.company_act.label.text_14') }}</div>
           <div class="content">
             <cube-scroll>
               <div class="tiem">
-                <p>{{ $t('company_act.label.text_15') }}</p>
-                <p>{{ $t('company_act.label.text_16') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_15') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_16') }}</p>
               </div>
               <div class="tiem">
-                <p>{{ $t('company_act.label.text_17') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_17') }}</p>
                 <p>{{dialogCompanyName}}</p>
               </div>
               <div class="tiem" v-if="this.nameValue !== 'OTH'">
-                <p>{{ $t('company_act.label.text_18') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_18') }}</p>
                 <p>{{dialogCompanyActive}}</p>
               </div>
               <div v-if="activeSelect === 'DSO3'">
                 <div class="tiem">
-                  <p>{{ $t('company_act.label.text_19') }}</p>
+                  <p>{{ $t('iAccount.company_act.label.text_19') }}</p>
                   <p>{{scriptStockNum}}</p>
                 </div>
                 <div class="tiem">
-                  <p>{{ $t('company_act.label.text_20') }}</p>
+                  <p>{{ $t('iAccount.company_act.label.text_20') }}</p>
                   <p>{{scriptCashNum}}</p>
                 </div>
               </div>
               <div v-if="activeSelect === 'OSE2'">
                 <div class="tiem">
-                  <p>{{ $t('company_act.label.text_21') }}</p>
+                  <p>{{ $t('iAccount.company_act.label.text_21') }}</p>
                   <p>{{shareExchangeNum}}</p>
                 </div>
               </div>
               <div class="tiem" v-if="activeSelect === 'RS2'">
-                <p>{{ $t('company_act.label.text_22') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_22') }}</p>
                 <p>{{rightSubscriptionNum2}}</p>
               </div>
               <div class="tiem" v-if="activeSelect === 'RS1' || activeSelect === 'RS2'">
-                <p>{{ $t('company_act.label.text_23') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_23') }}</p>
                 <p>{{rightSubscriptionNum3}}</p>
               </div>
               <div class="tiem" v-if="activeSelect === 'OOS2'">
-                <p>{{ $t('company_act.label.text_22') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_22') }}</p>
                 <p>{{offerSubscriptionNum2}}</p>
               </div>
               <div class="tiem" v-if="activeSelect === 'OOS1' || activeSelect === 'OOS2'">
-                <p>{{ $t('company_act.label.text_23') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_23') }}</p>
                 <p>{{offerSubscriptionNum3}}</p>
               </div>
               <div class="tiem" v-if="activeSelect === 'CO2'">
-                <p>{{ $t('company_act.label.text_24') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_24') }}</p>
                 <p>{{cashOfferNum}}</p>
               </div>
               <div class="tiem" v-if="activeSelect === 'WC2'">
-                <p>{{ $t('company_act.label.text_34') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_34') }}</p>
                 <p>{{warrantsConversionNum}}</p>
               </div>
               <div class="tiem" v-if="activeSelect === 'PO2'">
-                <p>{{ $t('company_act.label.text_22') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_22') }}</p>
                 <p>{{preferentialOfferNum2}}</p>
               </div>
               <div class="tiem" v-if="activeSelect === 'PO1' || activeSelect === 'PO2'">
-                <p>{{ $t('company_act.label.text_23') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_23') }}</p>
                 <p>{{preferentialOfferNum3}}</p>
               </div>
               <div class="tiem">
-                <p>{{ $t('company_act.label.text_26') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_26') }}</p>
                 <p>{{remark}}</p>
               </div>
               <div class="msg">
-                <p>{{ $t('company_act.label.text_27') }}</p>
-                <p>{{ $t('company_act.label.text_28') }}</p>
-                <p>{{ $t('company_act.label.text_29') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_27') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_28') }}</p>
+                <p>{{ $t('iAccount.company_act.label.text_29') }}</p>
               </div>
             </cube-scroll>
           </div>
           <div class="footer border-top-1px">
-            <div class="cancel" @click="handleCancel">{{ $t('company_act.common.text_2') }}</div>
-            <div class="confirm border-left-1px" @click="handleConfirm">{{ $t('company_act.common.text_1') }}</div>
+            <div class="cancel" @click="handleCancel">{{ $t('iAccount.company_act.common.text_2') }}</div>
+            <div class="confirm border-left-1px" @click="handleConfirm">{{ $t('iAccount.company_act.common.text_1') }}</div>
           </div>
         </div>
       </div>
@@ -261,25 +261,25 @@ import SecuritiesApi from '@/modules/module-iaccount/api/modules/api-securities'
 
 
 // 附選擇權的股息權益
-const SCRIP_OPTIONS = i18n.t('define.SCRIP_OPTIONS')
+const SCRIP_OPTIONS = i18n.t('iAccount.define.SCRIP_OPTIONS')
 
 // 附選擇權的股份轉換
-const SHARE_EXCHANGE_OPTIONS = i18n.t('define.SHARE_EXCHANGE_OPTIONS')
+const SHARE_EXCHANGE_OPTIONS = i18n.t('iAccount.define.SHARE_EXCHANGE_OPTIONS')
 
 // 供股
-const RIGHTS_SUBSCRIPTION_OPTIONS = i18n.t('define.RIGHTS_SUBSCRIPTION_OPTIONS')
+const RIGHTS_SUBSCRIPTION_OPTIONS = i18n.t('iAccount.define.RIGHTS_SUBSCRIPTION_OPTIONS')
 
 // 公開配售
-const OPEN_OFFER_SUBSCRIPTION_OPTIONS = i18n.t('define.OPEN_OFFER_SUBSCRIPTION_OPTIONS')
+const OPEN_OFFER_SUBSCRIPTION_OPTIONS = i18n.t('iAccount.define.OPEN_OFFER_SUBSCRIPTION_OPTIONS')
 
 // 現金收購
-const CASH_OFFER = i18n.t('define.CASH_OFFER')
+const CASH_OFFER = i18n.t('iAccount.define.CASH_OFFER')
 
 // 認股權證的轉換
-const WARRANTS_CONVERSION_OPTIONS = i18n.t('define.WARRANTS_CONVERSION_OPTIONS')
+const WARRANTS_CONVERSION_OPTIONS = i18n.t('iAccount.define.WARRANTS_CONVERSION_OPTIONS')
 
 // 優先認購
-const PREFERENTIAL_OFFER = i18n.t('define.PREFERENTIAL_OFFER')
+const PREFERENTIAL_OFFER = i18n.t('iAccount.define.PREFERENTIAL_OFFER')
 
 export default {
   data () {
@@ -287,10 +287,10 @@ export default {
       remark: '',
       options: [],
       bourseValue: 'HKEX',
-      bourseOptions: i18n.t('define.BOURSE_OPTIONS'),
+      bourseOptions: i18n.t('iAccount.define.BOURSE_OPTIONS'),
       // 公司行动名称
       nameValue: '',
-      nameOptions: i18n.t('define.COMPANY_NAME_OPTIONS'),
+      nameOptions: i18n.t('iAccount.define.COMPANY_NAME_OPTIONS'),
       otherValue: '',
       activeSelect: '',
       activeOptions: [],
@@ -465,63 +465,63 @@ export default {
     handleBefore() {
       return new Promise((resolve, reject) => {
         // if (!this.activeStock) {
-        //   const msg = this.$t('company_act.placeholder.text_12')
-        //   tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+        //   const msg = this.$t('iAccount.company_act.placeholder.text_12')
+        //   tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
         //   reject(msg)
         // }
         // if (!this.activeSelect) {
-        //   const msg = this.$t('company_act.placeholder.text_13')
-        //   tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+        //   const msg = this.$t('iAccount.company_act.placeholder.text_13')
+        //   tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
         //   reject(msg)
         // }
         const reg = new RegExp(/^\d+$/)
         switch (this.nameValue) {
         case 'DSO':
           if (this.activeSelect === 'DSO3' && (!reg.test(this.scriptStockNum) || !reg.test(this.scriptCashNum))) {
-            const msg = this.$t('company_act.placeholder.text_17')
-            tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+            const msg = this.$t('iAccount.company_act.placeholder.text_17')
+            tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
             reject(msg)
           }
           break
         case 'OSE':
           if (this.activeSelect === 'OSE2' && !reg.test(this.shareExchangeNum)) {
-            const msg = this.$t('company_act.placeholder.text_17')
-            tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+            const msg = this.$t('iAccount.company_act.placeholder.text_17')
+            tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
             reject(msg)
           }
           break
         case 'RS':
           if (this.activeSelect === 'RS2' && !reg.test(this.rightSubscriptionNum2)) {
-            const msg = this.$t('company_act.placeholder.text_17')
-            tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+            const msg = this.$t('iAccount.company_act.placeholder.text_17')
+            tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
             reject(msg)
           }
           break
         case 'OOS':
           if (this.activeSelect === 'OOS2' && !reg.test(this.offerSubscriptionNum2)) {
-            const msg = this.$t('company_act.placeholder.text_17')
-            tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+            const msg = this.$t('iAccount.company_act.placeholder.text_17')
+            tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
             reject(msg)
           }
           break
         case 'CO':
           if (this.activeSelect === 'CO2' && !reg.test(this.cashOfferNum)) {
-            const msg = this.$t('company_act.placeholder.text_17')
-            tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+            const msg = this.$t('iAccount.company_act.placeholder.text_17')
+            tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
             reject(msg)
           }
           break
         case 'WC':
           if (this.activeSelect === 'WC2' && !reg.test(this.warrantsConversionNum)) {
-            const msg = this.$t('company_act.placeholder.text_17')
-            tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+            const msg = this.$t('iAccount.company_act.placeholder.text_17')
+            tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
             reject(msg)
           }
           break
         case 'PO':
           if (this.activeSelect === 'PO2' && !reg.test(this.preferentialOfferNum2)) {
-            const msg = this.$t('company_act.placeholder.text_17')
-            tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+            const msg = this.$t('iAccount.company_act.placeholder.text_17')
+            tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
             reject(msg)
           }
           break
@@ -600,8 +600,8 @@ export default {
       const str = stockAmount + cashAmount
       const reg = new RegExp(/^\d+$/)
       if (stockAmount && cashAmount && !reg.test(str)) {
-        const msg = this.$t('company_act.placeholder.text_17')
-        tips.alert({ content: msg, title: this.$t('company_act.common.text_3') })
+        const msg = this.$t('iAccount.company_act.placeholder.text_17')
+        tips.alert({ content: msg, title: this.$t('iAccount.company_act.common.text_3') })
         return
       }
       this.handleBefore().then(() => {
