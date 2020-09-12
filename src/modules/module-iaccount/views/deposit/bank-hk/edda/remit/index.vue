@@ -1,9 +1,9 @@
 <template>
   <div class="remit">
-    <jf-wrap
+    <sec-wrap
       :isDisabled="false"
       :nextBtnFixed="false"
-      :btnText="$t('common.text_1')"
+      :btnText="$t('iAccount.common.text_1')"
       :handleBefore="handleBefore"
       @handleNext="_handleNext"
     >
@@ -21,38 +21,38 @@
             <ul class="detail-form-new">
               <!-- 汇款账号 -->
               <li>
-                <div class="form-label">{{$t('deposit.edda.remit.text_1')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.remit.text_1')}}</div>
                 <div class="form-filed" @click="selectAccount">
                   <div v-if="depositAccount" class="flag">
                     <span>{{depositAccount}}</span>
                     <span class="flag-3">{{flagText}}</span>
                   </div>
-                  <div v-else>{{$t('deposit.edda.remit.text_2')}}</div>
+                  <div v-else>{{$t('iAccount.deposit.edda.remit.text_2')}}</div>
                   <i class="cubeic-pulldown"></i>
                 </div>
               </li>
-              <p class="tips">{{$t('deposit.edda.remit.tips.text_5')}}</p>
+              <p class="tips">{{$t('iAccount.deposit.edda.remit.tips.text_5')}}</p>
               <!-- 存入金额 -->
               <li>
-                <div class="form-label">{{$t('deposit.edda.remit.text_3')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.remit.text_3')}}</div>
                 <div class="form-filed form-jc">
                   <div class="form-items">
                     <input t
                       ype="text"
-                      :placeholder="$t('deposit.edda.remit.text_5')"
+                      :placeholder="$t('iAccount.deposit.edda.remit.text_5')"
                       @focus="_focusMoneyInput"
                       @blur="_blurMoneyInput"
                       v-model="depositMoney">
                   </div>
-                  <p>{{$t('deposit.edda.remit.text_4')}}</p>
+                  <p>{{$t('iAccount.deposit.edda.remit.text_4')}}</p>
                 </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </jf-wrap>
-    <foot-tip :list="remitTips" :title="$t('common.text_12')"></foot-tip>
+    </sec-wrap>
+    <foot-tip :list="remitTips" :title="$t('iAccount.common.text_12')"></foot-tip>
     <!-- 选择框 -->
     <div class="select-wrap" v-show="selectStatus" @click="hideWrap">
       <div class="list">
@@ -62,7 +62,7 @@
               <p class="account">{{item.depositAccount}}</p>
               <p :class="statusColor(item)"><span>{{statusText(item)}}</span></p>
             </li>
-            <li @click="addHandle">{{$t('deposit.edda.remit.text_6')}}</li>
+            <li @click="addHandle">{{$t('iAccount.deposit.edda.remit.text_6')}}</li>
           </ul>
         </div>
       </div>
@@ -89,10 +89,10 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 
 const REMIT_TIPS = [
   {
-    txt: 'deposit.edda.remit.tips.text_1'
+    txt: 'iAccount.deposit.edda.remit.tips.text_1'
   },
   {
-    txt: 'deposit.edda.remit.tips.text_2'
+    txt: 'iAccount.deposit.edda.remit.tips.text_2'
   }
 ]
 export default {
@@ -103,14 +103,14 @@ export default {
       remitTips: REMIT_TIPS,
       selectStatus: false,
       depositAccount: '',
-      flagText: this.$t('define.EDDA_STATUS')[3].text,
+      flagText: this.$t('iAccount.define.EDDA_STATUS')[3].text,
       depositMoney: '',
       showCaptcha: false
     }
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositWayInfo',
       'depositBankData',
       'depositBankType',
@@ -134,12 +134,12 @@ export default {
     },
     statusColor(item) {
       const { eddaState } = item
-      const list = this.$t('define.EDDA_STATUS')
+      const list = this.$t('iAccount.define.EDDA_STATUS')
       return [`flag-${list[eddaState].value}`]
     },
     statusText(item) {
       const { eddaState } = item
-      const list = this.$t('define.EDDA_STATUS')
+      const list = this.$t('iAccount.define.EDDA_STATUS')
       return list[eddaState].text
     },
     selectAccount() {
@@ -200,23 +200,23 @@ export default {
     handleBefore() {
       return new Promise((resolve, reject) => {
         if (!this.depositAccount) {
-          const msg = this.$t('deposit.edda.remit.tips.text_3')
+          const msg = this.$t('iAccount.deposit.edda.remit.tips.text_3')
           tips.toast({ txt: msg })
           return reject(msg)
         }
         if (!this.depositMoney) {
-          const msg = this.$t('deposit.edda.remit.tips.text_4')
+          const msg = this.$t('iAccount.deposit.edda.remit.tips.text_4')
           tips.toast({ txt: msg })
           return reject(msg)
         }
 
         if (this.depositMoney < 0.01) {
-          const msg = this.$t('deposit.edda.remit.tips.text_6')
+          const msg = this.$t('iAccount.deposit.edda.remit.tips.text_6')
           tips.toast({ txt: msg })
           return reject(msg)
         }
         if (this.depositEddaInfo.bankQuota < this.depositMoney) {
-          const msg = this.$t('deposit.edda.remit.tips.text_7')
+          const msg = this.$t('iAccount.deposit.edda.remit.tips.text_7')
           tips.toast({ txt: msg })
           return reject(msg)
         }
@@ -224,8 +224,8 @@ export default {
       })
     },
     _handleNext() {
-      const { user, deposit } = this.$store.state
-      const bankInfo = this.$t('define.BANK_NAME_OPTIONS')[2]
+      const { account, deposit } = this.$store.state
+      const bankInfo = this.$t('iAccount.define.BANK_NAME_OPTIONS')[2]
       // 基本信息
       const baseInfo = {
         currency: deposit.depositCurrency.value, // 入金币种
@@ -233,9 +233,9 @@ export default {
       }
 
       // 用户账号信息
-      const accInfo = {
-        clientId: user.accInfo.tradeAccount, // 交易账号
-        depositAccount: formatNumber(user.accInfo.fundAccount[0]), // 存入账号， 目前默认：现金账号
+      const secAccountInfo = {
+        clientId: account.secAccountInfo.tradeAccount, // 交易账号
+        depositAccount: formatNumber(account.secAccountInfo.fundAccount[0]), // 存入账号， 目前默认：现金账号
         depositAccountName: '现金账户'// 存入账户名称，目前仅支持：现金账户
       }
       const eddaInfo = {
@@ -257,7 +257,7 @@ export default {
         bankName: deposit.depositWay.title,
         bankCode: deposit.depositWay.value,
         ...baseInfo,
-        ...accInfo,
+        ...secAccountInfo,
         ...eddaInfo,
         ...jfBankInfo
       }

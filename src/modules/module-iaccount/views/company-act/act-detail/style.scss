@@ -1,0 +1,48 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.wrap {
+  background-color: #F5F5F5;
+  .btn {
+    position: absolute;
+    bottom: .165rem;
+    left: .125rem;
+    right: .125rem;
+  }
+}
+.content {
+  background-color: #fff;
+  padding: .2rem 0;
+  .item {
+    display: flex;
+    .label {
+      width:1.045rem;
+      font-size:.15rem;
+      font-family:PingFang SC;
+      font-weight:400;
+      color:rgba(153,153,153,1);
+      line-height:.205rem;
+      padding-left: .15rem;
+      padding-right: .24rem;
+    }
+    .text {
+      flex: 1;
+      font-size:.15rem;
+      font-family:PingFang SC;
+      font-weight:500;
+      color:rgba(51,51,51,1);
+      line-height:.205rem;
+    }
+  }
+  .pt {
+    padding-top: .265rem;
+  }
+}
+.notice {
+  font-size:.12rem;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  line-height:.225rem;
+  padding: .2rem 47px 0 .165rem
+}

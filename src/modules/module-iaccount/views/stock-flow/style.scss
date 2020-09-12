@@ -1,0 +1,49 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.stock-flow {
+  font-size: .14rem;
+  position: fixed;
+  height: 100%;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling : touch;
+  // 资金流水
+  .list-wrap {
+    background: $color-theme;
+    position: relative;
+  }
+  .bottom-tip {
+    color: $color-arrow;
+    font-size:.12rem;
+    height:.47rem;
+    line-height: .47rem;
+    text-align: center;
+    background :$color-theme-bg;
+  }
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom :0;
+    background:rgba(0,0,0,0.5);
+    z-index: 5;
+  }
+  // 下拉按钮
+  .arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: .07rem solid $color-arrow;
+    border-left: .07rem solid transparent;
+    border-right: .07rem solid transparent;
+    border-bottom: none;
+    border-radius: .025rem;
+    &.active {
+      border-top: none;
+      border-bottom: .07rem solid $color-link;
+    }
+  }
+}

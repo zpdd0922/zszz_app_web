@@ -17,7 +17,7 @@ export default {
   */
   queryStocks: data => post('/securities/find_shares', paramsData.COMMON(data)),
 
-  getAccInfo: data => post('/securities/find_acc_info', paramsData.COMMON(data)),
+  getsecAccountInfo: data => post('/securities/find_acc_info', paramsData.COMMON(data)),
 
   /**
   * { isShares: 0, state: 0 }
@@ -87,5 +87,9 @@ export default {
   toCommitIntoStockData: data => post('/securities/transferred_stock_apply', paramsData.CHECK(data)),
   
   toGetIntoStockAllInfo: data => post('/securities/find_transferred_stock', paramsData.CHECK(data)),
-
+  
+  /**
+   * 查询股票代码
+   */
+  findShares: data => post('/securities/find_shares', paramsData.COMMON(data)),
 };

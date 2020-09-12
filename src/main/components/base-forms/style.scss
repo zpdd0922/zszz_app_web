@@ -20,7 +20,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  @include border-1px;
+  @include border-after-1px;
 }
 
 .base-form-item-label {

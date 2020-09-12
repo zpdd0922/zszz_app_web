@@ -1,5 +1,5 @@
 <template>
-  <part-card :title="$t('deposit.remit.text_7')">
+  <part-card :title="$t('iAccount.deposit.remit.text_7')">
     <div class="upload-wrap">
       <div class="wrap-camera">
         <div class="camera-item" key="upload-accImgId">

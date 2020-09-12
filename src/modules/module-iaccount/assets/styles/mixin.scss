@@ -1,5 +1,11 @@
 @import './variable.scss';
 
+@mixin jf-icon-img($width: .5rem, $height: .5rem) {
+  width: $width;
+  height: $height;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 // 锁定图片尺寸
 @mixin max-size ($size: 100%) {
@@ -122,7 +128,7 @@
 }
 
 // 边框 1px - 存在层级覆盖
-@mixin border-1px ($color: $color-border, $type: solid, $radius: inherit) {
+@mixin border-after-1px ($color: $color-border, $type: solid, $radius: inherit) {
   position: relative;
   &:after {
     content: '\0020';
@@ -157,6 +163,7 @@
     content: '\0020';
     height: 1px;
     transform: scaleY(0.5);
+    background-color: $color;
     position: absolute;
     left: $left;
     right: $right;

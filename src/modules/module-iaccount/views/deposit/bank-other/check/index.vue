@@ -1,7 +1,7 @@
 <template>
-  <jf-wrap
+  <sec-wrap
     class="check"
-    :btnText="$t('deposit.common.text_3')"
+    :btnText="$t('iAccount.deposit.common.text_3')"
     @handleNext="_clickBtn">
     <head-bank
       :styleObj="{
@@ -11,19 +11,19 @@
       :bank="depositBankData"
       :desc="depositWayInfo">
       <template v-slot:title>
-        {{ depositBankData.title }} • {{ $t('deposit.ways.text_4') }}
+        {{ depositBankData.title }} • {{ $t('iAccount.deposit.ways.text_4') }}
       </template>
     </head-bank>
 
     <div class="content">
       <div class="content-inner">
-        <h5 class="inner-title account-info" v-html="$t('deposit.check.text_1', { config: getAccountHmtl(accInfo) })"></h5>
+        <h5 class="inner-title account-info" v-html="$t('iAccount.deposit.check.text_1', { config: getAccountHmtl(secAccountInfo) })"></h5>
         <div class="inner-detail">
           <ul class="detail-check">
             <!-- 表单信息 -->
             <li key="check-form">
               <div class="check-label">
-                <span>{{ $t('deposit.check.text_2') }}</span>
+                <span>{{ $t('iAccount.deposit.check.text_2') }}</span>
               </div>
               <div class="check-filed">
                 <p
@@ -54,12 +54,12 @@
       </div>
 
       <guide-link
-        :title="$t('deposit.check.text_12')"
+        :title="$t('iAccount.deposit.check.text_12')"
         :link="link_how"
         iconName="check"></guide-link>
     </div>
 
-  </jf-wrap>
+  </sec-wrap>
 </template>
 
 <script>
@@ -69,12 +69,12 @@ import { format_Form } from '@/modules/module-iaccount/format/common'
 import commonMixin from '@/modules/module-iaccount/mixins/common'
 
 const CHECK_FORM = [{
-  title: 'deposit.check.text_3',
+  title: 'iAccount.deposit.check.text_3',
   custom: {
     value: 'accountName'
   }
 }, {
-  title: 'deposit.check.text_4',
+  title: 'iAccount.deposit.check.text_4',
   custom: {
     value: (data, obj) => {
       const val = data.depositToAccount || {}
@@ -84,21 +84,21 @@ const CHECK_FORM = [{
 }]
 
 const CHECK_DETAIL = [{
-  title: 'deposit.check.text_5',
+  title: 'iAccount.deposit.check.text_5',
   list: [{
-    txt: 'deposit.check.text_6'
+    txt: 'iAccount.deposit.check.text_6'
   }]
 }, {
-  title: 'deposit.check.text_7',
+  title: 'iAccount.deposit.check.text_7',
   list: [{
-    txt: 'deposit.check.text_8'
+    txt: 'iAccount.deposit.check.text_8'
   }, {
-    txt: 'deposit.check.text_9'
+    txt: 'iAccount.deposit.check.text_9'
   }, {
-    txt: 'deposit.check.text_10',
+    txt: 'iAccount.deposit.check.text_10',
     phone: true
   }, {
-    txt: 'deposit.check.text_11'
+    txt: 'iAccount.deposit.check.text_11'
   }]
 }]
 
@@ -112,13 +112,13 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositWayInfo',
       'depositCurrency',
       'depositBankData'
     ]),
     checkForm() {
-      return format_Form(CHECK_FORM, this.$t('define.CHECK_INFO'), this.depositCurrency)
+      return format_Form(CHECK_FORM, this.$t('iAccount.define.CHECK_INFO'), this.depositCurrency)
     }
   },
   methods: {
@@ -129,6 +129,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import './style.scss';
 </style>

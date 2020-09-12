@@ -1,9 +1,9 @@
 <template>
   <div class="bank-type">
     <part-list
-      :title="$t('deposit.bank_type.title')"
+      :title="$t('iAccount.deposit.bank_type.title')"
       :isLink="true"
-      :list="$t('define.BANK_TYPE')"
+      :list="$t('iAccount.define.BANK_TYPE')"
       @clickItem="_clickBankType">
       <template v-slot:img="slotProps">
         <jf-icon class="type-img" :name="slotProps.item.code"></jf-icon>
@@ -11,7 +11,7 @@
     </part-list>
 
     <div class="btn-link">
-      <span @click="gotoGuide(link)" class="txt">{{ $t('deposit.bank_type.text_4') }}</span>
+      <span @click="gotoGuide(link)" class="txt">{{ $t('iAccount.deposit.bank_type.text_4') }}</span>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import './style.scss';
 </style>
 

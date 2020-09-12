@@ -412,7 +412,6 @@ export const propertyType = (args) => {
  * 1 受雇 | 2 自营/个体户 3 | 退休 4 8 10 学生 | 6 农林牧副渔
  */
 export const capitalSourceNew = (args) => {
-  console.log(1321, args.capital)
   let result = args.capital;
 
   return JSON.parse(JSON.stringify(result)).sort((a, b) => a - b);

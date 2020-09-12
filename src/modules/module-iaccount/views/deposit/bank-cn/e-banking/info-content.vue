@@ -1,24 +1,24 @@
 <template>
-  <jf-wrap
-    :btnText="$t('deposit.common.text_3')"
+  <sec-wrap
+    :btnText="$t('iAccount.deposit.common.text_3')"
     @handleNext="_clickBtn">
     <div class="content">
       <div class="content-inner">
-        <h5 class="inner-title account-info" v-html="$t('deposit.common.text_4', { config: getAccountHmtl(accInfo) })"></h5>
+        <h5 class="inner-title account-info" v-html="$t('iAccount.deposit.common.text_4', { config: getAccountHmtl(secAccountInfo) })"></h5>
         <div class="inner-detail">
-          <h6 class="detail-title">{{ $t('deposit.eBanking.text_1') }}</h6>
-          <p class="detail-tips">{{ $t('deposit.common.text_2') }}</p>
+          <h6 class="detail-title">{{ $t('iAccount.deposit.eBanking.text_1') }}</h6>
+          <p class="detail-tips">{{ $t('iAccount.deposit.common.text_2') }}</p>
 
           <detail-list :lists="eBankingDetail"></detail-list>
         </div>
       </div>
 
       <guide-link
-        :title="$t('deposit.eBanking.text_11', { config: depositBankData.title })"
+        :title="$t('iAccount.deposit.eBanking.text_11', { config: depositBankData.title })"
         :link="getComputedLink"
         iconName="bank"></guide-link>
     </div>
-  </jf-wrap>
+  </sec-wrap>
 </template>
 
 <script>
@@ -31,14 +31,14 @@ import commonMixin from '@/modules/module-iaccount/mixins/common'
 const EXAMPLE_BANK = {
   foot: [
     {
-      txt: 'deposit.common.text_5'
+      txt: 'iAccount.deposit.common.text_5'
     }
   ]
 }
 
 const EBANKING_CN = [
   {
-    title: 'deposit.eBanking.text_8',
+    title: 'iAccount.deposit.eBanking.text_8',
     custom: {
       value: (data, obj) => {
         const { depositCurrency, depositSubAccount } = obj
@@ -52,7 +52,7 @@ const EBANKING_CN = [
       }
     }
   }, {
-    title: 'deposit.eBanking.text_9',
+    title: 'iAccount.deposit.eBanking.text_9',
     custom: {
       value: (data, obj) => {
         const { depositSubAccount } = obj
@@ -60,29 +60,29 @@ const EBANKING_CN = [
       }
     }
   }, {
-    title: 'deposit.eBanking.text_10',
+    title: 'iAccount.deposit.eBanking.text_10',
     custom: {
       value: 'depositUserAddress'
     }
   }, {
-    title: 'deposit.eBanking.text_3',
+    title: 'iAccount.deposit.eBanking.text_3',
     custom: {
       value: (data) => {
         return data.bankName
       }
     }
   }, {
-    title: 'deposit.eBanking.text_17',
+    title: 'iAccount.deposit.eBanking.text_17',
     custom: {
       value: 'bankNameEN'
     }
   }, {
-    title: 'deposit.eBanking.text_5',
+    title: 'iAccount.deposit.eBanking.text_5',
     custom: {
       value: 'swiftCode'
     }
   }, {
-    title: 'deposit.eBanking.text_6',
+    title: 'iAccount.deposit.eBanking.text_6',
     custom: {
       value: 'depositToBankAddress'
     }
@@ -100,7 +100,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositSubAccount',
       'depositCurrency',
       'depositBankData'

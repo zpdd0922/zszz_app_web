@@ -42,14 +42,14 @@ export default {
               key: "deposit",
               label: "存入資金",
               iconType: "deposit",
-              path: "/deposit",
+              path: "sec-funds-deposit",
             },
             // { key: "exchange", label: "貨幣兌換", iconType: "exchange" },
             {
               key: "withdraw",
               label: "取出資金",
               iconType: "withdraw",
-              // path: "/funds_withdraw",
+              path: "sec-funds-withdraw",
             },
             // {
             //   key: "funds_history1",
@@ -61,13 +61,13 @@ export default {
               key: "funds_history2",
               label: "資金記錄",
               iconType: "fund_history",
-              // path: "/funds_history",
+              path: "sec-funds-history",
             },
             {
               key: "funds_history",
               label: "資金流水",
               iconType: "fund_list",
-              // path: "/funds_history",
+              path: "sec-funds-capital-flow",
             },
           ],
         },
@@ -75,7 +75,7 @@ export default {
           key: "stocks",
           label: "股票",
           channel: [
-            { key: "enter", label: "轉入股票", iconType: "enter", path: "/into-stock" },
+            { key: "enter", label: "轉入股票", iconType: "enter", path: "intoStock" },
             { key: "out", label: "轉出股票", iconType: "out" },
             {
               key: "history-stocks",
@@ -107,7 +107,7 @@ export default {
               key: "statement",
               label: "傭金方案",
               iconType: "statement",
-              path: "fee/statement"
+              path: "feeStatement",
             },
             // {
             //   key: "account",
@@ -160,7 +160,7 @@ export default {
     intoChannel(item) {
       const { path } = item;
       if (path) {
-        this.$router.push(path);
+        this.$router.push({ name: path });
       } else {
         alert({
           title: this.$t("common.alertTitle"),

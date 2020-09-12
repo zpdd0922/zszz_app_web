@@ -71,7 +71,7 @@ export default {
   * @return clientStatus 客户状态
   * '1': 账户冻结(联系客服)    '0'：正常
   */
-  findAccInfo: data => post('/sec_api/find_acc_info', paramsData.COMMON(data)),
+  findsecAccountInfo: data => post('/sec_api/find_acc_info', paramsData.COMMON(data)),
 
   getStockInfo: data => post('/sec_api/find_transferred_stock', paramsData.COMMON(data)),
   
@@ -87,7 +87,7 @@ export default {
   /**
    * 是否可以大陆银行卡入金 - 针对已大陆卡开户用户（早期业务需求）
    * 区分运行环境tips
-   * H5-大陆银行卡入金需先进行CA认证，请下载玖富犇犇APP进行此操作
+   * H5-大陆银行卡入金需先进行CA认证，请下载智珠宝APP进行此操作
    * APP-大陆银行卡入金需先进行CA认证
    * @param verifyIsRestrictOpenAccount <Boolean>
    */
@@ -149,5 +149,8 @@ export default {
    */
   findUserInfo: data => post('/sec_api/find_user_info', paramsData.COMMON(data)),
 
-
+  /**
+   * 提交公司行动
+   */
+  saveCorporateActions: data => post('/sec_api/save_corporate_actions', paramsData.COMMON(data)),
 };

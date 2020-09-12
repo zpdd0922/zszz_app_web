@@ -1,9 +1,9 @@
 <template>
   <div class="currency-type">
     <part-list
-      :title="$t('deposit.currency_type.title_1')"
+      :title="$t('iAccount.deposit.currency_type.title_1')"
       :isLink="true"
-      :list="$t('define.CURRENCY')"
+      :list="$t('iAccount.define.CURRENCY')"
       @clickItem="_clickCurrency">
       <template v-slot:img="slotProps">
         <jf-icon class="type-img" :name="slotProps.item.iconName"></jf-icon>
@@ -12,27 +12,27 @@
 
     <part-list
       v-if="hisData.length"
-      :title="$t('deposit.currency_type.title_2')"
+      :title="$t('iAccount.deposit.currency_type.title_2')"
       :list="hisData">
       <template v-slot:default="slotProps">
         <div class="item-info">
           <div class="info-list" key="currency">
-            <span class="label">{{ $t('deposit.currency_type.text_4') }}</span>
+            <span class="label">{{ $t('iAccount.deposit.currency_type.text_4') }}</span>
             <span class="field">{{ slotProps.item.currency | filterCurrency }}</span>
           </div>
           <div class="info-list" key="bank">
-            <span class="label">{{ $t('deposit.currency_type.text_5') }}</span>
+            <span class="label">{{ $t('iAccount.deposit.currency_type.text_5') }}</span>
             <span class="field" v-if="slotProps.item.remittanceBankName || slotProps.item.remittanceBankAccount">
               {{ slotProps.item.remittanceBankName }}-{{ slotProps.item.remittanceBankAccount | filterSubStr }}
             </span>
           </div>
           <div class="info-list" key="way">
-            <span class="label">{{ $t('deposit.currency_type.text_6') }}</span>
+            <span class="label">{{ $t('iAccount.deposit.currency_type.text_6') }}</span>
             <span class="field">{{ slotProps.item.bankCode | filterBankCodeWay }}</span>
           </div>
           <span
             class="info-btn"
-            @click="judgeDepositAgain(slotProps.item)">{{ $t('deposit.currency_type.text_3')}}</span>
+            @click="judgeDepositAgain(slotProps.item)">{{ $t('iAccount.deposit.currency_type.text_3')}}</span>
         </div>
       </template>
     </part-list>
@@ -48,7 +48,7 @@ import {
 } from '@/modules/module-iaccount/define'
 import { formatToDBC } from '@/modules/module-iaccount/utils/format'
 import commonMixin from '@/modules/module-iaccount/mixins/common'
-import OpenApi from '@/modules/module-iaccount/api/modules/api-open'
+import AccountApi from '@/modules/module-iaccount/api/modules/api-account'
 import SecuritiesApi from '@/modules/module-iaccount/api/modules/api-securities'
 
 const FPS_CHECK_key = [FPS, CHECK]
@@ -101,16 +101,16 @@ export default {
         console.log('处理入金记录-币种 wayKey', wayKey)
 
         // 匹配出入金方式 - 其他为网银
-        const temp_way = this.$t('define.DEPOSIT_WAY')[wayKey] || this.$t('define.DEPOSIT_WAY')[EBANK]
+        const temp_way = this.$t('iAccount.define.DEPOSIT_WAY')[wayKey] || this.$t('iAccount.define.DEPOSIT_WAY')[EBANK]
         console.log('处理入金记录-币种 temp_way', temp_way)
         // 获取当前银行卡类型的列表
-        // const temp_bankList = item.bankType === this.$t('define.BANK_HK').value ? bank_hk : bank_cn
+        // const temp_bankList = item.bankType === this.$t('iAccount.define.BANK_HK').value ? bank_hk : bank_cn
         let temp_bankList = []
-        if (item.bankType === this.$t('define.BANK_HK').value) {
+        if (item.bankType === this.$t('iAccount.define.BANK_HK').value) {
           temp_bankList = bank_hk
-        } else if (item.bankType === this.$t('define.BANK_CN').value) {
+        } else if (item.bankType === this.$t('iAccount.define.BANK_CN').value) {
           temp_bankList = bank_cn
-        } else if (item.bankType === this.$t('define.BANK_OTHER').value) {
+        } else if (item.bankType === this.$t('iAccount.define.BANK_OTHER').value) {
           temp_bankList = bank_other
         }
         console.log('temp_bankList', temp_bankList)
@@ -137,19 +137,19 @@ export default {
         return temp_bankItem
       })
       // 第一条港币
-      const data_hk = his.filter(item => item.remittanceBankCorde).find(item => item.currency === this.$t('define.DOLLAR_HK').value)
+      const data_hk = his.filter(item => item.remittanceBankCorde).find(item => item.currency === this.$t('iAccount.define.DOLLAR_HK').value)
       // 第一条美元
-      const data_us = his.filter(item => item.remittanceBankCorde).find(item => item.currency === this.$t('define.DOLLAR_US').value)
+      const data_us = his.filter(item => item.remittanceBankCorde).find(item => item.currency === this.$t('iAccount.define.DOLLAR_US').value)
       console.log('_handleResData', arr, his, data_hk, data_us)
       this.hisData = [data_hk, data_us].filter(Boolean)
       console.log('this.hisData', this.hisData)
     },
     _clickCurrency(item) {
-      OpenApi.getOpenBankType().then(res => {
+      AccountApi.getOpenBankType().then(res => {
         const { bankType } = res
         if (bankType === 0) {
           // 香港卡开户
-          const bank_hk = this.$t('define.BANK_HK')
+          const bank_hk = this.$t('iAccount.define.BANK_HK')
           this.$store.dispatch('selectBankType', bank_hk).then(() => {
             this._gotoView('bank-list-hk', item)
           })
@@ -173,7 +173,7 @@ export default {
       // 根据bankCode判断
       // CHECK - 支票 FPS-fps转数快 其他-网银
       const temp = (val || '').toUpperCase()
-      const deposit_way = i18n.t('define.DEPOSIT_WAY')
+      const deposit_way = i18n.t('iAccount.define.DEPOSIT_WAY')
       const wayKey = Object.keys(deposit_way).find(item => item === temp) || EBANK
       return deposit_way[wayKey].title
     }

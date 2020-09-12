@@ -6,6 +6,7 @@
 @import './val';
 
 $color-main: #5A2AB8;
+$color-main-sub: #ad8fe8;
 
 
 /* 主色 */
@@ -38,7 +39,7 @@ $color-block-bg: #fff;
 $color-block-bg-active: rgba(204, 204, 204, 0.1);
 
 /* 超链接 */
-$color-link-txt: #6a9cf8;
+$color-link-txt: $color-main-sub;
 $color-link-txt-active: $color-main;
 $color-link-txt-disable: #666;
 
@@ -65,7 +66,7 @@ $color-mask-opacity: rgba(51, 51, 51, 0.3);
 $color-btn-txt: $color-txt-rev;
 $color-btn-bg-disable: #ccc; 
 $color-btn-bg: $color-main;
-$color-btn-bg-active: #4a15b2;
+$color-btn-bg-active: $color-main;
 
 /* 公共input组件 */
 $color-input-bg: #f0f0f0;

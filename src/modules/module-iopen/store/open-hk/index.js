@@ -69,7 +69,6 @@ const actions = {
     });
   },
   saveHkCacheInfo({ commit, state }, params) {
-    console.log(123123);
     const { info } = params;
     const paramsCopy = _.clone(params)
     const obj = { ...params, info: JSON.stringify(paramsCopy.info) }

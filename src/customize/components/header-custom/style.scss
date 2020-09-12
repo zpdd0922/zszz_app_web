@@ -8,7 +8,7 @@
   color: $color-nav-txt;
   padding: 0 .1rem;
   font-size: .15rem;
-  @include border-1px;
+  @include border-after-1px;
 
   .header-left {
       position: absolute;

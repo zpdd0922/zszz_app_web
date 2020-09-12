@@ -1,0 +1,41 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.cmbc {
+  .qa {
+    background: $color-theme;
+    padding: .1rem .15rem 0;
+    .qa-item {
+      margin-top: .025rem;
+      padding-bottom: .11rem;
+      @include border-x(bottom, $style: dashed);
+      &+.qa-item {
+        margin-top: .125rem;
+      };
+      .title {
+        color: $color-text;
+        font-size: .15rem;
+      };
+      .txt {
+        color: $color-666;
+        font-size: .13rem;
+        line-height: .24rem;
+        text-align: justify;
+        margin-top: .1rem;
+      };
+    };
+  };
+  .account {
+    padding: .1rem .15rem 0;
+    background: $color-theme;
+    .text {
+      font-size: .13rem;
+    };
+    .acc-num {
+      text-align: center;
+      font-weight: bold;
+      padding: .2rem;
+      font-size: .25rem;
+    };
+  };
+};

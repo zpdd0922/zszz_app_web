@@ -38,10 +38,10 @@ export const EDDA_INFO = {
 export const CHECK_INFO = {
   descTime: '1-2个工作日',
   descFee: '请咨询银行',
-  accountName: '9F Primasia Securities Limited',
+  accountName: 'Well Link Securities',
   depositToAccount: {
-    hkd: '012-884-0-012763-8',
-    usd: '012-884-0-801758-0'
+    hkd: '012-123456789',
+    usd: '012-123456789'
   },
   swiftCode: 'BKCHHKHHXXX',
   depositToBankAddress: 'Bank of China Tower, 1 Garden Road, Central, Hong Kong.'

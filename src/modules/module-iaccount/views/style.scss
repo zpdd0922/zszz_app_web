@@ -1,16 +1,185 @@
 @import '../components/styles.scss';
 
+@import '../components/styles.scss';
 
-.layout-iaccount{
-    width: 100%;
-    .next-btn-wrap {
-        padding: .3rem .25rem;
+.layout-iaccount {
+  .sec-page-title {
+    padding: .15rem .15rem .1rem;
+    font-size: .18rem;
+    line-height: 2em;
+
+    .guide-link {
         font-size: .14rem;
+        height: 1.5em;
+        line-height: 1.6em;
+        color: $color-link-txt-active;
     }
+  }
+  
+  .step-content {
+    background-color: $color-content-bg;
+  }
+
+ 
+  .next-btn-wrap {
+      padding: .3rem .25rem;
+      font-size: .14rem;
+  }
+
+  .custom-form-group {
+    .cube-form-group-legend {
+      font-size: $form-lengend-font;
+      color: $color-form-lengend-txt;
+      padding: 0 $padding-lr;
+      line-height: 2;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        transform: scaleY(0.5);
+        background-color: $color-separate-line;
+      }
+    }
+
+
+    .cube-form-item {
+      padding: 0 $padding-lr;
+    }
+
+    .cube-form-label {
+      padding-right: 1em;
+      font-size: $form-item-label-font;
+      color: $color-form-item-label-txt;
+    }
+
+
+    .cube-form-field {
+      font-size: $form-item-field-font;
+      color: $color-form-item-field-txt;
+    }
+
+    .cube-input,
+    .cube-select {
+      font-size: $form-item-field-font;
+      color: $color-form-item-field-txt;
+    }
+
+    .cube-textarea-wrapper {
+      padding: 0;
+      font-size: $form-item-field-font;
+      color: $color-form-item-field-txt;
+
+      &.cube-textarea_expanded {
+        padding: .1rem 0;
+        line-height: 1.3;
+      }
+    }
+    
+    .label-width-3em .cube-form-label{
+      width: 3em;
+    }
+    .label-width-4em .cube-form-label{
+      width: 4em;
+    }
+    .label-width-5em .cube-form-label{
+      width: 5em;
+    }
+    .label-width-6em .cube-form-label{
+      width: 6em;
+    }
+    .label-width-7em .cube-form-label{
+      width: 7em;
+    }
+    .label-width-8em .cube-form-label{
+      width: 8em;
+    }
+    .label-width-9em .cube-form-label{
+      width: 9em;
+    }
+    .label-width-10em .cube-form-label{
+      width: 10em;
+    }
+  } 
+  .custom-checkbox-group {
+    .cube-checkbox-wrap {
+      justify-content: start;
+    }
+  }
+
+  .custom-textarea textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    line-height: 18px;
+    text-align: justify;
+  }
+
+
+  .margin-bottom {
+    width: 100%;
+    height: .1rem;
+    background-color: $color-bg;
+  }
+
+  .triangle-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid;
+    border-width: .13rem;
+    border-color: $color-triangle-icon-bg transparent transparent $color-triangle-icon-bg;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: .1rem;
+      height: .1rem;
+      line-height: .1rem;
+      font-size: .12rem;
+      text-align: center;
+      color: $color-triangle-icon-txt;
+      transform: translate3d(-.1rem, -.1rem, 0);
+
+    }
+  }
+
+  .triangle-icon-1:before {
+    content: '1';
+  }
+
+  .triangle-icon-2:before {
+    content: '2';
+  }
+
+  .triangle-icon-3:before {
+    content: '3';
+  }
+
+  .triangle-icon-4:before {
+    content: '4';
+  }
+
+  .triangle-icon-5:before {
+    content: '5';
+  }
+  
+  .telephone {
+    color: $color-link-txt-active;
+  }
 }
 
 @import './home/style.scss';
-// @import './funds-deposit/style.scss';
+@import './funds-deposit/style.scss';
+
 
 //引入计算佣金页面样式
 @import './fee-statement/style.scss';

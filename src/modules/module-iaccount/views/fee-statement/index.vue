@@ -12,16 +12,16 @@
     <section class="stock">
       <div class="title">
         <div class="icon-hk icon"></div>
-        <span>{{$t('brokerageCalculate.market.HKStock')}}</span>
+        <span>{{$t('iAccount.brokerageCalculate.market.HKStock')}}</span>
       </div>
-      <div class="brokerage-standard ">{{$t('brokerageCalculate.brokerageStandard')}}</div>
+      <div class="brokerage-standard ">{{$t('iAccount.brokerageCalculate.brokerageStandard')}}</div>
     </section>
     <section class="stock">
       <div class="title">
         <div class="icon-us icon"></div>
-        <span>{{$t('brokerageCalculate.market.USStock')}}</span>
+        <span>{{$t('iAccount.brokerageCalculate.market.USStock')}}</span>
       </div>
-      <div class="brokerage-standard ">{{$t('brokerageCalculate.brokerageStandard')}}</div>
+      <div class="brokerage-standard ">{{$t('iAccount.brokerageCalculate.brokerageStandard')}}</div>
     </section>
   </div>
 </template>
@@ -72,16 +72,16 @@ export default {
       const accountArray = this.accountArrayMock.map((item) => {
         let obj = {};
         obj.value = item.account;
-        obj.text = item.type === '1' ? `${this.$t('brokerageCalculate.accountSelector.cashAccount')}: ${item.account}` : `${this.$t('brokerageCalculate.accountSelector.marginAccount')}: ${item.account}`;
+        obj.text = item.type === '1' ? `${this.$t('iAccount.brokerageCalculate.accountSelector.cashAccount')}: ${item.account}` : `${this.$t('iAccount.brokerageCalculate.accountSelector.marginAccount')}: ${item.account}`;
         return obj;
       });
       console.log(accountArray);
       if (!this.picker) {
         this.picker = this.$createPicker({
           data: [accountArray],
-          title: this.$t("brokerageCalculate.accountSelector.title"),
-          cancelTxt: this.$t("brokerageCalculate.accountSelector.cancelTxt"),
-          confirmTxt: this.$t("brokerageCalculate.accountSelector.confirmTxt"),
+          title: this.$t("iAccount.brokerageCalculate.accountSelector.title"),
+          cancelTxt: this.$t("iAccount.brokerageCalculate.accountSelector.cancelTxt"),
+          confirmTxt: this.$t("iAccount.brokerageCalculate.accountSelector.confirmTxt"),
           onSelect: this.selectHandle,
           onCancel: this.cancelHandle
         })

@@ -1,6 +1,9 @@
 <template>
-  <div id="root" class="root-wrap">
-    <header-custom :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]" />
+  <div id="root" :class="['root-wrap', {'root-wrap-app': isApp}]">
+    <header-custom
+      :isShow="!isApp"
+      :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]"
+    />
     <template v-if="isChecking">
       <base-waiting />
     </template>
@@ -20,10 +23,12 @@ export default {
   components: { BaseCopyright, HeaderCustom },
   created() {
     this.setTitle(this.$t("iAccount.main.pageName"));
-    //TODO:
     // this.checkLogin();
   },
   computed: {
+    isApp() {
+      return this.UaInfo.isApp();
+    },
     isZhCN() {
       if (this.$i18n.locale === "zh_CN") {
         return true;
@@ -40,8 +45,7 @@ export default {
   data() {
     return {
       isRouterAlive: true, //控制视图是否显示的变量
-      //TODO:
-      isChecking: false
+      isChecking: false,
     };
   },
   // provide() {
@@ -99,6 +103,10 @@ export default {
   position: relative;
   padding-top: 0.44rem;
   min-width: 300px;
+}
+
+.root-wrap-app {
+  padding-top: 0;
 }
 
 .header-custom {

@@ -16,7 +16,7 @@ import BroadCast, { BROADCAST_ENUMS } from '@/main/utils/common/broadcast';
 import CustomToast from '@/main/components/custom-toast/index.vue'
 import CustomAlert from '@/main/components/custom-alert/index.vue'
 // 引入自定义组件
-import JfDialog from './components/JfDialog/index.vue'
+import JfDialog from './components2/JfDialog/index.vue'
 
 // 引入项目公共功能
 import setTitle from '@/main/utils/common/set-title';
@@ -30,9 +30,12 @@ import './router/permission';
 // 引入公共組件
 import { BaseFormGroup, BaseFormItem } from '@/main/components/base-forms';
 import { BaseCells, BaseCell, BaseCellHeader, BaseCellBody, BaseCellFooter } from '@/main/components/base-cell';
+import BaseIcon from '@/main/components/base-icon';
+import BaseCopyBoard from '@/main/components/base-copy-board';
 
 // 引入項目組件
 import '@/modules/module-iaccount/components/register';
+import '@/modules/module-iaccount/components2/register';
 
 // 引入样式
 require('./assets/styles/theme-white.scss');
@@ -64,6 +67,9 @@ Vue.component('BaseCell', BaseCell);
 Vue.component('BaseCellHeader', BaseCellHeader);
 Vue.component('BaseCellBody', BaseCellBody);
 Vue.component('BaseCellFooter', BaseCellFooter);
+Vue.component('BaseCopyBoard', BaseCopyBoard);
+Vue.component('BaseIcon', BaseIcon);
+
 
 /* eslint-disable no-new */
 new Vue({

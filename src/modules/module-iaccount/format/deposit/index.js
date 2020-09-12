@@ -47,7 +47,7 @@ export const format_DepositFPS = (data = []) => {
  */
 export const format_CommitData = (args, form) => {
   console.log('format_CommitData', args, form)
-  const { user, deposit } = args
+  const { user, account, deposit } = args
 
   // 基本信息
   const baseInfo = {
@@ -60,9 +60,9 @@ export const format_CommitData = (args, form) => {
   if (!isExitBase) return false
 
   // 用户账号信息
-  const accInfo = {
-    clientId: user.accInfo.tradeAccount,                               // 交易账号
-    depositAccount: formatNumber(user.accInfo.fundAccount[0]),         // 存入账号， 目前默认：现金账号
+  const secAccountInfo = {
+    clientId: account.secAccountInfo.tradeAccount,                               // 交易账号
+    depositAccount: formatNumber(account.secAccountInfo.fundAccount[0]),         // 存入账号， 目前默认：现金账号
     depositAccountName: '现金账户',                                     // 存入账户名称，目前仅支持：现金账户
   }
 
@@ -87,11 +87,11 @@ export const format_CommitData = (args, form) => {
   }
   const remitInfo = {
     remittanceBankName: bankName,                                           // 汇款银行名称 - 支票可空
-    remittanceAccountNameEn: user.accInfo.clientNameEn,                     // 汇款银行户英文名 - 支票可空
+    remittanceAccountNameEn: account.secAccountInfo.clientNameEn,                     // 汇款银行户英文名 - 支票可空
     remittanceBankAccount: formatNumber(form.depositBankAccount),           // 汇款账号 - 支票可空
   }
 
-  // 玖富收款信息
+  // 立桥收款信息
   let getInfo = {}
   const { bankInfoJF } = form
   switch (deposit.depositWay.value) {
@@ -117,7 +117,7 @@ export const format_CommitData = (args, form) => {
       const getAccount = accountType === 2 ?
           formatNumber(deposit.depositSubAccount.subAccountNo) : deposit.depositBankData.bankInfo.depositToAccount[deposit.depositCurrency.code]
         const getAccountName = accountType === 2 ?
-          deposit.depositSubAccount.accountName : deposit.depositBankData.bankInfo.accountName
+          iAccount.deposit.depositSubAccount.accountName : deposit.depositBankData.bankInfo.accountName
       // 当用户可选择收款银行
       if (bankInfoJF && Object.keys(bankInfoJF).length) {
         getInfo = {
@@ -191,7 +191,7 @@ export const format_CommitData = (args, form) => {
 
   const postData = {
     ...baseInfo,
-    ...accInfo,
+    ...secAccountInfo,
     ...formInfo,
     ...getInfo,
     ...remitInfo,

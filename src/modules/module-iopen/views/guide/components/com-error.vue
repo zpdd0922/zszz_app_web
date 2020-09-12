@@ -13,9 +13,9 @@
         </p>
       </div>
     </section>
-    <footer class="foot">
+    <!-- <footer class="foot">
       <cube-button @click="onClick">{{$t("iOpen.guide.btnLogout")}}</cube-button>
-    </footer>
+    </footer> -->
   </section>
 </template>
 

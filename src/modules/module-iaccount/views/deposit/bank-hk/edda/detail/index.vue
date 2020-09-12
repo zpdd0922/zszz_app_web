@@ -1,9 +1,9 @@
 <template>
   <div class="detail">
-    <jf-wrap
+    <sec-wrap
       :isDisabled="false"
       :nextBtnFixed="false"
-      :btnText="$t('common.text_22')"
+      :btnText="$t('iAccount.common.text_22')"
       @handleNext="_handleNext"
     >
       <head-bank
@@ -19,7 +19,7 @@
           <div class="box">
             <div class="title">
               <p class="img"></p>
-              <p>{{$t('deposit.edda.bind.text_15')}}</p>
+              <p>{{$t('iAccount.deposit.edda.bind.text_15')}}</p>
             </div>
             <div class="desc">{{depositEddaInfo.eddaFailReason}}</div>
           </div>
@@ -30,35 +30,35 @@
           <div class="inner-detail">
             <ul class="detail-form-new">
               <li>
-                <div class="form-label">{{$t('deposit.edda.bind.text_1')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.bind.text_1')}}</div>
                 <div class="form-filed">{{depositEddaInfo.bankName}}</div>
               </li>
               <li>
-                <div class="form-label">{{$t('deposit.edda.bind.text_2')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.bind.text_2')}}</div>
                 <div class="form-filed">{{depositEddaInfo.depositAccountName}}</div>
               </li>
               <li>
-                <div class="form-label">{{$t('deposit.edda.bind.text_5')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.bind.text_5')}}</div>
                 <div class="form-filed">{{_depositAccountType}}</div>
               </li>
               <li>
-                <div class="form-label">{{$t('deposit.edda.bind.text_7')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.bind.text_7')}}</div>
                 <div class="form-filed">{{depositEddaInfo.depositAccount}}</div>
               </li>
               <li>
-                <div class="form-label">{{$t('deposit.edda.bind.text_9')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.bind.text_9')}}</div>
                 <div class="form-filed">{{_bankIdKind}}</div>
               </li>
               <li>
-                <div class="form-label">{{$t('deposit.edda.bind.text_10')}}</div>
+                <div class="form-label">{{$t('iAccount.deposit.edda.bind.text_10')}}</div>
                 <div class="form-filed">{{depositEddaInfo.bankIdNo}}</div>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </jf-wrap>
-    <div class="btn" @click="delHandle">{{$t('common.text_23')}}</div>
+    </sec-wrap>
+    <div class="btn" @click="delHandle">{{$t('iAccount.common.text_23')}}</div>
   </div>
 </template>
 
@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositWayInfo',
       'depositBankData',
       'depositBankType',
@@ -119,19 +119,19 @@ export default {
   },
   methods: {
     filterKind(value) {
-      const list = this.$t('define.BANK_ID_KIND')
+      const list = this.$t('iAccount.define.BANK_ID_KIND')
       return list.filter(data => data.value === value)[0].text
     },
     filterType(value) {
-      const list = this.$t('define.DEPOSIT_ACCOUNT_TYPE')
+      const list = this.$t('iAccount.define.DEPOSIT_ACCOUNT_TYPE')
       return list.filter(data => data.value === value)[0].text
     },
     delHandle() {
       tips.confirm({
-        content: this.$t('common.text_24'),
+        content: this.$t('iAccount.common.text_24'),
         onConfirm: () => {
           const params = {
-            clientId: this.accInfo.tradeAccount,
+            clientId: this.secAccountInfo.tradeAccount,
             keyId: this.depositEddaInfo.keyId
           }
           SecApi.eddaBankDelete(params).then(() => {

@@ -143,7 +143,6 @@ export default {
           if (userInfo[val]) {
             this.handleUpdatePhone(userInfo[val], "bankPhoneNum");
           } else {
-            console.log(12312);
             this.handleBankePhoneNum();
           }
         } else {

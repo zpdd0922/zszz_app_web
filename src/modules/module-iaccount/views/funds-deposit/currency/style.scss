@@ -1,0 +1,12 @@
+.sec-deposit-currency {
+ 
+  .currency-icon-hkd {
+    @include retina-images('~@/modules/module-iaccount/assets/img/currency/hk');
+  }
+  .currency-icon-usd {
+    @include retina-images('~@/modules/module-iaccount/assets/img/currency/us');
+  }
+  .currency-icon-cny {
+    @include retina-images('~@/modules/module-iaccount/assets/img/currency/cn');
+  }
+}

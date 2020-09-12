@@ -1,7 +1,7 @@
 <template>
   <div class="bank-list">
     <part-list
-      :title="$t('deposit.bank_list.title')"
+      :title="$t('iAccount.deposit.bank_list.title')"
       :isLink="true"
       :list="bank_CMBCHK"
       @clickItem="_clickBank">
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositCurrency',
       'depositBankType'
     ]),
@@ -55,14 +55,14 @@ export default {
       return [
         // {
         //   value: CMBC_HK,
-        //   title: this.$t('deposit.bank_list.cmbchk'),
-        //   symbol: this.$t('deposit.cmbchk.text_1'),
+        //   title: this.$t('iAccount.deposit.bank_list.cmbchk'),
+        //   symbol: this.$t('iAccount.deposit.cmbchk.text_1'),
         //   icon: 'cmbc_logo'
         // },
         // {
         //   value: CMB_WLB,
-        //   title: this.$t('deposit.bank_list.cmbwlb'),
-        //   symbol: this.$t('deposit.cmbwlb.text_1'),
+        //   title: this.$t('iAccount.deposit.bank_list.cmbwlb'),
+        //   symbol: this.$t('iAccount.deposit.cmbwlb.text_1'),
         //   icon: 'cmb_wlb_logo'
         // }
       ]
@@ -71,9 +71,9 @@ export default {
   methods: {
     // 请求用户已绑定银行卡 - 香港卡
     _fetchBankUser() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       SecApi.depositBank({
-        bankType: this.$t('define.BANK_HK').value,
+        bankType: this.$t('iAccount.define.BANK_HK').value,
         fundAccount: fundAccount[0]
       }).then(res => {
         this.myBank = res || []
@@ -82,7 +82,7 @@ export default {
     // 请求香港银行卡列表
     _fetchBankList() {
       SecApi.bankListDeposit({
-        bankType: this.$t('define.BANK_HK').value
+        bankType: this.$t('iAccount.define.BANK_HK').value
       }).then(res => {
         this.optionsBank = res || []
       })
@@ -113,9 +113,9 @@ export default {
       // // 超过限制 - 前往解绑
       // if (isLimit) {
       //   tips.confirm({
-      //     confirmTxt: this.$t('common.text_17'),
-      //     cancelTxt: this.$t('common.text_3'),
-      //     content: this.$t('my_bank.text_13'),
+      //     confirmTxt: this.$t('iAccount.common.text_17'),
+      //     cancelTxt: this.$t('iAccount.common.text_3'),
+      //     content: this.$t('iAccount.my_bank.text_13'),
       //     onConfirm: () => {
       //       this.$router.push({ name: 'my-bank' })
       //     }
@@ -132,13 +132,13 @@ export default {
     },
     // 处理入金方式 - 仅一种直接进入相应页面
     async _judgeDepositWay(bank) {
-      const deposit_way = this.$t('define.DEPOSIT_WAY')
+      const deposit_way = this.$t('iAccount.define.DEPOSIT_WAY')
       const ways = await this.judgeDepositWay(bank.supportType, this.depositCurrency)
       const waysOption = Object.values(deposit_way).filter(item => ways.includes(item.code))
       console.log('香港卡 => 入金方式', waysOption)
       if (!waysOption.length) {
         tips.jfDialog({
-          content: this.$t('deposit.ways.text_13')
+          content: this.$t('iAccount.deposit.ways.text_13')
         })
         return false
       }
@@ -170,7 +170,7 @@ export default {
         params = bank
         break
       case CHECK:
-        params = this.$t('define.CHECK_INFO')
+        params = this.$t('iAccount.define.CHECK_INFO')
         break
       }
       console.log('object', params)
@@ -184,6 +184,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import './style.scss';
 </style>

@@ -2,7 +2,7 @@
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
 .ways {
-  & >>> .media-txt {
+  & /deep/ .media-txt {
     margin-left: 0;
     .title {
       font-size: .15rem;
@@ -16,10 +16,10 @@
       margin-left: .18rem;
     }
   }
-  & >>> .font-strong {
+  & /deep/ .font-strong {
     color: $color-888;
   }
-  & >>> .part {
+  & /deep/ .part {
     margin-top: 0;
   }
   .title {

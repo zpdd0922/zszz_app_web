@@ -1,0 +1,167 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+@import '~@/main/assets/scss/mixin.scss';
+
+.condition {
+  padding: 0 .075rem;
+  position: relative;
+  z-index: 10;
+  background :$color-theme;
+  border-top: .1rem solid $color-theme-bg;
+  .title {
+    display: flex;
+    align-items :center;
+    justify-content: space-around;
+    height: .4rem;
+    p {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      justify-content: center;
+      &.active {
+        color: $color-link;
+      }
+      .arrow {
+        margin-left: .05rem;
+      }
+      .date-show {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        span {
+          font-size:.11rem;
+          &+span {
+            display: inline-block;
+            margin-top: .04rem;
+          }
+        }
+      }
+    }
+    >span {
+      flex-shrink: 0;
+      width:.29rem;
+      height:.01rem;
+      border-radius:.01rem;
+      background: $color-arrow;
+    }
+  }
+  .selsct-card {
+    padding: .15rem .15rem .25rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: .4rem;
+    background: $color-theme;
+    z-index: 11;
+    .filter-criteria,.date-filter {
+      ul li {
+        border-bottom: .005rem solid $color-border-light;
+        padding: 0 0 .075rem;
+      }
+      .title {
+        font-size: .14rem;
+        line-height:.2rem;
+        margin-bottom: .075rem;
+        justify-content:vv flex-start;
+      }
+      .items {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        span {
+          width: .56rem;
+          text-align: center;
+          margin: 0 .12rem;
+          line-height: .35rem;
+          color: $color-arrow;
+          &.active {
+            color: $color-link;
+          }
+        }
+      }
+    }
+    .date-filter {
+      padding-bottom :.2rem;
+      .items  {
+        border-bottom: .005rem solid $color-border-light;
+      }
+      .date-select {
+        >div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: .2rem;
+          color: $color-arrow;
+          input {
+            width:1.24rem;
+            height:.36rem;
+            border-radius:.04rem;
+            border:.005rem solid $color-arrow;
+            box-sizing: border-box;
+            text-align: center;
+          }
+            // color $color-link
+          ::-webkit-input-placeholder {
+            color:$color-arrow;
+          }
+        }
+        >p {
+          color: $color-tips;
+          font-size:.12rem;
+          line-height:.17rem;
+          text-align: right;
+          margin-top: .08rem;
+          i {
+            display: inline-block;
+            @include jf-icon-img(.15rem, .15rem);
+            @include retina-images('~@/modules/module-iaccount/assets/img/icon/icon-tip');
+            position: relative;
+            top: .035rem;
+            right: .02rem;
+          }
+        }
+      }
+    }   
+    .btn-wrap {
+      margin-top: .25rem;
+      display: flex;
+      justify-content: space-around;
+      p {
+        width:1.2rem;
+        height:.4rem;
+        border-radius:.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: normal;
+        &.cancel {
+          border:.005rem solid $color-link;
+          color: $color-link;
+        }
+        &.ok {
+          background: $color-link;
+          color: $color-theme;
+        }
+        &.disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+// 下拉按钮
+.arrow {
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: .07rem solid $color-arrow;
+  border-left: .07rem solid transparent;
+  border-right: .07rem solid transparent;
+  border-bottom :none;
+  border-radius: .025rem;
+  &.active {
+    border-top: none;
+    border-bottom :.07rem solid $color-link;
+  }
+}

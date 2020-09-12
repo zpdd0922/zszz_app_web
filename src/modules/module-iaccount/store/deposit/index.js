@@ -106,9 +106,10 @@ const actions = {
   selectBankType({ commit, state }, data) {
     return new Promise((resolve, reject) => {
       // 香港卡 - 清除大陆银行卡下的本地缓存子账号
-      if (data.value === i18n.t('define.BANK_HK').value) {
+      if (data.value === i18n.t('iAccount.define.BANK_HK').value) {
         commit(types.GET_DEPOSIT_SUBACCOUNT)
       }
+      console.log(data)
       commit(types.SELECT_DEPOSIT_BANK_TYPE, data)
       resolve()
     })
@@ -152,7 +153,6 @@ const actions = {
 
   // 申请子账号
   apiGetCollectionNo({ commit, state }, data) {
-    debugger
     return new Promise((resolve, reject) => {
       SecuritiesApi.getCollectionNo(data).then(res => {
         commit(types.GET_DEPOSIT_SUBACCOUNT, res)

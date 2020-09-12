@@ -8,7 +8,7 @@
 // 登陆注册模块
 // 路由懒加载
 
-const _import = file => () => import('@/modules/module-sign-icrm/views/' + file + '/index.vue');
+const _import = file => () => import('@/modules/module-sign/views/' + file + '/index.vue');
 
 // 路由配置表
 const routes = [

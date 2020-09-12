@@ -1,8 +1,8 @@
 <template>
   <div class="into-stock">
     <!-- Loading -->
-    <template v-if='!accInfo'>
-    <!-- <template v-if='false'> -->
+    <!-- <template v-if='!accInfo'> -->
+    <template v-if='false'>
       <loading />
     </template>
 
@@ -30,9 +30,9 @@ export default {
   methods: {},
   created() {
     //TODO:
-    this.$store.dispatch('apiFindAccInfo').then(res => {
-      this.getAccountStatus(res)
-    })
+    // this.$store.dispatch('apiFindAccInfo').then(res => {
+    //   this.getAccountStatus(res)
+    // })
   }
 }
 
