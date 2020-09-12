@@ -36,8 +36,8 @@ export const DOLLAR_US_VAL = 2
 // FPS收款账号信息 - 暂时前端固定，后续通过接口获取
 export const FPS_HK_INFO = {
   depositToAccount: {
-    hkd: '012-884-0-012763-8',
-    usd: '012-884-0-801758-0'
+    hkd: '012-123456789',
+    usd: '012-123456789'
   },
   swiftCode: 'BKCHHKHHXXX',
   depositToBankAddress: 'Bank of China Tower, 1 Garden Road, Central, Hong Kong.'

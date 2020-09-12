@@ -2,14 +2,14 @@
   <jf-wrap
     class="request"
     :isDisabled="isDisabled"
-    :btnText="$t('withdraw.request.text_24')"
+    :btnText="$t('iAccount.withdraw.request.text_24')"
     :handleBefore="_handleBefore"
     @handleNext="_handleNext">
     <part-card>
       <ul class="detail-form">
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_1') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_1') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">
@@ -17,7 +17,7 @@
                 class="form-select"
                 @click="_clickSelectAccount">
                 <span v-if="accountLabel">{{ accountLabel }}</span>
-                <span v-else class="txt">{{ $t('withdraw.request.text_25') }}</span>
+                <span v-else class="txt">{{ $t('iAccount.withdraw.request.text_25') }}</span>
               </div>
             </div>
           </div>
@@ -25,11 +25,11 @@
       </ul>
     </part-card>
 
-    <part-card :title="$t('withdraw.request.text_3')">
+    <part-card :title="$t('iAccount.withdraw.request.text_3')">
       <ul class="detail-form">
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_4') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_4') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
@@ -40,7 +40,7 @@
         <!-- 选择其他银行 -->
         <li v-if="isShowOther">
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_31') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_31') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
@@ -48,17 +48,17 @@
                 v-model="model.withdrawBankNameOther"
                 type="text"
                 maxlength="150"
-                :placeholder="$t('withdraw.request.text_32')">
+                :placeholder="$t('iAccount.withdraw.request.text_32')">
             </div>
             <div class="filed-msg" v-show="model.withdrawBankNameOther">
-              <span class="txt font-link-size" @click="_clearInput('model.withdrawBankNameOther')">{{ $t('common.text_16') }}</span>
+              <span class="txt font-link-size" @click="_clearInput('model.withdrawBankNameOther')">{{ $t('iAccount.common.text_16') }}</span>
             </div>
           </div>
         </li>
 
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_6') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_6') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
@@ -68,10 +68,10 @@
                 v-model="model.withdrawBankAccount"
                 type="text"
                 maxlength="30"
-                :placeholder="$t('withdraw.request.text_7')">
+                :placeholder="$t('iAccount.withdraw.request.text_7')">
             </div>
             <div class="filed-msg" v-show="!withdrawBankHis && model.withdrawBankAccount">
-              <span class="txt font-link-size" @click="_clearInput('model.withdrawBankAccount')">{{ $t('common.text_16') }}</span>
+              <span class="txt font-link-size" @click="_clearInput('model.withdrawBankAccount')">{{ $t('iAccount.common.text_16') }}</span>
             </div>
           </div>
         </li>
@@ -79,7 +79,7 @@
         <!-- 需要再次确认账号 -->
         <li v-if="!withdrawBankHis">
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_8') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_8') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
@@ -87,10 +87,10 @@
                 v-model="model.withdrawBankAccountAgain"
                 type="text"
                 maxlength="30"
-                :placeholder="$t('withdraw.request.text_9')">
+                :placeholder="$t('iAccount.withdraw.request.text_9')">
             </div>
             <div class="filed-msg" v-show="model.withdrawBankAccountAgain">
-              <span class="txt font-link-size" @click="_clearInput('model.withdrawBankAccountAgain')">{{ $t('common.text_16') }}</span>
+              <span class="txt font-link-size" @click="_clearInput('model.withdrawBankAccountAgain')">{{ $t('iAccount.common.text_16') }}</span>
             </div>
           </div>
         </li>
@@ -98,7 +98,7 @@
         <template v-if="isBank_CN || isBank_other">
           <li>
             <div class="form-label">
-              <span>{{ $t('withdraw.request.text_10') }}</span>
+              <span>{{ $t('iAccount.withdraw.request.text_10') }}</span>
             </div>
             <div class="form-filed">
               <div class="filed-item border-bottom-1px">
@@ -106,15 +106,15 @@
                   v-model="model.swiftCode"
                   type="text"
                   maxlength="50"
-                  :placeholder="$t('withdraw.request.text_11', { name: getSwiftCodeName })">
+                  :placeholder="$t('iAccount.withdraw.request.text_11', { name: getSwiftCodeName })">
               </div>
-              <jf-icon name="tips_gray" @click="_showTip($t('withdraw.request.text_12', { name: getSwiftCodeName }))"></jf-icon>
+              <jf-icon name="tips_gray" @click="_showTip($t('iAccount.withdraw.request.text_12', { name: getSwiftCodeName }))"></jf-icon>
             </div>
           </li>
 
           <li>
             <div class="form-label">
-              <span>{{ $t('withdraw.request.text_13') }}</span>
+              <span>{{ $t('iAccount.withdraw.request.text_13') }}</span>
             </div>
             <div class="form-filed">
               <div class="filed-item border-bottom-1px">
@@ -122,7 +122,7 @@
                   v-model="model.address"
                   type="text"
                   maxlength="50"
-                  :placeholder="$t('withdraw.request.text_14')">
+                  :placeholder="$t('iAccount.withdraw.request.text_14')">
               </div>
             </div>
           </li>
@@ -130,11 +130,11 @@
       </ul>
     </part-card>
 
-    <part-card :title="$t('withdraw.request.text_15')">
+    <part-card :title="$t('iAccount.withdraw.request.text_15')">
       <ul class="detail-form">
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_16') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_16') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
@@ -156,14 +156,14 @@
         </li>
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_17') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_17') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">
               <input
                 v-model="model.withdrawMoney"
                 type="text"
-                :placeholder="$t('withdraw.request.text_18')"
+                :placeholder="$t('iAccount.withdraw.request.text_18')"
                 @focus="_focusMoneyInput"
                 @blur="_blurMoneyInput">
             </div>
@@ -175,7 +175,7 @@
         <!-- 手续费 -->
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_33') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_33') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">{{ _getFee() }}</div>
@@ -187,7 +187,7 @@
         <!-- 实际提取金额 -->
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_34') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_34') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">{{ getAct }}</div>
@@ -204,28 +204,28 @@
         <li class="cell">
           <div>
             <span>
-              {{ $t('withdraw.request.text_19')}}
+              {{ $t('iAccount.withdraw.request.text_19')}}
               <em class="money">{{ money | filterEmptyVal }} {{ getCurrency.label }}</em>
             </span>
           </div>
           <div>
-            <span class="font-link" @click="_clickSetAll">{{ $t('withdraw.request.text_20') }}</span>
+            <span class="font-link" @click="_clickSetAll">{{ $t('iAccount.withdraw.request.text_20') }}</span>
           </div>
         </li>
         <li class="cell">
           <div>
-            <span>{{ $t('deposit.common.text_7') }} {{ withdrawBankInfo.chargeMoney | filterEmptyVal }}</span>
+            <span>{{ $t('iAccount.deposit.common.text_7') }} {{ withdrawBankInfo.chargeMoney | filterEmptyVal }}</span>
             <jf-icon v-if="withdrawBankInfo.chargeMoneyRemark" name="tips_gray" @click="_showTip(withdrawBankInfo.chargeMoneyRemark)"></jf-icon>
           </div>
         </li>
         <li class="cell">
           <div>
-            <span>{{ $t('deposit.common.text_8') }} {{ withdrawBankInfo.timeArrival | filterEmptyVal }}</span>
+            <span>{{ $t('iAccount.deposit.common.text_8') }} {{ withdrawBankInfo.timeArrival | filterEmptyVal }}</span>
           </div>
         </li>
         <li v-if="withdrawBankInfo.effectiveTime" class="cell">
           <div>
-            <span>{{ $t('deposit.common.text_9') }} {{ withdrawBankInfo.effectiveTime }}</span>
+            <span>{{ $t('iAccount.deposit.common.text_9') }} {{ withdrawBankInfo.effectiveTime }}</span>
           </div>
         </li>
       </ul>
@@ -257,7 +257,7 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 export default {
   mixins: [commonMixin],
   data() {
-    const currencyOptions = this.$t('define.CURRENCY')
+    const currencyOptions = this.$t('iAccount.define.CURRENCY')
     return {
       showCaptcha: false,
       currencyOptions: currencyOptions,
@@ -282,7 +282,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'withdrawBankHis',
       'withdrawBankInfo'
     ]),
@@ -290,10 +290,10 @@ export default {
       return this.withdrawBankInfo && this.withdrawBankInfo.receiptBankCode === OTHER
     },
     isBank_CN() {
-      return [this.$t('define.BANK_CN').value].includes(this.withdrawBankInfo.bankType)
+      return [this.$t('iAccount.define.BANK_CN').value].includes(this.withdrawBankInfo.bankType)
     },
     isBank_other() {
-      return [this.$t('define.BANK_OTHER').value].includes(this.withdrawBankInfo.bankType)
+      return [this.$t('iAccount.define.BANK_OTHER').value].includes(this.withdrawBankInfo.bankType)
     },
     getSwiftCodeName() {
       return this.isBank_CN ? '大陆' : ''
@@ -338,7 +338,7 @@ export default {
     },
     _showTip(txt) {
       tips.jfDialog({
-        btnTxt: this.$t('common.text_10'),
+        btnTxt: this.$t('iAccount.common.text_10'),
         content: txt
       })
     },
@@ -353,26 +353,26 @@ export default {
         if (!this.withdrawBankHis &&
           (withdrawBankAccount !== withdrawBankAccountAgain)
         ) {
-          const msg = this.$t('withdraw.request.text_27')
+          const msg = this.$t('iAccount.withdraw.request.text_27')
           tips.toast({ txt: msg })
           return reject(msg)
         }
 
         // 实际提取金额小于零
         if (Number(this.getAct) <= 0) {
-          const msg = this.$t('withdraw.request.text_35')
+          const msg = this.$t('iAccount.withdraw.request.text_35')
           tips.toast({ txt: msg })
           return reject(msg)
         }
 
         if (this.getCurrency.code === HKD && Number(withdrawMoney) < 10) {
-          const msg = this.$t('withdraw.request.text_28')
+          const msg = this.$t('iAccount.withdraw.request.text_28')
           tips.toast({ txt: msg })
           return reject(msg)
         }
         // 提取资金不可超过可提资金
         if (Number(withdrawMoney) > Number(this.money)) {
-          const msg = this.$t('withdraw.request.text_29')
+          const msg = this.$t('iAccount.withdraw.request.text_29')
           tips.toast({ txt: msg })
           return reject(msg)
         }
@@ -435,7 +435,7 @@ export default {
     },
     // 获取可提资金
     _fetchMoney() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       // 需要取柜台定义币种字段
       const currencyGt = this.getCurrency.gt
       const params = {
@@ -449,11 +449,11 @@ export default {
     },
     // 格式化现金账号选项
     _formatAccount() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       this.accountList = fundAccount.map(item => {
         return {
           value: item,
-          text: item + '-' + this.$t('withdraw.request.text_2')
+          text: item + '-' + this.$t('iAccount.withdraw.request.text_2')
         }
       })
       // 默认选中第一项
@@ -463,8 +463,8 @@ export default {
       if (!this.picker_account) {
         this.picker_account = this.$createPicker({
           title: '',
-          confirmTxt: this.$t('common.text_9'),
-          cancelTxt: this.$t('common.text_2'),
+          confirmTxt: this.$t('iAccount.common.text_9'),
+          cancelTxt: this.$t('iAccount.common.text_2'),
           data: [this.accountList],
           onSelect: this.selectHandle_account
         })

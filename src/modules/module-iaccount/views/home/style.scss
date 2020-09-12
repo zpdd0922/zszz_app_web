@@ -1,20 +1,21 @@
 $channelIconList: ('ipo_history','xgxx','sqgg','ipo','other_fee','quotas','pro','password','transfer','statement', 'deposit', 'withdraw', 'exchange', 'fund_history', 'enter', 'out', 'stock_history', 'account', 'fund_list', 'dayly');
 
 .sec-home {
-  background-color: $color-block-bg;
+  background-color: $color-content-bg;
   .sec-list-box {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid $color-separate-line;
+    @include border-before-1px(top, $color-separate-line);
+    @include border-after-1px(bottom, $color-separate-line);
   }
 
   .sec-list-item {
     width: 25%;
     display: inline-block;
     text-align: center;
-    padding: .05rem 0;
-    border-right: 1px solid $color-separate-line;
-    border-bottom: 1px solid $color-separate-line;
+    padding: .08rem 0;
+    @include border-before-1px(right, $color-separate-line);
+    @include border-after-1px(bottom, $color-separate-line);
     font-size: 0;
     
     i {

@@ -1,9 +1,9 @@
 <template>
   <div class="condition">
     <div class="title">
-      <p :class="{'active': isFilterCriteria}" @click="toggleArrow('isFilterCriteria')">{{$t('capital_flow.common.text_3')}}<i :class="{'active': isFilterCriteria, 'arrow': true}"></i></p>
+      <p :class="{'active': isFilterCriteria}" @click="toggleArrow('isFilterCriteria')">{{$t('iAccount.capital_flow.common.text_3')}}<i :class="{'active': isFilterCriteria, 'arrow': true}"></i></p>
       <span></span>
-      <p v-if="dataFilter.key" @click="toggleArrow('isDate')"  :class="{'active': isDate}">{{$t(`capital_flow.common.${dataFilter.text}`)}}<i :class="{'active': isDate, 'arrow': true}"></i></p>
+      <p v-if="dataFilter.key" @click="toggleArrow('isDate')"  :class="{'active': isDate}">{{$t(`iAccount.capital_flow.common.${dataFilter.text}`)}}<i :class="{'active': isDate, 'arrow': true}"></i></p>
       <p v-if="dataFilter.date" @click="toggleArrow('isDate')" :class="{'active': isDate}">
         <span class="date-show">
           <span>{{dataFilter.date.start}}</span>
@@ -18,7 +18,7 @@
       <div v-show="isFilterCriteria" class="filter-criteria">
         <ul>
           <li v-for="(item,idx) in filterCriteriaArr" :key="idx">
-            <p class="title">{{$t(`capital_flow.common.${item.title}`)}}</p>
+            <p class="title">{{$t(`iAccount.capital_flow.common.${item.title}`)}}</p>
             <p class="items">
               <span
                 v-for="(items,index) in item.option"
@@ -29,7 +29,7 @@
                   item.type === 'capitalFlow' && (capitalFlowSel ? (items.key === capitalFlowSel.key) : items.default)
                 }"
                 @click="changeCondition(0,item.type, items)">
-                {{$t(`capital_flow.common.${items.text}`)}}
+                {{$t(`iAccount.capital_flow.common.${items.text}`)}}
               </span>
             </p>
           </li>
@@ -37,28 +37,28 @@
       </div>
       <!-- 筛选日期 -->
       <div v-show="isDate" class="date-filter">
-        <p class="title">{{$t('capital_flow.common.text_8')}}</p>
+        <p class="title">{{$t('iAccount.capital_flow.common.text_8')}}</p>
         <div class="items">
           <span
              v-for="(item,index) in dataFilterArr.option"
             :key="index"
             :class="{'active': dataFilterSel ? (item.key === dataFilterSel.key) : (item.default)}"
             @click="changeCondition(1,dataFilterArr.type, item)">
-              {{$t(`capital_flow.common.${item.text}`)}}
+              {{$t(`iAccount.capital_flow.common.${item.text}`)}}
           </span>
         </div>
         <div class="date-select">
           <div>
-            <input @click="showDatePicker(0)"  type="text" v-model="startDate" readonly :placeholder="$t('capital_flow.common.text_22')" />
-            <span>{{$t('capital_flow.common.text_23')}}</span>
-            <input @click="showDatePicker(1)" type="text" v-model="endDate" readonly :placeholder="$t('capital_flow.common.text_24')" />
+            <input @click="showDatePicker(0)"  type="text" v-model="startDate" readonly :placeholder="$t('iAccount.capital_flow.common.text_22')" />
+            <span>{{$t('iAccount.capital_flow.common.text_23')}}</span>
+            <input @click="showDatePicker(1)" type="text" v-model="endDate" readonly :placeholder="$t('iAccount.capital_flow.common.text_24')" />
           </div>
-          <p v-show="isTipShow"><i></i>{{$t('capital_flow.common.text_25')}}</p>
+          <p v-show="isTipShow"><i></i>{{$t('iAccount.capital_flow.common.text_25')}}</p>
         </div>
       </div>
       <div class="btn-wrap">
-        <p class="cancel" @click="reSet">{{$t('common.text_21')}}</p>
-        <p :class="{'ok': true, 'disabled': isTipShow }" @click="commit">{{$t('common.text_9')}}</p>
+        <p class="cancel" @click="reSet">{{$t('iAccount.common.text_21')}}</p>
+        <p :class="{'ok': true, 'disabled': isTipShow }" @click="commit">{{$t('iAccount.common.text_9')}}</p>
       </div>
     </div>
   </div>

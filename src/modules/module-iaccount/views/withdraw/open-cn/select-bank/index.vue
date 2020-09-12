@@ -2,7 +2,7 @@
   <div class="select-bank">
 
     <part-list
-      :title="$t('deposit.bank_type.text_1')"
+      :title="$t('iAccount.deposit.bank_type.text_1')"
       :isLink="true"
       :list="options_CMBCHK"
       @clickItem="showDialog_withdraw_cmbchk">
@@ -23,7 +23,7 @@
     <!-- 大陆银行卡 -->
     <part-list
       v-if="bank_cn.length"
-      :title="$t('deposit.bank_type.text_3')"
+      :title="$t('iAccount.deposit.bank_type.text_3')"
       :isLink="true"
       :alias="alias"
       :list="bank_cn"
@@ -33,7 +33,7 @@
     <!-- 其他地区银行卡 -->
     <part-list
       v-if="bank_other.length"
-      :title="$t('deposit.bank_type.text_5')"
+      :title="$t('iAccount.deposit.bank_type.text_5')"
       :isLink="true"
       :alias="alias"
       :list="bank_other"
@@ -74,13 +74,13 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo'
+      'secAccountInfo'
     ]),
     options_CMBCHK() {
       return [
         {
           value: CMBC_HK,
-          title: this.$t('deposit.bank_list.cmbchk')
+          title: this.$t('iAccount.deposit.bank_list.cmbchk')
         }
       ]
     }
@@ -88,7 +88,7 @@ export default {
   methods: {
     // 请求用户已绑定银行卡 - 所有
     _fetchBankUser() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       SecApi.depositBank({
         bankType: 0,
         fundAccount: fundAccount[0]
@@ -125,8 +125,8 @@ export default {
     // 大陆卡
     _clickBank_cn(item) {
       tips.confirm({
-        confirmTxt: this.$t('common.text_1'),
-        cancelTxt: this.$t('common.text_3'),
+        confirmTxt: this.$t('iAccount.common.text_1'),
+        cancelTxt: this.$t('iAccount.common.text_3'),
         onConfirm: () => {
           this._judgeLimitBank(item)
         },
@@ -137,7 +137,7 @@ export default {
                 'custom-cube-dialog-title': true
               },
               slot: 'title'
-            }, this.$t('withdraw.select_bank.text_1')),
+            }, this.$t('iAccount.withdraw.select_bank.text_1')),
             createElement('div', {
               class: {
                 'custom-cube-dialog-content': true
@@ -145,7 +145,7 @@ export default {
               slot: 'content'
             }, [
               createElement('p', null, [
-                this.$t('withdraw.select_bank.text_2'),
+                this.$t('iAccount.withdraw.select_bank.text_2'),
                 createElement('span', {
                   class: {
                     'font-link': true
@@ -155,7 +155,7 @@ export default {
                       this.gotoGuide(HELP_URL.REQUEST_HK_CARD_LINK)
                     }
                   }
-                }, this.$t('withdraw.select_bank.text_3'))
+                }, this.$t('iAccount.withdraw.select_bank.text_3'))
               ])
             ])
           ]

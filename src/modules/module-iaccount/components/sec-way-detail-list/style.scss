@@ -1,0 +1,23 @@
+
+.sec-way-detail-list {
+    // background: $color-theme;
+    padding: .1rem 0;
+    li {
+      @include flex-box();
+      font-size: .14rem;
+      line-height: .22rem;
+      margin-top: .1rem;
+
+      .label {
+        width: .8rem;
+        margin-right: .12rem;
+      }
+      .filed {
+        color: $color-txt-highlight;
+        flex: 1;
+      }
+      .jf-icon {
+        margin-top: -.02rem;
+      }
+    }
+  }

@@ -12,7 +12,7 @@ import OpenHK from '@/modules/module-iaccount/views/withdraw/open-hk/layout'
 const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iaccount" */ `../../views/${path}/${file}.vue`);
 
 // 路由名称
-const getRouterName = () => i18n.t('withdraw.name')
+const getRouterName = () => i18n.t('iAccount.withdraw.name')
 
 // 路由模块
 const withdrawRouter = [

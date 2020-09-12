@@ -1,21 +1,21 @@
 <template>
-  <jf-wrap
+  <sec-wrap
     class="apply-account"
     :isDisabled="isDisabled"
     :btnText="btnText"
     @handleNext="_clickBtn">
     <div class="content">
       <div class="content-inner">
-        <h5 class="inner-title account-info" v-html="$t('deposit.common.text_4', { config: getAccountHmtl(accInfo) })"></h5>
+        <h5 class="inner-title account-info" v-html="$t('iAccount.deposit.common.text_4', { config: getAccountHmtl(secAccountInfo) })"></h5>
         <div class="inner-detail">
-          <h6 class="detail-title">{{ $t('deposit.eBanking.text_1') }}</h6>
+          <h6 class="detail-title">{{ $t('iAccount.deposit.eBanking.text_1') }}</h6>
 
-          <p class="account-tips">{{ $t('deposit.eBanking.text_12') }}</p>
+          <p class="account-tips">{{ $t('iAccount.deposit.eBanking.text_12') }}</p>
         </div>
       </div>
     </div>
 
-  </jf-wrap>
+  </sec-wrap>
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
   mixins: [commonMixin],
   data() {
     return {
-      btnText: i18n.t('deposit.eBanking.text_13'),
+      btnText: i18n.t('iAccount.deposit.eBanking.text_13'),
       isDisabled: false
     }
   },
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositSubAccount'
     ])
   },
@@ -44,8 +44,8 @@ export default {
     _clickBtn() {
       if (this.isDisabled) return
       this.isDisabled = true
-      this.btnText = i18n.t('deposit.eBanking.text_14')
-      const { tradeAccount, fundAccount = [], clientNameCn, clientNameEn } = this.accInfo
+      this.btnText = i18n.t('iAccount.deposit.eBanking.text_14')
+      const { tradeAccount, fundAccount = [], clientNameCn, clientNameEn } = this.secAccountInfo
       const params = {
         clientId: tradeAccount,
         clientNameCn,
@@ -59,11 +59,11 @@ export default {
     _getBtnText() {
       switch (this.depositSubAccount.state) {
       case STATUS_ACCOUNT.IsGet:
-        this.btnText = i18n.t('deposit.eBanking.text_15')
+        this.btnText = i18n.t('iAccount.deposit.eBanking.text_15')
         break
       default:
         this.isDisabled = false
-        this.btnText = i18n.t('deposit.eBanking.text_16')
+        this.btnText = i18n.t('iAccount.deposit.eBanking.text_16')
         break
       }
     }

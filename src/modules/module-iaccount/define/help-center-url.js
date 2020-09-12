@@ -6,6 +6,7 @@
 const getHelpUrl = (detailId) => {
   if (typeof detailId === 'undefined') return ''
 
+  return "http://106.52.75.112:6003/webstatic/building/index.html"
   return window.HOST_URL + `/webstatic/helpCenter1/help.html#detail-${detailId}.html`
 }
 

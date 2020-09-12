@@ -10,18 +10,18 @@ export const format_CommitData_CN = (args, form) => {
   const { user, withdraw } = args;
 
   // 处理选择其他银行
-  const bankName = withdraw.withdrawBankInfo.receiptBankCode === OTHER ?
-    form.withdrawBankNameOther : withdraw.withdrawBankInfo.receiptBankName;
+  const bankName = iAccount.withdraw.withdrawBankInfo.receiptBankCode === OTHER ?
+    form.withdrawBankNameOther : iAccount.withdraw.withdrawBankInfo.receiptBankName;
   const postData = {
     currency: form.currency,                 // 出金币种
-    extMethod: withdraw.withdrawBankInfo.bankType,                // 出金银行卡类型
+    extMethod: iAccount.withdraw.withdrawBankInfo.bankType,                // 出金银行卡类型
     bankName: bankName,            // 出金银行名称
-    bankCode: withdraw.withdrawBankInfo.receiptBankCode,           // 出金银行编码
+    bankCode: iAccount.withdraw.withdrawBankInfo.receiptBankCode,           // 出金银行编码
     bankAccount: form.withdrawBankAccount,       // 出金银行卡号
 
-    payee: user.accInfo.clientNameEn,             // 账号英文名
-    clientId: user.accInfo.tradeAccount,      // 交易账号
-    extAccount: user.accInfo.fundAccount[0],     // 现金账号
+    payee: account.secAccountInfo.clientNameEn,             // 账号英文名
+    clientId: account.secAccountInfo.tradeAccount,      // 交易账号
+    extAccount: account.secAccountInfo.fundAccount[0],     // 现金账号
     extAccountName: "现金账户",   // 账户名称 - 默认'现金账户'
 
     availableAmount: form.money, // 可提取资金
@@ -51,9 +51,9 @@ export const format_CommitData_HK = (args, form) => {
     bankCode: form.bankInfo.bankCode,           // 出金银行编码
     bankAccount: form.bankInfo.bankAccount,       // 出金银行卡号
 
-    payee: user.accInfo.clientNameEn,             // 账号英文名
-    clientId: user.accInfo.tradeAccount,      // 交易账号
-    extAccount: user.accInfo.fundAccount[0],     // 现金账号
+    payee: account.secAccountInfo.clientNameEn,             // 账号英文名
+    clientId: account.secAccountInfo.tradeAccount,      // 交易账号
+    extAccount: account.secAccountInfo.fundAccount[0],     // 现金账号
     extAccountName: "现金账户",   // 账户名称 - 默认'现金账户'
 
     availableAmount: form.money, // 可提取资金

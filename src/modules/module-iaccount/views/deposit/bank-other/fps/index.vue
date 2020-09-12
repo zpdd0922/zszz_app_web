@@ -1,7 +1,7 @@
 <template>
-  <jf-wrap
+  <sec-wrap
     class="fps"
-    :btnText="$t('deposit.common.text_3')"
+    :btnText="$t('iAccount.deposit.common.text_3')"
     @handleNext="_clickBtn">
     <head-bank
       :styleObj="{
@@ -11,28 +11,28 @@
       :bank="depositBankData"
       :desc="depositWayInfo">
       <template v-slot:title>
-        {{ depositBankData.title }} • {{ $t('deposit.ways.text_2') }}
+        {{ depositBankData.title }} • {{ $t('iAccount.deposit.ways.text_2') }}
       </template>
     </head-bank>
 
     <div class="content">
       <div class="content-inner">
-        <h5 class="inner-title account-info" v-html="$t('deposit.common.text_4', { config: getAccountHmtl(accInfo) })"></h5>
+        <h5 class="inner-title account-info" v-html="$t('iAccount.deposit.common.text_4', { config: getAccountHmtl(secAccountInfo) })"></h5>
         <div class="inner-detail">
-          <h6 class="detail-title">{{ $t('deposit.fps.text_1') }}</h6>
-          <p class="detail-tips">{{ $t('deposit.common.text_2') }}</p>
+          <h6 class="detail-title">{{ $t('iAccount.deposit.fps.text_1') }}</h6>
+          <p class="detail-tips">{{ $t('iAccount.deposit.common.text_2') }}</p>
 
           <detail-list :lists="fpsDetail"></detail-list>
         </div>
       </div>
 
       <guide-link
-        :title="$t('deposit.fps.text_5')"
+        :title="$t('iAccount.deposit.fps.text_5')"
         :link="link"
         iconName="fps"></guide-link>
     </div>
 
-  </jf-wrap>
+  </sec-wrap>
 </template>
 
 <script>
@@ -44,24 +44,24 @@ import commonMixin from '@/modules/module-iaccount/mixins/common'
 const EXAMPLE_BANK = {
   foot: [
     {
-      txt: 'deposit.common.text_5'
+      txt: 'iAccount.deposit.common.text_5'
     }
   ]
 }
 
 const FPS_BOCHK = [
   {
-    title: 'deposit.fps.text_2',
+    title: 'iAccount.deposit.fps.text_2',
     custom: {
       value: 'accountFPS'
     }
   }, {
-    title: 'deposit.fps.text_3',
+    title: 'iAccount.deposit.fps.text_3',
     custom: {
       value: 'bankName'
     }
   }, {
-    title: 'deposit.fps.text_4',
+    title: 'iAccount.deposit.fps.text_4',
     custom: {
       value: 'accountName',
       tips: 'accountNameRemark'
@@ -79,7 +79,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositWayInfo',
       'depositBankData'
     ]),

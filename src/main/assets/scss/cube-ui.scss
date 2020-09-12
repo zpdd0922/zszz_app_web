@@ -24,7 +24,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .cube-switch {
@@ -81,12 +81,22 @@
 
 
 .cube-btn {
-  background-color: $color-btn-bg;
+  background: $color-btn-bg;
   padding: 1em;
   font-size: .15rem;
 
   &:active {
     background-color: $color-btn-bg-active;
+  }
+}
+
+.cube-btn-outline {
+  color: $color-btn-bg;
+  border-color: $color-btn-bg;
+  background: transparent;
+  position: relative;
+  &:after {
+    border-color: inherit;
   }
 }
 

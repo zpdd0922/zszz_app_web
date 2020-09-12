@@ -3,17 +3,17 @@
     <!-- 出入金总额 -->
     <div class="total-amount">
       <div class="title">
-        <p>{{$t('capital_flow.common.text_1')}}</p>
-        <p><span>{{$t('capital_flow.common.text_2')}}</span><i :class="{'active': isTotalAmount, 'arrow': true}" @click="toggleArrow('isTotalAmount')"></i></p>
+        <p>{{$t('iAccount.capital_flow.common.text_1')}}</p>
+        <p><span>{{$t('iAccount.capital_flow.common.text_2')}}</span><i :class="{'active': isTotalAmount, 'arrow': true}" @click="toggleArrow('isTotalAmount')"></i></p>
       </div>
       <div class="amount-card" v-show="isTotalAmount">
         <div class="deposit">
-          <span><i class="icon-hk"></i> {{totalAmount.enterHK | formatMoney}}{{$t('capital_flow.common.text_18')}}</span>
-          <span><i class="icon-us"></i> {{totalAmount.enterUSA | formatMoney}}{{$t('capital_flow.common.text_19')}}</span>
+          <span><i class="icon-hk"></i> {{totalAmount.enterHK | formatMoney}}{{$t('iAccount.capital_flow.common.text_18')}}</span>
+          <span><i class="icon-us"></i> {{totalAmount.enterUSA | formatMoney}}{{$t('iAccount.capital_flow.common.text_19')}}</span>
         </div>
         <div class="withdraw">
-          <span><i class="icon-hk"></i> {{totalAmount.subtractHK | formatMoney}}{{$t('capital_flow.common.text_18')}}</span>
-          <span><i class="icon-us"></i> {{totalAmount.subtractUSA | formatMoney}}{{$t('capital_flow.common.text_19')}}</span>
+          <span><i class="icon-hk"></i> {{totalAmount.subtractHK | formatMoney}}{{$t('iAccount.capital_flow.common.text_18')}}</span>
+          <span><i class="icon-us"></i> {{totalAmount.subtractUSA | formatMoney}}{{$t('iAccount.capital_flow.common.text_19')}}</span>
         </div>
       </div>
     </div>
@@ -23,9 +23,9 @@
     <div class="list-wrap">
       <template v-if="fundInfoList.length > 0">
         <flow-list v-for="(item, idx) in fundInfoList" :key="idx" :item="item" :index="idx"></flow-list>
-        <p class="bottom-tip">{{$t('capital_flow.common.text_27')}}</p>
+        <p class="bottom-tip">{{$t('iAccount.capital_flow.common.text_27')}}</p>
       </template>
-      <empty-box v-else :tips="$t('common.text_13')"></empty-box>
+      <empty-box v-else :tips="$t('iAccount.common.text_13')"></empty-box>
     </div>
     <!-- 遮罩层 -->
     <div class="mask" v-show="isMask"></div>
@@ -83,10 +83,10 @@ export default {
     formatMoney
   },
   created() {
-    if (this.accInfo) {
+    if (this.secAccountInfo) {
       this._handleNext()
     } else {
-      this.$store.dispatch('apiFindAccInfo').then(() => {
+      this.$store.dispatch('getSecAccountInfo').then(() => {
         this._handleNext()
       })
     }
@@ -97,7 +97,7 @@ export default {
       'currencyType', // 币种
       'capitalFlow', // 资金流向
       'dataFilter', // 日期
-      'accInfo'
+      'secAccountInfo'
     ])
   },
   methods: {
@@ -140,7 +140,7 @@ export default {
     },
     // 获取资金总额
     fundRecordSum() {
-      const { fundAccount = [], tradeAccount } = this.accInfo
+      const { fundAccount = [], tradeAccount } = this.secAccountInfo
       const params = {
         fundAccount: fundAccount[0],
         clientId: tradeAccount,
@@ -158,7 +158,7 @@ export default {
     },
     // 获取资金流水
     fundRecordInfo() {
-      const { fundAccount = [], tradeAccount } = this.accInfo
+      const { fundAccount = [], tradeAccount } = this.secAccountInfo
       let param = {
         tradePwd: this.trd, // 类型：String  必有字段  备注：交易密码
         key: this.key,

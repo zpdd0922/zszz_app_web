@@ -1,11 +1,11 @@
 <template>
   <div class="funds">
     <!-- <div class="funds-tips">
-      <p class="txt">{{ $t('history.common.text_7') }}</p>
+      <p class="txt">{{ $t('iAccount.history.common.text_7') }}</p>
     </div> -->
 
     <!-- <funds-summary
-      :title="$t('history.common.text_5')"
+      :title="$t('iAccount.history.common.text_5')"
       :lists="summarys"
       @clickTips="_clickWithdrawTips"></funds-summary> -->
 
@@ -49,7 +49,7 @@
             </template>
           </part-list>
         </template>
-        <empty-box v-else :tips="$t('common.text_13')"></empty-box>
+        <empty-box v-else :tips="$t('iAccount.common.text_13')"></empty-box>
       </div>
     </div>
   </div>
@@ -67,12 +67,12 @@ import SecuritiesApi from '@/modules/module-iaccount/api/modules/api-securities'
 
 const SUMMARYS_DATA = [
   {
-    title: 'deposit.currency_type.text_1',
+    title: 'iAccount.deposit.currency_type.text_1',
     iconName: 'hk',
     key: 'hk',
     money: ''
   }, {
-    title: 'deposit.currency_type.text_2',
+    title: 'iAccount.deposit.currency_type.text_2',
     iconName: 'us',
     key: 'dollar',
     money: ''
@@ -150,7 +150,7 @@ export default {
     },
     _clickWithdrawTips() {
       tips.alert({
-        confirmTxt: this.$t('common.text_10'),
+        confirmTxt: this.$t('iAccount.common.text_10'),
         render: (createElement) => {
           return [
             createElement('div', {
@@ -158,7 +158,7 @@ export default {
                 'custom-cube-dialog-title': true
               },
               slot: 'title'
-            }, this.$t('history.common.text_5')),
+            }, this.$t('iAccount.history.common.text_5')),
             createElement('div', {
               class: {
                 'custom-cube-dialog-content': true
@@ -166,7 +166,7 @@ export default {
               slot: 'content'
             }, [
               createElement('p', null, [
-                this.$t('history.common.text_6'),
+                this.$t('iAccount.history.common.text_6'),
                 createElement('span', {
                   class: {
                     'font-link': true
@@ -177,7 +177,7 @@ export default {
                     }
                   }
                 }, this.getPhone),
-                this.$t('history.common.text_15')
+                this.$t('iAccount.history.common.text_15')
               ])
             ])
           ]

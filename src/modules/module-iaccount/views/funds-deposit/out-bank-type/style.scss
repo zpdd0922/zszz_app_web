@@ -1,0 +1,11 @@
+.sec-deposit-bank-type {
+    .bank-type-icon-hk {
+      @include retina-images('~@/modules/module-iaccount/assets/img/bank-type/icon_card_hk');
+    }
+    .bank-type-icon-other {
+      @include retina-images('~@/modules/module-iaccount/assets/img/bank-type/icon_card_other');
+    }
+
+    
+
+}

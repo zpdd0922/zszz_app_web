@@ -29,6 +29,10 @@ export const post = (url, params) => {
   return axios.post(url, params);
 }
 
+export const postCommon = (url, params) => {
+  return axios.post(url, paramsData.COMMON(params));
+}
+
 export const postImg = (url, params, options) => {
   return ajaxUpload(HOST_OPEN, url, updateHeaders, params, options);
 }

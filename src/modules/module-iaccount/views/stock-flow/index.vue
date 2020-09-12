@@ -6,9 +6,9 @@
     <div class="list-wrap">
       <template v-if="stockInfoList.length > 0">
         <flow-list v-for="(item, idx) in stockInfoList" :key="idx" :item="item" :index="idx"></flow-list>
-        <p class="bottom-tip">{{$t('capital_flow.common.text_27')}}</p>
+        <p class="bottom-tip">{{$t('iAccount.capital_flow.common.text_27')}}</p>
       </template>
-      <empty-box v-else :tips="$t('common.text_13')"></empty-box>
+      <empty-box v-else :tips="$t('iAccount.common.text_13')"></empty-box>
     </div>
     <!-- 遮罩层 -->
     <div class="mask" v-show="isMask"></div>
@@ -56,10 +56,10 @@ export default {
     }
   },
   created() {
-    if (this.accInfo) {
+    if (this.secAccountInfo) {
       this._handleNext()
     } else {
-      this.$store.dispatch('apiFindAccInfo').then(() => {
+      this.$store.dispatch('getSecAccountInfo').then(() => {
         this._handleNext()
       })
     }
@@ -70,7 +70,7 @@ export default {
       'marketType', // 币种
       'capitalFlow', // 资金流向
       'dataFilter', // 日期
-      'accInfo'
+      'secAccountInfo'
     ])
   },
   methods: {
@@ -93,7 +93,7 @@ export default {
     },
     // 获取股票流水
     stockRecordInfo() {
-      const { fundAccount = [], tradeAccount } = this.accInfo
+      const { fundAccount = [], tradeAccount } = this.secAccountInfo
       let param = {
         // tradePwd: this.trd, // 类型：String  必有字段  备注：交易密码
         // key: this.key,

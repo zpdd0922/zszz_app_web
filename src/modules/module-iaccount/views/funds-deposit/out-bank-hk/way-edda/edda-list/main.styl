@@ -1,0 +1,114 @@
+@import '~assets/stylus/variable.styl'
+@import '~assets/stylus/mixin.styl'
+
+.edda-list
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background #FFFFFF
+.btn
+  display: flex
+  align-items: center
+  justify-content: center
+  width:690px;
+  height:80px;
+  margin 80px auto 0
+  background:rgba(252,114,76,0);
+  border-radius:40px;
+  border:2px solid $color-link
+  color: $color-link
+  .add-icon
+    bg-image('add-icon')
+  .txt
+    width:168px;
+    height:40px;
+    font-size:28px;
+    font-family:PingFangSC-Regular,PingFang SC;
+    font-weight:400;
+    color:$color-link
+    line-height:40px;
+.item
+  flex-box($row: center, $col: center)
+  .img
+  .content
+    .name
+      flex-box($row: center, $col: center)
+      font-size:28px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:$color-text
+      line-height:40px;
+      & > p:nth-child(1)
+        padding-right 32px
+    .account
+      font-size:24px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:$color-arrow
+      line-height:34px;
+      padding-top 10px
+  .flag-0
+    width:126px;
+    height:32px;
+    background#BFB9BA
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+  .flag-1
+    width:126px;
+    height:32px;
+    background:#51CBF5
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+  .flag-2
+    width:126px;
+    height:32px;
+    background:#F15B5A
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+  .flag-3
+    width:126px;
+    height:32px;
+    background:#7CB716
+    border-radius:200px 2px 200px 2px;
+    text-align: center
+    line-height:32px;
+    span
+      font-size:20px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+
+.arrow
+  position: absolute !important
+  right 0
+  arrow($dir: right, $border: 2px, $width: 16px, $poa: 38px)
+.del
+  position: absolute !important
+  right 30px
+  font-size:28px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: $color-link
+  line-height:40px;
+
+

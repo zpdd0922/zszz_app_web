@@ -8,10 +8,10 @@ export const BANK_NAME_OPTIONS = [
     getBankAddress: 'Bank of China Tower, 1 Garden Road, Central, Hong Kong',
     swiftCode: 'BKCHHKHHXXX',
     depositToAccount: {
-      hkd: '01288400127638',
-      usd: '01288408017580'
+      hkd: '012123456789',
+      usd: '012123456789'
     },
-    getAccountName: '9F Primasia Securities Limited'
+    getAccountName: 'Well Link Securities'
   },
   {
     value: 'HSBCHK',
@@ -22,10 +22,10 @@ export const BANK_NAME_OPTIONS = [
     getBankAddress: '1, Queen\'s Road Central, Hong Kong',
     swiftCode: 'HSBCHKHHHKH',
     depositToAccount: {
-      hkd: '600325351292',
-      usd: '600325351274'
+      hkd: '600123456789',
+      usd: '600123456789'
     },
-    getAccountName: '9F Primasia Securities Limited'
+    getAccountName: 'Well Link Securities'
   },
   {
     value: 'DBS',
@@ -36,9 +36,9 @@ export const BANK_NAME_OPTIONS = [
     getBankAddress: 'MILLENNIUM CITY 6 FLOOR 9 392 KWUN TONG ROAD',
     swiftCode: 'DHBKHKHHXXX 或 DHBKHKHH',
     depositToAccount: {
-      hkd: '000292053',
-      usd: '000292053'
+      hkd: '000123456',
+      usd: '000123456'
     },
-    getAccountName: '9F Primasia Securities Limited'
+    getAccountName: 'Well Link Securities'
   }
 ]

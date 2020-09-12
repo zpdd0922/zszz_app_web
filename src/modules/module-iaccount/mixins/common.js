@@ -10,12 +10,12 @@ import { formatToDBC } from '@/modules/module-iaccount/utils/format'
 import { format_DepositFPS } from '@/modules/module-iaccount/format/deposit'
 import { format_getBankAccount } from '@/modules/module-iaccount/format/common'
 import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
-import OpenApi from '@/modules/module-iaccount/api/modules/api-open'
+import AccountApi from '@/modules/module-iaccount/api/modules/api-account'
 
 export default {
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositBankData',
       'depositBankType'
     ]),
@@ -49,20 +49,20 @@ export default {
       window.JFSTOCK.userMakePhone({ phone })
     },
     // 交易信息展示 名称 + 英文
-    getAccountHmtl(accInfo) {
-      const val = accInfo ? (accInfo.clientNameCn + '(' + accInfo.clientNameEn + ')') : EMPTY_LABEL
+    getAccountHmtl(secAccountInfo) {
+      const val = secAccountInfo ? (secAccountInfo.clientNameCn + '(' + secAccountInfo.clientNameEn + ')') : EMPTY_LABEL
       const valHtml = `<strong class="font-strong">${val}</strong>`
       return valHtml
     },
     // 客户交易账户状态
-    getAccountStatus(accInfo) {
-      const { clientStatus } = accInfo || {}
+    getAccountStatus(secAccountInfo) {
+      const { clientStatus } = secAccountInfo || {}
       // 账号已冻结
       if (clientStatus === '1') {
         tips.jfDialog({
           render: (createElement) => {
             return createElement('p', null, [
-              createElement('span', null, this.$t('common.text_18')),
+              createElement('span', null, this.$t('iAccount.common.text_18')),
               createElement('span', {
                 class: {
                   'font-link': true
@@ -73,7 +73,7 @@ export default {
                   }
                 }
               }, this.getPhone_HK),
-              createElement('span', null, this.$t('common.text_19')),
+              createElement('span', null, this.$t('iAccount.common.text_19')),
               createElement('span', {
                 class: {
                   'font-link': true
@@ -113,7 +113,7 @@ export default {
         render: createElement => {
           return [
             createElement('p', null, [
-              createElement('span', null, this.$t('withdraw.select_bank.text_4')),
+              createElement('span', null, this.$t('iAccount.withdraw.select_bank.text_4')),
               createElement('span', {
                 class: {
                   'font-link': true
@@ -124,7 +124,7 @@ export default {
                     this.gotoGuide(HELP_URL.CMBC_WITHDRAW_HOW)
                   }
                 }
-              }, this.$t('withdraw.select_bank.text_5'))
+              }, this.$t('iAccount.withdraw.select_bank.text_5'))
             ])
           ]
         }
@@ -135,7 +135,7 @@ export default {
       let bank_cn = []
       let bank_hk = []
       let bank_other = []
-      const bank_type = this.$t('define.BANK_TYPE')
+      const bank_type = this.$t('iAccount.define.BANK_TYPE')
       try {
         // 香港
         bank_hk = await SecApi.bankListDeposit({ bankType: bank_type[0].value })
@@ -146,6 +146,7 @@ export default {
       } catch (error) {
       }
       const banks = bank_hk.concat(bank_cn)
+      console.log(banks)
       return { banks, bank_hk, bank_cn, bank_other }
     },
     // 入金方式处理
@@ -155,12 +156,12 @@ export default {
       // 2.入金币种 - 美元 - 不展示FPS
       const isUS = depositCurrency.code === USD
       if (isUS) {
-        ways = ways.filter(item => (item !== this.$t('define.DEPOSIT_WAY')[FPS].code && item !== this.$t('define.DEPOSIT_WAY')[EDDA].code))
+        ways = ways.filter(item => (item !== this.$t('iAccount.define.DEPOSIT_WAY')[FPS].code && item !== this.$t('iAccount.define.DEPOSIT_WAY')[EDDA].code))
       }
       // 3.香港卡开户 - 不展示支票
-      const { bankType } = await OpenApi.getOpenBankType()
+      const { bankType } = await AccountApi.getOpenBankType()
       if (bankType === 0) {
-        ways = ways.filter(item => item !== this.$t('define.DEPOSIT_WAY')[CHECK].code)
+        ways = ways.filter(item => item !== this.$t('iAccount.define.DEPOSIT_WAY')[CHECK].code)
       }
       console.log('ways', ways)
       return ways
@@ -173,7 +174,7 @@ export default {
       console.log('处理入金记录-wayKey', wayKey)
 
       // 匹配出入金方式 - 其他为网银
-      const temp_way = this.$t('define.DEPOSIT_WAY')[wayKey] || this.$t('define.DEPOSIT_WAY')[EBANK]
+      const temp_way = this.$t('iAccount.define.DEPOSIT_WAY')[wayKey] || this.$t('iAccount.define.DEPOSIT_WAY')[EBANK]
       console.log('处理入金记录-temp_way', temp_way)
 
       // 该银行卡类型下所有银行列表数据
@@ -217,12 +218,12 @@ export default {
       this.$store.dispatch('selectBankItem', temp_bankItem)
 
       // 币种
-      const temp_currency = this.$t('define.CURRENCY').find(item => item.value === data.currency)
+      const temp_currency = this.$t('iAccount.define.CURRENCY').find(item => item.value === data.currency)
       this.$store.dispatch('selectCurrency', temp_currency)
       console.log('再次转入-temp_currency', temp_currency)
 
       // 银行卡类型
-      const temp_bankType = this.$t('define.BANK_TYPE').find(item => item.value === data.bankType)
+      const temp_bankType = this.$t('iAccount.define.BANK_TYPE').find(item => item.value === data.bankType)
       this.$store.dispatch('selectBankType', temp_bankType)
       console.log('再次转入-temp_bankType', temp_bankType)
 
@@ -248,17 +249,17 @@ export default {
         temp_wayInfo = format_DepositFPS(temp_fps)[0]
         this.$store.dispatch('setWayInfo', temp_wayInfo)
         console.log('再次转入-temp_wayInfo', temp_wayInfo)
-        if (data.bankType === this.$t('define.BANK_HK').value) {
+        if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
           this.$router.push({ name: 'fps-hk' })
         } else {
           this.$router.push({ name: 'fps-other' })
         }
         break
       case CHECK:
-        temp_wayInfo = this.$t('define.CHECK_INFO')
+        temp_wayInfo = this.$t('iAccount.define.CHECK_INFO')
         this.$store.dispatch('setWayInfo', temp_wayInfo)
         console.log('再次转入-temp_wayInfo', temp_wayInfo)
-        if (data.bankType === this.$t('define.BANK_HK').value) {
+        if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
           this.$router.push({ name: 'check-hk' })
         } else {
           this.$router.push({ name: 'check-other' })
@@ -269,7 +270,7 @@ export default {
         this.$store.dispatch('setWayInfo', temp_wayInfo)
         console.log('再次转入-temp_wayInfo', temp_wayInfo)
         // 区分大陆还是香港卡
-        // if (data.bankType === this.$t('define.BANK_HK').value) {
+        // if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
         //   this.$router.push({ name: 'e-banking-hk' })
         // } else {
         //   this.$router.push({ name: 'e-banking-cn' })
@@ -295,8 +296,8 @@ export default {
      */
     async fetchEddaList(type) {
       const params = {
-        clientId: this.accInfo.tradeAccount,
-        fundAccount: this.accInfo.fundAccount.length && this.accInfo.fundAccount[0],
+        clientId: this.secAccountInfo.tradeAccount,
+        fundAccount: this.secAccountInfo.fundAccount.length && this.secAccountInfo.fundAccount[0],
         bankCode: this.depositBankData.value,
         bankType: this.depositBankType.value
       }

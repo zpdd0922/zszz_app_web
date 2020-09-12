@@ -1,0 +1,114 @@
+.sec-top-progress {
+  display: flex;
+  padding: .15rem .2rem;
+  font-size: 12px;
+  background-color: $color-progress-bg;
+
+  .progress {
+    flex: 1;
+    position: relative;
+    align-items: center;
+    text-align: center;
+
+    .line{
+      display:inline-block;
+      height: 2px;
+      width: 100%;
+      margin: 1em 0;
+      background-color: $color-progress-item-bg;
+      position: relative;
+
+    }
+
+
+
+    .step {
+      position: absolute;
+      display:inline-block;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 2px;
+      top: 1em;
+      left: 50%;
+      margin-left: -.75em;
+      margin-top: -.75em;
+      line-height: 1.5em;
+      background-color: $color-progress-item-bg;
+      border-radius: 50%;
+      color: #fff;
+    }
+
+    .label {
+      display:inline-block;
+      width: 100%;
+      color: $color-progress-item-bg;
+    }
+
+  }
+
+  .progress:first-child {
+    .line::after{
+      content: '';
+      position: absolute;
+      display: block;
+      top: -50%;
+      height: 200%;
+      left: 0;
+      background-color: #fff;
+      width: 50%;
+    }
+  }
+  .progress:last-child {
+    .line::after{
+      content: '';
+      position: absolute;
+      display: block;
+      top: -50%;
+      height: 200%;
+      right: 0;
+      background-color: #fff;
+      width: 50%;
+    }
+  }
+
+
+  .progress-active {
+    .line {
+      background-color: $color-progress-item-bg-active;
+    }
+    .step {
+      background-color: $color-progress-item-bg-active;
+    }
+
+    .label {
+      color: $color-progress-item-txt-active;
+    }
+  }
+
+  .progress-success {
+    .line {
+      background-color: $color-progress-item-bg-success;
+    }
+    .step {
+      background-color: $color-progress-item-bg-success;
+      color: $color-progress-item-bg-success;
+
+      &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('@/../../img/finish.png');
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+
+    .label {
+      color: $color-progress-item-txt-success;
+    }
+  }
+}

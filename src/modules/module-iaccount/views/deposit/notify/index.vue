@@ -2,15 +2,15 @@
   <div class="notify">
     <div class="notify-status">
       <jf-icon name="success"></jf-icon>
-      <p class="status-title">{{ $t('notify.text_1') }}</p>
-      <p class="status-txt">{{ $t('notify.text_2') }}</p>
+      <p class="status-title">{{ $t('iAccount.notify.text_1') }}</p>
+      <p class="status-txt">{{ $t('iAccount.notify.text_2') }}</p>
     </div>
     <div class="notify-action">
       <div class="action-item">
-        <cube-button :outline="true" @click="_clickGoHis">{{ $t('history.common.text_1') }}</cube-button>
+        <cube-button :outline="true" @click="_clickGoHis">{{ $t('iAccount.history.common.text_1') }}</cube-button>
       </div>
       <div class="action-item">
-        <cube-button @click="_clickGoAgain">{{ $t('deposit.currency_type.text_3') }}</cube-button>
+        <cube-button @click="_clickGoAgain">{{ $t('iAccount.deposit.currency_type.text_3') }}</cube-button>
       </div>
     </div>
   </div>

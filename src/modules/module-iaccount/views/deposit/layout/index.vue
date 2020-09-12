@@ -1,41 +1,38 @@
 <template>
   <div class="deposit">
     <!-- Loading -->
-    <template v-if='!accInfo'>
+    <template v-if="!secAccountInfo">
       <loading />
     </template>
 
     <!-- 主体内容 -->
     <template v-else>
-      <router-view/>
+      <router-view />
     </template>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import commonMixin from '@/modules/module-iaccount/mixins/common'
+import { mapGetters } from "vuex";
+import commonMixin from "@/modules/module-iaccount/mixins/common";
 
 export default {
   mixins: [commonMixin],
-  data () {
-    return {}
+  data() {
+    return {};
   },
   computed: {
-    ...mapGetters([
-      'accInfo'
-    ])
+    ...mapGetters(["secAccountInfo"]),
   },
   methods: {},
   created() {
-    this.$store.dispatch('apiFindAccInfo').then(res => {
-      this.getAccountStatus(res)
-    })
-  }
-}
-
+    this.$store.dispatch("getSecAccountInfo").then((res) => {
+      this.getAccountStatus(res);
+    });
+  },
+};
 </script>
 
 <style lang="scss">
-@import './style';
+@import "./style";
 </style>

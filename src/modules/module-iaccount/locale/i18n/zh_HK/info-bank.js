@@ -21,6 +21,9 @@ export const BANK_OTHER = {
   value: 3
 };
 
+// export const BANK_TYPE = [
+//   BANK_HK, BANK_CN, BANK_OTHER
+// ]
 export const BANK_TYPE = [
-  BANK_HK, BANK_CN, BANK_OTHER
+  BANK_HK
 ]

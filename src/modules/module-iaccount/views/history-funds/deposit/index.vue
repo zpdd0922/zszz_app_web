@@ -2,7 +2,7 @@
   <jf-wrap
     class="funds-detail"
     :nextBtnShow="isShowBtn"
-    :btnText="$t('history.funds.text_12')"
+    :btnText="$t('iAccount.history.funds.text_12')"
     @handleNext="judgeDepositAgain(cacheData)">
     <funds-summary :lists="summarys"></funds-summary>
 
@@ -41,7 +41,7 @@
         <!-- 审核状态 -->
         <li key="state">
           <div class="label">
-            <span>{{ $t('history.funds.text_9') }}</span>
+            <span>{{ $t('iAccount.history.funds.text_9') }}</span>
           </div>
           <div class="filed">
             <span :style="_getStatusColor(cacheData.state)">{{ cacheData.state | filterStateText }}</span>
@@ -50,7 +50,7 @@
         <!-- 退回时间 -->
         <li v-if="isShowReason" key="modifyTime">
           <div class="label">
-            <span>{{ $t('history.funds.text_10') }}</span>
+            <span>{{ $t('iAccount.history.funds.text_10') }}</span>
           </div>
           <div class="filed">
             <span>{{ cacheData.modifyTime | filterDateTime }}</span>
@@ -59,7 +59,7 @@
         <!-- 退回原因 -->
         <li v-if="isShowReason">
           <div class="label">
-            <span>{{ $t('history.funds.text_11') }}</span>
+            <span>{{ $t('iAccount.history.funds.text_11') }}</span>
           </div>
           <div class="filed">
             <span :style="_getStatusColor(cacheData.state)">{{ cacheData.backReason | filterEmptyVal }}</span>
@@ -87,34 +87,34 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 
 const SUMMARYS_DATA = [
   {
-    title: 'history.funds.text_16'
+    title: 'iAccount.history.funds.text_16'
   }
 ]
 
 const INFO_FRONT = [
   {
-    title: 'history.funds.text_1',
+    title: 'iAccount.history.funds.text_1',
     custom: {
       value: (data) => {
         return timestampToTime(data.createdTime, 'YYYY-MM-DD hh:mm:ss')
       }
     }
   }, {
-    title: 'history.funds.text_2',
+    title: 'iAccount.history.funds.text_2',
     custom: {
       value: (data) => {
-        const { title } = i18n.t('define.BANK_TYPE').find(item => item.value === data.bankType) || {}
+        const { title } = i18n.t('iAccount.define.BANK_TYPE').find(item => item.value === data.bankType) || {}
         return title
       }
     }
   }, {
-    title: 'history.funds.text_3',
+    title: 'iAccount.history.funds.text_3',
     key: 'remittanceBankName',
     custom: {
       value: 'remittanceBankName'
     }
   }, {
-    title: 'history.funds.text_4',
+    title: 'iAccount.history.funds.text_4',
     key: 'remittanceBankAccount',
     custom: {
       value: (data) => {
@@ -122,26 +122,26 @@ const INFO_FRONT = [
       }
     }
   }, {
-    title: 'history.funds.text_6',
+    title: 'iAccount.history.funds.text_6',
     custom: {
       value: (data) => {
         // 根据bankCode判断
         // CHECK - 支票 FPS-fps转数快 其他-网银
         const val = (data.bankCode || '').toUpperCase()
-        const deposit_way = i18n.t('define.DEPOSIT_WAY')
+        const deposit_way = i18n.t('iAccount.define.DEPOSIT_WAY')
         const wayKey = Object.keys(deposit_way).find(item => item === val) || EBANK
         return deposit_way[wayKey].title
       }
     }
   }, {
-    title: 'history.funds.text_7',
+    title: 'iAccount.history.funds.text_7',
     custom: {
       value: (data) => {
         return data.depositAccount + '-' + data.depositAccountName
       }
     }
   }, {
-    title: 'history.funds.text_8',
+    title: 'iAccount.history.funds.text_8',
     custom: {
       accImgId: 'accImgId',
       accImgIdA: 'accImgIdA'
@@ -182,7 +182,9 @@ export default {
       return res
     },
     summarys() {
-      const current = this.$t('define.CURRENCY').find(item => item.value === this.cacheData.currency) || {}
+      console.log(11111111111111111111, this.$t('iAccount.define.CURRENCY'))
+      const current = this.$t('iAccount.define.CURRENCY').find(item => item.value === this.cacheData.currency) || {}
+      
       return SUMMARYS_DATA.map(item => {
         return {
           ...item,
