@@ -2,7 +2,7 @@
   <jf-wrap
     class="funds-detail"
     :nextBtnShow="isShowBtn"
-    :btnText="$t('history.funds.text_13')"
+    :btnText="$t('iAccount.history.funds.text_13')"
     @handleNext="_clickCancel">
     <funds-summary :lists="summarys"></funds-summary>
 
@@ -13,7 +13,7 @@
         <!-- 审核状态 -->
         <li key="state">
           <div class="label">
-            <span>{{ $t('history.funds.text_9') }}</span>
+            <span>{{ $t('iAccount.history.funds.text_9') }}</span>
           </div>
           <div class="filed">
             <span :style="_getStatusColor(cacheData.state)">{{ cacheData.state | filterStateText }}</span>
@@ -22,7 +22,7 @@
         <!-- 退回时间 -->
         <li v-if="isShowReason" key="modifyTime">
           <div class="label">
-            <span>{{ $t('history.funds.text_10') }}</span>
+            <span>{{ $t('iAccount.history.funds.text_10') }}</span>
           </div>
           <div class="filed">
             <span>{{ cacheData.modifyTime | filterDateTime }}</span>
@@ -31,7 +31,7 @@
         <!-- 退回原因 -->
         <li v-if="isShowReason">
           <div class="label">
-            <span>{{ $t('history.funds.text_11') }}</span>
+            <span>{{ $t('iAccount.history.funds.text_11') }}</span>
           </div>
           <div class="filed">
             <span :style="_getStatusColor(cacheData.state)">{{ cacheData.backReason | filterEmptyVal }}</span>
@@ -58,40 +58,40 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 
 const SUMMARYS_DATA = [
   {
-    title: 'history.funds.text_17'
+    title: 'iAccount.history.funds.text_17'
   }
 ]
 
 const INFO_FRONT = [
   {
-    title: 'history.funds.text_1',
+    title: 'iAccount.history.funds.text_1',
     custom: {
       value: (data) => {
         return timestampToTime(data.createdTime, 'YYYY-MM-DD hh:mm:ss')
       }
     }
   }, {
-    title: 'history.funds.text_2',
+    title: 'iAccount.history.funds.text_2',
     custom: {
       value: (data) => {
-        const { title } = i18n.t('define.BANK_TYPE').find(item => item.value === data.extMethod) || {}
+        const { title } = i18n.t('iAccount.define.BANK_TYPE').find(item => item.value === data.extMethod) || {}
         return title
       }
     }
   }, {
-    title: 'history.funds.text_3',
+    title: 'iAccount.history.funds.text_3',
     custom: {
       value: 'bankName'
     }
   }, {
-    title: 'history.funds.text_4',
+    title: 'iAccount.history.funds.text_4',
     custom: {
       value: (data) => {
         return formatStepSpace(data.bankAccount)
       }
     }
   }, {
-    title: 'history.funds.text_5',
+    title: 'iAccount.history.funds.text_5',
     custom: {
       value: (data) => {
         return data.extAccount + '-' + data.extAccountName
@@ -122,7 +122,7 @@ export default {
       return format_Form(INFO_FRONT, this.cacheData)
     },
     summarys() {
-      const current = this.$t('define.CURRENCY').find(item => item.value === this.cacheData.currency) || {}
+      const current = this.$t('iAccount.define.CURRENCY').find(item => item.value === this.cacheData.currency) || {}
       return SUMMARYS_DATA.map(item => {
         return {
           ...item,
@@ -139,9 +139,9 @@ export default {
     },
     _clickCancel() {
       tips.confirm({
-        confirmTxt: this.$t('common.text_9'),
-        cancelTxt: this.$t('common.text_2'),
-        content: this.$t('history.funds.text_14'),
+        confirmTxt: this.$t('iAccount.common.text_9'),
+        cancelTxt: this.$t('iAccount.common.text_2'),
+        content: this.$t('iAccount.history.funds.text_14'),
         onConfirm: () => {
           this._fetchCancel()
         }
@@ -150,7 +150,7 @@ export default {
     _fetchCancel() {
       SecApi.cancelWithdrawal({ id: this.cacheData.id }).then(() => {
         tips.toast({
-          txt: this.$t('history.funds.text_15'),
+          txt: this.$t('iAccount.history.funds.text_15'),
           onTimeout: () => {
             this.$router.go(-1)
           }

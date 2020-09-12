@@ -128,7 +128,7 @@
 }
 
 // 边框 1px - 存在层级覆盖
-@mixin border-1px ($color: $color-border, $type: solid, $radius: inherit) {
+@mixin border-after-1px ($color: $color-border, $type: solid, $radius: inherit) {
   position: relative;
   &:after {
     content: '\0020';
@@ -163,6 +163,7 @@
     content: '\0020';
     height: 1px;
     transform: scaleY(0.5);
+    background-color: $color;
     position: absolute;
     left: $left;
     right: $right;

@@ -1,7 +1,7 @@
 <template>
-  <jf-wrap
+  <sec-wrap
     class="e-banking"
-    :btnText="$t('deposit.common.text_3')"
+    :btnText="$t('iAccount.deposit.common.text_3')"
     @handleNext="_clickBtn">
     <head-bank
       :styleObj="{
@@ -11,27 +11,27 @@
       :bank="depositBankData"
       :desc="depositWayInfo">
       <template v-slot:title>
-        {{ depositBankData.title }} • {{ $t('deposit.ways.text_3') }}
+        {{ depositBankData.title }} • {{ $t('iAccount.deposit.ways.text_3') }}
       </template>
     </head-bank>
 
     <div class="content">
       <div class="content-inner">
-        <h5 class="inner-title account-info" v-html="$t('deposit.common.text_4', { config: getAccountHmtl(accInfo) })"></h5>
+        <h5 class="inner-title account-info" v-html="$t('iAccount.deposit.common.text_4', { config: getAccountHmtl(secAccountInfo) })"></h5>
         <div class="inner-detail">
-          <h6 class="detail-title">{{ $t('deposit.eBanking.text_1') }}</h6>
-          <p class="detail-tips">{{ $t('deposit.common.text_2') }}</p>
+          <h6 class="detail-title">{{ $t('iAccount.deposit.eBanking.text_1') }}</h6>
+          <p class="detail-tips">{{ $t('iAccount.deposit.common.text_2') }}</p>
 
           <detail-list :lists="eBankingDetail"></detail-list>
         </div>
       </div>
 
       <guide-link
-        :title="$t('deposit.eBanking.text_7')"
+        :title="$t('iAccount.deposit.eBanking.text_7')"
         :link="getComputedLink"
         iconName="bank"></guide-link>
     </div>
-  </jf-wrap>
+  </sec-wrap>
 </template>
 
 <script>
@@ -43,14 +43,14 @@ import commonMixin from '@/modules/module-iaccount/mixins/common'
 const EXAMPLE_BANK = {
   foot: [
     {
-      txt: 'deposit.common.text_5'
+      txt: 'iAccount.deposit.common.text_5'
     }
   ]
 }
 
 const EBANKING_HK = [
   {
-    title: 'deposit.eBanking.text_2',
+    title: 'iAccount.deposit.eBanking.text_2',
     custom: {
       value: (data, obj) => {
         const val = data.depositToAccount || {}
@@ -63,28 +63,28 @@ const EBANKING_HK = [
       }
     }
   }, {
-    title: 'deposit.eBanking.text_3',
+    title: 'iAccount.deposit.eBanking.text_3',
     custom: {
       value: 'bankName'
     }
   }, {
-    title: 'deposit.eBanking.text_17',
+    title: 'iAccount.deposit.eBanking.text_17',
     custom: {
       value: 'bankNameEN'
     }
   }, {
-    title: 'deposit.eBanking.text_4',
+    title: 'iAccount.deposit.eBanking.text_4',
     custom: {
       value: 'accountName',
       tips: 'accountNameRemark'
     }
   }, {
-    title: 'deposit.eBanking.text_5',
+    title: 'iAccount.deposit.eBanking.text_5',
     custom: {
       value: 'swiftCode'
     }
   }, {
-    title: 'deposit.eBanking.text_6',
+    title: 'iAccount.deposit.eBanking.text_6',
     custom: {
       value: 'depositToBankAddress'
     }
@@ -102,7 +102,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositCurrency',
       'depositWayInfo',
       'depositBankData'

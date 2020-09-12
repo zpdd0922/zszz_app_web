@@ -2,7 +2,7 @@
   <div class="sec-home">
     <div v-for="(menuItem) in menu" :key="menuItem.key">
       <template v-if="menuItem.channel.length">
-        <!-- <sec-title :content="menuItem.label" /> -->
+        <sec-title :content="menuItem.label" />
         <ul class="sec-list-box">
           <li
             v-for="(channelItem, idx2) in menuItem.channel"
@@ -42,7 +42,7 @@ export default {
               key: "deposit",
               label: "存入資金",
               iconType: "deposit",
-              path: "/deposit",
+              path: "funds-deposit",
             },
             // { key: "exchange", label: "貨幣兌換", iconType: "exchange" },
             {

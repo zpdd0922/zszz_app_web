@@ -252,7 +252,6 @@ export default {
             this.$store
               .dispatch("getOcrData", { imgType, openType: 1 })
               .then((ocr) => {
-                console.log(112233, ocr);
                 // 处理ocr返回数据
                 const { ocrInfo } = getOcrIDCardData(ocr, imgType);
                 // 同步表单

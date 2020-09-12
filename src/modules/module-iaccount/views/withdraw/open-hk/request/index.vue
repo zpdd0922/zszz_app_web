@@ -2,14 +2,14 @@
   <jf-wrap
     class="request"
     :isDisabled="isDisabled"
-    :btnText="$t('withdraw.request.text_24')"
+    :btnText="$t('iAccount.withdraw.request.text_24')"
     :handleBefore="_handleBefore"
     @handleNext="_handleNext">
     <part-card>
       <ul class="detail-form">
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_1') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_1') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
@@ -17,24 +17,24 @@
                 class="form-select"
                 @click="_clickSelectAccount">
                 <span v-if="accountLabel">{{ accountLabel }}</span>
-                <span v-else class="txt">{{ $t('withdraw.request.text_25') }}</span>
+                <span v-else class="txt">{{ $t('iAccount.withdraw.request.text_25') }}</span>
               </div>
             </div>
           </div>
         </li>
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_5') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_5') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
-              <span class="txt">{{ accInfo | format_accInfo }}</span>
+              <span class="txt">{{ secAccountInfo | format_secAccountInfo }}</span>
             </div>
           </div>
         </li>
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_6') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_6') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">
@@ -42,7 +42,7 @@
                 class="form-select"
                 @click="_clickSelectBank">
                 <span v-if="bankInfo">{{ bankInfo.text }}</span>
-                <span v-else class="txt">{{ $t('withdraw.request.text_26') }}</span>
+                <span v-else class="txt">{{ $t('iAccount.withdraw.request.text_26') }}</span>
               </div>
             </div>
           </div>
@@ -50,11 +50,11 @@
       </ul>
     </part-card>
 
-    <part-card :title="$t('withdraw.request.text_15')">
+    <part-card :title="$t('iAccount.withdraw.request.text_15')">
       <ul class="detail-form">
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_16') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_16') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item border-bottom-1px">
@@ -76,14 +76,14 @@
         </li>
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_17') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_17') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">
               <input
                 v-model="model.withdrawMoney"
                 type="text"
-                :placeholder="$t('withdraw.request.text_18')"
+                :placeholder="$t('iAccount.withdraw.request.text_18')"
                 @focus="_focusMoneyInput"
                 @blur="_blurMoneyInput">
             </div>
@@ -95,7 +95,7 @@
         <!-- 手续费 -->
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_33') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_33') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">{{ _getFee() }}</div>
@@ -107,7 +107,7 @@
         <!-- 实际提取金额 -->
         <li>
           <div class="form-label">
-            <span>{{ $t('withdraw.request.text_34') }}</span>
+            <span>{{ $t('iAccount.withdraw.request.text_34') }}</span>
           </div>
           <div class="form-filed">
             <div class="filed-item">{{ getAct }}</div>
@@ -124,28 +124,28 @@
         <li class="cell">
           <div>
             <span>
-              {{ $t('withdraw.request.text_19')}}
+              {{ $t('iAccount.withdraw.request.text_19')}}
               <em class="money">{{ money | filterEmptyVal }} {{ getCurrency.label }}</em>
             </span>
           </div>
           <div>
-            <span class="font-link" @click="_clickSetAll">{{ $t('withdraw.request.text_20') }}</span>
+            <span class="font-link" @click="_clickSetAll">{{ $t('iAccount.withdraw.request.text_20') }}</span>
           </div>
         </li>
         <li class="cell">
           <div>
-            <span>{{ $t('deposit.common.text_7') }} {{ withdrawBankInfo.chargeMoney | filterEmptyVal }}</span>
+            <span>{{ $t('iAccount.deposit.common.text_7') }} {{ withdrawBankInfo.chargeMoney | filterEmptyVal }}</span>
             <jf-icon v-if="withdrawBankInfo.chargeMoneyRemark" name="tips_gray" @click="_showTip(withdrawBankInfo.chargeMoneyRemark)"></jf-icon>
           </div>
         </li>
         <li class="cell">
           <div>
-            <span>{{ $t('deposit.common.text_8') }} {{ withdrawBankInfo.timeArrival | filterEmptyVal }}</span>
+            <span>{{ $t('iAccount.deposit.common.text_8') }} {{ withdrawBankInfo.timeArrival | filterEmptyVal }}</span>
           </div>
         </li>
         <li v-if="withdrawBankInfo.effectiveTime" class="cell">
           <div>
-            <span>{{ $t('deposit.common.text_9') }} {{ withdrawBankInfo.effectiveTime }}</span>
+            <span>{{ $t('iAccount.deposit.common.text_9') }} {{ withdrawBankInfo.effectiveTime }}</span>
           </div>
         </li>
       </ul>
@@ -177,7 +177,7 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 export default {
   mixins: [commonMixin],
   data() {
-    const currencyOptions = this.$t('define.CURRENCY')
+    const currencyOptions = this.$t('iAccount.define.CURRENCY')
     return {
       showCaptcha: false,
       bank_hk: [],
@@ -200,7 +200,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'withdrawBankInfo'
     ]),
     isBank_CN() {
@@ -223,7 +223,7 @@ export default {
   methods: {
     _showTip(txt) {
       tips.jfDialog({
-        btnTxt: this.$t('common.text_10'),
+        btnTxt: this.$t('iAccount.common.text_10'),
         content: txt
       })
     },
@@ -246,19 +246,19 @@ export default {
 
         // 实际提取金额小于零
         if (Number(this.getAct) <= 0) {
-          const msg = this.$t('withdraw.request.text_35')
+          const msg = this.$t('iAccount.withdraw.request.text_35')
           tips.toast({ txt: msg })
           return reject(msg)
         }
 
         if (this.getCurrency.code === HKD && Number(withdrawMoney) < 10) {
-          const msg = this.$t('withdraw.request.text_28')
+          const msg = this.$t('iAccount.withdraw.request.text_28')
           tips.toast({ txt: msg })
           return reject(msg)
         }
 
         if (Number(withdrawMoney) > Number(this.money)) {
-          const msg = this.$t('withdraw.request.text_29')
+          const msg = this.$t('iAccount.withdraw.request.text_29')
           tips.toast({ txt: msg })
           return reject(msg)
         }
@@ -322,7 +322,7 @@ export default {
     },
     // 获取可提资金
     _fetchMoney() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       // 需要取柜台定义币种字段
       const currencyGt = this.getCurrency.gt
       const params = {
@@ -336,7 +336,7 @@ export default {
     },
     // 已绑定入金银行
     _fetchDepositBank() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       const params = {
         bankType: 2,
         fundAccount: fundAccount[0]
@@ -347,11 +347,11 @@ export default {
     },
     // 格式化现金账号选项
     _formatAccount() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       this.accountList = fundAccount.map(item => {
         return {
           value: item,
-          text: item + '-' + this.$t('withdraw.request.text_2')
+          text: item + '-' + this.$t('iAccount.withdraw.request.text_2')
         }
       })
       // 默认选中第一项
@@ -390,8 +390,8 @@ export default {
       if (!this.picker_account) {
         this.picker_account = this.$createPicker({
           title: '',
-          confirmTxt: this.$t('common.text_9'),
-          cancelTxt: this.$t('common.text_2'),
+          confirmTxt: this.$t('iAccount.common.text_9'),
+          cancelTxt: this.$t('iAccount.common.text_2'),
           data: [this.accountList],
           onSelect: this.selectHandle_account
         })
@@ -408,7 +408,7 @@ export default {
         tips.jfDialog({
           render: (createElement) => {
             return createElement('p', null, [
-              createElement('span', null, this.$t('withdraw.request.text_30')),
+              createElement('span', null, this.$t('iAccount.withdraw.request.text_30')),
               createElement('span', {
                 class: {
                   'font-link': true
@@ -428,8 +428,8 @@ export default {
       if (!this.picker_bank) {
         this.picker_bank = this.$createPicker({
           title: '',
-          confirmTxt: this.$t('common.text_9'),
-          cancelTxt: this.$t('common.text_2'),
+          confirmTxt: this.$t('iAccount.common.text_9'),
+          cancelTxt: this.$t('iAccount.common.text_2'),
           data: [this.bankList],
           onSelect: this.selectHandle_bank
         })
@@ -440,7 +440,7 @@ export default {
       console.log(selectedVal, selectedIndex, selectedText)
       const temp = this.bankList[selectedIndex[0]]
       // 民生银行_香港 - 弹框提醒
-      if (formatToDBC(temp.bankName).indexOf(this.$t('withdraw.select_bank.text_6')) !== -1) {
+      if (formatToDBC(temp.bankName).indexOf(this.$t('iAccount.withdraw.select_bank.text_6')) !== -1) {
         this.showDialog_withdraw_cmbchk()
         return false
       } else {
@@ -464,7 +464,7 @@ export default {
     }
   },
   filters: {
-    format_accInfo(val) {
+    format_secAccountInfo(val) {
       return val ? (val.clientNameCn + ' - ' + val.clientNameEn) : EMPTY_LABEL
     }
   },

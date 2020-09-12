@@ -37,8 +37,6 @@ router.beforeEach((to, from, next) => {
 
   // 判断当前环境
   // 白名单页
-
-  console.log(uaInfo)
   if (uaInfo.isApp()) {
     getUserInfoAPP({
       success: (res) => {
@@ -62,13 +60,11 @@ router.beforeEach((to, from, next) => {
           // Locale.use('cu-TW', cubeDefaultLang)
         }
 
-        console.log(1232, lang)
         i18n.locale = lang;
         setLanguage(lang)
 
         store.dispatch('appLogin', { ...result, phoneNum })
           .then(() => {
-            console.log(1232)
             next()
           })
       }

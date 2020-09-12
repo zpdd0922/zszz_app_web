@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import OpenApi from '@/modules/module-iaccount/api/modules/api-open'
+import OpenApi from '@/modules/module-iaccount/api/modules/api-account'
 
 export default {
   data () {

@@ -7,7 +7,7 @@
     </div>
     <div class="notify-action">
       <div class="action-item">
-        <cube-button :outline="true" @click="_clickGoHis">{{ $t('history.common.text_2') }}</cube-button>
+        <cube-button :outline="true" @click="_clickGoHis">{{ $t('iAccount.history.common.text_2') }}</cube-button>
       </div>
     </div>
   </div>

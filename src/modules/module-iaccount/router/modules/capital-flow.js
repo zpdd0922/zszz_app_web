@@ -5,8 +5,8 @@ import CapitalFlow from '@/modules/module-iaccount/views/capital-flow'
 import StockFlow from '@/modules/module-iaccount/views/stock-flow'
 
 // 路由名称
-const getRouterName = () => i18n.t('capital_flow.name')
-const getRouterName1 = () => i18n.t('capital_flow.stock_flow_name')
+const getRouterName = () => i18n.t('iAccount.capital_flow.name')
+const getRouterName1 = () => i18n.t('iAccount.capital_flow.stock_flow_name')
 
 // 路由模块
 const capitalFlowRouter = [

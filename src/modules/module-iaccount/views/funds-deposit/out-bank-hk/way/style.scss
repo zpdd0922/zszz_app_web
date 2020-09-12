@@ -1,0 +1,64 @@
+.sec-way {
+
+    .step-content-way {
+      padding: 0 .15rem;
+      color: $color-txt;
+     
+      .way-title{
+        padding: .1rem 0 .05rem;
+        font-size:.12rem;
+        line-height: 1.5em;
+        @include border-x(bottom, $color: $color-separate-line);
+      }
+
+      .way-detail{
+        padding: .05rem 0;
+        @include border-x(bottom, $color: $color-separate-line, $left: .15rem, $right: .15rem);
+        .way-detail-title {
+          color: $color-txt;
+          font-size: .14rem;
+          line-height: 2.5em;
+        }
+      
+        .way-detail-tips {
+          font-size: .12rem;
+          color: $color-txt-highlight;
+        }
+      }
+   
+    }
+   
+ }
+
+ .sec-way-check {
+  .detail-check {
+    background: $color-theme;
+    padding: .1rem 0;
+    li {
+      font-size: .14rem;
+      line-height: .22rem;
+      margin-bottom: .1rem;
+
+      .label {
+        width: .8rem;
+        margin-right: .12rem;
+      }
+      .filed {
+        color: $color-txt-highlight;
+        flex: 1;
+      }
+    }
+    .check-label {
+      color: $color-999;
+      font-size: .12rem;
+    }
+    .check-filed {
+      font-size: .14rem;
+      line-height: .22rem;
+      margin-top: .1rem;
+      p+p {
+        margin-top: .05rem;
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@ import BaseCopyright from "@/main/components/base-copyright/";
 export default {
   components: { BaseCopyright },
   created() {
-    this.setTitle(this.$t("main.pageName"));
+    this.setTitle(this.$t("iAccount.main.pageName"));
   },
   computed: {
     ...mapState({

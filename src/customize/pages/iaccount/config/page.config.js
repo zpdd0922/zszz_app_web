@@ -15,7 +15,7 @@ module.exports = {
       name: 'index',
       template: 'src/customize/pages/iaccount/template/index.html',
       entry: 'src/modules/module-iaccount/index.js',
-      title: '开户',
+      title: '證券服務',
     }
   ],
 };

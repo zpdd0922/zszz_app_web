@@ -1,0 +1,31 @@
+.sec-notify {
+  // @include fixed-full();
+  // background: $color-theme;
+  padding-top: 1.28rem;
+  .notify-status {
+    text-align: center;
+  }
+  .status-title {
+    color: $color-text;
+    font-size: .16rem;
+    margin-top: .22rem;
+  }
+  .status-txt {
+    color: $color-999;
+    width: 70%;
+    font-size: 26p.13remx;
+    line-height: 1.4;
+    margin: .12rem auto 0;
+  }
+
+  .notify-action {
+    @include flex-box($row: center);
+    margin-top: .57rem;
+    .action-item {
+      width: 1.6rem;
+      &+.action-item {
+        margin-left: .1rem;
+      }
+    }
+  }
+}

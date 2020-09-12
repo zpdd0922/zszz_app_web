@@ -21,6 +21,8 @@ export default {
     picker: {
       placeholder: '請選擇省市區',
     },
+    copyBoardTips: '复制成功',
+
     cubeComponents: {
       select: {
         title: '請選擇',

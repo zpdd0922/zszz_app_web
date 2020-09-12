@@ -24,7 +24,7 @@
             <span>{{item.occurAmount | addSymbol}}</span>
           </div>
           <div class="bottom">
-            {{$t('capital_flow.common.text_31')}}：<span>{{item.postAmount}}</span>
+            {{$t('iAccount.capital_flow.common.text_31')}}：<span>{{item.postAmount}}</span>
           </div>
         </div>
       </div>

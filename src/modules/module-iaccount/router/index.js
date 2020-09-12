@@ -22,6 +22,10 @@ const router = new VueRouter({
       ...signRouter,
       ...iaccountRouter,
       ]
+    },
+    {
+      path: "*",
+      redirect: 'iaccount'
     }
   ],
   scrollBehavior(to, from, savedPosition) {

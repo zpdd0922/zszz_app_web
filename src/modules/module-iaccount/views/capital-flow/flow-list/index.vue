@@ -20,7 +20,7 @@
             <span>{{item.occurBalance | formatMoney | addSymbol}}</span>
           </div>
           <div class="bottom">
-            {{$t('capital_flow.common.text_26')}}：<span>{{item.postBalance | formatMoney}}</span>
+            {{$t('iAccount.capital_flow.common.text_26')}}：<span>{{item.postBalance | formatMoney}}</span>
           </div>
         </div>
       </div>

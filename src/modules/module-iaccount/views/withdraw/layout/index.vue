@@ -1,7 +1,7 @@
 <template>
   <div class="withdraw">
     <!-- Loading -->
-    <template v-if='!accInfo'>
+    <template v-if='!secAccountInfo'>
       <loading />
     </template>
 
@@ -23,12 +23,12 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo'
+      'secAccountInfo'
     ])
   },
   methods: {},
   created() {
-    this.$store.dispatch('apiFindAccInfo').then(res => {
+    this.$store.dispatch('getSecAccountInfo').then(res => {
       this.getAccountStatus(res)
     })
   }

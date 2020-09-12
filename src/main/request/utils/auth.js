@@ -51,7 +51,7 @@ class Auth {
   * @return string
   */
   getAuthSession = () => {
-    return '59c6cbe93a0a4b339afc01dc8903606a123004';
+    return 'e428f5caed39461199887c23da80f186123129';
     // 获取地址栏session，有则更新本地
     const urlParams = getURLParameters() || {};
     const urlSession = urlParams.sessionId || '';

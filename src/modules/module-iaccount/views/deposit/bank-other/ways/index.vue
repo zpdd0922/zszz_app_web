@@ -9,7 +9,7 @@
     </head-bank>
 
     <part-list
-      :title="$t('deposit.ways.text_1')"
+      :title="$t('iAccount.deposit.ways.text_1')"
       :isLink="true"
       :list="waysOption"
       @clickItem="_clickWay">
@@ -17,29 +17,29 @@
         <!-- fps -->
         <p v-if="slotProps.item.value === fps" class="desc">
           <span class="txt">
-            {{$t('deposit.common.text_8')}} {{fpsTip.descTime}}
+            {{$t('iAccount.deposit.common.text_8')}} {{fpsTip.descTime}}
             <jf-icon v-if="fpsTip.descTimeTips" name="tips_gray" @click.native.stop="_showTips(fpsTip.descTimeTips)"></jf-icon>
           </span>
           <span class="txt">
-            {{$t('deposit.common.text_7')}} {{fpsTip.descFee}}
+            {{$t('iAccount.deposit.common.text_7')}} {{fpsTip.descFee}}
             <jf-icon v-if="fpsTip.descFeeTips" name="tips_gray" @click.native.stop="_showTips(fpsTip.descFeeTips)"></jf-icon>
           </span>
         </p>
         <!-- ebank -->
         <p v-if="slotProps.item.value === ebank" class="desc">
           <span class="txt">
-            {{$t('deposit.common.text_8')}} {{depositBankData.descTime}}
+            {{$t('iAccount.deposit.common.text_8')}} {{depositBankData.descTime}}
             <jf-icon v-if="depositBankData.descTimeTips" name="tips_gray" @click.native.stop="_showTips(depositBankData.descTimeTips)"></jf-icon>
           </span>
           <span class="txt">
-            {{$t('deposit.common.text_7')}} {{depositBankData.descFee}}
+            {{$t('iAccount.deposit.common.text_7')}} {{depositBankData.descFee}}
             <jf-icon v-if="depositBankData.descFeeTips" name="tips_gray" @click.native.stop="_showTips(depositBankData.descFeeTips)"></jf-icon>
           </span>
         </p>
         <!-- check -->
         <p v-if="slotProps.item.value === check" class="desc">
-          <span class="txt">{{$t('deposit.common.text_8')}} {{$t('define.CHECK_INFO').descTime}}</span>
-          <span class="txt">{{$t('deposit.common.text_7')}} {{$t('define.CHECK_INFO').descFee}}</span>
+          <span class="txt">{{$t('iAccount.deposit.common.text_8')}} {{$t('iAccount.define.CHECK_INFO').descTime}}</span>
+          <span class="txt">{{$t('iAccount.deposit.common.text_7')}} {{$t('iAccount.define.CHECK_INFO').descFee}}</span>
         </p>
       </template>
     </part-list>
@@ -79,44 +79,44 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 
 const WAYS_NOTICE = [
   {
-    txt: 'deposit.ways.text_10'
+    txt: 'iAccount.deposit.ways.text_10'
   }, {
     txt: (valHtml) => {
-      return i18n.t('deposit.ways.text_11', { config: valHtml })
+      return i18n.t('iAccount.deposit.ways.text_11', { config: valHtml })
     }
   }, {
-    txt: 'deposit.ways.text_12'
+    txt: 'iAccount.deposit.ways.text_12'
   }
 ]
 
 const FPS_TIPS = [
   {
-    title: 'deposit.fps.tips.text_1',
+    title: 'iAccount.deposit.fps.tips.text_1',
     list: [
-      { txt: 'deposit.fps.tips.text_2' },
-      { txt: 'deposit.fps.tips.text_3' },
-      { txt: 'deposit.fps.tips.text_4' },
-      { txt: 'deposit.fps.tips.text_5' },
-      { txt: 'deposit.fps.tips.text_6' },
-      { txt: 'deposit.fps.tips.text_7' }
+      { txt: 'iAccount.deposit.fps.tips.text_2' },
+      { txt: 'iAccount.deposit.fps.tips.text_3' },
+      { txt: 'iAccount.deposit.fps.tips.text_4' },
+      { txt: 'iAccount.deposit.fps.tips.text_5' },
+      { txt: 'iAccount.deposit.fps.tips.text_6' },
+      { txt: 'iAccount.deposit.fps.tips.text_7' }
     ]
   }, {
-    title: 'deposit.fps.tips.text_8',
+    title: 'iAccount.deposit.fps.tips.text_8',
     list: [
-      { txt: 'deposit.fps.tips.text_9' },
-      { txt: 'deposit.fps.tips.text_10' },
+      { txt: 'iAccount.deposit.fps.tips.text_9' },
+      { txt: 'iAccount.deposit.fps.tips.text_10' },
       {
         txt: (val) => {
-          return i18n.t('deposit.fps.tips.text_11', { config: val.accountFPS })
+          return i18n.t('iAccount.deposit.fps.tips.text_11', { config: val.accountFPS })
         }
       },
       {
         txt: (val) => {
-          return i18n.t('deposit.fps.tips.text_12', { config: val.accountName })
+          return i18n.t('iAccount.deposit.fps.tips.text_12', { config: val.accountName })
         }
       },
-      { txt: 'deposit.fps.tips.text_13' },
-      { txt: 'deposit.fps.tips.text_14' }
+      { txt: 'iAccount.deposit.fps.tips.text_13' },
+      { txt: 'iAccount.deposit.fps.tips.text_14' }
     ]
   }
 ]
@@ -139,7 +139,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositCurrency',
       'depositBankData',
       'depositBankType'
@@ -147,7 +147,7 @@ export default {
     waysNotice() {
       return WAYS_NOTICE.map(item => {
         if (isFunc(item.txt)) {
-          const valHtml = this.getAccountHmtl(this.accInfo)
+          const valHtml = this.getAccountHmtl(this.secAccountInfo)
           item.txt = item.txt(valHtml)
         }
         return item
@@ -157,13 +157,13 @@ export default {
   methods: {
     // 获取当前支持入金方式
     async _updateWays() {
-      const deposit_way = this.$t('define.DEPOSIT_WAY')
+      const deposit_way = this.$t('iAccount.define.DEPOSIT_WAY')
       const ways = await this.judgeDepositWay(this.depositBankData.supportType, this.depositCurrency)
       this.waysOption = Object.values(deposit_way).filter(item => ways.includes(item.code))
       console.log('ways => _judgeDepositWay', this.waysOption)
       if (!this.waysOption.length) {
         tips.jfDialog({
-          content: this.$t('deposit.ways.text_13')
+          content: this.$t('iAccount.deposit.ways.text_13')
         })
         return false
       }
@@ -210,7 +210,7 @@ export default {
         params = this.depositBankData
         break
       case CHECK:
-        params = this.$t('define.CHECK_INFO')
+        params = this.$t('iAccount.define.CHECK_INFO')
         break
       }
       this.$store.dispatch('setWayInfo', params)

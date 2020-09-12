@@ -1,8 +1,8 @@
 <template>
-  <jf-wrap
+  <sec-wrap
     class="remit"
     :isDisabled="isDisabled"
-    :btnText="$t('deposit.common.text_6')"
+    :btnText="$t('iAccount.deposit.common.text_6')"
     :handleBefore="_handleBefore"
     @handleNext="_handleNext">
     <head-bank
@@ -24,7 +24,7 @@
             <!-- 收款银行 -->
             <li v-if="isShowBankList">
               <div class="form-label">
-                <span>{{ $t('deposit.remit.text_14') }}</span>
+                <span>{{ $t('iAccount.deposit.remit.text_14') }}</span>
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
@@ -32,7 +32,7 @@
                     v-model="bankCode"
                     :options="bankOptions"
                     @change="_changeBank"
-                    :placeholder="$t('deposit.remit.text_15')"
+                    :placeholder="$t('iAccount.deposit.remit.text_15')"
                   ></cube-select>
                 </div>
               </div>
@@ -40,11 +40,11 @@
             <!-- 银行户名 -->
             <li>
               <div class="form-label">
-                <span>{{ $t('deposit.remit.text_1') }}</span>
+                <span>{{ $t('iAccount.deposit.remit.text_1') }}</span>
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
-                  <span class="txt">{{accInfo.clientNameCn}} （{{accInfo.clientNameEn}}）</span>
+                  <span class="txt">{{secAccountInfo.clientNameCn}} （{{secAccountInfo.clientNameEn}}）</span>
                 </div>
               </div>
             </li>
@@ -52,7 +52,7 @@
             <!-- 选择其他银行 -->
             <li v-if="isShowOther">
               <div class="form-label">
-                <span>{{ $t('deposit.remit.text_12') }}</span>
+                <span>{{ $t('iAccount.deposit.remit.text_12') }}</span>
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
@@ -64,19 +64,19 @@
                     v-model="model.depositBankNameOther"
                     type="text"
                     maxlength="150"
-                    :placeholder="$t('deposit.remit.text_13')">
+                    :placeholder="$t('iAccount.deposit.remit.text_13')">
                 </div>
                 <div
                   class="filed-msg"
                   v-show="!(depositBankHis && depositBankHis.bankName) && model.depositBankNameOther">
-                  <span class="txt" @click="_clearInput('model.depositBankNameOther')">{{ $t('common.text_16') }}</span>
+                  <span class="txt" @click="_clearInput('model.depositBankNameOther')">{{ $t('iAccount.common.text_16') }}</span>
                 </div>
               </div>
             </li>
             <!-- 汇款账号选择框 -->
             <li>
               <div class="form-label">
-                <span>{{ $t('deposit.remit.text_2') }}</span>
+                <span>{{ $t('iAccount.deposit.remit.text_2') }}</span>
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
@@ -92,7 +92,7 @@
             <!-- 汇款账号 -->
             <li v-if="isNoaddAccount">
               <div class="form-label">
-                <span>{{ $t('deposit.remit.text_2') }}</span>
+                <span>{{ $t('iAccount.deposit.remit.text_2') }}</span>
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
@@ -100,12 +100,12 @@
                     v-model="model.depositBankAccount"
                     type="text"
                     maxlength="30"
-                    :placeholder="$t('deposit.remit.text_5')">
+                    :placeholder="$t('iAccount.deposit.remit.text_5')">
                 </div>
                 <div
                   class="filed-msg"
                   v-show="!(depositBankHis && depositBankHis.bankAccount) && model.depositBankAccount">
-                  <span class="txt font-link-size" @click="_clearInput('model.depositBankAccount')">{{ $t('common.text_16') }}</span>
+                  <span class="txt font-link-size" @click="_clearInput('model.depositBankAccount')">{{ $t('iAccount.common.text_16') }}</span>
                 </div>
               </div>
             </li>
@@ -114,7 +114,7 @@
             <!-- <li v-if="!(depositBankHis && depositBankHis.bankAccount)"> -->
             <li v-if="isNoaddAccount">
               <div class="form-label">
-                <span>{{ $t('deposit.remit.text_3') }}</span>
+                <span>{{ $t('iAccount.deposit.remit.text_3') }}</span>
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
@@ -122,24 +122,24 @@
                     v-model="model.depositBankAccountAgain"
                     type="text"
                     maxlength="30"
-                    :placeholder="$t('deposit.remit.text_5')">
+                    :placeholder="$t('iAccount.deposit.remit.text_5')">
                 </div>
                 <div class="filed-msg" v-show="model.depositBankAccountAgain">
-                  <span class="txt font-link-size" @click="_clearInput('model.depositBankAccountAgain')">{{ $t('common.text_16') }}</span>
+                  <span class="txt font-link-size" @click="_clearInput('model.depositBankAccountAgain')">{{ $t('iAccount.common.text_16') }}</span>
                 </div>
               </div>
             </li>
             <!-- 存入金额 -->
             <li>
               <div class="form-label">
-                <span>{{ $t('deposit.remit.text_4') }}</span>
+                <span>{{ $t('iAccount.deposit.remit.text_4') }}</span>
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
                   <input
                     v-model="model.depositMoney"
                     type="text"
-                    :placeholder="$t('deposit.remit.text_6')"
+                    :placeholder="$t('iAccount.deposit.remit.text_6')"
                     @focus="_focusMoneyInput"
                     @blur="_blurMoneyInput">
                 </div>
@@ -160,7 +160,7 @@
 
     <foot-tip :list="dataRemit.foot"></foot-tip>
 
-  </jf-wrap>
+  </sec-wrap>
 </template>
 
 <script>
@@ -175,7 +175,7 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 const EXAMPLE_BANK = {
   foot: [
     {
-      txt: 'deposit.remit.text_8'
+      txt: 'iAccount.deposit.remit.text_8'
     }
   ]
 }
@@ -205,7 +205,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo',
+      'secAccountInfo',
       'depositWay',
       'depositWayInfo',
       'depositBankHis',
@@ -261,9 +261,9 @@ export default {
   },
   methods: {
     async _updateInfo() {
-      const { fundAccount = [] } = this.accInfo
+      const { fundAccount = [] } = this.secAccountInfo
       const myBank = await SecApi.depositBank({
-        bankType: this.$t('define.BANK_HK').value,
+        bankType: this.$t('iAccount.define.BANK_HK').value,
         fundAccount: fundAccount[0]
       })
       const bank = myBank.filter(val => formatToDBC(val.bankName) === formatToDBC(this.depositBankData.title))
@@ -297,19 +297,19 @@ export default {
         if (this.depositSelectBankAccount === 'add' &&
           (depositBankAccount !== depositBankAccountAgain)
         ) {
-          const msg = this.$t('deposit.remit.text_11')
+          const msg = this.$t('iAccount.deposit.remit.text_11')
           tips.toast({ txt: msg })
           return reject(msg)
         }
         // 未选择收款银行
         if (!this.bankCode) {
-          const msg = this.$t('deposit.remit.text_15')
+          const msg = this.$t('iAccount.deposit.remit.text_15')
           tips.toast({ txt: msg })
           return reject(msg)
         }
 
         // 查询是否上传过凭证
-        const { fundAccount = [], tradeAccount } = this.accInfo
+        const { fundAccount = [], tradeAccount } = this.secAccountInfo
         const params = {
           clientId: tradeAccount,
           depositAccount: fundAccount[0],
@@ -321,7 +321,7 @@ export default {
             if (res.count) {
               resolve()
             } else if (!formFile) {
-              const msg = this.$t('deposit.remit.text_16')
+              const msg = this.$t('iAccount.deposit.remit.text_16')
               tips.toast({ txt: msg })
               return reject(msg)
             } else {
@@ -330,7 +330,7 @@ export default {
           })
         } else {
           if (!formFile) {
-            const msg = this.$t('deposit.remit.text_16')
+            const msg = this.$t('iAccount.deposit.remit.text_16')
             tips.toast({ txt: msg })
             return reject(msg)
           } else {
@@ -341,7 +341,7 @@ export default {
     },
     // 加载收款银行信息
     _getBankOptions() {
-      const bankNameOptions = this.$t('define.BANK_NAME_OPTIONS')
+      const bankNameOptions = this.$t('iAccount.define.BANK_NAME_OPTIONS')
       const { bankInfo } = this.depositBankData
       const { receiptBankNoFps, accountName } = this.depositWayInfo
       switch (this.depositWay.value) {
@@ -382,7 +382,7 @@ export default {
       // fps
       case FPS:
       case EBANK:
-        const bankNameOptions = this.$t('define.BANK_NAME_OPTIONS')
+        const bankNameOptions = this.$t('iAccount.define.BANK_NAME_OPTIONS')
         const bankInfoJF = bankNameOptions.filter(item => item.value === this.bankCode)
         const formData = Object.assign({}, this.model, { img: this.file, bankInfoJF: bankInfoJF && bankInfoJF[0] })
         params = format_CommitData(data, formData)
@@ -396,7 +396,7 @@ export default {
       // 表单信息缺少 - 需重新入金
       if (!params) {
         tips.jfDialog({
-          content: this.$t('deposit.common.text_11'),
+          content: this.$t('iAccount.deposit.common.text_11'),
           onConfirm: () => {
             this.$router.push({ name: 'deposit' })
           }

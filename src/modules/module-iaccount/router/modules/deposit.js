@@ -14,7 +14,7 @@ import BankEdda from '../../views/deposit/bank-hk/edda/layout'
 const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iaccount" */ `../../views/${path}/${file}.vue`);
 
 // 路由名称
-const getRouterName = () => i18n.t('deposit.name')
+const getRouterName = () => i18n.t('iAccount.deposit.name')
 
 const depositRouter = [
   {

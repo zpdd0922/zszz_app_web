@@ -1,0 +1,25 @@
+
+.sec-part-list {
+  background-color: $color-content-bg;
+    .sec-part-list-item {
+      padding: .1rem .15rem;
+      &+.sec-part-list-item {
+        @include border-x(top, $color: $color-separate-line, $left: .15rem);
+      }
+    }
+    .sec-part-item-media-img {
+      width: .24rem;
+      margin-right: .08rem;
+    }
+
+    .sec-part-item-body {
+      .sec-part-item-title {
+        @include flex-box($col: center);
+        font-size: .14rem;
+      }
+
+      .sec-part-item-txt {
+        font-size: .13rem;
+      }
+    }
+  }

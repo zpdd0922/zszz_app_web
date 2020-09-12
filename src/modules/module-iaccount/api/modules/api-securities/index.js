@@ -17,7 +17,7 @@ export default {
   */
   queryStocks: data => post('/securities/find_shares', paramsData.COMMON(data)),
 
-  getAccInfo: data => post('/securities/find_acc_info', paramsData.COMMON(data)),
+  getsecAccountInfo: data => post('/securities/find_acc_info', paramsData.COMMON(data)),
 
   /**
   * { isShares: 0, state: 0 }

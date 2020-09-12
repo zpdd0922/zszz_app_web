@@ -14,7 +14,7 @@
     </head-bank>
 
     <div class="account">
-      <p class="text">{{$t('deposit.cmbchk.text_13')}}</p>
+      <p class="text">{{$t('iAccount.deposit.cmbchk.text_13')}}</p>
       <p class="acc-num">{{accountNum}}</p>
     </div>
 
@@ -36,7 +36,7 @@
       </div>
 
       <guide-link
-        :title="$t('deposit.cmbchk.text_8')"
+        :title="$t('iAccount.deposit.cmbchk.text_8')"
         :link="link_how"
         iconName="cmbc"></guide-link>
     </div>
@@ -59,29 +59,29 @@ import { mapGetters } from 'vuex'
 
 const CMBC_TXT = {
   head: {
-    title: 'deposit.bank_list.cmbchk',
+    title: 'iAccount.deposit.bank_list.cmbchk',
     value: 'cmbchk',
-    symbol: 'deposit.cmbchk.text_1',
-    descTime: i18n.t('deposit.cmbchk.text_2'),
-    descFee: i18n.t('deposit.cmbchk.text_3')
+    symbol: 'iAccount.deposit.cmbchk.text_1',
+    descTime: i18n.t('iAccount.deposit.cmbchk.text_2'),
+    descFee: i18n.t('iAccount.deposit.cmbchk.text_3')
   },
   qa: [
     {
-      title: 'deposit.cmbchk.text_4',
-      txt: 'deposit.cmbchk.text_5'
+      title: 'iAccount.deposit.cmbchk.text_4',
+      txt: 'iAccount.deposit.cmbchk.text_5'
     }, {
-      title: 'deposit.cmbchk.text_6',
-      txt: 'deposit.cmbchk.text_7'
+      title: 'iAccount.deposit.cmbchk.text_6',
+      txt: 'iAccount.deposit.cmbchk.text_7'
     }
   ],
   foot: [
     {
-      txt: 'deposit.cmbchk.text_9'
+      txt: 'iAccount.deposit.cmbchk.text_9'
     }, {
-      txt: 'deposit.cmbchk.text_10'
+      txt: 'iAccount.deposit.cmbchk.text_10'
     }, {
-      txt: 'deposit.cmbchk.text_11',
-      link: 'deposit.cmbchk.text_12'
+      txt: 'iAccount.deposit.cmbchk.text_11',
+      link: 'iAccount.deposit.cmbchk.text_12'
     }
   ]
 }
@@ -103,10 +103,10 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'accInfo'
+      'secAccountInfo'
     ]),
     accountNum() {
-      const acc = this.accInfo
+      const acc = this.secAccountInfo
       return acc.fundAccount.length && acc.fundAccount[0]
     }
   },

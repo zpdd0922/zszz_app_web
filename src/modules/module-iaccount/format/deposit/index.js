@@ -47,12 +47,12 @@ export const format_DepositFPS = (data = []) => {
  */
 export const format_CommitData = (args, form) => {
   console.log('format_CommitData', args, form)
-  const { user, deposit } = args
+  const { user, account, deposit } = args
 
   // 基本信息
   const baseInfo = {
-    currency: deposit.depositCurrency.value,                              // 入金币种
-    bankType: deposit.depositBankType.value,                              // 入金银行卡类型
+    currency: iAccount.deposit.depositCurrency.value,                              // 入金币种
+    bankType: iAccount.deposit.depositBankType.value,                              // 入金银行卡类型
   }
 
   // 基本信息缺少 - 全必填
@@ -60,9 +60,9 @@ export const format_CommitData = (args, form) => {
   if (!isExitBase) return false
 
   // 用户账号信息
-  const accInfo = {
-    clientId: user.accInfo.tradeAccount,                               // 交易账号
-    depositAccount: formatNumber(user.accInfo.fundAccount[0]),         // 存入账号， 目前默认：现金账号
+  const secAccountInfo = {
+    clientId: account.secAccountInfo.tradeAccount,                               // 交易账号
+    depositAccount: formatNumber(account.secAccountInfo.fundAccount[0]),         // 存入账号， 目前默认：现金账号
     depositAccountName: '现金账户',                                     // 存入账户名称，目前仅支持：现金账户
   }
 
@@ -76,55 +76,55 @@ export const format_CommitData = (args, form) => {
 
   // 用户汇款信息
   // 1.注意选择其他银行
-  let bankName = deposit.depositBankData.value === OTHER ? form.depositBankNameOther : deposit.depositBankData.title
+  let bankName = iAccount.deposit.depositBankData.value === OTHER ? form.depositBankNameOther : iAccount.deposit.depositBankData.title
   // 2.存在历史汇款银行数据
-  if (deposit.depositBankHis) {
+  if (iAccount.deposit.depositBankHis) {
     // 是否同一个账号
-    const isSomeAccount = formatNumber(deposit.depositBankHis.bankAccount) === formatNumber(form.depositBankAccount)
+    const isSomeAccount = formatNumber(iAccount.deposit.depositBankHis.bankAccount) === formatNumber(form.depositBankAccount)
     if (isSomeAccount) {
-      bankName = deposit.depositBankHis.bankName;
+      bankName = iAccount.deposit.depositBankHis.bankName;
     }
   }
   const remitInfo = {
     remittanceBankName: bankName,                                           // 汇款银行名称 - 支票可空
-    remittanceAccountNameEn: user.accInfo.clientNameEn,                     // 汇款银行户英文名 - 支票可空
+    remittanceAccountNameEn: account.secAccountInfo.clientNameEn,                     // 汇款银行户英文名 - 支票可空
     remittanceBankAccount: formatNumber(form.depositBankAccount),           // 汇款账号 - 支票可空
   }
 
-  // 玖富收款信息
+  // 立桥收款信息
   let getInfo = {}
   const { bankInfoJF } = form
-  switch (deposit.depositWay.value) {
+  switch (iAccount.deposit.depositWay.value) {
     case CHECK:
-      const getAccount_CHECK = deposit.depositWayInfo.depositToAccount[deposit.depositCurrency.code];
+      const getAccount_CHECK = iAccount.deposit.depositWayInfo.depositToAccount[iAccount.deposit.depositCurrency.code];
       getInfo = {
-        bankName: deposit.depositWay.title,
-        bankCode: deposit.depositWay.value,
-        remittanceBankCorde : deposit.depositBankData.value,                                  // 入金银行真是代码
+        bankName: iAccount.deposit.depositWay.title,
+        bankCode: iAccount.deposit.depositWay.value,
+        remittanceBankCorde : iAccount.deposit.depositBankData.value,                                  // 入金银行真是代码
         getAccount: getAccount_CHECK.replace(/-/g, ''),                                           // 收款账户号码
-        getAccountName: deposit.depositWayInfo.accountName,                                       // 收款人账户名
+        getAccountName: iAccount.deposit.depositWayInfo.accountName,                                       // 收款人账户名
         getAddress: '',                                                                           // 收款人地址
-        getBankCode: deposit.depositBankData.bankInfo.code,                                        // 收款银行编码
-        getBankNameCn: deposit.depositBankData.bankInfo.bankName,                                  // 收款银行中文名
-        getBankNameEn: deposit.depositBankData.bankInfo.bankNameEN,                                // 收款银行英文名
-        getBankAddress: deposit.depositWayInfo.depositToBankAddress,                               // 收款银行地址
-        swiftCode: deposit.depositWayInfo.swiftCode,                                               // SWIFT代码
+        getBankCode: iAccount.deposit.depositBankData.bankInfo.code,                                        // 收款银行编码
+        getBankNameCn: iAccount.deposit.depositBankData.bankInfo.bankName,                                  // 收款银行中文名
+        getBankNameEn: iAccount.deposit.depositBankData.bankInfo.bankNameEN,                                // 收款银行英文名
+        getBankAddress: iAccount.deposit.depositWayInfo.depositToBankAddress,                               // 收款银行地址
+        swiftCode: iAccount.deposit.depositWayInfo.swiftCode,                                               // SWIFT代码
       }
       break;
     case EBANK:
       // 网银-accountType 需区分大账户与子账户
-      const { bankInfo: { accountType } } = deposit.depositBankData
+      const { bankInfo: { accountType } } = iAccount.deposit.depositBankData
       const getAccount = accountType === 2 ?
-          formatNumber(deposit.depositSubAccount.subAccountNo) : deposit.depositBankData.bankInfo.depositToAccount[deposit.depositCurrency.code]
+          formatNumber(iAccount.deposit.depositSubAccount.subAccountNo) : iAccount.deposit.depositBankData.bankInfo.depositToAccount[iAccount.deposit.depositCurrency.code]
         const getAccountName = accountType === 2 ?
-          deposit.depositSubAccount.accountName : deposit.depositBankData.bankInfo.accountName
+          iAccount.deposit.depositSubAccount.accountName : iAccount.deposit.depositBankData.bankInfo.accountName
       // 当用户可选择收款银行
       if (bankInfoJF && Object.keys(bankInfoJF).length) {
         getInfo = {
-          bankName: deposit.depositBankData.title,                                                   // 入金选择银行名称
-          bankCode: deposit.depositBankData.value,                                                   // 入金选择银行代码
-          remittanceBankCorde : deposit.depositBankData.value,                                  // 入金银行真是代码
-          getAccount: bankInfoJF.depositToAccount[deposit.depositCurrency.code],                                                  // 收款账户号码
+          bankName: iAccount.deposit.depositBankData.title,                                                   // 入金选择银行名称
+          bankCode: iAccount.deposit.depositBankData.value,                                                   // 入金选择银行代码
+          remittanceBankCorde : iAccount.deposit.depositBankData.value,                                  // 入金银行真是代码
+          getAccount: bankInfoJF.depositToAccount[iAccount.deposit.depositCurrency.code],                                                  // 收款账户号码
           getAccountName: bankInfoJF.getAccountName,                                                                            // 收款人账户名
           getAddress: bankInfoJF.getAddress,                           // 收款人地址
           getBankCode: bankInfoJF.getBankCode,                                        // 收款银行编码
@@ -135,30 +135,30 @@ export const format_CommitData = (args, form) => {
         }
       } else {
         getInfo = {
-          bankName: deposit.depositBankData.title,                                                   // 入金选择银行名称
-          bankCode: deposit.depositBankData.value,                                                   // 入金选择银行代码
-          remittanceBankCorde : deposit.depositBankData.value,                                  // 入金银行真是代码
+          bankName: iAccount.deposit.depositBankData.title,                                                   // 入金选择银行名称
+          bankCode: iAccount.deposit.depositBankData.value,                                                   // 入金选择银行代码
+          remittanceBankCorde : iAccount.deposit.depositBankData.value,                                  // 入金银行真是代码
           getAccount: getAccount.replace(/-/g, ''),                                                  // 收款账户号码
           getAccountName,                                                                            // 收款人账户名
-          getAddress: deposit.depositWayInfo.bankInfo.depositUserAddress,                           // 收款人地址
-          getBankCode: deposit.depositWayInfo.bankInfo.code,                                        // 收款银行编码
-          getBankNameCn: deposit.depositWayInfo.bankInfo.bankName,                                  // 收款银行中文名
-          getBankNameEn: deposit.depositWayInfo.bankInfo.bankNameEN,                                // 收款银行英文名
-          getBankAddress: deposit.depositWayInfo.bankInfo.depositToBankAddress,                     // 收款银行地址
-          swiftCode: deposit.depositWayInfo.bankInfo.swiftCode,                                     // SWIFT代码
+          getAddress: iAccount.deposit.depositWayInfo.bankInfo.depositUserAddress,                           // 收款人地址
+          getBankCode: iAccount.deposit.depositWayInfo.bankInfo.code,                                        // 收款银行编码
+          getBankNameCn: iAccount.deposit.depositWayInfo.bankInfo.bankName,                                  // 收款银行中文名
+          getBankNameEn: iAccount.deposit.depositWayInfo.bankInfo.bankNameEN,                                // 收款银行英文名
+          getBankAddress: iAccount.deposit.depositWayInfo.bankInfo.depositToBankAddress,                     // 收款银行地址
+          swiftCode: iAccount.deposit.depositWayInfo.bankInfo.swiftCode,                                     // SWIFT代码
         }
       }
       break;
     case FPS:
       // 处理不同币种 - 对应收款账号
-      const getAccount_FPS = FPS_HK_INFO.depositToAccount[deposit.depositCurrency.code]
+      const getAccount_FPS = FPS_HK_INFO.depositToAccount[iAccount.deposit.depositCurrency.code]
       // 当用户可选择收款银行
       if (bankInfoJF && Object.keys(bankInfoJF).length) {
         getInfo = {
-          bankName: deposit.depositWay.title,                                                   // 入金选择银行名称
-          bankCode: deposit.depositWay.value,                                                   // 入金选择银行代码
-          remittanceBankCorde : deposit.depositBankData.value,                                  // 入金银行真是代码
-          getAccount: bankInfoJF.depositToAccount[deposit.depositCurrency.code],                                                     // 收款账户号码
+          bankName: iAccount.deposit.depositWay.title,                                                   // 入金选择银行名称
+          bankCode: iAccount.deposit.depositWay.value,                                                   // 入金选择银行代码
+          remittanceBankCorde : iAccount.deposit.depositBankData.value,                                  // 入金银行真是代码
+          getAccount: bankInfoJF.depositToAccount[iAccount.deposit.depositCurrency.code],                                                     // 收款账户号码
           getAccountName: bankInfoJF.getAccountName,                                                                            // 收款人账户名
           getAddress: bankInfoJF.getAddress,                                                                      // 收款人地址
           getBankCode: bankInfoJF.getBankCode,                                        // 收款银行编码
@@ -169,14 +169,14 @@ export const format_CommitData = (args, form) => {
         }
       } else {
         getInfo = {
-          bankName: deposit.depositWay.title,                                                   // 入金选择银行名称
-          bankCode: deposit.depositWay.value,                                                   // 入金选择银行代码
-          remittanceBankCorde : deposit.depositBankData.value,                                  // 入金银行真是代码
+          bankName: iAccount.deposit.depositWay.title,                                                   // 入金选择银行名称
+          bankCode: iAccount.deposit.depositWay.value,                                                   // 入金选择银行代码
+          remittanceBankCorde : iAccount.deposit.depositBankData.value,                                  // 入金银行真是代码
           getAccount: getAccount_FPS.replace(/-/g, ''),                                                           // 收款账户号码
-          getAccountName: deposit.depositWayInfo.accountName,                                   // 收款人账户名
+          getAccountName: iAccount.deposit.depositWayInfo.accountName,                                   // 收款人账户名
           getAddress: '',                                                                      // 收款人地址
-          getBankCode: deposit.depositWayInfo.bankCode,                                        // 收款银行编码
-          getBankNameCn: deposit.depositWayInfo.bankName,                                    // 收款银行中文名
+          getBankCode: iAccount.deposit.depositWayInfo.bankCode,                                        // 收款银行编码
+          getBankNameCn: iAccount.deposit.depositWayInfo.bankName,                                    // 收款银行中文名
           getBankNameEn: '',                                                                 // 收款银行英文名
           getBankAddress: FPS_HK_INFO.depositToBankAddress,                                   // 收款银行地址
           swiftCode: FPS_HK_INFO.swiftCode,                                                           // SWIFT代码
@@ -191,7 +191,7 @@ export const format_CommitData = (args, form) => {
 
   const postData = {
     ...baseInfo,
-    ...accInfo,
+    ...secAccountInfo,
     ...formInfo,
     ...getInfo,
     ...remitInfo,

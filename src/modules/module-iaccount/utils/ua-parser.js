@@ -64,12 +64,12 @@ class UA {
     return this.isIOS() && checkVersion('9', this.os.version)
   }
 
-  // 判断是否玖富犇犇app
+  // 判断是否智珠宝app
   isApp() {
     return this.isAppName('sunline')
   }
 
-  // 玖富股票
+  // 立桥股票
   isCustom() {
     return this.isAppName('sunline_custom')
   }
@@ -79,7 +79,7 @@ class UA {
     return this.isAppName('jfwklc')
   }
 
-  // 判断是否在玖富钱包app
+  // 判断是否在智珠客户版app
   isWalletApp() {
     return this.isAppName('jfwallet')
   }

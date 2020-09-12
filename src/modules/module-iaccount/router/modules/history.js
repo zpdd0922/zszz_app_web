@@ -6,17 +6,17 @@ const hisRouter = [
     path: '/:lang?/history-funds',
     name: 'history-funds',
     component: _import('history-funds/index'),
-    meta: { title: () => i18n.t('history.name') }
+    meta: { title: () => i18n.t('iAccount.history.name') }
   }, {
     path: '/:lang?/history-funds/deposit',
     name: 'funds-deposit',
     component: _import('history-funds/deposit'),
-    meta: { title: () => i18n.t('history.common.text_1') }
+    meta: { title: () => i18n.t('iAccount.history.common.text_1') }
   }, {
     path: '/:lang?/history-funds/withdraw',
     name: 'funds-withdraw',
     component: _import('history-funds/withdraw'),
-    meta: { title: () => i18n.t('history.common.text_2') }
+    meta: { title: () => i18n.t('iAccount.history.common.text_2') }
   }
 ]
 
