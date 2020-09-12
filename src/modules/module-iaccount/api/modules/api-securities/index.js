@@ -87,5 +87,9 @@ export default {
   toCommitIntoStockData: data => post('/securities/transferred_stock_apply', paramsData.CHECK(data)),
   
   toGetIntoStockAllInfo: data => post('/securities/find_transferred_stock', paramsData.CHECK(data)),
-
+  
+  /**
+   * 查询股票代码
+   */
+  findShares: data => post('/securities/find_shares', paramsData.COMMON(data)),
 };

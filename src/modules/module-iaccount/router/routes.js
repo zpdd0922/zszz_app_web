@@ -4,6 +4,7 @@ import depositRouter from './modules/deposit'
 import capitalFlowRouter from './modules/capital-flow'
 import hisRouter from './modules/history'
 import withdrawRouter from './modules/withdraw'
+import companyActRouter from './modules/company-act'
 
 // 路由配置表
 const routes = [
@@ -24,7 +25,8 @@ const routes = [
       ...capitalFlowRouter,
       ...depositRouter,
       ...hisRouter,
-      ...withdrawRouter
+      ...withdrawRouter,
+      ...companyActRouter
     ]
   },
 

@@ -28,6 +28,19 @@ import {
   EDDA_STATUS
 } from './edda'
 
+import {
+  SCRIP_OPTIONS,
+  SHARE_EXCHANGE_OPTIONS,
+  RIGHTS_SUBSCRIPTION_OPTIONS,
+  OPEN_OFFER_SUBSCRIPTION_OPTIONS,
+  CASH_OFFER,
+  WARRANTS_CONVERSION_OPTIONS,
+  PREFERENTIAL_OFFER,
+  BOURSE_OPTIONS,
+  COMPANY_NAME_OPTIONS
+} from './company/select-info'
+
+
 import { BANK_NAME_OPTIONS } from './info-remit'
 
 export default {
@@ -47,7 +60,16 @@ export default {
     BANK_NAME_OPTIONS,
     DEPOSIT_ACCOUNT_TYPE,
     BANK_ID_KIND,
-    EDDA_STATUS
+    EDDA_STATUS,
+    SCRIP_OPTIONS,
+    SHARE_EXCHANGE_OPTIONS,
+    RIGHTS_SUBSCRIPTION_OPTIONS,
+    OPEN_OFFER_SUBSCRIPTION_OPTIONS,
+    CASH_OFFER,
+    WARRANTS_CONVERSION_OPTIONS,
+    PREFERENTIAL_OFFER,
+    BOURSE_OPTIONS,
+    COMPANY_NAME_OPTIONS
   },
   main: {
     pageName: '证券服务'
@@ -556,6 +578,72 @@ export default {
       text_31: '余量',
       text_32: '证券存取',
       text_33: '证券流向'
+    }
+  },
+  company_act: {
+    common: {
+      text_1: '确定',
+      text_2: '取消',
+      text_3: '温馨提示'
+    },
+    label: {
+      text_1: '交易所',
+      text_2: '公司行动名称',
+      text_3: '行动之选择',
+      text_4: '其他',
+      text_5: '股票股数',
+      text_6: '现金股数',
+      text_7: '需转换的股数',
+      text_8: '部分供股的股数',
+      text_9: '额外供股的股数（如适用）',
+      text_10: '现金收购',
+      text_11: '需转换之股数',
+      text_12: '附言',
+      text_13: '提交',
+      text_14: '预览',
+      text_15: '交易所：',
+      text_16: '香港联合交易',
+      text_17: '公司行动名称：',
+      text_18: '公司之行动：',
+      text_19: '股票股数：',
+      text_20: '现金股数：',
+      text_21: '需转换的股数：',
+      text_22: '部分供股的股数：',
+      text_23: '额外供股的股数（如适用）：',
+      text_24: '现金收购：',
+      text_25: '需转换之股数：',
+      text_26: '附言：',
+      text_27: '请确认以上信息无误。',
+      text_28: '若您不符合参与该股票公司行动的条件,或于提交时已过本行所规定的该股票',
+      text_29: '公司行动回复的截止时间,或填写有误,本行将不会进行处理。',
+      text_30: '接受收购之股数',
+      text_31: '提交时间',
+      text_32: '返回',
+      text_33: '需行使的股数',
+      text_34: '需行使的股数:'
+    },
+    placeholder: {
+      text_1: '请输入股票代码/名称/首字母',
+      text_2: '请输入',
+      text_3: '请输入股票股数',
+      text_4: '请输入现金股数',
+      text_5: '请输入需转换的股数',
+      text_6: '请输入部分供股的股数',
+      text_7: '请输入额外供股的股数',
+      text_8: '请输入部分供股的股数',
+      text_9: '请输入接受收购之股数',
+      text_10: '请输入需转换之股数',
+      text_11: '请输入附言',
+      text_12: '请选择股票',
+      text_13: '请选择行动之选择',
+      text_14: '请输入股票股数以及现金股数',
+      text_15: '请输入其他',
+      text_16: '请选择公司行动名称',
+      text_17: '请输入正整数'
+    },
+    notice: {
+      text_1: '您的申请已提交。',
+      text_2: ' 请注意：若您不符合参与该股票公司行动的条件，或于提交时已过本行所规定的该股票公司行动回复的截止时间，或填写有误，本行将不会进行处理。'
     }
   }
 }
