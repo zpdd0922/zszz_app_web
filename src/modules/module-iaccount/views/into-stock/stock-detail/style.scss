@@ -37,10 +37,12 @@
       label {
         padding-right: 0.2rem;
       }
+      
+      input {
+        background: inherit;
+      }
     }
   }
-  
-  
   
   /*按钮*/
   .btn-wrap {
@@ -52,4 +54,96 @@
     color: $color-dialog-btn-txt;
     font-size: 0.17rem;
   }
+
+  //搜索
+  .search-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $search-z-index;
+    background-color: rgba(0,0,0, 0.6);
+
+    .search {
+      margin: .2rem auto;
+      width: 90%;
+      height: 90%;
+      border-radius: 0.1rem;
+      overflow: scroll;
+      
+      .head {
+        display: flex;
+        justify-content: space-between;
+        background-color: $color-header-bg;
+        color: $color-theme;
+
+        div {
+          padding: 0.1rem
+        }
+        div:first-child {
+          width: 0.46rem
+        }
+      }
+
+      .search-wrap {
+        display: flex;
+        position: relative;
+        background-color: $color-theme;
+
+        input {
+          width: 100%;
+          margin: 0.1rem 0.2rem;
+          padding: 0.1rem;
+          background-color: $color-theme-bg;
+        }
+        .search-input::placeholder {
+          text-align: center;
+        }
+
+        .clear-input {
+          position: absolute;
+          right: 6%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 0.15rem;
+          height: 0.15rem;
+          color: $color-999;
+          background-position: center;
+          background-repeat: no-repeat; 
+          background-size: 100%;   
+          background-image: url("../../../assets/img/close.png");
+          z-index: $search-z-index+1
+        }
+      }
+      
+      .history {
+        background-color: $color-theme;
+        height: 100%;
+
+        .history-title {
+          color: $color-999;
+          text-align: center;
+          line-height: 0.3rem;
+          border-bottom: 0.01rem solid $color-eee;
+
+        }
+        .clear-history {
+          color: $color-red;
+          padding: 0.1rem 0;
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+}
+
+.search-enter,
+.search-leave-to {
+  transform: scale3d(0, 0, 0);
+}
+.search-enter-active,
+.search-leave-active {
+  transition: all 0.2s;
 }

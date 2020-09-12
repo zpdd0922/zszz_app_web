@@ -16,23 +16,75 @@
         >
           <div class="inputColumn">
             <label for="stockName">{{getI18n('stockName')}}</label>
-            <input type="text" name="stockName" v-model="stockList[idx].stockName" :placeholder="getI18n('stockNamePlaceholder')">
+            <input 
+              type="text" 
+              name="stockName" 
+              v-model="stockList[idx].stockName" 
+              :placeholder="getI18n('stockNamePlaceholder')"
+              readonly="readonly"
+              @click="goToSearch(idx)"
+            >
           </div>
           <div class="inputColumn">
             <label for="quantity">{{getI18n('quantity')}}</label>
-            <input type="text" name="quantity" v-model="stockList[idx].quantity" :placeholder="getI18n('quantityPlaceholder')">
+            <input type="text"
+             name="quantity" 
+             v-model="stockList[idx].quantity" 
+             :placeholder="getI18n('quantityPlaceholder')"
+             :disabled="!item.isInputActive"
+            >
           </div>
           <!-- <cube-form-item :field="numberField"></cube-form-item> -->
-          <div class="btn-wrap" @click="handleClick($event, idx)" v-if="!item.isInputActive">
-            <div class="leftBtn" id="delete">删除</div>
-            <div class="rightBtn" id="edit">编辑</div>
-          </div>
-          <div class="btn-wrap" @click="handleClick($event, idx)" v-else >
+          <div class="btn-wrap" @click="handleClick($event, idx)" v-if="!isCanOperate && item.isInputActive">
             <div class="leftBtn" id="cancel">取消</div>
             <div class="rightBtn" id="save">保存</div>
           </div>
+          <div class="btn-wrap" @click="handleClick($event, idx)" v-else>
+            <div class="leftBtn" id="delete">删除</div>
+            <div class="rightBtn" id="edit">编辑</div>
+          </div>
         </div>
       </form>
+      <transition name="search">
+        <div class="search-mask" v-if="isSearch">
+          <div class="search">
+            <div class="head">
+              <div></div>
+              <div>股票搜索</div>
+              <div @click="closeSearch">关闭</div>
+            </div>
+            <div class="search-wrap">
+              <input type="text"
+                v-model="searchStockName" 
+                :placeholder="getI18n('search.searchInput')" 
+                name="searchStockName"
+                :class="{'search-input': !isTyping}"
+                @focus="changeStatus"
+                @blur="changeStatus"
+              >
+              <div
+                class="clear-input" 
+                v-show="this.searchStockName.length !== 0"
+                @click="searchStockName = ''"
+              ></div>
+            </div>
+            <div class="history">
+              <h3 class="history-title">{{getI18n('search.searchTitle')}}</h3>
+              <div class="history-list">
+                <div class="stockCodeList"
+                  v-for="(item, index) in stockCodeList"
+                  :key="index"
+                  @click="saveStockCode"
+                >
+                  <span>{{item.code}}</span>
+                  <span>{{item.companyName}}</span>
+                </div>
+              </div>
+              <div class="clear-history">{{getI18n('search.clear')}}</div>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
   </op-wrap>
 </template>
@@ -41,39 +93,21 @@
 export default {
   data() {
     return {
-      isDisabled:  true, //下一步按钮状态
-      isAddBtnActive: true, //添加按钮激活状态
-      number: 0, //记录最后一个数组元素的index
-      // activeIndex: 0,
-      // stockName: "",
-      // quantity: "",
+      isDisabled:  true, // 下一步按钮状态
+      isAddBtnActive: true, // 添加按钮激活状态
+      isCanOperate: false, // 全局按钮状态管理
       stockList: [],
-  
-
-      stockField: {
-        type: "input",
-        modelKey: `stockName`,
-        label: this.getI18n('stockName'),
-        props: {
-          placeholder: this.getI18n('stockNamePlaceholder'),
-          disabled : this.isInputDisabled,
-        },
-        rules: {
-          required: false
+      stockTemp: {}, // 临时数据状态存储
+      searchStockName: '', // 搜索框输入
+      isTyping: false,
+      isSearch: false, // 搜索框
+      indexSearch: '', // 进入搜索框点击的序号
+      stockCodeList: [
+        {
+          code: 00700,
+          companyName: '腾讯控股',
         }
-      },
-      numberField: {
-        type: "input",
-        modelKey: "quantity",
-        label: this.getI18n('quantity'),
-        props: {
-          placeholder: this.getI18n('quantityPlaceholder'),
-          disabled : this.isInputDisabled,
-        },
-        rules: {
-          required: false
-        }
-      }
+      ]
     }
   },
   computed: {
@@ -99,109 +133,112 @@ export default {
         return
       }
       this.isAddBtnActive = false;
-      //先将其他股票按钮禁用
-      if (this.stockList.length > 1) {
-        this.stockList.forEach((item) => {
-          item.isInputActive = false;
-          item.isOperateBtnActive = false;
-        });
-      }
+      this.isCanOperate = false;
       const stockItemAdded = {
-          id: this.number,
           stockName: '',
           quantity: '',
           isInputActive: true, //输入框状态
-          isOperateBtnActive: true, //操作按钮状态
       };
-      const list = this.stockList;
-      this.stockList = [stockItemAdded, ...list];
-      console.log(this.stockList, 2);
-      // this.stockList.push(stockItemAdded); 
-      // this.stockList.push({
-      //   id: ++this.number,
-      //   stockName: '',
-      //   quantity: '',
-      // });
+      this.stockList.unshift(stockItemAdded);
     },
     //处理点击事件
-    handleClick(e, itemId) {
+    handleClick(e, idx) {
       // 获得点击的按钮
       const id = e.target.id ? e.target.id : null;
       if ( id && id === 'delete') {
-        this.deleteStock(itemId);
+        this.deleteStock(idx);
       } else if (id && id === 'edit') {
-        this.edit(itemId);
+        this.edit(idx);
       } else if (id && id === 'save') {
-        this.saveStock(itemId)
+        this.saveStock(idx)
       } else if (id && id === 'cancel') {
-        this.cancel();
+        this.cancel(idx);
       }
     },
     //删除事件
-    deleteStock(itemId) {
-      this.stockList.splice(itemId, 1)
-      // const idx = null;
-      // this.stockList.forEach((itemId) => {
-      //   if (item.id === itemId) {
-      //     idx = index;
-      //   }
-      // });
-      // this.stockList.splice(idx, 1);
+    deleteStock(idx) {
+      this.stockList.splice(idx, 1)
     },
     // 编辑
-    edit(itemId) {
-      this.stockList.forEach((item) => {
-        if (item.id === itemId) {
-          item.isOperateBtnActive = true;
-          item.isInputActive = true;
-        } else {
-          item.isOperateBtnActive = false;
-          item.isInputActive = false;
-        }
-      })
+    edit(idx) {
+      // 先将全局输入框及按钮禁用
+      this.isCanOperate = false;
+      // 保存数据状态
+      this.stockTemp = Object.assign({}, this.stockList[idx]);
+      // 激活点击窗
+      this.stockList[idx].isInputActive = true;
     },
     // 取消
-    cancel(itemId) {
-      const stockItem = this.getClickedStockItem(itemId);
-      if (!stockItem.stockName && !quantity) {
-        this.stockList.pop();
+    cancel(idx) {
+      const stockItem = this.stockList[idx];
+      if (!this.stockTemp.stockName && !this.stockTemp.quantity) {
+        this.stockList.shift();
+      } else {
+        stockItem.stockName = this.stockTemp.stockName;
+        stockItem.quantity = this.stockTemp.quantity;
+        stockItem.isInputActive = false;
       }
-      // 激活所有按钮状态,禁止输入框
-      this.stockList.forEach((item) => {
-        item.isOperateBtnActive = true;
-        item.isInputActive = false;
-      })
-      this.cleanInputedData();
+      this.isCanOperate = true;
       this.isAddBtnActive = true;
+      this.stockTemp = {};
     },
     // 保存
-    saveStock(itemId) {
-      const stockItem = this.getClickedStockItem(itemId);
-      if (!stockItem.stockName) {
-        console.log('请输入股票')
+    saveStock(idx) {
+      const stockClicked = this.stockList[idx];
+      if (!stockClicked.stockName) {
+        this.showNoStockNameWarn();
         return
       }
-      if (!stockItem.quantity) {
-        //放出提醒，请输入数量
-        console.log('请输入数量')
+      if (!stockClicked.quantity) {
+        this.showNoQuantityWarn();
         return
       }
+      if (this.stockList.length > 1){
+        const list = this.stockList.slice(0, idx).concat(this.stockList.slice(idx+1))
+        if (list.some(item => item.stockName === stockClicked.stockName)) {
+          this.showRepeatWarn();
+          return
+        }
+      }
+      stockClicked.isInputActive = false
       //所有按钮激活，输入框禁用
-      this.stockList.forEach((item) => {
-        item.isInputActive = false;
-        item.isOperateBtnActive = true;
-      });
-      this.number++;
+      this.isCanOperate = true;
       this.isAddBtnActive = true;
     },
-    //获取点击的股票信息块
-    getClickedStockItem(itemId) {
-      return this.stockList.find((item) => {
-        return item.id === itemId
-      })
+    // 提示框
+    showNoStockNameWarn() {
+      const toast = this.$createToast({
+        type: 'txt',
+        time: 1000,
+        txt: this.getI18n('noStockNameWarn')
+      });
+      toast.show();
     },
-    // 清除输入框已有的数据
-    cleanInputedData() {
+    showNoQuantityWarn() {
+      const toast = this.$createToast({
+        type: 'txt',
+        time: 1000,
+        txt: this.getI18n('noQuantityWarn')
+      });
+      toast.show();
+    },
+    showRepeatWarn() {
+      const toast = this.$createToast({
+        type: 'txt',
+        time: 1000,
+        txt: this.getI18n('repeatWarn')
+      });
+      toast.show();
+    },
+    changeStatus() {
+      this.isTyping = !this.isTyping;
+    },
+    goToSearch(index) {
+      this.isSearch = true;
+      this.indexSearch = index;
+    },
+    closeSearch() {
+      this.isSearch = !this.isSearch;
     }
   },
 }

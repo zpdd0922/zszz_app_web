@@ -90,6 +90,14 @@ export default {
         stockNamePlaceholder: '输入股票代码',
         quantity: '数量',
         quantityPlaceholder: '输入股票数量',
+        noStockNameWarn: '股票代码不能为空',
+        noQuantityWarn: '股票数量不能为空',
+        repeatWarn: '股票代码不可重复输入',
+        search: {
+          searchInput: '请输入股票代码/名称/首字母',
+          searchTitle: '以下为历史搜索记录',
+          clear: '清除记录',
+        }
       },  
       infoConfirm: {
         confirmTitle: '请确认所填信息无误后提交',

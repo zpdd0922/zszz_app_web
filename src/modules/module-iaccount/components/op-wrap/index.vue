@@ -1,5 +1,5 @@
 <template>
-  <section class="op-com-op-wrap">
+  <section class="into-stock-op-wrap">
     <!-- 默认插槽 -->
     <slot></slot>
     <!-- 下一步按钮 -->
@@ -85,6 +85,6 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 @import './style.scss';
 </style>

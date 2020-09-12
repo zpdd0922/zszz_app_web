@@ -1,8 +1,8 @@
 <template>
-  <div class="deposit">
+  <div class="into-stock">
     <!-- Loading -->
     <!-- <template v-if='!accInfo'> -->
-      <template v-if='false'>
+    <template v-if='false'>
       <loading />
     </template>
 
@@ -38,7 +38,9 @@ export default {
 
 </script>
 
-<style>
+<style scoped lang="scss">
 /* @import './main' */
-
+.into-stock  {
+  width: 100%;
+}
 </style>
