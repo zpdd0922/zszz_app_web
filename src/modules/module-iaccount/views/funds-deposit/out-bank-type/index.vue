@@ -8,7 +8,7 @@
         <base-cell-body>
           <span class="label">
             {{item.label}}
-            <i v-if="item.isRecommend" class="icon-recommend">推荐</i>
+            <base-icon v-if="item.symbol" name="symbol">{{item.symbol}}</base-icon>
           </span>
           <span v-if="item.tips" class="tips">{{item.tips}}</span>
         </base-cell-body>
@@ -51,7 +51,7 @@ export default {
           value: 2,
           label: this.$t("iAccount.fundsDeposit.outBankType.hk.name"),
           tips: this.$t("iAccount.fundsDeposit.outBankType.hk.tips"),
-          isRecommend: true,
+          symbol:this.$t("iAccount.fundsDeposit.recommondTxt"),
           nextRoute: "sec-out-bank-hk",
         },
         {
@@ -68,7 +68,7 @@ export default {
   methods: {
     handleNext(item) {
       this.$store.dispatch("selectBankType", item).then(() => {
-        console.log(item)
+        console.log(item);
         this.$router.push({ name: item.nextRoute });
       });
     },
