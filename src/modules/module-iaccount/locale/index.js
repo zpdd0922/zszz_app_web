@@ -16,6 +16,9 @@ import customizeZhHK from '@/customize/locale/i18n/zh_HK';
 import iccountZhCN from '@/modules/module-iaccount/locale/i18n/zh_CN';
 import iccountEnUS from '@/modules/module-iaccount/locale/i18n/en_US';
 import iccounthHK from '@/modules/module-iaccount/locale/i18n/zh_HK';
+import signZhCN from '@/modules/module-sign/locale/i18n/zh_CN';
+import signEnUS from '@/modules/module-sign/locale/i18n/en_US';
+import signZhHK from '@/modules/module-sign/locale/i18n/zh_HK';
 import { getDefaultLang } from '@/main/locale/helper';
 
 Vue.use(VueI18n);
@@ -29,18 +32,21 @@ export default new VueI18n({
       ...commonZhCN,
       ...customizeZhCN,
       ...iccountZhCN,
+      ...signZhCN,
       lan: 'zh_CN'
     },
     en_US: {
       ...commonEnUS,
       ...customizeEnUS,
       ...iccountEnUS,
+      ...signEnUS,
       lan: 'en_US'
     },
     zh_HK: {
       ...commonZhHK,
       ...customizeZhHK,
       ...iccounthHK,
+      ...signZhHK,
       lan: 'zh_HK'
     }
   }
