@@ -74,7 +74,7 @@
                 <div class="stockCodeList"
                   v-for="(item, index) in stockCodeList"
                   :key="index"
-                  @click="saveStockCode"
+                  @click="saveStockCode(item)"
                 >
                   <span>{{item.code}}</span>
                   <span>{{item.companyName}}</span>
@@ -104,7 +104,7 @@ export default {
       indexSearch: '', // 进入搜索框点击的序号
       stockCodeList: [
         {
-          code: 00700,
+          code: '00700',
           companyName: '腾讯控股',
         }
       ]
@@ -238,8 +238,12 @@ export default {
       this.indexSearch = index;
     },
     closeSearch() {
-      this.isSearch = !this.isSearch;
-    }
+      this.isSearch = false
+    },
+    saveStockCode(item) {
+      this.stockList[this.indexSearch].stockName = `${item.code}  ${item.companyName}`
+      this.isSearch = false;
+    },
   },
 }
 </script>
