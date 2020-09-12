@@ -31,59 +31,83 @@ BroadCast.onmessage(BROADCAST_ENUMS.LOGIN_EXPRIS, () => {
 
 router.beforeEach((to, from, next) => {
   // 判断当前环境
-  // 白名单页
-  if (uaInfo.isApp()) {
-    getUserInfoAPP({
-      success: (res) => {
-        // 并修改手机字段统一为 --> phoneNum
-        const result = JSON.parse(res.data)
-        const { phoneNumber: phoneNum, language } = result
-        let lang = 'zh_HK';
-        switch (language) {
-          case 'zh-Hant':
-          case 'zh_HK':
-            lang = 'zh_HK'
-            // cube-ui内部组件国际化
-            // Locale.use('cu-TW', cubeDefaultLang)
-            break
-          case 'zh-Hans':
-          case 'zh_CN':
-            lang = 'zh_CN'
-            break
-          default:
-            lang = 'zh_HK'
-          // Locale.use('cu-TW', cubeDefaultLang)
-        }
-
-        i18n.locale = lang;
-        setLanguage(lang)
-
-        store.dispatch('appLogin', { ...result, phoneNum })
-          .then(() => {
-            next()
-          })
-      }
-    })
-  } else {
-    if (to.matched.some(res => res.meta.whiteAuth)) {
-      next();
-    } else {
-      // 用户信息
-      const token = auth.getAuthSession();
-      if (token) {
-        // 非APP内，检测用户信息是否失效
-        next();
-      } else {
-        // 跳转到登录界面
-        store.commit('updateLoadingStatus', { isLoading: false });
-        if (from.name !== 'login') {
-          NProgress.start();
-        }
+  const pathName = to.path;
+  if (pathName.indexOf('/security-service') != -1) {
+    if (pathName.indexOf("deposit") != -1) {
+      next({
+        name: 'sec-funds-deposit',
+        replace: true
+      });
+    }
+    else
+      if (pathName.indexOf("withdraw") != -1) {
         next({
-          name: 'login',
-          query: { redirect: to.fullPath },
+          name: 'sec-funds-withdraw',
           replace: true
         });
+      }
+      else {
+        next({
+          name: 'sec-home',
+          replace: true
+        });
+      }
+
+  } else {
+    // 白名单页
+    if (uaInfo.isApp()) {
+      getUserInfoAPP({
+        success: (res) => {
+          // 并修改手机字段统一为 --> phoneNum
+          const result = JSON.parse(res.data)
+          const { phoneNumber: phoneNum, language } = result
+          let lang = 'zh_HK';
+          switch (language) {
+            case 'zh-Hant':
+            case 'zh_HK':
+              lang = 'zh_HK'
+              // cube-ui内部组件国际化
+              // Locale.use('cu-TW', cubeDefaultLang)
+              break
+            case 'zh-Hans':
+            case 'zh_CN':
+              lang = 'zh_CN'
+              break
+            default:
+              lang = 'zh_HK'
+            // Locale.use('cu-TW', cubeDefaultLang)
+          }
+
+          i18n.locale = lang;
+          setLanguage(lang)
+
+          store.dispatch('appLogin', { ...result, phoneNum })
+            .then(() => {
+              next()
+            })
+        }
+      })
+    } else {
+      if (to.matched.some(res => res.meta.whiteAuth)) {
+        next();
+      } else {
+        // 用户信息
+        const token = auth.getAuthSession();
+        if (token) {
+          // 非APP内，检测用户信息是否失效
+          next();
+        } else {
+          // 跳转到登录界面
+          store.commit('updateLoadingStatus', { isLoading: false });
+          if (from.name !== 'login') {
+            NProgress.start();
+          }
+          next({
+            name: 'login',
+            query: { redirect: to.fullPath },
+            replace: true
+          });
+        }
       }
     }
   }

@@ -15,7 +15,7 @@
 
     <div class="cube-form cube-form_standard cube-form_valid step-content">
       <div class="cube-form-group custom-form-group">
-        <ul class="cube-form-group-content">
+        <ul class="cube-form-group-content border-bottom-1px">
           <!-- 收款银行 -->
           <li class="cube-form-item border-bottom-1px" v-if="isShowBankList">
             <div class="cube-form-label">
@@ -36,7 +36,7 @@
               <span>{{ $t('iAccount.deposit.remit.text_1') }}</span>
             </div>
             <div class="cube-form-field">
-              <div class="filed-item border-bottom-1px">
+              <div class="filed-item">
                 <span class="txt">{{secAccountInfo.clientNameCn}} （{{secAccountInfo.clientNameEn}}）</span>
               </div>
             </div>
@@ -48,7 +48,7 @@
               <span>{{ $t('iAccount.deposit.remit.text_12') }}</span>
             </div>
             <div class="cube-form-field">
-              <div class="filed-item border-bottom-1px">
+              <div class="filed-item">
                 <span
                   v-if="depositBankHis && depositBankHis.bankName"
                   class="txt"
@@ -78,7 +78,7 @@
               <span>{{ $t('iAccount.deposit.remit.text_2') }}</span>
             </div>
             <div class="cube-form-field">
-              <div class="filed-item border-bottom-1px">
+              <div class="filed-item">
                 <cube-select
                   v-model="depositSelectBankAccount"
                   :options="myBankOptions"
@@ -93,7 +93,7 @@
               <span>{{ $t('iAccount.deposit.remit.text_2') }}</span>
             </div>
             <div class="cube-form-field">
-              <div class="filed-item border-bottom-1px">
+              <div class="filed-item">
                 <div class="cube-input">
                   <input
                     v-model="model.depositBankAccount"
@@ -122,7 +122,7 @@
               <span>{{ $t('iAccount.deposit.remit.text_3') }}</span>
             </div>
             <div class="cube-form-field">
-              <div class="filed-item border-bottom-1px">
+              <div class="filed-item">
                 <div class="cube-input">
                   <input
                     v-model="model.depositBankAccountAgain"
@@ -146,7 +146,7 @@
               <span>{{ $t('iAccount.deposit.remit.text_4') }}</span>
             </div>
             <div class="cube-form-field">
-              <div class="filed-item border-bottom-1px">
+              <div class="filed-item">
                 <div class="cube-input">
                   <input
                     v-model="model.depositMoney"

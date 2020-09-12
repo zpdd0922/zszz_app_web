@@ -2,12 +2,12 @@
   <div class="notify">
     <div class="notify-status">
       <jf-icon name="success"></jf-icon>
-      <p class="status-title">{{ $t('iAccount.deposit.edda.notify.text_1') }}</p>
-      <p class="status-txt" v-if="query">{{ $t('iAccount.deposit.edda.notify.text_3') }}</p>
-      <p class="status-txt" v-else>{{ $t('iAccount.deposit.edda.notify.text_2') }}</p>
+      <p class="status-title">{{ $t('iAccount.deposit.edda.iAccount.notify.text_1') }}</p>
+      <p class="status-txt" v-if="query">{{ $t('iAccount.deposit.edda.iAccount.notify.text_3') }}</p>
+      <p class="status-txt" v-else>{{ $t('iAccount.deposit.edda.iAccount.notify.text_2') }}</p>
     </div>
     <div class="notify-btn" v-if="query">
-        <cube-button @click="handleNext">{{$t('iAccount.deposit.edda.notify.text_4')}}</cube-button>
+        <cube-button @click="handleNext">{{$t('iAccount.deposit.edda.iAccount.notify.text_4')}}</cube-button>
     </div>
   </div>
 </template>

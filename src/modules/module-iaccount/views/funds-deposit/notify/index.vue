@@ -2,8 +2,8 @@
   <div class="sec-notify">
     <div class="notify-status">
       <jf-icon name="success"></jf-icon>
-      <p class="status-title">{{ $t('iAccount.notify.text_1') }}</p>
-      <p class="status-txt">{{ $t('iAccount.notify.text_2') }}</p>
+      <p class="status-title">{{ $t('iAccount.iAccount.notify.text_1') }}</p>
+      <p class="status-txt">{{ $t('iAccount.iAccount.notify.text_2') }}</p>
     </div>
     <div class="notify-action">
       <div class="action-item">

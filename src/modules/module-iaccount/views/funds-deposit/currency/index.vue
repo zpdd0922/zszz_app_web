@@ -52,7 +52,8 @@ export default {
         {
           type: "hkd",
           code: 1,
-          label: this.$t("iAccount.fundsDeposit.currency.hkd.name"),
+          name: this.$t("iAccount.fundsDeposit.currency.hkd.name"),
+          label: this.$t("iAccount.fundsDeposit.currency.hkd.label"),
           tips: this.$t("iAccount.fundsDeposit.currency.usd.tips"),
           code: HKD,
           value: DOLLAR_HK_VAL,
@@ -62,7 +63,8 @@ export default {
         {
           type: "usd",
           code: 2,
-          label: this.$t("iAccount.fundsDeposit.currency.usd.name"),
+          name: this.$t("iAccount.fundsDeposit.currency.usd.name"),
+          label: this.$t("iAccount.fundsDeposit.currency.usd.label"),
           tips: this.$t("iAccount.fundsDeposit.currency.usd.tips"),
           code: USD,
           value: DOLLAR_US_VAL,

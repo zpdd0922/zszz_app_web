@@ -7,7 +7,7 @@ const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iacc
 const depositRoute = [
     {
         path: 'funds-deposit',
-        name: 'sec-fund-deposit',
+        name: 'sec-funds-deposit',
         component: Deposit,
         redirect: 'funds-deposit/currency',
         children: [

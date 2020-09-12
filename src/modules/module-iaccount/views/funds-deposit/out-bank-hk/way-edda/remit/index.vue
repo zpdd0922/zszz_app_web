@@ -232,12 +232,12 @@ export default {
       })
     },
     _handleNext() {
-      const { user, deposit } = this.$store.state
+      const { account, deposit } = this.$store.state
       const bankInfo = this.$t('iAccount.define.BANK_NAME_OPTIONS')[2]
       // 基本信息
       const baseInfo = {
-        currency: iAccount.deposit.depositCurrency.value, // 入金币种
-        bankType: iAccount.deposit.depositBankType.value // 入金银行卡类型
+        currency: deposit.depositCurrency.value, // 入金币种
+        bankType: deposit.depositBankType.value // 入金银行卡类型
       }
 
       // 用户账号信息
@@ -247,11 +247,11 @@ export default {
         depositAccountName: '现金账户'// 存入账户名称，目前仅支持：现金账户
       }
       const eddaInfo = {
-        remittanceBankName: iAccount.deposit.depositEddaInfo.bankName,
-        remittanceAccountNameEn: iAccount.deposit.depositEddaInfo.depositAccountName,
-        remittanceBankAccount: iAccount.deposit.depositEddaInfo.depositAccount,
-        remittanceBankCorde: iAccount.deposit.depositEddaInfo.bankCode,
-        remittanceBankId: iAccount.deposit.depositEddaInfo.bankId
+        remittanceBankName: deposit.depositEddaInfo.bankName,
+        remittanceAccountNameEn: deposit.depositEddaInfo.depositAccountName,
+        remittanceBankAccount: deposit.depositEddaInfo.depositAccount,
+        remittanceBankCorde: deposit.depositEddaInfo.bankCode,
+        remittanceBankId: deposit.depositEddaInfo.bankId
 
       }
       const jfBankInfo = {
@@ -262,8 +262,8 @@ export default {
       }
       const params = {
         depositMoney: this.depositMoney,
-        bankName: iAccount.deposit.depositWay.title,
-        bankCode: iAccount.deposit.depositWay.value,
+        bankName: deposit.depositWay.title,
+        bankCode: deposit.depositWay.value,
         ...baseInfo,
         ...secAccountInfo,
         ...eddaInfo,

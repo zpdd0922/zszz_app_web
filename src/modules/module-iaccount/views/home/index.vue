@@ -42,14 +42,14 @@ export default {
               key: "deposit",
               label: "存入資金",
               iconType: "deposit",
-              path: "funds-deposit",
+              path: "sec-funds-deposit",
             },
             // { key: "exchange", label: "貨幣兌換", iconType: "exchange" },
             {
               key: "withdraw",
               label: "取出資金",
               iconType: "withdraw",
-              path: "/withdraw",
+              path: "sec-funds-withdraw",
             },
             // {
             //   key: "funds_history1",
@@ -61,13 +61,13 @@ export default {
               key: "funds_history2",
               label: "資金記錄",
               iconType: "fund_history",
-              path: "/history-funds",
+              path: "sec-funds-history",
             },
             {
               key: "funds_history",
               label: "資金流水",
               iconType: "fund_list",
-              path: "/capital-flow",
+              path: "sec-funds-capital-flow",
             },
           ],
         },
@@ -107,7 +107,7 @@ export default {
               key: "statement",
               label: "傭金方案",
               iconType: "statement",
-              path: "fee/statement"
+              path: "fee/statement",
             },
             {
               key: "account",
@@ -160,7 +160,7 @@ export default {
     intoChannel(item) {
       const { path } = item;
       if (path) {
-        this.$router.push(path);
+        this.$router.push({ name: path });
       } else {
         alert({
           title: this.$t("common.alertTitle"),

@@ -18,7 +18,7 @@ const getRouterName = () => i18n.t('iAccount.withdraw.name')
 const withdrawRouter = [
   {
     path: '/:lang?/withdraw',
-    name: 'withdraw',
+    name: 'sec-funds-withdraw',
     component: WithDraw,
     redirect: '/:lang?/withdraw/index',
     children: [

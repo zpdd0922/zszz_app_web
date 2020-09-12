@@ -4,7 +4,7 @@ const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iacc
 const hisRouter = [
   {
     path: '/:lang?/history-funds',
-    name: 'history-funds',
+    name: 'sec-funds-history',
     component: _import('history-funds/index'),
     meta: { title: () => i18n.t('iAccount.history.name') }
   }, {

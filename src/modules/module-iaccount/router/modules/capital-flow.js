@@ -12,7 +12,7 @@ const getRouterName1 = () => i18n.t('iAccount.capital_flow.stock_flow_name')
 const capitalFlowRouter = [
   {
     path: '/:lang?/capital-flow',
-    name: 'capital-flow',
+    name: 'sec-funds-capital-flow',
     component: CapitalFlow,
     meta: { title: getRouterName }
   },

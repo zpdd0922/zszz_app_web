@@ -2,8 +2,8 @@
   <div class="notify">
     <div class="notify-status">
       <jf-icon name="success"></jf-icon>
-      <p class="status-title">{{ $t('notify.text_3') }}</p>
-      <p class="status-txt">{{ $t('notify.text_4') }}</p>
+      <p class="status-title">{{ $t('iAccount.notify.text_3') }}</p>
+      <p class="status-txt">{{ $t('iAccount.notify.text_4') }}</p>
     </div>
     <div class="notify-action">
       <div class="action-item">
@@ -18,8 +18,8 @@ import { DEV } from '@/modules/module-iaccount/api/config'
 import commonMixin from '@/modules/module-iaccount/mixins/common'
 
 const ROUTE_NAME = {
-  funds: 'history-funds',
-  home: 'home'
+  funds: 'sec-funds-history',
+  home: 'sec-home'
 }
 export default {
   // 返回 - 前往证券首页

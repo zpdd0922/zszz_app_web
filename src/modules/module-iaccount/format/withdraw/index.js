@@ -7,16 +7,16 @@ import { OTHER } from '@/modules/module-iaccount/define'
  */
 export const format_CommitData_CN = (args, form) => {
   console.log('format_CommitData_CN', args, form)
-  const { user, withdraw } = args;
+  const { account, withdraw } = args;
 
   // 处理选择其他银行
-  const bankName = iAccount.withdraw.withdrawBankInfo.receiptBankCode === OTHER ?
-    form.withdrawBankNameOther : iAccount.withdraw.withdrawBankInfo.receiptBankName;
+  const bankName = withdraw.withdrawBankInfo.receiptBankCode === OTHER ?
+    form.withdrawBankNameOther : withdraw.withdrawBankInfo.receiptBankName;
   const postData = {
     currency: form.currency,                 // 出金币种
-    extMethod: iAccount.withdraw.withdrawBankInfo.bankType,                // 出金银行卡类型
+    extMethod: withdraw.withdrawBankInfo.bankType,                // 出金银行卡类型
     bankName: bankName,            // 出金银行名称
-    bankCode: iAccount.withdraw.withdrawBankInfo.receiptBankCode,           // 出金银行编码
+    bankCode: withdraw.withdrawBankInfo.receiptBankCode,           // 出金银行编码
     bankAccount: form.withdrawBankAccount,       // 出金银行卡号
 
     payee: account.secAccountInfo.clientNameEn,             // 账号英文名
