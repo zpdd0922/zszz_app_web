@@ -31,6 +31,18 @@ import {
 
 import { BANK_NAME_OPTIONS } from './info-remit'
 
+import {
+  SCRIP_OPTIONS,
+  SHARE_EXCHANGE_OPTIONS,
+  RIGHTS_SUBSCRIPTION_OPTIONS,
+  OPEN_OFFER_SUBSCRIPTION_OPTIONS,
+  CASH_OFFER,
+  WARRANTS_CONVERSION_OPTIONS,
+  PREFERENTIAL_OFFER,
+  BOURSE_OPTIONS,
+  COMPANY_NAME_OPTIONS
+} from './company/select-info'
+
 export default {
   ...mainizeI18n,
   ...customizeI18n,
@@ -51,7 +63,16 @@ export default {
       BANK_NAME_OPTIONS,
       DEPOSIT_ACCOUNT_TYPE,
       BANK_ID_KIND,
-      EDDA_STATUS
+      EDDA_STATUS,
+      SCRIP_OPTIONS,
+      SHARE_EXCHANGE_OPTIONS,
+      RIGHTS_SUBSCRIPTION_OPTIONS,
+      OPEN_OFFER_SUBSCRIPTION_OPTIONS,
+      CASH_OFFER,
+      WARRANTS_CONVERSION_OPTIONS,
+      PREFERENTIAL_OFFER,
+      BOURSE_OPTIONS,
+      COMPANY_NAME_OPTIONS
     },
     main: {
       pageName: '證券服務'
@@ -561,6 +582,72 @@ export default {
         text_32: '證券存取',
         text_33: '證券流向'
       }
-    }
+    },
+    company_act: {
+      common: {
+        text_1: '确定',
+        text_2: '取消',
+        text_3: '溫馨提示'
+      },
+      label: {
+        text_1: '交易所',
+        text_2: '公司行動名稱',
+        text_3: '行動之選擇',
+        text_4: '其他',
+        text_5: '股票股數',
+        text_6: '現金股數',
+        text_7: '需轉換的股數',
+        text_8: '部分供股的股數',
+        text_9: '額外供股的股數（如適用）',
+        text_10: '現金收購',
+        text_11: '需轉換之股數',
+        text_12: '附言',
+        text_13: '提交',
+        text_14: '預覽',
+        text_15: '交易所:',
+        text_16: '香港聯合交易',
+        text_17: '公司行動名稱:',
+        text_18: '公司之行動:',
+        text_19: '股票股數:',
+        text_20: '現金股數:',
+        text_21: '需轉換的股數:',
+        text_22: '部分供股的股數:',
+        text_23: '額外供股的股數（如適用）:',
+        text_24: '現金收購:',
+        text_25: '需轉換之股數:',
+        text_26: '附言:',
+        text_27: '請確認以上信息無誤。',
+        text_28: '若您不符合參與該股票公司行動的條件，或於提交時已過本行所規定的該股票',
+        text_29: '公司行動回復的截止時間，或填寫有誤，本行將不會進行處理。',
+        text_30: '接受收購之股數',
+        text_31: '提交時間',
+        text_32: '返回',
+        text_33: '需行使的股數',
+        text_34: '需行使的股數:'
+      },
+      placeholder: {
+        text_1: '請輸入股票代碼/名稱/首字母',
+        text_2: '請輸入',
+        text_3: '請輸入股票股數',
+        text_4: '請輸入現金股數',
+        text_5: '請輸入需轉換的股數',
+        text_6: '請輸入部分供股的股數',
+        text_7: '請輸入額外供股的股數',
+        text_8: '請輸入部分供股的股數',
+        text_9: '請輸入接受收購之股數',
+        text_10: '請輸入需轉換之股數',
+        text_11: '請輸入附言',
+        text_12: '請選擇股票',
+        text_13: '請選擇行動之選擇',
+        text_14: '請輸入股票股數以及現金股數',
+        text_15: '請輸入其他',
+        text_16: '請選擇公司行動名稱',
+        text_17: '請輸入正整數'
+      },
+      notice: {
+        text_1: '您的申請已提交。',
+        text_2: '請注意：若您不符合參與該股票公司行動的條件，或於提交時已過本行所規定的該股票公司行動回復的截止時間，或填寫有誤，本行將不會進行處理。'
+      }
+    }
   }
 }

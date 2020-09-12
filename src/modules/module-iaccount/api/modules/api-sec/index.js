@@ -149,5 +149,8 @@ export default {
    */
   findUserInfo: data => post('/sec_api/find_user_info', paramsData.COMMON(data)),
 
-
+  /**
+   * 提交公司行动
+   */
+  saveCorporateActions: data => post('/sec_api/save_corporate_actions', paramsData.COMMON(data)),
 };

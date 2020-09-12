@@ -1,0 +1,144 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+@import '~@/main/assets/scss/mixin';
+
+.wrap {
+  @include fixed-full();
+  background-color: #F5F5F5;
+  .btn {
+    position: absolute;
+    bottom: .165rem;
+    left: .125rem;
+    right: .125rem;
+  }
+}
+.header {
+  height: .43rem;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  .input-btn {
+    display: flex;
+    align-items: center;
+    width:3.45rem;
+    height:.29rem;
+    background:rgba(238,238,238,1);
+    border-radius:.025rem;
+    margin: 0 auto;
+    .icon {
+      padding: 0 .09rem;
+    }
+    .txt {
+      font-size:.11rem;
+      font-family:PingFang SC;
+      font-weight:400;
+      color:rgba(121,126,139,1);
+    }
+  }
+}
+.stock-info {
+  display: flex;
+  align-items: center;
+  height: .55rem;
+  padding-left: .15rem;
+  background-color: #fff;
+  .stock-icon {
+    @include jf-icon-img(.17rem, .17rem);
+    @include retina-images('~@/modules/module-iaccount/views/company-act/act-form/images/stock-icon');
+    // bg-image('stock-icon');
+  }
+  .info {
+    font-size:.15rem;
+    font-family:PingFang SC;
+    font-weight:500;
+    color:rgba(51,51,51,1);
+    line-height:.195rem;
+    padding-left: .05rem;
+  }
+}
+.form {
+  margin-top: .05rem;
+  background-color: #fff;
+  padding: 0 .2rem;
+  .form-item {
+    display: flex;
+    align-items: center;
+  }
+    .label {
+      font-size:.15rem;
+      font-family:PingFang SC;
+      font-weight:400;
+      color:rgba(51,51,51,1);
+      line-height:.205rem;
+    }
+    .content {
+      flex: 1;
+    }
+}
+.require-status {
+  font-size:.14rem;
+  font-family:PingFang SC;
+  font-weight:400;
+  color:rgba(255,30,0,1);
+  padding-left: .04rem;
+  padding-right: .16rem;
+}
+
+.dialog {
+  @include fixed-full();
+  background-color: rgba(0,0,0,0.6);
+  .box {
+    @include pos-center();
+    width:3.065rem;
+    height:3.505rem;
+    background:rgba(255,255,255,1);
+    border-radius:.075rem;
+    .title {
+      font-size:.155rem;
+      font-family:PingFang SC;
+      font-weight:500;
+      color:rgba(51,51,51,1);
+      text-align: center;
+      padding-top: .26rem;
+    }
+    .content {
+      // height: 2.135rem;
+      height: 2.55rem;
+      padding: .26rem .23rem .275rem .24rem;
+      .tiem {
+        display: flex;
+        font-size: .15rem;
+        color: #333;
+        line-height: .25rem;
+        & > p:nth-child(2) {
+          padding-left: .1rem;
+        }
+      }
+      .msg {
+        color: #C02626;
+        font-size: .13rem;
+        line-height: .25rem;
+      }
+    }
+    .footer {
+      height: .42rem;
+      display: flex;
+      font-size: .155rem;
+      .cancel {
+        flex: 1;
+        line-height: .42rem;
+        text-align: center;
+      }
+      .confirm {
+        line-height: .42rem;
+        flex: 1;
+        text-align: center;
+        color: #093393;
+      }
+    }
+  }
+}
+
+
+
+
