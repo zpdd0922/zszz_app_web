@@ -206,8 +206,3 @@ export default {
 
 </script>
 
-<<<<<<< Updated upstream
-<style lang='stylus' scoped>
-</style>
-=======
->>>>>>> Stashed changes
