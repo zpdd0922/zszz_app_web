@@ -1,11 +1,11 @@
 export default {
-        pageName: '存入资金',
+        pageName: '存入資金',
         currency: {
-            title: '请选择存入币种',
+            title: '請選擇存入幣種',
             guide: '入金指引',
             tips: '',
             hkd: {
-                name: '存入港币',
+                name: '存入港幣',
                 tips: '',
             },
             usd: {
@@ -13,42 +13,42 @@ export default {
                 tips: '',
             },
             rmb: {
-                name: '存入离岸人民币',
+                name: '存入離岸人民幣',
                 tips: '',
             },
         },
         outBankType:{
-            title: '请选择汇出银行所在地',
+            title: '請選擇匯出銀行所在地',
             guide: '入金指引',
             tips: '',
             hk: {
-                name: '香港银行账户',
+                name: '香港銀行帳戶',
                 tips: '',
             },
             other: {
-                name: '其他地区银行账户',
+                name: '其他地區銀行帳戶',
                 tips: '',
             },
         },
         bankList:{
-            title: '请选择汇款银行',
+            title: '請選擇匯款銀行',
             hk: {
-                name: '香港银行账户',
+                name: '香港銀行帳戶',
                 tips: '',
             },
             other: {
-                name: '其他地区银行账户',
+                name: '其他地區銀行帳戶',
                 tips: '',
             },
         },
         ways:{
-            title: '请选择汇款方式',
+            title: '請選擇匯款方式',
             hk: {
-                name: '香港银行账户',
+                name: '香港銀行帳戶',
                 tips: '',
             },
             other: {
-                name: '其他地区银行账户',
+                name: '其他地區銀行帳戶',
                 tips: '',
             },
         },
