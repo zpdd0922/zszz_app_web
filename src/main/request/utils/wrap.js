@@ -36,6 +36,13 @@ const COMMON = (data = {}) => ({
   }
 });
 
+// 转移股票包裹层
+const TRANSFER = (data={}) => ({
+  requestSrc: auth.getPlateform(),
+  sessionId: auth.getAuthSession(),
+  ...data
+})
+
 // 获取开户相关选项数据字典@params str
 // 'WEB_OCCUPATION_TYPE' 所属行业
 const OPTIONS = (str) => ({
@@ -63,5 +70,6 @@ export default {
   OPTIONS,
   COMMON,
   CHECK,
-  PHONE
+  PHONE,
+  TRANSFER,
 };

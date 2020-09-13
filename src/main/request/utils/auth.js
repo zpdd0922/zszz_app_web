@@ -17,7 +17,9 @@ class Auth {
    * @return string
    */
   getPlateform = () => {
-    return 'ios';
+    //TODO:
+    return 'h5';
+    // return 'ios';
     if (UaInfo.isApp()) {
       if (UaInfo.isAndroid()) {
         return 'android';
@@ -51,7 +53,9 @@ class Auth {
   * @return string
   */
   getAuthSession = () => {
-    return 'f103ae8036da43aba073b4f3b51ee214135079';
+    //TODO:
+    return '2d0afc4685874d67b6bef3b48a9856a7135764';
+    // return 'f103ae8036da43aba073b4f3b51ee214135079';
     // 获取地址栏session，有则更新本地
     const urlParams = getURLParameters() || {};
     const urlSession = urlParams.sessionId || '';

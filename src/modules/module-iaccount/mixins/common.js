@@ -13,11 +13,28 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 import AccountApi from '@/modules/module-iaccount/api/modules/api-account'
 
 export default {
+  data() {
+    return {
+      // 获取历时转入记录需要字段
+      stockTransferred: {
+        name: '转入股票',
+        state: '0',
+        step: '0',
+        type: '1',
+      }
+    }
+  },
   computed: {
     ...mapGetters([
       'secAccountInfo',
       'depositBankData',
-      'depositBankType'
+      'depositBankType',
+      //客户选择港股还是美股
+      'isShares',
+      //历史选择
+      'isHistoryShares',
+      'stockTransferredUS',
+      'stockTransferredHK',
     ]),
     getPhone() {
       return window.PHONE_CN

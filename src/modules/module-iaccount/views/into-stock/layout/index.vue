@@ -16,23 +16,38 @@
 <script>
 import { mapGetters } from 'vuex'
 import commonMixin from '@/modules/module-iaccount/mixins/common'
+import storage from '@/main/utils/cache/localstorage.js'
 
 export default {
   mixins: [commonMixin],
   data () {
-    return {}
+    return {
+      // 获取历时转入记录需要字段
+      stockTransferred: {
+        name: '转入股票',
+        state: '0',
+        step: '0',
+        type: '1',
+      }
+    }
   },
   computed: {
     ...mapGetters([
-      'accInfo'
+      'accInfo',
+      'stockTransferredHK',
     ])
   },
   methods: {},
   created() {
     //TODO:
-    // this.$store.dispatch('apiFindAccInfo').then(res => {
+    // this.$store.dispatch('getSecAccountInfo').then(res => {
     //   this.getAccountStatus(res)
     // })
+    this.$store.dispatch('getSecAccountInfo').then(res => {
+      storage.set('secAccountInfo', res)
+    })
+    //获得历史转移记录，存入vuex;
+    this.$store.dispatch('getTransferredStock', this.stockTransferred).then((res) => {console.log(res, this.stockTransferredHK, '获得历史')})
   }
 }
 

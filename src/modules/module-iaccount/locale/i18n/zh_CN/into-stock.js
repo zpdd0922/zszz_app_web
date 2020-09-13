@@ -11,11 +11,11 @@ export const intoStock = {
           placeholder: '请选择',
           label: '转出券商',
         },
-        transferOutAccount: {
+        accountNumber: {
           placeholder: '转出券商的账户号码',
           label: '账户号码',
         },
-        transferOutName: {
+        accountName: {
           placeholder: '转出券商的账户姓名',
           label: '账户姓名',
         },
@@ -23,26 +23,26 @@ export const intoStock = {
           placeholder: '转出券商的名称',
           label: '券商名称',
         },
-        numberOfCCASS: {
+        ccass: {
           placeholder: '中央结算编号',
           label: 'CCASS号码',
         },
-        contactName: {
+         rolloutContacts: {
           placeholder: '转出券商的联系人',
           label: '联系人',
         },
-        contactPhone: {
+        contactsPhoneNum: {
           placeholder: '转出券商的联系人电话',
           label: '联系人电话',
         },
       },
       recieverInfo: {
         title: '接收方信息',
-        recieverCompany: {
+        receiveSec: {
           placeholder: '立桥证券',
           label: '接收账户',
         },
-        recieverAccount: {
+        recieveAccount: {
           placeholder: '请选择',
           label: '接收账户',
         },

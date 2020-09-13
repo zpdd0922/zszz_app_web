@@ -34,45 +34,21 @@ export default {
     };
   },
   created() {
+    //TODO:新增一个获取可提取现金的接口调用 /find_extractable_money
+
     // TODO: 新增ip判斷，進行邏輯處理？
     // this.queryAddressIP();
   },
   computed: {
     // ...mapGetters(["openInfo", "openProgress"]),
+    ...mapGetters(["isShares"]),
     // 判断当前路由环境
     origin() {
       return this.UaInfo.isApp() ? "app" : "h5";
     },
-    // isCanOpenCn() {
-    //   const phone = this.openProgress.phoneNumber;
-    //   return validate.isCnMobile(phone);
-    //   return true;
-    // },
+
     ways() {
-      // if (this.isCanOpenCn) {
-      //   return [
-      //     {
-      //       type: "cn",
-      //       code: 1,
-      //       label: this.$t("iOpen.authWay.wayCN"),
-      //       tips: this.$t("iOpen.authWay.wayCNTips"),
-      //       nextRoute: "opaOnlineCn",
-      //     },
-      //     {
-      //       type: "hk",
-      //       code: 2,
-      //       label: this.$t("iOpen.authWay.wayHK"),
-      //       tips: this.$t("iOpen.authWay.wayHKTips"),
-      //       nextRoute: "opaOnlineHk",
-      //     },
-      //     {
-      //       type: "other",
-      //       code: 3,
-      //       label: this.$t("iOpen.authWay.wayOther"),
-      //       nextRoute: "",
-      //     },
-      //   ];
-      // }
+
       return [
         {
           type: "hk",
@@ -93,6 +69,8 @@ export default {
   },
   methods: {
     handleNext(item) {
+      //更改选择状态
+      this.$store.commit('SET_ISSHARES', {isShares: item.code})
       // 进入下一流程
       this.$router.push({
         name: 'transferInfo',

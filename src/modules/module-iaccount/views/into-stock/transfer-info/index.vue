@@ -11,14 +11,14 @@
         >
           <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
         </template>
-        <cube-form-item :field="fieldsTransferOut.transferOutAccount"></cube-form-item>
-        <cube-form-item :field="fieldsTransferOut.transferOutName"></cube-form-item>
+        <cube-form-item :field="fieldsTransferOut.accountNumber"></cube-form-item>
+        <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item>
         <template
           v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
         >
-          <cube-form-item :field="fieldsTransferOut.numberOfCCASS"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut.contactName"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut.contactPhone"></cube-form-item>
+          <cube-form-item :field="fieldsTransferOut.ccass"></cube-form-item>
+          <cube-form-item :field="fieldsTransferOut. rolloutContacts"></cube-form-item>
+          <cube-form-item :field="fieldsTransferOut.contactPhoneNum"></cube-form-item>
         </template>
         <!-- 提醒 -->
         <div class="tips"></div>
@@ -28,8 +28,8 @@
       <div class="transfer-info-title">{{titleValues.reciever}}</div>
       <cube-form :model="recieverInfoModel">
         <div></div>
-        <cube-form-item :field="fieldsReciever.recieverCompany"></cube-form-item>
-        <cube-form-item :field="fieldsReciever.recieverAccount"></cube-form-item>
+        <cube-form-item :field="fieldsReciever.receiveSec"></cube-form-item>
+        <cube-form-item :field="fieldsReciever.recieveAccount"></cube-form-item>
       </cube-form>
       <div class="margin-bottom"></div>
     </div>
@@ -41,9 +41,11 @@
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import * as optionsList from "./options-list";
 import validate from "@/main/utils/format/validate";
+import commonMixin from '@/modules/module-iaccount/mixins/common'
+import { mapGetters } from 'vuex';
 
 export default {
-  // mixins: [onlineMixin],
+  mixins: [commonMixin],
   data() {
     return {
       validity: {},
@@ -53,16 +55,16 @@ export default {
       // isShowCapitalList: false,
       transferOutInfoModel: {
         transferOutCompany: '',
-        transferOutAccount: '',
-        transferOutName: '',
+        accountNumber: '',
+        accountName: '',
         otherTransferOutCompanyName: '',
-        numberOfCCASS: '',
-        contactName: '',
-        contactPhone: '',
+        ccass: '',
+        rolloutContacts: '',
+        contactPhoneNum: '',
       },
       recieverInfoModel: {
-        recieverCompany: '立桥证券',
-        recieverAccount: '',
+        receiveSec: '立桥证券',
+        recieveAccount: '',
       },
 
       // 转出方信息
@@ -86,14 +88,14 @@ export default {
           },
         },
         // 账户号码
-        transferOutAccount: {
+        accountNumber: {
           type: "input",
-          modelKey: "transferOutAccount",
-          label: this.getI18n("transferOutInfo.transferOutAccount.label"),
+          modelKey: "accountNumber",
+          label: this.getI18n("transferOutInfo.accountNumber.label"),
           props: {
             // title: this.$t("common.cubeComponents.select.title"),
             placeholder: this.getI18n(
-              "transferOutInfo.transferOutAccount.placeholder"
+              "transferOutInfo.accountNumber.placeholder"
             ),
           },
           rules: {
@@ -101,14 +103,14 @@ export default {
           },
         },
         // 账户姓名
-        transferOutName: {
+        accountName: {
           type: "input",
-          modelKey: "transferOutName",
-          label: this.getI18n("transferOutInfo.transferOutName.label"),
+          modelKey: "accountName",
+          label: this.getI18n("transferOutInfo.accountName.label"),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             placeholder: this.getI18n(
-              "transferOutInfo.transferOutName.placeholder"
+              "transferOutInfo.accountName.placeholder"
             ),
           },
           rules: {
@@ -130,13 +132,13 @@ export default {
           },
         },
         //CCASS号码
-        numberOfCCASS: {
+        ccass: {
           type: "input",
-          modelKey: "numberOfCCASS",
-          label: this.getI18n("transferOutInfo.numberOfCCASS.label"),
+          modelKey: "ccass",
+          label: this.getI18n("transferOutInfo.ccass.label"),
           props: {
             placeholder: this.getI18n(
-              "transferOutInfo.numberOfCCASS.placeholder"
+              "transferOutInfo.ccass.placeholder"
             ),
           },
           rules: {
@@ -144,13 +146,13 @@ export default {
           },
         },
         //联系人
-        contactName: {
+         rolloutContacts: {
           type: "input",
-          modelKey: "contactName",
-          label: this.getI18n("transferOutInfo.contactName.label"),
+          modelKey: " rolloutContacts",
+          label: this.getI18n("transferOutInfo. rolloutContacts.label"),
           props: {
             placeholder: this.getI18n(
-              "transferOutInfo.contactName.placeholder"
+              "transferOutInfo. rolloutContacts.placeholder"
             ),
           },
           rules: {
@@ -158,13 +160,13 @@ export default {
           },
         },
         //联系人电话
-        contactPhone: {
+        contactPhoneNum: {
           type: "input",
-          modelKey: "contactPhone",
-          label: this.getI18n("transferOutInfo.contactPhone.label"),
+          modelKey: "contactPhoneNum",
+          label: this.getI18n("transferOutInfo.contactPhoneNum.label"),
           props: {
             placeholder: this.getI18n(
-              "transferOutInfo.contactPhone.placeholder"
+              "transferOutInfo.contactPhoneNum.placeholder"
             ),
           },
           rules: {
@@ -175,13 +177,13 @@ export default {
       
       //接收方信息
       fieldsReciever: {
-        recieverCompany: {
+        receiveSec: {
           type: "input",
-          modelKey: "recieverCompany",
-          label: this.getI18n("recieverInfo.recieverCompany.label"),
+          modelKey: "receiveSec",
+          label: this.getI18n("recieverInfo.receiveSec.label"),
           props: {
             placeholder: this.getI18n(
-              "recieverInfo.recieverCompany.placeholder"
+              "recieverInfo.receiveSec.placeholder"
             ),
             disabled: true
           },
@@ -189,13 +191,13 @@ export default {
             required: false,
           },
         },
-        recieverAccount: {
+        recieveAccount: {
           type: "select",
-          modelKey: "recieverAccount",
-          label: this.getI18n("recieverInfo.recieverAccount.label"),
+          modelKey: "recieveAccount",
+          label: this.getI18n("recieverInfo.recieveAccount.label"),
           props: {
             placeholder: this.getI18n(
-              "recieverInfo.recieverAccount.placeholder"
+              "recieverInfo.recieveAccount.placeholder"
             ),
             options: optionsList.companyOptions(),
           },
@@ -213,6 +215,14 @@ export default {
     }
   },
   computed: {
+    ...mapGetters([
+      //客户选择港股还是美股
+      'isShares',
+      //历史选择
+      'isHistoryShares',
+      'stockTransferredUS',
+      'stockTransferredHK',
+    ]),
     // 返回title
     titleValues() {
       return {
@@ -239,9 +249,9 @@ export default {
       if (this.transferOutInfoModel.transferOutCompany !== 'OTH') {
         const {
           otherTransferOutCompanyName,
-          numberOfCCASS,
-          contactName,
-          contactPhone,
+          ccass,
+           rolloutContacts,
+          contactPhoneNum,
           ...objTemp
         } = data;
         for (let item of Object.keys(objTemp)) {
@@ -250,7 +260,7 @@ export default {
             return false
           }
           //未选择接收账户
-          if (!objTemp.recieverAccount) {
+          if (!objTemp.recieveAccount) {
             return false
           }
         //每项都大于两个字符时通过
@@ -267,7 +277,7 @@ export default {
             return false
           }
           //未选择接收账户
-          if (!data.recieverAccount) {
+          if (!data.recieveAccount) {
             return false
           }
         //每项都大于两个字符时通过
@@ -284,34 +294,30 @@ export default {
       return this.$t(`iAccount.intoStock.transferInfo.${key}`);
     },
     // 数据回填
-    // initData() {
-    //   const userInfo = this.openInfo;
-    //   // const defaultDataTrade = this.modelTrade;
-    //   const defaultDataExperience = this.modelExperience;
-
-    //   console.log(
-    //     // defaultDataTrade,
-    //     defaultDataExperience,
-    //     // userInfo.tradeStockFrequency
-    //   );
-    //   Object.keys(defaultDataExperience).forEach((val) => {
-    //     defaultDataExperience[val] =
-    //       userInfo[val] !== undefined
-    //         ? userInfo[val]
-    //         : defaultModelExperience[val] !== undefined
-    //         ? defaultModelExperience[val]
-    //         : defaultDataExperience[val];
-    //   });
-
-    //   Object.keys(defaultDataTrade).forEach((val) => {
-    //     defaultDataTrade[val] =
-    //       userInfo[val] !== undefined
-    //         ? userInfo[val]
-    //         : defaultModelTrade[val] !== undefined
-    //         ? defaultModelTrade[val]
-    //         : defaultDataTrade[val];
-    //   });
-    // },
+    initInfo() {
+      this.$store.dispatch('getTransferredStock', this.stockTransferred).then(() => {
+        console.log( this.stockTransferredHK, '获得历史')
+        console.log(this.isShares, 1)
+        console.log(this.isHistoryShares, 2)
+        console.log(this.stockTransferredHK, 3)
+      if (this.isShares === this.isHistoryShares) {
+        if(this.isShares === 1) {
+          Object.keys(this.transferOutInfoModel).forEach((key) => {
+            if (this.stockTransferredHK.stock[key]) {
+              this.transferOutInfoModel[key] = this.stockTransferredHK.stock[key] 
+            }
+          })      
+          Object.keys(this.recieverInfoModel).forEach((key) => {
+            if (this.stockTransferredHK[key]) {
+              this.recieverInfoModel[key] = this.stockTransferredHK[key] 
+            }
+          })      
+        }
+        console.log(this.transferOutInfoModel, 1234523)
+      }
+        
+        })
+    },
     // 下一步
     handleNext(e) {
       e.preventDefault();
@@ -372,9 +378,10 @@ export default {
   //     }
   //   },
   // },
-  created() {},
+  created() {
+      this.initInfo();
+  },
   mounted() {
-    // this.initData();
   },
 }
 </script>

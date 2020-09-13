@@ -90,6 +90,8 @@
 </template>
 
 <script>
+import commonMixin from '@/modules/module-iaccount/mixins/common';
+
 export default {
   data() {
     return {
@@ -110,6 +112,9 @@ export default {
       ]
     }
   },
+  created() {
+    initInfo();
+  },
   computed: {
     isInputDisabled() {
       // return isAddBtnActive && this.stockList.
@@ -120,6 +125,12 @@ export default {
     // },
   },
   methods: {
+    // 对比用户选择和历史选择
+    initInfo() {
+       if (this.isShares === this.isHistoryShares) {
+         
+       }
+    },
     getI18n(key) {
       return this.$t(`iAccount.intoStock.stockDetail.${key}`)
     },
