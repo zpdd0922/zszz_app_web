@@ -1,4 +1,4 @@
-import OnlineCN from '@/modules/module-iopen/views/online-cn/layout.vue';
+  import OnlineCN from '@/modules/module-iopen/views/online-cn/layout.vue';
 const _import = (path, file = 'index') => () => import(/* webpackChunkName:"open-account-cn" */ `../../views/online-cn/${path}/${file}.vue`);
 
 const onlineCnRouter = [

@@ -7,10 +7,13 @@ const state = {
   stockTransferredHK: {},
   // 美股历史数据
   stockTransferredUS: {},
-  //选择港股还是美股
+  // 选择港股还是美股
   isShares: localStorage["isShares"]?localStorage["isShares"]:'',
   // 历史选择
-  isHistoryShares: '',
+  isHistoryShares: null,
+  // 历史转入股票
+  sharesList: [],
+  // searchStockList: [],
 }
 
 const getters = {
@@ -18,9 +21,23 @@ const getters = {
   stockTransferredUS: state => state.stockTransferredUS,
   isShares: state => state.isShares,
   isHistoryShares: state => state.isHistoryShares,
+  sharesList: state => state.sharesList,
+  // searchStockList: state => state.searchStockList,
 }
 
 const mutations = {
+  // [types.SET_SEARCH_STOCK_LIST](state, payload) {
+  //   state.searchStockList = payload.stks;
+  // },
+  [types.SET_SHARES_LIST](state, payload) {
+    state.sharesList = payload.sharesList;
+  },
+  [types.SET_STOCK_TRANSFERRED_HK](state, payload) {
+    state.stockTransferredHK = payload.stockTransferredHK;
+  },
+  [types.SET_STOCK_TRANSFERRED_US](state, payload) {
+    state.stockTransferredUS = payload.stockTransferredUS;
+  },
   [types.SET_ISSHARES](state, payload) {
     localStorage.setItem("isShares", payload.isShares);
   },
@@ -30,11 +47,8 @@ const mutations = {
   [types.GET_STOCK_TRANSFERRED](state, payload) {
     if (payload.stock.isShares === 1) {
       state.stockTransferredHK = {...payload}
-      console.log('wanchenglishi')
-      state.isHistoryShares = 1;
     } else if (payload.stock.isShares === 2) {
       state.stockTransferredUS = {...payload}
-      state.isHistoryShares = 2;
     }
   },
 }
@@ -42,14 +56,41 @@ const mutations = {
 const actions = {
   // 获取历史转入数据
   getTransferredStock({commit}, data) {
+    // const fullData = {...state.stockTransferredHK, ...data}
     return new Promise((resolve, reject) => {
       ApiStockTransfer.getTransferredStock(data).then((res) => {
         commit(types.GET_STOCK_TRANSFERRED, res)
+        commit(types.SET_ISHISTORYSHARES, res)
+        commit(types.SET_SHARES_LIST, {sharesList: res.sharesList})
         resolve(res)
       })
     })
   },
-}
+  sendTransferredStockCache({commit}, tempData) {
+    let fullData = {};
+    if (tempData.type === 1) {
+      fullData = {...state.stockTransferredHK, ...tempData.data}
+      commit(types.SET_STOCK_TRANSFERRED_HK, fullData)
+    } else if (tempData === 2) {
+      fullData = {...state.stockTransferredUS, ...tempData.data}
+      commit(types.SET_STOCK_TRANSFERRED_US, fullData)
+    }
+    return new Promise((resolve, reject) => {
+      ApiStockTransfer.sendTransferredStockCache(tempData.data).then((res) => {
+        commit(types.GET_STOCK_TRANSFERRED, res)
+        resolve(res);
+      })
+    })
+  },
+  getSearchStockList({commit}, data) {
+    return new Promise((resolve, reject) => {
+      ApiStockTransfer.getSearchStockList(data).then((res) => {
+        // commit(types.SET_SEARCH_STOCK_LIST, res)
+        resolve(res)
+      })  
+    })
+  }
+} 
 
 export default {
   state,

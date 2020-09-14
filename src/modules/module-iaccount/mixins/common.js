@@ -341,7 +341,12 @@ export default {
         break
       }
       return list
+    },
+    //提交后台缓存
+    commitInfoCache(data) {
+      this.$store.dispatch('sendTransferredStockCache', data)
     }
+
   },
   filters: {
     filterEmptyVal(val) {

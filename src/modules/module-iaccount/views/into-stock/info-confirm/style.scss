@@ -47,11 +47,12 @@
     .content-wrap {
       display: flex;
       justify-content: space-between;
-
+      padding: 0.05rem 0.12rem;
       .line {
-
+        
         span {
           display: block;
+          padding: 0.01rem;
           padding-left: 0;
         }
       }

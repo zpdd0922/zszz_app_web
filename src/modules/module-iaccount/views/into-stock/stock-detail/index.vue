@@ -1,6 +1,6 @@
 <template>
   <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
-    <div class="stock-detail">
+    <div class="stock-detail" ref="stock-detail">
       <head-title :title="getI18n('title')" class="stock-detail-title"></head-title>
       <div
         :class="{'addBtn': true, 'addBtn-active': isAddBtnActive }"
@@ -15,21 +15,21 @@
           class="form"
         >
           <div class="inputColumn">
-            <label for="stockName">{{getI18n('stockName')}}</label>
+            <label for="sharesCode">{{getI18n('sharesCode')}}</label>
             <input 
               type="text" 
-              name="stockName" 
-              v-model="stockList[idx].stockName" 
+              name="sharesCode" 
+              v-model="stockList[idx].sharesCode" 
               :placeholder="getI18n('stockNamePlaceholder')"
               readonly="readonly"
               @click="goToSearch(idx)"
             >
           </div>
           <div class="inputColumn">
-            <label for="quantity">{{getI18n('quantity')}}</label>
+            <label for="sharesNum">{{getI18n('sharesNum')}}</label>
             <input type="text"
-             name="quantity" 
-             v-model="stockList[idx].quantity" 
+             name="sharesNum" 
+             v-model="stockList[idx].sharesNum" 
              :placeholder="getI18n('quantityPlaceholder')"
              :disabled="!item.isInputActive"
             >
@@ -54,33 +54,50 @@
               <div @click="closeSearch">关闭</div>
             </div>
             <div class="search-wrap">
-              <input type="text"
-                v-model="searchStockName" 
-                :placeholder="getI18n('search.searchInput')" 
-                name="searchStockName"
-                :class="{'search-input': !isTyping}"
-                @focus="changeStatus"
-                @blur="changeStatus"
-              >
-              <div
-                class="clear-input" 
-                v-show="this.searchStockName.length !== 0"
-                @click="searchStockName = ''"
-              ></div>
-            </div>
-            <div class="history">
-              <h3 class="history-title">{{getI18n('search.searchTitle')}}</h3>
-              <div class="history-list">
-                <div class="stockCodeList"
-                  v-for="(item, index) in stockCodeList"
-                  :key="index"
-                  @click="saveStockCode(item)"
+              <div class="search-input-wrap">
+                <input type="text"
+                  v-model="searchStockName" 
+                  :placeholder="getI18n('search.searchInput')" 
+                  name="searchStockName"
+                  :class="{'search-input': !isTyping}"
+                  @focus="changeStatus"
+                  @blur="changeStatus"
+                  @keyup="getStockList"
                 >
-                  <span>{{item.code}}</span>
-                  <span>{{item.companyName}}</span>
+                <div
+                  class="clear-input" 
+                  v-show="this.searchStockName.length !== 0"
+                  @click="clearSearchInput"
+                ></div>
+              </div>
+              <div class="search-list" v-if="searchStockList.length > 0">
+                <div class="search-line"
+                  v-for="(item, index) in searchStockList"
+                  :key="index"
+                  @click="saveStockCode($event, item)"
+                >
+                  <!-- 图标要根据值变化 -->
+                  <span>图标</span>
+                  <span class="code">{{item.id | formatCode}}</span>
+                  <span class="name">{{item.name}}</span>
                 </div>
               </div>
-              <div class="clear-history">{{getI18n('search.clear')}}</div>
+              <div class="history">
+                <h3 class="history-title">{{getI18n('search.searchTitle')}}</h3>
+                <div class="search-list">
+                  <div class="search-line"
+                    v-for="(item, index) in searchHistory"
+                    :key="index"
+                    @click="saveStockCode($event, item)"
+                  >
+                    <!-- 图标要根据值变化 -->
+                    <span>图标</span>
+                    <span class="code">{{item.id | formatCode}}</span>
+                    <span class="name">{{item.name}}</span>
+                  </div>
+                </div>
+                <div class="clear-history" @click="clearHistory">{{getI18n('search.clear')}}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -91,66 +108,168 @@
 
 <script>
 import commonMixin from '@/modules/module-iaccount/mixins/common';
+import { mapGetters } from 'vuex';
+import Storage from '@/main/utils/cache/localstorage';
 
 export default {
   data() {
     return {
-      isDisabled:  true, // 下一步按钮状态
+      searchStockList: [],// 搜索结果
       isAddBtnActive: true, // 添加按钮激活状态
       isCanOperate: false, // 全局按钮状态管理
-      stockList: [],
+      stockList: [],  // 展示的list
       stockTemp: {}, // 临时数据状态存储
       searchStockName: '', // 搜索框输入
       isTyping: false,
       isSearch: false, // 搜索框
       indexSearch: '', // 进入搜索框点击的序号
-      stockCodeList: [
-        {
-          code: '00700',
-          companyName: '腾讯控股',
+      // searchHistory: [
+      //   {
+      //     id: '00700',
+      //     name: '腾讯控股',
+      //   }
+      // ],
+      metaInfo: {
+        step: 2,
+        state: 2,
+      },
+      stockItemAdded: (() =>{
+        return {
+          sharesCode: '',
+          sharesNum: '',
+          sharesName: '',
+          isInputActive: true, //输入框状态
         }
-      ]
+      })(),
+      searchHistory: [],
+
     }
   },
   created() {
-    initInfo();
+    // 判断是刷新还是从上一个页面进来
+    if (this.isRefresh) {
+      this.updateInfo().then(() => {
+        this.initInfo();
+      });
+    } else {
+      this.initInfo();
+    }
+  },
+  props: {
+    isRefresh: {
+      type: Boolean,
+      default: true,
+    },
+    updateInfo: {
+      type: Function,
+    },
+    sendTransferredCache: {
+      type: Function,
+    },
   },
   computed: {
+    ...mapGetters([
+      'isShares',
+      // 'stockTransferredUS',
+      // 'stockTransferredHK',
+      'secAccountInfo',
+      'isHistoryShares',
+      'sharesList',
+      // 'searchStockList',
+    ]),
+    //搜索历史
+    // searchHistory() {
+    //   return Storage.get('TRANSFERRED_SEARCH_HISTROY') || [];
+    // },
     isInputDisabled() {
       // return isAddBtnActive && this.stockList.
       return true
-    }
-    // isDisabled() {
-    //   return false
-    // },
+    },
+    isDisabled() {
+      if (this.stockList.length !== 0) {
+        return true
+      } 
+    },
+  },
+  filters: {
+    formatCode(code) {
+      return code.split('.')[0]
+    },
   },
   methods: {
+    clearSearchInput() {
+      this.searchStockName = '';
+      this.searchStockList = [];
+    },
+    //搜索股票
+    getStockList() {
+      let data = {};
+      if (this.searchStockName.length === 0) {
+        this.searchStockList = [];
+        return 
+      } else {
+        data = {
+          params: {
+            mkt: '',
+            flag: 1,
+            condition: this.searchStockName
+          }
+        }
+      }
+      if (this.isShares === 1) {
+        data.mkt = 'HK'
+      } else if (this.isShares === 2) {
+        data.mkt = 'US'
+      }
+      this.$store.dispatch('getSearchStockList', data).then((res) => {
+        this.searchStockList = res.stks;
+      })
+    },
     // 对比用户选择和历史选择
     initInfo() {
-       if (this.isShares === this.isHistoryShares) {
-         
+       if (Number(this.isShares) === this.isHistoryShares){
+         this.sharesList.forEach((item) => {
+           this.stockList.push(item);
+         })
        }
+       this.searchHistory = Storage.get('TRANSFERRED_SEARCH_HISTROY') || [];
     },
     getI18n(key) {
       return this.$t(`iAccount.intoStock.stockDetail.${key}`)
     },
     handleNext() {
-      this.$router.push({name: 'infoConfirm'})
+      const stockListTemp = this.stockList.map((item) => {
+        return {
+          stockName: item.sharesName,
+          stockCode: item.sharesCode,
+          transferNumber: item.sharesNum,
+        }
+      })
+      const data = {
+        ...this.metaInfo,
+        info: '',
+        shares: [
+          ...stockListTemp,
+        ]
+      }
+
+      console.log(data);
+      this.updateInfo(data);
+      this.$router.push({name: 'infoConfirm', isRefresh: false})
     },
     // 增加
     addStock() {
-      console.log(this.stockList, 1)
       if (!this.isAddBtnActive) {
         return
       }
       this.isAddBtnActive = false;
       this.isCanOperate = false;
-      const stockItemAdded = {
-          stockName: '',
-          quantity: '',
-          isInputActive: true, //输入框状态
-      };
-      this.stockList.unshift(stockItemAdded);
+      // const stockItemAdded = {
+      //     sharesCode: '',
+      //     sharesNum: '',
+      //     isInputActive: true, //输入框状态
+      // };
+      this.stockList.unshift(this.stockItemAdded);
     },
     //处理点击事件
     handleClick(e, idx) {
@@ -182,11 +301,11 @@ export default {
     // 取消
     cancel(idx) {
       const stockItem = this.stockList[idx];
-      if (!this.stockTemp.stockName && !this.stockTemp.quantity) {
+      if (!this.stockTemp.sharesCode && !this.stockTemp.sharesNum) {
         this.stockList.shift();
       } else {
-        stockItem.stockName = this.stockTemp.stockName;
-        stockItem.quantity = this.stockTemp.quantity;
+        stockItem.sharesCode = this.stockTemp.sharesCode;
+        stockItem.sharesNum = this.stockTemp.sharesNum;
         stockItem.isInputActive = false;
       }
       this.isCanOperate = true;
@@ -196,17 +315,17 @@ export default {
     // 保存
     saveStock(idx) {
       const stockClicked = this.stockList[idx];
-      if (!stockClicked.stockName) {
+      if (!stockClicked.sharesCode) {
         this.showNoStockNameWarn();
         return
       }
-      if (!stockClicked.quantity) {
+      if (!stockClicked.sharesNum) {
         this.showNoQuantityWarn();
         return
       }
       if (this.stockList.length > 1){
         const list = this.stockList.slice(0, idx).concat(this.stockList.slice(idx+1))
-        if (list.some(item => item.stockName === stockClicked.stockName)) {
+        if (list.some(item => item.sharesCode === stockClicked.sharesCode)) {
           this.showRepeatWarn();
           return
         }
@@ -251,10 +370,28 @@ export default {
     closeSearch() {
       this.isSearch = false
     },
-    saveStockCode(item) {
-      this.stockList[this.indexSearch].stockName = `${item.code}  ${item.companyName}`
+    saveStockCode(e, item) {
+      this.stockList[this.indexSearch].sharesCode = item.id.split('.')[0];
+      this.stockList[this.indexSearch].sharesName= item.name;
+      this.stockList[this.indexSearch]
       this.isSearch = false;
+      //存在本地
+      const isPush = this.searchHistory.some((obj) => {
+        return obj.id === item.id
+      })
+      if (!isPush) {
+        this.searchHistory.push(item)
+        Storage.set('TRANSFERRED_SEARCH_HISTROY', this.searchHistory)
+      }
+      this.searchStockName = '';
+      this.searchStockList = [];
     },
+    clearHistory() {
+      while (this.searchHistory.length > 0) {
+        this.searchHistory.pop();
+      }
+      Storage.remove('TRANSFERRED_SEARCH_HISTROY');
+    }
   },
 }
 </script>

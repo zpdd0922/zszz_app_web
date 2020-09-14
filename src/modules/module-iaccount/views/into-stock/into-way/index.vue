@@ -31,9 +31,19 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      metaInfo: {
+        state: 0,
+        step: 0,
+      }
     };
   },
+  props: {
+    updateInfo: {
+      type: Function
+    }
+  },
   created() {
+    this.updateInfo();
     //TODO:新增一个获取可提取现金的接口调用 /find_extractable_money
 
     // TODO: 新增ip判斷，進行邏輯處理？
@@ -74,7 +84,7 @@ export default {
       // 进入下一流程
       this.$router.push({
         name: 'transferInfo',
-        params: { intoType: item.type },
+        params: { intoType: item.code, isRefresh: false },
       });
     },
   },

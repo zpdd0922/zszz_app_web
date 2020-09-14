@@ -17,19 +17,34 @@
           v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
         >
           <cube-form-item :field="fieldsTransferOut.ccass"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut. rolloutContacts"></cube-form-item>
+          <cube-form-item :field="fieldsTransferOut.rolloutContacts"></cube-form-item>
           <cube-form-item :field="fieldsTransferOut.contactPhoneNum"></cube-form-item>
         </template>
         <!-- 提醒 -->
-        <div class="tips"></div>
-        <div class="tips"></div>
+        <!-- <div class="tips" v-if="transferOutCompany==='OTH'"></div> -->
+        <div class="tips">{{getI18n('tips1')}}{{secAccountInfo.clientNameEn}}{{getI18n('tips2')}}`</div>
       </cube-form>
         <!-- 接收方信息 -->
-      <div class="transfer-info-title">{{titleValues.reciever}}</div>
-      <cube-form :model="recieverInfoModel">
+      <div class="transfer-info-title">{{titleValues.receiver}}</div>
+      <cube-form :model="receiverInfoModel">
         <div></div>
-        <cube-form-item :field="fieldsReciever.receiveSec"></cube-form-item>
-        <cube-form-item :field="fieldsReciever.recieveAccount"></cube-form-item>
+        <cube-form-item :field="fieldsreceiver.receiveSec"></cube-form-item>
+        <!-- <cube-form-item :field="fieldsreceiver.receiveAccount" :options="fundAccount"></cube-form-item> -->
+        <!-- 用fieldsoptions绑定不了变量，改成cube-form -->
+        <div class="cube-form-item border-bottom-1px">
+          <div class="cube-form-label">
+            <span>{{getI18n("receiverInfo.receiveAccount.label")}}</span>
+          </div>
+          <div class="cube-validator cube-form-field">
+            <div class="cube-validator-content">
+              <cube-select 
+                :options="fundAccount"
+                :placeholder="getI18n('receiverInfo.receiveAccount.placeholder')"
+                v-model="receiverInfoModel.receiveAccount"
+              ></cube-select>
+            </div>
+          </div>
+        </div>
       </cube-form>
       <div class="margin-bottom"></div>
     </div>
@@ -48,8 +63,6 @@ export default {
   mixins: [commonMixin],
   data() {
     return {
-      validity: {},
-      valid: undefined,
       //TODO:根据港美股入口换券商列表
       isHk: true,
       // isShowCapitalList: false,
@@ -62,11 +75,14 @@ export default {
         rolloutContacts: '',
         contactPhoneNum: '',
       },
-      recieverInfoModel: {
+      receiverInfoModel: {
         receiveSec: '立桥证券',
-        recieveAccount: '',
+        receiveAccount: '',
       },
-
+      metaInfo: {
+        step: 1,
+        state: 1
+      },
       // 转出方信息
       fieldsTransferOut: {
         // 转出券商选择
@@ -148,11 +164,11 @@ export default {
         //联系人
          rolloutContacts: {
           type: "input",
-          modelKey: " rolloutContacts",
-          label: this.getI18n("transferOutInfo. rolloutContacts.label"),
+          modelKey: "rolloutContacts",
+          label: this.getI18n("transferOutInfo.rolloutContacts.label"),
           props: {
             placeholder: this.getI18n(
-              "transferOutInfo. rolloutContacts.placeholder"
+              "transferOutInfo.rolloutContacts.placeholder"
             ),
           },
           rules: {
@@ -176,14 +192,14 @@ export default {
       },
       
       //接收方信息
-      fieldsReciever: {
+      fieldsreceiver: {
         receiveSec: {
           type: "input",
           modelKey: "receiveSec",
-          label: this.getI18n("recieverInfo.receiveSec.label"),
+          label: this.getI18n("receiverInfo.receiveSec.label"),
           props: {
             placeholder: this.getI18n(
-              "recieverInfo.receiveSec.placeholder"
+              "receiverInfo.receiveSec.placeholder"
             ),
             disabled: true
           },
@@ -191,48 +207,73 @@ export default {
             required: false,
           },
         },
-        recieveAccount: {
-          type: "select",
-          modelKey: "recieveAccount",
-          label: this.getI18n("recieverInfo.recieveAccount.label"),
-          props: {
-            placeholder: this.getI18n(
-              "recieverInfo.recieveAccount.placeholder"
-            ),
-            options: optionsList.companyOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
+        // receiveAccount: {
+        //   type: "select",
+        //   modelKey: "receiveAccount",
+        //   label: this.getI18n("receiverInfo.receiveAccount.label"),
+        //   props: {
+        //     placeholder: this.getI18n(
+        //       "receiverInfo.receiveAccount.placeholder"
+        //     ),
+        //     // options: this.fundAccount1,
+        //   },
+        //   rules: {
+        //     required: false,
+        //   },
+        // },
       },
     }
   },
   props: {
+    isRefresh: {
+      type: Boolean,
+      default: true,
+    },
     intoType: {
-      type: String,
-      default: 'hk'
-    }
+      type: Number,
+    },
+    updateInfo: {
+      type: Function,
+    },
+    sendTransferredCache: {
+      type: Function,
+    },
   },
   computed: {
     ...mapGetters([
       //客户选择港股还是美股
       'isShares',
       //历史选择
-      'isHistoryShares',
       'stockTransferredUS',
       'stockTransferredHK',
+      'secAccountInfo',
     ]),
+    // 选择港股还是美股
+    stockType() {
+      return this.intoType || this.isShares;
+    },
+    // 账户列表
+    fundAccount() {
+      if (this.secAccountInfo) {
+        return this.secAccountInfo.fundAccount.map((item) => {
+          return {
+            value: String(item),
+            text: `现金账户 ${item}`
+          }
+        })
+      }
+    },
+
     // 返回title
     titleValues() {
       return {
         transferOut: this.getI18n("transferOutInfo.title"),
-        reciever: this.getI18n("recieverInfo.title"),
+        receiver: this.getI18n("receiverInfo.title"),
       };
     },
     // 判断路由入口是美股还是港股
     isHK() {
-      if (this.intoType === 'hk') {
+      if (this.intoType === 1) {
         return true
       }
       return false
@@ -242,7 +283,7 @@ export default {
     isDisabled() {
       let data = {
         ...this.transferOutInfoModel,
-        ...this.recieverInfoModel
+        ...this.receiverInfoModel
       };
       //TODO:校验要做优化，CCASS要不要后台做校验
       // 证券转出商不为其他
@@ -250,7 +291,7 @@ export default {
         const {
           otherTransferOutCompanyName,
           ccass,
-           rolloutContacts,
+          rolloutContacts,
           contactPhoneNum,
           ...objTemp
         } = data;
@@ -260,7 +301,7 @@ export default {
             return false
           }
           //未选择接收账户
-          if (!objTemp.recieveAccount) {
+          if (!objTemp.receiveAccount) {
             return false
           }
         //每项都大于两个字符时通过
@@ -272,16 +313,17 @@ export default {
       } else {
         //证券转出商为其他
         for (let item of Object.keys(data)) {
+          console.log(data)
           // 证券转出商未选择
           if (!data.transferOutCompany) {
             return false
           }
           //未选择接收账户
-          if (!data.recieveAccount) {
+          if (!data.receiveAccount) {
             return false
           }
         //每项都大于两个字符时通过
-          if (data[item].length <2) {
+          if (data[item].length < 2) {
             return false
           }
         };
@@ -295,93 +337,92 @@ export default {
     },
     // 数据回填
     initInfo() {
-      this.$store.dispatch('getTransferredStock', this.stockTransferred).then(() => {
-        console.log( this.stockTransferredHK, '获得历史')
-        console.log(this.isShares, 1)
-        console.log(this.isHistoryShares, 2)
-        console.log(this.stockTransferredHK, 3)
-      if (this.isShares === this.isHistoryShares) {
-        if(this.isShares === 1) {
+      console.log(this.secAccountInfo, 'asdfas')
+      const stockType = this.intoType || Number(this.isShares);
+      if(stockType === 1) {
+        if (stockType === this.stockTransferredHK.stock.isShares) {
+          const companyName = this.stockTransferredHK.stock.secName;
           Object.keys(this.transferOutInfoModel).forEach((key) => {
+            // 判断转出公司名字是否是其他
+            if (companyName) {
+              const companyList = optionsList.companyOptions().map((item) => {
+                return item.value
+              });
+              if (companyList.includes(companyName)) {
+                this.transferOutInfoModel.transferOutCompany = companyName;
+              } else {
+                this.transferOutInfoModel.otherTransferOutCompanyName = companyName;
+                this.transferOutInfoModel.transferOutCompany = 'OTH';
+              }
+            }
             if (this.stockTransferredHK.stock[key]) {
               this.transferOutInfoModel[key] = this.stockTransferredHK.stock[key] 
             }
           })      
-          Object.keys(this.recieverInfoModel).forEach((key) => {
-            if (this.stockTransferredHK[key]) {
-              this.recieverInfoModel[key] = this.stockTransferredHK[key] 
+          Object.keys(this.receiverInfoModel).forEach((key) => {
+            if (this.stockTransferredHK.stock[key]) {
+              this.receiverInfoModel[key] = this.stockTransferredHK.stock[key] 
             }
           })      
         }
-        console.log(this.transferOutInfoModel, 1234523)
       }
-        
-        })
+    },
+    formatSubData() {
+      let secName = '';
+      if (this.transferOutInfoModel.transferOutCompany === 'OTH') {
+        secName = this.transferOutInfoModel.otherTransferOutCompanyName;
+      } else {
+        secName = this.transferOutInfoModel.transferOutCompany;
+        this.transferOutInfoModel.ccass = '';
+        this.transferOutInfoModel.rolloutContacts = '';
+        this.transferOutInfoModel.contactPhoneNum = '';
+      }
+      const tempStock = {
+        accountName: '',
+        accountNumber: '',
+        ccass: '',
+        clientId: this.secAccountInfo.tradeAccount || this.stockTransferredHK.stock.clientId,
+        contactsPhoneNum: '',
+        isShares: this.intoType || Number(this.isShares),
+        receiveAccount: '',
+        receiveSec: '',
+        rolloutContacts: '',
+        secName: secName,
+      }
+      const fullData = {
+        ...this.transferOutInfoModel,
+        ...this.receiverInfoModel,
+      }
+      Object.assign(tempStock, fullData)
+      return {
+        info: '',
+        ...this.metaInfo,
+        stock: {
+          ...tempStock
+        }
+      }
     },
     // 下一步
     handleNext(e) {
       e.preventDefault();
       // 保存数据&下一步
-      const params = {
-        // step: this.step,
-        info: {
-          ...this.transferOutInfoModel,
-          ...this.recieverInfoModel,
-        },
-      };
-      // this.saveCacheInfo(params).then(() => {
-      //   this.$router.push({ name: this.nextStep });
-      // });
-      this.$router.push('stock-detail')
+      const fullData = {type: this.stockType, data: this.formatSubData()};
+      this.sendTransferredCache(fullData);
+      this.$router.push({name:'stockDetail', isRefresh: false});
     },
-    // validateHandler(result) {
-    //   this.validity = result.validity;
-    //   this.valid = result.valid;
-    // },
-    // 获取后台数据字典
-    // async fetchDataDesin() {
-    //   const result = await this.$store.dispatch(
-    //     "getDictionary",
-    //     AO_INVEST_TARGET
-    //   );
-    //   // this.model.investTarget = result.map(v => v.value)
-    //   this.fieldsFinance[4].props.options = result.map((res) => ({
-    //     text: res.name,
-    //     value: res.value,
-    //   }));
-    // },
+
   },
-  // watch: {
-  //   "modelExperience.warrantsInvestmentExperience"(newVal, oldVal) {
-  //     if (newVal === 0) {
-  //       this.modelTrade.tradeWarrantsFrequency = 0;
-  //     }
-  //   },
-  //   "modelExperience.futuresInvestmentExperience"(newVal, oldVal) {
-  //     if (newVal === 0) {
-  //       this.modelTrade.tradeFuturesFrequency = 0;
-  //     }
-  //   },
-  //   "modelExperience.optionsExperience"(newVal, oldVal) {
-  //     if (newVal === 0) {
-  //       this.modelTrade.tradeOptionsFrequency = 0;
-  //     }
-  //   },
-  //   "modelExperience.CCBCExperience"(newVal, oldVal) {
-  //     if (newVal === 0) {
-  //       this.modelTrade.tradeUnitTrustsFrequency = 0;
-  //     }
-  //   },
-  //   "modelExperience.otherProductsExperience"(newVal, oldVal) {
-  //     if (newVal === 0) {
-  //       this.modelTrade.tradeOtherProductsFrequency = 0;
-  //     }
-  //   },
-  // },
   created() {
+    if (this.isRefresh) {
+      this.updateInfo().then(() => {
+        this.initInfo();
+      });
+    } else {
       this.initInfo();
+    }
   },
   mounted() {
+    // console.log(this.fundAccount, 'asdfaasdfs')
   },
 }
 </script>

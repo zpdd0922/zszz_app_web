@@ -31,28 +31,30 @@ export const intoStock = {
           placeholder: '转出券商的联系人',
           label: '联系人',
         },
-        contactsPhoneNum: {
+        contactPhoneNum: {
           placeholder: '转出券商的联系人电话',
           label: '联系人电话',
         },
       },
-      recieverInfo: {
+      receiverInfo: {
         title: '接收方信息',
         receiveSec: {
           placeholder: '立桥证券',
           label: '接收账户',
         },
-        recieveAccount: {
+        receiveAccount: {
           placeholder: '请选择',
           label: '接收账户',
         },
-      }
+      },
+      tips1: '账户姓名：需与立桥账户同名(',
+      tips2: '),不允许使用第三方账户转入股票',
     },
     stockDetail: {
       title: '股票资讯',
-      stockName: '股票',
+      sharesCode: '股票',
       stockNamePlaceholder: '输入股票代码',
-      quantity: '数量',
+      sharesNum: '数量',
       quantityPlaceholder: '输入股票数量',
       noStockNameWarn: '股票代码不能为空',
       noQuantityWarn: '股票数量不能为空',
@@ -71,7 +73,7 @@ export const intoStock = {
         accountNumber: '账户号码',
         accountName: '账户姓名',
       },
-      reciever: {
+      receive: {
         title: '接收方信息',
         companyName: '券商名称',
         accountNumber: '接收账户',
