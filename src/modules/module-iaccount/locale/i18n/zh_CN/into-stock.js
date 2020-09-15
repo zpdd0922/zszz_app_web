@@ -31,7 +31,7 @@ export const intoStock = {
           placeholder: '转出券商的联系人',
           label: '联系人',
         },
-        contactPhoneNum: {
+        contactsPhoneNum: {
           placeholder: '转出券商的联系人电话',
           label: '联系人电话',
         },
@@ -83,6 +83,8 @@ export const intoStock = {
         stockCode: '股票代码',
         stockName: '股票名称',
         quantity: '股票数量',
-      }
+      },
+      success: '提交成功',
+      fail: '提交失败',
     },  
 }

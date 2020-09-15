@@ -14,7 +14,8 @@ const intoStock = [
         path: 'into-way',
         name: 'intoWay',
         component: _import('into-stock/into-way'),
-        meta: {step: 0, state: 0}
+        meta: {step: 0, state: 0},
+        props: true,
       },
       {
         path: 'transfer-info',
@@ -28,13 +29,15 @@ const intoStock = [
         path: 'stock-detail',
         name: 'stockDetail',
         component: _import('into-stock/stock-detail'),
-        meta: {step: 2}
+        meta: {step: 2},
+        props: true,
       },
       {
         path: 'info-confirm',
         name: 'infoConfirm',
         component: _import('into-stock/info-confirm'),
-        meta: {step: 3}
+        meta: {step: 3},
+        props: true,
       }
     ]
   }

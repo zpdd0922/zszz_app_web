@@ -43,7 +43,7 @@ export default {
     }
   },
   created() {
-    this.updateInfo();
+    // typeof this.updateInfo === 'function' && this.updateInfo();
     //TODO:新增一个获取可提取现金的接口调用 /find_extractable_money
 
     // TODO: 新增ip判斷，進行邏輯處理？
@@ -79,12 +79,20 @@ export default {
   },
   methods: {
     handleNext(item) {
+      if (item.code === 2) {
+        alert({
+          title: this.$t("common.alertTitle"),
+          content: "功能待开放",
+        });
+        return
+      }
       //更改选择状态
-      this.$store.commit('SET_ISSHARES', {isShares: item.code})
+      // this.$store.commit('SET_ISSHARES', {isShares: item.code})
+      this.$store.dispatch("setMarketStatus", item.code)
       // 进入下一流程
       this.$router.push({
         name: 'transferInfo',
-        params: { intoType: item.code, isRefresh: false },
+        // params: { intoType: item.code, isRefresh: false },
       });
     },
   },

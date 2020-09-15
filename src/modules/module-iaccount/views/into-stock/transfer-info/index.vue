@@ -1,56 +1,62 @@
 <template>
-  <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
-    <div class="transfer-info-wrap">
-          <!-- 转出方信息 -->
-      <div class="transfer-info-title">{{titleValues.transferOut}}</div>
-      <cube-form :model="transferOutInfoModel" class="form">
-        <cube-form-item :field="fieldsTransferOut.transferOutCompany"></cube-form-item>
-        <!-- 转出公司为其他时弹出 -->
-        <template
-          v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
-        >
-          <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
-        </template>
-        <cube-form-item :field="fieldsTransferOut.accountNumber"></cube-form-item>
-        <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item>
-        <template
-          v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
-        >
-          <cube-form-item :field="fieldsTransferOut.ccass"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut.rolloutContacts"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut.contactPhoneNum"></cube-form-item>
-        </template>
-        <!-- 提醒 -->
-        <!-- <div class="tips" v-if="transferOutCompany==='OTH'"></div> -->
-        <div class="tips">{{getI18n('tips1')}}{{secAccountInfo.clientNameEn}}{{getI18n('tips2')}}`</div>
-      </cube-form>
-        <!-- 接收方信息 -->
-      <div class="transfer-info-title">{{titleValues.receiver}}</div>
-      <cube-form :model="receiverInfoModel">
-        <div></div>
-        <cube-form-item :field="fieldsreceiver.receiveSec"></cube-form-item>
-        <!-- <cube-form-item :field="fieldsreceiver.receiveAccount" :options="fundAccount"></cube-form-item> -->
-        <!-- 用fieldsoptions绑定不了变量，改成cube-form -->
-        <div class="cube-form-item border-bottom-1px">
-          <div class="cube-form-label">
-            <span>{{getI18n("receiverInfo.receiveAccount.label")}}</span>
-          </div>
-          <div class="cube-validator cube-form-field">
-            <div class="cube-validator-content">
-              <cube-select 
-                :options="fundAccount"
-                :placeholder="getI18n('receiverInfo.receiveAccount.placeholder')"
-                v-model="receiverInfoModel.receiveAccount"
-              ></cube-select>
+  <div>
+    <template v-if="isUpdating"> 
+      <loading />
+    </template>
+    <template v-else>
+      <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
+        <div class="transfer-info-wrap">
+              <!-- 转出方信息 -->
+          <div class="transfer-info-title">{{titleValues.transferOut}}</div>
+          <cube-form :model="transferOutInfoModel" class="form">
+            <cube-form-item :field="fieldsTransferOut.transferOutCompany"></cube-form-item>
+            <!-- 转出公司为其他时弹出 -->
+            <template
+              v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
+            >
+              <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
+            </template>
+            <cube-form-item :field="fieldsTransferOut.accountNumber"></cube-form-item>
+            <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item>
+            <template
+              v-if="transferOutInfoModel.transferOutCompany === 'OTH'"
+            >
+              <cube-form-item :field="fieldsTransferOut.ccass"></cube-form-item>
+              <cube-form-item :field="fieldsTransferOut.rolloutContacts"></cube-form-item>
+              <cube-form-item :field="fieldsTransferOut.contactsPhoneNum"></cube-form-item>
+            </template>
+            <!-- 提醒 -->
+            <!-- <div class="tips" v-if="transferOutCompany==='OTH'"></div> -->
+            <div class="tips">{{getI18n('tips1')}}{{secAccountInfo.clientNameEn}}{{getI18n('tips2')}}</div>
+          </cube-form>
+            <!-- 接收方信息 -->
+          <div class="transfer-info-title">{{titleValues.receiver}}</div>
+          <cube-form :model="receiverInfoModel">
+            <div></div>
+            <cube-form-item :field="fieldsreceiver.receiveSec"></cube-form-item>
+            <!-- <cube-form-item :field="fieldsreceiver.receiveAccount" :options="fundAccount"></cube-form-item> -->
+            <!-- 用fieldsoptions绑定不了变量，改成cube-form -->
+            <div class="cube-form-item border-bottom-1px">
+              <div class="cube-form-label">
+                <span>{{getI18n("receiverInfo.receiveAccount.label")}}</span>
+              </div>
+              <div class="cube-validator cube-form-field">
+                <div class="cube-validator-content">
+                  <cube-select 
+                    :options="fundAccount"
+                    :placeholder="getI18n('receiverInfo.receiveAccount.placeholder')"
+                    v-model="receiverInfoModel.receiveAccount"
+                  ></cube-select>
+                </div>
+              </div>
             </div>
-          </div>
+          </cube-form>
+          <div class="margin-bottom"></div>
         </div>
-      </cube-form>
-      <div class="margin-bottom"></div>
-    </div>
-  </op-wrap>
+      </op-wrap>
+    </template>  
+  </div>
 </template>
-
 <script type="text/ecmascript-6">
 // import onlineMixin from "../mixins/online.vue";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
@@ -63,6 +69,7 @@ export default {
   mixins: [commonMixin],
   data() {
     return {
+      isUpdating: false,
       //TODO:根据港美股入口换券商列表
       isHk: true,
       // isShowCapitalList: false,
@@ -73,7 +80,7 @@ export default {
         otherTransferOutCompanyName: '',
         ccass: '',
         rolloutContacts: '',
-        contactPhoneNum: '',
+        contactsPhoneNum: '',
       },
       receiverInfoModel: {
         receiveSec: '立桥证券',
@@ -176,13 +183,13 @@ export default {
           },
         },
         //联系人电话
-        contactPhoneNum: {
+        contactsPhoneNum: {
           type: "input",
-          modelKey: "contactPhoneNum",
-          label: this.getI18n("transferOutInfo.contactPhoneNum.label"),
+          modelKey: "contactsPhoneNum",
+          label: this.getI18n("transferOutInfo.contactsPhoneNum.label"),
           props: {
             placeholder: this.getI18n(
-              "transferOutInfo.contactPhoneNum.placeholder"
+              "transferOutInfo.contactsPhoneNum.placeholder"
             ),
           },
           rules: {
@@ -235,9 +242,9 @@ export default {
     updateInfo: {
       type: Function,
     },
-    sendTransferredCache: {
-      type: Function,
-    },
+    // sendTransferredCache: {
+    //   type: Function,
+    // },
   },
   computed: {
     ...mapGetters([
@@ -248,6 +255,7 @@ export default {
       'stockTransferredHK',
       'secAccountInfo',
     ]),
+
     // 选择港股还是美股
     stockType() {
       return this.intoType || this.isShares;
@@ -292,7 +300,7 @@ export default {
           otherTransferOutCompanyName,
           ccass,
           rolloutContacts,
-          contactPhoneNum,
+          contactsPhoneNum,
           ...objTemp
         } = data;
         for (let item of Object.keys(objTemp)) {
@@ -337,10 +345,11 @@ export default {
     },
     // 数据回填
     initInfo() {
-      console.log(this.secAccountInfo, 'asdfas')
       const stockType = this.intoType || Number(this.isShares);
-      if(stockType === 1) {
-        if (stockType === this.stockTransferredHK.stock.isShares) {
+      if (stockType === 1) {
+        if (!this.stockTransferredHK.stock) {
+          return
+        } else {
           const companyName = this.stockTransferredHK.stock.secName;
           Object.keys(this.transferOutInfoModel).forEach((key) => {
             // 判断转出公司名字是否是其他
@@ -365,6 +374,35 @@ export default {
             }
           })      
         }
+      } else if(stockType === 2) {
+        if (!this.stockTransferredUS.stock) {
+          return
+        } else {
+          const companyName = this.stockTransferredUS.stock.secName;
+          Object.keys(this.transferOutInfoModel).forEach((key) => {
+            // 判断转出公司名字是否是其他
+            if (companyName) {
+              const companyList = optionsList.companyOptions().map((item) => {
+                return item.value
+              });
+              if (companyList.includes(companyName)) {
+                this.transferOutInfoModel.transferOutCompany = companyName;
+              } else {
+                this.transferOutInfoModel.otherTransferOutCompanyName = companyName;
+                this.transferOutInfoModel.transferOutCompany = 'OTH';
+              }
+            }
+            if (this.stockTransferredUS.stock[key]) {
+              this.transferOutInfoModel[key] = this.stockTransferredUS.stock[key] 
+            }
+          })      
+          Object.keys(this.receiverInfoModel).forEach((key) => {
+            if (this.stockTransferredUS.stock[key]) {
+              this.receiverInfoModel[key] = this.stockTransferredUS.stock[key] 
+            }
+          })      
+
+        }
       }
     },
     formatSubData() {
@@ -375,13 +413,20 @@ export default {
         secName = this.transferOutInfoModel.transferOutCompany;
         this.transferOutInfoModel.ccass = '';
         this.transferOutInfoModel.rolloutContacts = '';
-        this.transferOutInfoModel.contactPhoneNum = '';
+        this.transferOutInfoModel.contactsPhoneNum = '';
       }
+      const clientIdTemp = (() => {
+        if (Number(this.isShares) ===1) {
+          return this.secAccountInfo.tradeAccount || this.stockTransferredHK.stock.clientId
+        } else {
+          return this.secAccountInfo.tradeAccount || this.stockTransferredUS.stock.clientId
+        }
+      })()
       const tempStock = {
         accountName: '',
         accountNumber: '',
         ccass: '',
-        clientId: this.secAccountInfo.tradeAccount || this.stockTransferredHK.stock.clientId,
+        clientId: clientIdTemp,
         contactsPhoneNum: '',
         isShares: this.intoType || Number(this.isShares),
         receiveAccount: '',
@@ -406,23 +451,25 @@ export default {
     handleNext(e) {
       e.preventDefault();
       // 保存数据&下一步
-      const fullData = {type: this.stockType, data: this.formatSubData()};
-      this.sendTransferredCache(fullData);
-      this.$router.push({name:'stockDetail', isRefresh: false});
+      // const fullData = {type: this.stockType, data: this.formatSubData()};
+      let fullData = {};
+      const tempData = this.formatSubData();
+      if (Number(this.isShares) === 1) {
+        fullData = {...this.stockTransferredHK, ...tempData}
+        this.$store.commit('SET_STOCK_TRANSFERRED_HK', {stockTransferredHK: fullData})
+      } else if (Number(tempData === 2)) {
+        fullData = {...this.stockTransferredUS, ...tempData}
+        this.$store.commit('SET_STOCK_TRANSFERRED_HK', {stockTransferredHK: fullData})
+      }
+      this.$store.dispatch('sendTransferredStockCache', tempData);
+      this.$router.push({name:'stockDetail', params: {isRefresh: false}});
     },
 
   },
   created() {
-    if (this.isRefresh) {
-      this.updateInfo().then(() => {
-        this.initInfo();
-      });
-    } else {
-      this.initInfo();
-    }
+    this.initInfo();
   },
   mounted() {
-    // console.log(this.fundAccount, 'asdfaasdfs')
   },
 }
 </script>

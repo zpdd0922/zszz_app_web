@@ -3,6 +3,7 @@ import * as types from './mutation-types'
 
 // 初始化数据 --> mapStates
 const state = {
+  isGetHistory: false,
   // 港股历史数据
   stockTransferredHK: {},
   // 美股历史数据
@@ -17,6 +18,7 @@ const state = {
 }
 
 const getters = {
+  isGetTransferHistory: state => state.isGetHistory,
   stockTransferredHK: state => state.stockTransferredHK,
   stockTransferredUS: state => state.stockTransferredUS,
   isShares: state => state.isShares,
@@ -31,6 +33,7 @@ const mutations = {
   // },
   [types.SET_SHARES_LIST](state, payload) {
     state.sharesList = payload.sharesList;
+    console.log(state.sharesList, 'asdfa32', payload.sharesList)
   },
   [types.SET_STOCK_TRANSFERRED_HK](state, payload) {
     state.stockTransferredHK = payload.stockTransferredHK;
@@ -42,15 +45,24 @@ const mutations = {
     localStorage.setItem("isShares", payload.isShares);
   },
   [types.SET_ISHISTORYSHARES](state, payload) {
+    if (!payload.stock) {
+      return 
+    }
     state.isHistoryShares = payload.stock.isShares
   },
   [types.GET_STOCK_TRANSFERRED](state, payload) {
+    if (!payload.stock) {
+      return
+    }
     if (payload.stock.isShares === 1) {
       state.stockTransferredHK = {...payload}
     } else if (payload.stock.isShares === 2) {
       state.stockTransferredUS = {...payload}
     }
   },
+  [types.UPDATE_CACHE_DATA_STATUS](state, payload){
+    state.isGetHistory = true;
+  }
 }
 
 const actions = {
@@ -59,35 +71,46 @@ const actions = {
     // const fullData = {...state.stockTransferredHK, ...data}
     return new Promise((resolve, reject) => {
       ApiStockTransfer.getTransferredStock(data).then((res) => {
-        commit(types.GET_STOCK_TRANSFERRED, res)
-        commit(types.SET_ISHISTORYSHARES, res)
-        commit(types.SET_SHARES_LIST, {sharesList: res.sharesList})
+      
+        if (res.stock) {
+          commit(types.GET_STOCK_TRANSFERRED, res)
+          commit(types.SET_ISHISTORYSHARES, res)
+          commit(types.SET_SHARES_LIST, res)
+        }
+        commit(types.UPDATE_CACHE_DATA_STATUS);
         resolve(res)
+      }).catch((err) => {
+        reject(err)
       })
     })
   },
-  sendTransferredStockCache({commit}, tempData) {
-    let fullData = {};
-    if (tempData.type === 1) {
-      fullData = {...state.stockTransferredHK, ...tempData.data}
-      commit(types.SET_STOCK_TRANSFERRED_HK, fullData)
-    } else if (tempData === 2) {
-      fullData = {...state.stockTransferredUS, ...tempData.data}
-      commit(types.SET_STOCK_TRANSFERRED_US, fullData)
-    }
+
+  setMarketStatus({commit}, marketCode){
+    commit(types.SET_ISSHARES, {isShares: marketCode})
+  },
+  
+  // 缓存数据
+  sendTransferredStockCache({commit}, data) {
     return new Promise((resolve, reject) => {
-      ApiStockTransfer.sendTransferredStockCache(tempData.data).then((res) => {
-        commit(types.GET_STOCK_TRANSFERRED, res)
+      ApiStockTransfer.sendTransferredStockCache(data).then((res) => {
+        if (res.stock) {
+          commit(types.GET_STOCK_TRANSFERRED, res)
+        }
         resolve(res);
+      }).catch((err) => {
+        reject(err)
       })
     })
   },
+  // 搜所接口
   getSearchStockList({commit}, data) {
     return new Promise((resolve, reject) => {
       ApiStockTransfer.getSearchStockList(data).then((res) => {
         // commit(types.SET_SEARCH_STOCK_LIST, res)
         resolve(res)
-      })  
+      }).catch((err) => {
+        reject(err)
+      })
     })
   }
 } 

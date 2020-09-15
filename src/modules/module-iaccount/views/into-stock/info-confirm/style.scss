@@ -5,7 +5,7 @@
 .info-confirm {
   width: 100%;
   background-color: $color-theme-s;
-
+  
   .info-confirm-title {
     padding: 0.15rem 0.15rem;
     width: 100%;
@@ -19,22 +19,18 @@
 
     .title {
       width: 100%;
-      padding: 0.12rem 0.12rem;
+      padding: 0.15rem 0.15rem;
     }
 
     .content-wrap {
-      padding: 0 0.12rem 0.12rem;
+      padding: 0 0.15rem 0.15rem;
       width: 100%;
 
-      .line {
-        line-height: 0.18rem;
-        
-        .content-title {
-          color: $color-999
-        }
-        .content-info {
-          padding-left: 0.2rem;
-        }
+      .content-title {
+        color: $color-999
+      }
+      .content-info {
+        padding-left: 0.2rem;
       }
     }
   }
@@ -42,19 +38,42 @@
     border-bottom: 1px dashed $color-eee;
   }
   .block:last-child {
-    margin-bottom: 0.2rem;
+    padding-bottom: 0.2rem;
     
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      .content-title {
+        color: $color-999
+      }
+      span {
+        flex: 0 0 20%;
+        padding-left: 0.15rem
+      }
+
+      span:nth-child(2) {
+        flex: 1 1 60%;
+      }
+
+      
+    }
     .content-wrap {
       display: flex;
-      justify-content: space-between;
-      padding: 0.05rem 0.12rem;
-      .line {
-        
-        span {
-          display: block;
-          padding: 0.01rem;
-          padding-left: 0;
-        }
+      justify-content: flex-start;
+      padding: 0.1rem 0 0 0;
+
+      .content-info {
+        flex: 0 0 20%;
+        padding-left: 0.15rem;
+        word-break: break-all;
+      }
+      .content-info:nth-child(2) {
+        flex: 1 1 60%
+      }
+      .content-info:last-child {
+        text-align: left;
       }
     }
   }

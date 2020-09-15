@@ -5,10 +5,13 @@
 .stock-detail {
   width: 100%;
   background-color: $color-theme-s;
+  color: #666;
 
   .stock-detail-title {
     padding: 0.15rem .15rem;
     font-size: 0.17rem;
+    color: $color-text;
+
   }
   .addBtn {
     width: 100%;
@@ -58,18 +61,20 @@
   //搜索
   .search-mask {
     position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    left: 10%;
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
     z-index: $search-z-index;
-    background-color: rgba(0,0,0, 0.6);
+    border-radius: 0.1rem;
+    // background-color: rgba(0,0,0, 0.6);
 
     .search {
-      margin: 0.8rem auto;
-      width: 90%;
-      height: 80%;
+      // margin: 0.8rem auto;
+      width: 100%;
+      height: 100%;
       border-radius: 0.1rem;
+      box-shadow: 0rem 0rem 0.1rem 0.1rem $color-999;
       overflow: scroll;
       
       .head {
@@ -89,11 +94,22 @@
       .search-wrap {
         width: 100%;
         height: 100%;
+        background-color: $color-theme;
+
+        .no-result {
+          height: 100%;
+          padding: 0.15rem;
+          background-color: $color-theme;
+          color: $color-ccc;
+          text-align: center;
+        }
+
         .search-input-wrap {
           display: flex;
           position: relative;
           background-color: $color-theme;
-  
+          
+
           input {
             width: 100%;
             margin: 0.1rem 0.2rem;
