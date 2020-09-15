@@ -33,7 +33,6 @@ export default class Axios {
     Fetch.interceptors.request.use(
       config => {
         const reqUrl = config.url;
-        console.log(reqUrl, 1)
         const isLoading = notNeedLoading.some(val => reqUrl.indexOf(val) > -1);
         if (!isLoading) {
           // 发送请求做的处理

@@ -9,7 +9,7 @@
           <head-title :title="getI18n('title')" class="stock-detail-title"></head-title>
           <div
             :class="{'addBtn': true, 'addBtn-active': isAddBtnActive }"
-            @click="addStock"
+            @click.stop="addStock"
           >+ 添加</div>
           <form
             v-if="stockList.length !== 0"
@@ -27,7 +27,7 @@
                   v-model="stockList[idx].sharesCode" 
                   :placeholder="getI18n('stockNamePlaceholder')"
                   readonly="readonly"
-                  @click="goToSearch(idx)"
+                  @click.stop="goToSearch(idx)"
                 >
               </div>
               <div class="inputColumn">
@@ -40,11 +40,11 @@
                 >
               </div>
               <!-- <cube-form-item :field="numberField"></cube-form-item> -->
-              <div class="btn-wrap" @click="handleClick($event, idx)" v-if="!isCanOperate && item.isInputActive">
+              <div class="btn-wrap" @click.stop="handleClick($event, idx)" v-if="!isCanOperate && item.isInputActive">
                 <div class="leftBtn" id="cancel">取消</div>
                 <div class="rightBtn" id="save">保存</div>
               </div>
-              <div class="btn-wrap" @click="handleClick($event, idx)" v-else>
+              <div class="btn-wrap" @click.stop="handleClick($event, idx)" v-else>
                 <div class="leftBtn" id="delete">删除</div>
                 <div class="rightBtn" id="edit">编辑</div>
               </div>
@@ -56,7 +56,7 @@
                 <div class="head">
                   <div></div>
                   <div>股票搜索</div>
-                  <div @click="closeSearch">关闭</div>
+                  <div @click.stop="closeSearch">关闭</div>
                 </div>
                 <div class="search-wrap">
                   <div class="search-input-wrap">
@@ -72,14 +72,14 @@
                     <div
                       class="clear-input" 
                       v-show="this.searchStockName.length !== 0"
-                      @click="clearSearchInput"
+                      @click.stop="clearSearchInput"
                     ></div>
                   </div>
                   <div class="search-list" v-if="searchStockList.length > 0">
                     <div class="search-line"
                       v-for="(item, index) in searchStockList"
                       :key="index"
-                      @click="saveStockCode($event, item)"
+                      @click.stop="saveStockCode($event, item)"
                     >
                       <!-- 图标要根据值变化 -->
                       <span>图标</span>
@@ -96,7 +96,7 @@
                       <div class="search-line"
                         v-for="(item, index) in searchHistory"
                         :key="index"
-                        @click="saveStockCode($event, item)"
+                        @click.stop="saveStockCode($event, item)"
                       >
                         <!-- 图标要根据值变化 -->
                         <span>图标</span>
@@ -142,7 +142,7 @@ export default {
         sharesCode: '',
         sharesNum: '',
         sharesName: '',
-        isInputActive: true, //输入框状态
+        isInputActive: false, //输入框状态
       },
       searchHistory: [],
     }
@@ -170,9 +170,10 @@ export default {
       // 'searchStockList',
     ]),
     isDisabled() {
-      if (this.stockList.length !== 0 && this.isCanOperate) {
-        return true
-      } 
+      return this.stockList.length !== 0 && this.isCanOperate 
+      // if (this.stockList.length > 0 && this.isCanOperate) {
+      //   return true
+      // } 
     },
   },
   filters: {
@@ -208,15 +209,13 @@ export default {
     // 对比用户选择和历史选择
     initInfo() {
       if (this.sharesList.length > 0){
-         this.sharesList.forEach((item) => {
-           const itemAdded = Object.assign({isInputActive: false}, item)
-           this.stockList.unshift(itemAdded);
-         })
-         this.isCanOperate = !this.stockList.some((item) => {
-             return !item.sharesCode || !item.sharesNum
-         })
-       }
-       this.searchHistory = Storage.get('TRANSFERRED_SEARCH_HISTROY') || [];
+        this.sharesList.forEach((item) => {
+          const itemAdded = Object.assign({isInputActive: false}, item)
+          this.stockList.unshift(itemAdded);
+        })
+        this.isCanOperate = true
+      }
+      this.searchHistory = Storage.get('TRANSFERRED_SEARCH_HISTROY') || [];
     },
     getI18n(key) {
       return this.$t(`iAccount.intoStock.stockDetail.${key}`)
@@ -250,6 +249,7 @@ export default {
       this.isAddBtnActive = false;
       this.isCanOperate = false;
       const added = {...this.stockItemAdded}
+      added.isInputActive = true
       this.stockList.unshift(added);
     },
     //处理点击事件
@@ -268,10 +268,16 @@ export default {
     },
     //删除事件
     deleteStock(idx) {
+      if (!this.isCanOperate) {
+        return
+      }
       this.stockList.splice(idx, 1)
     },
     // 编辑
     edit(idx) {
+      if (!this.isCanOperate) {
+        return
+      }
       // 先将全局输入框及按钮禁用
       this.isCanOperate = false;
       // 保存数据状态
@@ -311,7 +317,7 @@ export default {
           return
         }
       }
-      stockClicked.isInputActive = false
+      this.stockList[idx].isInputActive = false
       //所有按钮激活，输入框禁用
       this.isCanOperate = true;
       this.isAddBtnActive = true;
@@ -370,7 +376,7 @@ export default {
         this.searchHistory.pop();
       }
       Storage.remove('TRANSFERRED_SEARCH_HISTROY');
-    }
+    },
   },
 }
 </script>

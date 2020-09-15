@@ -33,7 +33,6 @@ const mutations = {
   // },
   [types.SET_SHARES_LIST](state, payload) {
     state.sharesList = payload.sharesList;
-    console.log(state.sharesList, 'asdfa32', payload.sharesList)
   },
   [types.SET_STOCK_TRANSFERRED_HK](state, payload) {
     state.stockTransferredHK = payload.stockTransferredHK;

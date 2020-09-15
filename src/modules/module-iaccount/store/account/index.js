@@ -18,7 +18,6 @@ const getters = {
 // mutations，同步数据，vue视图文件中可用this.$store.commit
 const mutations = {
   [types.GET_SEC_USER_INFO](state, payload = {}) {
-    console.log(payload)
     state.secAccountInfo = payload
   }
 }

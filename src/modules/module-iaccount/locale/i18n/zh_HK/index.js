@@ -29,9 +29,9 @@ import {
   EDDA_STATUS
 } from './edda'
 
-// import { brokerageCalculate } from './brokerage-calculate';
-import { BANK_NAME_OPTIONS } from './info-remit';
-import { intoStock } from './into-stock';
+import { brokerageCalculate } from './brokerage-calculate'
+import { BANK_NAME_OPTIONS } from './info-remit'
+import { intoStock } from './into-stock'
 
 import {
   SCRIP_OPTIONS,
@@ -51,10 +51,10 @@ export default {
   iAccount: {
     fundsDeposit,
     // 佣金计算
-    // brokerageCalculate,
+    brokerageCalculate,
     intoStock,
     nextBtn: '下一步',
-    confirmBtn: '确认提交',
+    confirmBtn: '確認提交',
     define: {
       BANK_HK,
       BANK_CN,

@@ -321,7 +321,6 @@ export default {
       } else {
         //证券转出商为其他
         for (let item of Object.keys(data)) {
-          console.log(data)
           // 证券转出商未选择
           if (!data.transferOutCompany) {
             return false
