@@ -237,8 +237,9 @@ export default {
         txt: "登录成功！",
         callback: () => {
           const { redirect_url = "" } = this.urlParams;
-          if (!redirect_url) {
-            window.location.href = downloadUrl;
+              if (!redirect_url) {
+            const { redirect = "/" } = this.query;
+            this.$router.replace({ path: redirect });
           } else {
             window.location.href = decodeURIComponent(redirect_url);
           }

@@ -16,9 +16,9 @@ import commonZhHK from '@/main/locale/i18n/zh_HK';
 import customizeZhCN from '@/customize/locale/i18n/zh_CN';
 import customizeEnUS from '@/customize/locale/i18n/en_US';
 import customizeZhHK from '@/customize/locale/i18n/zh_HK';
-import signZhCN from '@/modules/module-sign-icrm/locale/i18n/zh_CN';
-import signEnUS from '@/modules/module-sign-icrm/locale/i18n/en_US';
-import signZhHK from '@/modules/module-sign-icrm/locale/i18n/zh_HK';
+import signZhCN from '@/modules/module-sign/locale/i18n/zh_CN';
+import signEnUS from '@/modules/module-sign/locale/i18n/en_US';
+import signZhHK from '@/modules/module-sign/locale/i18n/zh_HK';
 import { getDefaultLang } from '@/main/locale/helper';
 //全局注册VueI18n
 Vue.use(VueI18n);

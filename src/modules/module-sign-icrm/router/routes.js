@@ -6,7 +6,7 @@
  * @Description:
  */
 // 登陆注册模块
-import MainWrap from '@/modules/module-sign-icrm/views/wrap.vue';
+import MainWrap from '@/modules/module-sign-d/views/wrap.vue';
 
 // 路由懒加载
 const _import = file => () => import('@/modules/module-sign-icrm/views/' + file + '/index.vue');

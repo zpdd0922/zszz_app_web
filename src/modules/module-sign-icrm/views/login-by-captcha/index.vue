@@ -171,7 +171,7 @@ export default {
         const { redirect = "/" } = this.query;
         this.$router.replace({ path: redirect });
       } else {
-        window.location.href = decodeURIComponent(source);
+        window.location.href = decodeURIComponent(redirect_url);
       }
     },
     // 表单校验
