@@ -15,6 +15,7 @@ export default {
       pwdLogin: '請輸入登錄密碼',
       pwdRetister: '請設置密碼（6-16位字符）',
       captcha: '請輸入短訊驗證碼',
+      imgCaptcha: '請輸入驗證碼',
     },
     captchaStatus: {
       send: '獲取驗證碼',

@@ -12,18 +12,18 @@ import auth from '@/main/request/utils/auth';
 import { getDefaultLang } from '@/main/locale/helper';
 
 const envConfig = window._GLOBAL_ENV_CONFIG || {};
-const baseURL = envConfig.serveriOpen;
+const baseURL = envConfig.serveriAccount;
 // const baseURL = "http://localhost:8901/securities";
 
-const DEV = process.env.NODE_ENV !== 'production'
-const HOST_OPEN = DEV ? '/dev-open' : baseURL
+// const DEV = process.env.NODE_ENV !== 'production'
+// const HOST_OPEN = DEV ? '/dev-open' : baseURL
 
 const updateHeaders = () => ({
   // "X-Accept-Token": auth.getAuthToken(),
   // "X-Accept-Language": getDefaultLang(),
 });
 
-const axios = new Axios(HOST_OPEN, { updateHeaders, whiteApiList: ['/open_api/ocr'] });
+const axios = new Axios(baseURL, { updateHeaders, whiteApiList: ['/open_api/ocr'] });
 
 export const post = (url, params) => {
   return axios.post(url, params);

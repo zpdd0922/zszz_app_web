@@ -1,17 +1,18 @@
-import userApi from '@/modules/module-sign-icrm/api/user';
+import userApi from '@/modules/module-sign/api/user';
 
 import auth from '@/main/request/utils/auth';
 import * as types from './mutation-user-types';
 
 // 初始化数据 --> mapStates
 const state = {
+  isShowImgCaptcha: false,
   userInfo: auth.getLocalUserInfo(),
   userSessionInfo: auth.getLocalUserSessionInfo(),
 };
 
 // 衍生数据，追踪数据更新后值 --> mapGetters
 const getters = {
-  showCaptcha: state => state.showCaptcha,
+  isShowImgCaptcha: state => state.isShowImgCaptcha,
   userInfo: state => state.userInfo,
   userSessionInfo: state => state.userSessionInfo
 };
@@ -19,7 +20,7 @@ const getters = {
 // mutations，同步数据，vue视图文件中可用this.$store.commit
 const mutations = {
   [types.SHOW_CAPTACH](state, payload) {
-    state.showCaptcha = payload.status;
+    state.isShowImgCaptcha = payload.status;
   },
 
   [types.SET_USER_INFO](state, payload) {
@@ -64,9 +65,9 @@ const actions = {
         });
     });
   },
-    /**
-   * APP内模拟登录 --> 直接获取用户信息
-   */
+  /**
+ * APP内模拟登录 --> 直接获取用户信息
+ */
   appLogin({ commit, state }, params) {
     return new Promise((resolve, reject) => {
       commit(types.SET_USER_INFO, { result: params })

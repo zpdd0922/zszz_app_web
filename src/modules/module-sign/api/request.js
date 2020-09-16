@@ -24,5 +24,5 @@ const baseURL = envConfig.serverUser;
 const axios = new Axios(baseURL, {});
 
 export const post = (url, params = {}, key = "") => {
-  return axios.post(url, paramsData.WRAP(params, key));
+  return axios.post(url, paramsData.NOPARAMS(params));
 }

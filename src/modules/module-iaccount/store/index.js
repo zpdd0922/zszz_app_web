@@ -16,8 +16,8 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   modules: {
     viewLoad: viewLoadModules,
-    user: userModules,
     ...modules,
+    user: userModules,
   },
   plugins: [...commonPlugins],
   strict: debug
