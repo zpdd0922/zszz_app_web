@@ -17,7 +17,7 @@ const routes = [
     path: '/sign',
     name: 'sign',
     component: MainWrap,
-    redirect: { name: 'login' },
+    redirect: { name: 'loginByPwd' },
     children: [
       {
         name: 'register',

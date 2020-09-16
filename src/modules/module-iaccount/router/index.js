@@ -21,10 +21,6 @@ const router = new VueRouter({
       children: [
         ...signRouter,
         ...iaccountRouter,
-        // {
-        //   path: "*",
-        //   redirect: { name: 'sec-home' },
-        // }
       ]
     },
   ],

@@ -5,7 +5,7 @@
     serverUser: 'http://121.35.249.14:9003',
     // serveriOpen: 'http://106.52.75.112:6012',
     serveriOpen: 'http://121.35.249.14:9011',
-    // serveriAccount: 'http://106.52.75.112:6012',
+    // serveriAccount: 'http://106.52.75.112:6003',
     serveriAccount: 'http://121.35.249.14:9011',
     // serveriOpen: 'http://121.35.249.14:9011',
     // serverInformation: 'https://sns.9fstock.com:9003/',

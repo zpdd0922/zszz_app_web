@@ -23,7 +23,7 @@ BroadCast.onmessage(BROADCAST_ENUMS.LOGIN_EXPRIS, () => {
     .then(() => {
       console.log(router)
       router.replace({
-        name: 'loginByCaptcha'
+        name: 'sign'
       });
     })
 });
@@ -99,11 +99,11 @@ router.beforeEach((to, from, next) => {
         } else {
           // 跳转到登录界面
           store.commit('updateLoadingStatus', { isLoading: false });
-          if (from.name !== 'login') {
+          if (from.name !== 'sign') {
             NProgress.start();
           }
           next({
-            name: 'login',
+            name: 'sign',
             query: { redirect: to.fullPath },
             replace: true
           });
