@@ -84,7 +84,7 @@ export default {
       isUpdating: false, // 刷新状态
       searchStockList: [],// 搜索结果
       isAddBtnActive: true, // 添加按钮激活状态
-      isCanOperate: false, // 全局按钮状态管理
+      isCanOperate: true, // 全局按钮状态管理
       stockList: [],  // 展示的list
       stockCacheList: [], // 缓存的list
       stockTemp: {}, // 临时数据状态存储
