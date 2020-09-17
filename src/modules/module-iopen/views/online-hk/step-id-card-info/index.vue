@@ -533,7 +533,7 @@ export default {
           : new Date();
         this.endDatePicker = this.$createDatePicker({
           title: "结束日期",
-          min: new Date(),
+          min: new Date(getPreDay(-1)),
           max: endDate_max,
           value: endDate_value,
           onSelect: this.selectHandleEnd,

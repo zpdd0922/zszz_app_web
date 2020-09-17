@@ -242,7 +242,7 @@ export default {
         return
       }
       // 先将全局输入框及按钮禁用
-      this.isAddBtnActive  = false;
+      this.isAddBtnActive  = false; 
       this.isCanOperate = false;
       // 保存数据状态
       this.stockTemp = Object.assign({}, this.stockList[idx]);

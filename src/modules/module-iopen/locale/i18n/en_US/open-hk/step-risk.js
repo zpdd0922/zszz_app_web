@@ -3,7 +3,7 @@ import commonI18n from '@/main/locale/i18n/zh_HK';
 
 export default {
     pageName: '風險披露',
-    playMediaBtn: '開始播放風險披露露營',
+    playMediaBtn: '開始播放風險披露錄音',
     media: {
         repNameLabel: '持牌代表：',
         repCodeLabel: '中央編號：',

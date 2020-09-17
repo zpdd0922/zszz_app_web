@@ -837,10 +837,34 @@ export default {
       });
       return !status.includes(false);
     },
+    // 电话号码验证，只验证了全数字和长度不大于11
+    validPhoneNum() {
+      const phoneList = [this.model.homeTelePhone, this.model.contactTelePhone, this.professionModel.companyTelePhone];
+      console.log(phoneList)
+      return phoneList.map((val)=>{
+        // 判断是否填写
+        if (val.length === 0) {
+          return true
+        } else {
+          // 判断是否包含除数字之外的
+          if (!isNaN(val)) {
+            // 判断是否大于11位
+            if (val.length > 11) {
+              return false
+            } else {
+              return true
+            }
+          } else {
+            return false
+          }
+        }
+      }).every((val) => {
+        return val
+      })
+    },
     // 验证提交按钮
     isDisabled() {
-      console.log(this.validProfession, this.validContact)
-      const status = this.validProfession && this.validContact;
+      const status = this.validProfession && this.validContact && this.validPhoneNum;
       return !status;
     },
     // 默认显示上一次选择城市下拉框的值(家庭地址)
