@@ -1,10 +1,11 @@
 export const intoStock = {
   intoWay: {
-  title: '請選擇轉入股票',
-  wayHK: '轉入港股股票',
-  wayUS: '轉入美股股票',
+    title: '請選擇轉入股票',
+    wayHK: '轉入港股股票',
+    wayUS: '轉入美股股票',
   },
   transferInfo: {
+  secName: '立橋證券',
   transferOutInfo: {
   title: '轉出方資訊',
   transferOutCompany: {
@@ -59,6 +60,8 @@ export const intoStock = {
   noStockNameWarn: '股票代碼不能為空',
   noQuantityWarn: '股票數量不能為空',
   repeatWarn: '股票代碼不可重複輸入',
+  delete: '刪除',
+  edit: '編輯',
   search: {
   searchInput: '請輸入股票代碼/名稱/首字母',
   searchTitle: '以下為歷史搜索記錄',

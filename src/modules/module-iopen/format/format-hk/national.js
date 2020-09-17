@@ -7,7 +7,7 @@ export const nationalFormat = (args) => {
     return 2;
   }
   if (idKindKey === 'passport') {
-    return nationType;
+    return `nationType`;
   }
 
   return 0;

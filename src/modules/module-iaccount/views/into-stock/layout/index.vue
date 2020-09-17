@@ -2,8 +2,7 @@
   <div class="into-stock"
 >
     <!-- Loading -->
-    <!-- <template v-if='!secAccountInfo'> -->
-    <template v-if='!isGetTransferHistory'>
+    <template v-if='!isGetTransferHistory || !secAccountInfo'>
       <loading />
     </template>
 
@@ -55,7 +54,6 @@ export default {
   },
   created() {
     this.$store.dispatch('getSecAccountInfo').then(res => {
-      storage.set('secAccountInfo', res)
     })
     this.getTransferredStock({state: '0',step: '0'})
   }

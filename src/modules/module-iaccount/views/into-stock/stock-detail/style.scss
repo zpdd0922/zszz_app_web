@@ -32,16 +32,61 @@
     margin-bottom: 0.2rem;
 
     .inputColumn {
+      display: flex;
+      position: relative;
       width: 100%;
       padding: 0.15rem 0.2rem;
       font-size: 0.17rem;
       border-bottom: 0.01rem solid $color-eee;
 
+      .list-box{
+        position: absolute;
+        top:100%;
+        max-height: 2.2rem;
+        left: .75rem;
+        right: .2rem;
+        z-index: 999;
+        background-color: $color-block-bg;
+        overflow: scroll;
+        // box-shadow:  0rem 0.1rem 0.1rem $color-999;
+        font-size: 0.12rem;
+        border: 0.01rem solid $color-ccc;
+        border-top: none;
+        min-height: .3rem;
+
+        .search-line {
+          display: table;
+          // justify-content: flex-start;
+          padding: 0.1rem 0.2rem;
+          @include border-after-1px();
+
+          span {
+            @include no-wrap();
+          }
+
+            span:first-child {
+              display: table-cell;
+              min-width: 0.3rem;
+              // padding-right: 0.2rem
+            }
+            span:nth-child(2) {
+              display: table-cell;
+              min-width: .6rem;
+            }
+            span:last-child {
+              display: table-cell;
+              width: 100%;
+            }
+          }
+      }    
+
       label {
-        padding-right: 0.2rem;
+        display: inline-block;
+        width: 1rem
       }
       
       input {
+        width: 100%;
         background: inherit;
       }
     }
@@ -133,19 +178,6 @@
             background-size: 100%;   
             background-image: url("../../../assets/img/close.png");
             z-index: $search-z-index+1
-          }
-        }
-
-        .search-list {
-          background-color: $color-theme;
-          
-          .search-line {
-            padding: 0.1rem 0.2rem;
-            @include border-after-1px();
-
-            span {
-              padding-right: 0.2rem
-            }
           }
         }
         

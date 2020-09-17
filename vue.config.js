@@ -80,8 +80,8 @@ module.exports = {
     proxy: {
       '/dev-open': {
         //TODO:
-        target: 'http://121.35.249.14:9003',
-        // target: 'http://106.52.75.112:6012',
+        // target: 'http://121.35.249.14:9003',
+        target: 'http://106.52.75.112:6012',
         // target: 'http://192.168.1.251:6012',
         // target: 'http://localhost:6012',
         // target: 'http://106.52.75.112:6003',
