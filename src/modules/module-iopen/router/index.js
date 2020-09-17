@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import opaRouter from '@/modules/module-iopen/router/routes.js';
-import signRouter from '@/modules/module-sign-icrm/router/routes.js';
+import signRouter from '@/modules/module-sign/router/routes.js';
 import AppWrap from '../wrap.vue';
 
 Vue.use(VueRouter);

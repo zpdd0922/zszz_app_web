@@ -36,40 +36,49 @@ const COMMON = (data = {}) => ({
   }
 });
 
-// 转移股票包裹层
-const TRANSFER = (data={}) => ({
-  requestSrc: auth.getPlateform(),
-  sessionId: auth.getAuthSession(),
-  ...data
-})
 
-// 获取开户相关选项数据字典@params str
-// 'WEB_OCCUPATION_TYPE' 所属行业
-const OPTIONS = (str) => ({
-  params: {
-    mark: str
-  }
-});
-
-// 查询开户状态
-const CHECK = (data = {}) => ({
+// 接口数据包裹层
+const NOPARAMS = (data = {}) => ({
   requestSrc: auth.getPlateform(),
   sessionId: auth.getAuthSession(),
   ...data
 });
 
-// 更新/绑定 手机号
-const PHONE = (data = {}) => ({
-  requestSrc: auth.getPlateform(),
-  sessionId: auth.getAuthSession(),
-  ...data
-});
+// // 转移股票包裹层
+// const TRANSFER = (data={}) => ({
+//   requestSrc: auth.getPlateform(),
+//   sessionId: auth.getAuthSession(),
+//   ...data
+// })
+
+// // 获取开户相关选项数据字典@params str
+// // 'WEB_OCCUPATION_TYPE' 所属行业
+// const OPTIONS = (str) => ({
+//   params: {
+//     mark: str
+//   }
+// });
+
+// // 查询开户状态
+// const CHECK = (data = {}) => ({
+//   requestSrc: auth.getPlateform(),
+//   sessionId: auth.getAuthSession(),
+//   ...data
+// });
+
+// // 更新/绑定 手机号
+// const PHONE = (data = {}) => ({
+//   requestSrc: auth.getPlateform(),
+//   sessionId: auth.getAuthSession(),
+//   ...data
+// });
 
 export default {
   WRAP,
-  OPTIONS,
   COMMON,
-  CHECK,
-  PHONE,
-  TRANSFER,
+  NOPARAMS,
+  // OPTIONS,
+  // CHECK,
+  // PHONE,
+  // TRANSFER,
 };

@@ -15,6 +15,7 @@ export default {
       pwdLogin: '请输入登录密码',
       pwdRetister: '请设置密码（6-16位字符）',
       captcha: '请输入短信验证码',
+      imgCaptcha: '请输入验证码',
     },
     captchaStatus: {
       send: '获取验证码',

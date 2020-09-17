@@ -1,271 +1,39 @@
-import paramsData from '../account/node_modules/@/main/request/utils/wrap';
-import userApi from '@/modules/module-sign/api/modules/api-user'
-
-import auth from '../account/node_modules/@/main/request/utils/auth';
-import * as types from './mutation-user-types'
-
-// 初始化数据 --> mapStates
-const state = {
-  showCaptcha: false,
-  userInfo: auth.getLocalUserInfo(),
-  userSessionInfo: auth.getLocalUserSessionInfo(),
-}
-
-// 衍生数据，追踪数据更新后值 --> mapGetters
-const getters = {
-  showCaptcha: state => state.showCaptcha,
-  userInfo: state => state.userInfo,
-  userSessionInfo: state => state.userSessionInfo,
-}
-
-// mutations，同步数据，vue视图文件中可用this.$store.commit
-const mutations = {
-  [types.SHOW_CAPTACH](state, payload) {
-    state.showCaptcha = payload.status
-  },
-
-  [types.SET_USER_INFO](state, payload) {
-    const { result = {} } = payload;
-    const obj = { sessionId: result.sessionId };
-    state.userInfo = result;
-    state.userSessionInfo = obj;
-    auth.updateLocalUserSessionInfo(result.sessionId);
-    auth.updateLocalUserInfo(result);
-  },
-
-  [types.GET_ACC_INFO](state, payload = {}) {
-    state.accInfo = payload
-  }
-}
-
-// actions， 异步操作数据，vue视图文件中可用this.$store.dispatch
-const actions = {
-  /**
-   * 获取用户所在IP
-   */
-  getIpAddr({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      userApi.getIpAddr()
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 登录检测
-   */
-  checkLogin({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.checkLogin(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  },
-  /**
-   * H5登录
-   */
-  login({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.login(params)
-        .then(res => {
-          commit(types.SET_USER_INFO, { result: res })
-          resolve(res)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  },
-    /**
-   * APP内模拟登录 --> 直接获取用户信息
-   */
-  appLogin({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      commit(types.SET_USER_INFO, { result: params })
-      resolve()
-    })
-  },
-
-  /**
-   * 登出 --> 后台
-   */
-  logout({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.logout(params)
-        .then(res => {
-          // 清除本地缓存
-          auth.logout();
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 登出 --> 前端
-   */
-  fedLogout({ commit }) {
-    return new Promise(resolve => {
-      // 清除本地缓存
-      auth.logout();
-      resolve()
-    })
-  },
-
-  /**
-   * 发送短信验证码
-   */
-  sendCode({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.sendCode(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
-  },
-  /**
-   * 是否需要图形验证码
-   */
-  needCaptcha({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.needCaptcha(params)
-        .then(res => {
-          commit(types.SHOW_CAPTACH, { status: res })
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 注册
-   */
-  register({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.register(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 检查手机号码是否可用
-   */
-  checkMobile({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.checkMobile(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 检查验证码是否可用
-   */
-  checkCode({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.checkCode(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 更换手机
-   */
-  updateMobile({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.updateMobile(paramsData.CHECK(params))
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 修改登录密码
-   */
-  updatePassword({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.updatePassword(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 修改交易密码
-   */
-  updateTradePassword({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.updateTradePassword(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 获取用户渠道类别
-   */
-  getUserType({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.getUserType(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  },
-  /**
-   * 重置登录密码
-   */
-  resetPassword({ commit, state }, params) {
-    return new Promise((resolve, reject) => {
-      userApi.resetPassword(params)
-        .then(res => {
-          resolve(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    })
-  }
-}
+import { post } from '../request';
 
 export default {
-  state,
-  getters,
-  mutations,
-  actions
-}
+  needCaptcha: data => post('capt/needCaptcha', data),
+  /**
+   * 发送短信验证码
+   *
+   * @param certType 默认类型 --> 手机：0
+   * @param certCode 手机号码
+   * @param type 验证码类型
+   *
+   * @return JSON { code: integer, message: string, result: {eventId}}
+   */
+  fetchCaptcha: data => post('/user_api/reg_valcode', data, data.certCode),
+  /**
+   * 登录
+   *
+   * @param certType 类型
+   * 0-其他系统账号 
+   * 1-手机 
+   * 2-邮箱 
+   * 3-用户账号 
+   * 4-交易账号
+   * @param certCode 账号/手机
+   * @param passwordType 密码类型 0-其他 | 1-验证码 | 2-密码
+   * @param password 密码 | 验证码 | 第三方登录凭证
+   * @param captchaId 验证码Id
+   *
+   * @return JSON { code: integer, message: string, result: {} }
+   */
+  login: data => post('/user_api/user_login', data, data.certCode),
+
+  /**
+   * 登出
+   *
+   * @return JSON { code: integer, message: string, result: {} }
+   */
+  logout: () => post('/sign/logout'),
+};

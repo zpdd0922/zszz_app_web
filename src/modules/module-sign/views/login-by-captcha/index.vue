@@ -28,7 +28,9 @@ import validate from "@/main/utils/format/validate";
 
 const envConfig = window._GLOBAL_ENV_CONFIG || {};
 const downloadUrl = envConfig.webDownload;
+const baseURL = envConfig.serverUser;
 
+const defaultSrc = baseURL + "/capt/showCaptcha.jpg?v=";
 const defaultCountryCode = "86";
 
 export default {
@@ -56,27 +58,55 @@ export default {
         captcha: {
           tips: "",
         },
+        captchaImg: {
+          tips: "",
+        },
       },
+      captchaImgUrl: defaultSrc + +new Date(),
       urlParams: getURLParameters(),
     };
   },
-  created() {},
+  created() {
+    this.needCaptcha({});
+  },
   mounted() {
-    this.setTitle(
-      this.$t("sign.common.login")
-    );
+    this.setTitle(this.$t("sign.common.login"));
   },
   computed: {
+    ...mapGetters(["isShowImgCaptcha"]),
     isDisabled() {
       const { certCode, captcha } = this.formData;
       const result = certCode.length && captcha.length;
-
       return result < 1;
     },
     isCanSend() {
       return this.formData.certCode.length > 1;
     },
     formList() {
+      if (this.isShowImgCaptcha) {
+        return {
+          certCode: {
+            placeholder: this.$t("sign.formPlaceholder.accountMobile"),
+            type: "phone",
+            handleSetCountry: this.handleSetCountry,
+          },
+          captcha: {
+            placeholder: this.$t("sign.formPlaceholder.captcha"),
+            type: "code",
+            isCanSend: this.isCanSend,
+            handleCheckTrue: this.handleCheckTrue,
+            handleSendCode: this.handleSendCode,
+          },
+          captchaImg: {
+            placeholder: this.$t("sign.formPlaceholder.imgCaptcha"),
+            type: "captcha",
+            captchaSrc: this.captchaImgUrl,
+            handleCaptchaSrc: () => {
+              this.captchaImgUrl = defaultSrc + +new Date();
+            },
+          },
+        };
+      }
       return {
         certCode: {
           placeholder: this.$t("sign.formPlaceholder.accountMobile"),
@@ -97,7 +127,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["fetchCaptcha", "login"]),
+    ...mapActions(["needCaptcha", "fetchCaptcha", "login"]),
     handleChangeRoute(route, isReplace) {
       if (isReplace) {
         this.$router.replace({ name: route });
@@ -144,9 +174,13 @@ export default {
           countryCode === defaultCountryCode
             ? account
             : `${countryCode}-${account}`;
+        // const params = {
+        //   nameType: 0,
+        //   name: certCode,
+        // };
         const params = {
-          nameType: 0,
-          name: certCode,
+          certType: 0,
+          phoneNum: certCode,
         };
 
         this.fetchCaptcha(params)
@@ -168,7 +202,13 @@ export default {
       if (isValid) {
         const { invUserId = 1, sourceCode = "" } = this.urlParams;
 
-        const { certCode, countryCode, captcha, captchaId } = this.formData;
+        const {
+          certCode,
+          countryCode,
+          captcha,
+          captchaId,
+          captchaImg,
+        } = this.formData;
         const account =
           countryCode === defaultCountryCode
             ? certCode
@@ -179,6 +219,7 @@ export default {
           certCode: account,
           eventId: captchaId,
           pwd: captcha,
+          captcha: captchaImg,
           invUserId,
           sourceCode,
         };
@@ -196,8 +237,9 @@ export default {
         txt: "登录成功！",
         callback: () => {
           const { redirect_url = "" } = this.urlParams;
-          if (!redirect_url) {
-            window.location.href = downloadUrl;
+              if (!redirect_url) {
+            const { redirect = "/" } = this.query;
+            this.$router.replace({ path: redirect });
           } else {
             window.location.href = decodeURIComponent(redirect_url);
           }

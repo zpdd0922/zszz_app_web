@@ -30,69 +30,97 @@ import validate from "@/main/utils/format/validate";
 
 const envConfig = window._GLOBAL_ENV_CONFIG || {};
 const downloadUrl = envConfig.webDownload;
+const baseURL = envConfig.serverUser;
 
+const defaultSrc = baseURL + "/capt/showCaptcha.jpg?v=";
 const defaultCountryCode = "86";
 
 export default {
   components: {
     Layout,
-    BaseForm
+    BaseForm,
   },
   props: {
     loginOther: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       formData: {
         countryCode: defaultCountryCode,
         certCode: "",
-        password: ""
+        password: "",
       },
       formRules: {
         certCode: {
-          tips: ""
+          tips: "",
         },
         password: {
-          tips: ""
-        }
+          tips: "",
+        },
+        captchaImg: {
+          tips: "",
+        },
       },
-      urlParams: getURLParameters()
+      captchaImgUrl: defaultSrc + +new Date(),
+      urlParams: getURLParameters(),
     };
   },
-  created() {},
+  created() {
+    this.needCaptcha({});
+  },
   mounted() {
-    this.setTitle(
-      this.$t("sign.common.login")
-    );
+    this.setTitle(this.$t("sign.common.login"));
   },
   computed: {
+    ...mapGetters(["isShowImgCaptcha"]),
     isDisabled() {
       const { certCode, password } = this.formData;
       const result = certCode.length && password.length;
       return result < 1;
     },
     formList() {
+      if (this.isShowImgCaptcha) {
+        return {
+          certCode: {
+            placeholder: this.$t("sign.formPlaceholder.accountMobile"),
+            type: "phone",
+            handleSetCountry: this.handleSetCountry,
+          },
+          password: {
+            placeholder: this.$t("sign.formPlaceholder.pwdLogin"),
+            type: "password",
+          },
+          captchaImg: {
+            placeholder: this.$t("sign.formPlaceholder.imgCaptcha"),
+            type: "captcha",
+            captchaSrc: this.captchaImgUrl,
+            handleCaptchaSrc: () => {
+              this.captchaImgUrl = defaultSrc + +new Date();
+            },
+          },
+        };
+      }
       return {
         certCode: {
           placeholder: this.$t("sign.formPlaceholder.accountMobile"),
           type: "phone",
-          handleSetCountry: this.handleSetCountry
+          handleSetCountry: this.handleSetCountry,
         },
         password: {
           placeholder: this.$t("sign.formPlaceholder.pwdLogin"),
-          type: "password"
-        }
+          type: "password",
+        },
       };
     },
     query() {
       return this.$route.query;
-    }
+    },
   },
   methods: {
-    ...mapActions(["fetchCaptcha", "login"]),
+    ...mapActions(["needCaptcha", "fetchCaptcha", "login"]),
     handleChangeRoute(route, isReplace = false) {
       console.log(route, isReplace);
       if (isReplace) {
@@ -104,7 +132,7 @@ export default {
     updateData(data) {
       this.formData = {
         ...this.formData,
-        ...data
+        ...data,
       };
     },
     handleSetCountry(value) {
@@ -118,7 +146,7 @@ export default {
       if (isValid) {
         const { invUserId = 1, sourceCode = "" } = this.urlParams;
 
-        const { certCode, password, countryCode } = this.formData;
+        const { certCode, password, countryCode, captchaImg } = this.formData;
         const account =
           countryCode === defaultCountryCode
             ? certCode
@@ -128,12 +156,13 @@ export default {
           certType: 0,
           certCode: account,
           pwd: password,
+          captcha: captchaImg,
           invUserId,
-          sourceCode
+          sourceCode,
         };
 
         this.login(params)
-          .then(res => {
+          .then((res) => {
             // 4.2登录成功
             this.handleLoginSuccess();
           })
@@ -150,11 +179,12 @@ export default {
         callback: () => {
           const { redirect_url = "" } = this.urlParams;
           if (!redirect_url) {
-            window.location.href = downloadUrl;
+            const { redirect = "/" } = this.query;
+            this.$router.replace({ path: redirect });
           } else {
             window.location.href = decodeURIComponent(redirect_url);
           }
-        }
+        },
       });
     },
     // 表单校验
@@ -176,7 +206,7 @@ export default {
       }
 
       return true;
-    }
-  }
+    },
+  },
 };
 </script>

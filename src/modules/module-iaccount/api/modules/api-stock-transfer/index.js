@@ -5,11 +5,11 @@ export default {
   /**
    * 查询用户已转入股票记录
    */
-  getTransferredStock: data => post('/securities/transferred_stock', paramsData.TRANSFER(data)),
+  getTransferredStock: data => post('/securities/transferred_stock', paramsData.NOPARAMS(data)),
   /**
    * 缓存用户已填写转入股票记录
    */
-  sendTransferredStockCache: data => post('/securities/transferred_stock', paramsData.TRANSFER(data)),
+  sendTransferredStockCache: data => post('/securities/transferred_stock', paramsData.NOPARAMS(data)),
 
   getSearchStockList: data => post('/securities/find_shares_list', data),
 }

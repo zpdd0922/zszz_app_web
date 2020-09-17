@@ -55,6 +55,7 @@ class Auth {
   getAuthSession = () => {
     //TODO:
     // return '255ebb808c80454fb65f200065afcf2f136059';
+    // return 'ee6ab57fec544b58857f50b7ece2a727123211';
     // return 'f103ae8036da43aba073b4f3b51ee214135079';
     return '89636a2d7ff24b09bdfe7deb19fe6f68123235'
     // 获取地址栏session，有则更新本地
