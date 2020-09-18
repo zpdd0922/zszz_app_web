@@ -17,6 +17,7 @@ class Auth {
    * @return string
    */
   getPlateform = () => {
+    return 'ios';
     if (UaInfo.isApp()) {
       if (UaInfo.isAndroid()) {
         return 'android';

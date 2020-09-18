@@ -3,7 +3,7 @@
     <div class="header border-bottom-1px border-top-1px">
       <div class="input-btn">
         <i class="cubeic-search icon"></i>
-        <input class="code-input" ref="code" v-model.lazy="value" :placeholder="$t('iAccount.iAccount.iAccount.company_act.placeholder.text_1')" />
+        <input class="code-input" ref="code" v-model.lazy="value" :placeholder="$t('iAccount.company_act.placeholder.text_1')" />
       </div>
     </div>
     <div class="list">

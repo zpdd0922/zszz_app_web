@@ -126,7 +126,7 @@ export default {
     },
   },
   created() {
-    this.updateInfo()
+    this.updateInfo();
   },
   methods: {
     getI18n(key) {
@@ -137,7 +137,7 @@ export default {
       // const userInfo = {};
       Object.keys(this.model).forEach((val) => {
         const res = userInfo[val] ? userInfo[val] : this.model[val];
-        console.log(val)
+        console.log(val);
         // 处理手机号
         if (val === "bankPhoneNum") {
           if (userInfo[val]) {
@@ -164,12 +164,17 @@ export default {
       return new Promise((resolve, reject) => {
         const {
           idCardValue: idCard = "",
-          cnNameValue: userName = "",
+          cnNameValue: name = "",
         } = this.openInfo;
-        const { bankId: bankCode, bankNum, bankPhoneNum: phone } = this.model;
+        
+        const {
+          bankId: bankCode,
+          bankNum,
+          bankPhoneNum: cellPhone,
+        } = this.model;
 
         // 判断手机号是否合法
-        if (!validate.isMobile(phone)) {
+        if (!validate.isMobile(cellPhone)) {
           const phoneTips = "请输入正确手机号码";
           toast({ type: "error", txt: phoneTips, time: 1000 });
           return reject(new Error(phoneTips));
@@ -183,8 +188,8 @@ export default {
           .dispatch("checkBankCard", {
             bankCard,
             idCard,
-            userName,
-            phone,
+            name,
+            cellPhone,
           })
           .then((res) => {
             const { verify = false } = res;
