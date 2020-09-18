@@ -33,6 +33,10 @@ export const CMB_WLB = 'cmbwlb'
 export const DOLLAR_HK_VAL = 1
 export const DOLLAR_US_VAL = 2
 
+//股票市场
+export const MARKET_HK_VAL = 1
+export const MARKET_US_VAL = 2
+
 // FPS收款账号信息 - 暂时前端固定，后续通过接口获取
 export const FPS_HK_INFO = {
   depositToAccount: {

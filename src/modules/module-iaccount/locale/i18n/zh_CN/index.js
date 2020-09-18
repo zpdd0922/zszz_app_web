@@ -44,6 +44,7 @@ import {
 import { brokerageCalculate } from './brokerage-calculate';
 import { BANK_NAME_OPTIONS } from './info-remit';
 import { intoStock } from './into-stock';
+import { transferHistory } from './transfer-history';
 
 
   // language: 'zh_CN',
@@ -56,6 +57,7 @@ import { intoStock } from './into-stock';
       // 佣金计算
       brokerageCalculate,
       intoStock,
+      transferHistory,
       nextBtn: '下一步',
       confirmBtn: '确认提交',
     define: {

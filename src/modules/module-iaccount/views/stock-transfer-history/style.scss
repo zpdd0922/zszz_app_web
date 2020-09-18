@@ -1,0 +1,59 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.funds {
+  .part {
+    margin-top: 0;
+  }
+
+  .funds-tips {
+    color: $color-999;
+    font-size: .12rem;
+    padding: .11rem .15rem .05rem;
+  }
+}
+
+.funds-select {
+  margin-top: .05rem;
+  position: relative;
+  .select-tab {
+    @include flex-box($row: space-between);
+    background: $color-theme;
+    height: .36rem;
+    line-height: .36rem;
+    padding: 0 .15rem;
+  }
+
+  .select-box {
+    .content-wrap {
+      width: 100%;
+      @include border-name (0.1rem,$color-eee, solid, top);
+
+      ul {
+        width: 100vw;
+        padding: 0.05rem 0.1rem;
+        line-height: 0.18rem;
+
+        li {
+          display: flex;
+          justify-content: flex-start;
+          width: 100%;
+
+          span:first-child {
+            flex: 0 1 25%;
+            color: $color-999;
+            min-width: 0.8rem;
+          }
+          span:nth-child(2) {
+            flex: 0 1 auto;
+            min-width: 2rem;
+          }
+        }
+      }
+
+      ul:not(:last-child) {
+        border-bottom: #e5e5e5 dashed 0.01rem;
+      }
+    }
+  }
+}

@@ -15,6 +15,8 @@ const state = {
   // 历史转入股票
   sharesList: [],
   // searchStockList: [],
+  // 股票转移历史
+  stockTransferHistory: [],
 }
 
 const getters = {
@@ -24,6 +26,8 @@ const getters = {
   isShares: state => state.isShares,
   isHistoryShares: state => state.isHistoryShares,
   sharesList: state => state.sharesList,
+  stockTransferHistory: state => state.stockTransferHistory,
+
   // searchStockList: state => state.searchStockList,
 }
 
@@ -61,7 +65,11 @@ const mutations = {
   },
   [types.UPDATE_CACHE_DATA_STATUS](state, payload){
     state.isGetHistory = true;
-  }
+  },
+  [types.STOCK_TRANSFER_HISTORY](state, payload){
+    state.stockTransferHistory = payload;
+  },
+
 }
 
 const actions = {
@@ -106,6 +114,18 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiStockTransfer.getSearchStockList(data).then((res) => {
         // commit(types.SET_SEARCH_STOCK_LIST, res)
+        resolve(res)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  },
+
+  // 获取股票转移记录
+  getStocksHistory({commit}, data) {
+    return new Promise((resolve, reject) => {
+      ApiStockTransfer.getStocksHistory(data).then((res) => {
+        commit(types.STOCK_TRANSFER_HISTORY, res)
         resolve(res)
       }).catch((err) => {
         reject(err)

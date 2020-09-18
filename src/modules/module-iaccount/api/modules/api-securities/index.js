@@ -22,7 +22,7 @@ export default {
   /**
   * { isShares: 0, state: 0 }
   */
-  getStocksHistory: data => post('/securities/find_transferred_stock_record', paramsData.CHECK(data)),
+  getStocksHistory: data => post('/securities/find_transferred_stock_record', paramsData.NOPARAMS(data)),
 
   /**
    * 入金记录
@@ -33,7 +33,7 @@ export default {
    * @param state  操作状态
    * 99 默认所有  前端分页
    */
-  getFundsHistory: data => post('/securities/find_deposit_record', paramsData.CHECK(data)),
+  getFundsHistory: data => post('/securities/find_deposit_record', paramsData.NOPARAMS(data)),
 
   /**
    * 查询子账号信息

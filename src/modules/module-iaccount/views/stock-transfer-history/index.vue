@@ -10,16 +10,16 @@
 </template>
 
 <script>
-import { FUNDS_TYPE } from "@/modules/module-iaccount/define";
-import ListDeposit from "./listDeposit";
-import ListWithdraw from "./listWithdraw";
+import { TRANSFER_TYPE } from "@/modules/module-iaccount/define";
+import ListIntoStock from "./listIntoStock";
+import ListOutStock from "./listOutStock";
 
 const FUNDS_COMP = {
-  deposit: ListDeposit,
-  withdraw: ListWithdraw,
+  intoStock: ListIntoStock,
+  outStock: ListOutStock,
 };
 
-const DEFAULT_TABS = Object.values(FUNDS_TYPE.options);
+const DEFAULT_TABS = Object.values( TRANSFER_TYPE.options);
 
 export default {
   // 记录上一次选中tab栏
@@ -43,8 +43,8 @@ export default {
   computed: {},
   methods: {},
   components: {
-    ListDeposit,
-    ListWithdraw,
+    ListIntoStock,
+    ListOutStock,
   },
 };
 </script>

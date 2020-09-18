@@ -81,6 +81,7 @@ export default {
               key: "history-stocks",
               label: "股票歷史",
               iconType: "stock_history",
+              path: "stock-transfer-history",
             },
             // { key: "ipo", label: "新股認購", iconType: "ipo" },
             // { key: "ipo_history", label: "新股歷史", iconType: "ipo_history" },
