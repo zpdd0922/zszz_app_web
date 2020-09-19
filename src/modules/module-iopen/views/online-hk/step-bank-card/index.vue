@@ -251,7 +251,8 @@ export default {
       const userInfo = this.openInfo;
       Object.keys(this.model).forEach((val) => {
         if (val == "bankUserName" && !userInfo[val]) {
-          this.model[val] = this.openInfo.enNameValue;
+          // this.model[val] = this.openInfo.enNameValue;
+          this.model[val] = `${this.openInfo.givenNameSpell} ${this.openInfo.familyNameSpell}`;
         } else {
           const res = userInfo[val] ? userInfo[val] : this.model[val];
           this.model[val] = res;
