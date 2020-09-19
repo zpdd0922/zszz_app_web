@@ -73,6 +73,7 @@ export default {
         isOpenUs: false,
         isOpenFutures: false,
         isOpenOptions: false,
+        isOpenCn: false,
         personalType: 1,
         tradingWay: 1,
       },
@@ -187,10 +188,10 @@ export default {
         },
         isOpenFutures: {
           type: "checkbox",
-          modelKey: "isOpenFutures",
+          modelKey: "isOpenCn",
           props: {
             option: {
-              label: this.getI18n("otherAccounts.accountForward"),
+              label: this.getI18n("otherAccounts.accountCn"),
               value: true,
             },
             shape: "square",

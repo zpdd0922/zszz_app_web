@@ -4,9 +4,9 @@
       <cube-form :model="model" class="step-content">
         <head-title :title="titleValues.declareTitle"></head-title>
         <!-- 是否唯一收益拥有人 -->
-        <cube-form-group class="custom-form-group">
+        <!-- <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsAccountOwner.isAccountOwner"></cube-form-item>
-        </cube-form-group>
+        </cube-form-group>-->
 
         <!-- 是否与本公司员工有关系 -->
         <cube-form-group class="custom-form-group">
@@ -35,29 +35,42 @@
             v-if="disclosureDefine.isNotConsortWithMargin.isCanFalse &&  !model.isNotConsortWithMargin"
           >
             <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin.withMarginName"></cube-form-item>
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin.withMarginAccount"></cube-form-item>
+            <cube-form-item
+              class="label-width-4em"
+              :field="fieldsConsortWithMargin.withMarginAccount"
+            ></cube-form-item>
           </template>
         </cube-form-group>
 
         <!-- 本人或配偶是否是其他账户的实际拥有人或担保人 -->
         <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsOtherPOorPGWithMargin.isNotBOorPG"></cube-form-item>
-          <template
-            v-if="disclosureDefine.isNotBOorPG.isCanFalse &&  !model.isNotBOorPG"
-          >
-            <cube-form-item class="label-width-5em" :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginName"></cube-form-item>
-            <cube-form-item class="label-width-5em" :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginAccount"></cube-form-item>
+          <template v-if="disclosureDefine.isNotBOorPG.isCanFalse &&  !model.isNotBOorPG">
+            <cube-form-item
+              class="label-width-5em"
+              :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginName"
+            ></cube-form-item>
+            <cube-form-item
+              class="label-width-5em"
+              :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginAccount"
+            ></cube-form-item>
           </template>
         </cube-form-group>
-        
+
         <!-- 是否大于35% -->
         <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsConsortWithOtherMargin.isNotConsortWithOtherMargin"></cube-form-item>
           <template
             v-if="disclosureDefine.isNotConsortWithOtherMargin.isCanFalse &&  !model.isNotConsortWithOtherMargin"
           >
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithOtherMargin.withOtherMarginName"></cube-form-item>
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithOtherMargin.withOtherMarginAccount"></cube-form-item>
+            <cube-form-item
+              class="label-width-4em"
+              :field="fieldsConsortWithOtherMargin.withOtherMarginName"
+            ></cube-form-item>
+            <cube-form-item
+              class="label-width-4em"
+              :field="fieldsConsortWithOtherMargin.withOtherMarginAccount"
+            ></cube-form-item>
           </template>
         </cube-form-group>
         <div class="margin-bottom"></div>
@@ -66,7 +79,9 @@
         <section>
           <head-title :title="titleValues.greenCardTitle"></head-title>
           <h3 class="greenCardDeclare">{{ greenCardDeclare }}</h3>
-          <cube-form-item :field="fieldUSGreenCard"></cube-form-item>
+          <cube-form-group class="custom-form-group">
+            <cube-form-item :field="fieldUSGreenCard"></cube-form-item>
+          </cube-form-group>
         </section>
       </cube-form>
       <div class="margin-bottom"></div>
@@ -104,14 +119,14 @@ export default {
         withMarginAccount: "",
 
         isNotBOorPG: true,
-        otherPOorBGMarginName: '',
-        otherPOorBGMarginAccount: '',
+        otherPOorBGMarginName: "",
+        otherPOorBGMarginAccount: "",
 
         isNotConsortWithOtherMargin: true,
         withOtherMarginName: "",
         withOtherMarginAccount: "",
 
-        isNotUsGreenCardHolder: "",
+        isNotUsGreenCardHolder: 3,
       },
 
       // 1 是否本账号唯一受益人
@@ -171,7 +186,7 @@ export default {
             shape: "square",
           },
         },
-        hkexParterName:{
+        hkexParterName: {
           type: "input",
           modelKey: "hkexParterName",
           label: this.getI18n("other.hkexParterName"),
@@ -179,7 +194,7 @@ export default {
             placeholder: this.getI18n("other.inputPlaceholder"),
           },
         },
-        hkexParterCENo:{
+        hkexParterCENo: {
           type: "input",
           modelKey: "hkexParterCENo",
           label: this.getI18n("other.hkexParterCENo"),
@@ -283,8 +298,8 @@ export default {
         type: "radio-group",
         modelKey: "isNotUsGreenCardHolder",
         props: {
-          options: optionsList.getUsGreenCardOptions()
-        }
+          options: optionsList.getUsGreenCardOptions(),
+        },
       },
       disclosureDefine: disclosureDefine,
     };
@@ -298,9 +313,7 @@ export default {
     },
     // 第一个复选框校验
     accountOwnerStatusCheck() {
-      const {
-        isAccountOwner,
-      } = this.model;
+      const { isAccountOwner } = this.model;
       if (isAccountOwner) {
         return true;
       }
@@ -423,7 +436,7 @@ export default {
     handleNext() {
       // 保存数据&下一步
       // const obj = { ...this.model, ...this.taxModel };
-      const obj = { ...this.model};
+      const obj = { ...this.model };
       const params = {
         step: this.step,
         info: obj,
@@ -440,7 +453,7 @@ export default {
         title: this.$t("common.alertTitle"),
         content,
         callback: () => {
-          this.model[key] = typeof val === 'boolean' ? true : 1;
+          this.model[key] = typeof val === "boolean" ? true : 1;
         },
       });
     },
@@ -470,9 +483,9 @@ export default {
     "model.isNotConsortWithOtherMargin"(newVal, oldVal) {
       this.handlerCheckAlert(newVal, "isNotConsortWithOtherMargin");
     },
-    "model.isNotUsGreenCardHolder"(newVal, oldVal) {
-      this.handlerCheckAlert(newVal, "isNotUsGreenCardHolder");
-    },
+    // "model.isNotUsGreenCardHolder"(newVal, oldVal) {
+    //   this.handlerCheckAlert(newVal, "isNotUsGreenCardHolder");
+    // },
   },
 };
 </script>

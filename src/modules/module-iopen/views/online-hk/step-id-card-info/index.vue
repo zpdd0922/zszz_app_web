@@ -38,7 +38,7 @@
               </cube-form-item>
 
               <!-- 证件类型 == 大陆身份证 OCR获取有效期限-->
-              <template v-if="isNeedCnName">
+              <template v-if="isChina">
                 <cube-form-item :field="fields.addressValue">
                   <cube-textarea
                     v-model="model.addressValue"
@@ -131,10 +131,9 @@
                 </cube-form-item>
                 <cube-form-item :field="fields.sex"></cube-form-item>
               </template>
-              <!-- 教育程度 -->
-              <cube-form-item :field="fields.educationLevel"></cube-form-item>
-              <!-- 婚姻状况 -->
-              <cube-form-item :field="fields.maritalStatus"></cube-form-item>
+              <cube-form-item :field="fields.birthCountry"></cube-form-item>
+              <cube-form-item v-if="model.birthCountry === 'OTH'" :field="fields.birthCountryTxt"></cube-form-item>
+              <cube-form-item :field="fields.birthArea"></cube-form-item>
             </cube-form-group>
           </div>
         </cube-form>
@@ -153,7 +152,7 @@ import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
 import * as optionsList from "./options-list";
-
+import { modelValidator } from "./validator";
 
 export default {
   mixins: [onlineMixin],
@@ -175,8 +174,9 @@ export default {
         sex: "",
         passportStartValue: "", // 护照起始日期
         passportEndValue: "", // 护照截止日期
-        educationLevel: "", //教育程度
-        maritalStatus: "", //婚姻状况
+        birthCountry: "", //出生国家
+        birthCountryTxt: "", //出生国家
+        birthArea: "", //出生地区
       },
       fields: {
         familyName: {
@@ -252,53 +252,70 @@ export default {
             options: sexOptions,
           },
         },
-        educationLevel: {
+        birthCountry: {
           type: "select",
-          modelKey: "educationLevel",
-          label: this.getI18n("educationLevel.label"),
+          modelKey: "birthCountry",
+          label: this.getI18n("birthCountry.label"),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("educationLevel.placeholder"),
-            options: optionsList.educationLevelOptions(),
+            placeholder: this.getI18n("birthCountry.placeholder"),
+            options: [],
+          },
+          events: {
+            change: (value, index, text) => {
+              if (value !== "OTH") {
+                this.model.birthCountryTxt = text;
+              } else {
+                this.model.birthCountryTxt = "";
+              }
+            },
           },
           rules: {
             required: false,
           },
         },
-        maritalStatus: {
-          type: "select",
-          modelKey: "maritalStatus",
-          label: this.getI18n("maritalStatus.label"),
+        birthCountryTxt: {
+          type: "input",
+          modelKey: "birthCountryTxt",
+          label: this.getI18n("birthCountry.label"),
           props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("maritalStatus.placeholder"),
-            options: optionsList.maritalStatusOptions(),
+            placeholder: this.getI18n("birthArea.placeholder"),
           },
           rules: {
             required: false,
           },
         },
-      }
+        birthArea: {
+          type: "input",
+          modelKey: "birthArea",
+          label: this.getI18n("birthArea.label"),
+          props: {
+            placeholder: this.getI18n("birthArea.placeholder"),
+          },
+          rules: {
+            required: false,
+          },
+        },
+      },
     };
   },
   computed: {
     familyNamePlaceHolder() {
       const tips = this.fields.familyName.props.placeholder;
-      return this.isNeedCnName
-        ? tips
-        : `${tips}${this.getI18n("placeholderMore")}`;
+      return this.isChina ? tips : `${tips}${this.getI18n("placeholderMore")}`;
     },
     givenNamePlaceHolder() {
       const tips = this.fields.givenName.props.placeholder;
-      return this.isNeedCnName
-        ? tips
-        : `${tips}${this.getI18n("placeholderMore")}`;
+      return this.isChina ? tips : `${tips}${this.getI18n("placeholderMore")}`;
     },
-    isNeedCnName() {
+    // 香港永久身份
+    isRealHK() {
+      return this.openInfo.idKindKey === "idCardHk";
+    },
+    // 中国大陆国籍
+    isChina() {
       return this.openInfo.idKindKey === "idCardCn";
     },
     isPassport() {
@@ -317,7 +334,7 @@ export default {
     // 组合中文姓名拼音用以签名信息以及传递给CUBP
     enName() {
       const { familyNameSpell, givenNameSpell } = this.model;
-      return familyNameSpell + givenNameSpell;
+      return familyNameSpell + " " +givenNameSpell;
     },
     isDisabled() {
       // 增加大陆籍，限制输入两个字以上
@@ -334,12 +351,10 @@ export default {
         sex,
         passportStartValue,
         passportEndValue,
-        educationLevel,
-        maritalStatus,
       } = this.model;
       let arr = [familyNameSpell, givenNameSpell, idCardValue, birthday, sex];
 
-      if (this.isNeedCnName) {
+      if (this.isChina) {
         arr = [
           familyName,
           givenName,
@@ -363,12 +378,13 @@ export default {
         ];
       }
       const result = arr.every((val) => String(val).length);
-      // return this.isNeedCnName ? !(result && cnNameValue.length > 1) : !result
-      return !(result && educationLevel && maritalStatus);
+      // return this.isChina ? !(result && cnNameValue.length > 1) : !result
+      return !result;
     },
   },
   created() {
     this.updateInfo();
+    this.fetchDataDesin();
   },
   methods: {
     getI18n(key) {
@@ -381,9 +397,32 @@ export default {
         this.model[val] = res;
       });
     },
+    // 获取后台数据字典
+    async fetchDataDesin() {
+      const result = await this.$store.dispatch(
+        "getDictionary",
+        this.$t("iOpen.common.nationlityCode")
+      );
+      let cnData = {
+        value: "",
+        text: "",
+      };
+      const list = result
+        .map((res) => {
+          const data = { text: res.name, value: res.value };
+          if (data.value === "0") {
+            cnData = data;
+          }
+          return data;
+        })
+        .filter((v) => !["2", "6", "MAC"].includes(v.value));
+      this.fields.birthCountry.props.options = list;
+      this.model.birthCountry = cnData.value;
+      this.model.birthCountryTxt = cnData.text;
+    },
     handleNext(e) {
       // 大陆身份证 --> 根据身份证来获取出生日期与性别
-      if (this.isNeedCnName) {
+      if (this.isChina) {
         // 判断是否已读取信息
         const { sex } = this.openInfo;
         const { idCardValue } = this.model;

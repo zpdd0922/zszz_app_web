@@ -11,18 +11,16 @@
         <p class="declare-item-content">{{i18nValues.isAllowProvidePrivacy.content}}</p>
       </cube-form>
       <div class="margin-bottom"></div>
-      <cube-form :model="model" class="step-content">
-        <head-title :title="i18nValues.northTrade.title"></head-title>
         <!-- 是否北向交易 -->
+      <!-- <cube-form :model="model" class="step-content">
+        <head-title :title="i18nValues.northTrade.title"></head-title>
         <p class="declare-item-content">{{i18nValues.northTrade.tipsContent}}</p>
         <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsOther.northTrade" />
         </cube-form-group>
         <p class="declare-item-content">{{i18nValues.northTrade.content}}</p>
-      </cube-form>
-      <div class="margin-bottom"></div>
-
-      <div class="margin-bottom"></div>
+      </cube-form> -->
+      <!-- <div class="margin-bottom"></div> -->
       <!-- 税务信息 -->
       <div class="step-content privacy-box">
         <head-title :title="getI18n('tax.title')"></head-title>
@@ -87,8 +85,7 @@ export default {
     return {
       model: {
         isAllowProvidePrivacy: 1,
-        northTrade: 1,
-        fatca: 0,
+        // northTrade: 1,
       },
       fieldsOther: {
         isAllowProvidePrivacy: {
@@ -322,6 +319,14 @@ export default {
     },
     updateInfo() {
       const userInfo = this.openInfo;
+
+      Object.keys(this.model).forEach((val) => {
+        const res =
+          userInfo[val] || userInfo[val] === 0
+            ? userInfo[val]
+            : this.model[val];
+        this.model[val] = res;
+      });
 
       Object.keys(this.taxModel).forEach((val) => {
         this.taxModel[val] = userInfo[val] ? userInfo[val] : this.taxModel[val];

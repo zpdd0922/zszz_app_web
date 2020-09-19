@@ -52,7 +52,6 @@ router.beforeEach((to, from, next) => {
           replace: true
         });
       }
-
   } else {
     // 白名单页
     if (uaInfo.isApp()) {

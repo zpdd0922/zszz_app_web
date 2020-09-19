@@ -5,7 +5,7 @@
         <cube-form :model="model">
           <div class="info-wrap">
             <cube-form-group class="custom-form-group" :legend="getI18n('tips')">
-            <!-- <cube-form-group class="custom-form-group"> -->
+              <!-- <cube-form-group class="custom-form-group"> -->
               <cube-form-item :field="{label: getI18n('name.label')}">
                 <div class="custom-date-box">
                   <div class="custom-form-separator">{{fields.familyName.label}}</div>
@@ -78,7 +78,7 @@
                   <div class="custom-form-date">
                     <!-- <template v-if="model.isLonger">
                       <span>{{longerDateText}}</span>
-                    </template> -->
+                    </template>-->
                     <!-- <template v-else> -->
                     <template>
                       <div @click="showEndDatePicker">
@@ -100,14 +100,13 @@
                     <input v-model="model.isLonger" type="checkbox" class="cube-switch-input" />
                     <i class="cube-switch-ui">{{longerDateText}}</i>
                   </div>
-                </div> -->
+                </div>-->
               </cube-form-item>
               <!-- 签发机关 -->
               <cube-form-item :field="fields.authority"></cube-form-item>
-              <!-- 教育程度 -->
-              <cube-form-item :field="fields.educationLevel"></cube-form-item>
-              <!-- 婚姻状况 -->
-              <cube-form-item :field="fields.maritalStatus"></cube-form-item>
+              <cube-form-item :field="fields.birthCountry"></cube-form-item>
+              <cube-form-item v-if="model.birthCountry === 'OTH'" :field="fields.birthCountryTxt"></cube-form-item>
+              <cube-form-item :field="fields.birthArea"></cube-form-item>
             </cube-form-group>
           </div>
         </cube-form>
@@ -125,6 +124,7 @@ import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
 import * as optionsList from "./options-list";
+import { modelValidator } from "./validator";
 
 // TODO: 減少了民族字段
 
@@ -145,8 +145,9 @@ export default {
         authority: "", //证件签发地
         // nation: "", //民族
         // isLonger: false,
-        educationLevel: "", //教育程度
-        maritalStatus: "", //婚姻状况
+        birthCountry: "", //出生国家
+        birthCountryTxt: "", //出生国家
+        birthArea: "", //出生地区
       },
       fields: {
         familyName: {
@@ -203,6 +204,52 @@ export default {
         //     maxlength: 20,
         //   },
         // },
+        birthCountry: {
+          type: "select",
+          modelKey: "birthCountry",
+          label: this.getI18n("birthCountry.label"),
+          props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            placeholder: this.getI18n("birthCountry.placeholder"),
+            options: [],
+          },
+          events: {
+            change: (value, index, text) => {
+              if (value !== "OTH") {
+                this.model.birthCountryTxt = text;
+              } else {
+                this.model.birthCountryTxt = "";
+              }
+            },
+          },
+          rules: {
+            required: false,
+          },
+        },
+        birthCountryTxt: {
+          type: "input",
+          modelKey: "birthCountryTxt",
+          label: this.getI18n("birthCountry.label"),
+          props: {
+            placeholder: this.getI18n("birthArea.placeholder"),
+          },
+          rules: {
+            required: false,
+          },
+        },
+        birthArea: {
+          type: "input",
+          modelKey: "birthArea",
+          label: this.getI18n("birthArea.label"),
+          props: {
+            placeholder: this.getI18n("birthArea.placeholder"),
+          },
+          rules: {
+            required: false,
+          },
+        },
         idCardValue: {
           type: "input",
           modelKey: "idCardValue",
@@ -232,36 +279,6 @@ export default {
             maxlength: 20,
           },
         },
-        educationLevel: {
-          type: "select",
-          modelKey: "educationLevel",
-          label: this.getI18n("educationLevel.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("educationLevel.placeholder"),
-            options: optionsList.educationLevelOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
-        maritalStatus: {
-          type: "select",
-          modelKey: "maritalStatus",
-          label: this.getI18n("maritalStatus.label"),
-          props: {
-            title: this.$t("common.cubeComponents.select.title"),
-            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n("maritalStatus.placeholder"),
-            options: optionsList.maritalStatusOptions(),
-          },
-          rules: {
-            required: false,
-          },
-        },
       },
     };
   },
@@ -274,19 +291,20 @@ export default {
     // 组合中文姓名拼音用以签名信息以及传递给BPM
     enName() {
       const { familyNameSpell, givenNameSpell } = this.model;
-      return familyNameSpell + givenNameSpell;
+      return familyNameSpell + " " +givenNameSpell;
     },
     isDisabled() {
       // 限制名字与地址至少两个字以上
       const { addressValue } = this.model;
-      const result = Object.values(this.model).every(
-        (val) => String(val).length
-      );
+      const result = modelValidator.every((val) => {
+        return String(this.model[val]).length;
+      });
       return !(result && addressValue.length > 2);
     },
   },
   created() {
     this.updateInfo();
+    this.fetchDataDesin();
   },
   methods: {
     getI18n(key) {
@@ -299,6 +317,29 @@ export default {
         const res = userInfo[val] ? userInfo[val] : this.model[val];
         this.model[val] = res;
       });
+    },
+    // 获取后台数据字典
+    async fetchDataDesin() {
+      const result = await this.$store.dispatch(
+        "getDictionary",
+        this.$t("iOpen.common.nationlityCode")
+      );
+      let cnData = {
+        value: "",
+        text: "",
+      };
+      const list = result
+        .map((res) => {
+          const data = { text: res.name, value: res.value };
+          if (data.value === "0") {
+            cnData = data;
+          }
+          return data;
+        })
+        .filter((v) => !["2", "6", "MAC"].includes(v.value));
+      this.fields.birthCountry.props.options = list;
+      this.model.birthCountry = cnData.value;
+      this.model.birthCountryTxt = cnData.text;
     },
     handleNext(e) {
       // 判断是否已读取信息

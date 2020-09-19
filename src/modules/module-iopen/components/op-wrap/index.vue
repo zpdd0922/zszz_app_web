@@ -74,13 +74,13 @@ export default {
     },
     // 2.回传父组件事件 - 成功
     handleSuccessFunc(e, res) {
-      this.isClicked = false;
       this.$emit("handleNext", e, res);
+      this.isClicked = false;
     },
     // 3.回传父组件事件 - 失败
     handleFailFunc(e, err) {
-      this.isClicked = false;
       this.$emit("handleFail", e, err);
+      this.isClicked = false;
     }
   }
 };

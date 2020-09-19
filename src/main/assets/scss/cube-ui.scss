@@ -95,8 +95,10 @@
   border-color: $color-btn-bg;
   background: transparent;
   position: relative;
+  border: 1px solid;
+  
   &:after {
-    border-color: inherit;
+    display: none;
   }
 }
 

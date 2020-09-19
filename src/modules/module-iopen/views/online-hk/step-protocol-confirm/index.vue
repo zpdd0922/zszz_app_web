@@ -115,14 +115,18 @@ export default {
       this.formList.forEach((item) => {
         const { key, value } = item;
         // 名字中间加个空格
-        if (key == "cnNameValue") {
-          item.value = userInfo[key] ? `${userInfo['familyName']} ${userInfo['givenName']}` : value;
-          return
-        }
-        if (key == "enNameValue") {
-          item.value = userInfo[key] ? `${userInfo['givenNameSpell']} ${userInfo['familyNameSpell']}` : value;
-          return
-        }
+        // if (key == "cnNameValue") {
+        //   item.value = userInfo[key]
+        //     ? `${userInfo["familyName"]} ${userInfo["givenName"]}`
+        //     : value;
+        //   return;
+        // }
+        // if (key == "enNameValue") {
+        //   item.value = userInfo[key]
+        //     ? `${userInfo["givenNameSpell"]} ${userInfo["familyNameSpell"]}`
+        //     : value;
+        //   return;
+        // }
         if (key == "phoneNum") {
           item.value = this.openProgress.phoneNumber;
         } else {
@@ -158,7 +162,7 @@ export default {
         this.$router.replace({ name: this.signatureStep });
       } else {
         // 活动中心过来的用户会带此活动id ，在大陆开户中最后一步提交会使用到
-      const {
+        const {
           activeId = "0",
           channelId = "",
           inviteId = "0",
@@ -171,7 +175,10 @@ export default {
           lang: this.$t("customize.languageValue"),
         };
 
-        const data = this.formatCommitData(this.openInfo, normalData);
+        const data = this.formatCommitData(
+          { ...this.openInfo, phoneNumber: this.openProgress.phoneNumber },
+          normalData
+        );
 
         this.toCommitAllDataHK(data).then((res) => {
           toast({

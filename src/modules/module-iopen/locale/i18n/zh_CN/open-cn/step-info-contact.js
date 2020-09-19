@@ -17,16 +17,26 @@ export default {
             label: '邮箱',
             placeholder: '请填写您的电子邮箱'
         },
-        // educationLevel: {
-        //     label: '教育程度',
-        //     placeholder: '请选择教育程度',
-        //     options: {
-        //         a: '小学',
-        //         b: '中学',
-        //         c: '专上学院',
-        //         d: '大学或以上',
-        //     }
-        // },
+        educationLevel: {
+            label: '教育程度',
+            placeholder: '请选择教育程度',
+            options: {
+                primary: '小学',
+                secondary: '中学',
+                diploma: '专上学院',
+                universtyOrAbove: '大学或以上',
+            }
+        },
+        maritalStatus: {
+            label: '婚姻状况',
+            placeholder: '请选择婚姻状况',
+            options: {
+                single: '未婚',
+                married: '已婚',
+                divorced: '离婚',
+                widowed: '鳏寡',
+            }
+        },
         homeRadio: {
             label: '现时住址',
             placeholder: '请选择',
@@ -116,7 +126,7 @@ export default {
             }
         },
         workingSeniority: {
-            label: '从业年限',
+            label: '任职年期',
             placeholder: '请选择',
             options: {
                 ltFive: '少于5年',

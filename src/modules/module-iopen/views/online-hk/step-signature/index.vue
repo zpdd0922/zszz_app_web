@@ -1,5 +1,5 @@
 <template>
-  <Signature :userName="openInfo.cnNameValue" @confirm="handleConfirmSign" />
+  <Signature :userName="userName" @confirm="handleConfirmSign" />
 </template>
 
 <script type="text/ecmascript-6">
@@ -16,7 +16,10 @@ export default {
     };
   },
   computed: {
-
+    userName() {
+      if(this.openInfo.cnNameValue) return this.openInfo.cnNameValue;
+      return this.openInfo.enNameValue;
+    },
   },
   methods: {
     getI18n(key) {

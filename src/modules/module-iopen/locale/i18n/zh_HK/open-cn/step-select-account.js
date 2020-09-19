@@ -19,6 +19,7 @@ export default {
         title: '其他交易市場',
         accountHk: '香港證券市場交易',
         accountUs: '美國證券市場交易',
+        accountCn: '美國證券市場交易',
         accountStockOptions: '股票期權交易',
         accountForward: '期貨交易',
     },

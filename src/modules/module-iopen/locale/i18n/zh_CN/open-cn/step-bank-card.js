@@ -3,7 +3,7 @@ import commonI18n from '@/main/locale/i18n/zh_CN';
 
 export default {
     pageName: '大陆银行卡验证身份',
-    errorTips: '银行校验不通过，请注意个人姓名，手机号码，银行卡号以及银行卡预留手机号四要素信息一致。',
+    errorTips: '银行校验不通过，请注意个人姓名，身份证号码，银行卡号以及银行卡预留手机号四要素信息一致。',
     bankNum: {
         label: '银行卡号',
         placeholder: '请输入本人大陆储蓄卡号'
