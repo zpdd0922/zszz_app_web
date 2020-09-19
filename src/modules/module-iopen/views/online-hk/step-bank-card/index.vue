@@ -230,6 +230,9 @@ export default {
     this.updateInfo();
   },
   methods: {
+    validPhoneNum() {
+      return !isNaN(this.bankNum) && this.bankNum.length > 2;
+    },
     getI18n(key) {
       return this.getStepI18nValue("bankCard", key);
     },
@@ -265,7 +268,14 @@ export default {
       // this.$set(this.BankCardFile, tempKey, tempVal);
       // this.$set(this.BankCardUpload, tempKey, tempVal);
     },
+    
     handleNext(e) {
+      if (!this.validPhoneNum()) {
+        const errorTips = this.getI18n('errorTipsPhone');
+        toast({ type: "error", txt: errorTips, time: 1000 });
+        return;
+      }
+
       // 保存数据&下一步
       const params = {
         step: this.step,

@@ -29,4 +29,5 @@ export default {
             '銀行卡僅用於實名認證，與出入金、銀行卡綁定等無關。'
         ]
     },
+    errorTipsPhone: '請輸入正確的電話號碼',  
 }
