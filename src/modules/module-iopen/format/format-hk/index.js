@@ -208,7 +208,7 @@ export const formatCommitData = (args, normalData = {}) => {
   };
 
   const tradePassword = {
-    password: args.password // 初始交易密码
+    tradePwd: args.password // 初始交易密码
   }
 
 
