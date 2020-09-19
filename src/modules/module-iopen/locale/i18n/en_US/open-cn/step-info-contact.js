@@ -33,7 +33,7 @@ export default {
         },
         homeTelePhone: {
             label: '住址電話',
-            placeholder: '現時住址聯係電話(選填)'
+            placeholder: '現時住址聯繫電話(選填)'
         },
         contactRadio: {
             label: '通訊地址',
@@ -42,7 +42,7 @@ export default {
         },
         contactTelePhone: {
             label: '通訊電話',
-            placeholder: '通訊地址聯係電話(選填)'
+            placeholder: '通訊地址聯繫電話(選填)'
         },
         addressCity: {
             label: '省市區',

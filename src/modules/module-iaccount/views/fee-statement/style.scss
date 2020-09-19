@@ -31,7 +31,7 @@
 
     .title {
       width: 100%;
-      padding: 0.15rem 0.1rem;
+      padding: 0.15rem 0.2rem;
       margin-bottom: 0.02rem;
       background-color: #fff;
       vertical-align: top;
@@ -55,10 +55,22 @@
 
     .brokerage-standard {
       width: 100%;
-      padding: 0.15rem 0.1rem;
-      color: $color-txt-sub;
-      background-color: #fff;
+      padding: 0.15rem 0.2rem;
+      color: $color-txt;
+      background-color: $color-content-bg;
+
+      span:last-child {
+        float: right;
+      }
     }
+  }
+
+  .record {
+    width: 100%;
+    padding: 0.05rem;
+    text-align: center;
+    color: $color-main-sub;
+
   }
 
   .icon-hk {

@@ -12,4 +12,9 @@ export const brokerageCalculate = {
     HKStock: "港股"
   },
   brokerageStandard: "佣金标准",
+  unitHK: '港币',
+  unitUS: '美元',
+  bi: '笔',
+  privilege: '您已有免佣特权，有效期：',
+  noPrivilege: '无免佣特权 '
 }

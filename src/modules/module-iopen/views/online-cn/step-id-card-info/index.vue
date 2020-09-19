@@ -398,7 +398,7 @@ export default {
           : new Date();
         this.endDatePicker = this.$createDatePicker({
           title: this.getI18n("dateStartValue.endPlaceholder"),
-          min: new Date(),
+          min: new Date(getPreDay(-1)),
           max: endDate_max,
           value: endDate_value,
           onSelect: this.selectHandleEnd,

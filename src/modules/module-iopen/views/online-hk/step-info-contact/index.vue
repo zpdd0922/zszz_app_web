@@ -864,9 +864,34 @@ export default {
       });
       return !status.includes(false);
     },
+    // 电话号码验证，只验证了全数字和长度不大于11
+    validPhoneNum() {
+      const phoneList = [this.model.homeTelePhone, this.model.contactTelePhone, this.professionModel.companyTelePhone];
+      console.log(phoneList)
+      return phoneList.map((val)=>{
+        // 判断是否填写
+        if (val.length === 0) {
+          return true
+        } else {
+          // 判断是否包含除数字之外的
+          if (!isNaN(val)) {
+            // 判断是否大于11位
+            if (val.length > 11) {
+              return false
+            } else {
+              return true
+            }
+          } else {
+            return false
+          }
+        }
+      }).every((val) => {
+        return val
+      })
+    },
     // 验证提交按钮
     isDisabled() {
-      const result = this.validProfession && this.validContact;
+      const result = this.validProfession && this.validContact && validPhoneNum;
       const cardFile = Object.values(this.AddressImgFile);
       const len = 1;
 

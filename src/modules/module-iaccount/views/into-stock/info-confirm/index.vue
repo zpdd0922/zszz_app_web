@@ -148,7 +148,12 @@ export default {
           this.$router.replace('/');
         }, 1000)
       }, (err)=>{
-        this.createToast(err)
+        const toast = this.$createToast({
+          type: 'txt',
+          time: 1000,
+          txt: err,
+        });
+        toast.show();
       });
     },
   },

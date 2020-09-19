@@ -25,6 +25,9 @@
     .content-wrap {
       padding: 0 0.15rem 0.15rem;
       width: 100%;
+      .line {
+        padding-bottom: 0.02rem
+      }
 
       .content-title {
         color: $color-999
@@ -68,6 +71,7 @@
         flex: 0 0 20%;
         padding-left: 0.15rem;
         word-break: break-all;
+        @include no-wrap();
       }
       .content-info:nth-child(2) {
         flex: 1 1 60%

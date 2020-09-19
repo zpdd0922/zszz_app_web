@@ -43,7 +43,6 @@ export default {
     }
   },
   created() {
-    // typeof this.updateInfo === 'function' && this.updateInfo();
     //TODO:新增一个获取可提取现金的接口调用 /find_extractable_money
 
     // TODO: 新增ip判斷，進行邏輯處理？

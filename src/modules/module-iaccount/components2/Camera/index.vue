@@ -194,6 +194,7 @@ export default {
           this.$emit("localLoad", file, idFlag);
         },
         upload: (file, idFlag) => {
+          console.log(123123);
           this._upload(file, idFlag);
         },
         fail: (res, msg = "操作失败，请稍后重试") => {
@@ -290,6 +291,7 @@ export default {
         typeof this.params === "function"
           ? this.params(file, key)
           : { imgBase64: file, ...this.params };
+
       postImg(this.target, tempParams, {
         imgType: key,
         callback: this.callback,

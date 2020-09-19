@@ -22,7 +22,7 @@ export default {
   /**
   * { isShares: 0, state: 0 }
   */
-  getStocksHistory: data => post('/securities/find_transferred_stock_record', paramsData.CHECK(data)),
+  getStocksHistory: data => post('/securities/find_transferred_stock_record', paramsData.NOPARAMS(data)),
 
   /**
    * 入金记录
@@ -33,14 +33,14 @@ export default {
    * @param state  操作状态
    * 99 默认所有  前端分页
    */
-  getFundsHistory: data => post('/securities/find_deposit_record', paramsData.CHECK(data)),
+  getFundsHistory: data => post('/securities/find_deposit_record', paramsData.NOPARAMS(data)),
 
   /**
    * 查询子账号信息
    * 根据入金银行字段accountType判断处理
    * 1-大账户  2-子账号（该接口）
    */
-  findAccountInfo: data => post('/securities/find_accountInfo', paramsData.CHECK(data)),
+  findAccountInfo: data => post('/securities/find_accountInfo', paramsData.NOPARAMS(data)),
 
   /**
    * 子账号申请
@@ -51,14 +51,14 @@ export default {
    * @param clientNameCn   中文名
    * @param fundAccount    现金账号
    */
-  getCollectionNo: data => post('/securities/apply_bank_itemaccount', paramsData.CHECK(data)),
+  getCollectionNo: data => post('/securities/apply_bank_itemaccount', paramsData.NOPARAMS(data)),
 
   /**
    * { moneyType, fundAccount }
    */
-  toGetExtractableMoney: data => post('/securities/find_extractable_money_new', paramsData.CHECK(data)),
+  toGetExtractableMoney: data => post('/securities/find_extractable_money_new', paramsData.NOPARAMS(data)),
 
-  toCommitWithdrawData: data => post('/securities/save_hong', paramsData.CHECK(data)),
+  toCommitWithdrawData: data => post('/securities/save_hong', paramsData.NOPARAMS(data)),
 
   /**
    * { mkt, condition, flag: 1 }
@@ -68,25 +68,25 @@ export default {
   /**
    * { type: 1, name: '转入股票', ...obj }
    */
-  commitIntoStockStep: data => post('/securities/transferred_stock', paramsData.CHECK(data)),
+  commitIntoStockStep: data => post('/securities/transferred_stock', paramsData.NOPARAMS(data)),
 
   /**
    * { type: 1, name: '证券服务', ...obj }
    */
-  saveIntoStockInfoStep: data => post('/securities/save_distribute_save_tmp', paramsData.CHECK(data)),
+  saveIntoStockInfoStep: data => post('/securities/save_distribute_save_tmp', paramsData.NOPARAMS(data)),
 
   /**
    * { type: 1, name: '证券服务', ...obj }
    */
-  findIntoStockInfoStep: data => post('/securities/find_distribute_save_tmp', paramsData.CHECK(data)),
+  findIntoStockInfoStep: data => post('/securities/find_distribute_save_tmp', paramsData.NOPARAMS(data)),
 
-  toCommitIntoStockInfo: data => post('/securities/save_transferred_stock', paramsData.CHECK(data)),
+  toCommitIntoStockInfo: data => post('/securities/save_transferred_stock', paramsData.NOPARAMS(data)),
 
-  toCommitIntoStockList: data => post('/securities/save_shares_stock', paramsData.CHECK(data)),
+  toCommitIntoStockList: data => post('/securities/save_shares_stock', paramsData.NOPARAMS(data)),
 
-  toCommitIntoStockData: data => post('/securities/transferred_stock_apply', paramsData.CHECK(data)),
+  toCommitIntoStockData: data => post('/securities/transferred_stock_apply', paramsData.NOPARAMS(data)),
   
-  toGetIntoStockAllInfo: data => post('/securities/find_transferred_stock', paramsData.CHECK(data)),
+  toGetIntoStockAllInfo: data => post('/securities/find_transferred_stock', paramsData.NOPARAMS(data)),
   
   /**
    * 查询股票代码
