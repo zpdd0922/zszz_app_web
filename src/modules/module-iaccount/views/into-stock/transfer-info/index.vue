@@ -118,6 +118,7 @@ export default {
           label: this.getI18n("transferOutInfo.accountName.label"),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
+            readonly: true,
             placeholder: this.getI18n(
               "transferOutInfo.accountName.placeholder"
             ),
