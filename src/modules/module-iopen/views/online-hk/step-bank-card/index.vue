@@ -231,7 +231,7 @@ export default {
   },
   methods: {
     validPhoneNum() {
-      return !isNaN(this.bankNum) && this.bankNum.length > 2;
+      return !isNaN(this.model.bankNum) && this.model.bankNum.length > 2;
     },
     getI18n(key) {
       return this.getStepI18nValue("bankCard", key);
@@ -271,7 +271,7 @@ export default {
     
     handleNext(e) {
       if (!this.validPhoneNum()) {
-        const errorTips = this.getI18n('errorTipsPhone');
+        const errorTips = this.getI18n('errorTipsBankNum');
         toast({ type: "error", txt: errorTips, time: 1000 });
         return;
       }

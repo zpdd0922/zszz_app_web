@@ -43,6 +43,6 @@ export default {
     title: "溫馨提示",
     content: ["開戶成功後，只能透過此綁定銀行帳戶進行存款與提款"],
   },
-  errorTipsPhone: '請輸入正確的電話號碼',
+  errorTipsBankNum: '請輸入正確的帳戶號碼',
 
 };

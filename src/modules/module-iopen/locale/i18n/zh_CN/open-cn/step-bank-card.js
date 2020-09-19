@@ -29,6 +29,6 @@ export default {
             '银行卡仅用于实名认证，与出入金、银行卡绑定等无关。'
         ]
     },
-    errorTipsPhone: '请输入正确的电话号码',
+    errorTipsBankNum: '请输入正确的账户号码',
 
 }

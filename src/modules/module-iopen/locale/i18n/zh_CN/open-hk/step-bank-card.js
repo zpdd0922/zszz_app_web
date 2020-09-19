@@ -45,6 +45,6 @@ export default {
             '开户成功后，只能透过此绑定银行账户进行存款与提款',
         ]
     },
-    errorTipsPhone: '请输入正确的电话号码',
+    errorTipsBankNum: '请输入正确的账户号码',
 
 }
