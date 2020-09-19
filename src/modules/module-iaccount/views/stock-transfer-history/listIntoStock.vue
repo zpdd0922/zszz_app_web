@@ -27,17 +27,17 @@
               <div class="content-wrap">
                 <ul class="company">
                   <li>
-                    <span>{{'iAccount.transferHistory.date'}}</span
+                    <span>{{$t('iAccount.transferHistory.date')}}</span
                     ><span>{{
                       slotProps.item.createdTime | filterDateTime
                     }}</span>
                   </li>
                   <li>
-                    <span>{{ "转出券商" }}</span
+                    <span>{{$t('iAccount.transferHistory.outCompany')}}</span
                     ><span>{{ slotProps.item.secName }}</span>
                   </li>
                   <li>
-                    <span>{{ "状态" }}</span
+                    <span>{{$t('iAccount.transferHistory.status')}}</span
                     ><span>{{ slotProps.item.state | filterStatusText }}</span>
                   </li>
                 </ul>
@@ -47,11 +47,11 @@
                   :key="index"
                 >
                   <li>
-                    <span>{{ "股票名称" }}</span
+                    <span>{{$t('iAccount.transferHistory.stockName')}}</span
                     ><span>{{ item.sharesName }}</span>
                   </li>
                   <li>
-                    <span>{{ "股票数量" }}</span
+                    <span>{{$t('iAccount.transferHistory.stockNum')}}</span
                     ><span>{{ item.sharesNum }}</span>
                   </li>
                 </ul>
@@ -144,6 +144,7 @@ export default {
     },
 
     _filterAll() {
+      console.log(this.state, this.market, 'asdfasd')
       if (!this.market && !this.state) {
         this.listData = [...this.listDataCache];
       } else if (!this.market && this.state) {
@@ -156,7 +157,7 @@ export default {
         });
       } else {
         this.listData = [...this.listDataCache].filter((item) => {
-          return item.state === this.state && item.market === this.market;
+          return item.state === this.state && item.isShares === this.market;
         });
       }
     },

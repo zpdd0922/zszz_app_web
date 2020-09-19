@@ -57,7 +57,6 @@ export default {
       this.isShowMenu = !this.isShowMenu
     },
     _filterItem(item, index) {
-      console.log(item, index, 'sadfa')
       this.$emit('input', item.value)
       this.$emit('filter', item, index)
       this.isShowMenu = false
