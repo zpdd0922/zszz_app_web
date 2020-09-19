@@ -8,7 +8,9 @@
           <!-- 郵箱 -->
           <cube-form-item :field="fieldsContact.email"></cube-form-item>
           <!-- 教育程度 -->
-          <!-- <cube-form-item :field="fieldsContact.educationLevel"></cube-form-item> -->
+          <cube-form-item :field="fieldsContact.educationLevel"></cube-form-item>
+          <!-- 婚姻状况 -->
+          <cube-form-item :field="fieldsContact.maritalStatus"></cube-form-item>
           <!-- 住宅地址选择 -->
           <cube-form-item :field="fieldsContact.homeRadio"></cube-form-item>
           <!-- 住址地址选择省市区 -->
@@ -99,7 +101,10 @@
             <template v-if="model.contactRadio === optionsList.radioListValue.oth">
               <cube-form-item :field="fieldsContactOther.contactOhterCountry"></cube-form-item>
               <template v-if="model.contactOhterCountry === 'OTH'">
-                <cube-form-item :field="fieldsContactOther.otherContactRepublic" class="custom-form-enName">
+                <cube-form-item
+                  :field="fieldsContactOther.otherContactRepublic"
+                  class="custom-form-enName"
+                >
                   <div class="cube-input">
                     <input
                       v-model.trim="model.otherContactRepublic"
@@ -124,9 +129,9 @@
             </template>
             <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
           </template>
-          <p class="tips" v-html="dStatementReceiveModeWarning"></p>
+          <!-- <p class="tips" v-html="dStatementReceiveModeWarning"></p> -->
           <!-- 收取节单方式 -->
-          <cube-form-item :field="fieldsContact.dStatementReceiveMode"></cube-form-item>
+          <!-- <cube-form-item :field="fieldsContact.dStatementReceiveMode"></cube-form-item> -->
         </cube-form-group>
       </cube-form>
       <div class="margin-bottom"></div>
@@ -135,9 +140,7 @@
         <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.professionTitle"></head-title>
           <cube-form-item :field="fieldsProfession.professionCode"></cube-form-item>
-          <template
-            v-if="professionModel.professionCode === 'OTH'"
-          >
+          <template v-if="professionModel.professionCode === optionsList.professionCodeValue.other">
             <cube-form-item :field="fieldsProfession.professionCodeOther"></cube-form-item>
           </template>
           <template
@@ -180,10 +183,6 @@ import { deepClone } from "@/main/utils/format/object";
 import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
-import {
-  // WEB_OCCUPATION_TYPE,
-  AO_NATIONALITY,
-} from "../../../api/params-define";
 
 export default {
   mixins: [onlineMixin],
@@ -202,6 +201,8 @@ export default {
       model: {
         // 联络信息字段
         email: "", // 邮箱地址
+        educationLevel: "", // 
+        maritalStatus: "", // 
         homeRadio: optionsList.radioListValue.cn, // 住宅地址单选
         homeCity: [], // 住宅地址省市区
         homeAddressDetail: "", // 住宅地址省市区详细
@@ -225,9 +226,11 @@ export default {
         contactOtherCity: "", // 选择其他国家市
         contactOtherArea: "", // 选择其他国家区域
         contactTelePhone: "", // 选择其他国家区
-        dStatementReceiveMode: '' //收取节点及书信方式
+        dStatementReceiveMode: "1", //收取节点及书信方式
       },
-      dStatementReceiveModeWarning: this.getI18n("contact.dStatementReceiveModeWarning"),
+      dStatementReceiveModeWarning: this.getI18n(
+        "contact.dStatementReceiveModeWarning"
+      ),
       // 职业类型字段
       professionModel: {
         professionCode: 0, // 职业类型选择
@@ -251,18 +254,33 @@ export default {
           },
           trigger: "blur",
         },
-        // educationLevel: {
-        //   type: "select",
-        //   modelKey: "educationLevel",
-        //   label: this.getI18n("contact.educationLevel.label"),
-        //   props: {
-        //     placeholder: this.getI18n("contact.educationLevel.placeholder"),
-        //     options: optionsList.educationLevelOptions(),
-        //   },
-        //   rules: {
-        //     required: false,
-        //   },
-        // },
+        educationLevel: {
+          type: "select",
+          modelKey: "educationLevel",
+          label: this.getI18n("contact.educationLevel.label"),
+          props: {
+            placeholder: this.getI18n("contact.educationLevel.placeholder"),
+            options: optionsList.educationLevelOptions(),
+          },
+          rules: {
+            required: false,
+          },
+        },
+        maritalStatus: {
+          type: "select",
+          modelKey: "maritalStatus",
+          label: this.getI18n("contact.maritalStatus.label"),
+          props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            placeholder: this.getI18n("contact.maritalStatus.placeholder"),
+            options: optionsList.maritalStatusOptions(),
+          },
+          rules: {
+            required: false,
+          },
+        },
         homeRadio: {
           type: "select",
           modelKey: "homeRadio",
@@ -410,23 +428,24 @@ export default {
           trigger: "blur",
         },
         dStatementReceiveMode: {
-        type: "select",
-        modelKey: "dStatementReceiveMode",
-        label: this.getI18n("contact.dStatementReceiveMode.label"),
-        props: {
-          title: this.$t("common.cubeComponents.select.title"),
-          cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
-          confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-          placeholder: this.getI18n(
-            "contact.dStatementReceiveMode.placeholder"
-          ),
-          options: optionsList.dStatementReceiveModeOptions(),
+          type: "select",
+          modelKey: "dStatementReceiveMode",
+          label: this.getI18n("contact.dStatementReceiveMode.label"),
+          props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            placeholder: this.getI18n(
+              "contact.dStatementReceiveMode.placeholder"
+            ),
+            options: optionsList.dStatementReceiveModeOptions(),
+          },
+          rules: {
+            required: false,
+          },
+          trigger: "blur",
         },
-        rules: {
-          required: false,
-        },
-        trigger: "blur",
-        },
+      
       },
       // 住址选择其他
       fieldsHomeOther: {
@@ -777,8 +796,8 @@ export default {
             "contactOtherArea",
             "otherContactRepublic",
           ];
-        
-        if (otherContry.includes(val.key)) {
+
+          if (otherContry.includes(val.key)) {
             return true;
           }
         }
@@ -839,32 +858,39 @@ export default {
     },
     // 电话号码验证，只验证了全数字和长度不大于11
     validPhoneNum() {
-      const phoneList = [this.model.homeTelePhone, this.model.contactTelePhone, this.professionModel.companyTelePhone];
-      console.log(phoneList)
-      return phoneList.map((val)=>{
-        // 判断是否填写
-        if (val.length === 0) {
-          return true
-        } else {
-          // 判断是否包含除数字之外的
-          if (!isNaN(val)) {
-            // 判断是否大于11位
-            if (val.length > 11) {
-              return false
-            } else {
-              return true
-            }
+      const phoneList = [
+        this.model.homeTelePhone,
+        this.model.contactTelePhone,
+        this.professionModel.companyTelePhone,
+      ];
+      console.log(phoneList);
+      return phoneList
+        .map((val) => {
+          // 判断是否填写
+          if (val.length === 0) {
+            return true;
           } else {
-            return false
+            // 判断是否包含除数字之外的
+            if (!isNaN(val)) {
+              // 判断是否大于11位
+              if (val.length > 11) {
+                return false;
+              } else {
+                return true;
+              }
+            } else {
+              return false;
+            }
           }
-        }
-      }).every((val) => {
-        return val
-      })
+        })
+        .every((val) => {
+          return val;
+        });
     },
     // 验证提交按钮
     isDisabled() {
-      const status = this.validProfession && this.validContact && this.validPhoneNum;
+      const status =
+        this.validProfession && this.validContact && this.validPhoneNum;
       return !status;
     },
     // 默认显示上一次选择城市下拉框的值(家庭地址)
@@ -1019,7 +1045,7 @@ export default {
         this.$store
           .dispatch("checkEmail", { email: this.model.email })
           .then((res) => {
-            resolve()
+            resolve();
             // const { isValid = false, remark = "校验邮箱失败" } = res;
             // if (isValid) {
             //   resolve(isValid);

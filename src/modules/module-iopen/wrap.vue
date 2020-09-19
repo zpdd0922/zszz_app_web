@@ -14,8 +14,7 @@
       <base-copyright :content="$t('customize.company.copyright')" />
     </footer>
     <template v-if="isLoading">
-      123213
-      <!-- <base-waiting /> -->
+      <base-waiting />
     </template>
   </div>
 </template>

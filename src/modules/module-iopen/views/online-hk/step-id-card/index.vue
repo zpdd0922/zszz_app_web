@@ -149,7 +149,6 @@ import {
   IdCardHK,
   Passport,
   IMAGE_REQUEST_LIST,
-  AO_NATIONALITY,
 } from "../../../api/params-define";
 import { numberInput } from "@/main/utils/dom/number-dot";
 import validate from "@/main/utils/format/validate";
@@ -558,7 +557,7 @@ export default {
     async fetchDataDesin() {
       const result = await this.$store.dispatch(
         "getDictionary",
-        AO_NATIONALITY
+        this.$t("iOpen.common.nationlityCode")
       );
       const list = result
         .map((res) => ({ text: res.name, value: res.value }))

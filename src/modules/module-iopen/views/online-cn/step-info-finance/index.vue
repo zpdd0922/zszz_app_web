@@ -125,9 +125,9 @@ const defaultModel = {
   // realCheck: false,
   // realValue: "",
   derivative: 0, // 是否有意进行衍生品买卖
-  derivativeTrade: false, // 三五年内买卖衍生品复选框
-  derivativeCourse: false, // 学习过衍生品相关课程复选框
-  derivativeIndustry: false, // 从事衍生品相关行业复选框
+  derivativeTrade: true, // 三五年内买卖衍生品复选框
+  derivativeCourse: true, // 学习过衍生品相关课程复选框
+  derivativeIndustry: true, // 从事衍生品相关行业复选框
 };
 
 export default {
@@ -154,9 +154,9 @@ export default {
         // realCheck: false, // 不动产选择框
         // realValue: "", // 不动产数值
         derivative: 0, // 是否有意进行衍生品买卖
-        derivativeTrade: false, // 三五年内买卖衍生品复选框
-        derivativeCourse: false, // 学习过衍生品相关课程复选框
-        derivativeIndustry: false, // 从事衍生品相关行业复选框
+        derivativeTrade: true, // 三五年内买卖衍生品复选框
+        derivativeCourse: true, // 学习过衍生品相关课程复选框
+        derivativeIndustry: true, // 从事衍生品相关行业复选框
       },
       // 财务状况
       fieldsFinance: {

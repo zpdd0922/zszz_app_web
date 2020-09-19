@@ -3,11 +3,14 @@
     <div class="olhk-step olhk-step-info-contact">
       <!-- 联系信息 -->
       <cube-form :model="model">
-
         <cube-form-group class="step-content custom-form-group border-bottom-1px">
           <head-title :title="titleValues.contactTitle"></head-title>
           <!-- 郵箱 -->
           <cube-form-item :field="fieldsContact.email"></cube-form-item>
+          <!-- 教育程度 -->
+          <cube-form-item :field="fieldsContact.educationLevel"></cube-form-item>
+          <!-- 婚姻状况 -->
+          <cube-form-item :field="fieldsContact.maritalStatus"></cube-form-item>
           <!-- 住宅地址选择 -->
           <cube-form-item :field="fieldsContact.homeRadio"></cube-form-item>
           <!-- 住址地址选择省市区 -->
@@ -129,8 +132,8 @@
             <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
           </template>
           <!-- 收取节单方式 -->
-          <p class="tips" v-html="dStatementReceiveModeWarning"></p>
-          <cube-form-item :field="fieldsContact.dStatementReceiveMode"></cube-form-item>
+          <!-- <p class="tips" v-html="dStatementReceiveModeWarning"></p>
+          <cube-form-item :field="fieldsContact.dStatementReceiveMode"></cube-form-item>-->
         </cube-form-group>
       </cube-form>
       <p class="step-content step-content-upload-tips">{{getI18n('contact.tips')}}</p>
@@ -152,9 +155,7 @@
         <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.professionTitle"></head-title>
           <cube-form-item :field="fieldsProfession.professionCode"></cube-form-item>
-          <template
-            v-if="professionModel.professionCode === 'OTH'"
-          >
+          <template v-if="professionModel.professionCode === optionsList.professionCodeValue.other">
             <cube-form-item :field="fieldsProfession.professionCodeOther"></cube-form-item>
           </template>
           <template
@@ -169,7 +170,7 @@
             <cube-form-item :field="fieldsProfession.workingSeniority"></cube-form-item>
             <cube-form-item :field="fieldsProfession.companyTelePhone"></cube-form-item>
             <!-- 公司地址 -->
-            <cube-form-item 
+            <cube-form-item
               :field="fieldsProfession.companyAddress"
               v-if="professionModel.areaType !== 3"
             >
@@ -204,9 +205,8 @@ import {
   BASE64,
   Address,
   IMAGE_REQUEST_LIST,
-  AO_NATIONALITY,
 } from "../../../api/params-define";
-import { professionValidator } from '../../online-cn/step-info-contact/validator';
+import { professionValidator } from "../../online-cn/step-info-contact/validator";
 
 const defaultAddressImgHK = {
   [Address]: IMAGE_REQUEST_LIST[Address],
@@ -229,6 +229,8 @@ export default {
       model: {
         // 联络信息字段
         email: "", // 邮箱地址
+        educationLevel: "", //
+        maritalStatus: "", //
         homeRadio: optionsList.radioListValue.hk, // 住宅地址单选
         homeCity: [], // 住宅地址省市区
         homeAddressDetail: "", // 住宅地址省市区详细
@@ -252,10 +254,12 @@ export default {
         contactOtherCity: "", // 选择其他国家市
         contactOtherArea: "", // 选择其他国家区域
         contactTelePhone: "", // 选择其他国家区
-        dStatementReceiveMode: '' //收取节点及书信方式
+        dStatementReceiveMode: "1", //收取节点及书信方式
       },
-      dStatementReceiveModeWarning: this.getI18n("contact.dStatementReceiveModeWarning"),
-      
+      dStatementReceiveModeWarning: this.getI18n(
+        "contact.dStatementReceiveModeWarning"
+      ),
+
       AddressImgFile: {},
       AddressImgUpload: {},
       AddressImgUploadFiles: defaultAddressImgHK,
@@ -283,6 +287,33 @@ export default {
             maxlength: 50,
           },
           trigger: "blur",
+        },
+        educationLevel: {
+          type: "select",
+          modelKey: "educationLevel",
+          label: this.getI18n("contact.educationLevel.label"),
+          props: {
+            placeholder: this.getI18n("contact.educationLevel.placeholder"),
+            options: optionsList.educationLevelOptions(),
+          },
+          rules: {
+            required: false,
+          },
+        },
+        maritalStatus: {
+          type: "select",
+          modelKey: "maritalStatus",
+          label: this.getI18n("contact.maritalStatus.label"),
+          props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
+            placeholder: this.getI18n("contact.maritalStatus.placeholder"),
+            options: optionsList.maritalStatusOptions(),
+          },
+          rules: {
+            required: false,
+          },
         },
         homeRadio: {
           type: "select",
@@ -852,9 +883,7 @@ export default {
             return true;
           }
           return Boolean(item);
-        } else if (
-          data.professionCode === 'OTH'
-        ) {
+        } else if (data.professionCode === "OTH") {
           return !!(
             data.professionCodeOther && data.professionCodeOther.trim().length
           );
@@ -866,32 +895,37 @@ export default {
     },
     // 电话号码验证，只验证了全数字和长度不大于11
     validPhoneNum() {
-      const phoneList = [this.model.homeTelePhone, this.model.contactTelePhone, this.professionModel.companyTelePhone];
-      console.log(phoneList)
-      return phoneList.map((val)=>{
-        // 判断是否填写
-        if (val.length === 0) {
-          return true
-        } else {
-          // 判断是否包含除数字之外的
-          if (!isNaN(val)) {
-            // 判断是否大于11位
-            if (val.length > 11) {
-              return false
-            } else {
-              return true
-            }
+      const phoneList = [
+        this.model.homeTelePhone,
+        this.model.contactTelePhone,
+        this.professionModel.companyTelePhone,
+      ];
+      return phoneList
+        .map((val) => {
+          // 判断是否填写
+          if (val.length === 0) {
+            return true;
           } else {
-            return false
+            // 判断是否包含除数字之外的
+            if (!isNaN(val)) {
+              // 判断是否大于11位
+              if (val.length > 11) {
+                return false;
+              } else {
+                return true;
+              }
+            } else {
+              return false;
+            }
           }
-        }
-      }).every((val) => {
-        return val
-      })
+        })
+        .every((val) => {
+          return val;
+        });
     },
     // 验证提交按钮
     isDisabled() {
-      const result = this.validProfession && this.validContact && validPhoneNum;
+      const result = this.validProfession && this.validContact && this.validPhoneNum;
       const cardFile = Object.values(this.AddressImgFile);
       const len = 1;
 
@@ -1073,7 +1107,7 @@ export default {
         this.$store
           .dispatch("checkEmail", { email: this.model.email })
           .then((res) => {
-            resolve()
+            resolve();
             // const { isValid = false, remark = "校验邮箱失败" } = res;
             // if (isValid) {
             //   resolve(isValid);

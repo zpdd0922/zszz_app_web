@@ -36,11 +36,10 @@ export const formatCommitData = (args, normalData = {}) => {
     openAccountType: 1,
     // language: 1, // TODO:添加语言
     openAccountAccessWay: 1,
-
-    // phoneNumber: toDBC(args.bankPhoneNum), // 手机号 TODO,缓存数据没有手机号码~~~！！！！
+    phoneNumber: toDBC(args.phoneNumber), // 手机号 TODO,缓存数据没有手机号码~~~！！！！
   };
 
-  const accountMkts = accountMarkets(args);
+  // const accountMkts = accountMarkets(args);
 
   // 账户选择数据： 
   // TODO:检查是否有异常导致提交不了？
@@ -50,13 +49,14 @@ export const formatCommitData = (args, normalData = {}) => {
     optionsAccUsageScenarios: 1, //证券交易使用场景 [1、互联网交易（默认）   2、全权委托交易]
     futuresAccUsageScenarios: 1, //期货交易使用场景 [1、互联网交易（默认）  2、全权委托交易]
 
+
     fundAccountType: args.fundAccountType, // 账户类型 1：现金账户 2：融资账户
-    isOpenHkStockMarket: Number(accountMkts.includes(1)), // 港股交易 1 同意 or 0 不同意
-    isOpenUsaStockMarket: Number(accountMkts.includes(2)) || 0, // 美股交易 1 同意 or 0 不同意
+    isOpenHkStockMarket: Number(args.isOpenHk), // 港股交易 1 同意 or 0 不同意
+    isOpenUsaStockMarket: Number(args.isOpenUs), // 美股交易 1 同意 or 0 不同意
     isOpenOptions: Number(args.isOpenOptions), //是否开通期权 [0、不同意    1、同意]
     isOpenFutures: Number(args.isOpenFutures),//是否开通期货 [0、不同意    1、同意]
-
-    accountTypeRemarks: '',//账户类型备注
+    northTrade: Number(args.isOpenCn), // 北向交易 同意 or 不同意
+    accountTypeRemarks: '', //账户类型备注
   }
 
   // 用户身份信息
@@ -76,9 +76,8 @@ export const formatCommitData = (args, normalData = {}) => {
     idCardAddress: toDBC(args.addressValue), // 身份证地址
     idCardValidDateStart: args.dateStartValue, // 生效日期
     idCardValidDateEnd: args.dateEndValue, // 失效日期
-    maritalStatus: args.maritalStatus, //婚姻状况[1=未婚 2=已婚 3=离婚 4=鳏寡]
-    placeOfBirth: nationalFormat(args),
-    countryOfBirth: nationalFormat(args),
+    placeOfBirth: toDBC(args.birthArea),
+    countryOfBirth: toDBC(args.birthCountryTxt),
   };
 
   // 银行卡信息 - 产品v1.7 去除香港银行卡表单信息
@@ -95,6 +94,7 @@ export const formatCommitData = (args, normalData = {}) => {
   const infoContact = {
     email: toDBC(args.email.trim()), // 邮箱地址
     educationLevel: args.educationLevel, // 教育程度[0、未知  1、小学   2、中学   3、专上学院   4、大学或以上]
+    maritalStatus: args.maritalStatus, //婚姻状况[1=未婚 2=已婚 3=离婚 4=鳏寡]
     dStatementReceiveMode: args.dStatementReceiveMode, // 日结单及月结单发送方式[0、未知  1、电子邮箱  2、邮寄到住宅地址  3、邮寄到营业地址]
 
     // 家庭住址
@@ -127,23 +127,23 @@ export const formatCommitData = (args, normalData = {}) => {
     contactCityName: contactNameSplit(args, 1), // 通讯地址城市
     contactCountyName: contactNameSplit(args, 2), // 通讯地址区域
     contactDetailAddress: toDBC(contactDetailType(args)), // 通讯地址详细
-    phoneNumber: contactPhone(args), // 住址电话
+    contactPhone: contactPhone(args), // 住址电话
 
     // 通讯地址(新)
     // familyAddress: args.contactAddress,
     // contactAddress: args.contactAddress,
 
     // 職業信息
-    professionCode: args.professionCode === 'OTH' ? 7 : args.professionCode, // 职业类型
-    otherProfession: args.professionCode === 'OTH' ? args.professionCodeOther : '', // 其它职业类型
+    professionCode: args.professionCode, // 职业类型
+    otherProfession: args.professionCode === professionCodeValue.others ? args.professionCodeOther : '', // 其它职业类型
     companyName: toDBC(args.companyName), // 公司名称
     companyAddress: args.companyAddress,
     companyPhoneNumber: companyPhoneNumber(args), // 办公室电话
-    industryRange: args.industryRange, // 所属行业
+    industryRange: toDBC(args.industryRange), // 所属行业
     workingSeniority: args.workingSeniority, // 从业年限[0、未知  1、1-2年   2、2-5年   3、5-10年   4、>10年]
     jobPosition: args.jobPosition, // 职位级别
-    freelanceCode: 0,//自由职业细化类型
-    freelanceOther: args.professionCode === 'OTH' ? args.professionCodeOther : '',// 自由职业
+    // freelanceCode: 0,//自由职业细化类型
+    // freelanceOther: args.professionCode === 'OTH' ? toDBC(args.professionCodeOther) : '',// 自由职业
   };
 
   const infoDisclosure = {
@@ -153,7 +153,7 @@ export const formatCommitData = (args, normalData = {}) => {
   // 个人申明
   const infoDeclare = {
     isAllowProvidePrivacy: Number(args.isAllowProvidePrivacy), // 同意 or 不同意
-    northTrade: Number(args.northTrade), // 北向交易 同意 or 不同意
+    // northTrade: Number(args.northTrade), // 北向交易 同意 or 不同意
     taxationInfo: taxInformation(args), // 个人税务列表
     fatca: args.isNotUsGreenCardHolder //是否是美国居民[1=不是 2=美国出生但不是 3=是美国人]
   };
@@ -176,12 +176,12 @@ export const formatCommitData = (args, normalData = {}) => {
 
     // 是否衍生产品学习
     // TODO: 原数据设计为二级选择学习方法
-    derivativeProductsStudyType: args.derivative ? Number(args.derivativeCourse) : '',
+    derivativeProductsStudyType: args.derivative ? Number(args.derivativeCourse) : 0,
     derivativeProductsStudyTypeOther: '',
 
     // 是否在金融机构工作经验
     // TODO: 原数据设计为二级选择经验说明
-    financingInstitutionWorkExperienceType: args.derivative ? Number(args.derivativeIndustry) : '',
+    financingInstitutionWorkExperienceType: args.derivative ? Number(args.derivativeIndustry) : 0,
     financingInstitutionWorkExperienceTypeOther: '',
 
     // 是否在过去三年曾买卖过至少五次任何衍生产品的交易

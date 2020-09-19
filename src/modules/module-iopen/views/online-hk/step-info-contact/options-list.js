@@ -16,8 +16,25 @@ export const professionCodeValue = {
   housewife: 4,
   student: 5,
   umemployed: 6,
-  other: 'OTH'
+  other: 7
 };
+
+// 學歷
+export const educationLevelOptions = () => [
+  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.primary"), value: 1 },
+  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.secondary"), value: 2 },
+  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.diploma"), value: 3 },
+  { text: getStepI18nValue("infoContact", "contact.educationLevel.options.universtyOrAbove"), value: 4 },
+];
+
+// 婚姻状况
+export const maritalStatusOptions = () => [
+  { text: getStepI18nValue("infoContact", "contact.maritalStatus.options.single"), value: 1 },
+  { text: getStepI18nValue("infoContact", "contact.maritalStatus.options.married"), value: 2 },
+  { text: getStepI18nValue("infoContact", "contact.maritalStatus.options.divorced"), value: 3 },
+  { text: getStepI18nValue("infoContact", "contact.maritalStatus.options.widowed"), value: 4 },
+];
+
 
 // 职业类型选项
 export const professionCodeOptions = () => [
@@ -108,7 +125,7 @@ export const workingSeniorityOptions = () => [
 
 // 收取节点及书信方式
 export const dStatementReceiveModeOptions = () => [
-  { text:  getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.email"), value: 1},
-  { text:  getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.residentalAddress"), value: 2},
-  { text:  getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.correspondenceAddress"), value: 3},
+  { text: getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.email"), value: 1 },
+  { text: getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.residentalAddress"), value: 2 },
+  { text: getStepI18nValue("infoContact", "contact.dStatementReceiveMode.options.correspondenceAddress"), value: 3 },
 ]

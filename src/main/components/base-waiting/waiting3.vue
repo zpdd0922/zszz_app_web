@@ -1,24 +1,53 @@
 <template>
   <div class="waiting">
+    <div :class="['waiting-mark', {'waiting-mark-color': isMark}]" ref="mark" @click="maskClick"></div>
     <div class="waiting-icon" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'waiting'
+  name: "waiting",
+  props: {
+    isMark: {
+      type: Boolean,
+      default: false,
+    },
+    outClick: {
+      type: Function,
+    },
+  },
+  methods: {
+    maskClick() {
+      typeof outClick === "function" && outClick();
+    },
+  },
 };
 </script>
 <style scoped>
-  .waiting {
-    width: 50px;
-    top: 50%;
-    left: 50%;
-    margin-top: -25px;
-    margin-left: -25px;
-    position: absolute;
-    text-align: center;
-  }
+.waiting-mark {
+  position: fixed;
+  z-index: 98;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.waiting-mark-color {
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0.3;
+}
+
+.waiting {
+  width: 50px;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+  position: absolute;
+  text-align: center;
+}
 .waiting-icon,
 .waiting-icon::before,
 .waiting-icon::after {

@@ -18,14 +18,19 @@ const router = new VueRouter({
       path: "/",
       component: AppWrap,
       redirect: 'opa',
-      children: [{
-        path: '/home',
-        name: 'home',
-        component: () => import(/* webpackChunkName:"open-account-common" */ `../views/home/index.vue`),
-        meta: { whiteAuth: true }
-      },
-      ...signRouter,
-      ...opaRouter,
+      children: [
+        {
+          path: '/home',
+          name: 'home',
+          component: () => import(/* webpackChunkName:"open-account-common" */ `../views/home/index.vue`),
+          meta: { whiteAuth: true }
+        },
+        ...signRouter,
+        ...opaRouter,
+        {
+          path: "*",
+          redirect: "opa",
+        }
       ]
     }
   ],

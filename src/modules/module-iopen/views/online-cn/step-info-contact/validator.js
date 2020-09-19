@@ -1,6 +1,8 @@
 // 联络信息字段(用于校验)
 export const contactValidator = [
   { key: 'email' },
+  { key: 'educationLevel' },
+  { key: 'maritalStatus' },
   { key: 'homeRadio' },
   { key: 'homeCity' },
   { key: 'homeAddressDetail' },

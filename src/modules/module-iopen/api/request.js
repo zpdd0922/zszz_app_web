@@ -22,7 +22,7 @@ const updateHeaders = () => ({
   // "X-Accept-Language": getDefaultLang(),
 });
 
-const axios = new Axios(baseURL, { updateHeaders, whiteApiList: ['/open_api/ocr'] });
+const axios = new Axios(baseURL, { updateHeaders, whiteApiList: ['/open_api/get_industry','/open_api/ocr'] });
 
 export const post = (url, params) => {
   return axios.post(url, paramsData.WRAP(params));
@@ -33,5 +33,5 @@ export const postOption = (url, params) => {
 }
 
 export const postImg = (url, params, options) => {
-  return ajaxUpload(HOST_OPEN, url, updateHeaders, paramsData.WRAP(params), options);
+  return ajaxUpload(baseURL, url, updateHeaders, paramsData.WRAP(params), options);
 }

@@ -47,24 +47,17 @@ export default {
         label: '签发机关',
         placeholder: '请输入签发机关'
     },
-    educationLevel: {
-        label: '教育程度',
-        placeholder: '请选择教育程度',
-        options: {
-            primary: '小学',
-            secondary: '中学',
-            diploma: '专上学院',
-            universtyOrAbove: '大学或以上',
-        }
+    birthCountry: {
+        label: '出生国家',
+        placeholder: '请选择'
     },
-    maritalStatus: {
-        label: '婚姻状况',
-        placeholder: '请选择婚姻状况',
-        options: {
-            single: '未婚',
-            married: '已婚',
-            divorced: '离婚',
-            widowed: '鳏寡',
-        }
-    }
+    birthCountryTxt: {
+        label: '出生国家',
+        placeholder: '请输入'
+    },
+    birthArea: {
+        label: '出生地区',
+        placeholder: '请输入',
+        txtHk: '中国香港',
+    },
 }

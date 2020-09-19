@@ -76,7 +76,6 @@ import {
   IdCardHK,
   Passport,
   IMAGE_REQUEST_LIST,
-  AO_NATIONALITY,
 } from "../../../api/params-define";
 
 // 重置香港银行卡默认提示图

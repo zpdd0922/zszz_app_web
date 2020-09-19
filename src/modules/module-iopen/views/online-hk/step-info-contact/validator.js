@@ -2,6 +2,8 @@
 export const contactValidator = [
   { key: 'email' },
   { key: 'homeRadio' },
+  { key: 'educationLevel' },
+  { key: 'maritalStatus' },
   { key: 'homeCity' },
   { key: 'homeAddressDetail' },
   // { key: 'homeAddressNumber' },

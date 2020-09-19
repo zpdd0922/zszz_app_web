@@ -44,6 +44,13 @@ const NOPARAMS = (data = {}) => ({
   ...data
 });
 
+// 获取开户相关选项数据字典@params str
+const OPTIONS = (str) => ({
+  params: {
+    mark: str
+  }
+});
+
 // // 转移股票包裹层
 // const TRANSFER = (data={}) => ({
 //   requestSrc: auth.getPlateform(),
