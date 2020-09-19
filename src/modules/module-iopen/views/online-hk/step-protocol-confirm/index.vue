@@ -59,7 +59,7 @@
             v-model="model.password"
             class="pwd"
             @input="checkPwd"
-            :disabled="!pwd1Status"
+            :readonly="!pwd1Status"
           ></cube-input>
         </cube-form>
       </div>
