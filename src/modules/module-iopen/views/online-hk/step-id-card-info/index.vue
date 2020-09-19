@@ -279,9 +279,9 @@ export default {
         birthCountryTxt: {
           type: "input",
           modelKey: "birthCountryTxt",
-          label: this.getI18n("birthCountry.label"),
+          label: this.getI18n("birthCountryTxt.label"),
           props: {
-            placeholder: this.getI18n("birthArea.placeholder"),
+            placeholder: this.getI18n("birthCountryTxt.placeholder"),
           },
           rules: {
             required: false,

@@ -57,7 +57,7 @@ placeholder: '請輸入'
 },
 birthArea: {
 label: '出生地區',
-placeholder: '請輸入',
+placeholder: '選填',
 txtHk: '中國香港',
 },
 }

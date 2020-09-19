@@ -55,6 +55,6 @@ export default {
     },
     birthArea: {
         label: '出生地区',
-        placeholder: '请输入'
+        placeholder: '选填'
     },
 }
