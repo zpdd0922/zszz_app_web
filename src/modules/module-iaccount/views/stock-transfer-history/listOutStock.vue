@@ -1,6 +1,6 @@
 <template>
-  <div class="funds">
-    <div class="funds-select">
+  <div class="transfer-history">
+    <div class="transfer-history-select">
       <sticky :z-index="10">
         <div class="select-tab border-bottom-1px">
           <jf-filter
