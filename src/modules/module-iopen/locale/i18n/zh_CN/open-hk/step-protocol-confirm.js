@@ -16,7 +16,7 @@ export default {
   notSame: "两次密码输入不一致",
   // empty: '密码不能为空',
   illegal: "密码不符合规则",
-  pwdSuccess: "密码设置成功",
+  pwdSuccess: "密码校验通过",
   btn: "我确认以上是本人讯息，下一步",
   success: "保存成功，请等待通知",
   };

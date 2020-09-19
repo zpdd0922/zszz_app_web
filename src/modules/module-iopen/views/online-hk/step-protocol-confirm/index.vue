@@ -58,7 +58,7 @@
             :placeholder="getI18n('tradePwdConfirm')"
             v-model="model.password"
             class="pwd"
-            @blur="checkPwd"
+            @input="checkPwd"
             :disabled="!pwd1Status"
           ></cube-input>
         </cube-form>

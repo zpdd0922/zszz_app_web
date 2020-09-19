@@ -16,7 +16,7 @@ export default {
   notSame: '兩次密碼輸入不一致',
   // empty: '密碼不能為空',
   illegal: '密碼不符合規則',
-  pwdSuccess: '密碼設置成功',
+  pwdSuccess: '密碼校驗通過',
   btn: '我確認以上是本人資訊，下一步',
   success:'保存成功，請等待通知'
   }

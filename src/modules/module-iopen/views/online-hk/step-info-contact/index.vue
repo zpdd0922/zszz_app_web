@@ -893,39 +893,9 @@ export default {
       });
       return !status.includes(false);
     },
-    // 电话号码验证，只验证了全数字和长度不大于11
-    validPhoneNum() {
-      const phoneList = [
-        this.model.homeTelePhone,
-        this.model.contactTelePhone,
-        this.professionModel.companyTelePhone,
-      ];
-      return phoneList
-        .map((val) => {
-          // 判断是否填写
-          if (val.length === 0) {
-            return true;
-          } else {
-            // 判断是否包含除数字之外的
-            if (!isNaN(val)) {
-              // 判断是否大于11位
-              if (val.length > 11) {
-                return false;
-              } else {
-                return true;
-              }
-            } else {
-              return false;
-            }
-          }
-        })
-        .every((val) => {
-          return val;
-        });
-    },
     // 验证提交按钮
     isDisabled() {
-      const result = this.validProfession && this.validContact && this.validPhoneNum;
+      const result = this.validProfession && this.validContact;
       const cardFile = Object.values(this.AddressImgFile);
       const len = 1;
 
@@ -964,6 +934,36 @@ export default {
     },
   },
   methods: {
+    // 电话号码验证，只验证了全数字和长度不大于11
+    validPhoneNum() {
+      const phoneList = [
+        this.model.homeTelePhone,
+        this.model.contactTelePhone,
+        this.professionModel.companyTelePhone,
+      ];
+      return phoneList
+        .map((val) => {
+          // 判断是否填写
+          if (val.length === 0) {
+            return true;
+          } else {
+            // 判断是否包含除数字之外的
+            if (!isNaN(val)) {
+              // 判断是否大于11位
+              if (val.length > 20) {
+                return false;
+              } else {
+                return true;
+              }
+            } else {
+              return false;
+            }
+          }
+        })
+        .every((val) => {
+          return val;
+        });
+    },
     getI18n(key, type = "") {
       return this.getStepI18nValue("infoContact", key);
     },
@@ -1098,7 +1098,12 @@ export default {
 
         // 校验邮箱格式
         if (!this.validEmail()) {
-          const errorTips = "请输入正确的邮箱地址";
+          const errorTips = this.getI18n('errorTipsEmail');
+          toast({ type: "error", txt: errorTips, time: 1000 });
+          return reject(new Error(errorTips));
+        }
+        if (!this.validPhoneNum()) {
+          const errorTips = this.getI18n('errorTipsPhone');
           toast({ type: "error", txt: errorTips, time: 1000 });
           return reject(new Error(errorTips));
         }
