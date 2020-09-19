@@ -9,7 +9,7 @@ const state = {
   // 美股历史数据
   stockTransferredUS: {},
   // 选择港股还是美股
-  isShares: localStorage["isShares"]?localStorage["isShares"]:'',
+  isShares: localStorage["isShares"] ? localStorage["isShares"] : '',
   // 历史选择
   isHistoryShares: null,
   // 历史转入股票
@@ -49,7 +49,7 @@ const mutations = {
   },
   [types.SET_ISHISTORYSHARES](state, payload) {
     if (!payload.stock) {
-      return 
+      return
     }
     state.isHistoryShares = payload.stock.isShares
   },
@@ -58,15 +58,15 @@ const mutations = {
       return
     }
     if (payload.stock.isShares === 1) {
-      state.stockTransferredHK = {...payload}
+      state.stockTransferredHK = { ...payload }
     } else if (payload.stock.isShares === 2) {
-      state.stockTransferredUS = {...payload}
+      state.stockTransferredUS = { ...payload }
     }
   },
-  [types.UPDATE_CACHE_DATA_STATUS](state, payload){
+  [types.UPDATE_CACHE_DATA_STATUS](state, payload) {
     state.isGetHistory = true;
   },
-  [types.STOCK_TRANSFER_HISTORY](state, payload){
+  [types.STOCK_TRANSFER_HISTORY](state, payload) {
     state.stockTransferHistory = payload;
   },
 
@@ -74,11 +74,11 @@ const mutations = {
 
 const actions = {
   // 获取历史转入数据
-  getTransferredStock({commit}, data) {
+  getTransferredStock({ commit }, data) {
     // const fullData = {...state.stockTransferredHK, ...data}
     return new Promise((resolve, reject) => {
       ApiStockTransfer.getTransferredStock(data).then((res) => {
-      
+
         if (res.stock) {
           commit(types.GET_STOCK_TRANSFERRED, res)
           commit(types.SET_ISHISTORYSHARES, res)
@@ -92,12 +92,15 @@ const actions = {
     })
   },
 
-  setMarketStatus({commit}, marketCode){
-    commit(types.SET_ISSHARES, {isShares: marketCode})
+  setMarketStatus({ commit }, marketCode) {
+    return new Promise((resolve, reject) => {
+      commit(types.SET_ISSHARES, { isShares: marketCode })
+      resolve()
+    })
   },
-  
+
   // 缓存数据
-  sendTransferredStockCache({commit}, data) {
+  sendTransferredStockCache({ commit }, data) {
     return new Promise((resolve, reject) => {
       ApiStockTransfer.sendTransferredStockCache(data).then((res) => {
         if (res.stock) {
@@ -110,7 +113,7 @@ const actions = {
     })
   },
   // 搜所接口
-  getSearchStockList({commit}, data) {
+  getSearchStockList({ commit }, data) {
     return new Promise((resolve, reject) => {
       ApiStockTransfer.getSearchStockList(data).then((res) => {
         // commit(types.SET_SEARCH_STOCK_LIST, res)
@@ -122,9 +125,9 @@ const actions = {
   },
 
   // 获取股票转移记录
-  getStocksHistory({commit}, data) {
+  getStocksHistory({ commit }, data) {
     return new Promise((resolve, reject) => {
-      ApiStockTransfer.getStocksHistory(data).then((res) => {
+    ApiStockTransfer.getStocksHistory(data).then((res) => {
         commit(types.STOCK_TRANSFER_HISTORY, res)
         resolve(res)
       }).catch((err) => {
@@ -132,7 +135,7 @@ const actions = {
       })
     })
   }
-} 
+}
 
 export default {
   state,

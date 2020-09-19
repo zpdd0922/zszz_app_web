@@ -160,6 +160,7 @@ export default function getImageInBase64({ uploadBefore, isCanSelect }) {
           EXIF.getData(file, function () {
             const orientation = EXIF.getTag(this, 'Orientation');
             resolve(compress(cached.img, orientation));
+            console.log(2431);
           });
         };
         cached.img.onerror = (e) => {

@@ -1,7 +1,5 @@
 @import '../components/styles.scss';
 
-@import '../components/styles.scss';
-
 .layout-iaccount {
   .sec-page-title {
     padding: .15rem .15rem .1rem;
@@ -175,10 +173,51 @@
   .telephone {
     color: $color-link-txt-active;
   }
+
+
+  .select-ways {
+    padding: .1rem .25rem;
+
+    .way-item {
+        display: flex;
+        border: solid 1px $color-separate-line;
+        border-radius: 5px;
+        padding: .2rem;
+        margin-bottom: .25rem;
+        align-items: center;
+        background: $color-content-bg;
+        font-size: 0;
+    
+        .way-icon {
+          background-size: contain;
+          display: inline-block;
+          width: .42rem;
+          height: .42rem;
+          border-radius: 5px;
+          margin-right: .1rem;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+         
+        .label{
+          display: inline-block;
+          width: 100%;
+          font-size:.15rem;
+        }
+    
+        .tips{
+          display: inline-block;
+          width: 100%;
+          font-size:.13rem;
+          color: $color-txt-sub;
+        }
+      }
+  }
 }
 
 @import './home/style.scss';
 @import './funds-deposit/style.scss';
+@import './into-stock/style.scss';
 
 
 //引入计算佣金页面样式

@@ -127,31 +127,45 @@
   }
 }
 
-// 边框 1px - 存在层级覆盖
-@mixin border-after-1px ($color: $color-border, $type: solid, $radius: inherit) {
+// 1px边框
+@mixin border-after-1px($dir: bottom, $color: $color-border) {
   position: relative;
+
   &:after {
     content: '\0020';
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    border: 1PX $type $color;
-    border-radius: $radius;
     position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    transform-origin: 0 0;
-    box-sizing: border-box;
-    @media (min-resolution: 2dppx) {
-      width: 200%;
-      height: 200%;
-      transform: scale(.5);
+    background-color: $color;
+
+    @if ($dir==top) {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      transform: scaleY(0.5);
     }
-    @media (min-resolution: 3dppx) {
-      width: 300%;
-      height: 300%;
-      transform: scale(.3333);
+
+    @else if ($dir==left) {
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      transform: scaleX(0.5);
+    }
+
+    @else if ($dir==right) {
+      right: 0;
+      top: 0;
+      width: 1px;
+      height: 100%;
+      transform: scaleX(0.5);
+    }
+
+    @else {
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      transform: scaleY(0.5);
     }
   }
 }

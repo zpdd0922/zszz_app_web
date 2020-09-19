@@ -3,9 +3,9 @@ import paramsData from '@/main/request/utils/wrap';
 
 export default {
   // 获取用户历史佣金记录
-  getUsercommissionRecord: data => post('/activ_api/find_user_commission_record', paramsData.NOPARAMS(data)),
+  getUsercommissionRecord: data => post('/sec_fee_api/comm/get_free_commission', paramsData.NOPARAMS(data)),
   // 获取用户香港佣金标准
-  getHKcommissionInfo : data => post('/activ_api/getHKCommissionInfo', paramsData.NOPARAMS(data)) ,
+  getHKcommissionInfo : data => post('/sec_fee_api/comm/get_user_commission', paramsData.COMMON(data)) ,
   // 获取用户美国佣金标准
-  getUScommissionInfo : data => post('/activ_api/getUSCommissionInfo', paramsData.NOPARAMS(data)),
+  getUScommissionInfo : data => post('/sec_fee_api/comm/get_us_commission', paramsData.NOPARAMS(data)),
 }

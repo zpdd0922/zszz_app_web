@@ -152,5 +152,5 @@ export default {
   /**
    * 提交公司行动
    */
-  saveCorporateActions: data => post('/sec_api/save_corporate_actions', paramsData.COMMON(data)),
+  saveCorporateActions: data => post('/sec_company_api/save_actions', paramsData.COMMON(data)),
 };

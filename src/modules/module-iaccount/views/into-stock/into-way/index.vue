@@ -1,24 +1,19 @@
 <template>
-  <section class="into-way-wrap">
-    <header class="page-title">{{$t('iAccount.intoStock.intoWay.title')}}</header>
-    <div class="ways">
-      <div
-        v-for="item in ways"
-        :key="item.type"
-        class="way-item"
-        @click="handleNext(item)"
-      >
-        <div>
-          <em :class="`icon icon-${item.type}`" />
-        </div>
-        <div class="cell-body">
+  <section class="sec-page-wrap sec-into-stock-way">
+    <base-cells class="select-ways">
+      <base-cell v-for="item in ways" :key="item.type" class="way-item" @click="handleNext(item)">
+        <base-cell-header>
+          <em :class="`way-icon way-icon-${item.type}`" />
+        </base-cell-header>
+        <base-cell-body>
           <span class="label">{{item.label}}</span>
-          <span class="eng">{{item.engLabel}}</span>
-          <!-- <span class="tips">{{item.tips}}</span> -->
-        </div>
-        <div class="arrow"></div>
-      </div>
-    </div>
+          <span v-if="item.tips" class="tips">{{item.tips}}</span>
+        </base-cell-body>
+        <base-cell-footer>
+          <base-icon name="arrow"></base-icon>
+        </base-cell-footer>
+      </base-cell>
+    </base-cells>
   </section>
 </template>
 
@@ -26,79 +21,70 @@
 import { userMakePhone, getMobileInfo } from "@/main/utils/native-app/";
 import { alert } from "@/main/utils/common/tips";
 import validate from "@/main/utils/format/validate";
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import AccountApi from "@/modules/module-iaccount/api/modules/api-account";
+import {
+  HKD,
+  USD,
+  DOLLAR_HK_VAL,
+  DOLLAR_US_VAL,
+} from "@/modules/module-iaccount/define";
 
 export default {
   data() {
     return {
-      metaInfo: {
-        state: 0,
-        step: 0,
-      }
+      offlineOptions: window.OFFLINE_CONTACT,
+      selectWay: "",
     };
   },
-  props: {
-    updateInfo: {
-      type: Function
-    }
-  },
   created() {
-    //TODO:新增一个获取可提取现金的接口调用 /find_extractable_money
-
     // TODO: 新增ip判斷，進行邏輯處理？
     // this.queryAddressIP();
   },
   computed: {
-    // ...mapGetters(["openInfo", "openProgress"]),
-    ...mapGetters(["isShares"]),
     // 判断当前路由环境
     origin() {
       return this.UaInfo.isApp() ? "app" : "h5";
     },
-
     ways() {
-
       return [
         {
           type: "hk",
           code: 1,
           label: this.$t("iAccount.intoStock.intoWay.wayHK"),
-          engLabel: 'Into HK stocks',
-          // nextRouteName: 'transferInfo',
+          tips: "Into HK stocks",
+          nextRouteName: "transferInfo",
         },
         {
           type: "us",
           code: 2,
           label: this.$t("iAccount.intoStock.intoWay.wayUS"),
-          engLabel: 'Into US stocks',
+          tips: "Into US stocks",
           // nextRouteName: 'transferInfo',
         },
       ];
     },
   },
   methods: {
+    ...mapActions(["setMarketStatus"]),
     handleNext(item) {
-      if (item.code === 2) {
+      if (!item.nextRouteName) {
         alert({
           title: this.$t("common.alertTitle"),
           content: "功能待开放",
         });
-        return
+        return;
       }
       //更改选择状态
-      // this.$store.commit('SET_ISSHARES', {isShares: item.code})
-      this.$store.dispatch("setMarketStatus", item.code)
-      // 进入下一流程
-      this.$router.push({
-        name: 'transferInfo',
-        // params: { intoType: item.code, isRefresh: false },
+      this.setMarketStatus(item.code).then(() => {
+        // 进入下一流程
+        this.$router.push({
+          name: item.nextRouteName,
+          // params: { intoType: item.code, isRefresh: false },
+        });
       });
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import './style.scss';
-</style>
 

@@ -17,10 +17,9 @@ const getRouterName = () => i18n.t("iAccount.deposit.name");
 // 路由配置表
 const routes = [
   {
-    path: "/",
-    redirect: { name: "sec-home" },
-    component: () =>
-      import(/* webpackChunkName:"iaccount-common" */ `../views/layout.vue`),
+    path: "/sec/",
+    redirect: { name: 'sec-home' },
+    component: () => import(/* webpackChunkName:"iaccount-common" */ `../views/layout.vue`),
     children: [
       // 主页面
       {

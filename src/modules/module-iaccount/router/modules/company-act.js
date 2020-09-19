@@ -4,10 +4,10 @@ const _import = (path, file = 'index') => () => import(/* webpackChunkName:"iacc
 
 const companyActRouter = [
   {
-    path: '/company-act',
+    path: 'company-act',
     name: 'company-act',
     component: CompanyAct,
-    redirect: '/company-act/act-form',
+    redirect: 'company-act/act-form',
     children: [
       {
         name: 'act-form',

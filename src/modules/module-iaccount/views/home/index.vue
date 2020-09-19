@@ -75,7 +75,12 @@ export default {
           key: "stocks",
           label: "股票",
           channel: [
-            { key: "enter", label: "轉入股票", iconType: "enter", path: "intoStock" },
+            {
+              key: "enter",
+              label: "轉入股票",
+              iconType: "enter",
+              path: "intoStock",
+            },
             { key: "out", label: "轉出股票", iconType: "out" },
             {
               key: "history-stocks",
@@ -91,8 +96,13 @@ export default {
           key: "company",
           label: "公司行動",
           channel: [
-            { key: "xgxx", label: "選股選息", iconType: "xgxx" },
-            { key: "sqgg", label: "申請供股", iconType: "sqgg" },
+            {
+              key: "xgxx",
+              label: "選股選息",
+              iconType: "xgxx",
+              // path: "company-act",
+            },
+            // { key: "sqgg", label: "申請供股", iconType: "sqgg" },
           ],
         },
         {

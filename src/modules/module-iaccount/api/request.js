@@ -23,7 +23,7 @@ const updateHeaders = () => ({
   // "X-Accept-Language": getDefaultLang(),
 });
 
-const axios = new Axios(baseURL, { updateHeaders, whiteApiList: ['/open_api/ocr'] });
+const axios = new Axios(baseURL, { updateHeaders, whiteApiList: ['/sec_api/save_into_money'] });
 
 export const post = (url, params) => {
   return axios.post(url, params);
@@ -34,5 +34,5 @@ export const postCommon = (url, params) => {
 }
 
 export const postImg = (url, params, options) => {
-  return ajaxUpload(HOST_OPEN, url, updateHeaders, params, options);
+  return ajaxUpload(baseURL, url, updateHeaders, params, options);
 }

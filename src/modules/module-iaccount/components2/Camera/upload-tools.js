@@ -101,6 +101,7 @@ export const openJsCameraJF = (props) => {
   getImageInBase64({ uploadBefore: () => {uploadBefore(idFlag)}, isCanSelect })
     .then((imageUrl) => {
       localLoad(imageUrl, idFlag);
+      console.log(123);
       upload(imageUrl, idFlag);
     })
     .catch(err => {
