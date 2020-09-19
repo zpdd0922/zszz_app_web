@@ -189,7 +189,7 @@ const depositRouter = [
         ]
       },
       {
-        name: 'deposit-notify',
+        name: "sec-deposit-notify",
         path: 'notify',
         component: _import('deposit/notify'),
         meta: { title: getRouterName }

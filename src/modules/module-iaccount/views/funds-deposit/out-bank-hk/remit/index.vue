@@ -284,7 +284,6 @@ export default {
         this.depositSelectBankAccount !== "add"
           ? result
           : depositBankAccountAgain.length && result;
-      console.log("isDisabled-hk", formInput, result, isEmpty);
       return !isEmpty;
     },
   },

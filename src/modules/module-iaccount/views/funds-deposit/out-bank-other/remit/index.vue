@@ -156,7 +156,7 @@
                     @blur="_blurMoneyInput"
                   />
                   <div class="cube-input-append">
-                    <span class="txt">{{ depositCurrency.label }}</span>
+                    <span class="txt">{{ depositCurrency.name }}</span>
                   </div>
                 </div>
               </div>
@@ -452,10 +452,10 @@ export default {
         });
         return false;
       }
-      this.$store
+       this.$store
         .dispatch("apiSaveIntoMoney", params)
         .then((res) => {
-          this.$router.push({ name: "deposit-notify" });
+          this.$router.push({ name: "sec-deposit-notify" });
         })
         .catch((error) => {
           const { message } = error;

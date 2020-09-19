@@ -412,7 +412,7 @@ export default {
         return false
       }
       this.$store.dispatch('apiSaveIntoMoney', params).then(res => {
-        this.$router.push({ name: 'deposit-notify' })
+        this.$router.push({ name: "sec-deposit-notify" })
       }).catch((error) => {
         const { message } = error
         tips.alert({ content: message })
