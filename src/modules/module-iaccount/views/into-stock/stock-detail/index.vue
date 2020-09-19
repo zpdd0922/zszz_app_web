@@ -19,23 +19,30 @@
               :disabled="!item.isInputActive"
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
+            <!-- <div class="list-box" v-if="true"> -->
               <!-- TODO:看看后续要不要加loading -->
-              <!-- <template v-if="isSearchLoading">
-                <loading />
-              </template>-->
-              <template>
+              <template v-if="isSearchLoading">
+                <div class="is-searching">
+                  <span>搜索中...</span>
+                </div>
+              </template>
+              <template v-else>
                 <div class="search-list" v-if="searchStockList.length > 0">
                   <div
                     class="search-line"
                     v-for="(item, index) in searchStockList"
                     :key="index"
+                    @mousedown.prevent
                     @click.stop="saveStockCode($event, idx,item)"
                   >
                     <!-- 图标要根据值变化 -->
-                    <span>图标</span>
+                    <span class="hk-stock-icon"></span>
                     <span class="code">{{item.id | formatCode}}</span>
                     <span class="name">{{item.name}}</span>
                   </div>
+                </div>
+                <div class="no-result" v-else>
+                  <span>{{getI18n('noResult')}}</span>
                 </div>
               </template>
             </div>
@@ -99,7 +106,7 @@ export default {
         isInputActive: false, //输入框状态
       },
       searchHistory: [],
-      // isSearchLoading: false, // 搜索框搜索状态
+      isSearchLoading: false, // 搜索框搜索状态
     };
   },
   created() {
@@ -146,7 +153,7 @@ export default {
         this.searchStockList = [];
         return;
       } else {
-        // this.isSearchLoading = true;
+        this.isSearchLoading = true;
         data = {
           params: {
             mkt: "",
@@ -155,14 +162,18 @@ export default {
           },
         };
       }
-      data.params.mkt = Number(this.isShares) === 1 ? "HK" : "US";
+      if (!this.isShares) {
+        data.params.mkt = Number(this.isShares) === 1 ? "HK" : "US";
+      } else {
+        data.params.mkt = Number(this.isHistoryShares) === 1 ? "HK" : "US";
+      }
       this.$store.dispatch("getSearchStockList", data).then((res) => {
         if (res) {
           this.searchStockList = res.stks;
         } else {
           this.searchStockList = [];
         }
-        // this.isSearchLoading = false
+        this.isSearchLoading = false
       });
     },
     // 对比用户选择和历史选择
