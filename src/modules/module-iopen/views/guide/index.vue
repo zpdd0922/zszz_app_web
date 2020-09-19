@@ -1,8 +1,7 @@
 <template>
   <section class="op-guide">
     <template v-if="!openProgress">
-      123213
-      <!-- <base-waiting /> -->
+      <base-waiting />
     </template>
     <template v-else>
       <div class="box">
@@ -17,8 +16,8 @@
           <!-- <template v-if="isAuthing">
             <com-authing :skin="skin" @click="handleLogout"></com-authing>
           </template>
-          <template v-else> -->
-            <com-pending :skin="skin" @click="handleLogout"></com-pending>
+          <template v-else>-->
+          <com-pending :skin="skin" @click="handleLogout"></com-pending>
           <!-- </template> -->
         </template>
         <!-- 开户已取消 -->
@@ -116,14 +115,21 @@ export default {
     },
     progressComponent() {},
   },
-  created() {
+  mounted() {
     this.getOpenProgress({ openType: 0 });
   },
   methods: {
     ...mapActions(["getOpenProgress", "updateAuthStatus"]),
     // 触发极速开户
     onOpenClick() {
-      this.handleAppOpen({ path: "open-way" });
+      this.getOpenProgress({ openType: 0 }).then((res) => {
+        if (
+          res.openStatus === OPEN_STATUS.UN_START ||
+          res.openStatus === OPEN_STATUS.UN_SUBMIT
+        ) {
+          this.handleAppOpen({ path: "open-way" });
+        }
+      });
     },
     onAuthClick() {
       this.updateAuthStatus({ flag: 1 }).then(

@@ -58,14 +58,6 @@ const NOPARAMS = (data = {}) => ({
 //   ...data
 // })
 
-// // 获取开户相关选项数据字典@params str
-// // 'WEB_OCCUPATION_TYPE' 所属行业
-const OPTIONS = (str) => ({
-  params: {
-    mark: str
-  }
-});
-
 // // 查询开户状态
 // const CHECK = (data = {}) => ({
 //   requestSrc: auth.getPlateform(),

@@ -334,7 +334,7 @@ export default {
     // 组合中文姓名拼音用以签名信息以及传递给CUBP
     enName() {
       const { familyNameSpell, givenNameSpell } = this.model;
-      return familyNameSpell + " " +givenNameSpell;
+      return familyNameSpell + " " + givenNameSpell;
     },
     isDisabled() {
       // 增加大陆籍，限制输入两个字以上
@@ -351,8 +351,16 @@ export default {
         sex,
         passportStartValue,
         passportEndValue,
+        birthCountryTxt,
       } = this.model;
-      let arr = [familyNameSpell, givenNameSpell, idCardValue, birthday, sex];
+      let arr = [
+        familyNameSpell,
+        givenNameSpell,
+        idCardValue,
+        birthday,
+        sex,
+        birthCountryTxt,
+      ];
 
       if (this.isChina) {
         arr = [
@@ -364,6 +372,7 @@ export default {
           addressValue,
           dateStartValue,
           dateEndValue,
+          birthCountryTxt,
         ];
       }
       if (this.isPassport) {
@@ -375,6 +384,7 @@ export default {
           sex,
           passportStartValue,
           passportEndValue,
+          birthCountryTxt,
         ];
       }
       const result = arr.every((val) => String(val).length);
