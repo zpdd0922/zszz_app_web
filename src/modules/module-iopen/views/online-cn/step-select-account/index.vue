@@ -11,8 +11,7 @@
             />
           </cube-form-item>
         </cube-form-group>-->
-
-        <div class="margin-bottom"></div>
+        <!-- <div class="margin-bottom"></div> -->
         <cube-form-group class="step-content step-content-accounts custom-form-group">
           <head-title :title="contentTitle.accounts"></head-title>
           <cube-form-item :field="filedsAccounts.fundAccountType">

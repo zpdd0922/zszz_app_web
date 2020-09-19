@@ -20,7 +20,7 @@ export default {
         optionsExperience: { label: '期權', placeholder: '請選擇' },
         unitTrustsExperience: { label: '基金', placeholder: '請選擇' },
         otherProductsExperience: { label: '其他投資產品', placeholder: '請選擇' },
-        otherProductsName: { label: '請說明', placeholder: '請填寫' },
+        otherProductsName: { label: '', placeholder: '請填寫其他投資產品' },
     },
     trade: {
         title: '交易頻率(每年)',

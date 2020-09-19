@@ -11,6 +11,6 @@ export default {
         optionsExperience: { label: '期权', placeholder: '请选择' },
         CCBCExperience: { label: '牛熊证', placeholder: '请选择' },
         otherProductsExperience: { label: '其他投资产品', placeholder: '请选择' },
-        otherProductsName: { label: '请说明', placeholder: '请填写' },
+        otherProductsName: { label: '', placeholder: '请填写其他投资产品' },
     },
 };

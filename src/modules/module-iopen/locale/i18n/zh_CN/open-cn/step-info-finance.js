@@ -48,7 +48,7 @@ export default {
             hedging: '对冲',
             other: '其他',
         } },
-        investTargetOther: { label: '\r', placeholder: '请填写其他投资目的' },
+        investTargetOther: { label: '其他投资目的', placeholder: '请填写其他投资目的' },
         residence: { label: '住宿', placeholder: '请选择住宿', options: {
             rented: '租用物业',
             selfOwned: '自置物业',
@@ -57,7 +57,7 @@ export default {
             withFamily: '与家人同住',
             other: '其他',
         } },
-        residenceOther: { label: '\r', placeholder: '请填写其他住宿方式' },
+        residenceOther: { label: '其他住宿', placeholder: '请填写其他住宿方式' },
     },
     // assets: {
     //     title: '财产种类',

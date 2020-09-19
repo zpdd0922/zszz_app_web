@@ -193,14 +193,14 @@ export const formatCommitData = (args, normalData = {}) => {
   };
 
   const infoExperience = {
-    stocksInvestmentExperienceType: args.stocksInvestmentExperience, // 股票投资经验
-    warrantsInvestmentExperienceType: args.warrantsInvestmentExperience, // 认证股权经验
-    futuresInvestmentExperienceType: args.futuresInvestmentExperience, // 期货投资经验
-    optionsExperience: args.optionsExperience,   // 期权投资经验 [0、未知 1、没有  2、<1年   3、 1-2年   4、>2年]
+    stocksInvestmentExperienceType: args.stocksInvestmentExperience || 0, // 股票投资经验
+    warrantsInvestmentExperienceType: args.warrantsInvestmentExperience || 0, // 认证股权经验
+    futuresInvestmentExperienceType: args.futuresInvestmentExperience || 0, // 期货投资经验
+    optionsExperience: args.optionsExperience || 0,   // 期权投资经验 [0、未知 1、没有  2、<1年   3、 1-2年   4、>2年]
     unitTrustsExperience: args.unitTrustsExperience || 0, // 单位信托基金/互惠基金[0、未知 1、没有  2、<1年   3、 1-2年   4、>2年]
-    otherProductsExperience: args.otherProductsExperience,   //其它投资产品 [0、未知  1、<10年  2、10-40年   3、 >40年]
+    otherProductsExperience: args.otherProductsExperience || 0,   //其它投资产品 [0、未知  1、<10年  2、10-40年   3、 >40年]
     otherProductsName: args.otherProductsExperience && args.otherProductsExperience !== 0 ? args.otherProductsName : '', // 其它投资产品名称
-    ccbcExperience: args.CCBCExperience, //牛熊证投资经验
+    ccbcExperience: args.CCBCExperience || 0, //牛熊证投资经验
     // TODO:互斥條件處理？？
     // tradeWarrantsFrequency: args.tradeWarrantsFrequency,   // //认股证交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
     // tradeStockFrequency: args.tradeStockFrequency,//股票交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]

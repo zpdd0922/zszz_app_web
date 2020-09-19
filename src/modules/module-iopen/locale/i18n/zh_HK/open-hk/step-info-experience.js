@@ -11,7 +11,7 @@ export default {
     optionsExperience: { label: '期權', placeholder: '請選擇' },
     CCBCExperience: { label: '牛熊證', placeholder: '請選擇' },
     otherProductsExperience: { label: '其他投資產品', placeholder: '請選擇' },
-    otherProductsName: { label: '請說明', placeholder: '請填寫' },
+    otherProductsName: { label: '', placeholder: '請填寫其他投資產品' },
     },
     };
     

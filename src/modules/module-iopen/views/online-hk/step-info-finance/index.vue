@@ -403,6 +403,21 @@ export default {
     // 验证财务信息
     validCapital() {
       const data = this.model;
+        if (
+        this.isShowTargetInput &&
+        (typeof data.investTargetOther !== "string" ||
+          data.investTargetOther.trim() === "")
+      ) {
+        return false;
+      }
+      
+      if (
+        this.isShowResidenceInput &&
+        (typeof data.residenceOther !== "string" ||
+          data.residenceOther.trim() === "")
+      ) {
+        return false;
+      }
       const status = validForm.capitalValidator.map((val) => {
         const item = data[val];
         if (typeof item === "object") {
