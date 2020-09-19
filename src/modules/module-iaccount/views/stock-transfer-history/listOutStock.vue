@@ -1,14 +1,5 @@
 <template>
   <div class="funds">
-    <!-- <div class="funds-tips">
-      <p class="txt">{{ $t('iAccount.history.common.text_7') }}</p>
-    </div> -->
-
-    <!-- <funds-summary
-      :title="$t('iAccount.history.common.text_5')"
-      :lists="summarys"
-      @clickTips="_clickWithdrawTips"></funds-summary> -->
-
     <div class="funds-select">
       <sticky :z-index="10">
         <div class="select-tab border-bottom-1px">
@@ -110,17 +101,18 @@ export default {
     },
     _fetchHis() {
       const params = {
-        type: this.itemData.value,
-        currency: this.currency,
-        state: this.state
-      }
-      SecuritiesApi.getFundsHistory(params).then(res => {
-        this._handleResData(res)
-      }).catch(() => {
-        this.listData = []
-      })
-    },
-    _handleResData(data) {
+        isShares: 0,
+        state: 0,
+      };
+      this.$store
+        .dispatch("getStocksHistory", params)
+        .then((res) => {
+          this.listData = [];
+        })
+        .catch(() => {
+          this.listData = [];
+        });
+    },    _handleResData(data) {
       const { moneySum, moneyList } = data
       this.summarys = SUMMARYS_DATA.map(item => {
         return {

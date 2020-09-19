@@ -1,6 +1,6 @@
 <template>
-  <div class="funds">
-    <div class="funds-select">
+  <div class="transfer-history">
+    <div class="transfer-history-select">
       <sticky :z-index="10">
         <div class="select-tab border-bottom-1px">
           <jf-filter
@@ -27,17 +27,17 @@
               <div class="content-wrap">
                 <ul class="company">
                   <li>
-                    <span>{{$t('iAccount.transferHistory.date')}}</span
+                    <span>{{ $t("iAccount.transferHistory.date") }}</span
                     ><span>{{
                       slotProps.item.createdTime | filterDateTime
                     }}</span>
                   </li>
                   <li>
-                    <span>{{$t('iAccount.transferHistory.outCompany')}}</span
+                    <span>{{ $t("iAccount.transferHistory.outCompany") }}</span
                     ><span>{{ slotProps.item.secName }}</span>
                   </li>
                   <li>
-                    <span>{{$t('iAccount.transferHistory.status')}}</span
+                    <span>{{ $t("iAccount.transferHistory.status") }}</span
                     ><span>{{ slotProps.item.state | filterStatusText }}</span>
                   </li>
                 </ul>
@@ -47,11 +47,11 @@
                   :key="index"
                 >
                   <li>
-                    <span>{{$t('iAccount.transferHistory.stockName')}}</span
+                    <span>{{ $t("iAccount.transferHistory.stockName") }}</span
                     ><span>{{ item.sharesName }}</span>
                   </li>
                   <li>
-                    <span>{{$t('iAccount.transferHistory.stockNum')}}</span
+                    <span>{{ $t("iAccount.transferHistory.stockNum") }}</span
                     ><span>{{ item.sharesNum }}</span>
                   </li>
                 </ul>
@@ -67,7 +67,6 @@
 
 <script>
 import i18n from "@/modules/module-iaccount/locale";
-// import { FundsSummary } from '../components'
 import * as tips from "@/modules/module-iaccount/utils/tips";
 import cookie from "@/modules/module-iaccount/utils/cookie";
 import { timestampToTime } from "@/modules/module-iaccount/utils/date";
@@ -144,7 +143,7 @@ export default {
     },
 
     _filterAll() {
-      console.log(this.state, this.market, 'asdfasd')
+      console.log(this.state, this.market, "asdfasd");
       if (!this.market && !this.state) {
         this.listData = [...this.listDataCache];
       } else if (!this.market && this.state) {
@@ -172,8 +171,6 @@ export default {
       return timestampToTime(val, "YYYY/MM/DD");
     },
   },
-  components: {
-    // FundsSummary
-  },
+  components: {},
 };
 </script>

@@ -1,19 +1,13 @@
 @import '~@/modules/module-iaccount/assets/styles/variable.scss';
 @import '~@/modules/module-iaccount/assets/styles/mixin.scss';
 
-.funds {
+.transfer-history {
   .part {
     margin-top: 0;
   }
-
-  .funds-tips {
-    color: $color-999;
-    font-size: .12rem;
-    padding: .11rem .15rem .05rem;
-  }
 }
 
-.funds-select {
+.transfer-history-select {
   margin-top: .05rem;
   position: relative;
   .select-tab {
@@ -27,12 +21,12 @@
   .select-box {
     .content-wrap {
       width: 100%;
-      @include border-name (0.1rem,$color-eee, solid, top);
+      border-radius: 0.2rem;
 
       ul {
-        width: 100vw;
-        padding: 0.05rem 0.1rem;
-        line-height: 0.18rem;
+        width: 100%;
+        padding: 0.05rem 0.15rem;
+        line-height: 0.22rem;
 
         li {
           display: flex;
@@ -54,6 +48,13 @@
       ul:not(:last-child) {
         border-bottom: #e5e5e5 dashed 0.01rem;
       }
+    }
+    .content-wrap:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0.12rem;
+      background-color: $color-theme-bg;
     }
   }
 }
