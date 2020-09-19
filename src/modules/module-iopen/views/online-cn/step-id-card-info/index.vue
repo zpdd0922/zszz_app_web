@@ -76,11 +76,11 @@
                   </div>
                   <div class="custom-form-separator">|</div>
                   <div class="custom-form-date">
-                    <!-- <template v-if="model.isLonger">
+                    <template v-if="model.isLonger">
                       <span>{{longerDateText}}</span>
-                    </template>-->
-                    <!-- <template v-else> -->
-                    <template>
+                    </template>
+                    <template v-else>
+                    <!-- <template> -->
                       <div @click="showEndDatePicker">
                         <template v-if="model.dateEndValue">
                           <span>{{model.dateEndValue}}</span>
@@ -95,12 +95,12 @@
                   </div>
                 </div>
                 <!-- 切换长期身份证按钮 -->
-                <!-- <div class="custom-form-switch">
+                <div class="custom-form-switch">
                   <div class="cube-switch">
                     <input v-model="model.isLonger" type="checkbox" class="cube-switch-input" />
                     <i class="cube-switch-ui">{{longerDateText}}</i>
                   </div>
-                </div>-->
+                </div>
               </cube-form-item>
               <!-- 签发机关 -->
               <cube-form-item :field="fields.authority"></cube-form-item>
@@ -144,7 +144,7 @@ export default {
         dateEndValue: "", //证件有效期
         authority: "", //证件签发地
         // nation: "", //民族
-        // isLonger: false,
+        isLonger: false,
         birthCountry: "", //出生国家
         birthCountryTxt: "", //出生国家
         birthArea: "", //出生地区

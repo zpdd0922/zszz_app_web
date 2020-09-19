@@ -66,7 +66,8 @@ export const intoStock = {
         searchInput: '请输入股票代码/名称/首字母',
         searchTitle: '以下为历史搜索记录',
         clear: '清除记录',
-      }
+      },
+      noResult: '无搜索结果',
     },  
     infoConfirm: {
       confirmTitle: '请确认所填信息无误后提交',

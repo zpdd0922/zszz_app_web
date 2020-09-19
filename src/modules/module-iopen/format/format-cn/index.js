@@ -210,6 +210,10 @@ export const formatCommitData = (args, normalData = {}) => {
     // tradeOtherProductsFrequency: args.tradeOtherProductsFrequency, //其它投资产品交易频率次/年 [0、未知 1、<10  2、10-40   3、 >40]
   };
 
+  const tradePassword = {
+    password: args.password // 初始交易密码
+  }
+
   // 数据汇总
   const formData = {
     ...userCommonInfo,
@@ -221,6 +225,7 @@ export const formatCommitData = (args, normalData = {}) => {
     ...infoDeclare,
     ...infoFinance,
     ...infoExperience,
+    ...tradePassword,
   };
 
   // 需要单独增加字段（基本上都是一些写死的数据  方便以后拓展用）

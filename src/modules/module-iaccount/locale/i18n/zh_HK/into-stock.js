@@ -67,6 +67,7 @@ export const intoStock = {
       searchTitle: "以下為歷史搜索記錄",
       clear: "清除記錄",
     },
+    noResult: '無搜索結果',
   },
   infoConfirm: {
     confirmTitle: "請確認所填資訊無誤後提交",

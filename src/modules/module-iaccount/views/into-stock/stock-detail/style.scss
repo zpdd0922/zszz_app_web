@@ -58,11 +58,25 @@
         box-shadow:  0rem 0.05rem 0.1rem $color-mask-opacity;
         font-size: 0.13rem;
 
+        .is-searching {
+          text-align: center;
+        }
+        .no-result {
+          text-align: center;
+        }
+
         .search-line {
-          display: table;
-          padding: 0 .2rem;
+          display: flex;
+          padding: 0 .1rem;
           line-height: 2.8em;
           @include border-after-1px(bottom, $color-separate-line);
+
+          .hk-stock-icon {
+            background-image: url('~@/modules/module-iaccount/assets/img/stock-icon/HK.png');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
 
           span {
             @include no-wrap();
@@ -70,12 +84,12 @@
 
             span:first-child {
               display: table-cell;
-              min-width: 0.3rem;
-              // padding-right: 0.2rem
+              min-width: 0.2rem;
             }
             span:nth-child(2) {
               display: table-cell;
-              min-width: .6rem;
+              min-width: .8rem;
+              padding-left: .1rem;
             }
             span:last-child {
               display: table-cell;
