@@ -907,7 +907,7 @@ export default {
             // 判断是否包含除数字之外的
             if (!isNaN(val)) {
               // 判断是否大于11位
-              if (val.length > 11) {
+              if (val.length > 20) {
                 return false;
               } else {
                 return true;

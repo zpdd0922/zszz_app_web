@@ -934,6 +934,36 @@ export default {
     },
   },
   methods: {
+    // 电话号码验证，只验证了全数字和长度不大于11
+    validPhoneNum() {
+      const phoneList = [
+        this.model.homeTelePhone,
+        this.model.contactTelePhone,
+        this.professionModel.companyTelePhone,
+      ];
+      return phoneList
+        .map((val) => {
+          // 判断是否填写
+          if (val.length === 0) {
+            return true;
+          } else {
+            // 判断是否包含除数字之外的
+            if (!isNaN(val)) {
+              // 判断是否大于11位
+              if (val.length > 20) {
+                return false;
+              } else {
+                return true;
+              }
+            } else {
+              return false;
+            }
+          }
+        })
+        .every((val) => {
+          return val;
+        });
+    },
     getI18n(key, type = "") {
       return this.getStepI18nValue("infoContact", key);
     },
