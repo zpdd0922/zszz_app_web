@@ -19,11 +19,11 @@
             <cube-radio-group :hollow-style="true" position="left">
               <cube-radio
                 v-model="model.fundAccountType"
-                :option="filedsAccounts.fundAccountType.props.options[1]"
+                :option="filedsAccounts.fundAccountType.props.options[0]"
               />
               <cube-radio
                 v-model="model.fundAccountType"
-                :option="filedsAccounts.fundAccountType.props.options[0]"
+                :option="filedsAccounts.fundAccountType.props.options[1]"
               />
             </cube-radio-group>
           </cube-form-item>
@@ -32,9 +32,10 @@
         <cube-form-group class="step-content step-content-accounts custom-form-group">
           <head-title :title="contentTitle.otherAccounts"></head-title>
           <cube-form-item :field="filedsAccounts.isOpenHk"></cube-form-item>
+          <cube-form-item :field="filedsAccounts.isOpenCn"></cube-form-item>
           <cube-form-item :field="filedsAccounts.isOpenUs"></cube-form-item>
           <!-- <cube-form-item :field="filedsAccounts.isOpenOptions"></cube-form-item> -->
-          <cube-form-item :field="filedsAccounts.isOpenFutures"></cube-form-item>
+          <!-- <cube-form-item :field="filedsAccounts.isOpenFutures"></cube-form-item> -->
         </cube-form-group>
         <!-- <div class="margin-bottom"></div>
         <cube-form-group class="step-content step-content-accounts custom-form-group">
@@ -187,6 +188,17 @@ export default {
           },
         },
         isOpenFutures: {
+          type: "checkbox",
+          modelKey: "isOpenFutures",
+          props: {
+            option: {
+              label: this.getI18n("otherAccounts.accountFutures"),
+              value: true,
+            },
+            shape: "square",
+          },
+        },
+        isOpenCn: {
           type: "checkbox",
           modelKey: "isOpenCn",
           props: {
