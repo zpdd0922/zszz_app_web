@@ -103,7 +103,7 @@ export default {
         blurHidden: true,
       },
       eye: {
-        open: true,
+        open: false,
         reverse: false
       },
       idFlag,
