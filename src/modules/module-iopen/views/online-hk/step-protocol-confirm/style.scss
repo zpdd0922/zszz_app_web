@@ -1,3 +1,5 @@
+@import '@/customize/theme/_val_white';
+
 .olhk-step-protocol-confirm {
   .step-content-sign-list {
     padding: .14rem .25rem;
@@ -51,5 +53,35 @@
         color: #f95a29;
       }
     }
+    
+  }
+  .pwdTitle {
+    padding-left: .14rem;
+    font-size: 0.18rem;
+    margin-top: .2rem
+  }
+  
+  .rule {
+    padding-left: .14rem;
+    color: #5A2AB8;
+    font-size: 0.13rem;
+    line-height: .2rem;
+    margin-bottom: 0.1rem;
+  }
+  .trade-pwd {
+    background-color: #fff;
+    padding: .1rem 0.14rem 0;
+
+    .warn {
+      color: $color-error;
+      font-size: 0.13rem;
+    }
+    .pwd {
+      width: 100%;
+    }
+    .suc {
+      color: $color-success;
+    }
+
   }
 }

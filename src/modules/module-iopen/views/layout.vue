@@ -9,6 +9,7 @@
   <div class="op-page-wrap">
     <!-- Loading -->
     <template v-if="!openProgress">
+    <!-- <template v-if="false">  -->
       <base-waiting />
     </template>
     <!-- 主体内容 -->

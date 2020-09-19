@@ -7,7 +7,7 @@
   >
     <div class="olcn-step olcn-step-protocol-confirm">
       <div class="step-content step-content-sign-list">
-        <h3 class="sign-title">{{getI18n('tips')}}</h3>
+        <h3 class="sign-title">{{ getI18n("tips") }}</h3>
         <div ref="signBox" class="sign-box" @click.prevent="handleNext">
           <template v-if="upload[idFlag] && upload[fileName]">
             <img :src="upload[idFlag]" />
@@ -18,18 +18,50 @@
                 <img ref="signImgDom" :src="upload[fileName]" />
               </template>
               <template v-else>
-                <span class="sign-img-txt">{{getI18n('tipsSign')}}</span>
+                <span class="sign-img-txt">{{ getI18n("tipsSign") }}</span>
               </template>
             </div>
             <div class="sign-content">
               <ul>
                 <li v-for="(item, ind) in formList" :key="ind">
-                  <span>{{item.label}}： {{item.value}}</span>
+                  <span>{{ item.label }}： {{ item.value }}</span>
                 </li>
               </ul>
             </div>
           </template>
         </div>
+      </div>
+      <div>
+        <h3 class="pwdTitle">{{ getI18n("setPwd") }}</h3>
+        <div class="rule">{{ getI18n("pwdRule") }}</div>
+      </div>
+      <div class="trade-pwd">
+        <div class="warn" v-if="showWarn" :class="{suc: pwdSuccess}">
+          <span>{{ warnText }}</span>
+        </div>
+        <cube-form :model="model">
+          <cube-input
+            type="password"
+            :clearable="clearable"
+            :eye="eye"
+            :placeholder="getI18n('tradePwd')"
+            v-model="model.pwd"
+            class="pwd"
+            @blur="checkPwd"
+            @focus="showWarn = true"
+          >
+          </cube-input>
+          <cube-input
+            type="password"
+            :clearable="clearable"
+            :eye="eye"
+            :placeholder="getI18n('tradePwdConfirm')"
+            v-model="model.password"
+            class="pwd"
+            @blur="checkPwd"
+            :disabled="!pwd1Status"
+          ></cube-input>
+        </cube-form>
       </div>
     </div>
   </op-wrap>
@@ -66,6 +98,14 @@ export default {
   },
   data() {
     return {
+      clearable: {
+        visible: true,
+        blurHidden: true,
+      },
+      eye: {
+        open: true,
+        reverse: false
+      },
       idFlag,
       fileName,
       file: {},
@@ -81,7 +121,7 @@ export default {
           label: this.getI18n("content.nameEn"),
           value: "",
           key: "enNameValue",
-        },  
+        },
         {
           label: this.getI18n("content.idCard"),
           value: "",
@@ -92,7 +132,13 @@ export default {
       ],
       model: {
         pelCheck: false,
+        pwd: '',
+        password: '',
       },
+      warnText: '',
+      pwd1Status: false,
+      showWarn: false,
+      pwdSuccess: false,
     };
   },
   computed: {
@@ -101,10 +147,32 @@ export default {
     },
     // 是否签名
     isDisabled() {
-      return Object.values(this.upload).length <= 0;
+      return Object.values(this.upload).length <= 0 || !this.pwdSuccess;
     },
   },
   methods: {
+    checkPwd() {
+      const [p1, p2] = [this.model.pwd, this.model.password];
+      if (!this.pwd1Status) {
+        if (p1.length === 8 && /^[A-Za-z0-9]{8}$/.test(p1)) {
+          this.pwd1Status = true;
+          this.pwdSuccess = false;
+        } else {
+          this.warnText = this.getI18n('illegal');
+          this.pwd1Status =false;
+          this.pwdSuccess = false;
+        }
+      } else {
+        if (p2 === p1) {
+          this.pwdSuccess =true;
+          this.warnText = this.getI18n('pwdSuccess');
+        } else {
+          this.warnText = this.getI18n('notSame');
+          this.pwd1Status = true;
+          this.pwdSuccess = false;
+        }
+      }
+    },
     getI18n(key) {
       return this.getStepI18nValue("protocolConfirm", key);
     },
@@ -143,7 +211,7 @@ export default {
     handleBefore() {
       return new Promise((resolve, reject) => {
         // 保存数据&下一步
-        const obj = this.model;
+        const {pwd, ...obj} = this.model;
         const params = {
           step: this.step,
           info: obj,

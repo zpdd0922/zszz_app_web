@@ -4,38 +4,57 @@
       <sticky :z-index="10">
         <div class="select-tab border-bottom-1px">
           <jf-filter
-            ref="currency"
-            v-model="currency"
-            :menus="currencyMenus"
-            @click.native="_clickCurrency"
-            @filter="_clickFilterCurrrency"></jf-filter>
+            ref="market"
+            v-model="market"
+            :menus="marketMenus"
+            @click.native="_clickMarket"
+            @filter="_clickFilterMarket"
+          ></jf-filter>
           <jf-filter
             ref="state"
             v-model="state"
             :menus="statusMenus"
             @click.native="_clickStatus"
-            @filter="_clickFilterStatus"></jf-filter>
+            @filter="_clickFilterStatus"
+          ></jf-filter>
         </div>
       </sticky>
 
       <div v-if="listData" class="select-box">
         <template v-if="listData.length">
-          <part-list
-            :isLink="true"
-            :list="listData"
-            @clickItem="_clickListItem">
+          <part-list :list="listData">
             <template v-slot:default="slotProps">
-              <div class="box-item">
-                <p class="tip">
-                  {{ slotProps.item.bankName }}-{{ slotProps.item.bankAccount | filterSubStr }}
-                  {{ itemData.label }}
-                </p>
-                <p class="money">
-                  <span class="num">{{ slotProps.item.extractionAmount | filterMoney }}</span>
-                  <span class="label">{{ slotProps.item.currency | filterCurrency }}</span>
-                </p>
-                <p class="time">{{ slotProps.item.createdTime | filterDateTime }}</p>
-                <span class="status" :style="_getStatusColor(slotProps.item.state)">{{ slotProps.item.state | filterStatusText }}</span>
+              <div class="content-wrap">
+                <ul class="company">
+                  <li>
+                    <span>{{ $t("iAccount.transferHistory.date") }}</span
+                    ><span>{{
+                      slotProps.item.createdTime | filterDateTime
+                    }}</span>
+                  </li>
+                  <li>
+                    <span>{{ $t("iAccount.transferHistory.outCompany") }}</span
+                    ><span>{{ slotProps.item.secName }}</span>
+                  </li>
+                  <li>
+                    <span>{{ $t("iAccount.transferHistory.status") }}</span
+                    ><span>{{ slotProps.item.state | filterStatusText }}</span>
+                  </li>
+                </ul>
+                <ul
+                  class="stock-detail"
+                  v-for="(item, index) in slotProps.item.sharesInfoList"
+                  :key="index"
+                >
+                  <li>
+                    <span>{{ $t("iAccount.transferHistory.stockName") }}</span
+                    ><span>{{ item.sharesName }}</span>
+                  </li>
+                  <li>
+                    <span>{{ $t("iAccount.transferHistory.stockNum") }}</span
+                    ><span>{{ item.sharesNum }}</span>
+                  </li>
+                </ul>
               </div>
             </template>
           </part-list>
@@ -47,57 +66,50 @@
 </template>
 
 <script>
-import i18n from '@/modules/module-iaccount/locale'
-// import { FundsSummary } from '../components'
-import * as tips from '@/modules/module-iaccount/utils/tips'
-import { timestampToTime } from '@/modules/module-iaccount/utils/date'
-import cookie from '@/modules/module-iaccount/utils/cookie'
-import { HIS_WITHDRAW, CURRENCY_TYPE, CURRENCY_OUT_STATUS } from '@/modules/module-iaccount/define'
-import commonMixin from '@/modules/module-iaccount/mixins/common'
-import SecuritiesApi from '@/modules/module-iaccount/api/modules/api-securities'
+import i18n from "@/modules/module-iaccount/locale";
+import * as tips from "@/modules/module-iaccount/utils/tips";
+import cookie from "@/modules/module-iaccount/utils/cookie";
+import { timestampToTime } from "@/modules/module-iaccount/utils/date";
+import {
+  HIS_DEPOSIT,
+  STOCK_MARKET,
+  STOCK_STATUS,
+} from "@/modules/module-iaccount/define";
+import commonMixin from "@/modules/module-iaccount/mixins/common";
+import SecuritiesApi from "@/modules/module-iaccount/api/modules/api-securities";
 
-const SUMMARYS_DATA = [
-  {
-    title: 'iAccount.deposit.currency_type.text_1',
-    iconName: 'hk',
-    key: 'hk',
-    money: ''
-  }, {
-    title: 'iAccount.deposit.currency_type.text_2',
-    iconName: 'us',
-    key: 'dollar',
-    money: ''
-  }
-]
-const CURRENCY_MENUS = Object.values(CURRENCY_TYPE.options).sort((a, b) => a.sort - b.sort)
-const STATUS_MENUS = Object.values(CURRENCY_OUT_STATUS.options).sort((a, b) => a.sort - b.sort)
+const STOCK_MENUS = Object.values(STOCK_MARKET.options).sort(
+  (a, b) => a.sort - b.sort
+);
+const STATUS_MENUS = Object.values(STOCK_STATUS.options).sort(
+  (a, b) => a.sort - b.sort
+);
 
 export default {
   mixins: [commonMixin],
   props: {
     itemData: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       listData: null,
-      summarys: SUMMARYS_DATA,
-      currency: CURRENCY_MENUS[0].value,
+      market: STOCK_MENUS[0].value,
       state: STATUS_MENUS[0].value,
-      currencyMenus: CURRENCY_MENUS,
-      statusMenus: STATUS_MENUS
-    }
+      marketMenus: STOCK_MENUS,
+      statusMenus: STATUS_MENUS,
+      listDataCache: [],
+    };
   },
   created() {
-    this._fetchHis()
+    this._fetchHis();
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     _getStatusColor(val) {
-      return { color: CURRENCY_OUT_STATUS.options[val].color || '' }
+      return { color: STOCK_STATUS.options[val].color || "" };
     },
     _fetchHis() {
       const params = {
@@ -107,94 +119,59 @@ export default {
       this.$store
         .dispatch("getStocksHistory", params)
         .then((res) => {
+          // this.listDataCache = res;
+          // this.listData = [...this.listDataCache];
           this.listData = [];
         })
         .catch(() => {
           this.listData = [];
         });
-    },    _handleResData(data) {
-      const { moneySum, moneyList } = data
-      this.summarys = SUMMARYS_DATA.map(item => {
-        return {
-          ...item,
-          money: moneySum[item.key] || '0'
-        }
-      })
-      this.listData = moneyList
     },
-    _clickCurrency() {
-      this.$refs.state._hide()
+    _clickMarket() {
+      this.$refs.state._hide();
     },
     _clickStatus() {
-      this.$refs.currency._hide()
+      this.$refs.market._hide();
     },
-    _clickFilterCurrrency(selectedVal, selectedIndex) {
-      this.currency = selectedVal.value
-      this._fetchHis()
+
+    _clickFilterMarket(selectedVal, selectedIndex) {
+      this.market = selectedVal.value;
+      this._filterAll();
     },
     _clickFilterStatus(selectedVal, selectedIndex) {
-      this.state = selectedVal.value
-      this._fetchHis()
+      this.state = selectedVal.value;
+      this._filterAll();
     },
-    _clickListItem(item) {
-      cookie.setCookie(HIS_WITHDRAW, item)
-      this.$router.push({ name: 'funds-withdraw', query: { tab: this.itemData.key } })
+
+    _filterAll() {
+      console.log(this.state, this.market, "asdfasd");
+      if (!this.market && !this.state) {
+        this.listData = [...this.listDataCache];
+      } else if (!this.market && this.state) {
+        this.listData = [...this.listDataCache].filter((item) => {
+          return item.state === this.state;
+        });
+      } else if (this.market && !this.state) {
+        this.listData = [...this.listDataCache].filter((item) => {
+          return item.isShares === this.market;
+        });
+      } else {
+        this.listData = [...this.listDataCache].filter((item) => {
+          return item.state === this.state && item.isShares === this.market;
+        });
+      }
     },
-    _clickWithdrawTips() {
-      tips.alert({
-        confirmTxt: this.$t('iAccount.common.text_10'),
-        render: (createElement) => {
-          return [
-            createElement('div', {
-              class: {
-                'custom-cube-dialog-title': true
-              },
-              slot: 'title'
-            }, this.$t('iAccount.history.common.text_5')),
-            createElement('div', {
-              class: {
-                'custom-cube-dialog-content': true
-              },
-              slot: 'content'
-            }, [
-              createElement('p', null, [
-                this.$t('iAccount.history.common.text_6'),
-                createElement('span', {
-                  class: {
-                    'font-link': true
-                  },
-                  on: {
-                    click: (e) => {
-                      this.tellPhone(this.getPhone)
-                    }
-                  }
-                }, this.getPhone),
-                this.$t('iAccount.history.common.text_15')
-              ])
-            ])
-          ]
-        }
-      })
-    }
   },
   filters: {
-    filterCurrency(val) {
-      return CURRENCY_TYPE.options[val] ? i18n.t(CURRENCY_TYPE.options[val].text) : val
-    },
     filterStatusText(val) {
-      return CURRENCY_OUT_STATUS.options[val] ? i18n.t(CURRENCY_OUT_STATUS.options[val].text) : val
+      return STOCK_STATUS.options[val]
+        ? i18n.t(STOCK_STATUS.options[val].text)
+        : val;
     },
     filterDateTime(val) {
-      return timestampToTime(val, 'YYYY.MM.DD hh:mm:ss')
+      return timestampToTime(val, "YYYY/MM/DD");
     },
-    filterMoney(val = 0) {
-      return Number(val).toFixed(2) + ''
-    }
   },
-  components: {
-    // FundsSummary
-  }
-}
-
+  components: {},
+};
 </script>
-

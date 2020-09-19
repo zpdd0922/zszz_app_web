@@ -1,14 +1,22 @@
 export default {
-  pageName: '签名确认',
-  tips: '请点击下方进入签名页面，并使用正楷签名。',
-  tipsSign: '请点击进入签名页',
+  pageName: "簽名確認",
+  tips: "請點擊下方進入簽名頁面，並使用正楷簽名。",
+  tipsSign: "請點擊進入簽名頁",
   content: {
-    nameCn: '中文姓名',
-    nameEn: '英文姓名',
-    idCard: '证件号码',
-    phone: '手机号码',
-    email: '邮箱地址'
+    nameCn: "中文姓名",
+    nameEn: "英文姓名",
+    idCard: "證件號碼",
+    phone: "手機號碼",
+    email: "郵箱地址",
   },
-  btn: '我确认以上是本人信息，下一步',
-  success:'保存成功，请等待通知'
-}
+  setPwd: "請設置初始交易密碼",
+  tradePwd: "請輸入密碼",
+  tradePwdConfirm: "請再次輸入密碼",
+  pwdRule: "(請設置為由數字或英文字元組成的8位密碼)",
+  notSame: "兩次密碼輸入不一致",
+  // empty: '密碼不能為空',
+  illegal: "密碼不符合規則",
+  pwdSuccess: "密碼設置成功",
+  btn: "我確認以上是本人訊息，下一步",
+  success: "保存成功，請等待通知",
+};
