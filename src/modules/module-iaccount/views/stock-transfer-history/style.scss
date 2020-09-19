@@ -1,0 +1,60 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+
+.transfer-history {
+  .part {
+    margin-top: 0;
+  }
+}
+
+.transfer-history-select {
+  margin-top: .05rem;
+  position: relative;
+  .select-tab {
+    @include flex-box($row: space-between);
+    background: $color-theme;
+    height: .36rem;
+    line-height: .36rem;
+    padding: 0 .15rem;
+  }
+
+  .select-box {
+    .content-wrap {
+      width: 100%;
+      border-radius: 0.2rem;
+
+      ul {
+        width: 100%;
+        padding: 0.05rem 0.15rem;
+        line-height: 0.22rem;
+
+        li {
+          display: flex;
+          justify-content: flex-start;
+          width: 100%;
+
+          span:first-child {
+            flex: 0 1 25%;
+            color: $color-999;
+            min-width: 0.8rem;
+          }
+          span:nth-child(2) {
+            flex: 0 1 auto;
+            min-width: 2rem;
+          }
+        }
+      }
+
+      ul:not(:last-child) {
+        border-bottom: #e5e5e5 dashed 0.01rem;
+      }
+    }
+    .content-wrap:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 0.12rem;
+      background-color: $color-theme-bg;
+    }
+  }
+}

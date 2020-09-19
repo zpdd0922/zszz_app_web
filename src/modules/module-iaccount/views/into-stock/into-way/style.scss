@@ -1,74 +1,8 @@
-
-@import '~@/customize/theme/_val_white.scss';
-@import '~@/modules/module-iaccount/assets/styles/variable.scss';
-@import '~@/main/assets/scss/_mixin.scss';
-
-.into-way-wrap {
-  .page-title {
-    font-weight: bold;
-    margin: 0.6rem 0 0.3rem;
-    text-align: center;
+.sec-into-stock-way {
+  .way-icon-hk {
+    @include retina-images('~@/modules/module-iaccount/assets/img/currency/hk');
   }
-
-  .ways {
-    padding: .15rem .25rem;
+  .way-icon-us {
+    @include retina-images('~@/modules/module-iaccount/assets/img/currency/us');
   }
-
-  .way-item {
-    display: flex;
-    border: solid 1px $color-separate-line;
-    border-radius: 5px;
-    padding: .2rem .15rem;
-    margin-bottom: .25rem;
-    align-items: center;
-    background: $color-content-bg;
-
-    .icon {
-      background-size: contain;
-      display: inline-block;
-      width: .5rem;
-      height: .5rem;
-      // border-radius: 50%;
-      margin-right: .2rem;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .icon-us {
-      background-image: url('~@/modules/module-iaccount/assets/img/select-type/icon_us.png');
-    }
-    .icon-hk {
-      background-image: url('~@/modules/module-iaccount/assets/img/select-type/icon_hk.png');
-    }
-
-
-    .cell-body {
-      display: inline-block;
-      padding: 0.1rem 0;
-      line-height: 0.2rem;
-    }
-
-    .label{
-      display: inline-block;
-      width: 100%;
-      font-size:.17rem;
-    }
-
-    .eng {
-      color: $color-999;
-    }
-
-    .arrow {
-      @include arrow(right, .15rem)
-    }
-
-    .tips{
-      display: inline-block;
-      width: 100%;
-      font-size:.13rem;
-      padding-top: .06rem;
-      color: $color-txt-sub;
-    }
-  }
-
 }

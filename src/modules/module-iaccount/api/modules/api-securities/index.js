@@ -19,10 +19,7 @@ export default {
 
   getsecAccountInfo: data => post('/securities/find_acc_info', paramsData.COMMON(data)),
 
-  /**
-  * { isShares: 0, state: 0 }
-  */
-  getStocksHistory: data => post('/securities/find_transferred_stock_record', paramsData.NOPARAMS(data)),
+
 
   /**
    * 入金记录
@@ -85,9 +82,9 @@ export default {
   toCommitIntoStockList: data => post('/securities/save_shares_stock', paramsData.NOPARAMS(data)),
 
   toCommitIntoStockData: data => post('/securities/transferred_stock_apply', paramsData.NOPARAMS(data)),
-  
+
   toGetIntoStockAllInfo: data => post('/securities/find_transferred_stock', paramsData.NOPARAMS(data)),
-  
+
   /**
    * 查询股票代码
    */

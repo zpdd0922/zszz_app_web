@@ -1,49 +1,4 @@
 
-.sec-funds-deposit{
-    .select-ways {
-        padding: .1rem .25rem;
-    
-        .way-item {
-            display: flex;
-            border: solid 1px $color-separate-line;
-            border-radius: 5px;
-            padding: .2rem;
-            margin-bottom: .25rem;
-            align-items: center;
-            background: $color-content-bg;
-            font-size: 0;
-        
-            .way-icon {
-              background-size: contain;
-              display: inline-block;
-              width: .42rem;
-              height: .42rem;
-              border-radius: 5px;
-              margin-right: .1rem;
-              background-position: center;
-              background-repeat: no-repeat;
-            }
-             
-            .label{
-              display: inline-block;
-              width: 100%;
-              font-size:.15rem;
-            }
-        
-            .tips{
-              display: inline-block;
-              width: 100%;
-              font-size:.13rem;
-              color: $color-txt-sub;
-            }
-          }
-      }
-
-      //  入金视图
-}
-
-
-
 @import './currency/style.scss';
 @import './out-bank-type/style.scss';
 @import './out-bank-hk/style.scss';
