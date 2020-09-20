@@ -10,6 +10,16 @@
             <!-- <img @click="showImagePreview(`${key}${SUFFIX}`)" :src="upload[`${key}${SUFFIX}`]"> -->
             <img :src="upload[`${key}${SUFFIX}`]" />
             <!-- 上传进度 -->
+            <template v-if="uploadLoad[`${key}Status`] === 'ready'">
+              <div class="op-com-photo-rate">
+                <span>加载中</span>
+              </div>
+            </template>  
+            <template v-if="uploadLoad[`${key}Status`] === 'compress'">
+              <div class="op-com-photo-rate">
+                <span>压缩中</span>
+              </div>
+            </template>
             <template v-if="uploadLoad[`${key}Status`] === 'uploading'">
               <div class="op-com-photo-rate">
                 <span>{{uploadLoad[`${key}Percent`]}} %</span>
@@ -34,93 +44,88 @@
           </div>
         </template>
       </div>
-      
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import UploadTools, { openJsCameraJF } from './upload-tools';
-import { stCamera } from './tool-st-camera';
-import UserAge from '@/main/utils/common/ua-info';
-import { toast } from '@/main/utils/common/tips';
-import { openAlbumApp } from '@/main/utils/native-app/';
+import UploadTools, { openJsCameraJF } from "./upload-tools";
+import { stCamera } from "./tool-st-camera";
+import UserAge from "@/main/utils/common/ua-info";
+import { toast } from "@/main/utils/common/tips";
+import { openAlbumApp } from "@/main/utils/native-app/";
 
 export default {
   props: {
     // 显示单个组件标题
     showTxt: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /* 组件提示语 */
     uploadTips: {
       type: String,
-      default: ''
+      default: "",
     },
     /* 需上传列表 */
     uploadFiles: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     /* 已传文件对象 */
     uploadList: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     /* 初始上传文件base64 */
     uploadBase: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     /* 存储字段后缀名 */
     SUFFIX: {
       type: String,
-      default: 'Path'
+      default: "Path",
     },
     /* 拍照参数  */
     cameraType: {
       default: 0,
-      validator: value => {
-        return [
-          0, 1
-        ].indexOf(value) !== -1;
-      }
+      validator: (value) => {
+        return [0, 1].indexOf(value) !== -1;
+      },
     },
     // 是否可选相册，默认可选
     isCanSelect: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /* APP自定义相机提示语 */
     tips: {
       type: String,
-      default: '请确保拍摄物体清晰、无反光'
+      default: "请确保拍摄物体清晰、无反光",
     },
     /* 扫描参数  */
     scanParams: {
       type: Object,
       default: () => {
         return {};
-      }
+      },
     },
     sdkType: {
-      default: 'idCard',
-      validator: value => {
-        return [
-          'idCard', 'bankCard', 'liveNess'
-        ].indexOf(value) !== -1;
-      }
+      default: "idCard",
+      validator: (value) => {
+        return ["idCard", "bankCard", "liveNess"].indexOf(value) !== -1;
+      },
     },
     idCardFaceType: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   data() {
     return {
@@ -142,7 +147,7 @@ export default {
     // 文件上传暂存base64
     upload() {
       return this.uploadBase;
-    }
+    },
   },
   created() {
     this.initUpload();
@@ -160,11 +165,11 @@ export default {
     showImagePreview(key) {
       const imgs = Object.values(this.upload);
       const curImg = this.upload[key];
-      const curInd = imgs.findIndex(img => img === curImg);
+      const curInd = imgs.findIndex((img) => img === curImg);
       const params = {
         imgs,
         loop: false,
-        initialIndex: curInd
+        initialIndex: curInd,
       };
       this.$createImagePreview(params).show();
     },
@@ -172,7 +177,7 @@ export default {
     hanldeReload(key) {
       const tempKey = `${key}${this.SUFFIX}`;
       const tempBase = this.upload[`${key}${this.SUFFIX}`];
-      this.$emit('uploadAfter', tempBase, tempKey, this.callback);
+      this.$emit("uploadAfter", tempBase, tempKey, this.callback);
     },
     // 文件上传回调
     callback(key, e) {
@@ -182,19 +187,23 @@ export default {
     // 初始化拍照
     initUpload() {
       const defaultUpload = {
-        uploadBefore: idFlag => {
-          this.$emit('uploadBefore', idFlag);
+        uploadBefore: (idFlag) => {
+          const imgType = idFlag.replace(this.SUFFIX, "");
+          this.$set(this.uploadLoad, [`${imgType}Status`], "ready");
+          this.$emit("uploadBefore", idFlag);
         },
         localLoad: (file, idFlag) => {
-          this.$emit('localLoad', file, idFlag);
+          const imgType = idFlag.replace(this.SUFFIX, "");
+          this.$set(this.uploadLoad, [`${imgType}Status`], "compress");
+          this.$emit("localLoad", file, idFlag);
         },
         upload: (file, idFlag) => {
-          this.$emit('uploadAfter', file, idFlag, this.callback);
+          this.$emit("uploadAfter", file, idFlag, this.callback);
         },
         cameraType: this.cameraType,
         isCanSelect: this.isCanSelect,
         tips: this.tips,
-        idCardFaceType: this.idCardFaceType
+        idCardFaceType: this.idCardFaceType,
       };
       this.uploadTools = new UploadTools(defaultUpload);
     },
@@ -202,7 +211,7 @@ export default {
     handleCamera(key) {
       const tempKey = `${key}${this.SUFFIX}`;
       if (!this.model[tempKey]) {
-        this.$set(this.model, tempKey, '');
+        this.$set(this.model, tempKey, "");
       }
       this.uploadTools.openCamera(tempKey);
     },
@@ -210,21 +219,21 @@ export default {
     handleOpenAlbum(key) {
       const tempKey = `${key}${this.SUFFIX}`;
       if (!this.model[tempKey]) {
-        this.$set(this.model, tempKey, '');
+        this.$set(this.model, tempKey, "");
       }
 
       const defaultOptions = {
         idFlag: tempKey,
         isCanSelect: true,
-        uploadBefore: idFlag => {
-          this.$emit('uploadBefore', idFlag);
+        uploadBefore: (idFlag) => {
+          this.$emit("uploadBefore", idFlag);
         },
         localLoad: (file, idFlag) => {
-          this.$emit('localLoad', file, idFlag);
+          this.$emit("localLoad", file, idFlag);
         },
         upload: (file, idFlag) => {
-          this.$emit('uploadAfter', file, idFlag, this.callback);
-        }
+          this.$emit("uploadAfter", file, idFlag, this.callback);
+        },
       };
 
       openJsCameraJF(defaultOptions);
@@ -233,23 +242,23 @@ export default {
     handleOpenAlbumAndroid(key) {
       const tempKey = `${key}${this.SUFFIX}`;
       if (!this.model[tempKey]) {
-        this.$set(this.model, tempKey, '');
+        this.$set(this.model, tempKey, "");
       }
-  
+
       const defaultOptions = {
         success: (res, msg) => {
           // base64位转换
-          const { data = '' } = res;
+          const { data = "" } = res;
           const file = `data:image/jpeg;base64,${data}`;
-          this.$emit('uploadAfter', file, tempKey, this.callback);
+          this.$emit("uploadAfter", file, tempKey, this.callback);
         },
-        fail: (res, msg = '操作失败，请稍后重试') => {
-          toast({ type: 'error', txt: msg });
-          this.$emit('fail', msg);
+        fail: (res, msg = "操作失败，请稍后重试") => {
+          toast({ type: "error", txt: msg });
+          this.$emit("fail", msg);
         },
-        complete: msg => {
-          this.$emit('complete', msg);
-        }
+        complete: (msg) => {
+          this.$emit("complete", msg);
+        },
       };
       openAlbumApp(defaultOptions);
     },
@@ -262,18 +271,18 @@ export default {
 
       const callback = {
         success: (val, msg) => {
-          this.$emit('success', val, msg, this.callback);
+          this.$emit("success", val, msg, this.callback);
         },
-        fail: (msg = '网络请求超时，请稍后重试') => {
-          toast({ type: 'error', txt: msg });
-          this.$emit('fail', msg);
+        fail: (msg = "网络请求超时，请稍后重试") => {
+          toast({ type: "error", txt: msg });
+          this.$emit("fail", msg);
         },
-        complete: msg => {
-          this.$emit('complete', msg);
-        }
+        complete: (msg) => {
+          this.$emit("complete", msg);
+        },
       };
       stCamera(sdkType, defaultOptions, callback);
-    }
-  }
+    },
+  },
 };
 </script>

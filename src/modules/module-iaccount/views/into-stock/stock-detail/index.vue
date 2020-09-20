@@ -19,7 +19,7 @@
               :disabled="!item.isInputActive"
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
-            <!-- <div class="list-box" v-if="true"> -->
+              <!-- <div class="list-box" v-if="true"> -->
               <!-- TODO:看看后续要不要加loading -->
               <template v-if="isSearchLoading">
                 <div class="is-searching">
@@ -165,7 +165,7 @@ export default {
       if (!this.isShares) {
         data.params.mkt = Number(this.isShares) === 1 ? "HK" : "US";
       } else {
-        data.params.mkt = Number(this.isHistoryShares) === 1 ? "HK" : "US";
+        data.params.mkt = "HK";
       }
       this.$store.dispatch("getSearchStockList", data).then((res) => {
         if (res) {
@@ -173,7 +173,7 @@ export default {
         } else {
           this.searchStockList = [];
         }
-        this.isSearchLoading = false
+        this.isSearchLoading = false;
       });
     },
     // 对比用户选择和历史选择

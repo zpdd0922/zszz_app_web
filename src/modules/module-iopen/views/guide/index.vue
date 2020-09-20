@@ -124,8 +124,9 @@ export default {
     onOpenClick() {
       this.getOpenProgress({ openType: 0 }).then((res) => {
         if (
-          res.openStatus === OPEN_STATUS.UN_START ||
-          res.openStatus === OPEN_STATUS.UN_SUBMIT
+          res.openStatus !== OPEN_STATUS.ACCOUNT_OFF &&
+          res.openStatus !== OPEN_STATUS.SUCCESS &&
+          res.openStatus !== OPEN_STATUS.PENDING
         ) {
           this.handleAppOpen({ path: "open-way" });
         }
