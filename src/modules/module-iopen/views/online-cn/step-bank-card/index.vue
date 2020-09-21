@@ -175,7 +175,7 @@ export default {
 
         // 判断手机号是否合法
         if (!validate.isMobile(cellPhone)) {
-          const phoneTips = "请输入正确手机号码";
+          const phoneTips = this.getI18n('errorPhoneNum');
           toast({ type: "error", txt: phoneTips, time: 1000 });
           return reject(new Error(phoneTips));
         }

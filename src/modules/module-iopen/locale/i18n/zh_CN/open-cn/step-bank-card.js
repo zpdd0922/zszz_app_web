@@ -30,5 +30,6 @@ export default {
         ]
     },
     errorTipsBankNum: '请输入正确的账户号码',
+    errorPhoneNum: '请输入正确手机号码',
 
 }

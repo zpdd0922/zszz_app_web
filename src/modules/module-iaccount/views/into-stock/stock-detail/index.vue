@@ -2,7 +2,7 @@
   <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
     <div class="sec-stock-into-detail" ref="stock-detail">
       <head-title :title="getI18n('title')" class="stock-detail-title"></head-title>
-      <div :class="{'addBtn': true, 'addBtn-active': isAddBtnActive }" @click.stop="addStock">+ 添加</div>
+      <div :class="{'addBtn': true, 'addBtn-active': isAddBtnActive }" @click.stop="addStock">+ {{getI18n('add')}}</div>
       <ul v-if="stockList.length !== 0">
         <li v-for="(item, idx) in stockList" :key="idx" class="form">
           <div class="item-column">
@@ -20,10 +20,10 @@
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
             <!-- <div class="list-box" v-if="true"> -->
-              <!-- TODO:看看后续要不要加loading -->
+              <!-- TODO:看看后续要不要加loading -->   
               <template v-if="isSearchLoading">
                 <div class="is-searching">
-                  <span>搜索中...</span>
+                  <span>{{getI18n('isSearching')}}</span>
                 </div>
               </template>
               <template v-else>
@@ -63,8 +63,8 @@
             @click.stop="handleClick($event, idx)"
             v-if="!isCanOperate && item.isInputActive"
           >
-            <div class="leftBtn" id="cancel">取消</div>
-            <div class="rightBtn" id="save">保存</div>
+            <div class="leftBtn" id="cancel">{{getI18n('cancel')}}</div>
+            <div class="rightBtn" id="save">{{getI18n('save')}}</div>
           </div>
           <div class="btn-wrap" @click.stop="handleClick($event, idx)" v-else>
             <div class="leftBtn" id="delete">{{getI18n('delete')}}</div>
@@ -165,7 +165,7 @@ export default {
       if (!this.isShares) {
         data.params.mkt = Number(this.isShares) === 1 ? "HK" : "US";
       } else {
-        data.params.mkt = Number(this.isHistoryShares) === 1 ? "HK" : "US";
+        data.params.mkt = "HK";
       }
       this.$store.dispatch("getSearchStockList", data).then((res) => {
         if (res) {

@@ -470,13 +470,13 @@ export default {
           const age = getAge(getBirthFromCard(idCard));
           // 校验身份证
           if (!validate.isIdCard(idCard)) {
-            const cardTips = "请输入正确身份证号码";
+            const cardTips = this.getI18n('cardError');
             toast({ type: "error", txt: cardTips });
             return reject(new Error(cardTips));
           }
           // 大于70岁不允许线上开户
           if (age >= 70 && window.IS_CHECK_AGE) {
-            const ageTips = "70岁以上暂不能开户，非常抱歉";
+            const ageTips = this.getI18n('ageError');
             toast({ type: "error", txt: ageTips });
             return reject(new Error(ageTips));
           }
@@ -489,7 +489,7 @@ export default {
                 resolve(verify);
               } else {
                 alert({
-                  title: "温馨提示",
+                  title: this.getI18n('warmTips'),
                   content: remark,
                 });
                 reject(verify);
@@ -508,7 +508,7 @@ export default {
                 resolve(verify);
               } else {
                 alert({
-                  title: "温馨提示",
+                  title: this.getI18n('warmTips'),
                   content: remark,
                 });
                 reject(verify);
@@ -529,7 +529,7 @@ export default {
           ? new Date(this.model.birthday)
           : new Date();
         this.brithDatePicker = this.$createDatePicker({
-          title: "出生日期",
+          title: this.getI18n('bornDate'),
           min: birthday_min,
           max: new Date(),
           value: birthday_value,
@@ -559,7 +559,7 @@ export default {
           ? new Date(this.model.dateStartValue)
           : new Date();
         this.startDatePicker = this.$createDatePicker({
-          title: "起始日期",
+          title: this.getI18n('startDate'),
           min: startDate_min,
           max: new Date(),
           value: startDate_value,
@@ -581,7 +581,7 @@ export default {
           ? new Date(this.model.dateEndValue)
           : new Date();
         this.endDatePicker = this.$createDatePicker({
-          title: "结束日期",
+          title: this.getI18n('endDate'),
           min: new Date(getPreDay(-1)),
           max: endDate_max,
           value: endDate_value,
@@ -604,7 +604,7 @@ export default {
           ? new Date(this.model.passportStartValue)
           : new Date();
         this.passportstartDatePicker = this.$createDatePicker({
-          title: "起始日期",
+          title: this.getI18n('startDate'),
           min: startDate_min,
           max: new Date(),
           value: startDate_value,
@@ -626,7 +626,7 @@ export default {
           ? new Date(this.model.passportEndValue)
           : new Date();
         this.passprotendDatePicker = this.$createDatePicker({
-          title: "结束日期",
+          title: this.getI18n('endDate'),
           min: new Date(),
           max: endDate_max,
           value: endDate_value,
@@ -643,7 +643,7 @@ export default {
       if (this.model.dateEndValue === this.longerDateText) return false;
 
       confirm({
-        content: "为确保您资料的准确性，请确认您的身份证是否为长期身份证！",
+        content: this.getI18n('longerConfirm'),
         confirmCallback: () => {
           this.model.dateEndValue = this.longerDateText;
         },
