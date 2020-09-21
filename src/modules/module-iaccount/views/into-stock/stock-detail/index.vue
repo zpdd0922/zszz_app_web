@@ -173,7 +173,7 @@ export default {
         } else {
           this.searchStockList = [];
         }
-        this.isSearchLoading = false
+        this.isSearchLoading = false;
       });
     },
     // 对比用户选择和历史选择

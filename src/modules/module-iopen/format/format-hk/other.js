@@ -14,7 +14,7 @@ export const disclosureDefine = {
   // isNotExchangeParter: { disclosureCode: '24', disclosureSize: 0, isCanFalse: true, valueKey: 'isNotExchangeParter', disclosure1Key: 'exchangeParterName', disclosure2Key: 'exchangeParterNation', disclosure3Key: '', disclosure4Key: '' },
   // isNotCompanyController: { disclosureCode: '25', disclosureSize: 5, isCanFalse: true, valueKey: 'isNotCompanyController', disclosure1Key: 'companyControllerName', disclosure2Key: 'companyControllerJob', disclosure3Key: 'companyControllerExchange', disclosure4Key: 'companyControllerCode' },
   // isNotUsGreenCardHolder: { disclosureCode: '26', disclosureSize: 0, isCanFalse: false, valueKey: 'isNotUsGreenCardHolder', disclosure1Key: 'usGreenCardCode', disclosure2Key: '', disclosure3Key: '', disclosure4Key: '' },
-  isNotBOorPG: { disclosureCode: '29', disclosureSize: 1, isCanFalse: true, valueKey: 'isNorPBOorPG', disclosure1Key: 'otherPOorBGMarginName', disclosure2Key: 'otherPOorBGMarginAccount', disclosure3Key: '', disclosure4Key: '' },
+  isNotBOorPG: { disclosureCode: '29', disclosureSize: 1, isCanFalse: true, valueKey: 'isNotBOorPG', disclosure1Key: 'otherPOorBGMarginName', disclosure2Key: 'otherPOorBGMarginAccount', disclosure3Key: '', disclosure4Key: '' },
   // isAllowProvidePrivacy: { disclosureCode: '15', disclosureSize: 0, isCanFalse: true, valueKey: 'isAllowProvidePrivacy', disclosure1Key: '', disclosure2Key: '', disclosure3Key: '', disclosure4Key: '' },
 };
 
