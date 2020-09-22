@@ -1,0 +1,51 @@
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/mixin.scss';
+
+.statement {
+  .header {
+    display: flex;
+    height: .4rem;
+    background-color: #fff;
+    .jd-type, .jd-date {
+      text-align: center;
+      flex: 1;
+    }
+  }
+  .detail {
+    position: absolute;
+    top: .4rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .title {
+      height: .32rem;
+      line-height: .32rem;
+      padding: 0 .1rem;
+    }
+    .list {
+      .item {
+        display: flex;
+        height: .5rem;
+        background: #fff;
+        align-items: center;
+        padding: 0 .2rem;
+        .date {
+          width: .3rem;
+          height: .3rem;
+          border-radius: 50%;
+          background: #ffb39b;
+          text-align: center;
+          line-height: .3rem;
+        }
+        .type {
+          flex: 1;
+          padding-left: .1rem;
+        }
+        .pdf {
+          padding-right: .08rem;
+          @include arrow($width: 5px, $border: 1px)
+        }
+      }
+    }
+  }
+}
