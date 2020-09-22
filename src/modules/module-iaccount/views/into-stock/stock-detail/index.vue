@@ -72,7 +72,6 @@
           </div>
         </li>
       </ul>
-      <transition name="search"></transition>
     </div>
   </op-wrap>
 </template>
