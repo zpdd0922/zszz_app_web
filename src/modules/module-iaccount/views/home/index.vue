@@ -81,7 +81,7 @@ export default {
               iconType: "enter",
               path: "intoStock",
             },
-            { key: "out", label: "轉出股票", iconType: "out" },
+            { key: "out", label: "轉出股票", iconType: "out", path: "outStock" },
             {
               key: "history-stocks",
               label: "股票歷史",

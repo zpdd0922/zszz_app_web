@@ -1,0 +1,8 @@
+.sec-into-stock-way {
+  .way-icon-hk {
+    @include retina-images('~@/modules/module-iaccount/assets/img/currency/hk');
+  }
+  .way-icon-us {
+    @include retina-images('~@/modules/module-iaccount/assets/img/currency/us');
+  }
+}

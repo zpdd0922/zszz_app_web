@@ -32,6 +32,7 @@ import {
 import { brokerageCalculate } from './brokerage-calculate'
 import { BANK_NAME_OPTIONS } from './info-remit'
 import { intoStock } from './into-stock'
+import { outStock } from './out-stock'
 import { transferHistory } from './transfer-history';
 
 import {
@@ -54,6 +55,7 @@ export default {
     // 佣金计算
     brokerageCalculate,
     intoStock,
+    outStock,
     transferHistory,
     nextBtn: '下一步',
     confirmBtn: '確認提交',

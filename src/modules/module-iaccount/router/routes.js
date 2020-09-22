@@ -5,6 +5,7 @@ import withdrawRouter from "./modules/withdraw";
 import companyActRouter from "./modules/company-act";
 import depositRouter from "./fund/deposit";
 import intoStockRouter from "./modules/into-stock";
+import outStockRouter from "./modules/out-stock";
 import feeStatementRouter from "./modules/fee-statement";
 import stockTransferHistory from "./modules/stock-transfer-history";
 
@@ -36,6 +37,7 @@ const routes = [
       ...withdrawRouter,
       ...companyActRouter,
       ...intoStockRouter,
+      ...outStockRouter,
       ...feeStatementRouter,
       ...stockTransferHistory,
     ],

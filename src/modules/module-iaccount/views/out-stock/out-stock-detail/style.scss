@@ -1,0 +1,224 @@
+.sec-stock-into-detail {
+  width: 100%;
+  background-color: $color-theme-s;
+  color: #666;
+
+  .stock-detail-title {
+    padding: 0.15rem .15rem;
+    font-size: 0.17rem;
+    color: $color-text;
+
+  }
+  .addBtn {
+    width: 100%;
+    padding: 0.1rem 0;
+    text-align: center; 
+    margin-bottom: 0.1rem;
+    background-color: $color-block-bg;
+    font-size: 0.15rem;
+
+  }
+  .addBtn-active {
+    color: $color-dialog-btn-txt;
+  }
+
+  .form {
+    width: 100%;
+    background-color: $color-block-bg;
+    margin-bottom: 0.2rem;
+    font-size: 0.14rem;
+
+    .item-column {
+      display: flex;
+      position: relative;
+      width: 100%;
+      padding: .11rem .15rem .09rem;
+      line-height: 1.5em;
+      align-items: center;
+
+      @include border-after-1px(bottom, $color-separate-line);
+      label {
+        width: 3.5em;
+      }
+      
+      input {
+        flex: 1;
+        background: inherit;
+      }
+
+      .list-box {
+        position: absolute;
+        top: 100%;
+        height: 18em;
+        left: .75rem;
+        right: .2rem;
+        z-index: 999;
+        background-color: $color-block-bg;
+        overflow: scroll;
+        box-shadow:  0rem 0.05rem 0.1rem $color-mask-opacity;
+        font-size: 0.13rem;
+
+        .is-searching {
+          text-align: center;
+        }
+        .no-result {
+          text-align: center;
+        }
+
+        .search-line {
+          display: flex;
+          padding: 0 .1rem;
+          line-height: 2.8em;
+          @include border-after-1px(bottom, $color-separate-line);
+
+          .hk-stock-icon {
+            background-image: url('~@/modules/module-iaccount/assets/img/stock-icon/HK.png');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+
+          span {
+            @include no-wrap();
+          }
+
+            span:first-child {
+              display: table-cell;
+              min-width: 0.2rem;
+            }
+            span:nth-child(2) {
+              display: table-cell;
+              min-width: .8rem;
+              padding-left: .1rem;
+            }
+            span:last-child {
+              display: table-cell;
+              width: 100%;
+            }
+          }
+      }    
+
+    }
+  }
+  
+  /*按钮*/
+  .btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $color-block-bg;
+    padding: .15rem;
+    color: $color-dialog-btn-txt;
+  }
+
+  //搜索
+  .search-mask {
+    position: fixed;
+    left: 10%;
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    z-index: $search-z-index;
+    border-radius: 0.1rem;
+
+    .search {
+      // margin: 0.8rem auto;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.1rem;
+      box-shadow: 0rem 0rem 0.1rem 0.1rem $color-999;
+      overflow: scroll;
+      
+      .head {
+        display: flex;
+        justify-content: space-between;
+        background-color: $color-header-bg;
+        color: $color-theme;
+
+        div {
+          padding: 0.1rem
+        }
+        div:first-child {
+          width: 0.46rem
+        }
+      }
+
+      .search-wrap {
+        width: 100%;
+        height: 100%;
+        background-color: $color-theme;
+
+        .no-result {
+          height: 100%;
+          padding: 0.15rem;
+          background-color: $color-theme;
+          color: $color-ccc;
+          text-align: center;
+        }
+
+        .search-input-wrap {
+          display: flex;
+          position: relative;
+          background-color: $color-theme;
+          
+
+          input {
+            width: 100%;
+            margin: 0.1rem 0.2rem;
+            padding: 0.1rem;
+            background-color: $color-theme-bg;
+          }
+          .search-input::placeholder {
+            text-align: center;
+          }
+  
+          .clear-input {
+            position: absolute;
+            right: 6%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.15rem;
+            height: 0.15rem;
+            color: $color-999;
+            background-position: center;
+            background-repeat: no-repeat; 
+            background-size: 100%;   
+            background-image: url("~@/modules/module-iaccount/assets/img/close.png");
+            z-index: $search-z-index+1
+          }
+        }
+        
+        .history {
+          background-color: $color-theme;
+          height: 100%;
+  
+          .history-title {
+            color: $color-999;
+            text-align: center;
+            line-height: 0.3rem;
+            border-bottom: 0.01rem solid $color-eee;
+  
+          }
+          .clear-history {
+            color: $color-red;
+            padding: 0.1rem 0;
+            text-align: center;
+          }
+        }
+
+
+      }
+      
+    }
+  }
+  
+}
+
+.search-enter,
+.search-leave-to {
+  transform: scale3d(0, 0, 0);
+}
+.search-enter-active,
+.search-leave-active {
+  transition: all 0.2s;
+}
