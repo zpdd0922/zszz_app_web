@@ -53,7 +53,7 @@ export default {
       const params = {
         condition: this.value,
         flag: 1,
-        mkt: 'hk',
+        mkt: 'HK',
         // sessionUserId: uId || UserCode
       }
       SecuritiesApi.findShares(params).then(res => {
