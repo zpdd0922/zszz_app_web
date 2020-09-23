@@ -95,8 +95,8 @@ export default {
       isSearch: false, // 搜索框
       indexSearch: "", // 进入搜索框点击的序号
       metaInfo: {
-        step: 2,
-        state: 2,
+        // step: 2,
+        // state: 2,
       },
       stockItemAdded: {
         sharesCode: "",
@@ -122,12 +122,12 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "isShares",
-      "stockTransferredUS",
-      "stockTransferredHK",
+      "outMarketType",
+      "outStockUS",
+      "outStockHK",
       "secAccountInfo",
-      "isHistoryShares",
-      "sharesList",
+      "outMarketTypeHistory",
+      "outSharesList",
       // 'searchStockList',
     ]),
     isDisabled() {
@@ -161,7 +161,7 @@ export default {
           },
         };
       }
-      if (!this.isShares) {
+      if (!this.outMarketType) {
         data.params.mkt = Number(this.isShares) === 1 ? "HK" : "US";
       } else {
         data.params.mkt = "HK";
@@ -177,8 +177,8 @@ export default {
     },
     // 对比用户选择和历史选择
     initInfo() {
-      if (this.sharesList.length > 0) {
-        this.sharesList.forEach((item) => {
+      if (this.outSharesList.length > 0) {
+        this.outSharesList.forEach((item) => {
           const itemAdded = Object.assign({ isInputActive: false }, item);
           this.stockList.push(itemAdded);
         });
@@ -191,7 +191,7 @@ export default {
     },
     handleNext() {
       //存本地缓存
-      this.$store.commit("SET_SHARES_LIST", { sharesList: this.stockList });
+      this.$store.commit("SET_OUT_SHARES_LIST", { sharesList: this.stockList });
 
       const stockListTemp = this.stockList.map((item) => {
         return {
@@ -203,12 +203,17 @@ export default {
       const data = {
         ...this.metaInfo,
         info: "",
-        shares: [...stockListTemp],
+        sharesList: [...stockListTemp],
+        stock: {},
       };
-      this.$store.dispatch("sendTransferredStockCache", data).then(() => {
+      if (Number(this.outMarketType) === 2) {
+        data.stock = {...this.outStockUS}
+      } else {
+        data.stock = {...this.outStockHK}
+      }
+      this.$store.dispatch("sendOutStockCache", data).then(() => {
         this.$router.push({
           name: "outInfoConfirm",
-          params: { isRefresh: false },
         });
       });
     },

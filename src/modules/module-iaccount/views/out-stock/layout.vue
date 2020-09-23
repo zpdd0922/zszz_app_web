@@ -10,7 +10,7 @@
       </base-cell>
     </header>
     <!-- Loading -->
-    <template v-if="!isGetTransferHistory || !secAccountInfo">
+    <template v-if="!isGetOutHistory || !secAccountInfo">
       <loading />
     </template>
     <!-- 主体内容 -->
@@ -30,19 +30,12 @@ export default {
   mixins: [commonMixin],
   data() {
     return {
-      // 获取历时转入记录需要字段
-      commonInfo: {
-        name: "转入股票",
-        type: 1,
-      },
     };
   },
   computed: {
     ...mapGetters([
-      "isGetTransferHistory",
+      "isGetOutHistory",
       "secAccountInfo",
-      "stockTransferredHK",
-      "stockTransferredUS",
     ]),
     headerTitle() {
       const title = this.$route.meta.title;
@@ -78,11 +71,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["getSecAccountInfo", "getTransferredStock"]),
+    ...mapActions(["getSecAccountInfo", "getOutStock"]),
   },
   created() {
     this.getSecAccountInfo().then((res) => {
-      this.getTransferredStock({ state: "0", step: "0" });
+      this.getOutStock();
     });
   },
 };

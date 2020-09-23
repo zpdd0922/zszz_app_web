@@ -100,7 +100,7 @@ export default {
               key: "xgxx",
               label: "選股選息",
               iconType: "xgxx",
-              // path: "company-act",
+              path: "company-act",
             },
             // { key: "sqgg", label: "申請供股", iconType: "sqgg" },
           ],

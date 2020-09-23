@@ -21,7 +21,7 @@
         </div>
         <div class="item pt">
           <p class="label">{{$t('iAccount.company_act.label.text_6')}}</p>
-          <p class="text">{{renderCashAmount}}</p>
+          <p class="text">{{renderCashAmount}}</p>  
         </div>
       </template>
       <template v-if="OSE">
