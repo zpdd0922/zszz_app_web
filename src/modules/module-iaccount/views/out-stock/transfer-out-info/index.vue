@@ -90,8 +90,8 @@ export default {
         receiveAccount: "",
       },
       metaInfo: {
-        // step: 1,
-        // state: 1,
+        type: 'out',
+        step: 0,
       },
       // 转出方信息
       fieldsTransferOut: {
@@ -227,12 +227,12 @@ export default {
   computed: {
     ...mapGetters([
       //客户选择港股还是美股
-      "outMarketType",
+      "isSharesOut",
       //历史选择
-      "outStockHK",
-      "outStockUS",
+      "stockTransferredUS",
+      "stockTransferredHK",
       "secAccountInfo",
-      "outSharesList",
+      "sharesList",
     ]),
     // 账户列表
     fundAccount() {
@@ -318,14 +318,14 @@ export default {
     },
     // 数据回填
     initInfo() {
-      const stockType = this.intoType || Number(this.outMarketType);
+      const stockType = this.intoType || Number(this.isSharesOut);
       if (stockType === 1) {
-        if (!this.stockTransferredHK.stock) {
+        if (!this.stockTransferredHK.out.isSharesOut) {
           this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
           this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
-          const companyName = this.stockTransferredHK.stock.secName;
+          const companyName = this.stockTransferredHK.out.secName;
           Object.keys(this.transferOutInfoModel).forEach((key) => {
             // 判断转出公司名字是否是其他
             if (companyName) {
@@ -339,25 +339,25 @@ export default {
                 this.transferOutInfoModel.transferOutCompany = "OTH";
               }
             }
-            if (this.stockTransferredHK.stock[key]) {
-              this.transferOutInfoModel[key] = this.stockTransferredHK.stock[
+            if (this.stockTransferredHK.out[key]) {
+              this.transferOutInfoModel[key] = this.stockTransferredHK.out[
                 key
               ];
             }
           });
           Object.keys(this.receiverInfoModel).forEach((key) => {
-            if (this.stockTransferredHK.stock[key]) {
-              this.receiverInfoModel[key] = this.stockTransferredHK.stock[key];
+            if (this.stockTransferredHK.out[key]) {
+              this.receiverInfoModel[key] = this.stockTransferredHK.out[key];
             }
           });
         }
       } else if (stockType === 2) {
-        if (!this.stockTransferredUS.stock) {
+        if (!this.stockTransferredUS.out.isShares) {
           this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
           this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
-          const companyName = this.stockTransferredUS.stock.secName;
+          const companyName = this.stockTransferredUS.out.secName;
           Object.keys(this.transferOutInfoModel).forEach((key) => {
             // 判断转出公司名字是否是其他
             if (companyName) {
@@ -371,15 +371,15 @@ export default {
                 this.transferOutInfoModel.transferOutCompany = "OTH";
               }
             }
-            if (this.stockTransferredUS.stock[key]) {
-              this.transferOutInfoModel[key] = this.stockTransferredUS.stock[
+            if (this.stockTransferredUS.out[key]) {
+              this.transferOutInfoModel[key] = this.stockTransferredUS.out[
                 key
               ];
             }
           });
           Object.keys(this.receiverInfoModel).forEach((key) => {
-            if (this.stockTransferredUS.stock[key]) {
-              this.receiverInfoModel[key] = this.stockTransferredUS.stock[key];
+            if (this.stockTransferredUS.out[key]) {
+              this.receiverInfoModel[key] = this.stockTransferredUS.out[key];
             }
           });
         }
@@ -398,15 +398,15 @@ export default {
         this.transferOutInfoModel.contactsPhoneNum = "";
       }
       const clientIdTemp = (() => {
-        if (Number(this.outMarketType) === 1) {
+        if (Number(this.isSharesOut) === 1) {
           return (
             this.secAccountInfo.tradeAccount ||
-            this.stockTransferredHK.stock.clientId
+            this.stockTransferredHK.out.clientId
           );
         } else {
           return (
             this.secAccountInfo.tradeAccount ||
-            this.stockTransferredUS.stock.clientId
+            this.stockTransferredUS.out.clientId
           );
         }
       })();
@@ -416,7 +416,7 @@ export default {
         ccass: "",
         clientId: clientIdTemp,
         contactsPhoneNum: "",
-        isShares: this.intoType || Number(this.outMarketType),
+        isShares: this.intoType || Number(this.isSharesOut),
         receiveAccount: "",
         receiveSec: "",
         rolloutContacts: "",
@@ -430,20 +430,9 @@ export default {
       return {
         info: "",
         ...this.metaInfo,
-        stock: {
-          ...tempStock,
-        },
+        ...tempStock,
+        shareInfo: this.sharesList.out,
       };
-    },
-    //将股票列表的字段名对应上
-    formatSharesList() {
-      return this.outSharesList.map((item) => {
-        return {
-          stockName: item.sharesName,
-          stockCode: item.sharesCode,
-          transferNumber: item.sharesNum,
-        };
-      });
     },
     // 下一步
     handleNext(e) {
@@ -452,23 +441,24 @@ export default {
       // const fullData = {type: this.stockType, data: this.formatSubData()};
       let fullData = {};
       const tempData = this.formatSubData();
-      if (Number(this.outMarketType) === 1) {
-        fullData = { ...this.outStockHK, ...tempData };
-        this.$store.commit("SET_OUT_STOCK_HK", {
-          outStockHK: fullData,
+      if (Number(this.isSharesOut) === 1) {
+        fullData = {...this.stockTransferredHK.out, ...tempData};
+        this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
+          stockTransferredHK: fullData, 
+          type: 'out',
         });
-      } else if (Number(tempData === 2)) {
-        fullData = { ...this.outStockUS, ...tempData };
-        this.$store.commit("SET_OUT_STOCK_US", {
-          outStockUS: fullData,
+      } else if (Number(this.isSharesOut === 2)) {
+        fullData = {...this.stockTransferredHK.out, ...tempData};
+        this.$store.commit("SET_STOCK_TRANSFERRED_US", {
+          stockTransferredUS: fullData, 
+          type: 'out',
         });
       }
-      this.$store.dispatch("sendOutStockCache", {stock: tempData})
-        // .then(() => {
-        //   this.$router.push({
-        //     name: "outStockDetail",
-        //   });
-        // });
+      this.$store.dispatch("sendTransferredStockCache", fullData).then(() => {
+        this.$router.push({
+          name: "outStockDetail",
+        });
+      });
     },
   },
   created() {

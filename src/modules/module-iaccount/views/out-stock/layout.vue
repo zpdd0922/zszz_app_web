@@ -10,7 +10,7 @@
       </base-cell>
     </header>
     <!-- Loading -->
-    <template v-if="!isGetOutHistory || !secAccountInfo">
+    <template v-if="!isGetHistory || !secAccountInfo">
       <loading />
     </template>
     <!-- 主体内容 -->
@@ -30,12 +30,14 @@ export default {
   mixins: [commonMixin],
   data() {
     return {
+      isGetHistory: false,
     };
   },
   computed: {
     ...mapGetters([
-      "isGetOutHistory",
       "secAccountInfo",
+      "stockTransferredHK",
+      "stockTransferredUS",
     ]),
     headerTitle() {
       const title = this.$route.meta.title;
@@ -71,11 +73,23 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["getSecAccountInfo", "getOutStock"]),
+    ...mapActions(["getSecAccountInfo", "getTransferredStock"]),
   },
   created() {
     this.getSecAccountInfo().then((res) => {
-      this.getOutStock();
+      if (this.secAccountInfo.fundAccount && this.secAccountInfo.fundAccount.length >0) {
+        this.getTransferredStock({ type: 'out', step: "0" });
+        this.isGetHistory = true;
+      } else {
+        toast({
+          type: 'txt',
+          txt: '账户信息错误',
+          callback: ()=> {
+            this.router.push('/')
+          },
+          time: 1000,
+        })
+      }
     });
   },
 };

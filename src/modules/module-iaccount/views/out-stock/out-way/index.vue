@@ -52,14 +52,14 @@ export default {
           type: "hk",
           code: 1,
           label: this.$t("iAccount.outStock.outWay.wayHK"),
-          tips: "out HK stocks",
+          tips: "transfer out HK stocks",
           nextRouteName: "transferOutInfo",
         },
         {
           type: "us",
           code: 2,
           label: this.$t("iAccount.outStock.outWay.wayUS"),
-          tips: "out US stocks",
+          tips: "transfer out US stocks",
           // nextRouteName: 'transferInfo',
         },
       ];
@@ -76,7 +76,7 @@ export default {
         return;
       }
       //更改选择状态
-      this.setOutMarketStatus(item.code).then(() => {
+      this.setOutMarketStatus({type: 'out', marketCode: item.code}).then(() => {
         // 进入下一流程
         this.$router.push({
           name: item.nextRouteName,

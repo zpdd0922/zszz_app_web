@@ -73,8 +73,8 @@ export default {
       stockList: [],
       isDisabled: false,
       metaInfo: {
-        step: -1,
-        state: 3,
+        step: 1,
+        type: 'out',
       },
     };
   },
@@ -83,7 +83,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "isShares",
+      "isSharesOut",
       "stockTransferredUS",
       "stockTransferredHK",
       "secAccountInfo",
@@ -99,22 +99,24 @@ export default {
     },
     //拿到所有填过的数据
     initInfo() {
-      if (Number(this.isShares) === 1) {
-        this.stockInfo = this.stockTransferredHK.stock;
-      } else if (Number(this.isShares) === 2) {
-        this.stockInfo = this.stockTransferredUS.stock;
+      if (Number(this.isSharesOut) === 1) {
+        this.stockInfo = this.stockTransferredHK.out;
+      } else if (Number(this.isSharesOut) === 2) {
+        this.stockInfo = this.stockTransferredUS.out;
       }
-      this.stockList = this.sharesList;
+      this.stockList = this.sharesList.out;
     },
     clearCache() {
-      this.$store.commit("SET_SHARES_LIST", { sharesList: [] });
+      this.$store.commit("SET_SHARES_LIST", { sharesList: [], stock: {type: 'in'}});
       this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
         stockTransferredHK: {},
+        type: 'out',
       });
       this.$store.commit("SET_STOCK_TRANSFERRED_US", {
         stockTransferredUS: {},
+        type: 'out',
       });
-      this.$store.commit("SET_ISHISTORYSHARES", { isHistoryShares: "" });
+      // this.$store.commit("SET_ISHISTORYSHARES", { isHistoryShares: "" });
     },
     createToast(txt) {
       const toast = this.$createToast({
@@ -126,11 +128,18 @@ export default {
     },
     handleNext() {
       this.isDisabled = true;
-      const data = {
-        accImgId: "",
-        stockId: this.stockList[0].stockId,
-        ...this.metaInfo,
-      };
+      let data = null;
+      if (Number(this.isSharesOut) === 1) {
+        data = {
+          id: this.stockTransferredHK.out.id,
+          ...this.metaInfo,
+        };
+      } else if (Number(this.isSharesOut) === 2) {
+        data = {
+          id: this.stockTransferredUS.out.id,
+          ...this.metaInfo,
+        };
+      }
        this.$store.dispatch("sendTransferredStockCache", data).then(
         (res) => {
           if (res.stock && res.sharesList.length === 0) {

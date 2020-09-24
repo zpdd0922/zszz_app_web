@@ -95,8 +95,8 @@ export default {
       isSearch: false, // 搜索框
       indexSearch: "", // 进入搜索框点击的序号
       metaInfo: {
-        // step: 2,
-        // state: 2,
+        type: 'out',
+        step: 0,
       },
       stockItemAdded: {
         sharesCode: "",
@@ -104,7 +104,7 @@ export default {
         sharesName: "",
         isInputActive: false, //输入框状态
       },
-      searchHistory: [],
+      // searchHistory: [],
       isSearchLoading: false, // 搜索框搜索状态
     };
   },
@@ -112,22 +112,19 @@ export default {
     this.initInfo();
   },
   props: {
-    isRefresh: {
-      type: Boolean,
-      default: true,
-    },
-    updateInfo: {
-      type: Function,
-    },
+
+    // updateInfo: {
+    //   type: Function,
+    // },
   },
   computed: {
     ...mapGetters([
-      "outMarketType",
-      "outStockUS",
-      "outStockHK",
+      "isSharesOut",
+      "stockTransferredUS",
+      "stockTransferredHK",
       "secAccountInfo",
-      "outMarketTypeHistory",
-      "outSharesList",
+      // "isHistoryShares",
+      "sharesList",
       // 'searchStockList',
     ]),
     isDisabled() {
@@ -161,9 +158,10 @@ export default {
           },
         };
       }
-      if (!this.outMarketType) {
-        data.params.mkt = Number(this.isShares) === 1 ? "HK" : "US";
+      if (!this.isSharesOut) {
+        data.params.mkt = Number(this.isSharesOut) === 1 ? "HK" : "US";
       } else {
+        //TODO:
         data.params.mkt = "HK";
       }
       this.$store.dispatch("getSearchStockList", data).then((res) => {
@@ -177,41 +175,46 @@ export default {
     },
     // 对比用户选择和历史选择
     initInfo() {
-      if (this.outSharesList.length > 0) {
-        this.outSharesList.forEach((item) => {
+      if (this.sharesList.out.length > 0) {
+        this.sharesList.out.forEach((item) => {
           const itemAdded = Object.assign({ isInputActive: false }, item);
           this.stockList.push(itemAdded);
         });
         this.isCanOperate = true;
       }
-      this.searchHistory = Storage.get("TRANSFERRED_SEARCH_HISTROY") || [];
+      // this.searchHistory = Storage.get("TRANSFERRED_SEARCH_HISTROY") || [];
     },
     getI18n(key) {
       return this.$t(`iAccount.outStock.stockDetail.${key}`);
     },
     handleNext() {
       //存本地缓存
-      this.$store.commit("SET_OUT_SHARES_LIST", { sharesList: this.stockList });
+      this.$store.commit("SET_SHARES_LIST", { stock: {type: 'out'}, sharesList: this.stockList });
 
-      const stockListTemp = this.stockList.map((item) => {
-        return {
-          stockName: item.sharesName,
-          stockCode: item.sharesCode,
-          transferNumber: item.sharesNum,
+      // const stockListTemp = this.stockList.map((item) => {
+      //   return {
+      //     stockName: item.sharesName,
+      //     stockCode: item.sharesCode,
+      //     transferNumber: item.sharesNum,
+      //   };
+      // });
+      let data = {};
+      if (Number(this.isSharesOut) === 1) {
+        data = {
+          info: "",
+          shareInfo: [...this.stockList],
+          ...this.metaInfo,
+          ...this.stockTransferredHK.out,
         };
-      });
-      const data = {
-        ...this.metaInfo,
-        info: "",
-        sharesList: [...stockListTemp],
-        stock: {},
-      };
-      if (Number(this.outMarketType) === 2) {
-        data.stock = {...this.outStockUS}
-      } else {
-        data.stock = {...this.outStockHK}
+      } else if (Number(this.isSharesOut) === 2) {
+        data = {
+          info: "",
+          shareInfo: [...this.stockList],
+          ...this.metaInfo,
+          ...this.stockTransferredUS.out,
+        };
       }
-      this.$store.dispatch("sendOutStockCache", data).then(() => {
+      this.$store.dispatch("sendTransferredStockCache", data).then(() => {
         this.$router.push({
           name: "outInfoConfirm",
         });
@@ -340,22 +343,22 @@ export default {
       this.stockList[idx].sharesName = item.name;
       this.isSearch = false;
       //存在本地
-      const isPush = this.searchHistory.some((obj) => {
-        return obj.id === item.id;
-      });
-      if (!isPush) {
-        this.searchHistory.push(item);
-        Storage.set("TRANSFERRED_SEARCH_HISTROY", this.searchHistory);
-      }
+      // const isPush = this.searchHistory.some((obj) => {
+      //   return obj.id === item.id;
+      // });
+      // if (!isPush) {
+      //   this.searchHistory.push(item);
+      //   Storage.set("TRANSFERRED_SEARCH_HISTROY", this.searchHistory);
+      // }
       this.searchStockName = "";
-      this.searchStockList = [];
+      // this.searchStockList = [];
     },
-    clearHistory() {
-      while (this.searchHistory.length > 0) {
-        this.searchHistory.pop();
-      }
-      Storage.remove("TRANSFERRED_SEARCH_HISTROY");
-    },
+    // clearHistory() {
+    //   while (this.searchHistory.length > 0) {
+    //     this.searchHistory.pop();
+    //   }
+    //   Storage.remove("TRANSFERRED_SEARCH_HISTROY");
+    // },
   },
 };
 </script>

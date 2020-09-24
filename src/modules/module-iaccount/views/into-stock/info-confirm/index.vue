@@ -10,49 +10,71 @@
         @handleNext="handleNext"
         class="info-confirm"
       >
-        <header class="info-confirm-title">{{getI18n('confirmTitle')}}</header>
+        <header class="info-confirm-title">
+          {{ getI18n("confirmTitle") }}
+        </header>
         <div>
           <div class="block">
-            <h3 class="title">{{getI18n('transferOut.title')}}</h3>
+            <h3 class="title">{{ getI18n("transferOut.title") }}</h3>
             <div class="content-wrap">
               <div class="line">
-                <span class="content-title">{{getI18n('transferOut.companyName')}}</span>
-                <span class="content-info">{{stockInfo.secName}}</span>
+                <span class="content-title">{{
+                  getI18n("transferOut.companyName")
+                }}</span>
+                <span class="content-info">{{ stockInfo.secName }}</span>
               </div>
               <div class="line">
-                <span class="content-title">{{getI18n('transferOut.accountNumber')}}</span>
-                <span class="content-info">{{stockInfo.accountNumber}}</span>
+                <span class="content-title">{{
+                  getI18n("transferOut.accountNumber")
+                }}</span>
+                <span class="content-info">{{ stockInfo.accountNumber }}</span>
               </div>
               <div class="line">
-                <span class="content-title">{{getI18n('transferOut.accountName')}}</span>
-                <span class="content-info">{{stockInfo.accountName}}</span>
+                <span class="content-title">{{
+                  getI18n("transferOut.accountName")
+                }}</span>
+                <span class="content-info">{{ stockInfo.accountName }}</span>
               </div>
             </div>
           </div>
           <div class="block">
-            <h3 class="title">{{getI18n('receive.title')}}</h3>
+            <h3 class="title">{{ getI18n("receive.title") }}</h3>
             <div class="content-wrap">
               <div class="line">
-                <span class="content-title">{{getI18n('receive.companyName')}}</span>
-                <span class="content-info">{{stockInfo.receiveSec}}</span>
+                <span class="content-title">{{
+                  getI18n("receive.companyName")
+                }}</span>
+                <span class="content-info">{{ stockInfo.receiveSec }}</span>
               </div>
               <div class="line">
-                <span class="content-title">{{getI18n('receive.accountNumber')}}</span>
-                <span class="content-info">{{stockInfo.receiveAccount}}</span>
+                <span class="content-title">{{
+                  getI18n("receive.accountNumber")
+                }}</span>
+                <span class="content-info">{{ stockInfo.receiveAccount }}</span>
               </div>
             </div>
           </div>
           <div class="block">
-            <h3 class="title">{{getI18n('stockInfo.title')}}</h3>
+            <h3 class="title">{{ getI18n("stockInfo.title") }}</h3>
             <div class="content">
-              <span class="content-title">{{getI18n('stockInfo.stockCode')}}</span>
-              <span class="content-title">{{getI18n('stockInfo.stockName')}}</span>
-              <span class="content-title">{{getI18n('stockInfo.quantity')}}</span>
+              <span class="content-title">{{
+                getI18n("stockInfo.stockCode")
+              }}</span>
+              <span class="content-title">{{
+                getI18n("stockInfo.stockName")
+              }}</span>
+              <span class="content-title">{{
+                getI18n("stockInfo.quantity")
+              }}</span>
             </div>
-            <div class="content-wrap" v-for="(item, index) in stockList" :key="index">
-              <span class="content-info">{{item.sharesCode}}</span>
-              <span class="content-info">{{item.sharesName}}</span>
-              <span class="content-info">{{item.sharesNum}}</span>
+            <div
+              class="content-wrap"
+              v-for="(item, index) in stockList"
+              :key="index"
+            >
+              <span class="content-info">{{ item.sharesCode }}</span>
+              <span class="content-info">{{ item.sharesName }}</span>
+              <span class="content-info">{{ item.sharesNum }}</span>
             </div>
           </div>
         </div>
@@ -60,7 +82,6 @@
     </template>
   </div>
 </template>
-
 
 <script>
 import { mapActions, mapGetters } from "vuex";
@@ -73,8 +94,8 @@ export default {
       stockList: [],
       isDisabled: false,
       metaInfo: {
-        step: -1,
-        state: 3,
+        step: 1,
+        type: 'in',
       },
     };
   },
@@ -100,21 +121,25 @@ export default {
     //拿到所有填过的数据
     initInfo() {
       if (Number(this.isShares) === 1) {
-        this.stockInfo = this.stockTransferredHK.stock;
+        this.stockInfo = this.stockTransferredHK.in;
       } else if (Number(this.isShares) === 2) {
-        this.stockInfo = this.stockTransferredUS.stock;
+        this.stockInfo = this.stockTransferredUS.in;
       }
-      this.stockList = this.sharesList;
+      this.stockList = this.sharesList.in;
     },
     clearCache() {
-      this.$store.commit("SET_SHARES_LIST", { sharesList: [] });
+      this.$store.commit("SET_SHARES_LIST", { sharesList: [], stock: {type: 'in'}});
       this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
         stockTransferredHK: {},
+        type: 'in',
       });
       this.$store.commit("SET_STOCK_TRANSFERRED_US", {
         stockTransferredUS: {},
+        type: 'in',
       });
-      this.$store.commit("SET_ISHISTORYSHARES", { isHistoryShares: "" });
+      // this.$store.commit("SET_ISHISTORYSHARES", { stock: {
+      //   isShares: ''
+      // } });
     },
     createToast(txt) {
       const toast = this.$createToast({
@@ -126,14 +151,21 @@ export default {
     },
     handleNext() {
       this.isDisabled = true;
-      const data = {
-        accImgId: "",
-        stockId: this.stockList[0].stockId,
-        ...this.metaInfo,
-      };
-       this.$store.dispatch("sendTransferredStockCache", data).then(
+      let data = null;
+      if (Number(this.isShares) === 1) {
+        data = {
+          id: this.stockTransferredHK.in.id,
+          ...this.metaInfo,
+        };
+      } else if (Number(this.isShares) === 2) {
+        data = {
+          id: this.stockTransferredUS.in.id,
+          ...this.metaInfo,
+        };
+      }
+      this.$store.dispatch("sendTransferredStockCache", data).then(
         (res) => {
-          if (res.stock && res.sharesList.length === 0) {
+          if (!res.stock && res.sharesList.length === 0) {
             this.createToast("fail");
             this.isDisabled = false;
             return;

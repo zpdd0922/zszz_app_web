@@ -76,7 +76,8 @@ export default {
         return;
       }
       //更改选择状态
-      this.setMarketStatus(item.code).then(() => {
+      
+      this.setMarketStatus({type: 'in', marketCode: item.code}).then(() => {
         // 进入下一流程
         this.$router.push({
           name: item.nextRouteName,

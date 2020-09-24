@@ -10,7 +10,7 @@
       </base-cell>
     </header>
     <!-- Loading -->
-    <template v-if="!isGetTransferHistory || !secAccountInfo">
+    <template v-if="!isGetHistory || !secAccountInfo">
       <loading />
     </template>
     <!-- 主体内容 -->
@@ -25,21 +25,24 @@
 import { mapActions, mapGetters } from "vuex";
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import storage from "@/main/utils/cache/localstorage.js";
+import { toast } from '@/main/utils/common/tips/';
+
 
 export default {
   mixins: [commonMixin],
   data() {
     return {
       // 获取历时转入记录需要字段
-      commonInfo: {
-        name: "转入股票",
-        type: 1,
-      },
+      // commonInfo: {
+      //   name: "转入股票",
+      //   type: 1,
+      // },
+      isGetHistory: false
     };
   },
   computed: {
     ...mapGetters([
-      "isGetTransferHistory",
+      // "isGetTransferHistory",
       "secAccountInfo",
       "stockTransferredHK",
       "stockTransferredUS",
@@ -82,8 +85,21 @@ export default {
   },
   created() {
     this.getSecAccountInfo().then((res) => {
-      this.getTransferredStock({ state: "0", step: "0" });
+      if (this.secAccountInfo.fundAccount && this.secAccountInfo.fundAccount.length >0) {
+        this.getTransferredStock({ type: 'in', step: "0" });
+        this.isGetHistory = true;
+      } else {
+        toast({
+          type: 'txt',
+          txt: '账户信息错误',
+          callback: ()=> {
+            this.router.push('/')
+          },
+          time: 1000,
+        })
+      }
     });
+
   },
 };
 </script>
