@@ -14,121 +14,84 @@
         </div>
       </div>
     </div>
-    <div class="detail">
-      <cube-scroll
-        :data="data"
-      >
-        <div>
-          <div v-for="(item, index) in data" :key="index">
-            <p class="title">{{item[0]}}</p>
-            <ul class="list">
-              <li v-for="(list, index) in item[1]" :key="index" class="item border-bottom-1px">
-                <p class="date">{{formatDate(list)}}</p>
-                <p class="type">{{formatType(list)}}</p>
-                <p class="pdf">查看PDF</p>
-              </li>
-            </ul>
+    <div class="detail" v-if="isHasData">
+      <cube-sticky :pos="scrollY">
+        <cube-scroll
+          :data="data"
+          :scroll-events="scrollEvents"
+          @scroll="scrollHandler"
+        >
+          <div>
+            <div v-for="(item, index) in data" :key="index">
+              <cube-sticky-ele :ele-key="item[0]">
+                <p class="title">{{item[0]}}</p>
+              </cube-sticky-ele>
+              <ul class="list">
+                <li v-for="(list, index) in item[1]" :key="index" class="item border-bottom-1px" @click="goPdf(list)">
+                  <p :class="['date', list.type === 1 ? 'day' : 'month']">{{formatDate(list)}}</p>
+                  <p class="type">{{formatType(list)}}</p>
+                  <p class="pdf">查看PDF</p>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </cube-scroll>
+        </cube-scroll>
+        <template slot="fixed" slot-scope="props">
+          <ul class="sticky-header">
+            <li>{{props.current}}</li>
+            <li @click="pwdTips">结单密码？</li>
+          </ul>
+        </template>
+      </cube-sticky>
     </div>
+    <template v-else>
+      <empty-box tips="暂无相关内容"></empty-box>
+    </template>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
 import { timestampToTime } from '@/modules/module-iaccount/utils/date'
 import { getStatementsData } from './format'
+import { openPDF } from '@/main/utils/native-app'
+import tradeApi from '@/modules/module-iaccount/api/modules/api-trade'
+import * as tips from '@/main/utils/common/tips'
 
 export default {
   data () {
     return {
       typeValue: '',
       dateValue: '全部日期',
+      dateYear: '', // 真是发往后台时间
+      dateMonth: '', // 真是发往后台时间
       upIcon: false,
-      data: [{
-            "date": 1600099200000,
-            "pdf": "http://down.statement.9fstock.com/2020/09/QKC4uXQKuPhxeOYXMN3Kkb58XAyZyq.pdf",
-            "type": 1
-          }, {
-            "date": 1600012800000,
-            "pdf": "http://down.statement.9fstock.com/2020/09/VBpsQTHj2WBQBf1qeyZIWAbj4PV6qB.pdf",
-            "type": 1
-          }, {
-            "date": 1599667200000,
-            "pdf": "http://down.statement.9fstock.com/2020/09/H18OaYDVxr2lCj8itlM1Dz1nqpoyJR.pdf",
-            "type": 1
-          }, {
-            "date": 1598803200000,
-            "pdf": "http://down.statement.9fstock.com/2020/08/dD3pmHjJDQ0Zlct9R4WylxtuHn2xf0.pdf",
-            "type": 2
-          }, {
-            "date": 1597334400000,
-            "pdf": "http://down.statement.9fstock.com/2020/08/jyBQLOzRNHE7BcjjnCVcaOUyNeB68i.pdf",
-            "type": 1
-          }, {
-            "date": 1597161600000,
-            "pdf": "http://down.statement.9fstock.com/2020/08/j37A1wDTON1DJsFVDPfw3xSDYFKgTj.pdf",
-            "type": 1
-          }, {
-            "date": 1597075200000,
-            "pdf": "http://down.statement.9fstock.com/2020/08/5GJ8ozRj6g5kjDj1hFeaLuu8rLYzvM.pdf",
-            "type": 1
-          }, {
-            "date": 1596729600000,
-            "pdf": "http://down.statement.9fstock.com/2020/08/lURAxr9MIW5d4PDtIwbW1Qq2dj9G5m.pdf",
-            "type": 1
-          }, {
-            "date": 1596124800000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/k0m5WMilrwoGvZF3eHGNWTjrQqHvVY.pdf",
-            "type": 2
-          }, {
-            "date": 1595433600000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/keShXcVbuEILAh66BKk8UJNK7CyamY.pdf",
-            "type": 1
-          }, {
-            "date": 1595260800000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/EIggiusDBAutIOyqkkEZApsLQnkGwz.pdf",
-            "type": 1
-          }, {
-            "date": 1594569600000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/lRQd1TWxCA3DQZkzfKhmbZZm0bnxt8.pdf",
-            "type": 1
-          }, {
-            "date": 1594310400000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/281BvwQnfXI6EW1Jl3CjfEAFjnmqXq.pdf",
-            "type": 1
-          }, {
-            "date": 1594137600000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/8DcoD5J6JQybigckTThZfYejGUgnWh.pdf",
-            "type": 1
-          }, {
-            "date": 1594051200000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/VHHYRxGecT6InT7O2rH58SkUgzgpK6.pdf",
-            "type": 1
-          }, {
-            "date": 1593705600000,
-            "pdf": "http://down.statement.9fstock.com/2020/07/vSLZ5guwoPmsvVYQmIhcdmjlaA1OOD.pdf",
-            "type": 1
-          }, {
-            "date": 1593446400000,
-            "pdf": "http://down.statement.9fstock.com/2020/06/LLakwE7qcgEljYMDhhlfcrKimrI9vy.pdf",
-            "type": 2
-          }, {
-            "date": 1593100800000,
-            "pdf": "http://down.statement.9fstock.com/2020/06/3SrHQdaCd2xsWZ0gGzKkSfGl6eLLu0.pdf",
-            "type": 1
-          }, {
-            "date": 1592841600000,
-            "pdf": "http://down.statement.9fstock.com/2020/06/4p0gt1IBpV7HvYMGHh1smNOPC9wqa7.pdf",
-            "type": 1
-          }, {
-            "date": 1592496000000,
-            "pdf": "http://down.statement.9fstock.com/2020/06/6spqjo5gNpSZB3ueZpC14Vc5Snlt2s.pdf",
-            "type": 1
-          }]
+      scrollEvents: ['scroll'],
+      scrollY: 0,
+      data: [],
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'secAccountInfo'
+    ]),
+    isHasData() {
+      return this.data.length
     }
   },
   methods: {
+    fetchData() {
+      const { fundAccount = [] } = this.secAccountInfo
+      const params = {
+        year: this.dateYear,
+        month: this.dateMonth,
+        type: this.typeValue,
+        fundAccount: fundAccount[0],
+      }
+      tradeApi.getStatements(params).then(res => {
+        this.data = getStatementsData(res)
+      })
+    },
     showDatePicker() {
       if (!this.datePicker) {
         this.datePicker = this.$createDatePicker({
@@ -147,14 +110,19 @@ export default {
       this.upIcon = false
       const text = selectedText.length && `${selectedText[0]}年-${selectedText[1]}月`
       this.dateValue = text
+      this.dateYear = selectedText.length && selectedText[0]
+      this.dateMonth = selectedText.length && selectedText[1]
     },
     cancelHandle() {
       console.log('1', 1)
     },
     // 格式化时间
     formatDate(data) {
-      const { date } = data
-      return timestampToTime(date, 'D')
+      const { date,   type } = data
+      if (type === 2) {
+        return timestampToTime(date, 'M') + '月'
+      }
+      return timestampToTime(date, 'D') + '日'
     },
     // 格式化日月结单文案
     formatType(data) {
@@ -163,11 +131,25 @@ export default {
         return '日结单'
       }
       return '月结单'
+    },
+    scrollHandler({ y }) {
+      this.scrollY = -y
+    },
+    goPdf({ pdf }) {
+      if (pdf && pdf !== '') {
+        openPDF({ url: pdf });
+      }
+    },
+    pwdTips() {
+      tips.jfDialog({
+        content: '为保护您的结单安全，已对结单进行加密，秘密为开户证件号码的后六位，包括数字，字母和字符。'
+      })
     }
   },
   mounted() {
     this.data = getStatementsData(this.data)
-    console.log('this.data', this.data)
+
+    // this.fetchData()
   }
 }
 </script>

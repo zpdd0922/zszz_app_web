@@ -21,6 +21,7 @@
       height: .32rem;
       line-height: .32rem;
       padding: 0 .1rem;
+      background-color: #f8f8f8;
     }
     .list {
       .item {
@@ -33,9 +34,17 @@
           width: .3rem;
           height: .3rem;
           border-radius: 50%;
-          background: #ffb39b;
+          // background: #ffb39b;
           text-align: center;
           line-height: .3rem;
+          font-size: .13rem;
+          color: #fff;
+        }
+        .day {
+          background-color: #ffb39b;
+        }
+        .month {
+          background-color: #ffc21f;
         }
         .type {
           flex: 1;
@@ -47,5 +56,17 @@
         }
       }
     }
+  }
+}
+
+.sticky-header {
+  display: flex;
+  justify-content: space-between;
+  height: .32rem;
+  line-height: .32rem;
+  padding: 0 .1rem;
+  background-color: #f8f8f8;
+  & > li:last-child {
+    color: #f95a29;
   }
 }
