@@ -5,6 +5,7 @@
         <i class="cubeic-search icon"></i>
         <input class="code-input" ref="code" v-model.lazy="value" :placeholder="$t('iAccount.company_act.placeholder.text_1')" />
       </div>
+      <div class="search-text">{{$t('iAccount.company_act.common.search')}}</div>
     </div>
     <div class="list">
       <div>
@@ -48,12 +49,12 @@ export default {
         this.options = []
         return
       }
-      const { uId, UserCode } = this.userInfo
+      // const { uId, UserCode } = this.userInfo
       const params = {
         condition: this.value,
         flag: 1,
-        mkt: '',
-        sessionUserId: uId || UserCode
+        mkt: 'HK',
+        // sessionUserId: uId || UserCode
       }
       SecuritiesApi.findShares(params).then(res => {
         const { stks } = res
@@ -96,6 +97,10 @@ export default {
         width: 90%;
         outline: none;
       }
+    }
+    .search-text {
+      padding: 0 .1rem;
+      white-space: nowrap;
     }
   }
   .list {

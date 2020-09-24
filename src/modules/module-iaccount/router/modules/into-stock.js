@@ -14,7 +14,7 @@ const intoStock = [
         path: 'into-way',
         name: 'intoWay',
         component: _import('into-stock/into-way'),
-        meta: { title: 'iAccount.intoStock.intoWay.title', step: 0, state: 0 },
+        meta: { title: 'iAccount.intoStock.intoWay.title'},
         props: true,
       },
       {

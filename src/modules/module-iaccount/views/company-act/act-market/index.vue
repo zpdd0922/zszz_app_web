@@ -18,23 +18,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { userMakePhone, getMobileInfo } from "@/main/utils/native-app/";
 import { alert } from "@/main/utils/common/tips";
-import validate from "@/main/utils/format/validate";
-import { mapActions, mapGetters } from "vuex";
-import AccountApi from "@/modules/module-iaccount/api/modules/api-account";
-import {
-  HKD,
-  USD,
-  DOLLAR_HK_VAL,
-  DOLLAR_US_VAL,
-} from "@/modules/module-iaccount/define";
 
 export default {
   data() {
     return {
-      offlineOptions: window.OFFLINE_CONTACT,
-      selectWay: "",
     };
   },
   created() {
@@ -51,22 +39,21 @@ export default {
         {
           type: "hk",
           code: 1,
-          label: this.$t("iAccount.outStock.outWay.wayHK"),
-          tips: "transfer out HK stocks",
-          nextRouteName: "transferOutInfo",
+          label: this.$t("iAccount.company_act.market.hk"),
+          tips: "HK stocks",
+          nextRouteName: "act-form",
         },
         {
           type: "us",
           code: 2,
-          label: this.$t("iAccount.outStock.outWay.wayUS"),
-          tips: "transfer out US stocks",
+          label: this.$t("iAccount.company_act.market.us"),
+          tips: "US stocks",
           // nextRouteName: 'transferInfo',
         },
       ];
     },
   },
   methods: {
-    ...mapActions(["setOutMarketStatus"]),
     handleNext(item) {
       if (!item.nextRouteName) {
         alert({
@@ -75,13 +62,13 @@ export default {
         });
         return;
       }
-      //更改选择状态
-      this.setOutMarketStatus({type: 'out', marketCode: item.code}).then(() => {
-        // 进入下一流程
-        this.$router.push({
-          name: item.nextRouteName,
-          // params: { intoType: item.code, isRefresh: false },
-        });
+      // 进入下一流程
+      this.$router.push({
+        name: item.nextRouteName,
+        query: {
+          market: item.type
+        }
+        // params: { intoType: item.code, isRefresh: false },
       });
     },
   },

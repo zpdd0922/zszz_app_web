@@ -95,8 +95,8 @@ export default {
       isSearch: false, // 搜索框
       indexSearch: "", // 进入搜索框点击的序号
       metaInfo: {
-        step: 2,
-        state: 2,
+        type: 'in',
+        step: 0,
       },
       stockItemAdded: {
         sharesCode: "",
@@ -104,7 +104,7 @@ export default {
         sharesName: "",
         isInputActive: false, //输入框状态
       },
-      searchHistory: [],
+      // searchHistory: [],
       isSearchLoading: false, // 搜索框搜索状态
     };
   },
@@ -112,13 +112,9 @@ export default {
     this.initInfo();
   },
   props: {
-    isRefresh: {
-      type: Boolean,
-      default: true,
-    },
-    updateInfo: {
-      type: Function,
-    },
+    // updateInfo: {
+    //   type: Function,
+    // },
   },
   computed: {
     ...mapGetters([
@@ -178,38 +174,49 @@ export default {
     },
     // 对比用户选择和历史选择
     initInfo() {
-      if (this.sharesList.length > 0) {
-        this.sharesList.forEach((item) => {
+      if (this.sharesList.in.length > 0) {
+        this.sharesList.in.forEach((item) => {
           const itemAdded = Object.assign({ isInputActive: false }, item);
           this.stockList.push(itemAdded);
         });
         this.isCanOperate = true;
       }
-      this.searchHistory = Storage.get("TRANSFERRED_SEARCH_HISTROY") || [];
+      // this.searchHistory = Storage.get("TRANSFERRED_SEARCH_HISTROY") || [];
     },
     getI18n(key) {
       return this.$t(`iAccount.intoStock.stockDetail.${key}`);
     },
     handleNext() {
       //存本地缓存
-      this.$store.commit("SET_SHARES_LIST", { sharesList: this.stockList });
+      this.$store.commit("SET_SHARES_LIST", { stock: {type: 'in'}, sharesList: this.stockList });
 
-      const stockListTemp = this.stockList.map((item) => {
-        return {
-          stockName: item.sharesName,
-          stockCode: item.sharesCode,
-          transferNumber: item.sharesNum,
+      // const stockListTemp = this.stockList.map((item) => {
+      //   return {
+      //     stockName: item.sharesName,
+      //     stockCode: item.sharesCode,
+      //     transferNumber: item.sharesNum,
+      //   };
+      // });
+      let data = {};
+      if (Number(this.isShares) === 1) {
+        data = {
+          info: "",
+          shareInfo: [...this.stockList],
+          ...this.metaInfo,
+          ...this.stockTransferredHK.in,
         };
-      });
-      const data = {
-        ...this.metaInfo,
-        info: "",
-        shares: [...stockListTemp],
-      };
+      } else if (Number(this.isShares) === 2) {
+        data = {
+          info: "",
+          shareInfo: [...this.stockList],
+          ...this.metaInfo,
+          ...this.stockTransferredUS.in,
+        };
+      }
+      console.log(this.stockTransferredHK)
       this.$store.dispatch("sendTransferredStockCache", data).then(() => {
         this.$router.push({
           name: "infoConfirm",
-          params: { isRefresh: false },
         });
       });
     },
@@ -336,22 +343,22 @@ export default {
       this.stockList[idx].sharesName = item.name;
       this.isSearch = false;
       //存在本地
-      const isPush = this.searchHistory.some((obj) => {
-        return obj.id === item.id;
-      });
-      if (!isPush) {
-        this.searchHistory.push(item);
-        Storage.set("TRANSFERRED_SEARCH_HISTROY", this.searchHistory);
-      }
+      // const isPush = this.searchHistory.some((obj) => {
+      //   return obj.id === item.id;
+      // });
+      // if (!isPush) {
+      //   this.searchHistory.push(item);
+      //   Storage.set("TRANSFERRED_SEARCH_HISTROY", this.searchHistory);
+      // }
       this.searchStockName = "";
-      this.searchStockList = [];
+      // this.searchStockList = [];
     },
-    clearHistory() {
-      while (this.searchHistory.length > 0) {
-        this.searchHistory.pop();
-      }
-      Storage.remove("TRANSFERRED_SEARCH_HISTROY");
-    },
+    // clearHistory() {
+    //   while (this.searchHistory.length > 0) {
+    //     this.searchHistory.pop();
+    //   }
+    //   Storage.remove("TRANSFERRED_SEARCH_HISTROY");
+    // },
   },
 };
 </script>

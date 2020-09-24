@@ -7,8 +7,14 @@ const companyActRouter = [
     path: 'company-act',
     name: 'company-act',
     component: CompanyAct,
-    redirect: 'company-act/act-form',
+    redirect: 'company-act/act-market',
     children: [
+      {
+        name: 'act-market',
+        path: 'act-market',
+        component: _import('company-act/act-market'),
+        meta: { title: 'iAccount.company_act.market.title'},
+      },
       {
         name: 'act-form',
         path: 'act-form',

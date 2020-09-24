@@ -14,7 +14,7 @@ const outStock = [
         path: 'out-way',
         name: 'outWay',
         component: _import('out-stock/out-way'),
-        meta: { title: 'iAccount.outStock.outWay.title', step: 0, state: 0 },
+        meta: { title: 'iAccount.outStock.outWay.title' },
         props: true,
       },
       {

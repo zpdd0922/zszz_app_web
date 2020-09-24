@@ -73,8 +73,8 @@ export default {
         receiveAccount: "",
       },
       metaInfo: {
-        step: 1,
-        state: 1,
+        type: 'in',
+        step: 0,
       },
       // 转出方信息
       fieldsTransferOut: {
@@ -215,6 +215,7 @@ export default {
       "stockTransferredUS",
       "stockTransferredHK",
       "secAccountInfo",
+      "sharesList",
     ]),
     // 账户列表
     fundAccount() {
@@ -302,12 +303,12 @@ export default {
     initInfo() {
       const stockType = this.intoType || Number(this.isShares);
       if (stockType === 1) {
-        if (!this.stockTransferredHK.stock) {
+        if (!this.stockTransferredHK.in.isShares) {
           this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
           this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
-          const companyName = this.stockTransferredHK.stock.secName;
+          const companyName = this.stockTransferredHK.in.secName;
           Object.keys(this.transferOutInfoModel).forEach((key) => {
             // 判断转出公司名字是否是其他
             if (companyName) {
@@ -321,25 +322,23 @@ export default {
                 this.transferOutInfoModel.transferOutCompany = "OTH";
               }
             }
-            if (this.stockTransferredHK.stock[key]) {
-              this.transferOutInfoModel[key] = this.stockTransferredHK.stock[
-                key
-              ];
+            if (this.stockTransferredHK.in[key]) {
+              this.transferOutInfoModel[key] = this.stockTransferredHK.in[key];
             }
           });
           Object.keys(this.receiverInfoModel).forEach((key) => {
-            if (this.stockTransferredHK.stock[key]) {
-              this.receiverInfoModel[key] = this.stockTransferredHK.stock[key];
+            if (this.stockTransferredHK.in[key]) {
+              this.receiverInfoModel[key] = this.stockTransferredHK.in[key];
             }
           });
         }
       } else if (stockType === 2) {
-        if (!this.stockTransferredUS.stock) {
+        if (!this.stockTransferredUS.in.isShares) {
           this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
           this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
-          const companyName = this.stockTransferredUS.stock.secName;
+          const companyName = this.stockTransferredUS.in.secName;
           Object.keys(this.transferOutInfoModel).forEach((key) => {
             // 判断转出公司名字是否是其他
             if (companyName) {
@@ -353,15 +352,15 @@ export default {
                 this.transferOutInfoModel.transferOutCompany = "OTH";
               }
             }
-            if (this.stockTransferredUS.stock[key]) {
-              this.transferOutInfoModel[key] = this.stockTransferredUS.stock[
+            if (this.stockTransferredUS.in[key]) {
+              this.transferOutInfoModel[key] = this.stockTransferredUS.in[
                 key
               ];
             }
           });
           Object.keys(this.receiverInfoModel).forEach((key) => {
-            if (this.stockTransferredUS.stock[key]) {
-              this.receiverInfoModel[key] = this.stockTransferredUS.stock[key];
+            if (this.stockTransferredUS.in[key]) {
+              this.receiverInfoModel[key] = this.stockTransferredUS.in[key];
             }
           });
         }
@@ -383,15 +382,16 @@ export default {
         if (Number(this.isShares) === 1) {
           return (
             this.secAccountInfo.tradeAccount ||
-            this.stockTransferredHK.stock.clientId
+            this.stockTransferredHK.in.clientId
           );
         } else {
           return (
             this.secAccountInfo.tradeAccount ||
-            this.stockTransferredUS.stock.clientId
+            this.stockTransferredUS.in.clientId
           );
         }
       })();
+      //请求参数需要字段
       const tempStock = {
         accountName: "",
         accountNumber: "",
@@ -408,37 +408,40 @@ export default {
         ...this.transferOutInfoModel,
         ...this.receiverInfoModel,
       };
+      // 数据填充
       Object.assign(tempStock, fullData);
+      // 请求全部参数
       return {
         info: "",
         ...this.metaInfo,
-        stock: {
-          ...tempStock,
-        },
+        ...tempStock,
+        shareInfo: this.sharesList.in,
       };
+
     },
     // 下一步
     handleNext(e) {
       e.preventDefault();
       // 保存数据&下一步
-      // const fullData = {type: this.stockType, data: this.formatSubData()};
       let fullData = {};
       const tempData = this.formatSubData();
       if (Number(this.isShares) === 1) {
-        fullData = { ...this.stockTransferredHK, ...tempData };
+        fullData = {...this.stockTransferredHK.in, ...tempData};
         this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
-          stockTransferredHK: fullData,
+          stockTransferredHK: fullData, 
+          type: 'in',
         });
-      } else if (Number(tempData === 2)) {
-        fullData = { ...this.stockTransferredUS, ...tempData };
-        this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
-          stockTransferredHK: fullData,
+        console.log(fullData)
+      } else if (Number(this.isShares === 2)) {
+        fullData = {...this.stockTransferredHK.in, ...tempData};
+        this.$store.commit("SET_STOCK_TRANSFERRED_US", {
+          stockTransferredUS: fullData, 
+          type: 'in',
         });
       }
-      this.$store.dispatch("sendTransferredStockCache", tempData).then(() => {
+      this.$store.dispatch("sendTransferredStockCache", fullData).then(() => {
         this.$router.push({
           name: "stockDetail",
-          params: { isRefresh: false },
         });
       });
     },
