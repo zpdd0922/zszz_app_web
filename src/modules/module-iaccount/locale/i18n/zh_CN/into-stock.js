@@ -60,13 +60,17 @@ export const intoStock = {
       noStockNameWarn: '股票代码不能为空',
       noQuantityWarn: '股票数量不能为空',
       repeatWarn: '股票代码不可重复输入',
+      add: ' 添加',
       delete: '删除',
       edit: '编辑',
+      cancel: '取消',
+      save: '保存',
       search: {
         searchInput: '请输入股票代码/名称/首字母',
         searchTitle: '以下为历史搜索记录',
         clear: '清除记录',
       },
+      isSearching: '搜索中...',
       noResult: '无搜索结果',
     },  
     infoConfirm: {

@@ -60,4 +60,11 @@ export default {
         placeholder: '选填',
         txtHk: '中国香港',
     },
+    cardError: '请输入正确身份证号码',
+    ageError: '70岁以上暂不能开户，非常抱歉',
+    warmTips: '温馨提示',
+    bornDate: '出生日期',
+    startDate: '起始日期',
+    endDate: '结束日期',
+    longerConfirm: '为确保您资料的准确性，请确认您的身份证是否为长期身份证！',
 }

@@ -1,0 +1,28 @@
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
+.transfer-info-wrap {
+  width: 100%;
+  background-color: $color-theme-m;
+
+  .form {
+    background-color: $color-theme;
+      .tips {
+        padding: 0.15rem 0.15rem;
+        font-size: 0.14rem;
+        color: $color-txt-highlight;
+      }
+  }
+
+  .transfer-info-title {
+    font-size: 0.17rem;
+    padding: 0.15rem 0.15rem;
+
+  }
+
+  
+  .cube-form_standard .cube-form-item {
+    min-height: 46px;
+}
+}

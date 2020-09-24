@@ -45,6 +45,7 @@ const mutations = {
     state.stockTransferredUS = payload.stockTransferredUS;
   },
   [types.SET_ISSHARES](state, payload) {
+    state.isShares = payload.isShares;
     localStorage.setItem("isShares", payload.isShares);
   },
   [types.SET_ISHISTORYSHARES](state, payload) {
@@ -112,7 +113,7 @@ const actions = {
       })
     })
   },
-  // 搜所接口
+  // 搜索接口
   getSearchStockList({ commit }, data) {
     return new Promise((resolve, reject) => {
       ApiStockTransfer.getSearchStockList(data).then((res) => {

@@ -6,6 +6,7 @@ export default {
    * 查询用户已转入股票记录
    */
   getTransferredStock: data => post('/securities/transferred_stock', paramsData.NOPARAMS(data)),
+  // getTransferredStock: data => post('/sec_api/find_transferred_stock', paramsData.COMMON(data)),
   /**
    * 缓存用户已填写转入股票记录
    */

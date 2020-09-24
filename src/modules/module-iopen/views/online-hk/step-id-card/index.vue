@@ -257,23 +257,23 @@ export default {
             options: [
               {
                 value: nationOptions.idCardCn.key,
-                text: nationOptions.idCardCn.text,
-                // text: this.$t("iOpen.common.idKind.idCardCn")
+                // text: nationOptions.idCardCn.text,
+                text: this.$t("iOpen.common.idKind.idCardCn")
               },
               {
                 value: nationOptions.idCardHk.key,
-                text: nationOptions.idCardHk.text,
-                // text: this.$t("iOpen.common.idKind.idCardHk")
+                // text: nationOptions.idCardHk.text,
+                text: this.$t("iOpen.common.idKind.idCardHk")
               },
               {
                 value: nationOptions.idCardHkTemp.key,
-                text: nationOptions.idCardHkTemp.text,
-                // text: this.$t("iOpen.common.idKind.idCardHkTemp")
+                // text: nationOptions.idCardHkTemp.text,
+                text: this.$t("iOpen.common.idKind.idCardHkTemp")
               },
               {
                 value: nationOptions.passport.key,
-                text: nationOptions.passport.text,
-                // text: this.$t("iOpen.common.idKind.passport")
+                // text: nationOptions.passport.text,
+                text: this.$t("iOpen.common.idKind.passport")
               },
             ],
           },
@@ -281,12 +281,12 @@ export default {
         {
           type: "select",
           modelKey: "nationType",
-          label: "国家/地区",
+          label: this.getI18n('nationType'),
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: "请选择国家/地区",
+            placeholder: this.getI18n('nationTypePlaceholder'),
             options: [],
           },
           events: {
@@ -302,7 +302,7 @@ export default {
           modelKey: "otherNationality",
           label: "",
           props: {
-            placeholder: "请用英文输入国家或地区名称",
+            placeholder: this.getI18n('inputOtherCountry'),
             maxlength: 50,
           },
           trigger: "blur",

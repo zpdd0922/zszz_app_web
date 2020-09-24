@@ -164,7 +164,6 @@ export default {
       if (!this.isShares) {
         data.params.mkt = Number(this.isShares) === 1 ? "HK" : "US";
       } else {
-        //TODO:这里放开美股之后要改
         data.params.mkt = "HK";
       }
       this.$store.dispatch("getSearchStockList", data).then((res) => {
@@ -188,7 +187,7 @@ export default {
       this.searchHistory = Storage.get("TRANSFERRED_SEARCH_HISTROY") || [];
     },
     getI18n(key) {
-      return this.$t(`iAccount.intoStock.stockDetail.${key}`);
+      return this.$t(`iAccount.outStock.stockDetail.${key}`);
     },
     handleNext() {
       //存本地缓存
@@ -208,7 +207,7 @@ export default {
       };
       this.$store.dispatch("sendTransferredStockCache", data).then(() => {
         this.$router.push({
-          name: "infoConfirm",
+          name: "outInfoConfirm",
           params: { isRefresh: false },
         });
       });
