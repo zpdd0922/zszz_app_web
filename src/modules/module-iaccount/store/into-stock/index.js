@@ -110,10 +110,10 @@ const mutations = {
         state.stockTransferredUS.in = { ...payload.stock }
       }
     } else if (payload.stock.type === 'out') {
-      if (payload.stock.isShares === 1) {
-        state.stockTransferredHK.in = { ...payload.stock }
+      if (!payload.stock.isShares) {
+        state.stockTransferredHK.out = { ...payload.stock }
       } else if (payload.stock.isShares === 2) {
-        state.stockTransferredUS.in = { ...payload.stock }
+        state.stockTransferredUS.out = { ...payload.stock }
       }
     }
   },

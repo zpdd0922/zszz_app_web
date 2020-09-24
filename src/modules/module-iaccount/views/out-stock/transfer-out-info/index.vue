@@ -318,6 +318,7 @@ export default {
     },
     // 数据回填
     initInfo() {
+      console.log(this.stockTransferredHK)
       const stockType = this.intoType || Number(this.isSharesOut);
       if (stockType === 1) {
         if (!this.stockTransferredHK.out.isSharesOut) {

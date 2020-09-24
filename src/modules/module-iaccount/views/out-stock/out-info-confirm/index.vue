@@ -107,7 +107,7 @@ export default {
       this.stockList = this.sharesList.out;
     },
     clearCache() {
-      this.$store.commit("SET_SHARES_LIST", { sharesList: [], stock: {type: 'in'}});
+      this.$store.commit("SET_SHARES_LIST", { sharesList: [], stock: {type: 'out'}});
       this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
         stockTransferredHK: {},
         type: 'out',
@@ -142,13 +142,13 @@ export default {
       }
        this.$store.dispatch("sendTransferredStockCache", data).then(
         (res) => {
-          if (res.stock && res.sharesList.length === 0) {
+          if (!res.stock && res.sharesList.length === 0) {
             this.createToast("fail");
             this.isDisabled = false;
             return;
           }
           this.createToast("success");
-          this.clearCache();
+          // this.clearCache();
           setTimeout(() => {
             this.$router.replace("/");
           }, 1000);
