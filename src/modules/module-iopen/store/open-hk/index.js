@@ -102,7 +102,7 @@ const actions = {
     const { type, location } = IMAGE_REQUEST_LIST[imgType];
     const params = { type, location, imgBase64 };
     return new Promise((resolve, reject) => {
-      openHKApi.saveCacheImg({ ...params, imgType, callback })
+      openHKApi.saveCacheImg(params, { imgType, callback })
         .then(res => {
           const updateImg = { [`${imgType}${SUFFIX}`]: res.path };
           commit(types.OPEN_IMG_HK, { updateImg });
