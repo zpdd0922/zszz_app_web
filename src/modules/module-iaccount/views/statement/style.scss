@@ -2,6 +2,8 @@
 @import '~@/main/assets/scss/mixin.scss';
 
 .statement {
+  height: 100%;
+  overflow: hidden;
   .header {
     display: flex;
     height: .4rem;

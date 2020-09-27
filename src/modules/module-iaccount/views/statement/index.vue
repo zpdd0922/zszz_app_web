@@ -17,12 +17,12 @@
     <div class="detail" v-if="isHasData">
       <cube-sticky :pos="scrollY">
         <cube-scroll
-          :data="data"
+          :data="list"
           :scroll-events="scrollEvents"
           @scroll="scrollHandler"
         >
           <div>
-            <div v-for="(item, index) in data" :key="index">
+            <div v-for="(item, index) in list" :key="index">
               <cube-sticky-ele :ele-key="item[0]">
                 <p class="title">{{item[0]}}</p>
               </cube-sticky-ele>
@@ -39,7 +39,7 @@
         <template slot="fixed" slot-scope="props">
           <ul class="sticky-header">
             <li>{{props.current}}</li>
-            <li @click="pwdTips">结单密码？</li>
+            <!-- <li @click="pwdTips">结单密码？</li> -->
           </ul>
         </template>
       </cube-sticky>
@@ -68,7 +68,7 @@ export default {
       upIcon: false,
       scrollEvents: ['scroll'],
       scrollY: 0,
-      data: [],
+      list: [],
     }
   },
   computed: {
@@ -76,7 +76,7 @@ export default {
       'secAccountInfo'
     ]),
     isHasData() {
-      return this.data.length
+      return this.list.length
     }
   },
   methods: {
@@ -89,7 +89,7 @@ export default {
         fundAccount: fundAccount[0],
       }
       tradeApi.getStatements(params).then(res => {
-        this.data = getStatementsData(res)
+        this.list = getStatementsData(res.statements)
       })
     },
     showDatePicker() {
@@ -112,6 +112,7 @@ export default {
       this.dateValue = text
       this.dateYear = selectedText.length && selectedText[0]
       this.dateMonth = selectedText.length && selectedText[1]
+      this.fetchData();
     },
     cancelHandle() {
       console.log('1', 1)
@@ -147,9 +148,9 @@ export default {
     }
   },
   mounted() {
-    this.data = getStatementsData(this.data)
+    this.list = getStatementsData(this.list)
 
-    // this.fetchData()
+    this.fetchData()
   }
 }
 </script>
