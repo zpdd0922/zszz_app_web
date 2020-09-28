@@ -22,5 +22,5 @@ export const companyOptions = () => [
   {value: '核聚证券有限公司', text: i18n.t('iAccount.outStock.companyList.text_19')},
   {value: '香港上海汇丰银行有限公司', text: i18n.t('iAccount.outStock.companyList.text_20')},
   {value: '友信证券有限公司', text: i18n.t('iAccount.outStock.companyList.text_21')},
-  {value: 'OTH', text: i18n.t('iAccount.outStock.companyList.other')}
+  {value: 'OTH', text: i18n.t('iAccount.outStock.companyList.other')},
 ]

@@ -41,7 +41,7 @@ export const intoStock = {
       title: "接收方資訊",
       receiveSec: {
         placeholder: "立橋證券",
-        label: "接收帳戶",
+        label: "接收券商",
       },
       receiveAccount: {
         placeholder: "請選擇",

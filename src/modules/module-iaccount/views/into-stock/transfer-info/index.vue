@@ -10,7 +10,26 @@
           <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
         </template>
         <cube-form-item :field="fieldsTransferOut.accountNumber"></cube-form-item>
-        <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item>
+        <!-- <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item> -->
+        <div class="cube-form-item border-bottom-1px">
+          <div class="cube-form-label">
+            <span>{{
+              getI18n("transferOutInfo.accountName.label")
+            }}</span>
+          </div>
+          <div class="cube-validator cube-form-field">
+            <div class="cube-validator-content">
+              <cube-select
+                :options="nameList"
+                :placeholder="
+                  getI18n('transferOutInfo.accountName.placeholder')
+                "
+                v-model="transferOutInfoModel.accountName"
+              ></cube-select>
+            </div>
+          </div>
+        </div>
+
         <template v-if="transferOutInfoModel.transferOutCompany === 'OTH'">
           <cube-form-item :field="fieldsTransferOut.ccass"></cube-form-item>
           <cube-form-item :field="fieldsTransferOut.rolloutContacts"></cube-form-item>
@@ -217,6 +236,21 @@ export default {
       "secAccountInfo",
       "sharesList",
     ]),
+    nameList() {
+      if (this.secAccountInfo) {
+        return [
+          {
+            value: String(this.secAccountInfo.clientNameEn),
+            text: this.secAccountInfo.clientNameEn,
+          },
+          {
+            value: String(this.secAccountInfo.clientNameCn),
+            text: this.secAccountInfo.clientNameCn,
+          },
+        ]
+      }
+    },
+
     // 账户列表
     fundAccount() {
       if (this.secAccountInfo) {

@@ -41,7 +41,7 @@ export const outStock = {
       title: "轉出方資訊",
       transferOutSec: {
         placeholder: "立橋證券",
-        label: "轉出帳戶",
+        label: "轉出券商",
       },
       transferOutAccount: {
         placeholder: "請選擇",

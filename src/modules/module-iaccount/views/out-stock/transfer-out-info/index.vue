@@ -16,7 +16,27 @@
         <cube-form-item
           :field="fieldsTransferOut.accountNumber"
         ></cube-form-item>
-        <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item>
+        <!-- <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item> -->
+        <!-- 账户姓名 -->
+        <div class="cube-form-item border-bottom-1px">
+          <div class="cube-form-label">
+            <span>{{
+              getI18n("receiveInfo.accountName.label")
+            }}</span>
+          </div>
+          <div class="cube-validator cube-form-field">
+            <div class="cube-validator-content">
+              <cube-select
+                :options="nameList"
+                :placeholder="
+                  getI18n('receiveInfo.accountName.placeholder')
+                "
+                v-model="transferOutInfoModel.accountName"
+              ></cube-select>
+            </div>
+          </div>
+        </div>
+
         <template v-if="transferOutInfoModel.transferOutCompany === 'OTH'">
           <cube-form-item :field="fieldsTransferOut.ccass"></cube-form-item>
           <cube-form-item
@@ -209,7 +229,7 @@ export default {
           modelKey: "receiveSec",
           label: this.getI18n("transferOutInfo.transferOutSec.label"),
           props: {
-            placeholder: this.getI18n("transferOutInfo.transferOutAccount.placeholder"),
+            placeholder: this.getI18n("transferOutInfo.transferOutSec.placeholder"),
             disabled: true,
           },
           rules: {
@@ -234,6 +254,20 @@ export default {
       "secAccountInfo",
       "sharesList",
     ]),
+    nameList() {
+      if (this.secAccountInfo) {
+        return [
+          {
+            value: String(this.secAccountInfo.clientNameEn),
+            text: this.secAccountInfo.clientNameEn,
+          },
+          {
+            value: String(this.secAccountInfo.clientNameCn),
+            text: this.secAccountInfo.clientNameCn,
+          },
+        ]
+      }
+    },
     // 账户列表
     fundAccount() {
       if (this.secAccountInfo) {
@@ -447,7 +481,6 @@ export default {
           stockTransferredHK: fullData, 
           type: 'out',
         });
-        console.log(this.stockTransferredHK, '123asdf')
       } else if (Number(this.isSharesOut === 2)) {
         fullData = {...this.stockTransferredHK.out, ...tempData};
         this.$store.commit("SET_STOCK_TRANSFERRED_US", {

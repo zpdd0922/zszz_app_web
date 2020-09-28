@@ -103,7 +103,7 @@ export default {
       listDataCache: [],
     };
   },
-  created() {
+  created() { 
     this._fetchHis();
   },
   computed: {},
@@ -118,7 +118,11 @@ export default {
       this.$store
         .dispatch("getStocksHistory", {type: 'in'})
         .then((res) => {
-          this.listDataCache = res;
+          if (res && res.length > 0){
+            this.listDataCache = res.filter((item) => {
+              return item.stock.state === 0 ? false : true
+            });
+          }
           this.listData = [...this.listDataCache];
         })
         .catch(() => {
