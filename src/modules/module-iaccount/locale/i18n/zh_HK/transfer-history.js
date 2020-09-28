@@ -17,6 +17,7 @@ export const transferHistory = {
   },
   date: "日期",
   outCompany: "轉出券商",
+  inCompany: '轉入券商',
   status: "狀態",
   stockName: "股票名稱",
   stockNum: "股票數量",

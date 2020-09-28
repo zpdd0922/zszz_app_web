@@ -68,21 +68,24 @@ export default {
   methods: {
     ...mapActions(["setOutMarketStatus"]),
     handleNext(item) {
-      if (!item.nextRouteName) {
-        alert({
-          title: this.$t("common.alertTitle"),
-          content: "功能待开放",
+      AccountApi.getOpenBankType().then(()=>{
+        if (!item.nextRouteName) {
+          alert({
+            title: this.$t("common.alertTitle"),
+            content: "功能待开放",
+          });
+          return;
+        }
+        //更改选择状态
+        this.setOutMarketStatus({type: 'out', marketCode: item.code}).then(() => {
+          // 进入下一流程
+          this.$router.push({
+            name: item.nextRouteName,
+            // params: { intoType: item.code, isRefresh: false },
+          });
         });
-        return;
-      }
-      //更改选择状态
-      this.setOutMarketStatus({type: 'out', marketCode: item.code}).then(() => {
-        // 进入下一流程
-        this.$router.push({
-          name: item.nextRouteName,
-          // params: { intoType: item.code, isRefresh: false },
-        });
-      });
+
+      })
     },
   },
 };
