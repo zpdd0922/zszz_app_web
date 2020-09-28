@@ -39,8 +39,8 @@ export const STOCK_STATUS = {
   key: "status",
   options: {
     0: { text: 'iAccount.transferHistory.statusFilter.allStatus', value: 0, sort: 0 },
-    1: { text: 'iAccount.transferHistory.statusFilter.committed', value: 1, sort: 1, color: '#FC724C'  },
-    2: { text: 'iAccount.transferHistory.statusFilter.processed', value: 2, sort: 2, color: '#FC724C' },
+    1: { text: 'iAccount.transferHistory.statusFilter.committed', value: 1, sort: 1, color: '#5A2AB8'  },
+    2: { text: 'iAccount.transferHistory.statusFilter.processed', value: 2, sort: 2, color: '#5A2AB8' },
     3: { text: 'iAccount.transferHistory.statusFilter.err', value: 3, sort: 3, color: '#E5425E' },
     4: { text: 'iAccount.transferHistory.statusFilter.finish', value: 4, sort: 4, color: '#60B782' }
     // 0: { text: "所有状态", code: 0 },

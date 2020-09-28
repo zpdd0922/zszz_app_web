@@ -20,8 +20,8 @@ export const CURRENCY_STATUS = {
   key: 'currencyStatus',
   options: {
     99: { text: 'iAccount.history.common.text_9', value: 99, sort: 0 },
-    0: { text: 'iAccount.history.common.text_10', value: 0, sort: 1, color: '#FC724C'  },
-    1: { text: 'iAccount.history.common.text_11', value: 1, sort: 2, color: '#FC724C' },
+    0: { text: 'iAccount.history.common.text_10', value: 0, sort: 1, color: '#5A2AB8'  },
+    1: { text: 'iAccount.history.common.text_11', value: 1, sort: 2, color: '#5A2AB8' },
     2: { text: 'iAccount.history.common.text_12', value: 2, sort: 3, color: '#E5425E' },
     3: { text: 'iAccount.history.common.text_13', value: 3, sort: 4, color: '#60B782' }
   },
@@ -33,8 +33,8 @@ export const CURRENCY_OUT_STATUS = {
   key: 'currencyStatus',
   options: {
     99: { text: 'iAccount.history.common.text_9', value: 99, sort: 0 },
-    0: { text: 'iAccount.history.common.text_10', value: 0, sort: 1, color: '#FC724C' },
-    1: { text: 'iAccount.history.common.text_11', value: 1, sort: 2, color: '#FC724C' },
+    0: { text: 'iAccount.history.common.text_10', value: 0, sort: 1, color: '#5A2AB8' },
+    1: { text: 'iAccount.history.common.text_11', value: 1, sort: 2, color: '#5A2AB8' },
     2: { text: 'iAccount.history.common.text_12', value: 2, sort: 3, color: '#E5425E' },
     3: { text: 'iAccount.history.common.text_13', value: 3, sort: 4, color: '#60B782' },
     4: { text: 'iAccount.history.common.text_14', value: 4, sort: 5, color: '#999999' },

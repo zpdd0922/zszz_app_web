@@ -103,8 +103,8 @@ export default {
           channel: [
             {
               key: "xgxx",
-              label: "選股選息",
-              iconType: "xgxx",
+              label: "行动回复",
+              iconType: "sqgg",
               path: "company-act",
             },
             // { key: "sqgg", label: "申請供股", iconType: "sqgg" },
