@@ -318,10 +318,9 @@ export default {
     },
     // 数据回填
     initInfo() {
-      console.log(this.stockTransferredHK)
       const stockType = this.intoType || Number(this.isSharesOut);
       if (stockType === 1) {
-        if (!this.stockTransferredHK.out.isSharesOut) {
+        if (!this.stockTransferredHK.out.isShares) {
           this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
           this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
@@ -448,6 +447,7 @@ export default {
           stockTransferredHK: fullData, 
           type: 'out',
         });
+        console.log(this.stockTransferredHK, '123asdf')
       } else if (Number(this.isSharesOut === 2)) {
         fullData = {...this.stockTransferredHK.out, ...tempData};
         this.$store.commit("SET_STOCK_TRANSFERRED_US", {

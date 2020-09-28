@@ -3,10 +3,10 @@ import * as types from './mutation-types'
 
 // 初始化数据 --> mapStates
 const state = {
-  // isGetTransferHistory: {
-  //   in: false,
-  //   out: false,
-  // },
+  isGetTransferHistory: {
+    in: false,
+    out: false,
+  },
   // 港股历史数据
   stockTransferredHK: {
     in: {},
@@ -36,7 +36,7 @@ const state = {
 }
 
 const getters = {
-  // isGetTransferHistory: state => state.isGetTransferHistory,
+  isGetTransferHistory: state => state.isGetTransferHistory,
   stockTransferredHK: state => state.stockTransferredHK,
   stockTransferredUS: state => state.stockTransferredUS,
   isShares: state => state.isShares,
@@ -70,7 +70,7 @@ const mutations = {
   [types.SET_STOCK_TRANSFERRED_US](state, payload) {
     if (payload.type === 'in') {
       state.stockTransferredUS.in = payload.stockTransferredUS;
-    } else if (payload.stock.type === 'out') {
+    } else if (payload.type === 'out') {
       state.stockTransferredUS.out = payload.stockTransferredUS;
     }
   },
@@ -103,14 +103,13 @@ const mutations = {
       return
     }
     if (payload.stock.type === 'in') {
-      //TODO:现在find接口不会返回全字段，等后台修改后再做调整
-      if (!payload.stock.isShares) {
+      if (payload.stock.isShares === 1) {
         state.stockTransferredHK.in = { ...payload.stock }
       } else if (payload.stock.isShares === 2) {
         state.stockTransferredUS.in = { ...payload.stock }
       }
     } else if (payload.stock.type === 'out') {
-      if (!payload.stock.isShares) {
+      if (payload.stock.isShares === 1) {
         state.stockTransferredHK.out = { ...payload.stock }
       } else if (payload.stock.isShares === 2) {
         state.stockTransferredUS.out = { ...payload.stock }
@@ -118,10 +117,18 @@ const mutations = {
     }
   },
   [types.UPDATE_CACHE_DATA_STATUS](state, payload) {
-    if (payload.stock.type === 'in') {
-      state.isGetTransferHistory.in = true;
-    } else if (payload.stock.type === 'out') {
-      state.isGetTransferHistory.out = true;
+    //TODO: 
+    if (!payload.stock) {
+      state.isGetTransferHistory = {
+        in: true,
+        out: true,
+      }
+    } else {
+      if (payload.stock.type === 'in') {
+        state.isGetTransferHistory.in = true;
+      } else if (payload.stock.type === 'out') {
+        state.isGetTransferHistory.out = true;
+      }
     }
   },
   [types.STOCK_TRANSFER_HISTORY](state, payload) {
@@ -144,9 +151,10 @@ const actions = {
           // commit(types.SET_ISHISTORYSHARES, res)
           commit(types.SET_SHARES_LIST, res)
         }
-        // commit(types.UPDATE_CACHE_DATA_STATUS, res);
+        commit(types.UPDATE_CACHE_DATA_STATUS, res);
         resolve(res)
-      }).catch((err) => {
+      })
+      .catch((err) => {
         reject(err)
       })
     })
@@ -202,7 +210,7 @@ const actions = {
   },
 
   // 获取股票转移记录
-  getStocksHistory({ commit }, data) {
+  getStocksHistory({ commit }, data = {type: 'all'}) {
     return new Promise((resolve, reject) => {
     ApiStockTransfer.getStocksHistory(data).then((res) => {
         commit(types.STOCK_TRANSFER_HISTORY, res)

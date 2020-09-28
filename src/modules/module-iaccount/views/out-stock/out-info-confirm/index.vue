@@ -148,7 +148,7 @@ export default {
             return;
           }
           this.createToast("success");
-          // this.clearCache();
+          this.clearCache();
           setTimeout(() => {
             this.$router.replace("/");
           }, 1000);

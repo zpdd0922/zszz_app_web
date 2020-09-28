@@ -29,21 +29,21 @@
                   <li>
                     <span>{{ $t("iAccount.transferHistory.date") }}</span
                     ><span>{{
-                      slotProps.item.createdTime | filterDateTime
+                      slotProps.item.stock.createdTime | filterDateTime
                     }}</span>
                   </li>
                   <li>
                     <span>{{ $t("iAccount.transferHistory.outCompany") }}</span
-                    ><span>{{ slotProps.item.secName }}</span>
+                    ><span>{{ slotProps.item.stock.secName }}</span>
                   </li>
                   <li>
                     <span>{{ $t("iAccount.transferHistory.status") }}</span
-                    ><span>{{ slotProps.item.state | filterStatusText }}</span>
+                    ><span>{{ slotProps.item.stock.state | filterStatusText }}</span>
                   </li>
                 </ul>
                 <ul
                   class="stock-detail"
-                  v-for="(item, index) in slotProps.item.sharesInfoList"
+                  v-for="(item, index) in slotProps.item.sharesList"
                   :key="index"
                 >
                   <li>
@@ -113,11 +113,10 @@ export default {
     },
     _fetchHis() {
       const params = {
-        isShares: 0,
-        state: 0,
+        type: 'in'
       };
       this.$store
-        .dispatch("getStocksHistory", params)
+        .dispatch("getStocksHistory", {type: 'in'})
         .then((res) => {
           this.listDataCache = res;
           this.listData = [...this.listDataCache];
@@ -143,20 +142,19 @@ export default {
     },
 
     _filterAll() {
-      console.log(this.state, this.market, "asdfasd");
       if (!this.market && !this.state) {
         this.listData = [...this.listDataCache];
       } else if (!this.market && this.state) {
         this.listData = [...this.listDataCache].filter((item) => {
-          return item.state === this.state;
+          return item.stock.state === this.state;
         });
       } else if (this.market && !this.state) {
         this.listData = [...this.listDataCache].filter((item) => {
-          return item.isShares === this.market;
+          return item.stock.isShares === this.market;
         });
       } else {
         this.listData = [...this.listDataCache].filter((item) => {
-          return item.state === this.state && item.isShares === this.market;
+          return item.stock.state === this.state && item.stock.isShares === this.market;
         });
       }
     },

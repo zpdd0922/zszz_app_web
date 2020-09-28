@@ -29,6 +29,8 @@ import {
   EDDA_STATUS
 } from './edda'
 
+import { STATEMENT_TYPE_LIST } from './statement'
+
 import { brokerageCalculate } from './brokerage-calculate'
 import { BANK_NAME_OPTIONS } from './info-remit'
 import { intoStock } from './into-stock'
@@ -82,7 +84,8 @@ export default {
       WARRANTS_CONVERSION_OPTIONS,
       PREFERENTIAL_OFFER,
       BOURSE_OPTIONS,
-      COMPANY_NAME_OPTIONS
+      COMPANY_NAME_OPTIONS,
+      STATEMENT_TYPE_LIST
     },
     main: {
       pageName: '證券服務'

@@ -1,6 +1,10 @@
 @import '../components/styles.scss';
 
 .layout-iaccount {
+  height: 100%;
+  position: relative;
+  flex:1;
+
   .sec-page-title {
     padding: .15rem .15rem .1rem;
     font-size: .18rem;

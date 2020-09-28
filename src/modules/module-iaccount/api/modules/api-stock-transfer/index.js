@@ -16,7 +16,7 @@ export default {
   getSearchStockList: data => post('/securities/find_shares_list', data),
 
   /**
-    * { isShares: 0, state: 0 }
+    * 
     */
-  getStocksHistory: data => post('/securities/find_transferred_stock_record', paramsData.NOPARAMS(data)),
+  getStocksHistory: data => post('/sec_api/find_transferred_stock_record', paramsData.COMMON(data)),
 }

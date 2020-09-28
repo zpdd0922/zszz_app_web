@@ -1,44 +1,53 @@
 <template>
   <div class="op-com-camera-wrap">
-    <div v-for="(item, key, ind) in uploadFiles" :key="ind" class="op-com-camera-item">
+    <div
+      v-for="(item, key, ind) in uploadFiles"
+      :key="ind"
+      class="op-com-camera-item"
+    >
       <template v-if="showTxt && item.txt">
-        <div class="op-com-item-title">{{item.txt}}</div>
+        <div class="op-com-item-title">{{ item.txt }}</div>
       </template>
       <div class="op-com-item-photo" @click="handleCamera(key)">
+        {{ uploadLoad[`${key}Status`] }}
         <template v-if="upload[`${key}${SUFFIX}`]">
           <div class="op-com-photo-img">
             <!-- <img @click="showImagePreview(`${key}${SUFFIX}`)" :src="upload[`${key}${SUFFIX}`]"> -->
             <img :src="upload[`${key}${SUFFIX}`]" />
-            <!-- 上传进度 -->
+            <!-- 加载图片 -->
             <template v-if="uploadLoad[`${key}Status`] === 'ready'">
               <div class="op-com-photo-rate">
                 <span>加载中</span>
               </div>
-            </template>  
+            </template>
+            <!-- 压缩图片 -->
             <template v-if="uploadLoad[`${key}Status`] === 'compress'">
               <div class="op-com-photo-rate">
                 <span>压缩中</span>
               </div>
             </template>
+            <!-- 上传进度 -->
             <template v-if="uploadLoad[`${key}Status`] === 'uploading'">
               <div class="op-com-photo-rate">
-                <span>{{uploadLoad[`${key}Percent`]}} %</span>
+                <span>{{ uploadLoad[`${key}Percent`] }} %</span>
               </div>
             </template>
             <!-- 上传失败 -->
             <template v-if="uploadLoad[`${key}Status`] === 'error'">
-              <div class="op-com-photo-reload" @click.stop="hanldeReload(key)">重新上传</div>
+              <div class="op-com-photo-reload" @click.stop="hanldeReload(key)">
+                重新上传
+              </div>
             </template>
           </div>
         </template>
         <template v-else>
           <div class="op-com-photo-img">
             <template v-if="uploadTips">
-              <div class="photo-tips">{{uploadTips}}</div>
+              <div class="photo-tips">{{ uploadTips }}</div>
             </template>
             <div
               class="op-com-photo-bg"
-              :style="{backgroundImage: `url(${item.placehold})`}"
+              :style="{ backgroundImage: `url(${item.placehold})` }"
               @click="showImageBg(item)"
             ></div>
           </div>
@@ -181,6 +190,7 @@ export default {
     },
     // 文件上传回调
     callback(key, e) {
+      console.log(123231, key);
       this.$set(this.uploadLoad, [`${key}Status`], e.status);
       this.$set(this.uploadLoad, [`${key}Percent`], e.percent);
     },
@@ -198,6 +208,7 @@ export default {
           this.$emit("localLoad", file, idFlag);
         },
         upload: (file, idFlag) => {
+          console.log(typeof this.callback)
           this.$emit("uploadAfter", file, idFlag, this.callback);
         },
         cameraType: this.cameraType,

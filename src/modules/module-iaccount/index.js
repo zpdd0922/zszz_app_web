@@ -3,7 +3,7 @@ import FastClick from 'fastclick';
 import Cube from 'cube-ui';
 
 import App from './App';
-import router from './router';
+import router from './router';  
 import store from './store';
 import i18n from './locale';
 

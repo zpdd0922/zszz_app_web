@@ -141,6 +141,7 @@ export default {
       this.searchStockList = [];
     },
     //搜索股票
+    //  TODO:要加节流
     getStockList(idx) {
       let data = {};
       const inputVal = this.stockList[idx].sharesCode;

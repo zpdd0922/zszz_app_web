@@ -204,7 +204,8 @@ export default {
       });
 
       // 更新图片 - 优先本地，其次服务端
-      const signImgData = this.openImg[fileName];
+      // const signImgData = this.openImg[fileName];
+      const signImgData = storage.get(fileName) || this.openImg[fileName]
       // 若存在签名图
       if (signImgData) {
         this.$set(this.upload, fileName, signImgData);

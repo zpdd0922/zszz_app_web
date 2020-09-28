@@ -10,7 +10,7 @@
       </base-cell>
     </header>
     <!-- Loading -->
-    <template v-if="!isGetHistory || !secAccountInfo">
+    <template v-if="!isGetTransferHistory.out || !secAccountInfo">
       <loading />
     </template>
     <!-- 主体内容 -->
@@ -25,6 +25,7 @@
 import { mapActions, mapGetters } from "vuex";
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import storage from "@/main/utils/cache/localstorage.js";
+import { toast } from '@/main/utils/common/tips/';
 
 export default {
   mixins: [commonMixin],
@@ -35,6 +36,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      "isGetTransferHistory",
       "secAccountInfo",
       "stockTransferredHK",
       "stockTransferredUS",
@@ -79,13 +81,12 @@ export default {
     this.getSecAccountInfo().then((res) => {
       if (this.secAccountInfo.fundAccount && this.secAccountInfo.fundAccount.length >0) {
         this.getTransferredStock({ type: 'out', step: "0" });
-        this.isGetHistory = true;
       } else {
         toast({
           type: 'txt',
           txt: '账户信息错误',
           callback: ()=> {
-            this.router.push('/')
+            this.$router.push('/')
           },
           time: 1000,
         })

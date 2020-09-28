@@ -10,7 +10,7 @@
       </base-cell>
     </header>
     <!-- Loading -->
-    <template v-if="!isGetHistory || !secAccountInfo">
+    <template v-if="!isGetTransferHistory.in || !secAccountInfo">
       <loading />
     </template>
     <!-- 主体内容 -->
@@ -37,12 +37,11 @@ export default {
       //   name: "转入股票",
       //   type: 1,
       // },
-      isGetHistory: false
     };
   },
   computed: {
     ...mapGetters([
-      // "isGetTransferHistory",
+      "isGetTransferHistory",
       "secAccountInfo",
       "stockTransferredHK",
       "stockTransferredUS",
@@ -87,13 +86,12 @@ export default {
     this.getSecAccountInfo().then((res) => {
       if (this.secAccountInfo.fundAccount && this.secAccountInfo.fundAccount.length >0) {
         this.getTransferredStock({ type: 'in', step: "0" });
-        this.isGetHistory = true;
       } else {
         toast({
           type: 'txt',
           txt: '账户信息错误',
           callback: ()=> {
-            this.router.push('/')
+            this.$router.push('/')
           },
           time: 1000,
         })

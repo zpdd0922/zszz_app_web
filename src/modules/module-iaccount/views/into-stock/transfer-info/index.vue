@@ -431,7 +431,6 @@ export default {
           stockTransferredHK: fullData, 
           type: 'in',
         });
-        console.log(fullData)
       } else if (Number(this.isShares === 2)) {
         fullData = {...this.stockTransferredHK.in, ...tempData};
         this.$store.commit("SET_STOCK_TRANSFERRED_US", {
