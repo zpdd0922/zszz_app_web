@@ -2,38 +2,59 @@
   <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
     <div class="transfer-info-wrap">
       <!-- 转出方信息 -->
-      <div class="transfer-info-title">{{titleValues.transferOut}}</div>
-      <cube-form :model="transferOutInfoModel" class="form">
-        <cube-form-item :field="fieldsTransferOut.transferOutCompany"></cube-form-item>
+      <div class="transfer-info-title">{{ titleValues.transferOut }}</div>
+      <cube-form
+        :model="transferOutInfoModel"
+        class="step-content custom-form-group"
+      >
+        <cube-form-item
+          :field="fieldsTransferOut.transferOutCompany"
+        ></cube-form-item>
         <!-- 转出公司为其他时弹出 -->
         <template v-if="transferOutInfoModel.transferOutCompany === 'OTH'">
-          <cube-form-item :field="fieldsTransferOut.otherTransferOutCompanyName"></cube-form-item>
+          <cube-form-item
+            :field="fieldsTransferOut.otherTransferOutCompanyName"
+          ></cube-form-item>
         </template>
-        <cube-form-item :field="fieldsTransferOut.accountNumber"></cube-form-item>
+        <cube-form-item
+          :field="fieldsTransferOut.accountNumber"
+        ></cube-form-item>
         <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item>
         <template v-if="transferOutInfoModel.transferOutCompany === 'OTH'">
           <cube-form-item :field="fieldsTransferOut.ccass"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut.rolloutContacts"></cube-form-item>
-          <cube-form-item :field="fieldsTransferOut.contactsPhoneNum"></cube-form-item>
+          <cube-form-item
+            :field="fieldsTransferOut.rolloutContacts"
+          ></cube-form-item>
+          <cube-form-item
+            :field="fieldsTransferOut.contactsPhoneNum"
+          ></cube-form-item>
         </template>
-        <div class="tips">{{getI18n('tips1')}}{{secAccountInfo.clientNameEn}}{{getI18n('tips2')}}</div>
+        <div class="tips">
+          {{ getI18n("tips1") }}{{ secAccountInfo.clientNameEn
+          }}{{ getI18n("tips2") }}
+        </div>
       </cube-form>
       <!-- 接收方信息 -->
-      <div class="transfer-info-title">{{titleValues.receiver}}</div>
-      <cube-form :model="receiverInfoModel">
+      <div class="transfer-info-title">{{ titleValues.receiver }}</div>
+      <cube-form
+        :model="receiverInfoModel"
+        class="step-content custom-form-group"
+      >
         <div></div>
         <cube-form-item :field="fieldsreceiver.receiveSec"></cube-form-item>
         <!-- <cube-form-item :field="fieldsreceiver.receiveAccount" :options="fundAccount"></cube-form-item> -->
         <!-- 用fieldsoptions绑定不了变量，改成cube-form -->
         <div class="cube-form-item border-bottom-1px">
           <div class="cube-form-label">
-            <span>{{getI18n("receiverInfo.receiveAccount.label")}}</span>
+            <span>{{ getI18n("receiverInfo.receiveAccount.label") }}</span>
           </div>
           <div class="cube-validator cube-form-field">
             <div class="cube-validator-content">
               <cube-select
                 :options="fundAccount"
-                :placeholder="getI18n('receiverInfo.receiveAccount.placeholder')"
+                :placeholder="
+                  getI18n('receiverInfo.receiveAccount.placeholder')
+                "
                 v-model="receiverInfoModel.receiveAccount"
               ></cube-select>
             </div>
@@ -73,7 +94,7 @@ export default {
         receiveAccount: "",
       },
       metaInfo: {
-        type: 'in',
+        type: "in",
         step: 0,
       },
       // 转出方信息
@@ -353,9 +374,7 @@ export default {
               }
             }
             if (this.stockTransferredUS.in[key]) {
-              this.transferOutInfoModel[key] = this.stockTransferredUS.in[
-                key
-              ];
+              this.transferOutInfoModel[key] = this.stockTransferredUS.in[key];
             }
           });
           Object.keys(this.receiverInfoModel).forEach((key) => {
@@ -417,7 +436,6 @@ export default {
         ...tempStock,
         shareInfo: this.sharesList.in,
       };
-
     },
     // 下一步
     handleNext(e) {
@@ -426,16 +444,16 @@ export default {
       let fullData = {};
       const tempData = this.formatSubData();
       if (Number(this.isShares) === 1) {
-        fullData = {...this.stockTransferredHK.in, ...tempData};
+        fullData = { ...this.stockTransferredHK.in, ...tempData };
         this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
-          stockTransferredHK: fullData, 
-          type: 'in',
+          stockTransferredHK: fullData,
+          type: "in",
         });
       } else if (Number(this.isShares === 2)) {
-        fullData = {...this.stockTransferredHK.in, ...tempData};
+        fullData = { ...this.stockTransferredHK.in, ...tempData };
         this.$store.commit("SET_STOCK_TRANSFERRED_US", {
-          stockTransferredUS: fullData, 
-          type: 'in',
+          stockTransferredUS: fullData,
+          type: "in",
         });
       }
       this.$store.dispatch("sendTransferredStockCache", fullData).then(() => {
@@ -451,6 +469,3 @@ export default {
   mounted() {},
 };
 </script>
-<style lang="scss" scoped>
-@import "./style.scss";
-</style>

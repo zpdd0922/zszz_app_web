@@ -3,7 +3,7 @@
     <div class="transfer-info-wrap">
       <!-- 接收方信息 -->
       <div class="transfer-info-title">{{ titleValues.receiver }}</div>
-      <cube-form :model="transferOutInfoModel" class="form">
+      <cube-form :model="transferOutInfoModel" class="step-content custom-form-group">
         <cube-form-item
           :field="fieldsTransferOut.transferOutCompany"
         ></cube-form-item>
@@ -33,7 +33,7 @@
       </cube-form>
       <!-- 转出方信息 -->
       <div class="transfer-info-title">{{ titleValues.transferOut }}</div>
-      <cube-form :model="receiverInfoModel">
+      <cube-form :model="receiverInfoModel" class="step-content custom-form-group">
         <div></div>
         <cube-form-item :field="fieldsreceiver.receiveSec"></cube-form-item>
         <!-- <cube-form-item :field="fieldsreceiver.receiveAccount" :options="fundAccount"></cube-form-item> -->
@@ -468,6 +468,3 @@ export default {
   mounted() {},
 };
 </script>
-<style lang="scss" scoped>
-@import "./style.scss";
-</style>
