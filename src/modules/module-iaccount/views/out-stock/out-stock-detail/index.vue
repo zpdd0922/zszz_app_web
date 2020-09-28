@@ -15,7 +15,7 @@
               :placeholder="getI18n('stockNamePlaceholder')"
               @focus="goToSearch(idx)"
               @blur="closeSearch"
-              @keyup="getStockList(idx)"
+              @keyup="debouncedGetStockList(idx)"
               :disabled="!item.isInputActive"
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
@@ -79,6 +79,8 @@
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import { mapGetters } from "vuex";
 import Storage from "@/main/utils/cache/localstorage";
+import { debounce } from "@/modules/module-iaccount/utils/common";
+
 
 export default {
   data() {
@@ -141,6 +143,10 @@ export default {
       this.searchStockName = "";
       this.searchStockList = [];
     },
+    debouncedGetStockList: debounce(function(idx) {
+      this.getStockList(idx);
+    }, 500),
+
     //搜索股票
     getStockList(idx) {
       let data = {};

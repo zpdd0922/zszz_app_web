@@ -122,6 +122,8 @@ export default {
             this.listDataCache = res.filter((item) => {
               return item.stock.state === 0 ? false : true
             });
+          } else {
+            this.listDataCache = [];
           }
           this.listData = [...this.listDataCache];
         })

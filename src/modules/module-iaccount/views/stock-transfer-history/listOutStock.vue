@@ -38,7 +38,7 @@
                   </li>
                   <li>
                     <span>{{ $t("iAccount.transferHistory.status") }}</span
-                    ><span>{{ slotProps.item.state | filterStatusText }}</span>
+                    ><span>{{ slotProps.item.stock.state | filterStatusText }}</span>
                   </li>
                 </ul>
                 <ul
@@ -118,7 +118,15 @@ export default {
       this.$store
         .dispatch("getStocksHistory", params)
         .then((res) => {
-          this.listDataCache = res;
+          // this.listDataCache = res;
+          if (res && res.length > 0){
+            this.listDataCache = res.filter((item) => {
+              return item.stock.state === 0 ? false : true
+            });
+          } else {
+            this.listDataCache = [];
+          }
+
           this.listData = [...this.listDataCache];
           // this.listData = [];
         })
@@ -150,7 +158,6 @@ export default {
           return item.stock.state === this.state;
         });
       } else if (this.market && !this.state) {
-        console.log(1234)
         this.listData = [...this.listDataCache].filter((item) => {
           return item.stock.isShares === this.market;
         });

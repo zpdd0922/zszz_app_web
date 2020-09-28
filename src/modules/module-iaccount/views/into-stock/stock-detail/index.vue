@@ -1,29 +1,37 @@
 <template>
   <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
     <div class="sec-stock-into-detail" ref="stock-detail">
-      <head-title :title="getI18n('title')" class="stock-detail-title"></head-title>
-      <div :class="{'addBtn': true, 'addBtn-active': isAddBtnActive }" @click.stop="addStock">+ {{getI18n('add')}}</div>
+      <head-title
+        :title="getI18n('title')"
+        class="stock-detail-title"
+      ></head-title>
+      <div
+        :class="{ addBtn: true, 'addBtn-active': isAddBtnActive }"
+        @click.stop="addStock"
+      >
+        + {{ getI18n("add") }}
+      </div>
       <ul v-if="stockList.length !== 0">
         <li v-for="(item, idx) in stockList" :key="idx" class="form">
           <div class="item-column">
-            <label for="sharesCode">{{getI18n('sharesCode')}}</label>
+            <label for="sharesCode">{{ getI18n("sharesCode") }}</label>
             <input
               type="text"
               name="sharesCode"
               v-model="stockList[idx].sharesCode"
+              @keyup="debouncedGetStockList(idx)"
               autocomplete="off"
               :placeholder="getI18n('stockNamePlaceholder')"
               @focus="goToSearch(idx)"
               @blur="closeSearch"
-              @keyup="getStockList(idx)"
               :disabled="!item.isInputActive"
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
-            <!-- <div class="list-box" v-if="true"> -->
-              <!-- TODO:看看后续要不要加loading -->   
+              <!-- <div class="list-box" v-if="true"> -->
+              <!-- TODO:看看后续要不要加loading -->
               <template v-if="isSearchLoading">
                 <div class="is-searching">
-                  <span>{{getI18n('isSearching')}}</span>
+                  <span>{{ getI18n("isSearching") }}</span>
                 </div>
               </template>
               <template v-else>
@@ -33,22 +41,22 @@
                     v-for="(item, index) in searchStockList"
                     :key="index"
                     @mousedown.prevent
-                    @click.stop="saveStockCode($event, idx,item)"
+                    @click.stop="saveStockCode($event, idx, item)"
                   >
                     <!-- 图标要根据值变化 -->
                     <span class="hk-stock-icon"></span>
-                    <span class="code">{{item.id | formatCode}}</span>
-                    <span class="name">{{item.name}}</span>
+                    <span class="code">{{ item.id | formatCode }}</span>
+                    <span class="name">{{ item.name }}</span>
                   </div>
                 </div>
                 <div class="no-result" v-else>
-                  <span>{{getI18n('noResult')}}</span>
+                  <span>{{ getI18n("noResult") }}</span>
                 </div>
               </template>
             </div>
           </div>
           <div class="item-column">
-            <label for="sharesNum">{{getI18n('sharesNum')}}</label>
+            <label for="sharesNum">{{ getI18n("sharesNum") }}</label>
             <input
               type="text"
               name="sharesNum"
@@ -63,12 +71,12 @@
             @click.stop="handleClick($event, idx)"
             v-if="!isCanOperate && item.isInputActive"
           >
-            <div class="leftBtn" id="cancel">{{getI18n('cancel')}}</div>
-            <div class="rightBtn" id="save">{{getI18n('save')}}</div>
+            <div class="leftBtn" id="cancel">{{ getI18n("cancel") }}</div>
+            <div class="rightBtn" id="save">{{ getI18n("save") }}</div>
           </div>
           <div class="btn-wrap" @click.stop="handleClick($event, idx)" v-else>
-            <div class="leftBtn" id="delete">{{getI18n('delete')}}</div>
-            <div class="rightBtn" id="edit">{{getI18n('edit')}}</div>
+            <div class="leftBtn" id="delete">{{ getI18n("delete") }}</div>
+            <div class="rightBtn" id="edit">{{ getI18n("edit") }}</div>
           </div>
         </li>
       </ul>
@@ -79,10 +87,13 @@
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import { mapGetters } from "vuex";
 import Storage from "@/main/utils/cache/localstorage";
+import { debounce } from "@/modules/module-iaccount/utils/common";
+// import _ from "lodash";
 
 export default {
   data() {
     return {
+      // debounce,
       isUpdating: false, // 刷新状态
       searchStockList: [], // 搜索结果
       isAddBtnActive: true, // 添加按钮激活状态
@@ -95,7 +106,7 @@ export default {
       isSearch: false, // 搜索框
       indexSearch: "", // 进入搜索框点击的序号
       metaInfo: {
-        type: 'in',
+        type: "in",
         step: 0,
       },
       stockItemAdded: {
@@ -110,6 +121,11 @@ export default {
   },
   created() {
     this.initInfo();
+  },
+  mounted() {
+    // if(this.$refs.inputSearch)
+    // this.$refs.inputSearch.addEventListener( 'keyup', debounce(() => { console.log(window.innerWidth) console.log(window.innerHeight) }, 250) )
+    // console.log(this.$refs)
   },
   props: {
     // updateInfo: {
@@ -141,7 +157,10 @@ export default {
       this.searchStockList = [];
     },
     //搜索股票
-    //  TODO:要加节流
+    debouncedGetStockList: debounce(function(idx) {
+      this.getStockList(idx);
+    }, 500),
+ 
     getStockList(idx) {
       let data = {};
       const inputVal = this.stockList[idx].sharesCode;
@@ -189,7 +208,10 @@ export default {
     },
     handleNext() {
       //存本地缓存
-      this.$store.commit("SET_SHARES_LIST", { stock: {type: 'in'}, sharesList: this.stockList });
+      this.$store.commit("SET_SHARES_LIST", {
+        stock: { type: "in" },
+        sharesList: this.stockList,
+      });
 
       // const stockListTemp = this.stockList.map((item) => {
       //   return {
@@ -214,7 +236,6 @@ export default {
           ...this.stockTransferredUS.in,
         };
       }
-      console.log(this.stockTransferredHK)
       this.$store.dispatch("sendTransferredStockCache", data).then(() => {
         this.$router.push({
           name: "infoConfirm",
