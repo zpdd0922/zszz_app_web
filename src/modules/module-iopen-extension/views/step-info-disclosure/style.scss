@@ -1,0 +1,177 @@
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
+
+.olcn-step-info-other {
+  // 添加多个受益人时候重新设置宽度
+  $delete-right-width: -8%;
+
+  .cube-form-label {
+    width: 6em;
+  }
+
+  .disclosure-block-item {
+    position: relative;
+    padding: .1rem;
+
+    .triangle-icon {
+      top: .1rem;
+      left: .1rem;
+    }
+
+  }
+  h3 {
+    font-size: 0.14rem;
+  }
+  //美国居民身份申报
+  .greenCardDeclare {
+    padding: .1rem 0 0 .12rem;
+  }
+  // [class^="item-"] {
+  //   position: relative;
+  //   padding: .1rem;
+
+  //   &:before {
+  //     content: '';
+  //     position: absolute;
+  //     width: .26rem;
+  //     height: .25rem;
+  //     background-size: cover;
+  //     background-repeat: no-repeat;
+  //     background-position: center center; 
+  //   }
+  // }
+  // .item-1:before {
+  //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon1.png');
+  // }
+  // .item-2:before {
+  //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon2.png');
+  // }  
+  // .item-3:before {
+  //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon3.png');
+  // } 
+  // .item-4:before {
+  //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon4.png');
+  // }
+  // .item-5:before {
+  //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon5.png');
+  // }
+
+  .footer {
+    display: flex;
+    justify-content: space-around;
+    padding: .1rem 0;
+
+    .cube-btn-light {
+      color: #666;
+      background: #fcfcfc;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    }
+
+    .add {
+      font-size: .14rem;
+    }
+
+    .remove {
+      font-size: .14rem;
+    }
+
+  }
+
+
+
+  .cube-form-item{
+    min-height: 46px;
+  }
+
+  .cube-form-field{
+    flex: 1;
+  }
+  .cube-select:after {
+    display: none;
+  }
+  .cube-radio-group:after {
+    display: none;
+  }
+  .cube-radio:after {
+    display: none;
+  }
+  .cube-input-field{
+    padding: .05rem 0;
+  }
+
+  .error-tips {
+    font-size: 0.1rem;
+    padding: 0.1rem;
+    color: red;
+    line-height: 1.2;
+  }
+
+  .privacy-box {
+    margin-bottom: 0.1rem;
+  }
+
+  .privacy-block-group {
+    margin: 0.1rem;
+    background: #ffffff;
+    box-shadow: 0 0 0.07rem #eee;
+  }
+
+  .privacy-block-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 0.1rem;
+  }
+
+  .btn-box {
+    display: flex;
+    justify-content: space-between;
+    height: 0.42rem;
+    padding: 0 0.1rem;
+    font-size: 0.13rem;
+
+    .add {
+      width: 1.7rem;
+      height: 0.41rem;
+      line-height: 0.41rem;
+      text-align: center;
+      color: #1aae52;
+      background: #ffffff;
+      box-shadow: 0 0 0.07rem #e0e0e0;
+    }
+
+    .dele {
+      width: 1.7rem;
+      height: 0.41rem;
+      line-height: 0.41rem;
+      text-align: center;
+      color: #eb333b;
+      background: #ffffff;
+      box-shadow: 0 0 0.07rem #e0e0e0;
+
+      &.no-del {
+        color: #cccccc;
+      }
+    }
+  }
+
+  .big-text-area-wrap {
+    padding-left: 1em;
+    padding-bottom: .1rem;
+
+    .big-text-area {
+      padding: .5em;
+      border: none;
+      width: 100%;
+      height: 7em;
+      background-color: rgba(238, 238, 238, 0.53);
+      outline: none;
+
+      &::-webkit-input-placeholder {
+        font-size: .14rem;
+        color: #cccccc;
+      }
+    }
+  }
+}
