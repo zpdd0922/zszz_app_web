@@ -1,0 +1,121 @@
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
+.double-check-wrap {
+  color: $color-flat;
+  .header {
+    text-align: center;
+    padding: .2rem 0 .1rem;
+    background-color: $color-content-bg;
+    font-size: .15rem;
+    line-height: .25rem;
+    margin-bottom: .1rem;
+
+    .emp {
+      color: $color-main
+    }
+    .img {
+      width: 20%;
+      height: 20%;
+    }
+  }
+  .body {
+    background-color: $color-content-bg;
+    padding: .2rem .2rem 0;
+    white-space: nowrap;
+    margin-bottom: .1rem;
+    @include clearfix()
+
+    .captcha-wrap {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .2rem;
+      .captchaInput {
+        display: inline-block;
+        padding: 0 .1rem;
+        width: 66%;
+        font-size: .15rem;
+        border: .01rem solid $color-input-border;
+        border-radius: .05rem;
+      }
+      .sendCaptcha {
+        display: inline-block;
+        padding: .1rem .1rem;
+        font-size: .15rem;
+        line-height: .25rem;
+        background-color: $color-main-sub;
+        color: $color-content-bg;
+        text-align: center;
+        border-radius: .05rem;
+
+      }
+    }
+    .cap-btn {
+      border-radius: .05rem;
+    }
+    .tips {
+      margin: 0.05rem 0;
+      vertical-align: bottom;
+    }
+    .tips::before {
+      content: '';
+      display: inline-block;
+      vertical-align: bottom;
+      height: .15rem;
+      width: .15rem;
+      margin-right: .05rem;
+      background-image: url('~@/modules/module-double-check/assets/images/pass.png');
+      background-size: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .footer {
+    padding: .2rem .2rem .1rem;
+    background-color: $color-content-bg;
+    .faqs-title {
+      position: relative;
+      margin-left: .2rem;
+      color: $color-input-border;
+      font-size: .15rem;
+    }
+    .faqs-title::before {
+      position: absolute;
+      content: '';
+      display: block;
+      left: -6%;
+      top: 50%;
+      width: 4%;
+      border-top: .01rem solid $color-input-border;
+
+    }
+    .faqs-title::after {
+      position: absolute;
+      content: '';
+      display: block;
+      right: 0;
+      top: 50%;
+      width: 85%;
+      border-top: .01rem solid $color-input-border;
+
+    }
+    .faqs {
+      padding: .1rem 0;
+      border-top: .01rem solid $color-input-border;
+
+      h3 {
+        font-size: .15rem;
+        padding: .08rem 0;
+        color: $color-txt;
+      }
+      p {
+        line-height: .18rem;
+      }
+    }
+    .faqs:nth-child(2) {
+      border: none;
+    }
+  }
+}

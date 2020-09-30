@@ -1,32 +1,30 @@
 <template>
-  <div id="root" :class="['root-wrap', {'root-wrap-app': isApp}]">
-    <header-custom
-      :isShow="!isApp"
-      :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]"
-    />
-    <section>
-      <router-view v-if="isRouterAlive" /> 
-    </section>
+  <div id="root" class="root-wrap">
+    <header-custom :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]" />
+    <template v-if="isChecking">
+      <base-waiting />
+    </template>
+    <template v-else>
+      <router-view v-if="isRouterAlive" />
+    </template>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import BaseCopyright from "@/main/components/base-copyright/";
 import { getURLParameters } from "@/main/utils/format/url";
 import HeaderCustom from "@/customize/components/header-custom/";
 import { setLanguage } from "@/main/locale/helper";
 export default {
-  components: { HeaderCustom },
+  components: { BaseCopyright, HeaderCustom},
   created() {
-    this.setTitle(this.$t("iAccount.main.pageName"));
+    // this.setTitle(this.$t("demo.main.pageName"));
     // this.checkLogin();
   },
   computed: {
-    isApp() {
-      return this.UaInfo.isApp();
-    },
     isZhCN() {
-      if (this.$i18n.locale === "zh_CN") {
+      if (this.$t("language") === "zh_CN") {
         return true;
       }
       return false;
@@ -66,7 +64,7 @@ export default {
     },
     checkLogin() {
       const params = getURLParameters();
-      const userToken = params["sessionId"] || "";
+      const userToken = params["user_token"] || "";
       if (userToken && userToken !== "") {
         const params = {
           certType: 0,
@@ -99,10 +97,6 @@ export default {
   position: relative;
   padding-top: 0.44rem;
   min-width: 300px;
-}
-
-.root-wrap-app {
-  padding-top: 0;
 }
 
 .header-custom {
