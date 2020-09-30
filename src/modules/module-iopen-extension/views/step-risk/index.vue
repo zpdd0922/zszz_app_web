@@ -5,6 +5,9 @@
     :handleBefore="handleBefore"
     @handleNext="handleNext"
   >
+    <cube-form>
+      <head-title :title="titleValues.declareTitle"></head-title>
+    </cube-form>
     <div class="olcn-step olcn-step-risk">
       <cube-popup :visible="isShowAgreementPopup">
         <risk-com-agreement />
@@ -94,6 +97,12 @@ export default {
     };
   },
   computed: {
+    titleValues() {
+      return {
+        declareTitle: this.getI18n("title"),
+      };
+    },
+
     riskAudio() {
       if (this.language === "zh_CN") {
         return riskOptions.zh_CN;

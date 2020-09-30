@@ -15,7 +15,7 @@ module.exports = {
       name: 'index',
       template: 'src/customize/pages/iopen-extension/template/index.html',
       entry: 'src/modules/module-iopen-extension/index.js',
-      title: '增开孖展账户',
+      title: '保证金账户增开',
     }
   ],
 };

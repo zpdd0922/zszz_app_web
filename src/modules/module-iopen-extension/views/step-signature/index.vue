@@ -1,26 +1,27 @@
 <template>
-  <Signature :userName="openInfo.cnNameValue" @confirm="handleConfirmSign" />
+  <Signature  @confirm="handleConfirmSign" />
 </template>
 
 <script type="text/ecmascript-6">
-// import onlineMixin from "../mixins/online.vue";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import storage from "@/main/utils/cache/localstorage";
-// import { SUFFIX } from "../../../api/params-define";
+import { SUFFIX } from "../../api/params-define";
+import { mapGetters } from 'vuex';
 
 export default {
-  // mixins: [onlineMixin],
   data() {
     return {
       file: {},
     };
   },
   computed: {
-
+    ...mapGetters([
+      // 'openInfo'
+    ])
   },
   methods: {
     getI18n(key) {
-      return this.getStepI18nValue("signature", key);
+      return this.$t(`openMargin.signature.${key}`);
     },
     // 确认签名
     handleConfirmSign(params) {

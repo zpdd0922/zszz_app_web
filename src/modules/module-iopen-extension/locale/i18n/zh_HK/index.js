@@ -31,6 +31,7 @@ export default {
       adjectiveAuthAlert: `${customizeI18n.customize.company.securityName}要求簽署常設授權協議。`,
     },
     risk: {
+      title: "風險披露",
       playMediaBtn: "開始播放風險披露錄音",
       media: {
         repNameLabel: "持牌代表：",
@@ -50,16 +51,30 @@ export default {
         dialogTitle: "客戶協議書",
         dialogBtn: "已閱讀並同意",
       },
-      agreement: {
-        linkStart: "本人已詳細閱讀並同意上述聲明",
-        linkContent: `《${customizeI18n.customize.company.securityName}客戶協議書》`,
-        linkEnd: "",
-        dialogTitle: "客戶協議書",
-        dialogBtn: "已閱讀並同意",
-      },
+    },
+    confirm: {
+      title: "開戶文檔確認",
+      customerAgreement: "保證金（融資）客戶協議書（證券交易帳戶）",
+      riskAgreement: "風險披露聲明書--保證金（融資）帳戶",
+      adjectiveAuthAgreement: "證券及期貨（客戶證券）規定的常設授權",
+      feeAgreement: "立橋證券收費表",
+      nextBtn: "已閱讀並接受全部文檔內容",
+    },
+    comSignature: {
+      title: `我已閱讀全部開戶檔，瞭解相關風險並自願在${customizeI18n.customize.company.securityName}開戶。`,
+      tips: "注意：豎向簽名或簽名潦草均不能通過審核",
+      tipsContent: [
+        "請按照下方圖示",
+        "【橫向】",
+        "手寫個人",
+        "【正楷】",
+        " 簽名：",
+      ],
+      btnClear: "重簽",
+      btnConfirm: "確認簽名",
     },
     common: {
-      nextBtn: '下一步'
-    }
+      nextBtn: "下一步",
+    },
   },
 };
