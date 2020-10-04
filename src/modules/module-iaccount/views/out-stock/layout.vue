@@ -84,7 +84,7 @@ export default {
       } else {
         toast({
           type: 'txt',
-          txt: '账户信息错误',
+          txt: this.$t('iAccount.intoStock.tips.accountError'),
           callback: ()=> {
             this.$router.push('/')
           },

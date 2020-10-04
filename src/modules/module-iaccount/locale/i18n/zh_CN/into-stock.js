@@ -1,4 +1,7 @@
 export const intoStock = {
+  tips: {
+    accountError: '账户信息错误',
+  },
   intoWay: {
     title: "请选择转入股票",
     wayHK: "转入港股股票",

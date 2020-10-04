@@ -30,7 +30,7 @@
                 <li v-for="(list, index) in item[1]" :key="index" class="item border-bottom-1px" @click="goPdf(list)">
                   <p :class="['date', list.type === 1 ? 'day' : 'month']">{{formatDate(list)}}</p>
                   <p class="type">{{formatType(list)}}</p>
-                  <p class="pdf">查看PDF</p>
+                  <p class="pdf">{{getI18n('checkPDF')}}</p>
                 </li>
               </ul>
             </div>
@@ -45,7 +45,7 @@
       </cube-sticky>
     </div>
     <template v-else>
-      <empty-box tips="暂无相关内容"></empty-box>
+      <empty-box :tips="getI18n('tips.noContent')"></empty-box>
     </template>
   </div>
 </template>
@@ -80,6 +80,10 @@ export default {
     }
   },
   methods: {
+    getI18n(key) {
+      return this.$t(`iAccount.statementExtra.${key}`);
+    }
+    ,
     fetchData() {
       const { fundAccount = [] } = this.secAccountInfo
       const params = {
@@ -129,9 +133,9 @@ export default {
     formatType(data) {
       const { type } = data
       if (type === 1) {
-        return '日结单'
+        return this.getI18n('day')
       }
-      return '月结单'
+      return this.getI18n('month')
     },
     scrollHandler({ y }) {
       this.scrollY = -y
@@ -143,7 +147,7 @@ export default {
     },
     pwdTips() {
       tips.jfDialog({
-        content: '为保护您的结单安全，已对结单进行加密，秘密为开户证件号码的后六位，包括数字，字母和字符。'
+        content: this.getI18n('encodedTip')
       })
     }
   },

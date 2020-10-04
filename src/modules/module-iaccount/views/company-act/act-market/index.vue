@@ -58,7 +58,7 @@ export default {
       if (!item.nextRouteName) {
         alert({
           title: this.$t("common.alertTitle"),
-          content: "功能待开放",
+          content: this.$t('iAccount.common.alertWaiting'),
         });
         return;
       }

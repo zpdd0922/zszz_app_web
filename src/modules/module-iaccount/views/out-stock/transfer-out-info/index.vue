@@ -274,6 +274,7 @@ export default {
         return this.secAccountInfo.fundAccount.map((item) => {
           return {
             value: String(item),
+            //TODO:
             text: `现金账户 ${item}`,
           };
         });

@@ -36,36 +36,36 @@ export default {
       return [
         {
           key: "funds",
-          label: "資金",
+          label: this.getI18n('iconLabel.funds.label'),
           channel: [
             {
               key: "deposit",
-              label: "存入資金",
+              label: this.getI18n('iconLabel.funds.deposit'),
               iconType: "deposit",
               path: "sec-funds-deposit",
             },
-            // { key: "exchange", label: "貨幣兌換", iconType: "exchange" },
+            // { key: "exchange", label: this.getI18n('iconLabel.funds.exchange'), iconType: "exchange" },
             {
               key: "withdraw",
-              label: "取出資金",
+              label: this.getI18n('iconLabel.funds.withdraw'),
               iconType: "withdraw",
               path: "sec-funds-withdraw",
             },
             // {
             //   key: "funds_history1",
-            //   label: "資金調撥",
+            //   label: this.getI18n('iconLabel.funds.funds_history1'),
             //   iconType: "transfer",
             //   path: "/funds_history",
             // },
             {
               key: "funds_history2",
-              label: "資金記錄",
+              label: this.getI18n('iconLabel.funds.funds_history2'),
               iconType: "fund_history",
               path: "sec-funds-history",
             },
             {
               key: "funds_history",
-              label: "資金流水",
+              label: this.getI18n('iconLabel.funds.funds_history'),
               iconType: "fund_list",
               path: "sec-funds-capital-flow",
             },
@@ -73,106 +73,109 @@ export default {
         },
         {
           key: "stocks",
-          label: "股票",
+          label: this.getI18n('iconLabel.stocks.label'),
           channel: [
             {
               key: "enter",
-              label: "轉入股票",
+              label:this.getI18n('iconLabel.stocks.enter'),
               iconType: "enter",
               path: "intoStock",
             },
             {
               key: "out",
-              label: "轉出股票",
+              label: this.getI18n('iconLabel.stocks.out'),
               iconType: "out",
               path: "outStock",
             },
             {
               key: "history-stocks",
-              label: "股票歷史",
+              label: this.getI18n('iconLabel.stocks.history'),
               iconType: "stock_history",
               path: "stock-transfer-history",
             },
-            // { key: "ipo", label: "新股認購", iconType: "ipo" },
-            // { key: "ipo_history", label: "新股歷史", iconType: "ipo_history" },
+            // { key: "ipo", label: this.getI18n('iconLabel.stocks.ipo'), iconType: "ipo" },
+            // { key: "ipo_history", label: this.getI18n('iconLabel.stocks.ipo_history'), iconType: "ipo_history" },
           ],
         },
         {
           key: "company",
-          label: "公司行動",
+          label: this.getI18n('iconLabel.company.label'),
           channel: [
             {
               key: "xgxx",
-              label: "選股選息",
+              label: this.getI18n('iconLabel.company.xgxx'),
               iconType: "xgxx",
               path: "company-act",
             },
-            // { key: "sqgg", label: "申請供股", iconType: "sqgg" },
+            // { key: "sqgg", label: this.getI18n('iconLabel.company.sqgg'), iconType: "sqgg" },
           ],
         },
         {
           key: "fee",
-          label: "費用",
+          label: this.getI18n('iconLabel.fee.label'),
           channel: [
             {
               key: "quotas",
-              label: "行情購買",
+              label: this.getI18n('iconLabel.fee.quotas'),
               iconType: "quotas",
             },
             {
               key: "statement",
-              label: "傭金方案",
+              label: this.getI18n('iconLabel.fee.statement'),
               iconType: "statement",
               path: "feeStatement",
             },
             // {
             //   key: "account",
-            //   label: "計算傭金",
+            //   label: this.getI18n('iconLabel.fee.account'),
             //   iconType: "account",
             // },
             {
               key: "dayly",
-              label: "日月結單",
+              label: this.getI18n('iconLabel.fee.dayly'),
               iconType: "dayly",
               path: "statement",
             },
             // {
             //   key: "other_fee",
-            //   label: "其他費用",
+            //   label: this.getI18n('iconLabel.fee.other_fee'),
             //   iconType: "other_fee",
             // },
           ],
         },
         {
           key: "accounts",
-          label: "賬戶",
+          label: this.getI18n('iconLabel.accounts.label'),
           channel: [
             {
               key: "account",
-              label: "證券賬戶資料",
+              label: this.getI18n('iconLabel.accounts.account'),
               iconType: "account",
               path: "",
             },
             // {
             //   key: "pro",
-            //   label: "專業投資者",
+            //   label: this.getI18n('iconLabel.accounts.pro'),
             //   iconType: "pro",
             //   path: "",
             // },
-            { key: "password", label: "修改交易密碼", iconType: "password" },
+            { key: "password", label: this.getI18n('iconLabel.accounts.password'), iconType: "password" },
           ],
         },
       ];
     },
   },
   mounted() {
-    document.title = "證券業務";
-    this.BroadCast.send(this.BROADCAST_ENUMS.UPDATE_TITLE, {
-      title: "證券業務",
-    });
+    // document.title = "證券業務";
+    // this.BroadCast.send(this.BROADCAST_ENUMS.UPDATE_TITLE, {
+    //   title: "證券業務",
+    // });
   },
 
   methods: {
+    getI18n(key) {
+      return this.$t(`iAccount.home.${key}`)
+    },
     // 點擊菜單
     intoChannel(item) {
       const { path } = item;
@@ -181,7 +184,7 @@ export default {
       } else {
         alert({
           title: this.$t("common.alertTitle"),
-          content: "功能待开放",
+          content: this.$t("iAccount.common.alertWaiting"),
         });
       }
     },
