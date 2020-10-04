@@ -167,7 +167,7 @@ export default {
             this.handleLoginSuccess();
           })
           .catch(() => {
-            toast({ txt: "登录失败，请重试" });
+            toast({ txt: this.$t('sign.warn.failLogin') });
           });
       }
     },
@@ -175,7 +175,7 @@ export default {
     handleLoginSuccess() {
       console.log("handleLoginSuccess");
       toast({
-        txt: "登录成功！",
+        txt: this.$t('sign.common.successLogin'),
         callback: () => {
           const { redirect_url = "" } = this.urlParams;
           if (!redirect_url) {
@@ -192,14 +192,14 @@ export default {
       const { certCode, password } = this.formData;
 
       if (!certCode) {
-        this.formRules.certCode.tips = "请输入账号/手机号码";
+        this.formRules.certCode.tips = this.$t('sign.warn.accountWarn');
         return false;
       } else {
         this.formRules.certCode.tips = "";
       }
 
       if (!password) {
-        this.formRules.password.tips = "请输入登录密码";
+        this.formRules.password.tips = this.$t('sign.warn.passwdWarn');
         return false;
       } else {
         this.formRules.password.tips = "";

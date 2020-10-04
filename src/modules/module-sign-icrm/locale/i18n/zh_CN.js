@@ -25,6 +25,13 @@ export default {
     formBtn: {
       login: '立即登录',
       register: '立即注册'
+    },
+    warn: {
+      numWarn: '请输入正确的手机号码',
+      emptyWarn: '手机号码不能为空',
+      accountWarn: '请输入账号/手机号码',
+      captchaWarn: '请输入验证码',
     }
+
   }
 };

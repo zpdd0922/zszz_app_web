@@ -128,14 +128,14 @@ export default {
       const account = this.formData.certCode;
 
       if (countryCode === defaultCountryCode && !validate.isMobile(account)) {
-        this.formRules.certCode.tips = "请输入正确的手机号码";
+        this.formRules.certCode.tips = this.$t('sign.warn.numWarn');
         return false;
       } else {
         this.formRules.certCode.tips = "";
       }
 
       if (!account) {
-        this.formRules.certCode.tips = "手机号码不能为空";
+        this.formRules.certCode.tips = this.$t('sign.warn.emptyWarn');
         return false;
       } else {
         this.formRules.certCode.tips = "";
@@ -208,7 +208,7 @@ export default {
     handleLoginSuccess() {
       console.log("handleRegisterSuccess");
       toast({
-        txt: "注册成功",
+        txt: this.$t('sign.common.successSign'),
         callback: () => {
          const { redirect_url = "" } = this.urlParams;
               if (!redirect_url) {
@@ -225,21 +225,21 @@ export default {
       const { certCode, captcha, password } = this.formData;
 
       if (!certCode) {
-        this.formRules.certCode.tips = "请输入账号/手机号码";
+        this.formRules.certCode.tips = this.$t('sign.warn.accountWarn');
         return false;
       } else {
         this.formRules.certCode.tips = "";
       }
 
       if (this.showCaptcha && !captcha) {
-        this.formRules.captcha.tips = "请输入验证码";
+        this.formRules.captcha.tips = this.$t('sign.warn.captchaWarn');
         return false;
       } else {
         this.formRules.captcha.tips = "";
       }
 
       if (!password) {
-        this.formRules.password.tips = "请设置密码";
+        this.formRules.password.tips = this.$t('sign.warn.setPasswd');
         return false;
       } else {
         this.formRules.password.tips = "";

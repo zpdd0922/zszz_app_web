@@ -25,7 +25,12 @@ export default {
     formBtn: {
       login: '立即登錄',
       register: '立即註冊'
+    },
+    warn: {
+      numWarn: "請輸入正確的手機號碼",
+      emptyWarn: "手機號碼不能為空",
+      accountWarn: "請輸入帳號/手機號碼",
+      captchaWarn: "請輸入驗證碼",
     }
   }
-
 };

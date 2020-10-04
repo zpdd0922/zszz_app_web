@@ -8,6 +8,8 @@ export default {
       resetPwd: '忘记密码',
       loginByCaptcha: '短信验证码登录',
       loginByPwd: '账号密码登录',
+      successLogin: '登陆成功！',
+      successSign: '注册成功！',
     },
     formPlaceholder: {
       account: '请输入登录账号',
@@ -27,6 +29,15 @@ export default {
     formBtn: {
       login: '立即登录',
       register: '立即注册'
+    },
+    warn: {
+      numWarn: '请输入正确的手机号码',
+      emptyWarn: '手机号码不能为空',
+      accountWarn: '请输入账号/手机号码',
+      captchaWarn: '请输入验证码',
+      passwdWarn: '请输入登录密码',
+      failLogin: '登录失败，请重试',
+      setPasswd: '请设置密码',
     }
   }
 };
