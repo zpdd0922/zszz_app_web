@@ -146,7 +146,7 @@ export default {
         };
         // 超出范围弹出警告
         customToast({
-          txt: "签名超过虚线区域，可能导致开户审核失败",
+          txt: this.$t('iOpen.comSignature.outAreaWarn'),
           type: "warn",
           time: 1000,
           styleObj,

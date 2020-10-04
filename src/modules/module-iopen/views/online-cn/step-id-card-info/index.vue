@@ -376,13 +376,13 @@ export default {
         const age = getAge(getBirthFromCard(idCard));
         // 校验身份证
         if (!validate.isIdCard(idCard)) {
-          const cardTips = "请输入正确身份证号码";
+          const cardTips = this.getI18n('wran.wrondNum');
           toast({ type: "error", txt: cardTips });
           return reject(new Error(cardTips));
         }
         // 大于70岁不允许线上开户
         if (age >= 70 && window.IS_CHECK_AGE) {
-          const ageTips = "70岁以上暂不能开户，非常抱歉";
+          const ageTips = this.getI18n('wran.mt70');
           toast({ type: "error", txt: ageTips });
           return reject(new Error(ageTips));
         }
@@ -396,7 +396,7 @@ export default {
               resolve(verify);
             } else {
               alert({
-                title: "温馨提示",
+                title: this.getI18n('wran.warm'),
                 content: remark,
               });
               reject(verify);

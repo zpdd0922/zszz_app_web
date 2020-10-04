@@ -53,4 +53,9 @@ export default {
     label: "出生地區",
     placeholder: "選填",
   },
+  wran: {
+    warm: "溫馨提示",
+    wrondNum: "請輸入正確身份證號碼",
+    mt70: '70歲以上暫不能開戶，非常抱歉',
+  },
 };

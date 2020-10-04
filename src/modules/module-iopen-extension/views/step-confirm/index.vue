@@ -11,7 +11,7 @@
     <div class="list-wrap">
       <ul>
         <li v-for="(item, index) in agreementList" :key="index">
-          <a :href="item.url" class="link">{{ item.title }}</a>
+          <a :href="item.url" class="link">{{ item.title }}</a>      
         </li>
       </ul>
     </div>

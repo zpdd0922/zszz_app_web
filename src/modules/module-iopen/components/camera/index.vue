@@ -17,13 +17,13 @@
             <!-- 加载图片 -->
             <template v-if="uploadLoad[`${key}Status`] === 'ready'">
               <div class="op-com-photo-rate">
-                <span>加载中</span>
+                <span>{{$t('iOpen.uploadPicinfo.loading')}}</span>
               </div>
             </template>
             <!-- 压缩图片 -->
             <template v-if="uploadLoad[`${key}Status`] === 'compress'">
               <div class="op-com-photo-rate">
-                <span>压缩中</span>
+                <span>{{$t('iOpen.uploadPicinfo.zipping')}}</span>
               </div>
             </template>
             <!-- 上传进度 -->
@@ -35,7 +35,7 @@
             <!-- 上传失败 -->
             <template v-if="uploadLoad[`${key}Status`] === 'error'">
               <div class="op-com-photo-reload" @click.stop="hanldeReload(key)">
-                重新上传
+                {{$t('iOpen.uploadPicinfo.reload')}}
               </div>
             </template>
           </div>

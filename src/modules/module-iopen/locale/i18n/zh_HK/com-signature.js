@@ -13,5 +13,5 @@ export default {
     ],
     btnClear: '重簽',
     btnConfirm: '確認簽名',
-    
+    outAreaWarn: '簽名超過虛線區域，可能導致開戶審核失敗',
 };

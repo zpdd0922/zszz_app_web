@@ -13,5 +13,5 @@ export default {
     ],
     btnClear: '重签',
     btnConfirm: '确认签名',
-    
+    outAreaWarn: '签名超过虚线区域，可能导致开户审核失败',
 };

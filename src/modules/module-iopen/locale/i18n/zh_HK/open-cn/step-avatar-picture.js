@@ -6,4 +6,5 @@ export default {
     contentFinger: '請豎起$fingerNum$個手指拍攝照片',
     contentCard: '請手持證件個人信息面拍攝照片',
     contentHead: '請正面面向鏡頭拍攝照片',
+    photo: '拍攝',
 }

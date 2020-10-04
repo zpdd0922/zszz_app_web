@@ -36,7 +36,14 @@ export default {
       btnAlbum: '相冊',
       uploadFaceTips: '拍攝人像面，請確保身份證在相框內',
       uploadBackTips: '拍攝國徽面，請確保身份證在相框內',
+      tipsDefault: '請確保拍攝物體清晰、無反光',
+
     },
+    uploadPicinfo: {
+      loading: '加載中',
+      zipping: '壓縮中',
+      reload: '重新上傳',
+      },
     // openCn: {
     
     // },
