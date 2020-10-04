@@ -5,14 +5,14 @@
         <help-search
           :onSearch="doSearch"
           :autoFoucs="true"
-          placeholder="请输入问题关键字"
+          :placeholder="$t('helpCenter.search.placeholder')"
           :onCancel="doCancel"
         />
       </div>
       <p class="info">
-        搜索到
+        {{$t('helpCenter.search.searched')}}
         <span class="color-highlight">{{list.length}}</span> 
-        条 "<span class="color-highlight">{{searchTxt}}</span>" 相关内容
+        {{$t('helpCenter.search.unit')}} "<span class="color-highlight">{{searchTxt}}</span>" {{$t('helpCenter.search.relatedContent')}}
       </p>
     </header>
     <section>
@@ -24,7 +24,7 @@
           @click.stop="gotoDetail(item.id)"
         >{{item.title}}</li>
       </ul>
-      <p v-show="list.length === 0" class="empty">无匹配的数据</p>
+      <p v-show="list.length === 0" class="empty">{{$t('helpCenter.search.noData')}}</p>
     </section>
   </div>
 </template>
@@ -44,7 +44,7 @@ export default {
     };
   },
   created() {
-    setTitle('帮助中心');
+    setTitle(this.$t('helpCenter.title'));
   },
   computed: {},
   methods: {

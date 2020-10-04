@@ -1,7 +1,7 @@
 <template>
   <div class="help-center-home">
     <header class="search">
-      <help-search :onClick="toSearch" placeholder="请输入问题关键字" />
+      <help-search :onClick="toSearch" :placeholder="$t('helpCenter.search.placeholder')" />
     </header>
     <section v-if="isFetched">
       <ul class="classify-box">
@@ -16,7 +16,7 @@
         </li>
       </ul>
       <div class="frequently-box">
-        <h5 class="frequently-title">常见问题</h5>
+        <h5 class="frequently-title">{{$t('helpCenter.faqs')}}</h5>
         <ul class="frequently-list">
           <li
             class="frequently-item"
@@ -53,7 +53,7 @@ export default {
     };
   },
   created() {
-    setTitle("帮助中心");
+    setTitle(this.$t('helpCenter.title'));
     this.getIndexList();
   },
   watch: {},
