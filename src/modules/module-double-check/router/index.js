@@ -2,7 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import doubleCheckRouter from '@/modules/module-double-check/router/routes.js';
+import signRouter from '@/modules/module-sign/router/routes.js';
 import AppWrap from '../wrap.vue';
+
 
 
 Vue.use(VueRouter);
@@ -19,7 +21,8 @@ const router = new VueRouter({
       component: AppWrap,
       redirect: {name: 'double-check'},
       children: [
-        ...doubleCheckRouter
+        ...signRouter,
+        ...doubleCheckRouter,
       ]
     }
   ],

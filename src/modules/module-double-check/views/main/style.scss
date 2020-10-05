@@ -33,7 +33,8 @@
       margin-bottom: .2rem;
 
       .captchaInput {
-        display: inline-block;
+        display: block;
+        flex: 1 1 55%;
         padding: 0 .1rem;
         width: 66%;
         font-size: .15rem;
@@ -41,8 +42,10 @@
         border-radius: .05rem;
       }
       .sendCaptcha {
-        display: inline-block;
+        display: block;
         padding: .1rem .1rem;
+        margin-left: .2rem;
+        flex: 1 1;
         font-size: .15rem;
         line-height: .25rem;
         background-color: $color-main-sub;
