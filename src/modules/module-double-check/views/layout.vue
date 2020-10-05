@@ -1,16 +1,9 @@
-<!--
- * @Author: Jim
- * @Date: 2019-12-18 12:55:20
- * @LastEditors  : Jim
- * @LastEditTime : 2020-01-15 16:49:34
- * @Description: 
- -->
 <template>
   <div class="double-page-wrap">
     <!-- Loading -->
-    <!-- <template>
+    <template v-if="isGetPhone">
       <base-waiting />
-    </template> -->
+    </template>
     <!-- 主体内容 -->
     <template>
       <router-view />
@@ -23,15 +16,25 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      isGetPhone: true
+    };
   },
   computed: {
+    ...mapGetters([
+      'openAccountNum'
+    ])
   },
   created() {
     this.init();
   },
   methods: {
     init() {
+      this.$store.dispatch('getOpenAccountNum').then(()=>{
+        if (this.openAccountNum && this.openAccountNum.length !== 0) {
+          this.isGetPhone = false;
+        }
+      })
     }
   }
 };

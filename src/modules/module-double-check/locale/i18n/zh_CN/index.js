@@ -10,8 +10,8 @@ export default {
     header_2: "为保障您的账户安全，需要二次短信身份认证。",
     tips: "信任此设备，7天内没在此设备登录，再通知我",
     confirmBtn: "确认",
-    captchaPlaceholder: '请输入验证码',
-    sendCaptcha: '获取验证码',
+    captchaPlaceholder: "请输入验证码",
+    sendCaptcha: "获取验证码",
     faqs: {
       question_1: "什么是双重身份认证？",
       answer_1:
@@ -23,5 +23,21 @@ export default {
       answer_3:
         "短信验证码发送有一定延迟，如您在 30 秒内还未收到短信验证码，请联系在线客服：+852 3150 7728。如您在开户资料中预留的手机号码已不再使用，需填写《更改账户资料格》寄送给我们，以更新您的帐户资料。详情请咨询客服。",
     },
+    statusWarnList: {
+      "firstTime": {
+        header1: "由于您是首次在此设备进行登录",
+        header2: "为保障您的帐户安全，需要二次短信身份认证。",
+      },
+      "mt7days": {
+        header1: "由于您在 7 天内没有在此设备进行登录",
+        header2: "为保障您的帐户安全，需要再次进行二次短信身份认证。",
+      },
+      "untrust": {
+        header1: "您登录的设备不在信任设备清单中",
+        header2: "为保障您的帐户安全，需要二次短信身份认证。",
+      },
+    },
+    checkSuccess: '绑定成功！',
+    getCaptcha: '请获取验证码',
   },
 };

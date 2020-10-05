@@ -42,6 +42,9 @@ export default {
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
+
 }
 .copyright {
   width: 100%;

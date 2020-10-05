@@ -51,6 +51,16 @@ const OPTIONS = (str) => ({
   }
 });
 
+//获取开户手机号包裹层
+const PARAMSWITHVERSION = (data = {}) => ({
+  version: '1.0',
+  requestSrc: auth.getPlateform(),
+  params: {
+    sessionId: auth.getAuthSession(),
+    ...data
+  }
+});
+
 // // 转移股票包裹层
 // const TRANSFER = (data={}) => ({
 //   requestSrc: auth.getPlateform(),
@@ -77,6 +87,7 @@ export default {
   COMMON,
   NOPARAMS,
   OPTIONS,
+  PARAMSWITHVERSION,
   // CHECK,
   // PHONE,
   // TRANSFER,

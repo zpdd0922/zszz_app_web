@@ -19,7 +19,7 @@ import { setLanguage } from "@/main/locale/helper";
 export default {
   components: { BaseCopyright, HeaderCustom},
   created() {
-    // this.setTitle(this.$t("demo.main.pageName"));
+    this.setTitle(this.$t("doubleCheck.main.pageName"));
     // this.checkLogin();
   },
   computed: {
@@ -97,6 +97,9 @@ export default {
   position: relative;
   padding-top: 0.44rem;
   min-width: 300px;
+}
+.root-wrap-app {
+  padding-top: 0;
 }
 
 .header-custom {
