@@ -26,6 +26,7 @@ export default {
     ])
   },
   created() {
+    this.setTitle(this.$t("doubleCheck.main.pageName"));
     this.init();
   },
   methods: {

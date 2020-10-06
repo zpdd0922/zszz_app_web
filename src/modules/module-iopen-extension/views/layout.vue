@@ -28,6 +28,7 @@ export default {
   computed: {
   },
   created() {
+    this.setTitle(this.$t("iopenExt.main.pageName"));
     this.init();
   },
   methods: {

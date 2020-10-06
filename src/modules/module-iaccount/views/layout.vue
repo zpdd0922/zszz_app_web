@@ -4,13 +4,15 @@
   </div>
 </template>
 
-<script >
+<script>
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {};
   },
   created() {
+    this.setTitle(this.$t("iAccount.main.pageName"));
+
     this.getSecAccountInfo();
   },
   mounted() {

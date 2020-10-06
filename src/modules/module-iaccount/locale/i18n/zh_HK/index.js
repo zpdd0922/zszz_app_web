@@ -19,7 +19,8 @@ import { BANK_NAME_OPTIONS } from "./info-remit";
 import { intoStock } from "./into-stock";
 import { outStock } from "./out-stock";
 import { transferHistory } from "./transfer-history";
-import { statement } from "./statement";
+import { companyAct } from './company/index';
+// import { statement } from "./statement";
 
 
 import {
@@ -45,6 +46,7 @@ export default {
     outStock,
     statementExtra,
     transferHistory,
+    companyAct,
     nextBtn: "下一步",
     confirmBtn: "確認提交",
     define: {

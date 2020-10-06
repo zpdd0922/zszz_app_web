@@ -59,7 +59,7 @@
       <template v-if="nameValue === 'OTH'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_4") }}
           </div>
           <div class="content border-bottom-1px">
@@ -87,7 +87,7 @@
         </div>
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_6") }}
           </div>
           <div class="content border-bottom-1px">
@@ -103,7 +103,7 @@
       <template v-if="activeSelect === 'OSE2'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_7") }}
           </div>
           <div class="content border-bottom-1px">
@@ -119,7 +119,7 @@
       <template v-if="activeSelect === 'RS2'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_8") }}
           </div>
           <div class="content border-bottom-1px">
@@ -147,7 +147,7 @@
       <template v-if="activeSelect === 'OOS2'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_8") }}
           </div>
           <div class="content border-bottom-1px">
@@ -175,7 +175,7 @@
       <template v-if="activeSelect === 'CO2'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_10") }}
           </div>
           <div class="content border-bottom-1px">
@@ -191,7 +191,7 @@
       <template v-if="activeSelect === 'WC2'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_33") }}
           </div>
           <div class="content border-bottom-1px">
@@ -207,7 +207,7 @@
       <template v-if="activeSelect === 'PO2'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_8") }}
           </div>
           <div class="content border-bottom-1px">
@@ -357,6 +357,8 @@ import * as tips from '@/main/utils/common/tips'
 import i18n from '@/modules/module-iaccount/locale'
 import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 import SecuritiesApi from '@/modules/module-iaccount/api/modules/api-securities'
+import { toast } from '@/main/utils/common/tips/';
+
 
 
 // 附選擇權的股息權益
@@ -557,8 +559,16 @@ export default {
         ...obj
       }
       SecApi.saveCorporateActions(params).then(res => {
-        const data = { time: res, ...params }
-        this.$router.push({ name: 'detail', params: { data } })
+        
+        // const data = { time: res, ...params }
+        // this.$router.push({ name: 'detail', params: { data } })
+        toast({
+          type: 'txt',
+          txt: this.$t('iAccount.company_act.tips.success'),
+          callback: ()=>{
+            this.$router.push('/')
+          }
+        })
       })
     },
     handleBefore() {

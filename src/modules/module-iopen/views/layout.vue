@@ -30,6 +30,7 @@ export default {
     ...mapGetters(["openProgress"])
   },
   created() {
+    this.setTitle(this.$t("iOpen.common.title"));
     this.init();
   },
   methods: {
