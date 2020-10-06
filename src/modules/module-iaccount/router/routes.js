@@ -9,6 +9,7 @@ import outStockRouter from "./modules/out-stock";
 import feeStatementRouter from "./modules/fee-statement";
 import stockTransferHistory from "./modules/stock-transfer-history";
 import statementRouter from "./modules/statement"
+import addLimit from "./modules/add-limit"
 
 const _import = (path, file = "index") => () =>
   import(/* webpackChunkName:"iaccount" */ `../views/${path}/${file}.vue`);
@@ -41,7 +42,8 @@ const routes = [
       ...outStockRouter,
       ...feeStatementRouter,
       ...stockTransferHistory,
-      ...statementRouter
+      ...statementRouter,
+      ...addLimit,
     ],
   },
 ];

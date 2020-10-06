@@ -12,16 +12,16 @@ import { DEPOSIT_WAY, EDDA_INFO, CHECK_INFO } from "./info-way";
 
 import { DEPOSIT_ACCOUNT_TYPE, BANK_ID_KIND, EDDA_STATUS } from "./edda";
 
-import { STATEMENT_TYPE_LIST, statementExtra} from "./statement";
+import { STATEMENT_TYPE_LIST, statementExtra } from "./statement";
 
 import { brokerageCalculate } from "./brokerage-calculate";
 import { BANK_NAME_OPTIONS } from "./info-remit";
 import { intoStock } from "./into-stock";
 import { outStock } from "./out-stock";
 import { transferHistory } from "./transfer-history";
-import { companyAct } from './company/index';
+import { companyAct } from "./company/index";
+import { addLimit } from "./add-limit";
 // import { statement } from "./statement";
-
 
 import {
   SCRIP_OPTIONS,
@@ -47,6 +47,7 @@ export default {
     statementExtra,
     transferHistory,
     companyAct,
+    addLimit,
     nextBtn: "下一步",
     confirmBtn: "確認提交",
     define: {
@@ -84,7 +85,7 @@ export default {
       text_3: "其他服務",
       iconLabel: {
         funds: {
-          label: '資金',
+          label: "資金",
           deposit: "存入資金",
           // exchange: "貨幣兌換",
           // funds_history1: "資金調撥",
@@ -93,7 +94,7 @@ export default {
           funds_history: "資金流水",
         },
         stocks: {
-          label: '股票',
+          label: "股票",
           enter: "轉入股票",
           // exchange: "貨幣兌換",
           // funds_history1: "資金調撥",
@@ -103,12 +104,12 @@ export default {
           // ipo_history: "新股歷史",
         },
         company: {
-          label: '公司行動',
+          label: "公司行動",
           xgxx: "選股選息",
           // sqgg: "申請供股",
         },
         fee: {
-          label: '費用',
+          label: "費用",
           quotas: "行情購買",
           statement: "傭金方案",
           // account: "計算傭金",
@@ -116,12 +117,14 @@ export default {
           // other_fee: "其他費用",
         },
         accounts: {
-          label: '賬戶',
+          label: "賬戶",
           account: "證券賬戶資料",
           password: "修改交易密碼",
+          margin: "保證金帳戶增開",
+          add_limit: "信用額度提升",
           // pro: "專業投資者",
         },
-      }
+      },
     },
     common: {
       title: "證券服務",

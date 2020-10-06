@@ -1,17 +1,23 @@
 <template>
   <div class="sec-home">
-    <div v-for="(menuItem) in menu" :key="menuItem.key">
+    <div v-for="menuItem in menu" :key="menuItem.key">
       <template v-if="menuItem.channel.length">
         <sec-title :content="menuItem.label" />
         <ul class="sec-list-box">
           <li
             v-for="(channelItem, idx2) in menuItem.channel"
             :key="channelItem.key"
-            :class="['sec-list-item', {'sec-list-item-last-line': (menuItem.channel.length - idx2) / 4 < 1}]"
+            :class="[
+              'sec-list-item',
+              {
+                'sec-list-item-last-line':
+                  (menuItem.channel.length - idx2) / 4 < 1,
+              },
+            ]"
             @click="intoChannel(channelItem)"
           >
             <i :class="`sec-icon-${channelItem.iconType}`"></i>
-            <span>{{channelItem.label}}</span>
+            <span>{{ channelItem.label }}</span>
           </li>
         </ul>
       </template>
@@ -36,18 +42,18 @@ export default {
       return [
         {
           key: "funds",
-          label: this.getI18n('iconLabel.funds.label'),
+          label: this.getI18n("iconLabel.funds.label"),
           channel: [
             {
               key: "deposit",
-              label: this.getI18n('iconLabel.funds.deposit'),
+              label: this.getI18n("iconLabel.funds.deposit"),
               iconType: "deposit",
               path: "sec-funds-deposit",
             },
             // { key: "exchange", label: this.getI18n('iconLabel.funds.exchange'), iconType: "exchange" },
             {
               key: "withdraw",
-              label: this.getI18n('iconLabel.funds.withdraw'),
+              label: this.getI18n("iconLabel.funds.withdraw"),
               iconType: "withdraw",
               path: "sec-funds-withdraw",
             },
@@ -59,13 +65,13 @@ export default {
             // },
             {
               key: "funds_history2",
-              label: this.getI18n('iconLabel.funds.funds_history2'),
+              label: this.getI18n("iconLabel.funds.funds_history2"),
               iconType: "fund_history",
               path: "sec-funds-history",
             },
             {
               key: "funds_history",
-              label: this.getI18n('iconLabel.funds.funds_history'),
+              label: this.getI18n("iconLabel.funds.funds_history"),
               iconType: "fund_list",
               path: "sec-funds-capital-flow",
             },
@@ -73,23 +79,23 @@ export default {
         },
         {
           key: "stocks",
-          label: this.getI18n('iconLabel.stocks.label'),
+          label: this.getI18n("iconLabel.stocks.label"),
           channel: [
             {
               key: "enter",
-              label:this.getI18n('iconLabel.stocks.enter'),
+              label: this.getI18n("iconLabel.stocks.enter"),
               iconType: "enter",
               path: "intoStock",
             },
             {
               key: "out",
-              label: this.getI18n('iconLabel.stocks.out'),
+              label: this.getI18n("iconLabel.stocks.out"),
               iconType: "out",
               path: "outStock",
             },
             {
               key: "history-stocks",
-              label: this.getI18n('iconLabel.stocks.history'),
+              label: this.getI18n("iconLabel.stocks.history"),
               iconType: "stock_history",
               path: "stock-transfer-history",
             },
@@ -99,11 +105,11 @@ export default {
         },
         {
           key: "company",
-          label: this.getI18n('iconLabel.company.label'),
+          label: this.getI18n("iconLabel.company.label"),
           channel: [
             {
               key: "xgxx",
-              label: this.getI18n('iconLabel.company.xgxx'),
+              label: this.getI18n("iconLabel.company.xgxx"),
               iconType: "xgxx",
               path: "company-act",
             },
@@ -112,16 +118,16 @@ export default {
         },
         {
           key: "fee",
-          label: this.getI18n('iconLabel.fee.label'),
+          label: this.getI18n("iconLabel.fee.label"),
           channel: [
             {
               key: "quotas",
-              label: this.getI18n('iconLabel.fee.quotas'),
+              label: this.getI18n("iconLabel.fee.quotas"),
               iconType: "quotas",
             },
             {
               key: "statement",
-              label: this.getI18n('iconLabel.fee.statement'),
+              label: this.getI18n("iconLabel.fee.statement"),
               iconType: "statement",
               path: "feeStatement",
             },
@@ -132,7 +138,7 @@ export default {
             // },
             {
               key: "dayly",
-              label: this.getI18n('iconLabel.fee.dayly'),
+              label: this.getI18n("iconLabel.fee.dayly"),
               iconType: "dayly",
               path: "statement",
             },
@@ -145,11 +151,11 @@ export default {
         },
         {
           key: "accounts",
-          label: this.getI18n('iconLabel.accounts.label'),
+          label: this.getI18n("iconLabel.accounts.label"),
           channel: [
             {
               key: "account",
-              label: this.getI18n('iconLabel.accounts.account'),
+              label: this.getI18n("iconLabel.accounts.account"),
               iconType: "account",
               path: "",
             },
@@ -159,7 +165,23 @@ export default {
             //   iconType: "pro",
             //   path: "",
             // },
-            { key: "password", label: this.getI18n('iconLabel.accounts.password'), iconType: "password" },
+            {
+              key: "password",
+              label: this.getI18n("iconLabel.accounts.password"),
+              iconType: "password",
+            },
+            {
+              key: "margin",
+              label: this.getI18n("iconLabel.accounts.margin"),
+              iconType: "margin",
+              // path: ""
+            },
+            {
+              key: "add-limit",
+              label: this.getI18n("iconLabel.accounts.add_limit"),
+              iconType: "add_limit",
+              path: 'add-limit',
+            },
           ],
         },
       ];
@@ -174,7 +196,7 @@ export default {
 
   methods: {
     getI18n(key) {
-      return this.$t(`iAccount.home.${key}`)
+      return this.$t(`iAccount.home.${key}`);
     },
     // 點擊菜單
     intoChannel(item) {

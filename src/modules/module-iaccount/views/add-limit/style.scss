@@ -1,0 +1,93 @@
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
+.add-limit-wrap {
+  width: 100%;
+  font-size: .15rem;
+
+  .curLimit {
+    display: flex;
+    padding: .1rem;
+    justify-content: space-between;
+    margin-bottom: .05rem;
+    background-color: $color-content-bg;
+
+    .unit {
+      margin-left: .05rem;
+    }
+  }
+
+  .canLimit {
+    width: 100%;
+    background-color: $color-content-bg;
+
+    .title {
+      padding: .1rem;
+    }
+
+    .body-wrap {
+      display: flex;
+      width: 100%;
+      height: 1rem;
+      padding: .1rem;
+      font-size: .2rem;
+      line-height: .3rem;
+      @include border-after-1px(bottom, $color-separate-line);
+
+      .body {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        flex-wrap: wrap;
+        text-align: center;
+
+        .unit {
+          margin-left: .05rem;
+        }
+    
+        div {
+          width: 100%;
+        }
+      }
+    }
+    
+    .input {
+      padding: .16rem .1rem;
+
+      input {
+        padding-left: .3rem;
+      }
+    }
+  }
+  
+  .footer {
+    @include clearfix();
+
+    .agree {
+      padding: .1rem 0;
+      .link-start {
+        color: $color-txt-sub;
+      }
+    }
+    .btn-wrap {
+      padding: 0 .35rem .15rem;
+    }
+    .record {
+      float: right;
+      margin-right: .35rem;
+      color: $color-main-sub;
+    }
+  }
+
+  .tips {
+    color: $color-txt-sub;
+    line-height: .2rem;
+    padding: .1rem .1rem 0;
+
+    h3 {
+      margin-bottom: .05rem;
+    }
+  }
+
+}

@@ -32,6 +32,7 @@ import { intoStock } from "./into-stock";
 import { outStock } from "./out-stock";
 import { transferHistory } from "./transfer-history";
 import { company_act } from './company/index';
+import { addLimit } from './add-limit';
 // import { statement } from "./statement";
 
 // language: 'zh_CN',
@@ -48,6 +49,7 @@ export default {
     transferHistory,
     statementExtra,
     company_act,
+    addLimit,
     nextBtn: "下一步",
     confirmBtn: "确认提交",
     define: {
@@ -120,6 +122,8 @@ export default {
           label: "账户",
           account: "证券账户资料",
           password: "修改交易密码",
+          margin: '保证金账户增开',
+          add_limit: '信用额度提升',
           // pro: "专业投资者",
         },
       },

@@ -1,0 +1,67 @@
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+
+.list-wrap {
+  width: 100%;
+  font-size: .15rem;
+  .list-item {
+    margin-bottom: .1rem;
+    padding: .1rem;
+    background-color: $color-content-bg;
+    .top {
+      display: flex;
+      justify-content: space-between;
+      padding: .05rem;
+    }
+    .detail {
+      display: flex;
+      justify-content: space-between;
+      padding: .05rem;
+
+      div:last-child {
+        text-align: right;
+      }
+      .mkt {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 40%;
+      }
+      .originLimit {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 40%;
+
+      }
+      .curLimit {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 20%;
+      }
+      span {
+        width: 100%;
+      }
+      span:first-child {
+        margin-bottom: .1rem;
+      }
+
+      .title {
+        color: $color-999;
+      }
+    }
+  }
+}
+.noMore {
+  text-align: center;
+  color: $color-txt-sub;
+
+}
+.unProcessed {
+  color: $color-error;
+}
+.success {
+  color: $color-success;
+}
