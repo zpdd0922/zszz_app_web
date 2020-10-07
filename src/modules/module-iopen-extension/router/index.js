@@ -18,8 +18,14 @@ const router = new VueRouter({
     {
       path: "/",
       component: AppWrap,
-      redirect: { name: "margin-info-disclosure" },
+      redirect: { name: "opmaGuide" },
       children: [
+        {
+          path: 'guide',
+          name: 'opmaGuide',
+          component: () => import(/* webpackChunkName:"open-account-common" */ `../views/guide/index.vue`),
+          meta: {whiteAuth: true}
+        },
         ...signRouter,
         ...marginRouter,
         // {

@@ -6,24 +6,33 @@
  * @Description: 
  */
 import Axios from '@/main/request/axios/';
-import paramsWrap from '@/main/request/utils/wrap-icrm';
-// import auth from '@/main/request/utils/auth-icrm';
-// import { getDefaultLang } from '@/main/locale/helper';
-const envConfig = window._GLOBAL_ENV_CONFIG || {};
-const baseURL = envConfig.baseServer;
+import ajaxUpload from '@/main/request/axios/upload';
+import paramsData from '@/main/request/utils/wrap';
+import auth from '@/main/request/utils/auth';
+import { getDefaultLang } from '@/main/locale/helper';
 
+const envConfig = window._GLOBAL_ENV_CONFIG || {};
+const baseURL = envConfig.serveriAccount;
 // const baseURL = "http://localhost:8901/securities";
-// const baseURL = 'http://121.35.249.13:8001';
-// const baseURL = 'http://localhost:9000';
+
+// const DEV = process.env.NODE_ENV !== 'production'
+// const HOST_OPEN = DEV ? '/dev-open' : baseURL
 
 const updateHeaders = () => ({
-
+  // "X-Accept-Token": auth.getAuthToken(),
+  // "X-Accept-Language": getDefaultLang(),
 });
 
-const axios = new Axios(baseURL, { updateHeaders });
+const axios = new Axios(baseURL, { updateHeaders, whiteApiList: ['/sec_api/save_into_money'] });
 
-export const post = (url, params = {}, key = "") => {
-  return axios.post(url, paramsWrap.WRAP(params, key));
+export const post = (url, params) => {
+  return axios.post(url, params);
 }
 
+export const postCommon = (url, params) => {
+  return axios.post(url, paramsData.COMMON(params));
+}
 
+export const postImg = (url, params, options) => {
+  return ajaxUpload(baseURL, url, updateHeaders, params, options);
+}

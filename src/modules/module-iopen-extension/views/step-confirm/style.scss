@@ -2,19 +2,41 @@
 @import '~@/customize/theme/_val_white.scss';
 @import '~@/main/assets/scss/_mixin.scss';
 
-.list-wrap {
-  background-color: $color-txt-rev;
-  li {
-    padding: .08rem .15rem;
-    a {
-      display: block;
-      width: 100%;
-      font-size: .13rem;
-      line-height: .25rem;
-      @include arrow(bottom, .08rem, .01rem, $color-input-border, .07rem)
+.margin-confirm{
+  .list-wrap {
+    background-color: $color-txt-rev;
+    margin-bottom: .1rem;
+    li {
+      padding: .08rem .15rem;
+      a {
+        display: block;
+        width: 100%;
+        font-size: .13rem;
+        line-height: .25rem;
+        @include arrow(bottom, .08rem, .01rem, $color-input-border, .07rem)
+      }
+    }
+    li:not(:last-child) {
+      @include border-after-1px(bottom,  $color-input-border)
     }
   }
-  li:not(:last-child) {
-    @include border-after-1px(bottom,  $color-input-border)
+  .input {
+    width: 100%;
+    padding: .16rem .15rem;
+    background-color: $color-content-bg;
+    
+    input {
+      padding-left: .3rem;
+    }
+  }
+  .agree {
+    margin: .1rem 0;
+    .agree-font {
+      color: $color-txt-sub;
+    }
+  }
+
+  & /deep/ .custom-form-btn {
+    padding-top: 0;
   }
 }

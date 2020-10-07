@@ -9,9 +9,9 @@
       <head-title :title="titleValues.declareTitle"></head-title>
     </cube-form>
     <div class="olcn-step olcn-step-risk">
-      <cube-popup :visible="isShowAgreementPopup">
+      <!-- <cube-popup :visible="isShowAgreementPopup">
         <risk-com-agreement />
-      </cube-popup>
+      </cube-popup> -->
       <div class="step-content step-content-media">
         <base-cells class="risk-media">
           <base-cell>
@@ -78,13 +78,13 @@ import {
   customAlert,
 } from "@/main/utils/common/tips";
 import UserAge from "@/main/utils/common/ua-info";
-import { riskOptions } from "./base-list";
-import RiskComAgreement from "./com-agreement";
+import { riskList } from "./base-list";
+// import RiskComAgreement from "./com-agreement";
 
 export default {
   // mixins: [onlineMixin],
   components: {
-    RiskComAgreement,
+    // RiskComAgreement,
   },
   data() {
     return {
@@ -93,7 +93,7 @@ export default {
       },
       isPlay: false,
       isPlayStatus: false,
-      isShowAgreementPopup: false,
+      // isShowAgreementPopup: false,
     };
   },
   computed: {
@@ -104,10 +104,13 @@ export default {
     },
 
     riskAudio() {
-      if (this.language === "zh_CN") {
-        return riskOptions.zh_CN;
+      if (this.$t('language') === "zh_CN") {
+        return riskList.zh_CN;
+      } else if(this.$t('language') === "zh_HK") {
+        return riskList.zh_HK;
+      } else {
+        return []
       }
-      return riskOptions.zh_HK;
     },
     nextBtnText() {
       if (!this.isPlayStatus) return this.getI18n("playMediaBtn");
@@ -128,14 +131,7 @@ export default {
     getI18n(key, type = "") {
       return this.$t(`iopenExt.risk.${key}`);
     },
-    updateInfo() {
-      const userInfo = this.openInfo;
-      // 表单信息
-      Object.keys(this.model).forEach((val) => {
-        const res = userInfo[val] ? userInfo[val] : this.model[val];
-        this.model[val] = res;
-      });
-    },
+
     playAudio(item) {
       this.isPlayStatus = true;
       if (this.isPlay) {
@@ -144,15 +140,6 @@ export default {
       } else {
         this.$refs.riskMedia.play();
         this.isPlay = true;
-      }
-    },
-    // 跳转协议页面
-    showAlert(item) {
-      const { value } = item;
-      if (value === 0) {
-        this.$router.push({ name: "cash-account" });
-      } else if (value === 1) {
-        this.$router.push({ name: "pel" });
       }
     },
     handleNext(e) {

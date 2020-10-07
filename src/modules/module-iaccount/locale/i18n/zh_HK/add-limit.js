@@ -1,7 +1,7 @@
 import customizeI18n from "@/customize/locale/i18n/zh_CN";
 
 export const addLimit = {
-  pageName: "保證金帳戶增開",
+  pageName: "信用額度提升",
   curLimit: {
     titleHK: "港股當前信用額度",
     unit: "HKD",

@@ -27,6 +27,9 @@ export default {
       }
       return agreementsData.zh_HK.list || [];
     }
+  },
+  created() {
+    console.log(this.$t('language'))
   }
 };
 </script>

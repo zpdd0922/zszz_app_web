@@ -1,11 +1,4 @@
-import {
-  KEY_USER_INFO,
-  KEY_SESSION_INFO,
-} from "@/modules/module-iaccount/api/config";
-// import paramsData from '@/modules/module-iaccount/api/params/params-wrap'
-import paramsData from "@/main/request/utils/wrap";
 import AccountApi from "@/modules/module-double-check/api/modules/api-account";
-
 import * as types from "./mutation-user-types";
 
 // 初始化数据 --> mapStates
@@ -29,12 +22,16 @@ const mutations = {
 const actions = {
   getOpenAccountNum({ commit, state }, data) {
     return new Promise((resolve, reject) => {
-      AccountApi.getOpenAccountNum(data).then((res) => {
-        if (res) {
-          commit(types.SET_OPEN_ACCOUNT_NUM, res);
-        }
-        resolve(res);
-      });
+      AccountApi.getOpenAccountNum(data)
+        .then((res) => {
+          if (res) {
+            commit(types.SET_OPEN_ACCOUNT_NUM, res);
+          }
+          resolve(res);
+        })
+        .catch((err) => {
+          reject(err);
+        })
     });
   },
   getVerifyCode({ commit, state }, data) {

@@ -41,18 +41,18 @@ const routes = [
             /* webpackChunkName:"margin-confirm" */ `../views/step-confirm/index.vue`
           ),
       },
-      {
-        path: "step4",
-        name: "margin-signature",
-        meta: {
-          whiteAuth: true
-        },
+      // {
+      //   path: "step4",
+      //   name: "margin-signature",
+      //   meta: {
+      //     whiteAuth: true
+      //   },
 
-        component: () =>
-          import(
-            /* webpackChunkName:"margin-signature" */ `../views/step-signature/index.vue`
-          ),
-      },
+      //   component: () =>
+      //     import(
+      //       /* webpackChunkName:"margin-signature" */ `../views/step-signature/index.vue`
+      //     ),
+      // },
     ],
   },
 ];

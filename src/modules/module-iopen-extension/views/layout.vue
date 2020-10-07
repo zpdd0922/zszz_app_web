@@ -8,11 +8,11 @@
 <template>
   <div class="margin-page-wrap">
     <!-- Loading -->
-    <!-- <template>
+    <template v-if="isFetchingProgress">
       <base-waiting />
-    </template> -->
+    </template>
     <!-- 主体内容 -->
-    <template>
+    <template v-else>
       <router-view />
     </template>
   </div>
@@ -23,16 +23,21 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      isFetchingProgress: false
+    };
   },
   computed: {
   },
   created() {
     this.setTitle(this.$t("iopenExt.main.pageName"));
-    this.init();
+    // this.init();
   },
   methods: {
     init() {
+      this.$store.dispatch('getOpenProgress').then(()=>{
+        this.isFetchingProgress = false;
+      })
     }
   }
 };

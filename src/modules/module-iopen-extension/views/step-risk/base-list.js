@@ -8,5 +8,5 @@
 
 const windowGolbalConfig = window._GLOBAL_CONFIG;
 
-export const riskOptions = windowGolbalConfig.risk;
-export const agreementsData = windowGolbalConfig.agreements;
+export const riskList = windowGolbalConfig.risk;
+// export const agreementsData = windowGolbalConfig.agreements;
