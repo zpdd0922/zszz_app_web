@@ -182,19 +182,8 @@ export default {
       // 更新签名框下面用户信息列表
       this.formList.forEach((item) => {
         const { key, value } = item;
-        // 名字中间加个空格
-        // if (key == "cnNameValue") {
-        //   item.value = userInfo[key]
-        //     ? `${userInfo["familyName"]} ${userInfo["givenName"]}`
-        //     : value;
-        //   return;
-        // }
-        // if (key == "enNameValue") {
-        //   item.value = userInfo[key]
-        //     ? `${userInfo["givenNameSpell"]} ${userInfo["familyNameSpell"]}`
-        //     : value;
-        //   return;
-        // }
+         console.log(key, this.openProgress)
+
         if (key == "phoneNum") {
           item.value = this.openProgress.phoneNumber;
         } else {

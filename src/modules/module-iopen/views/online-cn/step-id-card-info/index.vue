@@ -372,7 +372,7 @@ export default {
     handleBefore() {
       return new Promise((resolve, reject) => {
         const { idCardValue: idCard } = this.model;
-        const userName = this.cnName;
+        const name = this.cnName;
         const age = getAge(getBirthFromCard(idCard));
         // 校验身份证
         if (!validate.isIdCard(idCard)) {
@@ -389,7 +389,7 @@ export default {
 
         // 后台请求校验
         this.$store
-          .dispatch("checkIdCard", { idCard, userName, cardType: 1 })
+          .dispatch("checkIdCard", { idCard, name, cardType: 1 })
           .then((res) => {
             const { verify = false, remark = "" } = res;
             if (verify) {
@@ -397,7 +397,7 @@ export default {
             } else {
               alert({
                 title: "温馨提示",
-                content: remark,
+                content: "身份證姓名與證件號碼不符合！",
               });
               reject(verify);
             }
