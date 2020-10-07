@@ -39,5 +39,7 @@ export default {
     },
     checkSuccess: '绑定成功！',
     getCaptcha: '请获取验证码',
+    captchaWarn: '请输入验证码',
+    curPhoneNum: '您当前的电话号码为：'
   },
 };

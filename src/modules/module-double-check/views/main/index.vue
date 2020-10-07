@@ -6,6 +6,7 @@
       <p>{{ statusWarn.header2 }}</p>
     </header>
     <section class="body">
+      <div class="phone">{{$t('doubleCheck.curPhoneNum')}}{{hiddennedPhoneNum}}</div>
       <div class="captcha-wrap">
         <!-- <input
           type="text"
@@ -30,12 +31,11 @@
         class="cap-btn"
         >{{ $t("doubleCheck.confirmBtn") }}</cube-button
       >
-      <div
-        :class="{ tips: true, active: isAgree, normal: !isAgree }"
-        @click="changeAgree"
-      >
-        {{ $t("doubleCheck.tips") }}
-      </div>
+      <cube-checkbox v-model="sevenNRemFlag" class="agree">
+        <span @click.stop="handleToAgreement" class="base-links">{{
+          $t("doubleCheck.tips")
+        }}</span>
+      </cube-checkbox>
     </section>
     <footer class="footer">
       <div class="faqs-title">FAQS</div>
@@ -86,13 +86,14 @@ export default {
       //缓存获取的验证码
       captchaId: null,
       urlParams: getURLParameters(),
-      isAgree: false,
+      sevenNRemFlag: true,
     };
   },
   computed: {
     ...mapGetters(["openAccountNum", "isShowImgCaptcha", "userInfo"]),
-    sevenNRemFlag() {
-      return this.isAgree ? 1 : 0;
+    hiddennedPhoneNum() {
+      return this.openAccountNum &&
+      this.openAccountNum.replace(this.openAccountNum.substring(3, 7), "****")
     },
     statusWarn() {
       const type = this.urlParams.remindType || 0;
@@ -164,9 +165,8 @@ export default {
   },
   methods: {
     ...mapActions(["getVerifyCode"]),
-
-    changeAgree() {
-      this.isAgree = !this.isAgree;
+    handleToAgreement() {
+      this.sevenNRemFlag = !this.sevenNRemFlag;
     },
     updateData(data) {
       this.formData = {
@@ -184,8 +184,8 @@ export default {
           equipmentNum: this.userInfo.equipmentNum || 123124,
           authCode: this.formData.captcha,
           eventId: this.captchaId,
-          sevenNRemFlag: this.sevenNRemFlag,
-          equipmentName: this.userInfo.equipmentName || 'iphone8',
+          sevenNRemFlag: Number(this.sevenNRemFlag),
+          equipmentName: this.userInfo.equipmentName || "iphone8",
         };
         if (params.eventId !== null) {
           this.$store.dispatch("checkCaptcha", params).then((res) => {
@@ -216,7 +216,7 @@ export default {
           toast({
             type: "txt",
             time: 2000,
-            txt: this.$t('doubleCheck.getCaptcha'),
+            txt: this.$t("doubleCheck.getCaptcha"),
           });
         }
       }
@@ -224,24 +224,6 @@ export default {
 
     handleCheckTrue() {
       return this.openAccountNum && this.openAccountNum.length > 0;
-      // // 发送前 --> 校验手机是否合法
-      // const countryCode = this.formData.countryCode;
-      // const account = this.formData.certCode;
-
-      // if (countryCode === defaultCountryCode && !validate.isMobile(account)) {
-      //   this.formRules.certCode.tips = "请输入正确的手机号码";
-      //   return false;
-      // } else {
-      //   this.formRules.certCode.tips = "";
-      // }
-
-      // if (!account) {
-      //   this.formRules.certCode.tips = "手机号码不能为空";
-      //   return false;
-      // } else {
-      //   this.formRules.certCode.tips = "";
-      // }
-      // return true;
     },
     handleSendCode() {
       return new Promise((resolve, reject) => {
@@ -273,7 +255,7 @@ export default {
       const { captcha } = this.formData;
 
       if (!captcha) {
-        this.formRules.captcha.tips = "请输入验证码";
+        this.formRules.captcha.tips = this.$t("doubleCheck.captchaWarn");
         return false;
       } else {
         this.formRules.captcha.tips = "";

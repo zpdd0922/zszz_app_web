@@ -27,6 +27,11 @@
     margin-bottom: .1rem;
     @include clearfix();
 
+    .phone {
+      font-size: .15rem;
+      color: $color-txt;
+      margin-bottom: .05rem;
+    }
     .captcha-wrap {
       // display: flex;
       // justify-content: space-between;
@@ -93,33 +98,8 @@
     .cap-btn {
       border-radius: .05rem;
     }
-    .tips {
-      margin: 0.05rem 0;
-      vertical-align: bottom;
-    }
-    .normal::before {
-      content: '';
-      display: inline-block;
-      vertical-align: bottom;
-      height: .15rem;
-      width: .15rem;
-      // margin-right: .05rem;
-      background-image: url('~@/modules/module-double-check/assets/images/circle.png');
-      background-size: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-    .active::before {
-      content: '';
-      display: inline-block;
-      vertical-align: bottom;
-      height: .15rem;
-      width: .15rem;
-      // margin-right: .05rem;
-      background-image: url('~@/modules/module-double-check/assets/images/pass.png');
-      background-size: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
+    .agree {
+      padding-left: 0;
     }
   }
 
@@ -169,4 +149,7 @@
       border: none;
     }
   }
+}
+.body /deep/ .cube-btn_disabled:after {
+  border: none;
 }
