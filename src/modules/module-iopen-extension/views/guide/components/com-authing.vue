@@ -50,7 +50,6 @@ import _ from "lodash";
 import {
   OPEN_STATUS,
   PENDING_STATUS_TYPE,
-  AUTH_STATUS_TYPE,
   FAIL_STATUS_TYPE,
 } from "@/modules/module-iopen/enums/open-progress";
 export default {

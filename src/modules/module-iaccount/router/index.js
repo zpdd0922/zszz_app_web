@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 
 import iaccountRouter from '@/modules/module-iaccount/router/routes.js';
 import signRouter from '@/modules/module-sign/router/routes.js';
+import iopenExtRouter from '@/modules/module-iopen-extension/router/routes.js';
 import AppWrap from '../wrap.vue';
 
 Vue.use(VueRouter);
@@ -20,6 +21,7 @@ const router = new VueRouter({
       redirect: { name: 'sec-home' },
       children: [
         ...signRouter,
+        ...iopenExtRouter,
         ...iaccountRouter,
         {
           path: "*",

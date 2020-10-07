@@ -75,7 +75,7 @@ export default {
       return this.$t(`iopenExt.confirm.${key}`);
     },
     handleNext() {
-
+      this.$router.push({name: 'opmaGuide'})
       // this.$store.dispatch('handleOpenMargin')
     },
 

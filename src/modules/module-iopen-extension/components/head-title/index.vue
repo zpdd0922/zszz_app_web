@@ -1,10 +1,4 @@
-<!--
- * @Author: Jim
- * @Date: 2019-12-19 15:37:53
- * @LastEditors: Jim
- * @LastEditTime: 2019-12-20 17:59:35
- * @Description: 
- -->
+
 <template>
   <div class="op-header-title border-bottom-1px">
     <span class="op-header-title-main">{{title}}</span>
@@ -37,6 +31,6 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import './style.scss';
 </style>

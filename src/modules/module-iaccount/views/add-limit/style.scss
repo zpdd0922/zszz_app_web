@@ -22,6 +22,11 @@
     width: 100%;
     background-color: $color-content-bg;
 
+    .margin-bottom {
+      font-size: 0;
+      height: .1rem;
+    }
+
     .title {
       padding: .1rem;
     }

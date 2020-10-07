@@ -18,6 +18,7 @@
           </div>
         </div>
       </div>
+      <div class="margin-bottom"></div>
       <div class="input">
         <label for="tradePwd">{{ getI18n("tradePwd.label") }}</label>
         <input

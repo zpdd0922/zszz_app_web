@@ -1,5 +1,14 @@
 const routes = [
   {
+    path: "guide",
+    name: "opmaGuide",
+    component: () =>
+      import(
+        /* webpackChunkName:"open-account-common" */ `../views/guide/index.vue`
+      ),
+    meta: { whiteAuth: true },
+  },
+  {
     path: "open-margin",
     name: "margin-layout",
     redirect: { name: "margin-info-disclosure" },
@@ -10,7 +19,7 @@ const routes = [
         path: "step1",
         name: "margin-info-disclosure",
         meta: {
-          whiteAuth: true
+          whiteAuth: true,
         },
         component: () =>
           import(
@@ -21,7 +30,7 @@ const routes = [
         path: "step2",
         name: "margin-risk",
         meta: {
-          whiteAuth: true
+          whiteAuth: true,
         },
 
         component: () =>
@@ -33,7 +42,7 @@ const routes = [
         path: "step3",
         name: "margin-confirm",
         meta: {
-          whiteAuth: true
+          whiteAuth: true,
         },
 
         component: () =>

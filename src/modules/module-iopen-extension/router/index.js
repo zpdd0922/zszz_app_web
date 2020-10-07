@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import marginRouter from "@/modules/module-iopen-extension/router/routes.js";
+import marginRouter from "@/modules/module-iopen-extension/router";
 import signRouter from "@/modules/module-sign/router/routes.js";
 
 import AppWrap from "../wrap.vue";
@@ -20,18 +20,12 @@ const router = new VueRouter({
       component: AppWrap,
       redirect: { name: "opmaGuide" },
       children: [
-        {
-          path: 'guide',
-          name: 'opmaGuide',
-          component: () => import(/* webpackChunkName:"open-account-common" */ `../views/guide/index.vue`),
-          meta: {whiteAuth: true}
-        },
         ...signRouter,
         ...marginRouter,
-        // {
-        //   path: "*",
-        //   redirect: "/",
-        // },
+        {
+          path: "*",
+          redirect: "/",
+        },
       ],
     },
   ],

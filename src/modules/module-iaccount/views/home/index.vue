@@ -174,7 +174,7 @@ export default {
               key: "margin",
               label: this.getI18n("iconLabel.accounts.margin"),
               iconType: "margin",
-              // path: ""
+              path: "opmaGuide"
             },
             {
               key: "add-limit",
