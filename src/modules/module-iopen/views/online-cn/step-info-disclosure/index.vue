@@ -1,5 +1,9 @@
 <template>
-  <op-wrap :isDisabled="isDisableNext" :btnText="getI18n('nextBtn')" @handleNext="handleNext">
+  <op-wrap
+    :isDisabled="isDisableNext"
+    :btnText="getI18n('nextBtn')"
+    @handleNext="handleNext"
+  >
     <div class="olcn-step olcn-step-info-other">
       <cube-form :model="model" class="step-content">
         <head-title :title="titleValues.declareTitle"></head-title>
@@ -10,31 +14,59 @@
 
         <!-- 是否与本公司员工有关系 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsOurStaffKin.unrelatedToWLSStaff"></cube-form-item>
-          <template v-if="disclosureDefine.isNotOurStaffKin.isCanFalse &&  !model.isNotOurStaffKin">
-            <cube-form-item :field="fieldsOurStaffKin.relatedStaffName"></cube-form-item>
-            <cube-form-item :field="fieldsOurStaffKin.relationship"></cube-form-item>
+          <cube-form-item
+            :field="fieldsOurStaffKin.unrelatedToWLSStaff"
+          ></cube-form-item>
+          <template
+            v-if="
+              disclosureDefine.isNotOurStaffKin.isCanFalse &&
+              !model.isNotOurStaffKin
+            "
+          >
+            <cube-form-item
+              :field="fieldsOurStaffKin.relatedStaffName"
+            ></cube-form-item>
+            <cube-form-item
+              :field="fieldsOurStaffKin.relationship"
+            ></cube-form-item>
           </template>
         </cube-form-group>
 
         <!-- 是否港交所參與者僱員 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsHkexParterStaff.isNotHkexParterStaff"></cube-form-item>
+          <cube-form-item
+            :field="fieldsHkexParterStaff.isNotHkexParterStaff"
+          ></cube-form-item>
           <template
-            v-if="disclosureDefine.isNotHkexParterStaff.isCanFalse &&  !model.isNotHkexParterStaff"
+            v-if="
+              disclosureDefine.isNotHkexParterStaff.isCanFalse &&
+              !model.isNotHkexParterStaff
+            "
           >
-            <cube-form-item :field="fieldsHkexParterStaff.hkexParterName"></cube-form-item>
-            <cube-form-item :field="fieldsHkexParterStaff.hkexParterCENo"></cube-form-item>
+            <cube-form-item
+              :field="fieldsHkexParterStaff.hkexParterName"
+            ></cube-form-item>
+            <cube-form-item
+              :field="fieldsHkexParterStaff.hkexParterCENo"
+            ></cube-form-item>
           </template>
         </cube-form-group>
 
         <!-- 配偶是否拥有保证金账户 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsConsortWithMargin.isNotConsortWithMargin"></cube-form-item>
+          <cube-form-item
+            :field="fieldsConsortWithMargin.isNotConsortWithMargin"
+          ></cube-form-item>
           <template
-            v-if="disclosureDefine.isNotConsortWithMargin.isCanFalse &&  !model.isNotConsortWithMargin"
+            v-if="
+              disclosureDefine.isNotConsortWithMargin.isCanFalse &&
+              !model.isNotConsortWithMargin
+            "
           >
-            <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin.withMarginName"></cube-form-item>
+            <cube-form-item
+              class="label-width-4em"
+              :field="fieldsConsortWithMargin.withMarginName"
+            ></cube-form-item>
             <cube-form-item
               class="label-width-4em"
               :field="fieldsConsortWithMargin.withMarginAccount"
@@ -44,8 +76,12 @@
 
         <!-- 本人或配偶是否是其他账户的实际拥有人或担保人 -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsOtherPOorPGWithMargin.isNotBOorPG"></cube-form-item>
-          <template v-if="disclosureDefine.isNotBOorPG.isCanFalse &&  !model.isNotBOorPG">
+          <cube-form-item
+            :field="fieldsOtherPOorPGWithMargin.isNotBOorPG"
+          ></cube-form-item>
+          <template
+            v-if="disclosureDefine.isNotBOorPG.isCanFalse && !model.isNotBOorPG"
+          >
             <cube-form-item
               class="label-width-5em"
               :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginName"
@@ -59,9 +95,14 @@
 
         <!-- 是否大于35% -->
         <cube-form-group class="custom-form-group">
-          <cube-form-item :field="fieldsConsortWithOtherMargin.isNotConsortWithOtherMargin"></cube-form-item>
+          <cube-form-item
+            :field="fieldsConsortWithOtherMargin.isNotConsortWithOtherMargin"
+          ></cube-form-item>
           <template
-            v-if="disclosureDefine.isNotConsortWithOtherMargin.isCanFalse &&  !model.isNotConsortWithOtherMargin"
+            v-if="
+              disclosureDefine.isNotConsortWithOtherMargin.isCanFalse &&
+              !model.isNotConsortWithOtherMargin
+            "
           >
             <cube-form-item
               class="label-width-4em"
@@ -457,6 +498,17 @@ export default {
         },
       });
     },
+    handlerCheckAlertForUs(newVal, oldVal, key) {
+      if (newVal !== 1) return;
+      const content = this.getI18n(`other.${key}Alert`);
+      alert({
+        title: this.$t("common.alertTitle"),
+        content,
+        callback: () => {
+          this.model[key] = typeof val === "boolean" ? true : oldVal;
+        },
+      });
+    },
   },
   created() {
     this.updateInfo();
@@ -483,9 +535,9 @@ export default {
     "model.isNotConsortWithOtherMargin"(newVal, oldVal) {
       this.handlerCheckAlert(newVal, "isNotConsortWithOtherMargin");
     },
-    // "model.isNotUsGreenCardHolder"(newVal, oldVal) {
-    //   this.handlerCheckAlert(newVal, "isNotUsGreenCardHolder");
-    // },
+    "model.isNotUsGreenCardHolder"(newVal, oldVal) {
+      this.handlerCheckAlertForUs(newVal, oldVal, "isNotUsGreenCardHolder");
+    },
   },
 };
 </script>

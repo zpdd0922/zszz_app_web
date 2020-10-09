@@ -3,6 +3,7 @@
     debug: false,
     serverUser: 'http://114.119.32.41:6012',
     serveriOpen: 'http://114.119.32.41:6012',
+    serveriAccount: 'http://114.119.32.41:6012',
     serverInformation: 'http://114.119.32.41:6003',
     serverHelpCenter: 'http://114.119.32.41:6003',
     serverDocument: '',

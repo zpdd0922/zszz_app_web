@@ -63,16 +63,16 @@
         font-size: .14rem;
         line-height:.2rem;
         margin-bottom: .075rem;
-        justify-content:vv flex-start;
+        justify-content: flex-start;
       }
       .items {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         span {
-          width: .56rem;
+          width: 20%;
           text-align: center;
-          margin: 0 .12rem;
+          margin: 0 2.5%;
           line-height: .35rem;
           color: $color-arrow;
           &.active {

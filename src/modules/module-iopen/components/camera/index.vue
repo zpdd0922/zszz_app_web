@@ -9,7 +9,6 @@
         <div class="op-com-item-title">{{ item.txt }}</div>
       </template>
       <div class="op-com-item-photo" @click="handleCamera(key)">
-        {{ uploadLoad[`${key}Status`] }}
         <template v-if="upload[`${key}${SUFFIX}`]">
           <div class="op-com-photo-img">
             <!-- <img @click="showImagePreview(`${key}${SUFFIX}`)" :src="upload[`${key}${SUFFIX}`]"> -->
