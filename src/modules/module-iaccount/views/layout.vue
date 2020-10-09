@@ -12,7 +12,6 @@ export default {
   },
   created() {
     this.setTitle(this.$t("iAccount.main.pageName"));
-
     this.getSecAccountInfo();
   },
   mounted() {

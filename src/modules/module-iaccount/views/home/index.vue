@@ -35,7 +35,9 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    this.setTitle(this.$t("iAccount.main.pageName"));
+  },
   watch: {},
   computed: {
     menu() {

@@ -1,4 +1,6 @@
-import { postCommon } from '../../request';
+import { post, postCommon } from '../../request';
+import paramsData from '@/main/request/utils/wrap';
+
 
 export default {
   /**
@@ -6,7 +8,7 @@ export default {
   * @return clientStatus 客户状态
   * '1': 账户冻结(联系客服)    '0'：正常
   */
- getSecAccountInfo: data => postCommon('/sec_api/find_acc_info', data),
+ getSecAccountInfo: data => post('/securities/find_acc_info', paramsData.NOPARAMS(data)),
 
   /**
    * 校验交易密码
