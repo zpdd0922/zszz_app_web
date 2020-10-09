@@ -1,5 +1,5 @@
 <template>
-  <section class="sec-page-wrap sec-into-stock-way">
+  <section class="sec-page-wrap">
     <base-cells class="select-ways">
       <base-cell v-for="item in ways" :key="item.type" class="way-item" @click="handleNext(item)">
         <base-cell-header>
@@ -74,4 +74,7 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@import './style.scss';
+</style>
 

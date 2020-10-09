@@ -1,4 +1,7 @@
-.sec-stock-into-detail {
+@import '~@/customize/theme/_val_white.scss';
+@import '~@/modules/module-iaccount/assets/styles/variable.scss';
+@import '~@/main/assets/scss/_mixin.scss';
+.sec-stock-detail {
   width: 100%;
   background-color: $color-theme-s;
   color: #666;
@@ -64,7 +67,20 @@
         .no-result {
           text-align: center;
         }
-
+        .close-search {
+          position: absolute;
+          top: 0;
+          right: .1rem;
+        }
+        .close-search:before {
+          position: absolute;
+          content: '';
+          display: block;
+          left: -.05rem;
+          right: -.05rem;
+          bottom: -.05rem;
+          top: -.05rem;
+        }
         .search-line {
           display: flex;
           padding: 0 .1rem;

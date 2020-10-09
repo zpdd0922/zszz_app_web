@@ -1,6 +1,6 @@
 export const intoStock = {
   tips: {
-    accountError: '帳戶信息錯誤',
+    accountError: "未查詢到開戶帳號",
   },
   intoWay: {
     title: "請選擇轉入股票",
@@ -51,6 +51,10 @@ export const intoStock = {
         label: "接收帳戶",
       },
     },
+    warn: {
+      ccassWarn: "請輸入正確的CCASS號碼",
+      contactsPhoneNumWarn: "請輸入正確的聯繫人電話",
+    },
     tips1: "帳戶姓名：需與立橋帳戶同名(",
     tips2: "),不允許使用第三方帳戶轉入股票",
   },
@@ -61,7 +65,8 @@ export const intoStock = {
     sharesNum: "數量",
     quantityPlaceholder: "輸入股票數量",
     noStockNameWarn: "股票代碼不能為空",
-    noQuantityWarn: "股票數量不能為空",
+    noQuantityWarn: "請輸入正確的股票數量",
+    noSharesNameWarn: "未查詢到到該支股票",
     repeatWarn: "股票代碼不可重複輸入",
     add: " 添加",
     delete: "刪除",

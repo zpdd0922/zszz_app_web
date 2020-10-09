@@ -1,6 +1,6 @@
 export const intoStock = {
   tips: {
-    accountError: '账户信息错误',
+    accountError: "未查询到开户账号",
   },
   intoWay: {
     title: "请选择转入股票",
@@ -51,6 +51,10 @@ export const intoStock = {
         label: "接收账户",
       },
     },
+    warn: {
+      ccassWarn: "请输入正确的CCASS号码",
+      contactsPhoneNumWarn: "请输入正确的联系人电话",
+    },
     tips1: "账户姓名：需与立桥账户同名(",
     tips2: "),不允许使用第三方账户转入股票",
   },
@@ -61,7 +65,8 @@ export const intoStock = {
     sharesNum: "数量",
     quantityPlaceholder: "输入股票数量",
     noStockNameWarn: "股票代码不能为空",
-    noQuantityWarn: "股票数量不能为空",
+    noQuantityWarn: "请输入正确的股票数量",
+    noSharesNameWarn: "未查询到到该支股票",
     repeatWarn: "股票代码不可重复输入",
     add: " 添加",
     delete: "删除",
@@ -120,6 +125,6 @@ export const intoStock = {
     text_19: "核聚证券有限公司",
     text_20: "香港上海汇丰银行有限公司",
     text_21: "友信证券有限公司",
-    other: "其他券商"
+    other: "其他券商",
   },
 };

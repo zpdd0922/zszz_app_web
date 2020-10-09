@@ -1,6 +1,6 @@
 <template>
   <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
-    <div class="sec-stock-into-detail" ref="stock-detail">
+    <div class="sec-stock-detail" ref="stock-detail">
       <head-title :title="getI18n('title')" class="stock-detail-title"></head-title>
       <div :class="{'addBtn': true, 'addBtn-active': isAddBtnActive }" @click.stop="addStock">+ {{getI18n('add')}}</div>
       <ul v-if="stockList.length !== 0">
@@ -14,13 +14,11 @@
               autocomplete="off"
               :placeholder="getI18n('stockNamePlaceholder')"
               @focus="goToSearch(idx)"
-              @blur="closeSearch"
               @keyup="debouncedGetStockList(idx)"
               :disabled="!item.isInputActive"
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
             <!-- <div class="list-box" v-if="true"> -->
-              <!-- TODO:看看后续要不要加loading -->   
               <template v-if="isSearchLoading">
                 <div class="is-searching">
                   <span>{{getI18n('isSearching')}}</span>
@@ -35,7 +33,6 @@
                     @mousedown.prevent
                     @click.stop="saveStockCode($event, idx,item)"
                   >
-                    <!-- 图标要根据值变化 -->
                     <span class="hk-stock-icon"></span>
                     <span class="code">{{item.id | formatCode}}</span>
                     <span class="name">{{item.name}}</span>
@@ -44,6 +41,7 @@
                 <div class="no-result" v-else>
                   <span>{{getI18n('noResult')}}</span>
                 </div>
+                <div class="close-search" @click="closeSearch(idx)">X</div>
               </template>
             </div>
           </div>
@@ -52,7 +50,7 @@
             <input
               type="text"
               name="sharesNum"
-              v-model="stockList[idx].sharesNum"
+              v-model.trim="stockList[idx].sharesNum"
               :placeholder="getI18n('quantityPlaceholder')"
               :disabled="!item.isInputActive"
             />
@@ -292,17 +290,24 @@ export default {
         this.showNoStockNameWarn();
         return;
       }
-      if (!stockClicked.sharesNum) {
+      //判断股票数量格式是否正确
+      if (!/^[1-9]+[\d]*$/.test(stockClicked.sharesNum)) {
         this.showNoQuantityWarn();
         return;
       }
+      // 判断是否取到股票名称
+      if (!stockClicked.sharesName) {
+        this.showNoSharesNameWarn();
+        return
+      }
+      // 超过两只股票时判断是否重复
       if (this.stockList.length > 1) {
         const list = this.stockList
           .slice(0, idx)
           .concat(this.stockList.slice(idx + 1));
         if (list.some((item) => item.sharesCode === stockClicked.sharesCode)) {
           this.showRepeatWarn();
-          return;
+          return; 
         }
       }
       this.stockList[idx].isInputActive = false;
@@ -335,13 +340,23 @@ export default {
       });
       toast.show();
     },
+    showNoSharesNameWarn() {
+      const toast = this.$createToast({
+        type: "txt",
+        time: 1000,
+        txt: this.getI18n("noSharesNameWarn"), 
+      });
+      toast.show();
+    },
     goToSearch(index) {
       if (!this.isCanOperate && this.stockList[index].isInputActive) {
         this.isSearch = true;
         this.indexSearch = index;
       }
     },
-    closeSearch() {
+    closeSearch(idx) {
+      this.stockList[idx].sharesCode = '',
+      this.stockList[idx].sharesName = '',
       this.isSearch = false;
     },
     saveStockCode(e, idx, item) {
@@ -368,3 +383,6 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@import "./style.scss";
+</style>

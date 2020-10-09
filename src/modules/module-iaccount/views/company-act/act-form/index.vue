@@ -74,7 +74,7 @@
       <template v-if="activeSelect === 'DSO3'">
         <div class="form-item">
           <div class="label">
-            <span class="require-status">*</span>
+            <!-- <span class="require-status">*</span> -->
             {{ $t("iAccount.company_act.label.text_5") }}
           </div>
           <div class="content border-bottom-1px">

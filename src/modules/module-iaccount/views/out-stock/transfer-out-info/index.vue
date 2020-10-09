@@ -20,17 +20,13 @@
         <!-- 账户姓名 -->
         <div class="cube-form-item border-bottom-1px">
           <div class="cube-form-label">
-            <span>{{
-              getI18n("receiveInfo.accountName.label")
-            }}</span>
+            <span>{{ getI18n("receiveInfo.accountName.label") }}</span>
           </div>
           <div class="cube-validator cube-form-field">
             <div class="cube-validator-content">
               <cube-select
                 :options="nameList"
-                :placeholder="
-                  getI18n('receiveInfo.accountName.placeholder')
-                "
+                :placeholder="getI18n('receiveInfo.accountName.placeholder')"
                 v-model="transferOutInfoModel.accountName"
               ></cube-select>
             </div>
@@ -469,9 +465,32 @@ export default {
         shareInfo: this.sharesList.out,
       };
     },
+    // 如果券商选择为其他，数据校验
+    handleBefore() {
+      if (this.transferOutInfoModel.transferOutCompany === 'OTH') {
+          // 检测ccass号码格式正确
+          const validateCCASS = this.transferOutInfoModel.ccass && /^[A-Za-z0-9]+$/.test(this.transferOutInfoModel.ccass);
+          console.log(validateCCASS);
+          // 检测手机号格式正确
+          const validateContactsPhoneNum = this.transferOutInfoModel.contactsPhoneNum && /^[0-9]+$/.test(this.transferOutInfoModel.contactsPhoneNum);
+          if (!validateCCASS) {
+            this.showCCASSWarn();
+            return false
+          }
+          if (!validateContactsPhoneNum) {
+            this.showContactsPhoneNumWarn();
+            return false
+          }
+      }
+      return true
+    },
     // 下一步
     handleNext(e) {
       e.preventDefault();
+      const validate = this.handleBefore();
+      if (!validate) {
+        return
+      }
       // 保存数据&下一步
       // const fullData = {type: this.stockType, data: this.formatSubData()};
       let fullData = {};
@@ -479,13 +498,13 @@ export default {
       if (Number(this.isSharesOut) === 1) {
         fullData = {...this.stockTransferredHK.out, ...tempData};
         this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
-          stockTransferredHK: fullData, 
+          stockTransferredHK: fullData,
           type: 'out',
         });
       } else if (Number(this.isSharesOut === 2)) {
         fullData = {...this.stockTransferredHK.out, ...tempData};
         this.$store.commit("SET_STOCK_TRANSFERRED_US", {
-          stockTransferredUS: fullData, 
+          stockTransferredUS: fullData,
           type: 'out',
         });
       }
@@ -494,6 +513,20 @@ export default {
           name: "outStockDetail",
         });
       });
+    },
+    showCCASSWarn() {
+      toast({
+        type: 'txt',
+        txt: this.getI18n('warn.ccassWarn'),
+        time: 1000,
+      })
+    },
+    showContactsPhoneNumWarn() {
+      toast({
+        type: 'txt',
+        txt: this.getI18n('warn.contactsPhoneNumWarn'),
+        time: 1000,
+      })
     },
   },
   created() {

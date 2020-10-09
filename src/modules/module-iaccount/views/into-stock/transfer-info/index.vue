@@ -454,9 +454,31 @@ export default {
       };
 
     },
+    // 如果券商选择为其他，数据校验
+    handleBefore() {
+      if (this.transferOutInfoModel.transferOutCompany === 'OTH') {
+          // 检测ccass号码格式正确
+          const validateCCASS = this.transferOutInfoModel.ccass && /^[A-Za-z0-9]+$/.test(this.transferOutInfoModel.ccass);
+          // 检测手机号格式正确
+          const validateContactsPhoneNum = this.transferOutInfoModel.contactsPhoneNum && /^[0-9]+$/.test(this.transferOutInfoModel.contactsPhoneNum);
+          if (!validateCCASS) {
+            this.showCCASSWarn();
+            return false
+          }
+          if (!validateContactsPhoneNum) {
+            this.showContactsPhoneNumWarn();
+            return false
+          }
+      }
+      return true
+    },
     // 下一步
     handleNext(e) {
       e.preventDefault();
+      const validate = this.handleBefore();
+      if (!validate) {
+        return
+      }
       // 保存数据&下一步
       let fullData = {};
       const tempData = this.formatSubData();
@@ -478,6 +500,20 @@ export default {
           name: "stockDetail",
         });
       });
+    },
+    showCCASSWarn() {
+      toast({
+        type: 'txt',
+        txt: this.getI18n('warn.ccassWarn'),
+        time: 1000,
+      })
+    },
+    showContactsPhoneNumWarn() {
+      toast({
+        type: 'txt',
+        txt: this.getI18n('warn.contactsPhoneNumWarn'),
+        time: 1000,
+      })
     },
   },
   created() {

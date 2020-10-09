@@ -29,6 +29,7 @@ export default {
   },
   computed: {
   },
+  //TODO:这里路由跳转前请求开户状态，根据状态跳转路由
   created() {
     this.setTitle(this.$t("iopenExt.main.pageName"));
     // this.init();

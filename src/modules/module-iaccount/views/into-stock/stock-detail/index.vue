@@ -1,6 +1,6 @@
 <template>
   <op-wrap :isDisabled="!isDisabled" @handleNext="handleNext">
-    <div class="sec-stock-into-detail" ref="stock-detail">
+    <div class="sec-stock-detail" ref="stock-detail">
       <head-title
         :title="getI18n('title')"
         class="stock-detail-title"
@@ -23,7 +23,6 @@
               autocomplete="off"
               :placeholder="getI18n('stockNamePlaceholder')"
               @focus="goToSearch(idx)"
-              @blur="closeSearch"
               :disabled="!item.isInputActive"
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
@@ -52,6 +51,7 @@
                 <div class="no-result" v-else>
                   <span>{{ getI18n("noResult") }}</span>
                 </div>
+                <div class="close-search" @click="closeSearch(idx)">X</div>
               </template>
             </div>
           </div>
@@ -122,16 +122,6 @@ export default {
   created() {
     this.initInfo();
   },
-  mounted() {
-    // if(this.$refs.inputSearch)
-    // this.$refs.inputSearch.addEventListener( 'keyup', debounce(() => { console.log(window.innerWidth) console.log(window.innerHeight) }, 250) )
-    // console.log(this.$refs)
-  },
-  props: {
-    // updateInfo: {
-    //   type: Function,
-    // },
-  },
   computed: {
     ...mapGetters([
       "isShares",
@@ -160,7 +150,7 @@ export default {
     debouncedGetStockList: debounce(function(idx) {
       this.getStockList(idx);
     }, 500),
- 
+
     getStockList(idx) {
       let data = {};
       const inputVal = this.stockList[idx].sharesCode;
@@ -208,6 +198,7 @@ export default {
     },
     handleNext() {
       //存本地缓存
+      console.log(this.stockList);
       this.$store.commit("SET_SHARES_LIST", {
         stock: { type: "in" },
         sharesList: this.stockList,
@@ -308,9 +299,13 @@ export default {
         this.showNoStockNameWarn();
         return;
       }
-      if (!stockClicked.sharesNum) {
+      if (!/^[1-9]+[\d]*$/.test(stockClicked.sharesNum)) {
         this.showNoQuantityWarn();
         return;
+      }
+      if (!stockClicked.sharesName) {
+        this.showNoSharesNameWarn();
+        return
       }
       if (this.stockList.length > 1) {
         const list = this.stockList
@@ -351,13 +346,23 @@ export default {
       });
       toast.show();
     },
+    showNoSharesNameWarn() {
+      const toast = this.$createToast({
+        type: "txt",
+        time: 1000,
+        txt: this.getI18n("noSharesNameWarn"),
+      });
+      toast.show();
+    },
     goToSearch(index) {
       if (!this.isCanOperate && this.stockList[index].isInputActive) {
         this.isSearch = true;
         this.indexSearch = index;
       }
     },
-    closeSearch() {
+    closeSearch(idx) {
+      this.stockList[idx].sharesCode = '',
+      this.stockList[idx].sharesName = '',
       this.isSearch = false;
     },
     saveStockCode(e, idx, item) {

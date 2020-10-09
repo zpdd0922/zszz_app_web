@@ -1,4 +1,6 @@
-.sec-into-stock-way {
+@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
+@import '~@/main/assets/scss/mixin';
+.select-ways {
   .way-icon-hk {
     @include retina-images('~@/modules/module-iaccount/assets/img/currency/hk');
   }
