@@ -35,19 +35,18 @@
         <h3 class="pwdTitle">{{ getI18n("setPwd") }}</h3>
         <div class="rule">{{ getI18n("pwdRule") }}</div>
       </div>
+      <div class="warn" v-if="showWarn" :class="{suc: pwdSuccess}">
+        <span>{{ warnText }}</span>
+      </div>
       <div class="trade-pwd">
-        <div class="warn" v-if="showWarn" :class="{suc: pwdSuccess}">
-          <span>{{ warnText }}</span>
-        </div>
         <cube-form :model="model">
           <cube-input
             type="password"
             :clearable="clearable"
             :eye="eye"
             :placeholder="getI18n('tradePwd')"
-            v-model="model.pwd"
+            v-model.trim="model.pwd"
             class="pwd"
-            @blur="checkPwd"
             @focus="showWarn = true"
           >
           </cube-input>
@@ -56,10 +55,9 @@
             :clearable="clearable"
             :eye="eye"
             :placeholder="getI18n('tradePwdConfirm')"
-            v-model="model.password"
+            v-model.trim="model.password"
             class="pwd"
-            @input="checkPwd"
-            :readonly="!pwd1Status"
+            v-if="pwd1Status"
           ></cube-input>
         </cube-form>
       </div>
@@ -151,28 +149,6 @@ export default {
     },
   },
   methods: {
-    checkPwd() {
-      const [p1, p2] = [this.model.pwd, this.model.password];
-      if (!this.pwd1Status) {
-        if (p1.length === 8 && /^[A-Za-z0-9]{8}$/.test(p1)) {
-          this.pwd1Status = true;
-          this.pwdSuccess = false;
-        } else {
-          this.warnText = this.getI18n('illegal');
-          this.pwd1Status =false;
-          this.pwdSuccess = false;
-        }
-      } else {
-        if (p2 === p1) {
-          this.pwdSuccess =true;
-          this.warnText = this.getI18n('pwdSuccess');
-        } else {
-          this.warnText = this.getI18n('notSame');
-          this.pwd1Status = true;
-          this.pwdSuccess = false;
-        }
-      }
-    },
     getI18n(key) {
       return this.getStepI18nValue("protocolConfirm", key);
     },
@@ -250,6 +226,26 @@ export default {
             },
           });
         });
+      }
+    },
+  },
+  watch: {
+    "model.pwd"(newVal, oldVal) {
+      if (newVal && newVal.length === 8 && /^[A-Za-z0-9]{8}$/.test(newVal)) {
+        this.warnText = '',
+        this.pwd1Status = true
+      } else {
+        this.pwdSuccess = false;
+        this.warnText = this.getI18n('illegal');
+      }
+    },
+    "model.password"(newVal, oldVal) {
+      if (newVal !== this.model.pwd) {
+        this.warnText = this.getI18n('notSame');
+        this.pwdSuccess = false;
+      } else {
+        this.warnText = this.getI18n('pwdSuccess');
+        this.pwdSuccess = true;
       }
     },
   },

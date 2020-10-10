@@ -46,5 +46,6 @@ export default {
         ]
     },
     errorTipsBankNum: '请输入正确的账户号码',
+    errorTipsBankName: '请输入正确的账户名称',
 
 }

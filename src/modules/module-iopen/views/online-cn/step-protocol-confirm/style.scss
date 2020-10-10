@@ -65,24 +65,25 @@
   .rule {
     padding-left: .14rem;
     color: #5A2AB8;
-    font-size: 0.13rem;
+    font-size: 100%;
     line-height: .2rem;
     margin-bottom: 0.1rem;
   }
+  .warn {
+    padding: 0 .14rem .02rem;
+    color: $color-error;
+    font-size: 0.13rem;
+  }
+  .suc {
+    color: $color-success;
+  }
   .trade-pwd {
     background-color: #fff;
-    padding: .1rem 0.14rem 0;
+    padding: 0 0.14rem;
 
-    .warn {
-      color: $color-error;
-      font-size: 0.13rem;
-    }
     .pwd {
       width: 100%;
+      font-size: 100%;
     }
-    .suc {
-      color: $color-success;
-    }
-
   }
 }

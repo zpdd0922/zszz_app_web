@@ -39,7 +39,7 @@
             <template v-else>
               <cube-form-item :field="fieldsHomeOther.homeOtherCountry"></cube-form-item>
               <template v-if="model.homeOtherCountry === 'OTH'">
-                <cube-form-item
+                <!-- <cube-form-item
                   :field="fieldsHomeOther.otherFamilyRepublic"
                   class="custom-form-enName"
                 >
@@ -50,7 +50,7 @@
                       :placeholder="fieldsHomeOther.otherFamilyRepublic.props.placeholder"
                     />
                   </div>
-                </cube-form-item>
+                </cube-form-item> -->
                 <cube-form-item :field="fieldsHomeOther.otherFamilyRepublic"></cube-form-item>
               </template>
               <cube-form-item :field="fieldsHomeOther.homeOtherProvince"></cube-form-item>
@@ -1080,6 +1080,51 @@ export default {
   watch: {
     "model.email"(newVal, oldVal) {
       this.model.email = toDBC(newVal).toLowerCase();
+    },
+    "model.homeTelePhone"(newVal, oldVal) {
+      const w = newVal.split('').pop()
+      // 校验输入值不为非法字符
+      if (w && !/^[0-9]+$/.test(w)) {
+        this.$nextTick(()=>{
+          this.model.homeTelePhone = oldVal
+        })
+      }
+      // 校验长度不超过20
+      if (newVal.length >20) {
+        this.$nextTick(()=>{
+          this.model.homeTelePhone = oldVal
+        })
+      }
+    },
+    "model.contactTelePhone"(newVal, oldVal) {
+      const w = newVal.split('').pop()
+      // 校验输入值不为非法字符
+      if (w && !/^[0-9]+$/.test(w)) {
+        this.$nextTick(()=>{
+          this.model.contactTelePhone = oldVal
+        })
+      }
+      // 校验长度不超过20
+      if (newVal.length >20) {
+        this.$nextTick(()=>{
+          this.model.contactTelePhone = oldVal
+        })
+      }
+    },
+    "professionModel.companyTelePhone"(newVal, oldVal) {
+      const w = newVal.split('').pop()
+      // 校验输入值不为非法字符
+      if (w && !/^[0-9]+$/.test(w)) {
+        this.$nextTick(()=>{
+          this.professionModel.companyTelePhone = oldVal
+        })
+      }
+      // 校验长度不超过20
+      if (newVal.length >20) {
+        this.$nextTick(()=>{
+          this.professionModel.companyTelePhone = oldVal
+        })
+      }
     },
   },
   created() {

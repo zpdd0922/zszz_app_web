@@ -55,13 +55,13 @@ export default {
           tips: "transfer out HK stocks",
           nextRouteName: "transferOutInfo",
         },
-        {
-          type: "us",
-          code: 2,
-          label: this.$t("iAccount.outStock.outWay.wayUS"),
-          tips: "transfer out US stocks",
-          // nextRouteName: 'transferInfo',
-        },
+        // {
+        //   type: "us",
+        //   code: 2,
+        //   label: this.$t("iAccount.outStock.outWay.wayUS"),
+        //   tips: "transfer out US stocks",
+        //   // nextRouteName: 'transferInfo',
+        // },
       ];
     },
   },

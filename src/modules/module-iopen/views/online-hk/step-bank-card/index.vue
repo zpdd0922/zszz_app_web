@@ -212,7 +212,6 @@ export default {
         result = Object.keys(this.model).filter(val => val !== 'otherBankName')
           .every(val => String(this.model[val]).length)
       }
-
       // const cardFile = Object.values(this.BankCardFile);
       // const len = 1;
 
@@ -222,7 +221,7 @@ export default {
       //   cardFile.every((val) => String(val).length);
 
       // return !(result && isUpload);
-      return !result;
+      return !result
     },
   },
   created() {
@@ -230,8 +229,11 @@ export default {
     this.updateInfo();
   },
   methods: {
-    validPhoneNum() {
-      return !isNaN(this.model.bankNum) && this.model.bankNum.length > 2;
+    validBankNum() {
+      return this.model.bankNum && this.model.bankNum.length > 3 && validate.isAccountNum(this.model.bankNum)
+    },
+    validBankName() {
+      return validate.isBankName(this.model.otherBankName);
     },
     getI18n(key) {
       return this.getStepI18nValue("bankCard", key);
@@ -270,13 +272,20 @@ export default {
     },
     
     handleNext(e) {
-      if (!this.validPhoneNum()) {
+      if (!this.validBankNum()) {
         const errorTips = this.getI18n('errorTipsBankNum');
         toast({ type: "error", txt: errorTips, time: 1000 });
         return;
       }
-
-      // 保存数据&下一步
+      if (!this.validBankName()) {
+        const errorTips = this.getI18n('errorTipsBankName');
+        toast({ type: "error", txt: errorTips, time: 1000 });
+        return;
+      }
+      //银行名称不为其他清空已填其他值
+      if (this.model.bankId !== 'OTHERS') {
+        this.model.otherBankName = ''
+      }
       const params = {
         step: this.step,
         info: this.model,
@@ -295,7 +304,7 @@ export default {
       }
     },
   },
-  watch: {},
+  watch: {}
 };
 </script>
 

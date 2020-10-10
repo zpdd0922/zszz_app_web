@@ -2,7 +2,7 @@ import customizeI18n from "@/customize/locale/i18n/zh_HK";
 import commonI18n from "@/main/locale/i18n/zh_HK";
 
 export default {
-  pageName: "基本資訊",
+  pageName: "基本信息",
   tips: "請確認您的身份信息，若有誤請手動修改",
   name: {
     label: "中文姓名",
@@ -58,4 +58,5 @@ export default {
     wrondNum: "請輸入正確身份證號碼",
     mt70: '70歲以上暫不能開戶，非常抱歉',
   },
+  longerConfirm: '為確保您資料的準確性，請確認您的身份證是否為長期身份證！',
 };

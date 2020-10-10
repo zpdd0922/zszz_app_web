@@ -14,6 +14,7 @@
             <i class="arrow"></i>
           </div>
         </header>
+        <!-- 港股 -->
         <section class="stock">
           <div class="title">
             <div class="icon-hk icon"></div>
@@ -24,7 +25,8 @@
             <span>{{formattedBalRtoHK}}, 最低{{commissionStandard.hk.minFare}}{{getI18n('unitHK')}}</span>
           </div>
         </section>
-        <section class="stock">
+        <!-- 美股 -->
+        <!-- <section class="stock">
           <div class="title">
             <div class="icon-us icon"></div>
             <span>{{getI18n('market.USStock')}}</span>
@@ -33,7 +35,7 @@
             <span>{{getI18n('brokerageStandard')}}</span>
             <span>{{formattedBalRtoUS}}, 最低{{commissionStandard.us.minFare}}{{getI18n('unitUS')}}</span>
           </div>
-        </section>
+        </section> -->
         <section class="record" v-if="isGetPrivilege">
           <span class="privilege">{{privilegeText}}</span>
         </section>

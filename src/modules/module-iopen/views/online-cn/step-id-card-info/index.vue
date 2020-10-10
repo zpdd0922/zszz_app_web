@@ -96,9 +96,12 @@
                 </div>
                 <!-- 切换长期身份证按钮 -->
                 <div class="custom-form-switch">
-                  <div class="cube-switch">
-                    <input v-model="model.isLonger" type="checkbox" class="cube-switch-input" />
-                    <i class="cube-switch-ui">{{longerDateText}}</i>
+                  <div class="cube-switch" @click="showLonger">
+                    <cube-switch v-model="model.isLonger">
+                    </cube-switch>
+                    <span class="longer" :class="{on:model.isLonger}">{{longerDateText}}</span>
+                    <!-- <input v-model="model.isLonger" type="checkbox" class="cube-switch-input" /> -->
+                    <!-- <i class="cube-switch-ui" :class="{longer: model.isLonger}">{{longerDateText}}</i> -->
                   </div>
                 </div>
               </cube-form-item>
@@ -454,11 +457,10 @@ export default {
         .join("-");
     },
     handleIdCardLonger() {
-      console.log(this.model.dateEndValue);
-      if (this.model.dateEndValue !== "") return false;
-
+      if (this.model.dateEndValue === this.longerDateText) return false;
+      console.log(123)
       confirm({
-        content: this.getI18n("dateStartValue.edfFoerverTips"),
+        content: this.getI18n('longerConfirm'),
         confirmCallback: () => {
           this.model.dateEndValue = this.longerDateText;
         },
@@ -467,17 +469,21 @@ export default {
         },
       });
     },
+    showLonger() {
+      !this.model.isLonger && this.handleIdCardLonger();
+      this.model.dateEndValue = '';
+    }
   },
   watch: {
-    "model.isLonger": function (newVal, oldVal) {
-      if (newVal) {
-        this.handleIdCardLonger();
-      } else {
-        if (this.model.dateEndValue !== "") {
-          this.model.dateEndValue = "";
-        }
-      }
-    },
+    // "model.isLonger": function (newVal, oldVal) {
+    //   if (newVal) {
+    //     this.handleIdCardLonger();
+    //   } else {
+    //     if (this.model.dateEndValue === this.longerDateText) {
+    //       this.model.dateEndValue = "";
+    //     }
+    //   }
+    // },
     "model.givenName": function (newVal, oldVal) {
       if (!validate.isChinese(newVal)) {
         this.model.givenName = "";
