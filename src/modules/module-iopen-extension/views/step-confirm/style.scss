@@ -20,13 +20,29 @@
       @include border-after-1px(bottom,  $color-input-border)
     }
   }
-  .input {
+  .cube-input_active:after {
+    border-color: $color-form-active;
+  }    
+
+  .input-wrap {
     width: 100%;
-    padding: .16rem .15rem;
+    height: .5rem;
+    padding: 0rem .15rem;
     background-color: $color-content-bg;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     
-    input {
-      padding-left: .3rem;
+    .label {
+      // width: 30%;
+      flex: 1 1 auto;
+      line-height: .5rem;
+      font-size: 100%;
+      // padding-bottom: .1rem;
+    }
+    .pwd {
+      flex: 1 1 80%;
+      // padding-left: .3rem;
     }
   }
   .agree {

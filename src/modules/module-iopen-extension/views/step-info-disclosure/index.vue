@@ -265,17 +265,6 @@ export default {
     getI18n(key, type = "") {
       return this.$t(`iopenExt.${key}`);
     },
-    updateInfo() {
-      // const userInfo = this.openInfo;
-      // // 表单信息
-      // Object.keys(this.model).forEach((val) => {
-      //   if (emtpy.includes(userInfo[val])) {
-      //     this.model[val] = this.model[val];
-      //   } else {
-      //     this.model[val] = userInfo[val];
-      //   }
-      // });
-    },
     // 提交方法
     handleNext() {
       // 保存数据&下一步
@@ -304,7 +293,7 @@ export default {
     },
   },
   created() {
-    this.updateInfo();
+    // this.updateInfo();
     // console.log(this.greenCardDeclare)
   },
   watch: {

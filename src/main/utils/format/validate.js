@@ -56,4 +56,9 @@ export default class Validate {
     const regExp = /^[\u4e00-\u9fa5a-zA-Z0-9\(\)]+$/;
     return regExp.test(str);
   }
+  //交易密码 由英文字母和数字组成的8位密码
+  static isTradePwd = str => {
+    const regExp = /^[A-Za-z0-9]{8}$/;
+    return regExp.test(str)
+  }
 };

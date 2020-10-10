@@ -1,7 +1,7 @@
 
 // import paramsData from '@/modules/module-iaccount/api/params/params-wrap'
 import paramsData from "@/main/request/utils/wrap";
-import openMarginApi from "@/modules/module-iopen-extension/api/modules/api-margin-confirm";
+import openMarginApi from "@/modules/module-iopen-extension/api/modules/api-open-margin";
 
 import * as types from "./mutation-user-types";
 
@@ -19,9 +19,9 @@ const mutations = {
 
 // actions， 异步操作数据，vue视图文件中可用this.$store.dispatch
 const actions = {
-  handleOpenMargin({ commit, state }, data) {
+  submitOpenMargin({ commit, state }, data) {
     return new Promise((resolve, reject) => {
-      openMarginApi.handleOpenMargin(data)
+      openMarginApi.submitOpenMargin(data)
         .then((res) => {
           resolve(res);
         })
