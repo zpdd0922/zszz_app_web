@@ -133,6 +133,7 @@ export default {
       tradePwd: {
         label: "交易密碼",
         placeholder: "請輸入交易密碼",
+        badPwd: '密碼格式不正確',
       },
       agreement: {
         linkStart: "",

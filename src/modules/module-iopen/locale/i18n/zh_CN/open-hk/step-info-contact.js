@@ -107,10 +107,10 @@ export default {
                 employed: '受雇',
                 selfEmployed: '自雇',
                 retired: '退休',
+                other: '其他',
                 housewife: '家庭主妇',
                 student: '学生',
                 umemployed: '待业',
-                other: '其他',
             }
         },
         professionCodeOther: { label: '其他就业情况', placeholder: '请填写' },

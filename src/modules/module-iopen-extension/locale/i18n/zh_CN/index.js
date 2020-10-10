@@ -134,6 +134,7 @@ export default {
       tradePwd: {
         label: "交易密码",
         placeholder: "请输入交易密码",
+        badPwd: '密码格式不正确'
       },
       agreement: {
         linkStart: "",

@@ -1,10 +1,17 @@
 <template>
-  <op-wrap :isDisabled="isDisabled" :handleBefore="handleBefore" @handleNext="handleNext">
+  <op-wrap
+    :isDisabled="isDisabled"
+    :handleBefore="handleBefore"
+    @handleNext="handleNext"
+  >
     <div class="olhk-step olhk-step-id-card-info">
       <div class="step-content user-info">
         <cube-form :model="model">
           <div class="info-wrap">
-            <cube-form-group class="custom-form-group" :legend="getI18n('tips')">
+            <cube-form-group
+              class="custom-form-group"
+              :legend="getI18n('tips')"
+            >
               <cube-form-item :field="fields.familyName">
                 <div class="cube-input">
                   <input
@@ -36,7 +43,6 @@
                   />
                 </div>
               </cube-form-item>
-
               <!-- 证件类型 == 大陆身份证 OCR获取有效期限-->
               <template v-if="isChina">
                 <cube-form-item :field="fields.addressValue">
@@ -51,37 +57,46 @@
                   <div class="custom-date-box">
                     <div @click="showStartDatePicker" class="custom-form-date">
                       <template v-if="model.dateStartValue">
-                        <span>{{model.dateStartValue}}</span>
+                        <span>{{ model.dateStartValue }}</span>
                       </template>
                       <template v-else>
-                        <span
-                          class="cube-select-placeholder"
-                        >{{getI18n("dateStartValue.startPlaceholder")}}</span>
+                        <span class="cube-select-placeholder">{{
+                          getI18n("dateStartValue.startPlaceholder")
+                        }}</span>
                       </template>
                     </div>
                     <div class="custom-form-separator">|</div>
                     <div class="custom-form-date">
                       <template v-if="model.isLonger">
-                        <span>{{longerDateText}}</span>
+                        <span>{{ longerDateText }}</span>
                       </template>
                       <template v-else>
                         <div @click="showEndDatePicker">
                           <template v-if="model.dateEndValue">
-                            <span>{{model.dateEndValue}}</span>
+                            <span>{{ model.dateEndValue }}</span>
                           </template>
                           <template v-else>
-                            <span
-                              class="cube-select-placeholder"
-                            >{{getI18n("dateStartValue.endPlaceholder")}}</span>
+                            <span class="cube-select-placeholder">{{
+                              getI18n("dateStartValue.endPlaceholder")
+                            }}</span>
                           </template>
                         </div>
                       </template>
                     </div>
                   </div>
                   <div class="custom-form-switch">
-                    <div class="cube-switch">
-                      <input v-model="model.isLonger" type="checkbox" class="cube-switch-input" />
-                      <i class="cube-switch-ui">{{longerDateText}}</i>
+                    <div class="cube-switch" @click="showLonger">
+                      <cube-switch v-model="model.isLonger"> </cube-switch>
+                      <span class="longer" :class="{ on: model.isLonger }">{{
+                        longerDateText
+                      }}</span>
+
+                      <!-- <input
+                        v-model="model.isLonger"
+                        type="checkbox"
+                        class="cube-switch-input"
+                      />
+                      <i class="cube-switch-ui">{{ longerDateText }}</i> -->
                     </div>
                   </div>
                 </cube-form-item>
@@ -92,26 +107,29 @@
                 <template v-if="isPassport">
                   <cube-form-item :field="fields.dateStartValue">
                     <div class="custom-date-box">
-                      <div @click="showPassPortStartDatePicker" class="custom-form-date">
+                      <div
+                        @click="showPassPortStartDatePicker"
+                        class="custom-form-date"
+                      >
                         <template v-if="model.passportStartValue">
-                          <span>{{model.passportStartValue}}</span>
+                          <span>{{ model.passportStartValue }}</span>
                         </template>
                         <template v-else>
-                          <span
-                            class="cube-select-placeholder"
-                          >{{getI18n("dateStartValue.startPlaceholder")}}</span>
+                          <span class="cube-select-placeholder">{{
+                            getI18n("dateStartValue.startPlaceholder")
+                          }}</span>
                         </template>
                       </div>
                       <div class="custom-form-separator">|</div>
                       <div class="custom-form-date">
                         <div @click="showPassPortEndDatePicker">
                           <template v-if="model.passportEndValue">
-                            <span>{{model.passportEndValue}}</span>
+                            <span>{{ model.passportEndValue }}</span>
                           </template>
                           <template v-else>
-                            <span
-                              class="cube-select-placeholder"
-                            >{{getI18n("dateStartValue.endPlaceholder")}}</span>
+                            <span class="cube-select-placeholder">{{
+                              getI18n("dateStartValue.endPlaceholder")
+                            }}</span>
                           </template>
                         </div>
                       </div>
@@ -119,12 +137,18 @@
                   </cube-form-item>
                 </template>
                 <cube-form-item :field="fields.birthday">
-                  <div @click="showBrithDatePicker" class="cube-select" :class="isSelectIcon">
+                  <div
+                    @click="showBrithDatePicker"
+                    class="cube-select"
+                    :class="isSelectIcon"
+                  >
                     <template v-if="model.birthday">
-                      <span class="cube-select-text">{{model.birthday}}</span>
+                      <span class="cube-select-text">{{ model.birthday }}</span>
                     </template>
                     <template v-else>
-                      <span class="cube-select-placeholder">{{fields.birthday.props.placeholder}}</span>
+                      <span class="cube-select-placeholder">{{
+                        fields.birthday.props.placeholder
+                      }}</span>
                     </template>
                     <i class="cube-select-icon"></i>
                   </div>
@@ -132,7 +156,10 @@
                 <cube-form-item :field="fields.sex"></cube-form-item>
               </template>
               <cube-form-item :field="fields.birthCountry"></cube-form-item>
-              <cube-form-item v-if="model.birthCountry === 'OTH'" :field="fields.birthCountryTxt"></cube-form-item>
+              <cube-form-item
+                v-if="model.birthCountry === 'OTH'"
+                :field="fields.birthCountryTxt"
+              ></cube-form-item>
               <cube-form-item :field="fields.birthArea"></cube-form-item>
             </cube-form-group>
           </div>
@@ -387,9 +414,11 @@ export default {
           birthCountryTxt,
         ];
       }
+      // idcard长度校验
+      const idResult = idCardValue.length && idCardValue.length > 6
       const result = arr.every((val) => String(val).length);
       // return this.isChina ? !(result && cnNameValue.length > 1) : !result
-      return !result;
+      return !result || !idResult;
     },
   },
   created() {
@@ -652,17 +681,21 @@ export default {
         },
       });
     },
+    showLonger() {
+      !this.model.isLonger && this.handleIdCardLonger();
+      this.model.dateEndValue = '';
+    }
   },
   watch: {
-    "model.isLonger": function (newVal, oldVal) {
-      if (newVal) {
-        this.handleIdCardLonger();
-      } else {
-        if (this.model.dateEndValue === this.longerDateText) {
-          this.model.dateEndValue = "";
-        }
-      }
-    },
+    // "model.isLonger": function (newVal, oldVal) {
+    //   if (newVal) {
+    //     this.handleIdCardLonger();
+    //   } else {
+    //     if (this.model.dateEndValue === this.longerDateText) {
+    //       this.model.dateEndValue = "";
+    //     }
+    //   }
+    // },
     "model.givenName": function (newVal, oldVal) {
       if (!validate.isChinese(newVal)) {
         this.model.givenName = "";
@@ -692,8 +725,11 @@ export default {
       }
     },
     "model.idCardValue": function (newVal, oldVal) {
-      if (validate.isChinese(newVal)) {
-        this.model.idCardValue = "";
+      const w = newVal.split('').pop()
+      // 校验输入值为非法字符
+      if (w && !/^[A-Za-z0-9\(\)]+$/.test(w)) {
+        // 香港身份证有括号
+          this.model.idCardValue = oldVal
       } else {
         this.model.idCardValue = toDBC(newVal);
       }
@@ -701,4 +737,3 @@ export default {
   },
 };
 </script>
-

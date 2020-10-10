@@ -31,7 +31,7 @@ export const STOCK_MARKET = {
   options: {
     0: { text: 'iAccount.transferHistory.marketFilter.allMarket', value: 0, sort: 0},
     [HK]: { text: 'iAccount.transferHistory.marketFilter.hk', value: HK, sort: 1},
-    [US]: { text: 'iAccount.transferHistory.marketFilter.us', value: US, sort: 2},
+    // [US]: { text: 'iAccount.transferHistory.marketFilter.us', value: US, sort: 2},
   },
 };
 

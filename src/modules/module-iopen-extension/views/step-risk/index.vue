@@ -125,7 +125,6 @@ export default {
     },
   },
   created() {
-    // this.updateInfo();
   },
   methods: {
     getI18n(key, type = "") {

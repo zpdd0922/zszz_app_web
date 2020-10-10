@@ -44,5 +44,5 @@ export default {
     content: ["開戶成功後，只能透過此綁定銀行帳戶進行存款與提款"],
   },
   errorTipsBankNum: '請輸入正確的帳戶號碼',
-
+  errorTipsBankName: '請輸入正確的帳戶名稱',
 };

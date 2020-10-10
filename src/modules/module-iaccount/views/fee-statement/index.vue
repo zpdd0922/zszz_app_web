@@ -13,6 +13,7 @@
             <i class="arrow"></i>
           </div>
         </header>
+        <!-- 港股 -->
         <section class="stock">
           <div class="title">
             <div class="icon-hk icon"></div>
@@ -26,7 +27,8 @@
             >
           </div>
         </section>
-        <section class="stock">
+        <!-- 美股 -->
+        <!-- <section class="stock">
           <div class="title">
             <div class="icon-us icon"></div>
             <span>{{ getI18n("market.USStock") }}</span>
@@ -38,7 +40,7 @@
               }}{{ getI18n("unitUS") }}</span
             >
           </div>
-        </section>
+        </section> -->
         <section class="record" v-if="isGetPrivilege">
           <span class="privilege">{{ privilegeText }}</span>
         </section>

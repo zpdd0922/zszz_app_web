@@ -4,7 +4,7 @@ const routes = [
     name: "opmaGuide",
     component: () =>
       import(
-        /* webpackChunkName:"open-account-common" */ `../views/guide/index.vue`
+        /* webpackChunkName:"open-margin-common" */ `../views/guide/index.vue`
       ),
     meta: { whiteAuth: true },
   },

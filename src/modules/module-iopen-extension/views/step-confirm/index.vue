@@ -17,18 +17,23 @@
       </ul>
     </div>
 
-    <div class="input">
-      <label for="tradePwd">{{ getI18n("tradePwd.label") }}</label>
-      <input
-        type="password"
-        :placeholder="getI18n('tradePwd.placeholder')"
+    <div class="input-wrap">
+      <div class="label">{{ getI18n("tradePwd.label") }}</div>
+      <cube-input
         name="tradePwd"
-        v-model="tradePwd"
-      />
+        type="password"
+        :clearable="clearable"
+        :eye="eye"
+        :placeholder="getI18n('tradePwd.placeholder')"
+        v-model.trim="tradePwd"
+        class="pwd"
+        :label="getI18n('tradePwd.label')"
+      >
+      </cube-input>
     </div>
     <div class="agree">
-      <cube-checkbox v-model="checked" >
-        <span class="agree-font">{{ getI18n("agreement.linkContent")}}</span>
+      <cube-checkbox v-model="checked">
+        <span class="agree-font">{{ getI18n("agreement.linkContent") }}</span>
       </cube-checkbox>
     </div>
   </op-wrap>
@@ -37,13 +42,25 @@
 <script type="text/ecmascript-6">
 import {agreementList} from './staticFileList';
 import I18n from '@/modules/module-iopen-extension/locale/index.js';
+import validate from '@/main/utils/format/validate.js';
+import { toast } from '@/main/utils/common/tips/';
+
 
 export default {
   data() {
     return {
       // agreements: agreementList,
-      tradePwd: null,
+      tradePwd: '',
       checked: false,
+      clearable: {
+        visible: true,
+        blurHidden: true,
+      },
+      eye: {
+        open: false,
+        reverse: false
+      },
+
     };
   },
   computed: {
@@ -53,7 +70,7 @@ export default {
       };
     },
     isDisabled() {
-      return !this.checked
+      return !this.checked || this.tradePwd.length <7
     },
     //风险提示列表
     agreements() {
@@ -74,13 +91,25 @@ export default {
     getI18n(key) {
       return this.$t(`iopenExt.confirm.${key}`);
     },
+    validatePwd() {
+      return validate.isTradePwd(this.tradePwd)
+    },
     handleNext() {
-      this.$router.push({name: 'opmaGuide'})
+      if (!this.validatePwd()) {
+        toast({
+          type: 'error',
+          txt: this.getI18n('tradePwd.badPwd'),
+          time: 1000
+        })
+        return
+      }
+      // this.$router.push({name: 'opmaGuide'})
       // this.$store.dispatch('handleOpenMargin')
     },
 
   },
-  mounted() {
+  created() {
+    
   },
 };
 </script>

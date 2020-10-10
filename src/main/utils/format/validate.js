@@ -46,4 +46,19 @@ export default class Validate {
     const reg = /[\u4e00-\u9fa5]+/gi;
     return reg.test(str);
   }
+  //账户号码 限制字母和数字
+  static isAccountNum = str => {
+    const regExp = /^[0-9a-zA-Z]+$/;
+    return regExp.test(str);
+  }
+  //银行名字 限制字母、数字、简繁体和括号
+  static isBankName = str => {
+    const regExp = /^[\u4e00-\u9fa5a-zA-Z0-9\(\)]+$/;
+    return regExp.test(str);
+  }
+  //交易密码 由英文字母和数字组成的8位密码
+  static isTradePwd = str => {
+    const regExp = /^[A-Za-z0-9]{8}$/;
+    return regExp.test(str)
+  }
 };

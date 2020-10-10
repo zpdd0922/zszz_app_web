@@ -27,6 +27,16 @@
     .cube-switch-ui{
       width: 5em;
     }
+    .longer {
+      position: absolute;
+      left: auto;
+      right: .05rem;
+    }
+    .on {
+      left: .05rem;
+      right: auto;
+      color: $color-content-bg;
+    }
 
     .cube-switch-input:checked+.cube-switch-ui:after {
       transform: translateX(3em);
