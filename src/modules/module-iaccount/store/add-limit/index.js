@@ -82,9 +82,9 @@ const actions = {
     });
   },
   // 获取历史数据
-  fetchingAddLimitHistory({ commit }, data) {
+  getAddLimitHistory({ commit }, data) {
     return new Promise((resolve, reject) => {
-      ApiAddLimit.getCurLimit(data)
+      ApiAddLimit.getAddLimitHistory(data)
         .then((res) => {
           if (res) {
             commit(types.SET_IS_FETCHING, { isFetching: false });

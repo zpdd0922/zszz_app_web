@@ -48,7 +48,7 @@ export default {
     };
   },
   created() {
-    // this.$store.dispatch('fetchingAddLimitHistory').then(()=>{
+    // this.$store.dispatch('getAddLimitHistory').then(()=>{
     //   this.isFetching = false;
     // })
     this.setTitle(this.$t("iAccount.addLimit.history.pageName"));
