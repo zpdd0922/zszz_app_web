@@ -24,7 +24,7 @@ const router = new VueRouter({
         ...marginRouter,
         {
           path: "*",
-          redirect: "/",
+          redirect: { name: "opmaGuide" },
         },
       ],
     },

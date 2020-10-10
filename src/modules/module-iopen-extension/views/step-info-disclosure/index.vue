@@ -8,7 +8,7 @@
         <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsConsortWithMargin.isNotConsortWithMargin"></cube-form-item>
           <template
-            v-if="disclosureDefine.isNotConsortWithMargin.isCanFalse &&  !model.isNotConsortWithMargin"
+            v-if="disclosureDefine.isNotConsortWithMargin.isCanFalse && !model.isNotConsortWithMargin"
           >
             <cube-form-item class="label-width-4em" :field="fieldsConsortWithMargin.withMarginName"></cube-form-item>
             <cube-form-item

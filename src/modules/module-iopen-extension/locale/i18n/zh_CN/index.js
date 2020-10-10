@@ -141,6 +141,8 @@ export default {
         linkContent: `已阅读并接受全部文件内容`,
         linkEnd: "",
       },
+      submitSuccess: '提交成功',
+      submitFailed: '提交失败',
     },
     common: {
       nextBtn: "下一步",

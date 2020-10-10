@@ -44,6 +44,7 @@ import {agreementList} from './staticFileList';
 import I18n from '@/modules/module-iopen-extension/locale/index.js';
 import validate from '@/main/utils/format/validate.js';
 import { toast } from '@/main/utils/common/tips/';
+import { otherDisclosure } from "@/modules/module-iopen-extension/format/disclosure";
 
 
 export default {
@@ -103,13 +104,61 @@ export default {
         })
         return
       }
-      // this.$router.push({name: 'opmaGuide'})
-      // this.$store.dispatch('handleOpenMargin')
-    },
 
+      const formattedData = this.formatCommitData(
+        {
+          isNotConsortWithMargin: true,
+          isNotConsortWithOtherMargin: true,
+          isNotBOorPG: true,
+          adjectiveAuth: true,
+        }
+      );
+      const data = {
+        tradePwd: this.tradePwd,
+        key: '',
+        ...formattedData,
+      }
+      console.log(data);
+      // this.$router.push({name: 'opmaGuide'})
+      this.$store.dispatch('submitOpenMargin', data).then((res)=>{
+        if (res) {
+          toast({
+            type: 'txt',
+            txt: this.getI18n('submitSuccess'),
+            time: 1000,
+            callback: ()=>{
+              this.$router.push('/')
+            }
+          })
+        }
+      }).catch((err)=>{
+        toast({
+          type: 'error',
+          txt: this.getI18n('submitFailed'),
+          time: 1000,
+          callback: ()=>{
+            this.$router.push()
+          }
+        })
+
+      })
+    },
+    formatCommitData(args) {
+      const infoDisclosure = {
+        otherDisclosure: otherDisclosure(args), // 身份資料申報
+      };
+      // 数据汇总
+      const formData = {
+        ...infoDisclosure,
+      };
+      const data = {
+        formData: JSON.stringify(formData),
+      };
+      return data;
+    }
   },
   created() {
-    
+
   },
 };
 </script>

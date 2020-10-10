@@ -140,6 +140,8 @@ export default {
         linkContent: `已閱讀並接受全部檔內容`,
         linkEnd: "",
       },
+      submitSuccess: '提交成功',
+      submitFailed: '提交失敗',
     },
     common: {
       nextBtn: "下一步",
