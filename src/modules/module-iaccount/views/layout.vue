@@ -15,8 +15,6 @@ export default {
     this.getSecAccountInfo();
   },
   mounted() {
-    // this.setTitle("证券服务")
-    // document.title = '证券服务';
   },
   computed: {
     ...mapGetters(["secAccountInfo"]),

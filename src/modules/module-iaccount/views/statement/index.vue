@@ -90,7 +90,7 @@ export default {
         year: this.dateYear,
         month: this.dateMonth,
         type: this.typeValue,
-        fundAccount: fundAccount[0],
+        // fundAccount: fundAccount[0],
       }
       tradeApi.getStatements(params).then(res => {
         this.list = getStatementsData(res.statements)

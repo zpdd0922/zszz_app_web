@@ -267,10 +267,10 @@ export default {
     //   this.model.depositBankAccount = bankAccount
     // },
     async _updateInfo() {
-      const { fundAccount = [] } = this.secAccountInfo
+      // const { fundAccount = [] } = this.secAccountInfo
       const myBank = await SecApi.depositBank({
         bankType: this.$t('iAccount.define.BANK_OTHER').value,
-        fundAccount: fundAccount[0]
+        // fundAccount: fundAccount[0]
       })
       const bank = myBank.filter(val => formatToDBC(val.bankName) === formatToDBC(this.depositBankData.title))
         .map(val => {

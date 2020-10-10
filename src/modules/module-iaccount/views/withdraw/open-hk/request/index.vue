@@ -52,7 +52,7 @@
 
     <part-card :title="$t('iAccount.withdraw.request.text_15')">
       <ul class="detail-form">
-        <li>
+        <!-- <li>
           <div class="form-label">
             <span>{{ $t('iAccount.withdraw.request.text_16') }}</span>
           </div>
@@ -73,7 +73,7 @@
               </div>
             </div>
           </div>
-        </li>
+        </li> -->
         <li>
           <div class="form-label">
             <span>{{ $t('iAccount.withdraw.request.text_17') }}</span>
@@ -184,6 +184,7 @@ export default {
       currencyOptions: currencyOptions,
       money: '',
       accountLabel: '',
+      accountValue: '',
       accountList: [],
       bankInfo: null,
       bankList: [],
@@ -194,7 +195,7 @@ export default {
     }
   },
   created() {
-    this._fetchMoney()
+    // this._fetchMoney()
     this._formatAccount()
     this._fetchBankList()
   },
@@ -322,13 +323,12 @@ export default {
     },
     // 获取可提资金
     _fetchMoney() {
-      const { fundAccount = [] } = this.secAccountInfo
       // 需要取柜台定义币种字段
-      const currencyGt = this.getCurrency.gt
+      const currencyGt = this.getCurrency.gt;
       const params = {
         moneyType: currencyGt,
-        fundAccount: fundAccount[0]
-      }
+        fundAccount: this.accountValue,
+      };
       SecApi.findExtractableMoney(params).then(res => {
         const temp = res.totalAmount
         this.money = Number(temp) <= 0 ? '0.00' : temp
@@ -339,7 +339,7 @@ export default {
       const { fundAccount = [] } = this.secAccountInfo
       const params = {
         bankType: 2,
-        fundAccount: fundAccount[0]
+        // fundAccount: fundAccount[0]
       }
       SecApi.depositBank(params).then(res => {
         this._formatBank(res)
@@ -347,15 +347,22 @@ export default {
     },
     // 格式化现金账号选项
     _formatAccount() {
-      const { fundAccount = [] } = this.secAccountInfo
-      this.accountList = fundAccount.map(item => {
+         const { fundAccount = [] } = this.secAccountInfo;
+      this.accountList = fundAccount.map((item) => {
+        const { fundAccount: account, assetProp } = item;
+        const txt =
+          assetProp === "M"
+            ? this.$t("iAccount.withdraw.request.text_2m")
+            : this.$t("iAccount.withdraw.request.text_2");
         return {
-          value: item,
-          text: item + '-' + this.$t('iAccount.withdraw.request.text_2')
-        }
-      })
+          value: item.fundAccount,
+          text: txt + " - " + item.fundAccount,
+        };
+      });
       // 默认选中第一项
-      this.accountLabel = this.accountList[0].text
+      this.accountLabel = this.accountList[0].text;
+      this.accountValue = this.accountList[0].value;
+      this._fetchMoney();
     },
     // 格式化银行卡选项
     _formatBank(res = []) {

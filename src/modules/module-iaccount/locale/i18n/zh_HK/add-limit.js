@@ -2,6 +2,24 @@ import customizeI18n from "@/customize/locale/i18n/zh_CN";
 
 export const addLimit = {
   pageName: "信用額度提升",
+  loanLimit: {
+    nextTitle: "当前只能调整为",
+    cn: {
+      currentName: "A股通当前信用额度",
+      nextName: "A股账户",
+      curreny: 'CNY'
+    },
+    hk: {
+      currentName: "港股当前信用额度",
+      nextName: "港股账户",
+      curreny: 'HKD'
+    },
+    us: {
+      currentName: "美股当前信用额度",
+      nextName: "美股账户",
+      curreny: 'USD'
+    }
+  },
   curLimit: {
     titleHK: "港股當前信用額度",
     unit: "HKD",

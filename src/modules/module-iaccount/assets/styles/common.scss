@@ -118,12 +118,21 @@
     .form-radio {
       &.radio_selected {
         .radio-ui {
+          @include retina-images('~@/modules/module-iaccount/assets/img/currency/cn');
           // bg-image('icon/selected', true);
         }
       }
     }
     .radio-ui {
       display: inline-block;
+      background-size: auto 100%;
+      display: inline-block;
+      width: 100%;
+      height: .18rem;
+      margin-bottom: .05rem;
+      background-position: center;
+      background-repeat: no-repeat;
+      @include retina-images('~@/modules/module-iaccount/assets/img/currency/cn');
       // bg-image('icon/unselect', true);
     }
     .radio-wrap {

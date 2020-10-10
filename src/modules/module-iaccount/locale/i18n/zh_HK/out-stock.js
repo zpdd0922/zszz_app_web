@@ -52,6 +52,7 @@ export const outStock = {
       ccassWarn: "请输入正确的CCASS号码",
       contactsPhoneNumWarn: "请输入正确的联系人电话",
     },
+    tips:"賬戶姓名：需與立橋賬戶$clientNameCn$ ($clientNameEn$) 同名，不允許使用第三方帳戶轉入股票",
     tips1: "帳戶姓名：需與立橋帳戶同名(",
     tips2: "),不允許使用第三方帳戶轉出股票",
   },

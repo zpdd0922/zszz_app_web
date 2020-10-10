@@ -451,6 +451,7 @@ export default {
         text_12: "支票转账指南",
       },
       remit: {
+        text_0: "资金账号",
         text_1: "银行户名",
         text_2: "汇款账号",
         text_3: "确认账号",
@@ -485,6 +486,7 @@ export default {
       request: {
         text_1: "提取账户",
         text_2: "现金账户",
+        text_2m: "保证金账户",
         text_3: "收款账户信息",
         text_4: "收款银行",
         text_5: "账户名称",

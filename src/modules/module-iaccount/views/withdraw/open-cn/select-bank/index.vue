@@ -88,10 +88,10 @@ export default {
   methods: {
     // 请求用户已绑定银行卡 - 所有
     _fetchBankUser() {
-      const { fundAccount = [] } = this.secAccountInfo
+      // const { fundAccount = [] } = this.secAccountInfo
       SecApi.depositBank({
         bankType: 0,
-        fundAccount: fundAccount[0]
+        // fundAccount: fundAccount[0]
       }).then(res => {
         this.myBank = res || []
       })

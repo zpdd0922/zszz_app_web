@@ -5,7 +5,7 @@ export default {
   pageName: "綁定同名香港銀行帳戶",
   tips: "請綁定您同名$userName$的香港銀行帳戶，",
   tips2: "不接受綁定他人或聯名銀行帳戶",
-  imgTips: "請上傳包含帳號的香港銀行卡或電子截圖",
+  imgTips: "請上傳包含賬號的香港銀行卡或電子截圖",
   bankId: {
     label: "銀行",
     placeholder: "請選擇香港銀行",
