@@ -4,21 +4,23 @@
       <template v-if="menuItem.channel.length">
         <sec-title :content="menuItem.label" />
         <ul class="sec-list-box">
-          <li
-            v-for="(channelItem, idx2) in menuItem.channel"
-            :key="channelItem.key"
-            :class="[
-              'sec-list-item',
-              {
-                'sec-list-item-last-line':
-                  (menuItem.channel.length - idx2) / 4 < 1,
-              },
-            ]"
-            @click="intoChannel(channelItem)"
-          >
-            <i :class="`sec-icon-${channelItem.iconType}`"></i>
-            <span>{{ channelItem.label }}</span>
-          </li>
+          <template v-for="(channelItem, idx2) in menuItem.channel">
+            <li
+              v-if="!channelItem.disabled"
+              :key="channelItem.key"
+              :class="[
+                'sec-list-item',
+                {
+                  'sec-list-item-last-line':
+                    (menuItem.channel.length - idx2) / 4 < 1,
+                },
+              ]"
+              @click="intoChannel(channelItem)"
+            >
+              <i :class="`sec-icon-${channelItem.iconType}`"></i>
+              <span>{{ channelItem.label }}</span>
+            </li>
+          </template>
         </ul>
       </template>
     </div>
@@ -27,6 +29,7 @@
 
 <script>
 import { toast, alert, confirm } from "@/main/utils/common/tips";
+import { mapGetters } from "vuex";
 
 export default {
   name: "home",
@@ -35,9 +38,16 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    this.setTitle(this.$t("iAccount.main.pageName"));
+  },
   watch: {},
   computed: {
+    ...mapGetters(["secAccountInfo"]),
+    isMarginAccount() {
+      const { fundAccount = [] } = this.secAccountInfo;
+      return fundAccount.some((item) => item.assetProp == "M");
+    },
     menu() {
       return [
         {
@@ -74,6 +84,7 @@ export default {
               label: this.getI18n("iconLabel.funds.funds_history"),
               iconType: "fund_list",
               path: "sec-funds-capital-flow",
+              disabled: true
             },
           ],
         },
@@ -158,6 +169,7 @@ export default {
               label: this.getI18n("iconLabel.accounts.account"),
               iconType: "account",
               path: "",
+              disabled: true
             },
             // {
             //   key: "pro",
@@ -169,18 +181,21 @@ export default {
               key: "password",
               label: this.getI18n("iconLabel.accounts.password"),
               iconType: "password",
+              disabled: true
             },
             {
               key: "margin",
               label: this.getI18n("iconLabel.accounts.margin"),
               iconType: "margin",
-              path: "opmaGuide"
+              path: "opmaGuide",
+              disabled: this.isMarginAccount,
             },
             {
               key: "add-limit",
               label: this.getI18n("iconLabel.accounts.add_limit"),
               iconType: "add_limit",
-              path: 'add-limit',
+              path: "add-limit",
+              disabled: !this.isMarginAccount,
             },
           ],
         },

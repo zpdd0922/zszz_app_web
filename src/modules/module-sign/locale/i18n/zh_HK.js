@@ -33,7 +33,7 @@ export default {
     warn: {
       numWarn: "請輸入正確的手機號碼",
       emptyWarn: "手機號碼不能為空",
-      accountWarn: "請輸入帳號/手機號碼",
+      accountWarn: "請輸入賬號/手機號碼",
       captchaWarn: "請輸入驗證碼",
       passwdWarn: "請輸入登錄密碼",
       failLogin: "登錄失敗，請重試",

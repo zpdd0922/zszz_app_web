@@ -66,8 +66,8 @@ export default {
       return valHtml
     },
     // 客户交易账户状态
-    getAccountStatus(secAccountInfo) {
-      const { clientStatus } = secAccountInfo || {}
+    getAccountStatus() {
+      const { clientStatus } = this.secAccountInfo || {}
       // 账号已冻结
       if (clientStatus === '1') {
         tips.jfDialog({
@@ -261,9 +261,9 @@ export default {
         this.$store.dispatch('setWayInfo', temp_wayInfo)
         console.log('再次转入-temp_wayInfo', temp_wayInfo)
         if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
-          this.$router.push({ name: 'fps-hk' })
+          this.$router.push({ name: 'sec-fps-hk' })
         } else {
-          this.$router.push({ name: 'fps-other' })
+          this.$router.push({ name: 'sec-fps-other' })
         }
         break
       case CHECK:
@@ -271,9 +271,9 @@ export default {
         this.$store.dispatch('setWayInfo', temp_wayInfo)
         console.log('再次转入-temp_wayInfo', temp_wayInfo)
         if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
-          this.$router.push({ name: 'check-hk' })
+          this.$router.push({ name: 'sec-check-hk' })
         } else {
-          this.$router.push({ name: 'check-other' })
+          this.$router.push({ name: 'sec-check-other' })
         }
         break
       default:
@@ -282,19 +282,19 @@ export default {
         console.log('再次转入-temp_wayInfo', temp_wayInfo)
         // 区分大陆还是香港卡
         // if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
-        //   this.$router.push({ name: 'e-banking-hk' })
+        //   this.$router.push({ name: 'sec-e-banking-hk' })
         // } else {
-        //   this.$router.push({ name: 'e-banking-cn' })
+        //   this.$router.push({ name: 'sec-e-banking-cn' })
         // }
         switch (data.bankType) {
         case 1:
-          this.$router.push({ name: 'e-banking-cn' })
+          this.$router.push({ name: 'sec-e-banking-cn' })
           break
         case 2:
-          this.$router.push({ name: 'e-banking-hk' })
+          this.$router.push({ name: 'sec-e-banking-hk' })
           break
         case 3:
-          this.$router.push({ name: 'e-banking-other' })
+          this.$router.push({ name: 'sec-e-banking-other' })
           break
         }
         break

@@ -9,17 +9,30 @@
     <header class="sec-page-title">
       <base-cell>
         <base-cell-header></base-cell-header>
-        <base-cell-body>{{depositWay.title}}</base-cell-body>
+        <base-cell-body>{{ depositWay.title }}</base-cell-body>
       </base-cell>
     </header>
 
     <div class="cube-form cube-form_standard cube-form_valid step-content">
       <div class="cube-form-group custom-form-group">
         <ul class="cube-form-group-content border-bottom-1px">
+          <li class="cube-form-item border-bottom-1px">
+            <div class="cube-form-label">
+              <span>{{ $t("iAccount.deposit.remit.text_0") }}</span>
+            </div>
+            <div class="cube-form-field">
+              <div class="filed-item">
+                <cube-select
+                  v-model="model.depositAccount"
+                  :options="accountList"
+                ></cube-select>
+              </div>
+            </div>
+          </li>
           <!-- 收款银行 -->
           <li class="cube-form-item border-bottom-1px" v-if="isShowBankList">
             <div class="cube-form-label">
-              <span>{{ $t('iAccount.deposit.remit.text_14') }}</span>
+              <span>{{ $t("iAccount.deposit.remit.text_14") }}</span>
             </div>
             <div class="cube-form-field">
               <cube-select
@@ -33,11 +46,15 @@
           <!-- 银行户名 -->
           <li class="cube-form-item border-bottom-1px">
             <div class="cube-form-label">
-              <span>{{ $t('iAccount.deposit.remit.text_1') }}</span>
+              <span>{{ $t("iAccount.deposit.remit.text_1") }}</span>
             </div>
             <div class="cube-form-field">
               <div class="filed-item">
-                <span class="txt">{{secAccountInfo.clientNameCn}} （{{secAccountInfo.clientNameEn}}）</span>
+                <span class="txt"
+                  >{{ secAccountInfo.clientNameCn }} （{{
+                    secAccountInfo.clientNameEn
+                  }}）</span
+                >
               </div>
             </div>
           </li>
@@ -45,14 +62,15 @@
           <!-- 选择其他银行 -->
           <li class="cube-form-item border-bottom-1px" v-if="isShowOther">
             <div class="cube-form-label">
-              <span>{{ $t('iAccount.deposit.remit.text_12') }}</span>
+              <span>{{ $t("iAccount.deposit.remit.text_12") }}</span>
             </div>
             <div class="cube-form-field">
               <div class="filed-item">
                 <span
                   v-if="depositBankHis && depositBankHis.bankName"
                   class="txt"
-                >{{model.depositBankNameOther}}</span>
+                  >{{ model.depositBankNameOther }}</span
+                >
                 <input
                   v-else
                   v-model="model.depositBankNameOther"
@@ -63,19 +81,23 @@
               </div>
               <div
                 class="filed-msg"
-                v-show="!(depositBankHis && depositBankHis.bankName) && model.depositBankNameOther"
+                v-show="
+                  !(depositBankHis && depositBankHis.bankName) &&
+                  model.depositBankNameOther
+                "
               >
                 <span
                   class="txt"
                   @click="_clearInput('model.depositBankNameOther')"
-                >{{ $t('iAccount.common.text_16') }}</span>
+                  >{{ $t("iAccount.common.text_16") }}</span
+                >
               </div>
             </div>
           </li>
           <!-- 汇款账号选择框 -->
           <li class="cube-form-item border-bottom-1px">
             <div class="cube-form-label">
-              <span>{{ $t('iAccount.deposit.remit.text_2') }}</span>
+              <span>{{ $t("iAccount.deposit.remit.text_2") }}</span>
             </div>
             <div class="cube-form-field">
               <div class="filed-item">
@@ -90,7 +112,7 @@
           <!-- 汇款账号 -->
           <li class="cube-form-item border-bottom-1px" v-if="isNoaddAccount">
             <div class="cube-form-label">
-              <span>{{ $t('iAccount.deposit.remit.text_2') }}</span>
+              <span>{{ $t("iAccount.deposit.remit.text_2") }}</span>
             </div>
             <div class="cube-form-field">
               <div class="filed-item">
@@ -103,12 +125,16 @@
                   />
                   <div
                     class="cube-input-append"
-                    v-show="!(depositBankHis && depositBankHis.bankAccount) && model.depositBankAccount"
+                    v-show="
+                      !(depositBankHis && depositBankHis.bankAccount) &&
+                      model.depositBankAccount
+                    "
                   >
                     <span
                       class="txt font-link-size"
                       @click="_clearInput('model.depositBankAccount')"
-                    >{{ $t('iAccount.common.text_16') }}</span>
+                      >{{ $t("iAccount.common.text_16") }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -119,7 +145,7 @@
           <!-- <li class="cube-form-item border-bottom-1px" v-if="!(depositBankHis && depositBankHis.bankAccount)"> -->
           <li class="cube-form-item border-bottom-1px" v-if="isNoaddAccount">
             <div class="cube-form-label">
-              <span>{{ $t('iAccount.deposit.remit.text_3') }}</span>
+              <span>{{ $t("iAccount.deposit.remit.text_3") }}</span>
             </div>
             <div class="cube-form-field">
               <div class="filed-item">
@@ -130,11 +156,15 @@
                     maxlength="30"
                     :placeholder="$t('iAccount.deposit.remit.text_5')"
                   />
-                  <div class="cube-input-append" v-show="model.depositBankAccountAgain">
+                  <div
+                    class="cube-input-append"
+                    v-show="model.depositBankAccountAgain"
+                  >
                     <span
                       class="txt font-link-size"
                       @click="_clearInput('model.depositBankAccountAgain')"
-                    >{{ $t('iAccount.common.text_16') }}</span>
+                      >{{ $t("iAccount.common.text_16") }}</span
+                    >
                   </div>
                 </div>
               </div>
@@ -143,7 +173,7 @@
           <!-- 存入金额 -->
           <li class="cube-form-item border-bottom-1px">
             <div class="cube-form-label">
-              <span>{{ $t('iAccount.deposit.remit.text_4') }}</span>
+              <span>{{ $t("iAccount.deposit.remit.text_4") }}</span>
             </div>
             <div class="cube-form-field">
               <div class="filed-item">
@@ -164,10 +194,12 @@
           </li>
         </ul>
       </div>
-        <wrap-upload @upload="_getImgId" @del="_delImgId" :exampleImg="_getExampleImg"></wrap-upload>
-      </div>
+      <wrap-upload
+        @upload="_getImgId"
+        @del="_delImgId"
+        :exampleImg="_getExampleImg"
+      ></wrap-upload>
     </div>
-
     <foot-tip :list="dataRemit.foot"></foot-tip>
   </sec-wrap>
 </template>
@@ -208,9 +240,12 @@ export default {
         depositBankNameOther: "",
         depositBankAccount: "",
         depositBankAccountAgain: "",
+        depositAccount: "",
         depositMoney: "",
         remarks: "",
       },
+      accountNameInfo: {},
+      accountList: [],
       bankOptions: [],
       myBankOptions: [],
       bankName: "",
@@ -218,6 +253,7 @@ export default {
     };
   },
   created() {
+    this._formatAccount();
     this._updateInfo();
     this._getBankOptions();
   },
@@ -289,16 +325,34 @@ export default {
     },
   },
   methods: {
+    // 格式化现金账号选项
+    _formatAccount() {
+      const { fundAccount = [] } = this.secAccountInfo;
+      this.accountList = fundAccount.map((item) => {
+        const { fundAccount: account, assetProp } = item;
+        const txt =
+          assetProp === "M"
+            ? this.$t("iAccount.withdraw.request.text_2m")
+            : this.$t("iAccount.withdraw.request.text_2");
+        this.accountNameInfo[account] = txt;
+        return {
+          value: item.fundAccount,
+          text: txt + " - " + item.fundAccount,
+        };
+      });
+      // 默认选中第一项
+      this.model.depositAccount = this.accountList[0].value;
+    },
     // _updateInfo() {
     //   const { bankAccount = '', bankName = '' } = this.depositBankHis || {}
     //   this.model.depositBankNameOther = bankName
     //   this.model.depositBankAccount = bankAccount
     // },
     async _updateInfo() {
-      const { fundAccount = [] } = this.secAccountInfo;
+      // const { fundAccount = [] } = this.secAccountInfo;
       const myBank = await SecApi.depositBank({
         bankType: this.$t("iAccount.define.BANK_OTHER").value,
-        fundAccount: fundAccount[0],
+        // fundAccount: fundAccount[0],
       });
       const bank = myBank
         .filter(
@@ -353,7 +407,7 @@ export default {
         const { fundAccount = [], tradeAccount } = this.secAccountInfo;
         const params = {
           clientId: tradeAccount,
-          depositAccount: fundAccount[0],
+          depositAccount: this.model.depositAccount,
           remittanceBankAccount: formatNumber(this.model.depositBankAccount),
         };
         const formFile = Object.values(this.file).some(
@@ -433,12 +487,16 @@ export default {
           const formData = Object.assign({}, this.model, {
             img: this.file,
             bankInfoJF: bankInfoJF && bankInfoJF[0],
+            depositAccountName: this.accountNameInfo[this.model.depositAccount],
           });
           params = format_CommitData(data, formData);
           break;
         // 支票
         default:
-          const checkData = Object.assign({}, this.model, { img: this.file });
+          const checkData = Object.assign({}, this.model, {
+            img: this.file,
+            depositAccountName: this.accountNameInfo[this.model.depositAccount],
+          });
           params = format_CommitData(data, checkData);
           break;
       }
@@ -452,7 +510,7 @@ export default {
         });
         return false;
       }
-       this.$store
+      this.$store
         .dispatch("apiSaveIntoMoney", params)
         .then((res) => {
           this.$router.push({ name: "sec-deposit-notify" });

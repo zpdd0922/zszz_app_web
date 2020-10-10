@@ -66,9 +66,7 @@ export default {
   },
   methods: {},
   created() {
-    this.$store.dispatch("getSecAccountInfo").then((res) => {
-      this.getAccountStatus(res);
-    });
+      this.getAccountStatus();
   },
 };
 </script>

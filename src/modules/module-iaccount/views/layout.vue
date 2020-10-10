@@ -12,12 +12,9 @@ export default {
   },
   created() {
     this.setTitle(this.$t("iAccount.main.pageName"));
-
     this.getSecAccountInfo();
   },
   mounted() {
-    // this.setTitle("证券服务")
-    // document.title = '证券服务';
   },
   computed: {
     ...mapGetters(["secAccountInfo"]),

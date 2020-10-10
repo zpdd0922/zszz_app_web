@@ -94,7 +94,7 @@ const INFO_FRONT = [
     title: 'iAccount.history.funds.text_5',
     custom: {
       value: (data) => {
-        return data.extAccount + '-' + data.extAccountName
+        return data.extAccountName + '-' + data.extAccount
       }
     }
   }

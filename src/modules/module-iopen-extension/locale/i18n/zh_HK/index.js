@@ -55,8 +55,8 @@ export default {
       success: {
         title: "開戶成功",
         desc: {
-          tradeAccountPre: "交易帳號：",
-          fundAccountPre: "資金帳號：",
+          tradeAccountPre: "交易賬號：",
+          fundAccountPre: "資金賬號：",
           cn: [
             `你已成功簽署《${customizeI18n.customize.company.securityName}證券帳戶開立協議》並開立帳戶，`,
             "請在稍後的短訊和電郵中查收初始交易密碼，",
@@ -80,7 +80,7 @@ export default {
     openMargin: {
       isNotConsortWithMargin: `本人的配偶不是${customizeI18n.customize.company.securityFullName}的保證金客戶。`,
       withMarginName: "姓名",
-      withMarginAccount: "帳號",
+      withMarginAccount: "賬號",
 
       isNotBOorPG: `本人及本人的配偶不是${customizeI18n.customize.company.securityFullName}其他保證金帳戶的實際擁有人或擔保人`,
       otherBOorPGAccountName: "帳戶名稱",
@@ -88,7 +88,7 @@ export default {
 
       isNotConsortWithOtherMargin: `本人及本人的配偶沒有${customizeI18n.customize.company.securityFullName}任何保證金客戶中控制其百分之三十五或以上股權或表決權。`,
       withOtherMarginName: "姓名",
-      withOtherMarginAccount: "帳號",
+      withOtherMarginAccount: "賬號",
 
       adjectiveAuth: `當升級為保證金（融資）帳戶後，${customizeI18n.customize.company.securityFullName}有權隨時運用本人的保證金（融資）帳戶內之證券，可進行抵押或其他處置。本人明白常設授權續期通知書將於常設授權屆滿前最少十四（14）天寄予本人。如${customizeI18n.customize.company.securityFullName}於常設授權有效期屆滿前未有接獲本人等書面反對，則本人之常設授權會在屆滿時按照常設授權的條款及細則視作為同意續期十二（12）個月。`,
 

@@ -48,7 +48,7 @@ const state = {
 
 const getters = {
   isFetching: (state) => state.isFetching,
-  curLimit: (state) => state.curLimit,
+  // curLimit: (state) => state.curLimit,
   addLimitHistoryList: (state) => state.addLimitHistoryList,
 };
 
@@ -56,9 +56,9 @@ const mutations = {
   [types.SET_IS_FETCHING](state, payload) {
     state.isFetching = payload.isFetching;
   },
-  [types.SET_CUR_LIMIT](state, payload) {
-    state.curLimit = payload.lineCredit;
-  },
+  // [types.SET_CUR_LIMIT](state, payload) {
+  //   state.curLimit = payload.lineCredit;
+  // },
 
   [types.SET_ADD_LIMIT_HISTORY_LIST](state, payload) {
     state.addLimitHistoryList = payload.addLimitHistoryList;
@@ -67,13 +67,13 @@ const mutations = {
 
 const actions = {
   //获取当前额度
-  getCurLimit({ commit }, data) {
+  getMarginLoanLimitInfo({ commit }, data) {
     return new Promise((resolve, reject) => {
-      ApiAddLimit.getCurLimit(data)
+      ApiAddLimit.getMarginLoanLimitInfo(data)
         .then((res) => {
-          if (res) {
-            commit(types.SET_CUR_LIMIT, res);
-          }
+          // if (res) {
+          //   commit(types.SET_CUR_LIMIT, res);
+          // }
           resolve(res);
         })
         .catch((err) => {
@@ -84,7 +84,7 @@ const actions = {
   // 获取历史数据
   getAddLimitHistory({ commit }, data) {
     return new Promise((resolve, reject) => {
-      ApiAddLimit.getAddLimitHistory(data)
+      ApiAddLimit.getMarginLoanLimitInfo(data)
         .then((res) => {
           if (res) {
             commit(types.SET_IS_FETCHING, { isFetching: false });

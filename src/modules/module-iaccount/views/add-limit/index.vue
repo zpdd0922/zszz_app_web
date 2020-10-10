@@ -1,25 +1,58 @@
 <template>
   <div class="add-limit-wrap">
-    <section class="curLimit">
-      <div class="title">{{ getI18n("curLimit.titleHK") }}</div>
-      <div>
-        <span class="num">{{ curLimit1 }}</span>
-        <span class="unit">{{ getI18n("curLimit.unit") }}</span>
-      </div>
-    </section>
-    <section class="canLimit">
-      <header class="title">{{ getI18n("canLimit.title") }}</header>
-      <div class="body-wrap">
-        <div class="body">
-          <div>{{ getI18n("canLimit.hk") }}</div>
-          <div>
-            <span class="num">{{ canLimit }}</span>
-            <span class="unit">{{ getI18n("curLimit.unit") }}</span>
-          </div>
+    <ul class="step-content limit-current-box">
+      <li class="limit-current-item" v-if="isOpenHkMarket">
+        <span class="name">{{ getI18n("loanLimit.hk.currentName") }}</span>
+        <div class="content">
+          <span class="num">{{ loanLimitValue.hk | formatMoney }}</span>
+          <span class="unit">{{ getI18n("loanLimit.hk.curreny") }}</span>
         </div>
-      </div>
-      <div class="margin-bottom"></div>
-      <div class="input">
+      </li>
+      <li class="limit-current-item" v-if="isOpenUsaMarket">
+        <span class="name">{{ getI18n("loanLimit.us.currentName") }}</span>
+        <div class="content">
+          <span class="num">{{ loanLimitValue.us | formatMoney }}</span>
+          <span class="unit">{{ getI18n("loanLimit.us.curreny") }}</span>
+        </div>
+      </li>
+      <li class="limit-current-item" v-if="isOpenCnMarket">
+        <p class="name">{{ getI18n("loanLimit.cn.currentName") }}</p>
+        <div class="content">
+          <span class="num">{{ loanLimitValue.cn | formatMoney }}</span>
+          <span class="unit">{{ getI18n("loanLimit.cn.curreny") }}</span>
+        </div>
+      </li>
+    </ul>
+    <div class="margin-bottom"></div>
+    <!-- <div class="step-content limit-next-box">
+      <header class="title">{{ getI18n("canLimit.title") }}</header>
+      <ul class="limit-next-content">
+        <li class="limit-next-item" v-if="isOpenHkMarket">
+          <p class="name">{{ getI18n("loanLimit.hk.nextName") }}</p>
+          <div class="content">
+            <span class="num">{{ loanLimitNextValue.hk | formatMoney }}</span>
+            <span class="unit">{{ getI18n("loanLimit.hk.curreny") }}</span>
+          </div>
+        </li>
+        <li class="limit-next-item" v-if="isOpenUsaMarket">
+          <p class="name">{{ getI18n("loanLimit.us.nextName") }}</p>
+          <div class="content">
+            <span class="num">{{ loanLimitNextValue.hk | formatMoney }}</span>
+            <span class="unit">{{ getI18n("loanLimit.us.curreny") }}</span>
+          </div>
+        </li>
+        <li class="limit-next-item" v-if="isOpenCnMarket">
+          <p class="name">{{ getI18n("loanLimit.cn.nextName") }}</p>
+          <div class="content">
+            <span class="num">{{ loanLimitNextValue.hk | formatMoney }}</span>
+            <span class="unit">{{ getI18n("loanLimit.cn.curreny") }}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="margin-bottom"></div> -->
+    <div class="step-content limit-trdpwd-box">
+      <div class="">
         <label for="tradePwd">{{ getI18n("tradePwd.label") }}</label>
         <input
           type="password"
@@ -28,17 +61,18 @@
           v-model="tradePwd"
         />
       </div>
-    </section>
-    <section class="footer">
-      <div class="agree">
-        <cube-checkbox v-model="checked">
-          <span class="link-start">{{ getI18n("agreement.linkStart") }}</span>
-          <span @click.stop="handleToAgreement" class="base-links">{{
-            getI18n("agreement.linkContent")
-          }}</span>
-          {{ getI18n("agreement.linkEnd") }}
-        </cube-checkbox>
-      </div>
+    </div>
+    <div class="limit-agree-box">
+      <cube-checkbox v-model="checked">
+        <span>{{ getI18n("agreement.linkStart") }}</span>
+        <span @click.stop="handleToAgreement" class="base-links">{{
+          getI18n("agreement.linkContent")
+        }}</span>
+        {{ getI18n("agreement.linkEnd") }}
+      </cube-checkbox>
+    </div>
+
+    <footer class="footer">
       <div class="btn-wrap">
         <cube-button :disabled="!isCanNext" @click="handleNext">{{
           getI18n("nextBtn")
@@ -47,15 +81,15 @@
       <div class="record" @click="goToHistory">
         {{ getI18n("record") }}
       </div>
-    </section>
-    <section class="tips">
+      <div class="tips">
       <h3>{{ getI18n("tips.title") }}</h3>
       <ol tag="ol">
         <li v-for="(item, index) in getI18n('tipsList')" :key="index">
           {{ item }}
         </li>
       </ol>
-    </section>
+    </div>
+    </footer>
   </div>
 </template>
 
@@ -68,6 +102,7 @@ import { toast } from "@/main/utils/common/tips/";
 //   curLimitList,
 //   canLimitList,
 // } from "@/modules/module-iaccount/views/add-limit/stock-list";
+import { formatMoney } from "@/modules/module-iaccount/utils/number";
 
 export default {
   data() {
@@ -75,21 +110,65 @@ export default {
       //交易密码
       tradePwd: null,
       //当前额度
-      curLimit1: this.curLimit || 200000,
+      defaultNextLimitHk: 200000,
+      loanLimitValue: {
+        hk: "0.00",
+        us: "0.00",
+        cn: "0.00",
+      },
+      loanLimitNextValue: {
+        hk: "0.00",
+        us: "0.00",
+        cn: "0.00",
+      },
+      marketMap: {
+        0: "cn",
+        1: "us",
+        2: "hk",
+      },
       //可以提升的额度
       canLimit: 200000,
       //同意协议
       checked: false,
     };
   },
+
+  filters: {
+    formatMoney,
+  },
   created() {
-    // this.$store.dispatch("getCurLimit");
+    // this.$store.dispatch("getMarginLoanLimitInfo");
+    this.init();
     this.setTitle(this.$t("iAccount.addLimit.pageName"));
   },
   computed: {
-    ...mapGetters([
-      'curLimit'
-    ]),
+    ...mapGetters(["secAccountInfo"]),
+    marginAccount() {
+      const { fundAccount = [] } = this.secAccountInfo;
+      let account = "";
+      fundAccount.some((item) => {
+        if (item.assetProp == "M") {
+          account = item.fundAccount;
+        }
+        return item.assetProp == "M";
+      });
+      return account;
+    },
+    isOpenCnMarket() {
+      return (
+        this.secAccountInfo && Boolean(this.secAccountInfo.isOpenCnStockMarket)
+      );
+    },
+    isOpenHkMarket() {
+      return (
+        this.secAccountInfo && Boolean(this.secAccountInfo.isOpenHkStockMarket)
+      );
+    },
+    isOpenUsaMarket() {
+      return (
+        this.secAccountInfo && Boolean(this.secAccountInfo.isOpenUsaStockMarket)
+      );
+    },
     isCanNext() {
       return this.checked && this.tradePwd && this.tradePwd.length > 0;
     },
@@ -133,15 +212,27 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["getVerifyCode"]),
+    ...mapActions(["getMarginLoanLimitInfo"]),
+    init() {
+      this.getMarginLoanLimitInfo({ fundAccount: this.marginAccount }).then(
+        (res) => {
+          res.map((item) => {
+            const { moneyType = "", maxExposure = "0" } = item;
+            const key = this.marketMap[moneyType];
+            console.log(key);
+            if (key) {
+              this.loanLimitValue[key] = maxExposure;
+            }
+          });
+        }
+      );
+    },
     getI18n(key) {
       return this.$t(`iAccount.addLimit.${key}`);
     },
     // 处理提交
     handleNext() {
-      this.$store.dispatch('submitAddLimit').then(()=>{
-
-      })
+      this.$store.dispatch("submitAddLimit").then(() => {});
     },
     // 处理跳转协议
     handleToAgreement() {

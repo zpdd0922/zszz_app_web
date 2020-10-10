@@ -40,7 +40,7 @@ hkexParterCENo: '中央編號',
 
 isNotConsortWithMargin: `本人的配偶不是${customizeI18n.customize.company.securityFullName}的保證金客戶。`,
 withMarginName: '姓名',
-withMarginAccount: '帳號',
+withMarginAccount: '賬號',
 
 isNotBOorPG: `本人及本人的配偶不是${customizeI18n.customize.company.securityFullName}其他保證金帳戶的實際擁有人或擔保人`,
 otherBOorPGAccountName: '帳戶名稱',
@@ -48,7 +48,7 @@ otherBOorPGAccountNumber: '帳戶號碼',
 
 isNotConsortWithOtherMargin: `本人及本人的配偶沒有${customizeI18n.customize.company.securityFullName}任何保證金客戶中控制其百分之三十五或以上股權或表決權。`,
 withOtherMarginName: '姓名',
-withOtherMarginAccount: '帳號',
+withOtherMarginAccount: '賬號',
 usGreenCardCode: '美國納稅人識別號碼',
 // isNotCompanyController: '本人不是任何上市公司的董事、首席執行官或主要股東。',
 // companyControllerName: '公司/機構名稱',

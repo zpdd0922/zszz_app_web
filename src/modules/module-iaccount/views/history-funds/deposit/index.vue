@@ -137,7 +137,7 @@ const INFO_FRONT = [
     title: 'iAccount.history.funds.text_7',
     custom: {
       value: (data) => {
-        return data.depositAccount + '-' + data.depositAccountName
+        return data.depositAccountName + '-' + data.depositAccount
       }
     }
   }, {

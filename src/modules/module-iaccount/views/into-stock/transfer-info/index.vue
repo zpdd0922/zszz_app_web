@@ -16,13 +16,13 @@
             :field="fieldsTransferOut.otherTransferOutCompanyName"
           ></cube-form-item>
         </template>
-        <cube-form-item :field="fieldsTransferOut.accountNumber"></cube-form-item>
+        <cube-form-item
+          :field="fieldsTransferOut.accountNumber"
+        ></cube-form-item>
         <!-- <cube-form-item :field="fieldsTransferOut.accountName"></cube-form-item> -->
         <div class="cube-form-item border-bottom-1px">
           <div class="cube-form-label">
-            <span>{{
-              getI18n("transferOutInfo.accountName.label")
-            }}</span>
+            <span>{{ getI18n("transferOutInfo.accountName.label") }}</span>
           </div>
           <div class="cube-validator cube-form-field">
             <div class="cube-validator-content">
@@ -68,7 +68,7 @@
           <div class="cube-validator cube-form-field">
             <div class="cube-validator-content">
               <cube-select
-                :options="fundAccount"
+                :options="accountList"
                 :placeholder="
                   getI18n('receiverInfo.receiveAccount.placeholder')
                 "
@@ -114,6 +114,7 @@ export default {
         type: "in",
         step: 0,
       },
+      accountList: [],
       // 转出方信息
       fieldsTransferOut: {
         // 转出券商选择
@@ -266,7 +267,7 @@ export default {
             value: String(this.secAccountInfo.clientNameCn),
             text: this.secAccountInfo.clientNameCn,
           },
-        ]
+        ];
       }
     },
 
@@ -274,10 +275,15 @@ export default {
     fundAccount() {
       if (this.secAccountInfo) {
         return this.secAccountInfo.fundAccount.map((item) => {
+          const { fundAccount: account, assetProp } = item;
+
+          const txt =
+            assetProp === "M"
+              ? this.$t("iAccount.withdraw.request.text_2m")
+              : this.$t("iAccount.withdraw.request.text_2");
           return {
-            value: String(item),
-            //TODO:根据账户类别判断
-            text: `现金账户 ${item}`,
+            value: item.fundAccount,
+            text: txt + " - " + item.fundAccount,
           };
         });
       }
@@ -350,6 +356,23 @@ export default {
     },
   },
   methods: {
+     // 格式化现金账号选项
+    _formatAccount() {
+      const { fundAccount = [] } = this.secAccountInfo;
+      this.accountList = fundAccount.map((item) => {
+        const { fundAccount: account, assetProp } = item;
+        const txt =
+          assetProp === "M"
+            ? this.$t("iAccount.withdraw.request.text_2m")
+            : this.$t("iAccount.withdraw.request.text_2");
+        return {
+          value: item.fundAccount,
+          text: txt + " - " + item.fundAccount,
+        };
+      });
+      // 默认选中第一项
+      this.receiverInfoModel.receiveAccount = this.accountList[0].value;
+    },
     getI18n(key) {
       return this.$t(`iAccount.intoStock.transferInfo.${key}`);
     },
@@ -358,8 +381,8 @@ export default {
       const stockType = this.intoType || Number(this.isShares);
       if (stockType === 1) {
         if (!this.stockTransferredHK.in.isShares) {
-          this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
-          this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
+          // this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
+          // this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
           const companyName = this.stockTransferredHK.in.secName;
@@ -388,8 +411,8 @@ export default {
         }
       } else if (stockType === 2) {
         if (!this.stockTransferredUS.in.isShares) {
-          this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
-          this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
+          // this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
+          // this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
           const companyName = this.stockTransferredUS.in.secName;
@@ -417,8 +440,8 @@ export default {
           });
         }
       }
-      this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
-      this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
+      // this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
+      // this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
     },
     formatSubData() {
       let secName = "";
@@ -472,28 +495,32 @@ export default {
     },
     // 如果券商选择为其他，数据校验
     handleBefore() {
-      if (this.transferOutInfoModel.transferOutCompany === 'OTH') {
-          // 检测ccass号码格式正确
-          const validateCCASS = this.transferOutInfoModel.ccass && /^[A-Za-z0-9]+$/.test(this.transferOutInfoModel.ccass);
-          // 检测手机号格式正确
-          const validateContactsPhoneNum = this.transferOutInfoModel.contactsPhoneNum && /^[0-9]+$/.test(this.transferOutInfoModel.contactsPhoneNum);
-          if (!validateCCASS) {
-            this.showCCASSWarn();
-            return false
-          }
-          if (!validateContactsPhoneNum) {
-            this.showContactsPhoneNumWarn();
-            return false
-          }
+      if (this.transferOutInfoModel.transferOutCompany === "OTH") {
+        // 检测ccass号码格式正确
+        const validateCCASS =
+          this.transferOutInfoModel.ccass &&
+          /^[A-Za-z0-9]+$/.test(this.transferOutInfoModel.ccass);
+        // 检测手机号格式正确
+        const validateContactsPhoneNum =
+          this.transferOutInfoModel.contactsPhoneNum &&
+          /^[0-9]+$/.test(this.transferOutInfoModel.contactsPhoneNum);
+        if (!validateCCASS) {
+          this.showCCASSWarn();
+          return false;
+        }
+        if (!validateContactsPhoneNum) {
+          this.showContactsPhoneNumWarn();
+          return false;
+        }
       }
-      return true
+      return true;
     },
     // 下一步
     handleNext(e) {
       e.preventDefault();
       const validate = this.handleBefore();
       if (!validate) {
-        return
+        return;
       }
       // 保存数据&下一步
       let fullData = {};
@@ -519,20 +546,21 @@ export default {
     },
     showCCASSWarn() {
       toast({
-        type: 'txt',
-        txt: this.getI18n('warn.ccassWarn'),
+        type: "txt",
+        txt: this.getI18n("warn.ccassWarn"),
         time: 1000,
-      })
+      });
     },
     showContactsPhoneNumWarn() {
       toast({
-        type: 'txt',
-        txt: this.getI18n('warn.contactsPhoneNumWarn'),
+        type: "txt",
+        txt: this.getI18n("warn.contactsPhoneNumWarn"),
         time: 1000,
-      })
+      });
     },
   },
   created() {
+    this._formatAccount();
     this.initInfo();
   },
   mounted() {},

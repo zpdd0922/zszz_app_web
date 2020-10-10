@@ -59,11 +59,12 @@ export const format_CommitData = (args, form) => {
   const isExitBase = Object.values(baseInfo).every(item => item && String(item).length)
   if (!isExitBase) return false
 
+  console.log(args)
   // 用户账号信息
   const secAccountInfo = {
     clientId: account.secAccountInfo.tradeAccount,                               // 交易账号
-    depositAccount: formatNumber(account.secAccountInfo.fundAccount[0]),         // 存入账号， 目前默认：现金账号
-    depositAccountName: '现金账户',                                     // 存入账户名称，目前仅支持：现金账户
+    depositAccount: formatNumber(form.depositAccount),         // 存入账号， 目前默认：现金账号
+    depositAccountName: form.depositAccountName,                                     // 存入账户名称，目前仅支持：现金账户
   }
 
   // 基本表单信息

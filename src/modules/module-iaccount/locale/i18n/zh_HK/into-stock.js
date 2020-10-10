@@ -1,6 +1,6 @@
 export const intoStock = {
   tips: {
-    accountError: "未查詢到開戶帳號",
+    accountError: "未查詢到開戶賬號",
   },
   intoWay: {
     title: "請選擇轉入股票",
@@ -55,6 +55,7 @@ export const intoStock = {
       ccassWarn: "請輸入正確的CCASS號碼",
       contactsPhoneNumWarn: "請輸入正確的聯繫人電話",
     },
+    tips:"賬戶姓名：需與立橋賬戶$clientNameCn$ ($clientNameEn$) 同名，不允許使用第三方帳戶轉入股票",
     tips1: "帳戶姓名：需與立橋帳戶同名(",
     tips2: "),不允許使用第三方帳戶轉入股票",
   },

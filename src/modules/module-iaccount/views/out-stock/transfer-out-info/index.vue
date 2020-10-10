@@ -3,7 +3,10 @@
     <div class="transfer-info-wrap">
       <!-- 接收方信息 -->
       <div class="transfer-info-title">{{ titleValues.receiver }}</div>
-      <cube-form :model="transferOutInfoModel" class="step-content custom-form-group">
+      <cube-form
+        :model="transferOutInfoModel"
+        class="step-content custom-form-group"
+      >
         <cube-form-item
           :field="fieldsTransferOut.transferOutCompany"
         ></cube-form-item>
@@ -43,13 +46,15 @@
           ></cube-form-item>
         </template>
         <div class="tips">
-          {{ getI18n("tips1") }}{{ secAccountInfo.clientNameEn
-          }}{{ getI18n("tips2") }}
+          {{ tipsContent }}
         </div>
       </cube-form>
       <!-- 转出方信息 -->
       <div class="transfer-info-title">{{ titleValues.transferOut }}</div>
-      <cube-form :model="receiverInfoModel" class="step-content custom-form-group">
+      <cube-form
+        :model="receiverInfoModel"
+        class="step-content custom-form-group"
+      >
         <div></div>
         <cube-form-item :field="fieldsreceiver.receiveSec"></cube-form-item>
         <!-- <cube-form-item :field="fieldsreceiver.receiveAccount" :options="fundAccount"></cube-form-item> -->
@@ -63,7 +68,7 @@
           <div class="cube-validator cube-form-field">
             <div class="cube-validator-content">
               <cube-select
-                :options="fundAccount"
+                :options="accountList"
                 :placeholder="
                   getI18n('transferOutInfo.transferOutAccount.placeholder')
                 "
@@ -106,9 +111,10 @@ export default {
         receiveAccount: "",
       },
       metaInfo: {
-        type: 'out',
+        type: "out",
         step: 0,
       },
+      accountList: [],
       // 转出方信息
       fieldsTransferOut: {
         // 转出券商选择
@@ -120,9 +126,7 @@ export default {
             // title: this.$t("common.cubeComponents.select.title"),
             // cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
             // confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
-            placeholder: this.getI18n(
-              "receiveInfo.receiveCompany.placeholder"
-            ),
+            placeholder: this.getI18n("receiveInfo.receiveCompany.placeholder"),
             options: optionsList.companyOptions(),
           },
           rules: {
@@ -136,9 +140,7 @@ export default {
           label: this.getI18n("receiveInfo.accountNumber.label"),
           props: {
             // title: this.$t("common.cubeComponents.select.title"),
-            placeholder: this.getI18n(
-              "receiveInfo.accountNumber.placeholder"
-            ),
+            placeholder: this.getI18n("receiveInfo.accountNumber.placeholder"),
           },
           rules: {
             required: false,
@@ -152,9 +154,7 @@ export default {
           props: {
             title: this.$t("common.cubeComponents.select.title"),
             readonly: true,
-            placeholder: this.getI18n(
-              "receiveInfo.accountName.placeholder"
-            ),
+            placeholder: this.getI18n("receiveInfo.accountName.placeholder"),
           },
           rules: {
             required: false,
@@ -164,9 +164,7 @@ export default {
         otherTransferOutCompanyName: {
           type: "input",
           modelKey: "otherTransferOutCompanyName",
-          label: this.getI18n(
-            "receiveInfo.otherReceiveCompanyName.label"
-          ),
+          label: this.getI18n("receiveInfo.otherReceiveCompanyName.label"),
           props: {
             placeholder: this.getI18n(
               "receiveInfo.otherReceiveCompanyName.placeholder"
@@ -225,7 +223,9 @@ export default {
           modelKey: "receiveSec",
           label: this.getI18n("transferOutInfo.transferOutSec.label"),
           props: {
-            placeholder: this.getI18n("transferOutInfo.transferOutSec.placeholder"),
+            placeholder: this.getI18n(
+              "transferOutInfo.transferOutSec.placeholder"
+            ),
             disabled: true,
           },
           rules: {
@@ -250,6 +250,9 @@ export default {
       "secAccountInfo",
       "sharesList",
     ]),
+    tipsContent() {
+      return this.getI18n("tips").replace("$clientNameCn$", this.secAccountInfo.clientNameCn).replace("$clientNameEn$", this.secAccountInfo.clientNameEn);
+    },
     nameList() {
       if (this.secAccountInfo) {
         return [
@@ -261,7 +264,7 @@ export default {
             value: String(this.secAccountInfo.clientNameCn),
             text: this.secAccountInfo.clientNameCn,
           },
-        ]
+        ];
       }
     },
     // 账户列表
@@ -344,6 +347,23 @@ export default {
     },
   },
   methods: {
+    // 格式化现金账号选项
+    _formatAccount() {
+      const { fundAccount = [] } = this.secAccountInfo;
+      this.accountList = fundAccount.map((item) => {
+        const { fundAccount: account, assetProp } = item;
+        const txt =
+          assetProp === "M"
+            ? this.$t("iAccount.withdraw.request.text_2m")
+            : this.$t("iAccount.withdraw.request.text_2");
+        return {
+          value: item.fundAccount,
+          text: txt + " - " + item.fundAccount,
+        };
+      });
+      // 默认选中第一项
+      this.receiverInfoModel.receiveAccount = this.accountList[0].value;
+    },
     getI18n(key) {
       return this.$t(`iAccount.outStock.transferInfo.${key}`);
     },
@@ -352,8 +372,8 @@ export default {
       const stockType = this.intoType || Number(this.isSharesOut);
       if (stockType === 1) {
         if (!this.stockTransferredHK.out.isShares) {
-          this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
-          this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
+          // this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
+          // this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
           const companyName = this.stockTransferredHK.out.secName;
@@ -371,9 +391,7 @@ export default {
               }
             }
             if (this.stockTransferredHK.out[key]) {
-              this.transferOutInfoModel[key] = this.stockTransferredHK.out[
-                key
-              ];
+              this.transferOutInfoModel[key] = this.stockTransferredHK.out[key];
             }
           });
           Object.keys(this.receiverInfoModel).forEach((key) => {
@@ -384,8 +402,8 @@ export default {
         }
       } else if (stockType === 2) {
         if (!this.stockTransferredUS.out.isShares) {
-          this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
-          this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
+          // this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
+          // this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
           return;
         } else {
           const companyName = this.stockTransferredUS.out.secName;
@@ -403,9 +421,7 @@ export default {
               }
             }
             if (this.stockTransferredUS.out[key]) {
-              this.transferOutInfoModel[key] = this.stockTransferredUS.out[
-                key
-              ];
+              this.transferOutInfoModel[key] = this.stockTransferredUS.out[key];
             }
           });
           Object.keys(this.receiverInfoModel).forEach((key) => {
@@ -415,8 +431,8 @@ export default {
           });
         }
       }
-      this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
-      this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
+      // this.transferOutInfoModel.accountName = this.secAccountInfo.clientNameEn;
+      // this.receiverInfoModel.receiveAccount = this.secAccountInfo.fundAccount[0];
     },
     formatSubData() {
       let secName = "";
@@ -467,45 +483,49 @@ export default {
     },
     // 如果券商选择为其他，数据校验
     handleBefore() {
-      if (this.transferOutInfoModel.transferOutCompany === 'OTH') {
-          // 检测ccass号码格式正确
-          const validateCCASS = this.transferOutInfoModel.ccass && /^[A-Za-z0-9]+$/.test(this.transferOutInfoModel.ccass);
-          console.log(validateCCASS);
-          // 检测手机号格式正确
-          const validateContactsPhoneNum = this.transferOutInfoModel.contactsPhoneNum && /^[0-9]+$/.test(this.transferOutInfoModel.contactsPhoneNum);
-          if (!validateCCASS) {
-            this.showCCASSWarn();
-            return false
-          }
-          if (!validateContactsPhoneNum) {
-            this.showContactsPhoneNumWarn();
-            return false
-          }
+      if (this.transferOutInfoModel.transferOutCompany === "OTH") {
+        // 检测ccass号码格式正确
+        const validateCCASS =
+          this.transferOutInfoModel.ccass &&
+          /^[A-Za-z0-9]+$/.test(this.transferOutInfoModel.ccass);
+        console.log(validateCCASS);
+        // 检测手机号格式正确
+        const validateContactsPhoneNum =
+          this.transferOutInfoModel.contactsPhoneNum &&
+          /^[0-9]+$/.test(this.transferOutInfoModel.contactsPhoneNum);
+        if (!validateCCASS) {
+          this.showCCASSWarn();
+          return false;
+        }
+        if (!validateContactsPhoneNum) {
+          this.showContactsPhoneNumWarn();
+          return false;
+        }
       }
-      return true
+      return true;
     },
     // 下一步
     handleNext(e) {
       e.preventDefault();
       const validate = this.handleBefore();
       if (!validate) {
-        return
+        return;
       }
       // 保存数据&下一步
       // const fullData = {type: this.stockType, data: this.formatSubData()};
       let fullData = {};
       const tempData = this.formatSubData();
       if (Number(this.isSharesOut) === 1) {
-        fullData = {...this.stockTransferredHK.out, ...tempData};
+        fullData = { ...this.stockTransferredHK.out, ...tempData };
         this.$store.commit("SET_STOCK_TRANSFERRED_HK", {
           stockTransferredHK: fullData,
-          type: 'out',
+          type: "out",
         });
       } else if (Number(this.isSharesOut === 2)) {
-        fullData = {...this.stockTransferredHK.out, ...tempData};
+        fullData = { ...this.stockTransferredHK.out, ...tempData };
         this.$store.commit("SET_STOCK_TRANSFERRED_US", {
           stockTransferredUS: fullData,
-          type: 'out',
+          type: "out",
         });
       }
       this.$store.dispatch("sendTransferredStockCache", fullData).then(() => {
@@ -516,20 +536,21 @@ export default {
     },
     showCCASSWarn() {
       toast({
-        type: 'txt',
-        txt: this.getI18n('warn.ccassWarn'),
+        type: "txt",
+        txt: this.getI18n("warn.ccassWarn"),
         time: 1000,
-      })
+      });
     },
     showContactsPhoneNumWarn() {
       toast({
-        type: 'txt',
-        txt: this.getI18n('warn.contactsPhoneNumWarn'),
+        type: "txt",
+        txt: this.getI18n("warn.contactsPhoneNumWarn"),
         time: 1000,
-      })
+      });
     },
   },
   created() {
+    this._formatAccount();
     this.initInfo();
   },
   mounted() {},

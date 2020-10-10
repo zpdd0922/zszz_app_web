@@ -10,7 +10,7 @@ export default {
    * 查询用户提额历史记录
    * @return 
    */
-  getCurLimit: (data) => postCommon("/inc_credit_limit/find_inc_credit_limit_now", data),
+  getMarginLoanLimitInfo: (data) => postCommon("/inc_credit_limit/find_inc_credit_limit_now", data),
   /**
    * 查询用户提额历史记录
    * @return 
