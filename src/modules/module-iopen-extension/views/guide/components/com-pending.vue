@@ -66,9 +66,6 @@ export default {
           current: 3,
         },
       },
-      openProgress: {
-        openType: 1,
-      }
     };
   },
   computed: {
