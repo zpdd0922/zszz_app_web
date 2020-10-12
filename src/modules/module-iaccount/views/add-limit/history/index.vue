@@ -1,30 +1,49 @@
 <template>
-  <div>
+  <div class="limit-history">
     <template v-if="isFetching">
       <loading />
     </template>
     <template v-else>
-      <ul class="list-wrap">
+      <ul class="list-wrap" v-if="historyList && historyList.length">
         <li class="list-item" v-for="(item, index) in historyList" :key="index">
           <div class="top">
+            <!-- 时间 -->
             <span>{{ item.createTime | timeFormatter }}</span>
+            <!-- 状态 status 0:已提交 1:已受理  2:已成功 3:退回  -->
             <span :class="statusClass(item.status)">{{
               statusFormatter(item.status)
             }}</span>
           </div>
-          <div class="detail">
-            <div class="mkt">
-              <span class="title">{{ getI18n("mktTitle") }}</span>
-              <span>{{ getI18n("mktHK") }}</span>
+          <div class="step-content tb">
+            <div class="tr thead">
+              <span class="td txt-left">{{ getI18n("mktTitle") }}</span>
+              <span class="td txt-right">{{
+                getI18n("originLimitTitle")
+              }}</span>
+              <!-- <span class="td">{{ getI18n("curLimitTitle") }}</span> -->
+              <span class="td txt-right">{{ getI18n("curLimitTitle") }}</span>
             </div>
-            <div class="originLimit">
-              <span class="title">{{ getI18n("originLimitTitle") }}</span>
-              <span>{{ item.lineCredit }}</span>
-            </div>
-            <div class="curLimit">
-              <span class="title">{{ getI18n("curLimitTitle") }}</span>
-              <span>{{ item.lineCredit }}</span>
-            </div>
+            <template v-if="item.lineCreditList && item.lineCreditList.length">
+              <div
+                class="tr"
+                v-for="(itemLine, idx) in item.lineCreditList"
+                :key="idx"
+              >
+                <span class="td txt-left">{{
+                  getCurrencyLabel(itemLine.moneyType)
+                }}</span>
+                <span class="td txt-right">{{
+                  (item.lineCreditBefore || 0) | formatMoney
+                }}</span>
+                <!-- <span class="td  txt-right"
+                  >{{ (item.lineCreditApply|| 0)  | formatMoney
+                  }}</span
+                > -->
+                <span class="td txt-right">{{
+                  (item.lineCreditAfter || 0) | formatMoney
+                }}</span>
+              </div>
+            </template>
           </div>
         </li>
       </ul>
@@ -34,40 +53,76 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { format2datetime } from "@/main/utils/format/date.js";
-import { Toast } from 'cube-ui';
+import { Toast } from "cube-ui";
+import { isArray } from "@/main/utils/format/is";
+import { formatMoney } from "@/modules/module-iaccount/utils/number";
 
 export default {
   data() {
     return {
-      // statusClass: {
-      //   unProcessed:
-      // }
+      historyList: [],
+      marketMap: {
+        0: "cn",
+        1: "us",
+        2: "hk",
+      },
     };
   },
   created() {
-    this.$store.dispatch("getAddLimitHistory").then((res)=>{
-      if (res) {
-        toast({
-          type: 'txt',
-          txt: this.getI18n('submitSuccess'),
-          time: 1000,
-          callback: ()=>{
-            this.$router.push('/')
-          }
-        })
-      }
-    })
     this.setTitle(this.$t("iAccount.addLimit.history.pageName"));
+    // this.getList();
   },
   computed: {
-    ...mapGetters(["isFetching", "addLimitHistoryList"]),
-    historyList() {
-      return this.addLimitHistoryList
+    ...mapGetters(["secAccountInfo", "isFetching"]),
+    isOpenCnMarket() {
+      return (
+        this.secAccountInfo && Boolean(this.secAccountInfo.isOpenCnStockMarket)
+      );
+    },
+    isOpenHkMarket() {
+      return (
+        this.secAccountInfo && Boolean(this.secAccountInfo.isOpenHkStockMarket)
+      );
+    },
+    isOpenUsaMarket() {
+      return (
+        this.secAccountInfo && Boolean(this.secAccountInfo.isOpenUsaStockMarket)
+      );
+    },
+    marginAccount() {
+      const { fundAccount = [] } = this.secAccountInfo;
+      let account = "";
+      fundAccount.some((item) => {
+        if (item.assetProp == "M") {
+          account = item.fundAccount;
+        }
+        return item.assetProp == "M";
+      });
+      return account;
     },
   },
   methods: {
+    ...mapActions(["getAddLimitHistory"]),
+    getCurrencyLabel(market) {
+      const mktKey = this.marketMap[market];
+      if (!mktKey) return "";
+      return (
+        this.$t(`iAccount.addLimit.loanLimit.${mktKey}.accountName`) +
+        "/" +
+        this.$t(`iAccount.addLimit.loanLimit.${mktKey}.curreny`)
+      );
+    },
+    getList() {
+      this.getAddLimitHistory({ fundAccount: this.marginAccount }).then(
+        (res) => {
+          if (isArray(res)) {
+            this.historyList = res;
+          }
+        }
+      );
+    },
     getI18n(key) {
       return this.$t(`iAccount.addLimit.history.${key}`);
     },
@@ -97,6 +152,7 @@ export default {
     },
   },
   filters: {
+    formatMoney,
     timeFormatter(time) {
       return time && format2datetime(time, 1);
     },

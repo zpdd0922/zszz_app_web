@@ -3,7 +3,6 @@
     debug: false,
     serverUser: 'http://106.52.75.112:6003',
     serveriOpen: 'http://106.52.75.112:6012',
-    // serveriAccount: 'http://192.168.1.13:6012',
     serveriAccount: 'http://106.52.75.112:6012',
     serverInformation: 'http://106.52.75.112:6003',
     serverHelpCenter: 'http://106.52.75.112:6003',

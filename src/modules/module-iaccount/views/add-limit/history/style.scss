@@ -4,58 +4,63 @@
 
 .list-wrap {
   width: 100%;
-  font-size: .15rem;
+  font-size: .14rem;
+
   .list-item {
-    margin-bottom: .1rem;
-    padding: .1rem;
+    margin-bottom: .05rem;
+    padding: .05rem .15rem;
     background-color: $color-content-bg;
     .top {
       display: flex;
       justify-content: space-between;
-      padding: .05rem;
+      // font-size: .13rem;
+      padding: .1rem 0;
+      @include border-after-1px();
     }
-    .detail {
+
+    .item-line {
       display: flex;
       justify-content: space-between;
       padding: .05rem;
 
-      div:last-child {
-        text-align: right;
-      }
-      .mkt {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        width: 40%;
-      }
-      .originLimit {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        width: 40%;
+    }
 
-      }
-      .curLimit {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        width: 20%;
-      }
-      span {
-        width: 100%;
-      }
-      span:first-child {
-        margin-bottom: .1rem;
+    .tb {
+      display: table;
+      width: 100%;
+      padding: .05rem 0;
+    }
+
+
+    .tr {
+      display: table-row;
+      line-height: 1.7em;
+    }
+
+    .td {
+      display: table-cell;
+    }
+
+    
+    .thead {
+      .td {
+        font-weight: 600;
       }
 
-      .title {
-        color: $color-999;
-      }
+    }
+
+    .txt-left{
+      text-align: left;
+    }
+    .txt-right{
+      text-align: right;
     }
   }
 }
 .noMore {
   text-align: center;
+  padding: .1rem;
+  font-size:.12rem;
   color: $color-txt-sub;
 
 }
