@@ -41,9 +41,6 @@ import { Toast } from 'cube-ui';
 export default {
   data() {
     return {
-      // statusClass: {
-      //   unProcessed:
-      // }
     };
   },
   created() {
