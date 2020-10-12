@@ -38,7 +38,7 @@ export default new VueI18n({
       ...commonZhCN,
       ...customizeZhCN,
       ...iccountZhCN,
-      ...iopenZhCN,
+      // ...iopenZhCN,
       ...iopenExtZhCN,
       ...signZhCN,
       lan: 'zh_CN'
@@ -47,7 +47,7 @@ export default new VueI18n({
       ...commonEnUS,
       ...customizeEnUS,
       ...iccountEnUS,
-      ...iopenEnUS,
+      // ...iopenEnUS,
       ...iopenExtEnUS,
       ...signEnUS,
       lan: 'en_US'
@@ -56,7 +56,7 @@ export default new VueI18n({
       ...commonZhHK,
       ...customizeZhHK,
       ...iccounthHK,
-      ...iopenZhHK,
+      // ...iopenZhHK,
       ...iopenExtZhHK,
       ...signZhHK,
       lan: 'zh_HK'

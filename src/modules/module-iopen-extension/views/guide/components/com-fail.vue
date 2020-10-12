@@ -13,8 +13,8 @@
         </p>
       </div>
       <div v-if="!isCanceled" class="desc">
-        <h4 class="desc-title">{{$t("iopenExt.guide.fail.descTitle")}}</h4>
-        <p class="desc-tips" v-for="(reason, idx) in failReasons" :key="idx">{{reason}}</p>
+        <!-- <h4 class="desc-title">{{$t("iopenExt.guide.fail.descTitle")}}</h4> -->
+        <!-- <p class="desc-tips" v-for="(reason, idx) in failReasons" :key="idx">{{reason}}</p> -->
         <p class="desc-tips">
           {{$t("iopenExt.guide.contactPre")}}
           <a

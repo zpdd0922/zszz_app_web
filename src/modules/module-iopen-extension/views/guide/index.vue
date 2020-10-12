@@ -87,8 +87,10 @@ export default {
   data() {
     return {
       OPEN_STATUS,
-      openProgress: {openStatus: 6},
     };
+  },
+  created() {
+    this.getOpenProgress();
   },
   computed: {
     ...mapGetters(["userInfo", "openProgress"]),
