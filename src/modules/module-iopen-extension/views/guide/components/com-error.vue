@@ -5,7 +5,7 @@
         <em class="status"></em>
         <p class="result-title" v-html="failTitle"></p>
         <p class="result-content">
-          {{$t("iOpen.guide.contactPre")}}
+          {{$t("iopenExt.guide.contactPre")}}
           <a
             class="telephone"
             :href="`tel:${telePhone}`"
@@ -14,7 +14,7 @@
       </div>
     </section>
     <!-- <footer class="foot">
-      <cube-button @click="onClick">{{$t("iOpen.guide.btnLogout")}}</cube-button>
+      <cube-button @click="onClick">{{$t("iopenExt.guide.btnLogout")}}</cube-button>
     </footer> -->
   </section>
 </template>
@@ -23,7 +23,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { OPEN_STATUS } from "@/modules/module-iopen/enums/open-progress";
+import { OPEN_STATUS } from "@/modules/module-iopen-extension/enums/open-progress";
 
 export default {
   props: {
@@ -41,10 +41,10 @@ export default {
     failTitle() {
       // 是否销户
       if (this.openProgress.openStatus === OPEN_STATUS.ACCOUNT_OFF) {
-        return this.$t("iOpen.guide.fail.titleAccountOff");
+        return this.$t("iopenExt.guide.fail.titleAccountOff");
       }
       // 账户异常
-      return this.$t("iOpen.guide.fail.titleAccountAbo");
+      return this.$t("iopenExt.guide.fail.titleAccountAbo");
     },
   },
   methods: {

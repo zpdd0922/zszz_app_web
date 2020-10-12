@@ -8,14 +8,15 @@
         <!-- 未开始 -->
         <template
           v-if="
-            marginOpenStatus === OPEN_STATUS.UN_START ||
-            marginOpenStatus === OPEN_STATUS.UN_SUBMIT
+            marginAccountStatus === OPEN_STATUS.UN_START ||
+            marginAccountStatus === OPEN_STATUS.UN_SUBMIT
           "
         >
-          <com-ready :skin="skin" @click="onOpenClick"></com-ready>
+          <base-waiting />
+          <!-- <com-ready :skin="skin" @click="onOpenClick"></com-ready> -->
         </template>
         <!-- 开户中 -->
-        <template v-else-if="marginOpenStatus === OPEN_STATUS.PENDING">
+        <template v-else-if="marginAccountStatus === OPEN_STATUS.PENDING">
           <!-- <template v-if="isAuthing">
             <com-authing :skin="skin" @click="handleLogout"></com-authing>
           </template>
@@ -24,29 +25,29 @@
           <!-- </template> -->
         </template>
         <!-- 开户已取消 -->
-        <template v-else-if="marginOpenStatus === OPEN_STATUS.CANCELED">
+        <template v-else-if="marginAccountStatus === OPEN_STATUS.CANCELED">
           <com-fail :skin="skin" isCanceled @click="onOpenClick"></com-fail>
         </template>
         <!-- 开户成功 -->
-        <template v-else-if="marginOpenStatus === OPEN_STATUS.SUCCESS">
+        <template v-else-if="marginAccountStatus === OPEN_STATUS.SUCCESS">
           <com-success :skin="skin" @click="handleLogout"></com-success>
         </template>
         <!-- 开户失败 -->
         <template
           v-else-if="
-            marginOpenStatus === OPEN_STATUS.FAILED ||
-            marginOpenStatus === OPEN_STATUS.FAILED_1 ||
-            marginOpenStatus === OPEN_STATUS.FAILED_2
+            marginAccountStatus === OPEN_STATUS.FAILED ||
+            marginAccountStatus === OPEN_STATUS.FAILED_1 ||
+            marginAccountStatus === OPEN_STATUS.FAILED_2
           "
         >
           <com-fail :skin="skin" @click="onOpenClick"></com-fail>
         </template>
         <!-- 销户 -->
-        <template v-else-if="marginOpenStatus === OPEN_STATUS.ACCOUNT_OFF">
+        <template v-else-if="marginAccountStatus === OPEN_STATUS.ACCOUNT_OFF">
           <com-error :skin="skin" @click="handleLogout"></com-error>
         </template>
         <!-- 账户异常 -->
-        <!-- <template v-else-if="marginOpenStatus === OPEN_STATUS.ACCOUNT_ABO">
+        <!-- <template v-else-if="marginAccountStatus === OPEN_STATUS.ACCOUNT_ABO">
           <com-error :skin="skin"></com-error>
         </template>-->
         <template v-else>
@@ -97,13 +98,24 @@ export default {
     };
   },
   created() {
-    this.getOpenProgress();
+    this.getOpenProgress({ openType: 0 }).then((res) => {
+      console.log(res.openStatus, res.marginAccountStatus)
+      // 未开户，跳转开户
+      if (res.openStatus !== OPEN_STATUS.SUCCESS) {
+        window.location.replace(openURL);
+      } else if (
+        res.marginAccountStatus === OPEN_STATUS.UN_START ||
+        res.marginAccountStatus === OPEN_STATUS.UN_SUBMIT
+      ) {
+      this.$router.replace({ name: "margin-info-disclosure" });
+      }
+    });
   },
   computed: {
     ...mapGetters(["userInfo", "openProgress"]),
     // 开户状态
-    marginOpenStatus() {
-      return this.openProgress.marginOpenStatus;
+    marginAccountStatus() {
+      return this.openProgress.marginAccountStatus;
     },
     isOpenAccount() {
       return this.openProgress.openStatus === OPEN_STATUS.SUCCESS;
@@ -127,17 +139,6 @@ export default {
     },
   },
   mounted() {
-    this.getOpenProgress({ openType: 0 }).then((res) => {
-      // 未开户，跳转开户
-      if (res.openStatus !== OPEN_STATUS.SUCCESS) {
-        window.location.replace(openURL);
-      } else if (
-        marginOpenStatus === OPEN_STATUS.UN_START ||
-        marginOpenStatus === OPEN_STATUS.UN_SUBMIT
-      ) {
-        this.onOpenClick();
-      }
-    });
   },
   methods: {
     ...mapActions(["getOpenProgress"]),
