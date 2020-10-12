@@ -5,33 +5,20 @@ import { arrayToObject } from '@/main/utils/format/array';
 import * as types from './mutation-types';
 
 const state = {
-  openProgress: null,
+
 
 };
 
 const getters = {
-  openProgress: state => state.openProgress,
+
 };
 
 const mutations = {
-  [types.OPEN_PROGRESS](state, payload) {
-    state.openProgress = payload.result;
-  },
+
 };
 
 const actions = {
-  getOpenProgress({ commit, state }, params = {}) {
-    return new Promise((resolve, reject) => {
-      openApi.getOpenProgress(params)
-        .then(res => {
-          commit(types.OPEN_PROGRESS, { result: res });
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  },
+
 };
 
 export default {

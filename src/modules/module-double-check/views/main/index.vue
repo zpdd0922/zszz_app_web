@@ -6,7 +6,9 @@
       <p>{{ statusWarn.header2 }}</p>
     </header>
     <section class="body">
-      <div class="phone">{{$t('doubleCheck.curPhoneNum')}}{{hiddennedPhoneNum}}</div>
+      <div class="phone">
+        {{ $t("doubleCheck.curPhoneNum") }}{{ hiddennedPhoneNum }}
+      </div>
       <div class="captcha-wrap">
         <!-- <input
           type="text"
@@ -60,6 +62,8 @@ import { mapActions, mapGetters } from "vuex";
 import BaseForm from "@/main/components/base-form/";
 import { getURLParameters } from "@/main/utils/format/url";
 import { toast } from "@/main/utils/common/tips/";
+import { openTrade } from "@/main/utils/native-app";
+
 
 export default {
   components: {
@@ -92,8 +96,10 @@ export default {
   computed: {
     ...mapGetters(["openAccountNum", "isShowImgCaptcha", "userInfo"]),
     hiddennedPhoneNum() {
-      return this.openAccountNum &&
-      this.openAccountNum.replace(this.openAccountNum.substring(3, 7), "****")
+      return (
+        this.openAccountNum &&
+        this.openAccountNum.replace(this.openAccountNum.substring(3, 7), "****")
+      );
     },
     statusWarn() {
       const type = this.urlParams.remindType || 0;
@@ -176,16 +182,19 @@ export default {
     },
     //处理提交
     handleSubmit() {
+      const callback = this.urlParams['callback'];
       const isValid = this.chechFormRules();
       // 4.1验证通过
       if (isValid) {
         const params = {
-          userId: this.userInfo.uId,
-          equipmentNum: this.userInfo.equipmentNum || 123124,
+          userId: this.userInfo && this.userInfo.uId,
+          equipmentNum:
+            this.userInfo.equipmentNum ||
+            "A1B241398A75A5B66C17B124F6B887DB-44B24288-F84B-40D5-B5FB-C34D82FF3A13",
           authCode: this.formData.captcha,
           eventId: this.captchaId,
           sevenNRemFlag: Number(this.sevenNRemFlag),
-          equipmentName: this.userInfo.equipmentName || "iphone8",
+          equipmentName: this.userInfo.equipmentName || "iPhone 11 Pro",
         };
         if (params.eventId !== null) {
           this.$store.dispatch("checkCaptcha", params).then((res) => {
@@ -195,13 +204,11 @@ export default {
                 txt: this.$t("doubleCheck.checkSuccess"),
                 time: 1000,
                 callback: () => {
-                  console.log("跳转");
-                  // if (!redirect_url) {
-                  //   const { redirect = "/" } = this.query;
-                  //   this.$router.replace({ path: redirect });
-                  // } else {
-                  //   window.location.href = decodeURIComponent(redirect_url);
-                  // }
+                  if (typeof window.parent[callback] === 'function') {
+                    window.parent[callback]();
+                  } else {
+                    openTrade({});
+                  }
                 },
               });
             } else {
@@ -227,6 +234,11 @@ export default {
     },
     handleSendCode() {
       return new Promise((resolve, reject) => {
+        toast({
+          type: "txt",
+          txt: this.$t("doubleCheck.sendCaptcha"),
+          time: 1000,
+        });
         // 发送中
         this.isSendCode = true;
         // const params = {

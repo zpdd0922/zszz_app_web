@@ -186,7 +186,7 @@ export default {
       return (
         this.getI18n("tips").replace(
           "$userName$",
-          `<span class='highlight'>(${this.model.bankUserName})</span>`
+          `<span class='highlight'>(${this.openInfo.enNameValue})</span>`
         ) +
         `<span class='highlight'>${this.getI18n(
           "tips2"
@@ -254,9 +254,8 @@ export default {
     updateInfo() {
       const userInfo = this.openInfo;
       Object.keys(this.model).forEach((val) => {
-        if (val == "bankUserName" && !userInfo[val]) {
-          // this.model[val] = this.openInfo.enNameValue;
-          this.model[val] = `${this.openInfo.givenNameSpell} ${this.openInfo.familyNameSpell}`;
+        if (val == "bankUserName") {
+          this.model[val] = this.openInfo.enNameValue;
         } else {
           const res = userInfo[val] ? userInfo[val] : this.model[val];
           this.model[val] = res;
@@ -277,13 +276,15 @@ export default {
         toast({ type: "error", txt: errorTips, time: 1000 });
         return;
       }
-      if (!this.validBankName()) {
-        const errorTips = this.getI18n('errorTipsBankName');
-        toast({ type: "error", txt: errorTips, time: 1000 });
-        return;
+      if (this.model.bankId === this.bankValue.OTHERS) {
+        if (!this.validBankName()) {
+          const errorTips = this.getI18n('errorTipsBankName');
+          toast({ type: "error", txt: errorTips, time: 1000 });
+          return;
+        }
       }
       //银行名称不为其他清空已填其他值
-      if (this.model.bankId !== 'OTHERS') {
+      if (this.model.bankId !== this.bankValue.OTHERS) {
         this.model.otherBankName = ''
       }
       const params = {

@@ -90,5 +90,7 @@ export const addLimit = {
     originLimitTitle: '原有额度',
     curLimitTitle: '现有额度',
     noMore: '无更多记录',
+    badPwd: '密码格式不正确',
+    submitSuccess: '提交成功',
   },
 };

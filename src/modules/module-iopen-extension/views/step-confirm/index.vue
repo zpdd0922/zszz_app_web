@@ -45,6 +45,8 @@ import I18n from '@/modules/module-iopen-extension/locale/index.js';
 import validate from '@/main/utils/format/validate.js';
 import { toast } from '@/main/utils/common/tips/';
 import { otherDisclosure } from "@/modules/module-iopen-extension/format/disclosure";
+import openMarginApi from "@/modules/module-iopen-extension/api/modules/api-open-margin";
+import { mapActions } from 'vuex';
 
 
 export default {
@@ -71,7 +73,7 @@ export default {
       };
     },
     isDisabled() {
-      return !this.checked || this.tradePwd.length <7
+      return !this.checked || !this.validatePwd
     },
     //风险提示列表
     agreements() {
@@ -83,20 +85,21 @@ export default {
       } else if (I18n.locale === 'zh_HK') {
         return agreementList.zh_HK.list
       }
-    }
+    },
+    validatePwd() {
+      return validate.isTradePwd(this.tradePwd)
+    },
   },
   methods: {
+    ...mapActions(['submitOpenMargin']),
     jumpToLink(url) {
       window.location.href = url;
     },
     getI18n(key) {
       return this.$t(`iopenExt.confirm.${key}`);
     },
-    validatePwd() {
-      return validate.isTradePwd(this.tradePwd)
-    },
     handleNext() {
-      if (!this.validatePwd()) {
+      if (!this.validatePwd) {
         toast({
           type: 'error',
           txt: this.getI18n('tradePwd.badPwd'),
@@ -118,9 +121,9 @@ export default {
         key: '',
         ...formattedData,
       }
-      console.log(data);
       // this.$router.push({name: 'opmaGuide'})
-      this.$store.dispatch('submitOpenMargin', data).then((res)=>{
+      this.submitOpenMargin(data).then((res)=>{
+      // openMarginApi.submitOpenMargin(data).then((res)=>{
         if (res) {
           toast({
             type: 'txt',

@@ -137,7 +137,7 @@ export default {
       },
       agreement: {
         linkStart: "",
-        linkContent: `已閱讀並接受全部檔內容`,
+        linkContent: `已閱讀並接受全部文件內容`,
         linkEnd: "",
       },
       submitSuccess: '提交成功',

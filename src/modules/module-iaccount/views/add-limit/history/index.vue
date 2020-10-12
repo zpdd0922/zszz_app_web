@@ -5,14 +5,12 @@
     </template>
     <template v-else>
       <ul class="list-wrap">
-        <li
-          class="list-item"
-          v-for="(item, index) in addLimitHistoryList"
-          :key="index"
-        >
+        <li class="list-item" v-for="(item, index) in historyList" :key="index">
           <div class="top">
             <span>{{ item.createTime | timeFormatter }}</span>
-            <span :class="statusClass(item.status)">{{ statusFormatter(item.status) }}</span>
+            <span :class="statusClass(item.status)">{{
+              statusFormatter(item.status)
+            }}</span>
           </div>
           <div class="detail">
             <div class="mkt">
@@ -30,7 +28,7 @@
           </div>
         </li>
       </ul>
-      <div class="noMore">{{getI18n('noMore')}}</div>
+      <div class="noMore">{{ getI18n("noMore") }}</div>
     </template>
   </div>
 </template>
@@ -38,6 +36,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { format2datetime } from "@/main/utils/format/date.js";
+import { Toast } from 'cube-ui';
 
 export default {
   data() {
@@ -48,13 +47,25 @@ export default {
     };
   },
   created() {
-    // this.$store.dispatch('getAddLimitHistory').then(()=>{
-    //   this.isFetching = false;
-    // })
+    this.$store.dispatch("getAddLimitHistory").then((res)=>{
+      if (res) {
+        toast({
+          type: 'txt',
+          txt: this.getI18n('submitSuccess'),
+          time: 1000,
+          callback: ()=>{
+            this.$router.push('/')
+          }
+        })
+      }
+    })
     this.setTitle(this.$t("iAccount.addLimit.history.pageName"));
   },
   computed: {
     ...mapGetters(["isFetching", "addLimitHistoryList"]),
+    historyList() {
+      return this.addLimitHistoryList
+    },
   },
   methods: {
     getI18n(key) {
@@ -63,7 +74,7 @@ export default {
     statusClass(status) {
       switch (status) {
         case 0:
-          return 'unProcessed';
+          return "unProcessed";
         case 1:
           return "processing";
         case 2:
