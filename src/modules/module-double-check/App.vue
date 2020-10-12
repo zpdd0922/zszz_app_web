@@ -1,5 +1,5 @@
 <template>
-  <div id="root" class="root-wrap">
+  <div id="root" :class="['root-wrap', {'root-wrap-app': isApp}]">
     <header-custom
       :isShow="!isApp"
       :rightBtns="[{ content: this.nextLang, callBack: this.changeLang }]"

@@ -4,21 +4,21 @@
       <li class="limit-current-item" v-if="isOpenHkMarket">
         <span class="name">{{ getI18n("loanLimit.hk.currentName") }}</span>
         <div class="content">
-          <span class="num">{{ loanLimitValue.hk | formatMoney }}</span>
+          <span class="num">{{ (loanLimitValue.hk || 0) | formatMoney }}</span>
           <span class="unit">{{ getI18n("loanLimit.hk.curreny") }}</span>
         </div>
       </li>
       <li class="limit-current-item" v-if="isOpenUsaMarket">
         <span class="name">{{ getI18n("loanLimit.us.currentName") }}</span>
         <div class="content">
-          <span class="num">{{ loanLimitValue.us | formatMoney }}</span>
+          <span class="num">{{ (loanLimitValue.us || 0) | formatMoney }}</span>
           <span class="unit">{{ getI18n("loanLimit.us.curreny") }}</span>
         </div>
       </li>
       <li class="limit-current-item" v-if="isOpenCnMarket">
         <p class="name">{{ getI18n("loanLimit.cn.currentName") }}</p>
         <div class="content">
-          <span class="num">{{ loanLimitValue.cn | formatMoney }}</span>
+          <span class="num">{{ (loanLimitValue.cn || 0) | formatMoney }}</span>
           <span class="unit">{{ getI18n("loanLimit.cn.curreny") }}</span>
         </div>
       </li>
@@ -65,9 +65,9 @@
     <div class="limit-agree-box">
       <cube-checkbox v-model="checked">
         <span>{{ getI18n("agreement.linkStart") }}</span>
-        <a :href="addLimitAgreement.href" class="base-links">《{{
-          addLimitAgreement.content
-        }}》</a>
+        <span @click.stop="handleToAgreement" class="base-links">{{
+          getI18n("agreement.linkContent")
+        }}</span>
         {{ getI18n("agreement.linkEnd") }}
       </cube-checkbox>
     </div>
@@ -82,13 +82,13 @@
         {{ getI18n("record") }}
       </div>
       <div class="tips">
-      <h3>{{ getI18n("tips.title") }}</h3>
-      <ol tag="ol">
-        <li v-for="(item, index) in getI18n('tipsList')" :key="index">
-          {{ item }}
-        </li>
-      </ol>
-    </div>
+        <h3>{{ getI18n("tips.title") }}</h3>
+        <ol tag="ol">
+          <li v-for="(item, index) in getI18n('tipsList')" :key="index">
+            {{ item }}
+          </li>
+        </ol>
+      </div>
     </footer>
   </div>
 </template>
@@ -103,8 +103,7 @@ import { toast } from "@/main/utils/common/tips/";
 //   canLimitList,
 // } from "@/modules/module-iaccount/views/add-limit/stock-list";
 import { formatMoney } from "@/modules/module-iaccount/utils/number";
-import validate from '@/main/utils/format/validate'
-import {agreementsData} from './risk';
+import validate from "@/main/utils/format/validate";
 
 export default {
   data() {
@@ -145,12 +144,6 @@ export default {
   },
   computed: {
     ...mapGetters(["secAccountInfo"]),
-    addLimitAgreement() {
-      if (this.$t('language') === "zh_CN") {
-        return agreementsData.zh_CN.addLimit;
-      }
-      return agreementsData.zh_HK.addLimit;
-    },
     marginAccount() {
       const { fundAccount = [] } = this.secAccountInfo;
       let account = "";
@@ -227,7 +220,6 @@ export default {
           res.map((item) => {
             const { moneyType = "", maxExposure = "0" } = item;
             const key = this.marketMap[moneyType];
-            console.log(key);
             if (key) {
               this.loanLimitValue[key] = maxExposure;
             }
@@ -239,31 +231,32 @@ export default {
       return this.$t(`iAccount.addLimit.${key}`);
     },
     validatePwd() {
-      return validate.isTradePwd(this.tradePwd)
+      return validate.isTradePwd(this.tradePwd);
     },
     // 处理提交
     handleNext() {
       if (!this.validatePwd()) {
         toast({
-          type: 'txt',
-          txt: this.getI18n('badPwd'),
+          type: "txt",
+          txt: this.getI18n("badPwd"),
           time: 1000,
-        })
-        return
+        });
+        return;
       }
       const data = {
-        tradepwd: this.tradePwd
-      }
+        fundAccount: this.marginAccount,
+        tradePwd: this.tradePwd,
+      };
       this.$store.dispatch("submitAddLimit", data).then((res) => {
         if (res) {
-          this.$router.push('/')
+          this.$router.push("/");
         }
       });
     },
     // 处理跳转协议
-    // handleToAgreement() {
-    //   window.href = this.riskLink;
-    // },
+    handleToAgreement() {
+      return;
+    },
     //跳转历史记录页面
     goToHistory() {
       this.$router.push({ name: "add-limit-history" });

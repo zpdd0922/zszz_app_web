@@ -1,7 +1,7 @@
 (function (window) {
   var GLOBAL_ENV_CONFIG = {
     debug: false,
-    serverUser: 'http://106.52.75.112:6012',
+    serverUser: 'http://106.52.75.112:6003',
     serveriOpen: 'http://106.52.75.112:6012',
     serveriAccount: 'http://106.52.75.112:6012',
     serverInformation: 'http://106.52.75.112:6003',

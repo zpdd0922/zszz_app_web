@@ -6,16 +6,19 @@ export const addLimit = {
     nextTitle: "当前只能调整为",
     cn: {
       currentName: "A股通当前信用额度",
+      accountName: "A股通",
       nextName: "A股账户",
       curreny: 'CNY'
     },
     hk: {
       currentName: "港股当前信用额度",
+      accountName: "港股",
       nextName: "港股账户",
       curreny: 'HKD'
     },
     us: {
       currentName: "美股当前信用额度",
+      accountName: "美股",
       nextName: "美股账户",
       curreny: 'USD'
     }
@@ -88,7 +91,7 @@ export const addLimit = {
     mktTitle: '账户',
     mktHK: '港股',
     originLimitTitle: '原有额度',
-    curLimitTitle: '现有额度',
+    curLimitTitle: '获取额度',
     noMore: '无更多记录',
     badPwd: '密码格式不正确',
     submitSuccess: '提交成功',
