@@ -87,11 +87,11 @@ export default {
   data() {
     return {
       OPEN_STATUS,
-      openProgress: {openStatus: 3},
+      openProgress: {openStatus: 6},
     };
   },
   computed: {
-    // ...mapGetters(["userInfo", "openProgress"]),
+    ...mapGetters(["userInfo", "openProgress"]),
     // 开户状态
     openStatus() {
       // return OPEN_STATUS.PENDING;

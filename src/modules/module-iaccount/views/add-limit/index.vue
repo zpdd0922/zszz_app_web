@@ -103,6 +103,8 @@ import { toast } from "@/main/utils/common/tips/";
 //   canLimitList,
 // } from "@/modules/module-iaccount/views/add-limit/stock-list";
 import { formatMoney } from "@/modules/module-iaccount/utils/number";
+import validate from '@/main/utils/format/validate'
+
 
 export default {
   data() {
@@ -230,9 +232,27 @@ export default {
     getI18n(key) {
       return this.$t(`iAccount.addLimit.${key}`);
     },
+    validatePwd() {
+      return validate.isTradePwd(this.tradePwd)
+    },
     // 处理提交
     handleNext() {
-      this.$store.dispatch("submitAddLimit").then(() => {});
+      if (!this.validatePwd()) {
+        toast({
+          type: 'txt',
+          txt: this.getI18n('badPwd'),
+          time: 1000,
+        })
+        return
+      }
+      const data = {
+        tradepwd: this.tradePwd
+      }
+      this.$store.dispatch("submitAddLimit", data).then((res) => {
+        if (res) {
+          this.$router.push('/')
+        }
+      });
     },
     // 处理跳转协议
     handleToAgreement() {

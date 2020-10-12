@@ -1,24 +1,39 @@
-
-// import paramsData from '@/modules/module-iaccount/api/params/params-wrap'
-import paramsData from "@/main/request/utils/wrap";
+import openApi from '@/modules/module-iopen/api/api-common/index.js';
+import paramsData from '@/main/request/utils/wrap-icrm';
+import { SUFFIX, IMAGE_REQUEST_LIST, WEB_OCCUPATION_TYPE } from '@/modules/module-iopen/api/params-define';
+import { arrayToObject } from '@/main/utils/format/array';
+import * as types from './mutation-types';
 import openMarginApi from "@/modules/module-iopen-extension/api/modules/api-open-margin";
 
-import * as types from "./mutation-user-types";
 
-// 初始化数据 --> mapStates
 const state = {
+  openProgress: null,
+
 };
 
-// 衍生数据，追踪数据更新后值 --> mapGetters
 const getters = {
+  openProgress: state => state.openProgress
 };
 
-// mutations，同步数据，vue视图文件中可用this.$store.commit
 const mutations = {
+  [types.OPEN_PROGRESS](state, payload) {
+    state.openProgress = payload.result;
+  },
 };
 
-// actions， 异步操作数据，vue视图文件中可用this.$store.dispatch
 const actions = {
+  getOpenProgress({ commit, state }, params = {}) {
+    return new Promise((resolve, reject) => {
+      openApi.getOpenProgress(params)
+        .then(res => {
+          commit(types.OPEN_PROGRESS, { result: res });
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
   submitOpenMargin({ commit, state }, data) {
     return new Promise((resolve, reject) => {
       openMarginApi.submitOpenMargin(data)
@@ -36,5 +51,6 @@ export default {
   state,
   getters,
   mutations,
-  actions,
+  actions
 };
+

@@ -35,7 +35,7 @@
         <h3 class="pwdTitle">{{ getI18n("setPwd") }}</h3>
         <div class="rule">{{ getI18n("pwdRule") }}</div>
       </div>
-      <div class="warn" v-if="showWarn" :class="{suc: pwdSuccess}">
+      <div class="warn" v-if="showWarnText" :class="{suc: pwdSuccess}">
         <span>{{ warnText }}</span>
       </div>
       <div class="trade-pwd">
@@ -47,7 +47,6 @@
             :placeholder="getI18n('tradePwd')"
             v-model.trim="model.pwd"
             class="pwd"
-            @focus="showWarn = true"
           >
           </cube-input>
           <cube-input
@@ -57,7 +56,7 @@
             :placeholder="getI18n('tradePwdConfirm')"
             v-model.trim="model.password"
             class="pwd"
-            v-if="pwd1Status"
+            v-if="pwdStatus"
           ></cube-input>
         </cube-form>
       </div>
@@ -80,6 +79,7 @@ import screenshot from "@/main/utils/dom/screenshot";
 import storage from "@/main/utils/cache/localstorage";
 import UserAge from "@/main/utils/common/ua-info";
 import { getURLParameters } from "@/main/utils/format/url";
+import validate from '@/main/utils/format/validate';
 
 const fileName = `${Signature}${SUFFIX}`;
 const idFlag = `${SignatureInfo}${SUFFIX}`;
@@ -134,9 +134,7 @@ export default {
         pwd: '',
         password: '',
       },
-      warnText: '',
-      pwd1Status: false,
-      showWarn: false,
+      pwdStatus: false,
       pwdSuccess: false,
     };
   },
@@ -147,6 +145,52 @@ export default {
     // 是否签名
     isDisabled() {
       return Object.values(this.upload).length <= 0 || !this.pwdSuccess;
+    },
+    //文字状态显示
+    warnText() {
+      const [p1, p2] = [this.model.pwd, this.model.password];
+      // 密码1不存在
+      // 密码2存在，显示非法 密码2不存在则不显示
+      if (!p1) {
+        if (p2) {
+          return this.showWarnText('illegal')
+        } else {
+          return this.showWarnText('');
+        }
+      } else {
+        // 密码1存在
+        // 密码1校验不成功始终显示非法
+        if (!this.pwd1Checked) {
+          return this.showWarnText('illegal')
+        } else {
+          //密码1校验成功
+          // 是否一样
+          if (this.isPwdSame) {
+            return this.showWarnText('pwdSuccess')
+          } else {
+            // 不一样判断p2是否为空
+            if (p2) {
+              return this.showWarnText('notSame')
+            } else {
+              return this.showWarnText('')
+            }
+          }
+        }
+      }
+    },
+    //判断两次密码是否一样
+    isPwdSame() {
+      return this.model.pwd === this.model.password;
+    },
+    //判断密码1是否正确
+    pwd1Checked() {
+      const pwd = this.model.pwd
+      return pwd && validate.isTradePwd(pwd)
+    },
+    //判断密码2是否正确
+    pwd2Checked() {
+      const pwd = this.model.password
+      return pwd && validate.isTradePwd(pwd)
     },
   },
   methods: {
@@ -274,28 +318,39 @@ export default {
             url.indexOf('blob') === 0 && URL.revokeObjectURL(url)
           })
       }
-    }
+    },
+    //提示信息文字状态
+    showWarnText(val) {
+      switch (val) {
+        case 'illegal': 
+          return this.getI18n('illegal')
+        case 'notSame': 
+          return this.getI18n('notSame')
+        case 'pwdSuccess': 
+          return this.getI18n('pwdSuccess')
+        default :
+          return ''
+      }
+    },
   },
   created() {
     this.updateInfo();
   },
   watch: {
     "model.pwd"(newVal, oldVal) {
-      if (newVal && newVal.length === 8 && /^[A-Za-z0-9]{8}$/.test(newVal)) {
-        this.warnText = '',
-        this.pwd1Status = true
+      if (this.pwd1Checked) {
+        //首次校验通过显示第二个输入框
+        this.pwdStatus = true
+        this.pwdSuccess = this.isPwdSame ? true : false
       } else {
-        this.pwdSuccess = false;
-        this.warnText = this.getI18n('illegal');
+        this.pwdSuccess = false
       }
     },
     "model.password"(newVal, oldVal) {
-      if (newVal !== this.model.pwd) {
-        this.warnText = this.getI18n('notSame');
-        this.pwdSuccess = false;
+      if (this.pwd2Checked) {
+        this.pwdSuccess = this.isPwdSame ? true : false
       } else {
-        this.warnText = this.getI18n('pwdSuccess');
-        this.pwdSuccess = true;
+        this.pwdSuccess = false
       }
     },
   }

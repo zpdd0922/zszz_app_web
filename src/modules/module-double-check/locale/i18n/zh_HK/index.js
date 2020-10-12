@@ -40,7 +40,7 @@ export default {
     checkSuccess: "綁定成功！",
     getCaptcha: "請獲取驗證碼",
     captchaWarn: '請輸入驗證碼',
-    curPhoneNum: '您當前的電話號碼為：'
-
+    curPhoneNum: '您當前的電話號碼為：',
+    sendCaptcha: '發送成功',
   },
 };

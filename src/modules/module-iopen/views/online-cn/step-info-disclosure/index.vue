@@ -20,7 +20,7 @@
           <template
             v-if="
               disclosureDefine.isNotOurStaffKin.isCanFalse &&
-              !model.isNotOurStaffKin
+                !model.isNotOurStaffKin
             "
           >
             <cube-form-item
@@ -40,7 +40,7 @@
           <template
             v-if="
               disclosureDefine.isNotHkexParterStaff.isCanFalse &&
-              !model.isNotHkexParterStaff
+                !model.isNotHkexParterStaff
             "
           >
             <cube-form-item
@@ -60,7 +60,7 @@
           <template
             v-if="
               disclosureDefine.isNotConsortWithMargin.isCanFalse &&
-              !model.isNotConsortWithMargin
+                !model.isNotConsortWithMargin
             "
           >
             <cube-form-item
@@ -101,7 +101,7 @@
           <template
             v-if="
               disclosureDefine.isNotConsortWithOtherMargin.isCanFalse &&
-              !model.isNotConsortWithOtherMargin
+                !model.isNotConsortWithOtherMargin
             "
           >
             <cube-form-item

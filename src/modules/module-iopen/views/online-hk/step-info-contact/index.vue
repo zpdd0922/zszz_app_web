@@ -59,7 +59,7 @@
               <cube-form-item :field="fieldsHomeOther.homeOtherArea"></cube-form-item>
             </template>
             <!-- 详细地址 -->
-            <cube-form-item :field="fieldsContact.homeAddressDetail">123</cube-form-item>
+            <cube-form-item :field="fieldsContact.homeAddressDetail"></cube-form-item>
             <template v-if="model.homeRadio !== optionsList.radioListValue.oth">
               <!-- 门牌号 -->
               <!-- <cube-form-item :field="fieldsContact.homeAddressNumber"></cube-form-item> -->

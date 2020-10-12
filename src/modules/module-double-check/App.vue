@@ -1,6 +1,9 @@
 <template>
   <div id="root" class="root-wrap">
-    <header-custom :rightBtns="[{content: this.nextLang, callBack:this.changeLang }]" />
+    <header-custom
+      :isShow="!isApp"
+      :rightBtns="[{ content: this.nextLang, callBack: this.changeLang }]"
+    />
     <template v-if="isChecking">
       <base-waiting />
     </template>
@@ -17,12 +20,15 @@ import { getURLParameters } from "@/main/utils/format/url";
 import HeaderCustom from "@/customize/components/header-custom/";
 import { setLanguage } from "@/main/locale/helper";
 export default {
-  components: { BaseCopyright, HeaderCustom},
+  components: { BaseCopyright, HeaderCustom },
   created() {
     this.setTitle(this.$t("doubleCheck.main.pageName"));
     // this.checkLogin();
   },
   computed: {
+    isApp() {
+      return this.UaInfo.isApp();
+    },
     isZhCN() {
       if (this.$t("language") === "zh_CN") {
         return true;
@@ -51,7 +57,7 @@ export default {
   methods: {
     reload() {
       this.isChecking = true; //先关闭，
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         this.isChecking = false; //再打开
       });
     },

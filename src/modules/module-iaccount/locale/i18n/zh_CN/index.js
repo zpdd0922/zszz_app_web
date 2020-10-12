@@ -107,7 +107,7 @@ export default {
         },
         company: {
           label: "公司行动",
-          xgxx: "选股选息",
+          xgxx: "行动回复",
           // sqgg: "申请供股",
         },
         fee: {
