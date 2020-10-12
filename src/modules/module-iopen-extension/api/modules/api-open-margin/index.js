@@ -5,7 +5,7 @@ export default {
   * 提交增开保证金账户申请 
   * @return clientStatus 客户状态
   */
- submitOpenMargin: data => postCommon('/web_bpm/open_more_user_info/save_open_more_user_info', data),
+ submitOpenMargin: data => postCommon('/open_more_user_info/save_open_more_user_info', data),
   /**
   * 查询用户现金账户及交易账户信息
   * @return clientStatus 客户状态
