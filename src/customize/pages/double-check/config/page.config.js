@@ -12,7 +12,7 @@ module.exports = {
   serverPort: 8095,
   pages: [
     {
-      name: 'index',
+      name: 'attest',
       template: 'src/customize/pages/double-check/template/index.html',
       entry: 'src/modules/module-double-check/index.js',
       title: '二重认证',

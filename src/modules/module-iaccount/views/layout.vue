@@ -2,6 +2,9 @@
   <div class="layout-iaccount" v-if="secAccountInfo">
     <router-view />
   </div>
+  <div v-else>
+      <base-waiting />
+  </div>
 </template>
 
 <script>
