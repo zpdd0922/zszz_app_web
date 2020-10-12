@@ -195,7 +195,7 @@ export default {
               label: this.getI18n("iconLabel.accounts.add_limit"),
               iconType: "add_limit",
               path: "add-limit",
-              disabled: !this.isMarginAccount,
+              disabled: this.isMarginAccount,
             },
           ],
         },
