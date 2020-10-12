@@ -12,7 +12,8 @@
             { content: '客户款项常设授权', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=standing_auth&lang=zh_CN" },
             { content: '隐私保护政策', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=privacy_policy&lang=zh_CN" },
             { content: '电子认证服务协议', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=ca_auth&lang=zh_CN" },
-        ]
+        ],
+        addLimit: { content: '保证金账户风险披露', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=disclosure_margin&lang=zh_CN" },
     };
     Global_Config_Agreements.zh_HK = {
         list: [
@@ -24,7 +25,8 @@
             { content: '客戶款項常設授權', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=standing_auth&lang=zh_CN" },
             { content: '隱私保護政策', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=privacy_policy&lang=zh_CN" },
             { content: '電子認證服務協議', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=ca_auth&lang=zh_CN" },
-        ]
+        ],
+        addLimit:{ content: '保證金帳戶風險披露', href: window._GLOBAL_ENV_CONFIG.webAgreement + "?key=disclosure_margin&lang=zh_CN" },
     };
 
     window._GLOBAL_CONFIG = Global_Config;
