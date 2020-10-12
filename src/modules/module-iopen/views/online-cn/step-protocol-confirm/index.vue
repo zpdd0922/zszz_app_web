@@ -173,6 +173,10 @@ export default {
       // 若存在签名图
       if (signImgData) {
         this.$set(this.upload, fileName, signImgData);
+         this.$nextTick(() => {
+          // DOM转换base64
+          this.handleCanvasImg(signImgData)
+        })
       }
     },
     handleBefore() {
@@ -214,8 +218,6 @@ export default {
           normalData
         );
 
-        console.log(123, data)
-
         this.toCommitAllData(data).then((res) => {
           toast({
             type: "correct",
@@ -228,6 +230,21 @@ export default {
         });
       }
     },
+     handleCanvasImg(url) {
+      const self = this
+      // 等待图片加载完成
+      this.$refs.signImgDom.onload = function () {
+        // 合成图
+        screenshot(self.$refs.signBox)
+          .then(imgData => {
+            self.$set(self.upload, idFlag, imgData)
+            // 清除本地缓存签名
+            storage.remove(fileName)
+            // 如若本地缓存blob对象 - 去除
+            url.indexOf('blob') === 0 && URL.revokeObjectURL(url)
+          })
+      }
+    }
   },
   watch: {
     "model.pwd"(newVal, oldVal) {
