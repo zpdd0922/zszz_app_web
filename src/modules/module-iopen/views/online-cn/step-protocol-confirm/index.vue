@@ -229,7 +229,6 @@ export default {
       return new Promise((resolve, reject) => {
         this.showWarn = true;
         if (!this.pwdSuccess) {
-          console.log(123);
           reject();
           return
         }

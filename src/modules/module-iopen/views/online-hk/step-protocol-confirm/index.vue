@@ -35,7 +35,7 @@
         <h3 class="pwdTitle">{{ getI18n("setPwd") }}</h3>
         <div class="rule">{{ getI18n("pwdRule") }}</div>
       </div>
-      <div class="warn" v-if="showWarnText" :class="{suc: pwdSuccess}">
+      <div class="warn" v-if="showWarn" :class="{suc: pwdSuccess}">
         <span>{{ warnText }}</span>
       </div>
       <div class="trade-pwd">
@@ -136,6 +136,7 @@ export default {
       },
       pwdStatus: false,
       pwdSuccess: false,
+      showWarn: false,
     };
   },
   computed: {
@@ -144,7 +145,7 @@ export default {
     },
     // 是否签名
     isDisabled() {
-      return Object.values(this.upload).length <= 0 || !this.pwdSuccess;
+      return Object.values(this.upload).length <= 0
     },
     //文字状态显示
     warnText() {
@@ -255,6 +256,11 @@ export default {
     },
     handleBefore() {
       return new Promise((resolve, reject) => {
+        this.showWarn = true;
+        if (!this.pwdSuccess) {
+          reject();
+          return
+        }
         // 保存数据&下一步
         const {pwd, ...obj} = this.model;
         const params = {
