@@ -72,7 +72,7 @@ export default {
   },
   created() {
     this.setTitle(this.$t("iAccount.addLimit.history.pageName"));
-    // this.getList();
+    this.getList();
   },
   computed: {
     ...mapGetters(["secAccountInfo", "isFetching"]),

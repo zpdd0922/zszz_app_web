@@ -65,9 +65,9 @@
     <div class="limit-agree-box">
       <cube-checkbox v-model="checked">
         <span>{{ getI18n("agreement.linkStart") }}</span>
-        <span @click.stop="handleToAgreement" class="base-links">{{
-          getI18n("agreement.linkContent")
-        }}</span>
+        <a :href="addLimitAgreement.href" class="base-links">《{{
+          addLimitAgreement.content
+        }}》</a>
         {{ getI18n("agreement.linkEnd") }}
       </cube-checkbox>
     </div>
@@ -104,6 +104,7 @@ import { toast } from "@/main/utils/common/tips/";
 // } from "@/modules/module-iaccount/views/add-limit/stock-list";
 import { formatMoney } from "@/modules/module-iaccount/utils/number";
 import validate from "@/main/utils/format/validate";
+import {agreementsData} from './risk';
 
 export default {
   data() {
@@ -144,6 +145,12 @@ export default {
   },
   computed: {
     ...mapGetters(["secAccountInfo"]),
+    addLimitAgreement() {
+      if (this.$t('language') === "zh_CN") {
+        return agreementsData.zh_CN.addLimit;
+      }
+      return agreementsData.zh_HK.addLimit;
+    },
     marginAccount() {
       const { fundAccount = [] } = this.secAccountInfo;
       let account = "";
@@ -254,9 +261,9 @@ export default {
       });
     },
     // 处理跳转协议
-    handleToAgreement() {
-      return;
-    },
+    // handleToAgreement() {
+    //   return;
+    // },
     //跳转历史记录页面
     goToHistory() {
       this.$router.push({ name: "add-limit-history" });
