@@ -652,5 +652,8 @@ export default {
         text_33: "證券流向",
       },
     },
+    commonError: {
+      wrongBankName: '請輸入正確的銀行名稱',
+    }
   },
 };

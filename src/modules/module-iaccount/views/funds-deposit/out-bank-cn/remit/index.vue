@@ -219,6 +219,8 @@ import { format_CommitData } from "@/modules/module-iaccount/format/deposit";
 import * as tips from "@/main/utils/common/tips";
 import { OTHER, LIMIT_BANK } from "@/modules/module-iaccount/define";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
+import validate from "@/main/utils/format/validate"
+
 
 const EXAMPLE_BANK = {
   foot: [
@@ -367,7 +369,15 @@ export default {
     _handleBefore() {
       return new Promise((resolve, reject) => {
         // 表单校验
-        const { depositBankAccount, depositBankAccountAgain } = this.model;
+        const { depositBankAccount, depositBankAccountAgain, depositBankNameOther } = this.model;
+
+        // 校验银行名字是否正确
+        if (this.isShowOther && !validate.isBankName(depositBankNameOther)) {
+          const msg = this.$t("iAccount.commonError.wrongBankName");
+          tips.toast({ txt: msg });
+          return reject(msg);
+        }
+        
         // 过滤历史入金银行存在情况
         if (
           this.depositSelectBankAccount === "add" &&

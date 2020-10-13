@@ -1,2 +1,17 @@
 @import 'bank-list/style.scss';
 @import 'ways/style.scss';
+
+.sec-remit {
+  .other {
+    display: flex;
+    justify-content: space-between;
+
+    .filed-item {
+      width: 60%;
+    }
+    .filed-msg {
+      width: 47%;
+    }
+
+  }
+}

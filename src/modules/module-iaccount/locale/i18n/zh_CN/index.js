@@ -667,5 +667,8 @@ export default {
         text_33: "证券流向",
       },
     },
+    commonError: {
+      wrongBankName: '请输入正确的银行名称',
+    }
   },
 };
