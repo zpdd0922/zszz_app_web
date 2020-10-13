@@ -321,6 +321,7 @@ import * as tips from "@/modules/module-iaccount/utils/tips";
 // import userAgent from '@/modules/module-iaccount/utils/ua-parser'
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
+import validate from "@/main/utils/format/validate";
 
 export default {
   mixins: [commonMixin],
@@ -444,7 +445,14 @@ export default {
           withdrawBankAccount,
           withdrawBankAccountAgain,
           withdrawMoney,
+          withdrawBankNameOther,
         } = this.model;
+        // 校验银行名字是否正确
+        if (!validate.isBankName(withdrawBankNameOther)) {
+          const msg = this.$t("iAccount.withdraw.request.wrongBankName");
+          tips.toast({ txt: msg });
+          return reject(msg);
+        }
         // 过滤历史出金银行存在情况
         if (
           !this.withdrawBankHis &&

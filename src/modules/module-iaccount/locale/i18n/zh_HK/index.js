@@ -508,6 +508,7 @@ export default {
         text_33: "手續費",
         text_34: "實際提取金額",
         text_35: "抱歉，您的實際提取金額不足",
+        wrongBankName: '請輸入正確的銀行名稱',
       },
     },
     notify: {

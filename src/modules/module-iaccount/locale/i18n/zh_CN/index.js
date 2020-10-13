@@ -523,6 +523,7 @@ export default {
         text_33: "手续费",
         text_34: "实际提取金额",
         text_35: "抱歉，您的实际提取金额不足",
+        wrongBankName: '请输入正确的银行名称',
       },
     },
     notify: {
