@@ -275,6 +275,9 @@ export default {
           modelKey: "sex",
           label: this.getI18n("sex.label"),
           props: {
+            title: this.$t("common.cubeComponents.select.title"),
+            cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+            confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
             placeholder: this.getI18n("sex.placeholder"),
             options: sexOptions,
           },
@@ -559,6 +562,8 @@ export default {
           : new Date();
         this.brithDatePicker = this.$createDatePicker({
           title: this.getI18n('bornDate'),
+          cancelTxt: this.$t("common.cubeComponents.select.cancelTxt"),
+          confirmTxt: this.$t("common.cubeComponents.select.confirmTxt"),
           min: birthday_min,
           max: new Date(),
           value: birthday_value,
