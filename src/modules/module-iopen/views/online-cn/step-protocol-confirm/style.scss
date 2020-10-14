@@ -20,6 +20,9 @@
         height: 100%;
         display: block;
       }
+      .sign-img-txt {
+        font-size: 0.18rem;
+      }
     }
   
     .sign-img {
@@ -34,6 +37,7 @@
   
     .sign-content {
       // border-top: 2px solid $color-border;
+      
       padding: .15rem;
   
       ul {

@@ -32,7 +32,7 @@ export default {
         // exchangeParterName: '监管机构名称',
         // exchangeParterNation: '国家地区',
 
-        isNotHkexParterStaff: '本人不是香港证券及期货事务监察委员会的持牌或注册人士，或任何持牌或注册人士的董事、员工、代表或代理人。',
+        isNotHkexParterStaff: '本人不是香港证券及期货事务监察委员会的持牌或注册人士，或任何持牌或注册机构的董事、员工、代表或代理人。',
         hkexParterName: '姓名',
         hkexParterCENo: '中央编号',
         // hkexParterCompany: '公司名称',
@@ -63,7 +63,7 @@ export default {
         // isNotOurStaffAlert: `${customizeI18n.customize.company.securityName}暂不支持本公司及其联系公司的董事、雇员或持牌代表提供线上开户业务。`,
         isNotOurStaffKinAlert: `${customizeI18n.customize.company.securityName}暂不支持本公司及其联系公司之董事/员工的直系家庭成员提供线上开户业务。`,
         // isNotExchangeParterAlert: `${customizeI18n.customize.company.securityName}暂不支持对证券或期货交易所的注册人士或参与者提供线上开户业务。`,
-        isNotHkexParterStaffAlert: `${customizeI18n.customize.company.securityName}暂不支持对香港证券及期货事务监察委员会的持牌或注册人士，或任何持牌或注册人士的董事、员工、代表或代理人提供线上开户业务。`,
+        isNotHkexParterStaffAlert: `${customizeI18n.customize.company.securityName}暂不支持对香港证券及期货事务监察委员会的持牌或注册人士，或任何持牌或注册机构的董事、员工、代表或代理人提供线上开户业务。`,
         // isNotCompanyControllerAlert: `${customizeI18n.customize.company.securityName}暂不支持对上市公司的董事、首席执行官或主要股东提供线上开户业务。`,
         isNotConsortWithMarginAlert: `${customizeI18n.customize.company.securityName}暂不支持对本公司保证金客户之配偶提供线上开户业务。`,
         isNotPOorBGAlert: `${customizeI18n.customize.company.securityName}暂不支持对本公司保证金客户实际拥有人或者担保人提供线上开户业务。`,

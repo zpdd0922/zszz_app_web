@@ -67,4 +67,8 @@ export default {
     startDate: '起始日期',
     endDate: '结束日期',
     longerConfirm: '为确保您资料的准确性，请确认您的身份证是否为长期身份证！',
+    warn: {
+        familyNameSpell: '请输入正确的英文姓氏',
+        givenNameSpell: '请输入正确的英文名字',
+    }
 }

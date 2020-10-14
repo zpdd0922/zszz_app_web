@@ -32,6 +32,7 @@
   display: flex;
   align-items: center;
   background-color: #fff;
+  padding-left: 0.145rem;
   .input-btn {
     display: flex;
     align-items: center;
@@ -39,7 +40,6 @@
     height:.29rem;
     background:rgba(238,238,238,1);
     border-radius:.025rem;
-    margin: 0 auto;
     .icon {
       padding: 0 .09rem;
     }

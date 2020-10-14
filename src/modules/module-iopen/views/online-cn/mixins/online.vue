@@ -1,9 +1,10 @@
-
 <script>
 // 关于表单输入在安卓移动端底部定位浮起
 // 通过input聚焦与失焦来控制起位置
 import { mapGetters, mapActions } from "vuex";
 import { formatCommitData } from "@/modules/module-iopen/format/format-cn/index";
+import validate from "@/main/utils/format/validate";
+import { toast } from "@/main/utils/common/tips";
 
 export default {
   data() {},
@@ -39,13 +40,34 @@ export default {
   methods: {
     formatCommitData,
     ...mapActions({
-      toCommitAllData:'toCommitAllData',
-      saveCacheInfo:'saveCnCacheInfo',
-      saveImage:'saveImage',
+      toCommitAllData: "toCommitAllData",
+      saveCacheInfo: "saveCnCacheInfo",
+      saveImage: "saveImage",
     }),
     getStepI18nValue(step, key) {
       // return this.$t(`openAccount.openCn.${step}.${key}`);
       return this.$t(`iOpen.openCn.${step}.${key}`);
+    },
+    commonToast(text = "") {
+      if (typeof text === "string") {
+        return toast({
+          type: "txt",
+          txt: text,
+          time: 1000,
+        });
+      }
+    },
+    //校验方法
+    checkInfo(data='', func, warn='') {
+      if (!func || typeof func !== "function") {
+        return;
+      }
+      if (!func(data)) {
+        this.commonToast(warn);
+        return false
+      } else {
+        return true
+      }
     },
   },
 };

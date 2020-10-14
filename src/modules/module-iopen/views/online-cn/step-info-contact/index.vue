@@ -920,7 +920,7 @@ export default {
             return true;
           } else {
             // 判断是否包含除数字之外的
-            if (!isNaN(val)) {
+            if (validate.isMobile(val)) {
               // 判断是否大于11位
               if (val.length > 20) {
                 return false;
@@ -1095,51 +1095,6 @@ export default {
   watch: {
     "model.email"(newVal, oldVal) {
       this.model.email = toDBC(newVal).toLowerCase();
-    },
-    "model.homeTelePhone"(newVal, oldVal) {
-      const w = newVal.split('').pop()
-      // 校验输入值不为非法字符
-      if (w && !/^[0-9]+$/.test(w)) {
-        this.$nextTick(()=>{
-          this.model.homeTelePhone = oldVal
-        })
-      }
-      // 校验长度不超过20
-      if (newVal.length >20) {
-        this.$nextTick(()=>{
-          this.model.homeTelePhone = oldVal
-        })
-      }
-    },
-    "model.contactTelePhone"(newVal, oldVal) {
-      const w = newVal.split('').pop()
-      // 校验输入值不为非法字符
-      if (w && !/^[0-9]+$/.test(w)) {
-        this.$nextTick(()=>{
-          this.model.contactTelePhone = oldVal
-        })
-      }
-      // 校验长度不超过20
-      if (newVal.length >20) {
-        this.$nextTick(()=>{
-          this.model.contactTelePhone = oldVal
-        })
-      }
-    },
-    "professionModel.companyTelePhone"(newVal, oldVal) {
-      const w = newVal.split('').pop()
-      // 校验输入值不为非法字符
-      if (w && !/^[0-9]+$/.test(w)) {
-        this.$nextTick(()=>{
-          this.professionModel.companyTelePhone = oldVal
-        })
-      }
-      // 校验长度不超过20
-      if (newVal.length >20) {
-        this.$nextTick(()=>{
-          this.professionModel.companyTelePhone = oldVal
-        })
-      }
     },
   },
   created() {

@@ -155,6 +155,8 @@ export default {
       text_23: "删除",
       text_24: "确定执行此操作吗？",
       alertWaiting: "功能代开放",
+      tradePwd: '交易密码验证',
+      mt5: '密码输错五次，您的账户将被锁定'
     },
     deposit: {
       name: "存入资金",

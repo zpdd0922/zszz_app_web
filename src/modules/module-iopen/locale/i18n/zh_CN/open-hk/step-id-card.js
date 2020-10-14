@@ -23,4 +23,7 @@ export default {
     nationType: '国家/地区',
     nationTypePlaceholder: '请选择国家/地区',
     inputOtherCountry: '请用英文输入国家或地区名称',
+    warn: {
+        nation: "请输入正确的国家或地区名称"
+    }
 }

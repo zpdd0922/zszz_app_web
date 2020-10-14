@@ -4,6 +4,8 @@
 // 通过input聚焦与失焦来控制起位置
 import { mapGetters, mapActions } from "vuex";
 import { formatCommitData } from "@/modules/module-iopen/format/format-hk/index";
+import validate from "@/main/utils/format/validate";
+import { toast } from "@/main/utils/common/tips";
 
 export default {
   data() {},
@@ -46,6 +48,28 @@ export default {
     }),
     getStepI18nValue(step, key) {
       return this.$t(`iOpen.openHk.${step}.${key}`);
+    },
+    commonToast(text = "") {
+      if (typeof text === "string") {
+        return toast({
+          type: "txt",
+          txt: text,
+          time: 1000,
+        });
+      }
+    },
+    //校验方法
+    checkInfo(val='', func, warn='') {
+      const data = val.replace(/\s+/g, '')
+      if (!func || typeof func !== "function") {
+        return;
+      }
+      if (!func(data)) {
+        this.commonToast(warn);
+        return false
+      } else {
+        return true
+      }
     },
   },
 };

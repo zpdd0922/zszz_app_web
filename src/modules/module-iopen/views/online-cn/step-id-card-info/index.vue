@@ -1,14 +1,23 @@
 <template>
-  <op-wrap :isDisabled="isDisabled" :handleBefore="handleBefore" @handleNext="handleNext">
+  <op-wrap
+    :isDisabled="isDisabled"
+    :handleBefore="handleBefore"
+    @handleNext="handleNext"
+  >
     <div class="olcn-step olcn-step-id-card-info">
       <div class="step-content user-info">
         <cube-form :model="model">
           <div class="info-wrap">
-            <cube-form-group class="custom-form-group" :legend="getI18n('tips')">
+            <cube-form-group
+              class="custom-form-group"
+              :legend="getI18n('tips')"
+            >
               <!-- <cube-form-group class="custom-form-group"> -->
-              <cube-form-item :field="{label: getI18n('name.label')}">
+              <cube-form-item :field="{ label: getI18n('name.label') }">
                 <div class="custom-date-box">
-                  <div class="custom-form-separator">{{fields.familyName.label}}</div>
+                  <div class="custom-form-separator">
+                    {{ fields.familyName.label }}
+                  </div>
                   <div class="custom-form-date">
                     <input
                       v-model="model.familyName"
@@ -16,7 +25,9 @@
                       :placeholder="fields.familyName.props.placeholder"
                     />
                   </div>
-                  <div class="custom-form-separator">{{fields.givenName.label}}</div>
+                  <div class="custom-form-separator">
+                    {{ fields.givenName.label }}
+                  </div>
                   <div class="custom-form-date">
                     <input
                       v-model="model.givenName"
@@ -26,9 +37,11 @@
                   </div>
                 </div>
               </cube-form-item>
-              <cube-form-item :field="{label: getI18n('nameSpell.label')}">
+              <cube-form-item :field="{ label: getI18n('nameSpell.label') }">
                 <div class="custom-date-box">
-                  <div class="custom-form-separator">{{fields.familyNameSpell.label}}</div>
+                  <div class="custom-form-separator">
+                    {{ fields.familyNameSpell.label }}
+                  </div>
                   <div class="custom-form-date">
                     <input
                       v-model="model.familyNameSpell"
@@ -36,7 +49,9 @@
                       :placeholder="fields.familyNameSpell.props.placeholder"
                     />
                   </div>
-                  <div class="custom-form-separator">{{fields.givenNameSpell.label}}</div>
+                  <div class="custom-form-separator">
+                    {{ fields.givenNameSpell.label }}
+                  </div>
                   <div class="custom-form-date">
                     <input
                       v-model="model.givenNameSpell"
@@ -66,29 +81,29 @@
                 <div class="custom-date-box">
                   <div @click="showStartDatePicker" class="custom-form-date">
                     <template v-if="model.dateStartValue">
-                      <span>{{model.dateStartValue}}</span>
+                      <span>{{ model.dateStartValue }}</span>
                     </template>
                     <template v-else>
-                      <span
-                        class="cube-select-placeholder"
-                      >{{getI18n("dateStartValue.startPlaceholder")}}</span>
+                      <span class="cube-select-placeholder">{{
+                        getI18n("dateStartValue.startPlaceholder")
+                      }}</span>
                     </template>
                   </div>
                   <div class="custom-form-separator">|</div>
                   <div class="custom-form-date">
                     <template v-if="model.isLonger">
-                      <span>{{longerDateText}}</span>
+                      <span>{{ longerDateText }}</span>
                     </template>
                     <template v-else>
-                    <!-- <template> -->
+                      <!-- <template> -->
                       <div @click="showEndDatePicker">
                         <template v-if="model.dateEndValue">
-                          <span>{{model.dateEndValue}}</span>
+                          <span>{{ model.dateEndValue }}</span>
                         </template>
                         <template v-else>
-                          <span
-                            class="cube-select-placeholder"
-                          >{{getI18n("dateStartValue.endPlaceholder")}}</span>
+                          <span class="cube-select-placeholder">{{
+                            getI18n("dateStartValue.endPlaceholder")
+                          }}</span>
                         </template>
                       </div>
                     </template>
@@ -97,9 +112,10 @@
                 <!-- 切换长期身份证按钮 -->
                 <div class="custom-form-switch">
                   <div class="cube-switch" @click="showLonger">
-                    <cube-switch v-model="model.isLonger">
-                    </cube-switch>
-                    <span class="longer" :class="{on:model.isLonger}">{{longerDateText}}</span>
+                    <cube-switch v-model="model.isLonger"> </cube-switch>
+                    <span class="longer" :class="{ on: model.isLonger }">{{
+                      longerDateText
+                    }}</span>
                     <!-- <input v-model="model.isLonger" type="checkbox" class="cube-switch-input" /> -->
                     <!-- <i class="cube-switch-ui" :class="{longer: model.isLonger}">{{longerDateText}}</i> -->
                   </div>
@@ -108,7 +124,10 @@
               <!-- 签发机关 -->
               <cube-form-item :field="fields.authority"></cube-form-item>
               <cube-form-item :field="fields.birthCountry"></cube-form-item>
-              <cube-form-item v-if="model.birthCountry === 'OTH'" :field="fields.birthCountryTxt"></cube-form-item>
+              <cube-form-item
+                v-if="model.birthCountry === 'OTH'"
+                :field="fields.birthCountryTxt"
+              ></cube-form-item>
               <cube-form-item :field="fields.birthArea"></cube-form-item>
             </cube-form-group>
           </div>
@@ -124,7 +143,7 @@ import { toast, alert, confirm } from "@/main/utils/common/tips";
 import { getSexFromCard, getBirthFromCard } from "@/main/utils/format/idcard";
 import { getPreDay } from "@/main/utils/format/date";
 import { getAge } from "@/main/utils/format/idcard";
-import { toDBC } from "@/main/utils/format/formatter";
+import { toDBC, noSpace } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
 import * as optionsList from "./options-list";
 import { modelValidator } from "./validator";
@@ -315,7 +334,6 @@ export default {
     },
     updateInfo() {
       const userInfo = this.openInfo;
-      console.log(userInfo);
       Object.keys(this.model).forEach((val) => {
         const res = userInfo[val] ? userInfo[val] : this.model[val];
         this.model[val] = res;
@@ -374,18 +392,27 @@ export default {
     },
     handleBefore() {
       return new Promise((resolve, reject) => {
+        const {        
+          addressValue, 
+          authority,
+        } = this.model;
+        const checkAddressValue = this.checkInfo(addressValue, validate.isChinese, this.getI18n('warn.address'));
+        const checkAuthority = this.checkInfo(authority, validate.isChinese, this.getI18n('warn.authority'))
+        if (!checkAddressValue || !checkAuthority) {
+          return reject()
+        }
         const { idCardValue: idCard } = this.model;
         const name = this.cnName;
         const age = getAge(getBirthFromCard(idCard));
         // 校验身份证
         if (!validate.isIdCard(idCard)) {
-          const cardTips = this.getI18n('wran.wrondNum');
+          const cardTips = this.getI18n('warn.wrongNum');
           toast({ type: "error", txt: cardTips });
           return reject(new Error(cardTips));
         }
         // 大于70岁不允许线上开户
         if (age >= 70 && window.IS_CHECK_AGE) {
-          const ageTips = this.getI18n('wran.mt70');
+          const ageTips = this.getI18n('warn.mt70');
           toast({ type: "error", txt: ageTips });
           return reject(new Error(ageTips));
         }
@@ -399,7 +426,7 @@ export default {
               resolve(verify);
             } else {
               alert({
-                title: this.getI18n('wran.warm'),
+                title: this.getI18n('warn.warm'),
                 content: remark,
               });
               reject(verify);
@@ -472,7 +499,7 @@ export default {
     showLonger() {
       !this.model.isLonger && this.handleIdCardLonger();
       this.model.dateEndValue = '';
-    }
+    },
   },
   watch: {
     // "model.isLonger": function (newVal, oldVal) {
@@ -485,41 +512,33 @@ export default {
     //   }
     // },
     "model.givenName": function (newVal, oldVal) {
-      if (!validate.isChinese(newVal)) {
+      if (newVal && !validate.isChinese(newVal)) {
         this.model.givenName = "";
       } else {
         this.model.givenName = toDBC(newVal);
       }
     },
     "model.familyName": function (newVal, oldVal) {
-      if (!validate.isChinese(newVal)) {
+      if (newVal && !validate.isChinese(newVal)) {
         this.model.familyName = "";
       } else {
         this.model.familyName = toDBC(newVal);
       }
     },
     "model.familyNameSpell": function (newVal, oldVal) {
-      if (validate.isChinese(newVal)) {
+      if (newVal && !validate.isEn(newVal)) {
         this.model.familyNameSpell = "";
       } else {
         this.model.familyNameSpell = toDBC(newVal);
       }
     },
     "model.givenNameSpell": function (newVal, oldVal) {
-      if (validate.isChinese(newVal)) {
+      if (newVal && !validate.isEn(newVal)) {
         this.model.givenNameSpell = "";
       } else {
         this.model.givenNameSpell = toDBC(newVal);
       }
     },
-    "model.idCardValue": function (newVal, oldVal) {
-      if (validate.isChinese(newVal)) {
-        this.model.idCardValue = "";
-      } else {
-        this.model.idCardValue = toDBC(newVal);
-      }
-    },
   },
 };
 </script>
-

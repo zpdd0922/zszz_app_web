@@ -10,7 +10,7 @@ export const CURRENCY_TYPE = {
   options: {
     0: { text: 'iAccount.history.common.text_8', value: 0, sort: 0 },
     [HK]: { text: 'iAccount.deposit.currency_type.text_1', value: HK, sort: 1 },
-    [US]: { text: 'iAccount.deposit.currency_type.text_2', value: US, sort: 2 },
+    // [US]: { text: 'iAccount.deposit.currency_type.text_2', value: US, sort: 2 },
   },
 };
 

@@ -189,12 +189,11 @@ export default {
         const params = {
           userId: this.userInfo && this.userInfo.uId,
           equipmentNum:
-            this.userInfo.equipmentNum ||
-            "A1B241398A75A5B66C17B124F6B887DB-44B24288-F84B-40D5-B5FB-C34D82FF3A13",
+            this.userInfo.equipmentNum,
           authCode: this.formData.captcha,
           eventId: this.captchaId,
           sevenNRemFlag: Number(this.sevenNRemFlag),
-          equipmentName: this.userInfo.equipmentName || "iPhone 11 Pro",
+          equipmentName: this.userInfo.equipmentName,
         };
         if (params.eventId !== null) {
           this.$store.dispatch("checkCaptcha", params).then((res) => {

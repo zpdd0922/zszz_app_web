@@ -35,6 +35,9 @@
             @change="nameHandle"
             v-model="nameValue"
             :options="nameOptions"
+            :title="$t('common.cubeComponents.select.title')"
+            :cancelTxt="$t('common.cubeComponents.select.cancelTxt')"
+            :confirmTxt="$t('common.cubeComponents.select.confirmTxt')"
           >
           </cube-select>
         </div>
@@ -51,6 +54,9 @@
               @change="activeHandle"
               v-model="activeSelect"
               :options="activeOptions"
+              :title="$t('common.cubeComponents.select.title')"
+              :cancelTxt="$t('common.cubeComponents.select.cancelTxt')"
+              :confirmTxt="$t('common.cubeComponents.select.confirmTxt')"
             >
             </cube-select>
           </div>
@@ -133,7 +139,9 @@
       </template>
       <template v-if="activeSelect === 'RS1' || activeSelect === 'RS2'">
         <div class="form-item">
-          <div class="label alt">{{ $t("iAccount.company_act.label.text_9") }}</div>
+          <div class="label alt">
+            {{ $t("iAccount.company_act.label.text_9") }}
+          </div>
           <div class="content border-bottom-1px">
             <cube-input
               type="tel"
@@ -161,7 +169,9 @@
       </template>
       <template v-if="activeSelect === 'OOS1' || activeSelect === 'OOS2'">
         <div class="form-item">
-          <div class="label alt">{{ $t("iAccount.company_act.label.text_9") }}</div>
+          <div class="label alt">
+            {{ $t("iAccount.company_act.label.text_9") }}
+          </div>
           <div class="content border-bottom-1px">
             <cube-input
               type="tel"
@@ -221,7 +231,9 @@
       </template>
       <template v-if="activeSelect === 'PO1' || activeSelect === 'PO2'">
         <div class="form-item">
-          <div class="label alt">{{ $t("iAccount.company_act.label.text_9") }}</div>
+          <div class="label alt">
+            {{ $t("iAccount.company_act.label.text_9") }}
+          </div>
           <div class="content border-bottom-1px">
             <cube-input
               type="tel"
@@ -237,7 +249,7 @@
           <cube-textarea
             v-model="remark"
             :maxlength="200"
-            :indicator="{negtive: true, remain: true}"
+            :indicator="{ negtive: true, remain: true }"
             :autoExpand="true"
             :placeholder="$t('iAccount.company_act.placeholder.text_11')"
           ></cube-textarea>
@@ -559,7 +571,7 @@ export default {
         ...obj
       }
       SecApi.saveCorporateActions(params).then(res => {
-        
+
         // const data = { time: res, ...params }
         // this.$router.push({ name: 'detail', params: { data } })
         toast({
@@ -722,10 +734,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/customize/theme/_val_white.scss';
-@import '~@/modules/module-iaccount/assets/styles/variable.scss';
-@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
-@import '~@/main/assets/scss/mixin';
+@import "~@/customize/theme/_val_white.scss";
+@import "~@/modules/module-iaccount/assets/styles/variable.scss";
+@import "~@/modules/module-iaccount/assets/styles/mixin.scss";
+@import "~@/main/assets/scss/mixin";
 
 body,
 html {
@@ -741,10 +753,10 @@ html {
 </style>
 
 <style scoped lang="scss">
-@import '~@/customize/theme/_val_white.scss';
-@import '~@/modules/module-iaccount/assets/styles/variable.scss';
-@import '~@/modules/module-iaccount/assets/styles/mixin.scss';
-@import '~@/main/assets/scss/mixin';
+@import "~@/customize/theme/_val_white.scss";
+@import "~@/modules/module-iaccount/assets/styles/variable.scss";
+@import "~@/modules/module-iaccount/assets/styles/mixin.scss";
+@import "~@/main/assets/scss/mixin";
 .content {
   & /deep/ .cube-textarea_active::after {
     border-color: $color-main;

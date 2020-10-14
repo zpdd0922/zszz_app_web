@@ -58,14 +58,14 @@ export default {
           nextRouteName: "act-form",
           disabled: !this.isOpenHkStockMarket || false
         },
-        {
-          type: "us",
-          code: 2,
-          label: this.$t("iAccount.company_act.market.us"),
-          tips: "US stocks",
-          disabled: !this.isOpenUsaStockMarket
-          // nextRouteName: 'transferInfo',
-        },
+        // {
+        //   type: "us",
+        //   code: 2,
+        //   label: this.$t("iAccount.company_act.market.us"),
+        //   tips: "US stocks",
+        //   disabled: !this.isOpenUsaStockMarket
+        //   // nextRouteName: 'transferInfo',
+        // },
       ];
     },
   },

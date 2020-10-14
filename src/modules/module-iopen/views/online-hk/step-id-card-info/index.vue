@@ -496,6 +496,13 @@ export default {
       return new Promise((resolve, reject) => {
         const { idKindKey } = this.openInfo;
         const { idCardValue: idCard } = this.model;
+        const { familyNameSpell, givenNameSpell} = this.model
+        const checkFamilyNameSpell = this.checkInfo(familyNameSpell, validate.isEnName, this.getI18n('warn.familyNameSpell'))
+        const checkGivenNameSpell = this.checkInfo(givenNameSpell, validate.isEnName, this.getI18n('warn.givenNameSpell'))
+
+        if (!checkFamilyNameSpell || !checkGivenNameSpell) {
+          return reject();
+        }
         const userName = this.cnName;
         // 判断证件类型 - 大陆身份证
         if (idKindKey === "idCardCn") {
@@ -703,38 +710,23 @@ export default {
     // },
     "model.givenName": function (newVal, oldVal) {
       if (!validate.isChinese(newVal)) {
-        this.model.givenName = "";
+        this.model.givenName = '';
       } else {
         this.model.givenName = toDBC(newVal);
       }
     },
     "model.familyName": function (newVal, oldVal) {
       if (!validate.isChinese(newVal)) {
-        this.model.familyName = "";
+        this.model.familyName = '';
       } else {
         this.model.familyName = toDBC(newVal);
       }
     },
-    "model.familyNameSpell": function (newVal, oldVal) {
-      if (validate.isChinese(newVal)) {
-        this.model.familyNameSpell = "";
-      } else {
-        this.model.familyNameSpell = toDBC(newVal);
-      }
-    },
-    "model.givenNameSpell": function (newVal, oldVal) {
-      if (validate.isChinese(newVal)) {
-        this.model.givenNameSpell = "";
-      } else {
-        this.model.givenNameSpell = toDBC(newVal);
-      }
-    },
     "model.idCardValue": function (newVal, oldVal) {
-      const w = newVal.split('').pop()
       // 校验输入值为非法字符
-      if (w && !/^[A-Za-z0-9\(\)]+$/.test(w)) {
+      if (!/^[A-Za-z0-9\(\)]+$/.test(newVal)) {
         // 香港身份证有括号
-          this.model.idCardValue = oldVal
+          this.model.idCardValue = ""
       } else {
         this.model.idCardValue = toDBC(newVal);
       }

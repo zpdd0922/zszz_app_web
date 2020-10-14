@@ -56,5 +56,5 @@ export const COMPANY_NAME_OPTIONS = [
   { value: 'CO', text: '現金收購' },
   { value: 'WC', text: '認股權證的轉換' },
   { value: 'PO', text: '優先認購' },
-  { value: 'OTH', text: '其他公司行動' }
+  // { value: 'OTH', text: '其他公司行動' }
 ]

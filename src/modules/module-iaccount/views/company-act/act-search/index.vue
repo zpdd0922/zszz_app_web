@@ -129,7 +129,9 @@ export default {
         height: 100%;
         width: 90%;
         outline: none;
-        font-size:.11rem;
+        font-size: 0.11rem;
+        font-family: PingFang SC;
+        font-weight: 400;
       }
     }
     .search-text {

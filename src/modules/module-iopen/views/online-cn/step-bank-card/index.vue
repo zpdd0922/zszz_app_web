@@ -173,6 +173,11 @@ export default {
           bankPhoneNum: cellPhone,
         } = this.model;
 
+        //判断银行卡号
+        const checkBankNum = this.checkInfo(bankNum.replace(/\s+/g, ""), validate.isBankNum, this.getI18n('warn.bankNum'))
+        if (!checkBankNum) {
+          return reject()
+        }
         // 判断手机号是否合法
         if (!validate.isMobile(cellPhone)) {
           const phoneTips = this.getI18n('errorPhoneNum');

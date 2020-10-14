@@ -41,7 +41,7 @@ const formatDislosures = (args, val) => {
 
   if (val.disclosureSize > 1) {
     for (let i = 1; i <= 4; i++) {
-      const key = `disclosure${i}`;
+      const key = `disclosure${i}Key`;
       const argsKeyBase = val[key];
       let disclosureArr = [];
       for (let j = 0; j < val.disclosureSize; j++) {

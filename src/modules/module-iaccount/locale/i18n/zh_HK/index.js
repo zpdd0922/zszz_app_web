@@ -153,6 +153,8 @@ export default {
       text_23: "刪除",
       text_24: "確定執行此操作嗎？",
       alertWaiting: "功能代開放",
+      tradePwd: '交易密碼驗證',
+      mt5: '密碼輸錯五次，您的帳戶將被鎖定'
     },
     deposit: {
       name: "存入資金",
@@ -472,6 +474,7 @@ export default {
       request: {
         text_1: "提取帳戶",
         text_2: "現金賬戶",
+        text_2m: "保證金賬戶",
         text_3: "收款帳戶資訊",
         text_4: "收款銀行",
         text_5: "帳戶名稱",

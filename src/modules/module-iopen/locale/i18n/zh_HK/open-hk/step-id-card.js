@@ -20,7 +20,10 @@ export default {
     label: "證件類型",
     placeholder: "請選擇證件類型",
   },
-  nationType: '國家/地區',
-  nationTypePlaceholder: '請選擇國家/地區',
-  inputOtherCountry: '請用英文輸入國家或地區名稱',
+  nationType: "國家/地區",
+  nationTypePlaceholder: "請選擇國家/地區",
+  inputOtherCountry: "請用英文輸入國家或地區名稱",
+  warn: {
+    nation: "請輸入正確的國家或地區名稱",
+  },
 };

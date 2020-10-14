@@ -47,6 +47,7 @@
             :placeholder="getI18n('tradePwd')"
             v-model.trim="model.pwd"
             class="pwd"
+            @focus="showWarn = false"
           >
           </cube-input>
           <cube-input
@@ -56,7 +57,7 @@
             :placeholder="getI18n('tradePwdConfirm')"
             v-model.trim="model.password"
             class="pwd"
-            v-if="pwdStatus"
+            @focus="showWarn = false"
           ></cube-input>
         </cube-form>
       </div>
@@ -134,7 +135,6 @@ export default {
         password: '',
       },
       // 输入框1首次校验通过显示输入框2
-      pwdStatus: false,
       pwdSuccess: false,
       showWarn: false,
     };
@@ -145,7 +145,7 @@ export default {
     },
     // 按钮状态
     isDisabled() {
-      return Object.values(this.upload).length <= 0
+      return Object.values(this.upload).length <= 0 || this.emptyPwdCheck
     },
     //文字状态显示
     warnText() {
@@ -193,6 +193,10 @@ export default {
       const pwd = this.model.password
       return pwd && validate.isTradePwd(pwd)
     },
+    //检验密码是否输入
+    emptyPwdCheck() {
+      return !this.model.pwd || !this.model.password
+    }
   },
   methods: {
     getI18n(key) {
@@ -314,7 +318,6 @@ export default {
     "model.pwd"(newVal, oldVal) {
       if (this.pwd1Checked) {
         //首次校验通过显示第二个输入框
-        this.pwdStatus = true
         this.pwdSuccess = this.isPwdSame ? true : false
       } else {
         this.pwdSuccess = false

@@ -163,10 +163,10 @@ export default {
                 value: 1,
                 text: this.getI18n("bankCurrency.options.hkd"),
               },
-              {
-                value: 2,
-                text: this.getI18n("bankCurrency.options.usd"),
-              },
+              // {
+              //   value: 2,
+              //   text: this.getI18n("bankCurrency.options.usd"),
+              // },
               {
                 value: 3,
                 text: this.getI18n("bankCurrency.options.rmb"),

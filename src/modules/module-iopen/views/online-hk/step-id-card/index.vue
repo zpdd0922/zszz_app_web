@@ -1,5 +1,9 @@
 <template>
-  <op-wrap :isDisabled="isDisabled" :handleBefore="handleBefore" @handleNext="handleNext">
+  <op-wrap
+    :isDisabled="isDisabled"
+    :handleBefore="handleBefore"
+    @handleNext="handleNext"
+  >
     <div class="olhk-step olhk-step-id-card">
       <cube-form :model="model">
         <!-- 证件类型 -->
@@ -26,7 +30,9 @@
       <div class="margin-bottom"></div>
       <!-- 内地身份证 -->
       <template v-if="model.idKindKey === 'idCardCn'">
-        <p class="step-content step-content-upload-tips">{{getI18n('tips.idCardCn')}}</p>
+        <p class="step-content step-content-upload-tips">
+          {{ getI18n("tips.idCardCn") }}
+        </p>
         <ul class="step-content step-content-id-card-upload">
           <!-- 身份证正面 -->
           <li>
@@ -56,7 +62,9 @@
       </template>
       <!-- 香港永久身份證 -->
       <template v-else-if="model.idKindKey === 'idCardHk'">
-        <p class="step-content step-content-upload-tips">{{getI18n('tips.idCardHk')}}</p>
+        <p class="step-content step-content-upload-tips">
+          {{ getI18n("tips.idCardHk") }}
+        </p>
         <ul class="step-content step-content-id-card-upload">
           <!-- 身份证正面 -->
           <li>
@@ -74,7 +82,9 @@
       </template>
       <!-- 香港临时身份证 -->
       <template v-else-if="model.idKindKey === 'idCardHkTemp'">
-        <p class="step-content step-content-upload-tips">{{getI18n('tips.idCardHkTemp')}}</p>
+        <p class="step-content step-content-upload-tips">
+          {{ getI18n("tips.idCardHkTemp") }}
+        </p>
         <ul class="step-content step-content-id-card-upload">
           <!-- 身份证正面 -->
           <li>
@@ -103,7 +113,9 @@
       </template>
       <!-- 护照 -->
       <template v-else-if="model.idKindKey === 'passport'">
-        <p class="step-content step-content-upload-tips">{{getI18n('tips.passport')}}</p>
+        <p class="step-content step-content-upload-tips">
+          {{ getI18n("tips.passport") }}
+        </p>
         <ul class="step-content step-content-id-card-upload">
           <!-- 身份证正面 -->
           <li>
@@ -121,11 +133,11 @@
       </template>
       <div class="margin-bottom"></div>
       <div class="step-content id-card-desc">
-        <div class="desc-title">{{getI18n('desc.title')}}</div>
+        <div class="desc-title">{{ getI18n("desc.title") }}</div>
         <div class="desc-tips">
           <ul>
-            <li>{{getI18n('desc.content[0]')}}</li>
-            <li>{{getI18n('desc.content[1]')}}</li>
+            <li>{{ getI18n("desc.content[0]") }}</li>
+            <li>{{ getI18n("desc.content[1]") }}</li>
           </ul>
         </div>
       </div>
@@ -482,6 +494,13 @@ export default {
     },
     handleBefore() {
       return new Promise((resolve, reject) => {
+        //校验其他地区字段
+        if (this.model.nationType === 'OTH') {
+          const checkOtherNationality = this.checkInfo(this.model.otherNationality, validate.isNotChinese, this.getI18n('warn.nation'));
+          if (!checkOtherNationality) {
+            return reject();
+          }
+        }
         this.handleCheckNat()
           .then(() => {
             resolve();
@@ -589,4 +608,3 @@ export default {
   },
 };
 </script>
-

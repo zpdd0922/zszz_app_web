@@ -347,7 +347,7 @@ export default {
     },
     // 格式化现金账号选项
     _formatAccount() {
-         const { fundAccount = [] } = this.secAccountInfo;
+      const { fundAccount = [] } = this.secAccountInfo;
       this.accountList = fundAccount.map((item) => {
         const { fundAccount: account, assetProp } = item;
         const txt =

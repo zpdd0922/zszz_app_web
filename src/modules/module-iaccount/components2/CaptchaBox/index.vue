@@ -2,7 +2,7 @@
   <div class="Captcha">
     <div class="captcha-title">
       <div class="content">
-        <h5 class="title">交易密码验证</h5>
+        <h5 class="title">{{title}}</h5>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
         </span>
       </div>
       <footer class="footer">
-        <div class="brief">密码输错五次，您的账户将被锁定</div>
+        <div class="brief">{{$t('iAccount.common.mt5')}}</div>
       </footer>
       <!-- 仅限系统键盘输入值 -->
       <div class="form">
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import I18n from '@/modules/module-iaccount/locale/index.js'
 
 export default {
   props: {
@@ -61,7 +62,7 @@ export default {
     },
     title: {
       type: String,
-      default: '交易密码验证'
+      default: () => I18n.t('iAccount.common.tradePwd')
     }
   },
   data () {

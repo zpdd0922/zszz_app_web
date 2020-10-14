@@ -31,7 +31,7 @@ export default {
         // exchangeParterName: '監管機構名稱',
         // exchangeParterNation: '國家地區',
 
-        isNotHkexParterStaff: '本人不是香港證券及期貨事務監察委員會的持牌或註冊人士，或任何持牌或註冊人士的董事、員工、代表或代理人。',
+        isNotHkexParterStaff: '本人不是香港證券及期貨事務監察委員會的持牌或註冊人士，或任何持牌或註冊機構的董事、員工、代表或代理人。',
         hkexParterName: '姓名',
         hkexParterCENo: '中央編號',
         // hkexParterCompany: '公司名稱',
@@ -59,7 +59,7 @@ export default {
         // isNotOurStaffAlert: `${customizeI18n.customize.company.securityName}暫不支持本公司及其聯繫公司的董事、僱員或持牌代表提供線上開戶業務。`,
         isNotOurStaffKinAlert: `${customizeI18n.customize.company.securityName}暫不支持本公司及其聯繫公司之董事/員工的直系家庭成員提供線上開戶業務。`,
         // isNotExchangeParterAlert: `${customizeI18n.customize.company.securityName}暫不支持對證券或期貨交易所的註冊人士或參與者提供線上開戶業務。`,
-        isNotHkexParterStaffAlert: `${customizeI18n.customize.company.securityName}暫不支持對香港證券及期貨事務監察委員會的持牌或註冊人士，或任何持牌或註冊人士的董事、員工、代表或代理人提供線上開戶業務。`,
+        isNotHkexParterStaffAlert: `${customizeI18n.customize.company.securityName}暫不支持對香港證券及期貨事務監察委員會的持牌或註冊人士，或任何持牌或註冊機構的董事、員工、代表或代理人提供線上開戶業務。`,
         // isNotCompanyControllerAlert: `${customizeI18n.customize.company.securityName}暫不支持對上市公司的董事、行政總裁或主要股東提供線上開戶業務。`,
         isNotConsortWithMarginAlert: `${customizeI18n.customize.company.securityName}暫不支持對本公司保證金客戶之配偶提供線上開戶業務。`,
         isNotConsortWithMarginOtherAlert: `${customizeI18n.customize.company.securityName}暫不支持對本公司保證金客戶中控制其百分之三十五或以上股權或表決權之人士及其配偶提供線上開戶業務。`,

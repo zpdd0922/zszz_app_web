@@ -53,10 +53,13 @@ export default {
     label: "出生地區",
     placeholder: "選填",
   },
-  wran: {
+  warn: {
     warm: "溫馨提示",
-    wrondNum: "請輸入正確身份證號碼",
+    wrongNum: "請輸入正確身份證號碼",
     mt70: '70歲以上暫不能開戶，非常抱歉',
+    address: '請輸入正確的證件地址',
+    authority: '請輸入正確的簽發機關',
+    idCard: '四要素校驗未通過',
   },
   longerConfirm: '為確保您資料的準確性，請確認您的身份證是否為長期身份證！',
 };

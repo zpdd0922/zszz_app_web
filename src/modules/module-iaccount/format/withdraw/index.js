@@ -42,7 +42,7 @@ export const format_CommitData_CN = (args, form) => {
  */
 export const format_CommitData_HK = (args, form) => {
   console.log('format_CommitData_HK', args, form)
-  const { user } = args;
+  const { account } = args;
 
   const postData = {
     currency: form.currency,                 // 出金币种
