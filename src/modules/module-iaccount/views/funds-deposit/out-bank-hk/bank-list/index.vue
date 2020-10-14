@@ -176,8 +176,8 @@ export default {
       this.$store.dispatch("setWayInfo", params);
       this.$store.dispatch("selectWay", wayInfo).then(() => {
         // const name = (`${wayInfo.value}-hk`).toLowerCase()
-        const name = `${wayInfo.value}Hk`;
-
+        // const name = `${wayInfo.value}Hk`;
+        const name = `sec-${wayInfo.value.toLowerCase()}-hk`
         this.$router.push({ name: name });
       });
     },
