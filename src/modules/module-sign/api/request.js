@@ -26,3 +26,7 @@ const axios = new Axios(baseURL, {});
 export const post = (url, params = {}, key = "") => {
   return axios.post(url, paramsData.NOPARAMS(params));
 }
+
+export const postRegister = (url, params = {}) => {
+  return axios.post(url, params);
+}

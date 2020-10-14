@@ -1,4 +1,4 @@
-import { post } from '../request';
+import { post, postRegister } from '../request';
 
 export default {
   needCaptcha: data => post('capt/needCaptcha', data),
@@ -36,4 +36,6 @@ export default {
    * @return JSON { code: integer, message: string, result: {} }
    */
   logout: () => post('/sign/logout'),
+
+  register: data => postRegister('/user_api/user_register', data),
 };

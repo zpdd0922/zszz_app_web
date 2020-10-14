@@ -1,15 +1,28 @@
 <template>
-  <layout :title="$t('sign.common.register')" :tips="$t('sign.common.registerTips')">
+  <layout
+    :title="$t('sign.common.register')"
+    :tips="$t('sign.common.registerTips')"
+  >
     <div class="sign-page-content">
-      <base-form :formList="formList" :formRules="formRules" @updateData="updateData" />
+      <base-form
+        :formList="formList"
+        :formRules="formRules"
+        @updateData="updateData"
+      />
       <div class="form-btn">
-        <cube-button :disabled="isDisabled" @click="handleSubmit">{{$t("sign.formBtn.register")}}</cube-button>
+        <cube-button :disabled="isDisabled" @click="handleSubmit">{{
+          $t("sign.formBtn.register")
+        }}</cube-button>
         <div class="btn-links">
           <div>
-            <span @click="handleChangeRoute('loginByPwd')">{{$t('sign.common.login')}}</span>
+            <span @click="handleChangeRoute('loginByPwd')">{{
+              $t("sign.common.login")
+            }}</span>
           </div>
           <div>
-            <span @click="handleChangeRoute('resetPwd')">{{$t('sign.common.resetPwd')}}</span>
+            <span @click="handleChangeRoute('resetPwd')">{{
+              $t("sign.common.resetPwd")
+            }}</span>
           </div>
         </div>
       </div>
@@ -65,9 +78,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.setTitle(
-      this.$t("sign.common.register")
-    );
+    this.setTitle(this.$t("sign.common.register"));
   },
   computed: {
     isDisabled() {
@@ -128,14 +139,14 @@ export default {
       const account = this.formData.certCode;
 
       if (countryCode === defaultCountryCode && !validate.isMobile(account)) {
-        this.formRules.certCode.tips = this.$t('sign.warn.numWarn');
+        this.formRules.certCode.tips = this.$t("sign.warn.numWarn");
         return false;
       } else {
         this.formRules.certCode.tips = "";
       }
 
       if (!account) {
-        this.formRules.certCode.tips = this.$t('sign.warn.emptyWarn');
+        this.formRules.certCode.tips = this.$t("sign.warn.emptyWarn");
         return false;
       } else {
         this.formRules.certCode.tips = "";
@@ -154,8 +165,8 @@ export default {
             ? account
             : `${countryCode}-${account}`;
         const params = {
-          nameType: 0,
-          name: certCode,
+          certType: 0,
+          phoneNum: certCode,
         };
 
         this.fetchCaptcha(params)
@@ -187,16 +198,19 @@ export default {
             ? certCode
             : `${countryCode}-${certCode}`;
 
-        const { invertId = "1" } = this.urlParams;
+        const { invertId = "1", channelId = "1" } = this.urlParams;
 
         const params = {
-          invertId,
+          invUserId: invertId,
+          userSourceChannelId: channelId,
           certType: 0,
           certCode,
           eventId: captchaId,
           captcha: captcha,
           pwd: password,
         };
+
+        console.log(this.register);
 
         this.register(params).then((res) => {
           // 4.2登录成功
@@ -208,10 +222,10 @@ export default {
     handleLoginSuccess() {
       console.log("handleRegisterSuccess");
       toast({
-        txt: this.$t('sign.common.successSign'),
+        txt: this.$t("sign.common.successSign"),
         callback: () => {
-         const { redirect_url = "" } = this.urlParams;
-              if (!redirect_url) {
+          const { redirect_url = "" } = this.urlParams;
+          if (!redirect_url) {
             const { redirect = "/" } = this.query;
             this.$router.replace({ path: redirect });
           } else {
@@ -225,21 +239,21 @@ export default {
       const { certCode, captcha, password } = this.formData;
 
       if (!certCode) {
-        this.formRules.certCode.tips = this.$t('sign.warn.accountWarn');
+        this.formRules.certCode.tips = this.$t("sign.warn.accountWarn");
         return false;
       } else {
         this.formRules.certCode.tips = "";
       }
 
       if (this.showCaptcha && !captcha) {
-        this.formRules.captcha.tips = this.$t('sign.warn.captchaWarn');
+        this.formRules.captcha.tips = this.$t("sign.warn.captchaWarn");
         return false;
       } else {
         this.formRules.captcha.tips = "";
       }
 
       if (!password) {
-        this.formRules.password.tips = this.$t('sign.warn.setPasswd');
+        this.formRules.password.tips = this.$t("sign.warn.setPasswd");
         return false;
       } else {
         this.formRules.password.tips = "";
