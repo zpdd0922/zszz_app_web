@@ -93,7 +93,10 @@ export const addLimit = {
     originLimitTitle: '原有额度',
     curLimitTitle: '获取额度',
     noMore: '无更多记录',
+    
+  },
+  warn: {
     badPwd: '密码格式不正确',
     submitSuccess: '提交成功',
-  },
+  }
 };

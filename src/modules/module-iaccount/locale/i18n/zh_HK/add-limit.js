@@ -67,7 +67,10 @@ export const addLimit = {
     originLimitTitle: "原有額度",
     curLimitTitle: "获取額度",
     noMore: "無更多記錄",
+    
+  },
+  warn: {
     badPwd: '密碼格式不正確',
     submitSuccess: '提交成功',
-  },
+  }
 };

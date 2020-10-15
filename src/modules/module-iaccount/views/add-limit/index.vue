@@ -116,7 +116,6 @@ export default {
       loanLimitValue: {
         hk: "0.00",
         us: "0.00",
-        cn: "0.00",
       },
       loanLimitNextValue: {
         hk: "0.00",
@@ -245,18 +244,46 @@ export default {
       if (!this.validatePwd()) {
         toast({
           type: "txt",
-          txt: this.getI18n("badPwd"),
+          txt: this.getI18n("warn.badPwd"),
           time: 1000,
         });
         return;
       }
+      const lineCreditInfo = [];
+      if(this.isOpenCnMarket){
+        lineCreditInfo.push({
+          moneyType: 0,
+          lineCreditBefore: this.loanLimitValue.cn
+        })
+      }
+      if(this.isOpenHkMarket){
+        lineCreditInfo.push({
+          moneyType: 2,
+          lineCreditBefore: this.loanLimitValue.hk
+        })
+      }
+      if(this.isOpenUsaMarket){
+        lineCreditInfo.push({
+          moneyType: 1,
+          lineCreditBefore: this.loanLimitValue.us
+        })
+      }
+
       const data = {
         fundAccount: this.marginAccount,
         tradePwd: this.tradePwd,
+        lineCreditInfo:lineCreditInfo,
       };
       this.$store.dispatch("submitAddLimit", data).then((res) => {
         if (res) {
-          this.$router.push("/");
+          toast({
+            type: 'txt',
+            txt: this.getI18n('warn.submitSuccess'),
+            time: 1000,
+            callback: () => {
+              this.$router.push("/")             
+            }
+          })
         }
       });
     },
