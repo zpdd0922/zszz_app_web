@@ -136,6 +136,7 @@ const actions = {
    * 注册
    */
   register({ commit, state }, params) {
+    console.log(params)
     return new Promise((resolve, reject) => {
       userApi.register(params)
         .then(res => {
