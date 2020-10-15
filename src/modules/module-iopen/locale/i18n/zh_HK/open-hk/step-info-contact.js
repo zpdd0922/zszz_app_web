@@ -130,7 +130,8 @@ export default {
       label: "任職年期",
       placeholder: "請選擇",
       options: {
-        ltFive: "少於5年",
+        ltOne: "少於1年",
+        oneToFive: "1-5年",
         fiveToTen: "5-10年",
         mtTen: "10年以上",
       },
@@ -138,7 +139,6 @@ export default {
     companyTelePhone: { label: "辦公室電話", placeholder: "請填寫(選填)" },
     companyAddress: { label: "公司地址", placeholder: "請填寫" },
   },
-  errorTipsEmail: '請輸入正確的郵箱地址',
-  errorTipsPhone: '請輸入正確的電話號碼',
-
+  errorTipsEmail: "請輸入正確的郵箱地址",
+  errorTipsPhone: "請輸入正確的電話號碼",
 };

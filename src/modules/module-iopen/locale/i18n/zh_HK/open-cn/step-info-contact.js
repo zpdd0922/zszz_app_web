@@ -110,7 +110,7 @@ export default {
         housewife: "家庭主婦",
         student: "學生",
         umemployed: "待業",
-        other: '其他',
+        other: "其他",
       },
     },
     professionCodeOther: { label: "其他就業情況", placeholder: "請填寫" },
@@ -129,7 +129,8 @@ export default {
       label: "從業年限",
       placeholder: "請選擇",
       options: {
-        ltFive: "少於5年",
+        ltOne: "少於1年",
+        oneToFive: "1-5年",
         fiveToTen: "5-10年",
         mtTen: "10年以上",
       },
@@ -137,7 +138,6 @@ export default {
     companyTelePhone: { label: "辦公室電話", placeholder: "請填寫(選填)" },
     companyAddress: { label: "公司地址", placeholder: "請填寫" },
   },
-  errorTipsEmail: '請輸入正確的郵箱地址',
-  errorTipsPhone: '請輸入正確的電話號碼',
-
+  errorTipsEmail: "請輸入正確的郵箱地址",
+  errorTipsPhone: "請輸入正確的電話號碼",
 };
