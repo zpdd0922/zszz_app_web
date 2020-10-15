@@ -17,8 +17,8 @@
           <cube-form-item
             :field="fieldsOurStaffKin.unrelatedToWLSStaff"
           ></cube-form-item>
-          <template
-            v-if="
+          <div
+            v-show="
               disclosureDefine.isNotOurStaffKin.isCanFalse &&
                 !model.isNotOurStaffKin
             "
@@ -29,7 +29,36 @@
             <cube-form-item
               :field="fieldsOurStaffKin.relationship"
             ></cube-form-item>
-          </template>
+            <!-- 第二条之后的联系人信息 -->
+            <div class="related" v-for="(item, index) in staff" :key="index">
+              <div class="label">
+                <label for="first">{{
+                  getI18n("other.ourStaffKinName")
+                }}</label>
+                <input
+                  type="text"
+                  name="first"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.ourStaffKinName"
+                />
+              </div>
+              <div class="input">
+                <label for="second">{{
+                  getI18n("other.ourStaffKinRelation")
+                }}</label>
+                <input
+                  type="text"
+                  name="second"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.ourStaffKinRelation"
+                />
+              </div>
+            </div>
+            <add-delete-btn
+              @handleAdd="addList(staff, staffObj)"
+              @handleDelete="deleteList(staff)"
+            ></add-delete-btn>
+          </div>
         </cube-form-group>
 
         <!-- 是否港交所參與者僱員 -->
@@ -49,6 +78,37 @@
             <cube-form-item
               :field="fieldsHkexParterStaff.hkexParterCENo"
             ></cube-form-item>
+            <!-- 第二条之后的联系人信息 -->
+            <div
+              class="related"
+              v-for="(item, index) in hkexParter"
+              :key="index"
+            >
+              <div class="label">
+                <label for="first">{{ getI18n("other.hkexParterName") }}</label>
+                <input
+                  type="text"
+                  name="first"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.hkexParterName"
+                />
+              </div>
+              <div class="input">
+                <label for="second">{{
+                  getI18n("other.hkexParterCENo")
+                }}</label>
+                <input
+                  type="text"
+                  name="second"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.hkexParterCENo"
+                />
+              </div>
+            </div>
+            <add-delete-btn
+              @handleAdd="addList(hkexParter, hkexParterObj)"
+              @handleDelete="deleteList(hkexParter)"
+            ></add-delete-btn>
           </template>
         </cube-form-group>
 
@@ -71,6 +131,33 @@
               class="label-width-4em"
               :field="fieldsConsortWithMargin.withMarginAccount"
             ></cube-form-item>
+            <!-- 第二条之后的联系人信息 -->
+            <div class="related" v-for="(item, index) in margin" :key="index">
+              <div class="label">
+                <label for="first">{{ getI18n("other.withMarginName") }}</label>
+                <input
+                  type="text"
+                  name="first"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.withMarginName"
+                />
+              </div>
+              <div class="input">
+                <label for="second">{{
+                  getI18n("other.withMarginAccount")
+                }}</label>
+                <input
+                  type="text"
+                  name="second"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.withMarginAccount"
+                />
+              </div>
+            </div>
+            <add-delete-btn
+              @handleAdd="addList(margin, marginObj)"
+              @handleDelete="deleteList(margin)"
+            ></add-delete-btn>
           </template>
         </cube-form-group>
 
@@ -90,6 +177,39 @@
               class="label-width-5em"
               :field="fieldsOtherPOorPGWithMargin.otherPOorBGMarginAccount"
             ></cube-form-item>
+            <!-- 第二条之后的联系人信息 -->
+            <div
+              class="related"
+              v-for="(item, index) in otherMargin"
+              :key="index"
+            >
+              <div class="label">
+                <label for="first">{{
+                  getI18n("other.otherBOorPGAccountName")
+                }}</label>
+                <input
+                  type="text"
+                  name="first"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.otherPOorBGMarginName"
+                />
+              </div>
+              <div class="input">
+                <label for="second">{{
+                  getI18n("other.otherBOorPGAccountNumber")
+                }}</label>
+                <input
+                  type="text"
+                  name="second"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.otherPOorBGMarginAccount"
+                />
+              </div>
+            </div>
+            <add-delete-btn
+              @handleAdd="addList(otherMargin, otherMarginObj)"
+              @handleDelete="deleteList(otherMargin)"
+            ></add-delete-btn>
           </template>
         </cube-form-group>
 
@@ -112,6 +232,39 @@
               class="label-width-4em"
               :field="fieldsConsortWithOtherMargin.withOtherMarginAccount"
             ></cube-form-item>
+            <!-- 第二条之后的联系人信息 -->
+            <div
+              class="related"
+              v-for="(item, index) in withOtherMargin"
+              :key="index"
+            >
+              <div class="label">
+                <label for="first">{{
+                  getI18n("other.withOtherMarginName")
+                }}</label>
+                <input
+                  type="text"
+                  name="first"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.withOtherMarginName"
+                />
+              </div>
+              <div class="input">
+                <label for="second">{{
+                  getI18n("other.withOtherMarginAccount")
+                }}</label>
+                <input
+                  type="text"
+                  name="second"
+                  :placeholder="getI18n('other.inputPlaceholder')"
+                  v-model="item.withOtherMarginAccount"
+                />
+              </div>
+            </div>
+            <add-delete-btn
+              @handleAdd="addList(withOtherMargin, withOtherMarginObj)"
+              @handleDelete="deleteList(withOtherMargin)"
+            ></add-delete-btn>
           </template>
         </cube-form-group>
         <div class="margin-bottom"></div>
@@ -135,6 +288,7 @@ import onlineMixin from "../mixins/online";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import { disclosureDefine } from "@/modules/module-iopen/format/format-cn/other";
 import * as optionsList from "./option-list";
+import {noSpace} from '@/main/utils/format/formatter';
 
 const emtpy = ["null", "undefined", "", undefined, null];
 
@@ -169,7 +323,32 @@ export default {
 
         isNotUsGreenCardHolder: 3,
       },
-
+      staff: [],
+      hkexParter: [],
+      margin: [],
+      otherMargin: [],
+      withOtherMargin: [],
+      staffObj: {
+        ourStaffKinName: '',
+        ourStaffKinRelation: '',
+      },
+      maxLength: [4,4,4,4,4],
+      hkexParterObj: {
+        hkexParterName: '',
+        hkexParterCENo: '',
+      },
+      marginObj: {
+        withMarginName: '',
+        withMarginAccount: '',
+      },
+      otherMarginObj: {
+        otherPOorBGMarginName: '',
+        otherPOorBGMarginAccount: '',
+      },
+      withOtherMarginObj: {
+        withOtherMarginName: '',
+        withOtherMarginAccount: '',
+      },
       // 1 是否本账号唯一受益人
       fieldsAccountOwner: {
         isAccountOwner: {
@@ -353,14 +532,14 @@ export default {
       };
     },
     // 第一个复选框校验
-    accountOwnerStatusCheck() {
-      const { isAccountOwner } = this.model;
-      if (isAccountOwner) {
-        return true;
-      }
+    // accountOwnerStatusCheck() {
+    //   const { isAccountOwner } = this.model;
+    //   if (isAccountOwner) {
+    //     return true;
+    //   }
 
-      return false;
-    },
+    //   return false;
+    // },
     ourStaffKInStatusCheck() {
       const {
         isNotOurStaffKin,
@@ -444,7 +623,7 @@ export default {
     },
     // 提交按钮是否可点击
     isDisableNext() {
-      const check1 = this.accountOwnerStatusCheck;
+      // const check1 = this.accountOwnerStatusCheck;
       // const check2 = this.statusCheck2;
       const check2 = this.BOorPGStatusCheck;
       const check3 = this.ourStaffKInStatusCheck;
@@ -452,7 +631,7 @@ export default {
       const check5 = this.consortWithMarginStatusCheck;
       const check6 = this.consortWithOtherStatusCheck;
       const check7 = this.greenCardStatusCheck;
-      if (check1 && check2 && check3 && check4 && check5 && check6 && check7) {
+      if (check2 && check3 && check4 && check5 && check6 && check7) {
         return false;
       }
       return true;
@@ -477,6 +656,36 @@ export default {
     handleNext() {
       // 保存数据&下一步
       // const obj = { ...this.model, ...this.taxModel };
+      const cleanList = [
+        {
+          ele: this.model.isNotOurStaffKin,
+          arr: this.staff,
+        },
+        {
+          ele: this.model.isNotHkexParterStaff,
+          arr: this.hkexParter,
+        },
+        {
+          ele: this.model.isNotConsortWithMargin,
+          arr: this.margin,
+        },
+        {
+          ele: this.model.isNotBOorPG,
+          arr: this.otherMargin,
+        },
+        {
+          ele: this.model.isNotConsortWithOtherMargin,
+          arr: this.withOtherMargin,
+        },
+      ];
+      // 清理已经填写的数据
+      cleanList.forEach((item) => {this.cleanData(item.ele, item.arr)});
+      console.log(this.staff);
+
+      // 校验填写的值
+
+
+      return
       const obj = { ...this.model };
       const params = {
         step: this.step,
@@ -509,6 +718,31 @@ export default {
         },
       });
     },
+    //增加操作
+    addList(list, obj) {
+      const addObj = {...obj}
+      list.push(addObj)
+    },
+    // 删除操作
+    deleteList(list) {
+      list.pop()
+    },
+    // 清理数据
+    cleanData(key, arr) {
+      if (key) {
+        while (arr.length) {
+          arr.pop();
+        }
+      } else {
+        // 如果两项有一项未填，则去除这列
+        arr.forEach((item, index) => {
+          const empty = Object.values(item).some((val) => !noSpace(val))
+          if (empty) {
+            arr.splice(index, 1)
+          }
+        })
+      }
+    }
   },
   created() {
     this.updateInfo();

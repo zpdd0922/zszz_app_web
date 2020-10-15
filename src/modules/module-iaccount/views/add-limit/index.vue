@@ -116,6 +116,7 @@ export default {
       loanLimitValue: {
         hk: "0.00",
         us: "0.00",
+        cn: "0.00",
       },
       loanLimitNextValue: {
         hk: "0.00",

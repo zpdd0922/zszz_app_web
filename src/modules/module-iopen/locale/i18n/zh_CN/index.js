@@ -5,10 +5,12 @@ import guide from "./guide";
 import comSignature from "./com-signature";
 import openHk from "./open-hk";
 import openCn from "./open-cn";
+import components from "./components";
 
 export default {
   iOpen: {
     comSignature,
+    components,
     common: {
       title: "线上开户",
       nextBtn: "下一步",
