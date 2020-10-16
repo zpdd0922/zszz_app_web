@@ -18,6 +18,9 @@
 .cube-input {
   background-color: inherit;
 }
+.cube-input:after {
+  border: none;
+}
 
 .cube-select-text {
   width: 100%;

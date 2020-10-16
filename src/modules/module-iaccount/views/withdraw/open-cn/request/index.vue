@@ -567,8 +567,8 @@ export default {
         };
       });
       // 默认选中第一项
-      this.accountLabel = this.accountList[0].text;
-      this.accountValue = this.accountList[0].value;
+      this.accountLabel = this.accountList[0] && this.accountList[0].text;
+      this.accountValue = this.accountList[0] && this.accountList[0].value;
       this._fetchMoney();
     },
     _clickSelectAccount() {
