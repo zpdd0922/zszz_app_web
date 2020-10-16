@@ -304,7 +304,6 @@ export default {
         this.depositSelectBankAccount !== "add"
           ? result
           : depositBankAccountAgain.length && result;
-      console.log("isDisabled-cn", formInput, result, isEmpty);
       return !isEmpty;
     },
   },
@@ -459,7 +458,7 @@ export default {
         tips.jfDialog({
           content: this.$t("iAccount.deposit.common.text_11"),
           onConfirm: () => {
-            this.$router.push({ name: "deposit" });
+            this.$router.push({ name: "sec-funds-deposit" });
           },
         });
         return false;

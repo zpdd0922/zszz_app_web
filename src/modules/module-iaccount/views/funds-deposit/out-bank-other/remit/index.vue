@@ -514,7 +514,7 @@ export default {
         tips.jfDialog({
           content: this.$t("iAccount.deposit.common.text_11"),
           onConfirm: () => {
-            this.$router.push({ name: "deposit" });
+            this.$router.push({ name: "sec-funds-deposit" });
           },
         });
         return false;
