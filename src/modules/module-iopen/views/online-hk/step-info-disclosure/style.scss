@@ -19,6 +19,31 @@
   h3 {
     font-size: 0.14rem;
   }
+  //增加信息输入框
+  .custom-form-group {
+    .list {
+      width: 80%;
+      margin: 0 auto;
+      padding: .05rem 0;
+      border-bottom: .01rem dashed $color-separate-line;
+      .list-item {
+        display: flex;
+        justify-content: space-between;
+        height: .25rem;
+        line-height: .25rem;
+
+        label {
+          height: 2rem;
+        }
+        input {
+          width: 70%;
+        }
+      }
+    }
+    .list:nth-child(2) {
+      border-top: .01rem dashed $color-separate-line;
+    }
+  }
   //美国居民身份申报
   .greenCardDeclare {
     padding: .1rem 0 0 .12rem;

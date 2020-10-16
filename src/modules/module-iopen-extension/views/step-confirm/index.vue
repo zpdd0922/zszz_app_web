@@ -137,7 +137,7 @@ export default {
       }).catch((err)=>{
         toast({
           type: 'error',
-          txt: this.getI18n('submitFailed'),
+          txt: err,
           time: 1000,
           callback: ()=>{
             this.$router.push()

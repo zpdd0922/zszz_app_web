@@ -35,6 +35,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/customize/theme/_val_white.scss';
+
 .btn-wrap {
   display: flex;
   justify-content: space-evenly;
@@ -43,8 +45,12 @@ export default {
   padding: .1rem;
 
   .btn {
-    padding: .1rem .2rem;
+    width: 20%;
+    padding: .05rem 0;
     text-align: center;
+    background-color: $color-main-sub;
+    color: $color-bg;
+    border-radius: .05rem
   }
 }
 </style>

@@ -119,19 +119,19 @@ export const contactRadioOptions = () => [
 ];
 
 // 從業年限
-// export const workingSeniorityOptions = () => [
-//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.ltOne"), value: 4 },
-//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.oneToFive"), value: 1 },
-//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.fiveToTen"), value: 2 },
-//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.mtTen"), value: 3 }
-// ];
-// 從業年限
 export const workingSeniorityOptions = () => [
-  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.ltOne"), value: 1 },
-  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.oneToFive"), value: 2 },
-  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.fiveToTen"), value: 3 },
-  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.mtTen"), value: 4 }
+  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.ltOne"), value: 4 },
+  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.oneToFive"), value: 1 },
+  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.fiveToTen"), value: 2 },
+  { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.mtTen"), value: 3 }
 ];
+// 從業年限
+// export const workingSeniorityOptions = () => [
+//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.ltOne"), value: 1 },
+//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.oneToFive"), value: 2 },
+//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.fiveToTen"), value: 3 },
+//   { text: getStepI18nValue("infoContact", "profession.workingSeniority.options.mtTen"), value: 4 }
+// ];
 
 
 // 收取节点及书信方式

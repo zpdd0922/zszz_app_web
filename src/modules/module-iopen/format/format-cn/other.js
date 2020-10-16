@@ -44,7 +44,8 @@ const formatDislosures = (args, val) => {
       const key = `disclosure${i}Key`;
       const argsKeyBase = val[key];
       let disclosureArr = [];
-      for (let j = 0; j < val.disclosureSize; j++) {
+      //TODO:是否是从1开始
+      for (let j = 1; j < val.disclosureSize; j++) {
         const v = args[`${argsKeyBase}${j}`] ? args[`${argsKeyBase}${j}`] : '';
         disclosureArr.push(v);
       }

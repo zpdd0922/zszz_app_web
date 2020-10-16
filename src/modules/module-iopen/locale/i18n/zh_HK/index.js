@@ -5,10 +5,12 @@ import guide from './guide';
 import openHk from './open-hk';
 import openCn from './open-cn';
 import comSignature from './com-signature';
+import components from "./components";
 
 export default {
   iOpen: {
     comSignature,
+    components,
     common: {
       title: '綫上開戶',
       nextBtn: '下一步',

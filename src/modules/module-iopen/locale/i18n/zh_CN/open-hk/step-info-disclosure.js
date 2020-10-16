@@ -84,4 +84,9 @@ export default {
 
         }
     },
+    warn: {
+        info: '请填写正确格式的信息',
+        lengthCommon: '此项最多填写',
+        lengthUnit: '条',
+    }
 };
