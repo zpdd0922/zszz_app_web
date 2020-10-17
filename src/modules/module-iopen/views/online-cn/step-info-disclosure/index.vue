@@ -750,12 +750,16 @@ export default {
         const addObj = {...obj}
         list.push(addObj)
       } else {
-        this.commonToast(`${this.getI18n('warn.lengthCommon')}${maxLength}${this.getI18n('warn.lengthUnit')}`)
+        this.commonToast(`${this.getI18n('warn.maxLengthCommon')}${maxLength}${this.getI18n('warn.lengthUnit')}`)
       }
     },
     // 删除操作
     deleteList(list) {
-      list.pop()
+      if (list.length > 1) {
+        list.pop()
+      } else {
+        this.commonToast(`${this.getI18n('warn.minLengthCommon')}1${this.getI18n('warn.lengthUnit')}`)
+      }
     },
     cleanDataBeforeSubmit() {
       const cleanList = [

@@ -985,6 +985,19 @@ export default {
         this.professionModel.professionCode = args;
       }
     },
+    // 空字符校验字符
+    validateEmpty() {
+      if (this.professionModel.professionCode === optionsList.professionCodeValue.employed || this.professionModel.professionCode === optionsList.professionCodeValue.selfEmployed) {
+        const {
+          companyName,
+          companyAddress,
+          industryRange,
+        } = this.professionModel
+        return companyName.replace(/\s+/g, '') && companyAddress.replace(/\s+/g, '') && industryRange.replace(/\s+/g, '')
+      } else {
+        return true
+      }
+    },
     // 验证邮箱的准确性
     validEmail() {
       const { email } = this.model;
@@ -1056,6 +1069,11 @@ export default {
         }
         if (!this.validPhoneNum()) {
           const errorTips = this.getI18n('errorTipsPhone');
+          toast({ type: "error", txt: errorTips, time: 1000 });
+          return reject(new Error(errorTips));
+        }
+        if (!this.validateEmpty()) {
+          const errorTips = this.getI18n('empty');
           toast({ type: "error", txt: errorTips, time: 1000 });
           return reject(new Error(errorTips));
         }

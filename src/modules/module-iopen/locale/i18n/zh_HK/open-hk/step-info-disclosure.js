@@ -84,7 +84,8 @@ export default {
   },
   warn: {
     info: "請填寫正確格式的信息",
-    lengthCommon: "此項最多填寫",
+    maxLengthCommon: "此項最多填寫",
+    minLengthCommon: "此項最少填寫",
     lengthUnit: "條",
   },
 };

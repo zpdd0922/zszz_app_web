@@ -140,4 +140,5 @@ export default {
   },
   errorTipsEmail: "请输入正确的邮箱地址",
   errorTipsPhone: "请输入正确的电话号码",
+  empty: '必填信息不能为空'
 };

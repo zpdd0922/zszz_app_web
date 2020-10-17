@@ -140,4 +140,5 @@ export default {
   },
   errorTipsEmail: "請輸入正確的郵箱地址",
   errorTipsPhone: "請輸入正確的電話號碼",
+  empty: '必填信息不能為空',
 };

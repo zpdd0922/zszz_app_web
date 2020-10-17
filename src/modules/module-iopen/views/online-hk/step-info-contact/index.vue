@@ -270,7 +270,7 @@ export default {
       professionModel: {
         professionCode: "", // 职业类型选择
         professionCodeOther: "", // 职业类型选择
-        companyName: "", // 公司名称
+        companyName: "", // 公司名称  
         companyAddress: "", // 公司地址详细
         companyTelePhone: "", // 辦公室電話
         workingSeniority: "", // 從業年限
@@ -905,7 +905,7 @@ export default {
     },
     // 验证提交按钮
     isDisabled() {
-      const result = this.validProfession && this.validContact;
+      const result = this.validProfession && this.validContact
       const cardFile = Object.values(this.AddressImgFile);
       const len = 1;
 
@@ -944,6 +944,20 @@ export default {
     },
   },
   methods: {
+    // 空字符校验字符
+    validateEmpty() {
+      if (this.professionModel.professionCode === optionsList.professionCodeValue.employed || this.professionModel.professionCode === optionsList.professionCodeValue.selfEmployed) {
+        const {
+          companyName,
+          companyAddress,
+          industryRange,
+        } = this.professionModel
+        return companyName.replace(/\s+/g, '') && companyAddress.replace(/\s+/g, '') && industryRange.replace(/\s+/g, '')
+      } else {
+        return true
+      }
+    },
+
     // 电话号码验证，只验证了全数字和长度不大于11
     validPhoneNum() {
       const phoneList = [
@@ -1112,8 +1126,15 @@ export default {
           toast({ type: "error", txt: errorTips, time: 1000 });
           return reject(new Error(errorTips));
         }
+        
         if (!this.validPhoneNum()) {
           const errorTips = this.getI18n('errorTipsPhone');
+          toast({ type: "error", txt: errorTips, time: 1000 });
+          return reject(new Error(errorTips));
+        }
+        console.log(this.validateEmpty());
+        if (!this.validateEmpty()) {
+          const errorTips = this.getI18n('empty');
           toast({ type: "error", txt: errorTips, time: 1000 });
           return reject(new Error(errorTips));
         }
