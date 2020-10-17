@@ -10,6 +10,7 @@ import UaInfo from '@/main/utils/common/ua-info';
 import StorageCache from '@/main/utils/cache/localstorage';
 import { getURLParameters } from "@/main/utils/format/url";
 
+
 class Auth {
   /**
    * 获取平台
@@ -17,7 +18,6 @@ class Auth {
    * @return string
    */
   getPlateform = () => {
-    return 'ios'
     if (UaInfo.isApp()) {
       if (UaInfo.isAndroid()) {
         return 'android';
@@ -51,7 +51,6 @@ class Auth {
   * @return string
   */
   getAuthSession = () => {
-    // return "7fb988d680354068bad4e0e88fafc179122945"
     // 获取地址栏session，有则更新本地
     const urlParams = getURLParameters() || {};
     const urlSession = urlParams.sessionId || '';

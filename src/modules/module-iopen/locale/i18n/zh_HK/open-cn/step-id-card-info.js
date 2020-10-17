@@ -59,7 +59,7 @@ export default {
     mt70: '70歲以上暫不能開戶，非常抱歉',
     address: '請輸入正確的證件地址',
     authority: '請輸入正確的簽發機關',
-    idCard: '四要素校驗未通過',
+    realIdCardInfo: '身份信息校驗未通過',
   },
   longerConfirm: '為確保您資料的準確性，請確認您的身份證是否為長期身份證！',
 };

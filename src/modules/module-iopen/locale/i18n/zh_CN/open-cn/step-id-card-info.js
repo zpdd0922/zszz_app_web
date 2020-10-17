@@ -63,7 +63,7 @@ export default {
     mt70: "70岁以上暂不能开户，非常抱歉",
     address: '请输入正确的证件地址',
     authority: '请输入正确的签发机关',
-    idCard: '四要素校验不通过',
+    realIdCardInfo: '身份信息校验不通过',
   },
   longerConfirm: '为确保您资料的准确性，请确认您的身份证是否为长期身份证！',
 };

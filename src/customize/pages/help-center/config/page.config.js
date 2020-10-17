@@ -8,11 +8,11 @@
 // webpack相关配置
 module.exports = {
   baseUrl: './',
-  outputDir: 'dist/helpcenter',
+  outputDir: 'dist/webstatic/helpCenter1',
   serverPort: 28003,
   pages: [
     {
-      name: 'index',
+      name: 'help',
       template: 'src/customize/pages/help-center/template/index.html',
       entry: 'src/modules/module-help-center/index.js',
       title: '帮助中心',

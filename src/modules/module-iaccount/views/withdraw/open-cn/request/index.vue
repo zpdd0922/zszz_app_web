@@ -318,7 +318,7 @@ import {
 } from "@/modules/module-iaccount/utils/format";
 import { format_CommitData_CN } from "@/modules/module-iaccount/format/withdraw";
 import * as tips from "@/modules/module-iaccount/utils/tips";
-// import userAgent from '@/modules/module-iaccount/utils/ua-parser'
+import { tradeUnlock } from "@/main/utils/native-app/";
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
 import validate from "@/main/utils/format/validate";
@@ -334,6 +334,7 @@ export default {
       accountLabel: "",
       accountValue: "",
       accountList: [],
+      accountNameInfo: {},
       model: {
         currency: currencyOptions[0].value,
         withdrawBankNameOther: "",
@@ -486,27 +487,27 @@ export default {
       });
     },
     _handleNext() {
-      // if (userAgent.isApp()) {
-      //   // App 交易解锁
-      //   window.JFSTOCK.tradeUnlock({
+      // if (this.UaInfo.isApp()) {
+        // App 交易解锁
+      //   tradeUnlock({
       //     success: (res) => {
-      //       const result = JSON.parse(res.data)
+      //       const result = JSON.parse(res.data);
       //       // 处理提取
       //       this._fetchWithdraw({
       //         key: result.key,
       //         trd: result.password,
-      //         tradeToken: result.token
-      //       })
+      //         tradeToken: result.token,
+      //       });
       //     },
       //     fail: (err) => {
-      //       console.log(err)
-      //       this.showCaptcha = true
-      //     }
-      //   })
+      //       console.log(err);
+      //       this.showCaptcha = true;
+      //     },
+      //   });
       // } else {
-      //   this.showCaptcha = true
+        this.showCaptcha = true;
       // }
-      this.showCaptcha = true;
+      // this.showCaptcha = true;
     },
     _closeCaptcha() {
       this.showCaptcha = false;
@@ -521,12 +522,13 @@ export default {
       const formData = {
         money: this.money,
         chargeMoney: this.getCurrency.fee,
+        accountValue: this.accountValue,
+        accountName: this.accountNameInfo[this.accountValue],
         ...obj,
         ...this.model,
       };
       const data = this.$store.state;
       const params = format_CommitData_CN(data, formData);
-      console.log(params);
       this.$store.dispatch("apiToCommitCashOutData", params).then(() => {
         this.$router.push({ name: "withdraw-notify" });
       });
@@ -561,6 +563,7 @@ export default {
           assetProp === "M"
             ? this.$t("iAccount.withdraw.request.text_2m")
             : this.$t("iAccount.withdraw.request.text_2");
+        this.accountNameInfo[account] = txt;
         return {
           value: item.fundAccount,
           text: txt + " - " + item.fundAccount,

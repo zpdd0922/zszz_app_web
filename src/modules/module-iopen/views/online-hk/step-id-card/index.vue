@@ -495,12 +495,12 @@ export default {
     handleBefore() {
       return new Promise((resolve, reject) => {
         //校验其他地区字段
-        if (this.model.nationType === 'OTH') {
-          const checkOtherNationality = this.checkInfo(this.model.otherNationality, validate.isNotChinese, this.getI18n('warn.nation'));
-          if (!checkOtherNationality) {
-            return reject();
-          }
-        }
+        // if (this.model.nationType === 'OTH') {
+        //   const checkOtherNationality = this.checkInfo(this.model.otherNationality, validate.isNotChinese, this.getI18n('warn.nation'));
+        //   if (!checkOtherNationality) {
+        //     return reject();
+        //   }
+        // }
         this.handleCheckNat()
           .then(() => {
             resolve();
@@ -591,7 +591,7 @@ export default {
       this.handleNationUpload(newVal);
     },
     "model.otherNationality": function (newVal, oldVal) {
-      if (validate.isChinese(newVal)) {
+      if (validate.isAllChinese(newVal)) {
         this.model.otherNationality = "";
         this.model.nationTxt = "";
       } else {

@@ -8,7 +8,7 @@
 // webpack相关配置
 module.exports = {
   baseUrl: './',
-  outputDir: 'dist/information',
+  outputDir: 'dist/webstatic/Infomation',
   serverPort: 28003,
   pages: [
     {

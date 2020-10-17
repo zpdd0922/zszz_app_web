@@ -70,5 +70,6 @@ export default {
     warn: {
         familyNameSpell: '请输入正确的英文姓氏',
         givenNameSpell: '请输入正确的英文名字',
+        realIdCardInfo: '身份信息校验不通过',
     }
 }

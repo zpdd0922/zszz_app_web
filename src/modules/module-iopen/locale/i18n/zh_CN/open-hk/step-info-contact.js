@@ -139,6 +139,7 @@ export default {
     companyTelePhone: { label: "办公室电话", placeholder: "请填写(选填)" },
     companyAddress: { label: "公司地址", placeholder: "请填写" },
   },
+  errorTipsPre:"请输入正确的",
   errorTipsEmail: "请输入正确的邮箱地址",
   errorTipsPhone: "请输入正确的电话号码",
   empty: '必填信息不能为空'

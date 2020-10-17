@@ -106,6 +106,10 @@ export function setCADoc(res) {
   JsToNative('signingCADoc', res, true);
 }
 
+export function tradeUnlock(res) {
+  JsToNative('tradeUnlock', res);
+}
+
 // 打开PDF
 export function openPDF(res) {
   if (UaInfo.isAndroid() && UaInfo.isApp()) {

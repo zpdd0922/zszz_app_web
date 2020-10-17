@@ -35,7 +35,7 @@ export default {
       if (DEV) {
         next({ name: ROUTE_NAME.home })
       } else {
-        this.closeBack(window.MAIN_URL + window.HASH_SECRRITY_SERVICE)
+        this.closeBack()
       }
     }
   },

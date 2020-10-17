@@ -1,6 +1,6 @@
 (function (window) {
   var GLOBAL_ENV_CONFIG = {
-    debug: false,
+    debug: true,
     serverUser: 'http://106.52.75.112:6003',
     serveriOpen: 'http://106.52.75.112:6012',
     serveriAccount: 'http://106.52.75.112:6012',
@@ -9,6 +9,7 @@
     serverDocument: '',
     webSign: './sign.html',
     webIOpen: 'http://106.52.75.112:6003/sunline/open-account/index.html',
+    webIAccount: 'http://106.52.75.112:6003/sunline/main/index.html',
     webDownload: './download.html',
     webInformation: 'http://106.52.75.112:6003/webstatic/Infomation/newsdetail.html',
     webHelpCenter: 'http://106.52.75.112:6003/webstatic/helpCenter1/help.html',
