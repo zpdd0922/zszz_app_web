@@ -61,6 +61,14 @@
           v-model="tradePwd"
         />
       </div>
+      <!-- <cube-input
+        type="password"
+        :clearable="clearable"
+        :eye="eye"
+        :placeholder="getI18n('tradePwd.placeholder')"
+        v-model.trim="tradePwd"
+        class="pwd"
+      > -->
     </div>
     <div class="limit-agree-box">
       <cube-checkbox v-model="checked">
@@ -276,16 +284,14 @@ export default {
         lineCreditInfo:lineCreditInfo,
       };
       this.$store.dispatch("submitAddLimit", data).then((res) => {
-        if (res) {
-          toast({
-            type: 'txt',
-            txt: this.getI18n('warn.submitSuccess'),
-            time: 1000,
-            callback: () => {
-              this.$router.push("/")             
-            }
-          })
-        }
+        toast({
+          type: 'txt',
+          txt: this.getI18n('warn.submitSuccess'),
+          time: 1000,
+          callback: () => {
+            this.$router.push("/")             
+          }
+        })
       });
     },
     // 处理跳转协议

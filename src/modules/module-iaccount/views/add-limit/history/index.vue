@@ -33,21 +33,22 @@
                   getCurrencyLabel(itemLine.moneyType)
                 }}</span>
                 <span class="td txt-right">{{
-                  (item.lineCreditBefore || 0) | formatMoney
+                  (itemLine.lineCreditBefore || 0) | formatMoney
                 }}</span>
                 <!-- <span class="td  txt-right"
-                  >{{ (item.lineCreditApply|| 0)  | formatMoney
+                  >{{ (itemLine.lineCreditApply|| 0)  | formatMoney
                   }}</span
                 > -->
                 <span class="td txt-right">{{
-                  (item.lineCreditAfter || 0) | formatMoney
+                  (itemLine.lineCreditAfter || 0) | formatMoney
                 }}</span>
               </div>
             </template>
           </div>
         </li>
       </ul>
-      <div class="noMore">{{ getI18n("noMore") }}</div>
+      <!-- <div class="noMore">{{ getI18n("noMore") }}</div> -->
+      <empty-box v-else :tips="$t('iAccount.common.text_13')"></empty-box>
     </template>
   </div>
 </template>
