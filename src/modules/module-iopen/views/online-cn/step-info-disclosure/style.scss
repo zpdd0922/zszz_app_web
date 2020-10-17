@@ -8,29 +8,33 @@
 
   .disclosure-block-item {
     position: relative;
-    padding: .1rem;
+    padding: 0.1rem;
 
     .triangle-icon {
-      top: .1rem;
-      left: .1rem;
+      top: 0.1rem;
+      left: 0.1rem;
     }
-
   }
   h3 {
     font-size: 0.14rem;
   }
   //增加信息输入框
   .custom-form-group {
+    .cube-form-group-content {
+      .border-bottom-1px:after {
+        border-bottom: none;
+      }
+    }
     .list {
       width: 80%;
       margin: 0 auto;
-      padding: .05rem 0;
-      border-bottom: .01rem dashed $color-separate-line;
+      padding: 0.05rem 0;
+      border-bottom: 0.01rem dashed $color-separate-line;
       .list-item {
         display: flex;
         justify-content: space-between;
-        height: .25rem;
-        line-height: .25rem;
+        height: 0.25rem;
+        line-height: 0.25rem;
 
         label {
           height: 2rem;
@@ -41,12 +45,12 @@
       }
     }
     .list:nth-child(2) {
-      border-top: .01rem dashed $color-separate-line;
+      border-top: 0.01rem dashed $color-separate-line;
     }
   }
   //美国居民身份申报
   .greenCardDeclare {
-    padding: .1rem 0 0 .12rem;
+    padding: 0.1rem 0 0 0.12rem;
   }
   // [class^="item-"] {
   //   position: relative;
@@ -59,7 +63,7 @@
   //     height: .25rem;
   //     background-size: cover;
   //     background-repeat: no-repeat;
-  //     background-position: center center; 
+  //     background-position: center center;
   //   }
   // }
   // .item-1:before {
@@ -67,10 +71,10 @@
   // }
   // .item-2:before {
   //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon2.png');
-  // }  
+  // }
   // .item-3:before {
   //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon3.png');
-  // } 
+  // }
   // .item-4:before {
   //   background-image: url('~@/modules/module-iopen/assets/images/online-cn/triangle-icon4.png');
   // }
@@ -81,31 +85,28 @@
   .footer {
     display: flex;
     justify-content: space-around;
-    padding: .1rem 0;
+    padding: 0.1rem 0;
 
     .cube-btn-light {
       color: #666;
       background: #fcfcfc;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     .add {
-      font-size: .14rem;
+      font-size: 0.14rem;
     }
 
     .remove {
-      font-size: .14rem;
+      font-size: 0.14rem;
     }
-
   }
 
-
-
-  .cube-form-item{
+  .cube-form-item {
     min-height: 46px;
   }
 
-  .cube-form-field{
+  .cube-form-field {
     flex: 1;
   }
   .cube-select:after {
@@ -117,8 +118,8 @@
   .cube-radio:after {
     display: none;
   }
-  .cube-input-field{
-    padding: .05rem 0;
+  .cube-input-field {
+    padding: 0.05rem 0;
   }
 
   .error-tips {
@@ -179,10 +180,10 @@
 
   .big-text-area-wrap {
     padding-left: 1em;
-    padding-bottom: .1rem;
+    padding-bottom: 0.1rem;
 
     .big-text-area {
-      padding: .5em;
+      padding: 0.5em;
       border: none;
       width: 100%;
       height: 7em;
@@ -190,7 +191,7 @@
       outline: none;
 
       &::-webkit-input-placeholder {
-        font-size: .14rem;
+        font-size: 0.14rem;
         color: #cccccc;
       }
     }
