@@ -8,7 +8,7 @@
 // webpack相关配置
 module.exports = {
   baseUrl: './',
-  outputDir: 'dist/document',
+  outputDir: 'dist/sunline/document',
   serverPort: 28004,
   pages: [
     {

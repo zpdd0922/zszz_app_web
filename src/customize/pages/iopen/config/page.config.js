@@ -8,7 +8,7 @@
 // webpack相关配置
 module.exports = {
   baseUrl: './',
-  outputDir: 'dist/iopen',
+  outputDir: 'dist/sunline/open-account',
   serverPort: 8905,
   pages: [
     {
