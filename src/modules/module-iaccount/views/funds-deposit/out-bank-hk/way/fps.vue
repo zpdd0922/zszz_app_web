@@ -8,9 +8,9 @@
       <base-cell>
         <base-cell-header></base-cell-header>
         <base-cell-body>{{$t('iAccount.deposit.ways.text_2')}}</base-cell-body>
-        <base-cell-footer>
+        <!-- <base-cell-footer>
           <a class="guide-link" :href="link">{{$t('iAccount.deposit.fps.text_5')}}</a>
-        </base-cell-footer>
+        </base-cell-footer> -->
       </base-cell>
     </header>
     <div class="step-content step-content-way">

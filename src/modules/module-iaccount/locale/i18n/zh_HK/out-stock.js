@@ -7,7 +7,7 @@ export const outStock = {
   transferInfo: {
     secName: "立橋證券",
     receiveInfo: {
-      title: "接收方資訊",
+      title: "接收方信息",
       receiveCompany: {
         placeholder: "請選擇",
         label: "接收券商",
@@ -38,7 +38,7 @@ export const outStock = {
       },
     },
     transferOutInfo: {
-      title: "轉出方資訊",
+      title: "轉出方信息",
       transferOutSec: {
         placeholder: "立橋證券",
         label: "轉出券商",
@@ -57,7 +57,7 @@ export const outStock = {
     tips2: "),不允許使用第三方帳戶轉出股票",
   },
   stockDetail: {
-    title: "股票資訊",
+    title: "股票信息",
     sharesCode: "股票",
     stockNamePlaceholder: "輸入股票代碼",
     sharesNum: "數量",
@@ -80,20 +80,20 @@ export const outStock = {
     noResult: "無搜索結果",
   },
   infoConfirm: {
-    confirmTitle: "請確認所填資訊無誤後提交",
+    confirmTitle: "請確認所填信息無誤後提交",
     receive: {
-      title: "接收方資訊",
+      title: "接收方信息",
       companyName: "券商名稱",
       accountNumber: "帳戶號碼",
       accountName: "帳戶姓名",
     },
     transferOut: {
-      title: "轉出方資訊",
+      title: "轉出方信息",
       companyName: "券商名稱",
       accountNumber: "轉出帳戶",
     },
     stockInfo: {
-      title: "股票資訊",
+      title: "股票信息",
       stockCode: "股票代碼",
       stockName: "股票名稱",
       quantity: "股票數量",

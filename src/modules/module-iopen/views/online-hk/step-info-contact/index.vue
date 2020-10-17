@@ -15,6 +15,7 @@
           <cube-form-item :field="fieldsContact.homeRadio"></cube-form-item>
           <!-- 住址地址选择省市区 -->
           <template v-if="model.homeRadio !== radioListValue.company">
+            <!-- 显示住址选择其他 -->
             <template v-if="model.homeRadio !== radioListValue.oth">
               <cube-form-item :field="fieldsContact.homeCity">
                 <!-- 住址地址大陆省市区 -->
@@ -104,7 +105,7 @@
             <template v-else>
               <cube-form-item :field="fieldsContactOther.contactOhterCountry"></cube-form-item>
               <template v-if="model.contactOhterCountry === 'OTH'">
-                <cube-form-item
+                <!-- <cube-form-item
                   :field="fieldsContactOther.otherContactRepublic"
                   class="custom-form-enName"
                 >
@@ -115,8 +116,8 @@
                       :placeholder="fieldsContactOther.otherContactRepublic.props.placeholder"
                     />
                   </div>
-                </cube-form-item>
-                <!-- <cube-form-item :field="fieldsContactOther.otherContactRepublic"></cube-form-item> -->
+                </cube-form-item> -->
+                <cube-form-item :field="fieldsContactOther.otherContactRepublic"></cube-form-item>
               </template>
               <cube-form-item :field="fieldsContactOther.contactOtherProvince"></cube-form-item>
               <cube-form-item :field="fieldsContactOther.contactOtherCity"></cube-form-item>
@@ -942,6 +943,15 @@ export default {
       }
       return true;
     },
+    // 需要校验是否为空的字段和提示信息
+    emptyCheckList() {
+      let list = [];
+      先取出所有可能需要检验的字段
+      const {
+        homeAddressDetail
+
+      } = this.model
+    }
   },
   methods: {
     // 空字符校验字符
@@ -1133,6 +1143,7 @@ export default {
           return reject(new Error(errorTips));
         }
         console.log(this.validateEmpty());
+        // 校验是否有必填项为空值
         if (!this.validateEmpty()) {
           const errorTips = this.getI18n('empty');
           toast({ type: "error", txt: errorTips, time: 1000 });

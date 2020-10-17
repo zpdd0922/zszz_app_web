@@ -21,6 +21,9 @@ export default {
         passport: "护照",
       },
       nationlityCode: "AO_NATIONALITY",
+      warn: {
+        emptyMsg: '必填信息不能为空'
+      }
     },
     guide,
     authWay: {

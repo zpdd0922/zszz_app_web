@@ -143,21 +143,24 @@ export default {
                 'custom-cube-dialog-content': true
               },
               slot: 'content'
-            }, [
+            }, 
+            [
               createElement('p', null, [
                 this.$t('iAccount.withdraw.select_bank.text_2'),
-                createElement('span', {
-                  class: {
-                    'font-link': true
-                  },
-                  on: {
-                    click: (e) => {
-                      this.gotoGuide(HELP_URL.REQUEST_HK_CARD_LINK)
-                    }
-                  }
-                }, this.$t('iAccount.withdraw.select_bank.text_3'))
+                // createElement('span', {
+                //   class: {
+                //     'font-link': true
+                //   },
+                //   on: {
+                //     click: (e) => {
+                //       this.gotoGuide(HELP_URL.REQUEST_HK_CARD_LINK)
+                //     }
+                //   }
+                // }, 
+                // this.$t('iAccount.withdraw.select_bank.text_3'))
               ])
-            ])
+            ]
+            )
           ]
         }
       })

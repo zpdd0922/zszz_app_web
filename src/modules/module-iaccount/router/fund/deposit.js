@@ -19,7 +19,7 @@ const depositRoute = [
                     pageName: '',
                     title: 'iAccount.fundsDeposit.currency.title',
                     guide: 'iAccount.fundsDeposit.currency.guide',
-                    guideUrl: 'http://106.52.75.112:6003/webstatic/building/index.html',
+                    // guideUrl: 'http://106.52.75.112:6003/webstatic/building/index.html',
                 }
             },
             {

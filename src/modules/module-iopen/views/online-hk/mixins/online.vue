@@ -1,4 +1,3 @@
-
 <script>
 // 关于表单输入在安卓移动端底部定位浮起
 // 通过input聚焦与失焦来控制起位置
@@ -6,6 +5,7 @@ import { mapGetters, mapActions } from "vuex";
 import { formatCommitData } from "@/modules/module-iopen/format/format-hk/index";
 import validate from "@/main/utils/format/validate";
 import { toast } from "@/main/utils/common/tips";
+import { noSpace } from "@/main/utils/format/formatter.js";
 
 export default {
   data() {},
@@ -59,16 +59,29 @@ export default {
       }
     },
     //校验方法
-    checkInfo(val='', func, warn='') {
-      const data = val.replace(/\s+/g, '')
+    checkInfo(val = "", func, warn = "") {
+      const data = val.replace(/\s+/g, "");
       if (!func || typeof func !== "function") {
         return;
       }
       if (!func(data)) {
         this.commonToast(warn);
-        return false
+        return false;
       } else {
-        return true
+        return true;
+      }
+    },
+    // 检查空值，并且提示
+    checkEmpty(checkedValue, warnMsg) {
+      if (!checkedValue) {
+        return false;
+      }
+      let msg = warnMsg || this.$t('iOpen.common.warn.emptyMsg')
+      if (!noSpace(checkedValue)) {
+        this.commonToast(msg);
+        return false;
+      } else {
+        return true;
       }
     },
   },

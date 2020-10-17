@@ -20,7 +20,11 @@ export default {
         idCardHkTemp: "香港居民身份證與簽證身份書",
         passport: "護照",
       },
-      nationlityCode: 'AO_NATIONALITY_HK'
+      nationlityCode: 'AO_NATIONALITY_HK',
+      warn: {
+        emptyMsg: '必填信息不能為空',
+      }
+
     },
     guide,
     authWay: {

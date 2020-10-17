@@ -125,17 +125,17 @@ export default {
           return [
             createElement('p', null, [
               createElement('span', null, this.$t('iAccount.withdraw.select_bank.text_4')),
-              createElement('span', {
-                class: {
-                  'font-link': true
-                },
-                on: {
-                  click: (e) => {
-                    // 民生 - 出金指引
-                    this.gotoGuide(HELP_URL.CMBC_WITHDRAW_HOW)
-                  }
-                }
-              }, this.$t('iAccount.withdraw.select_bank.text_5'))
+              // createElement('span', {
+              //   class: {
+              //     'font-link': true
+              //   },
+              //   on: {
+              //     click: (e) => {
+              //       // 民生 - 出金指引
+              //       this.gotoGuide(HELP_URL.CMBC_WITHDRAW_HOW)
+              //     }
+              //   }
+              // }, this.$t('iAccount.withdraw.select_bank.text_5'))
             ])
           ]
         }

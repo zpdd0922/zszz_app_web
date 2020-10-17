@@ -448,7 +448,7 @@ export default {
           withdrawBankNameOther,
         } = this.model;
         // 校验银行名字是否正确
-        if (!validate.isBankName(withdrawBankNameOther)) {
+        if (!validate.isBankName(withdrawBankNameOther) && this.isShowOther) {
           const msg = this.$t("iAccount.withdraw.request.wrongBankName");
           tips.toast({ txt: msg });
           return reject(msg);
@@ -616,12 +616,14 @@ export default {
     "model.withdrawBankAccount": function (newVal, oldVal) {
       if (!newVal) return "";
       const num = formatNumber(formatToDBC(newVal));
-      this.model.withdrawBankAccount = formatStepSpace(num);
+      // this.model.withdrawBankAccount = formatStepSpace(num);
+      this.model.withdrawBankAccount = num;
     },
     "model.withdrawBankAccountAgain": function (newVal, oldVal) {
       if (!newVal) return "";
       const num = formatNumber(formatToDBC(newVal));
-      this.model.withdrawBankAccountAgain = formatStepSpace(num);
+      // this.model.withdrawBankAccountAgain = formatStepSpace(num);
+      this.model.withdrawBankAccountAgain = num;
     },
     "model.withdrawMoney": function (newVal, oldVal) {
       if (!newVal) return "";

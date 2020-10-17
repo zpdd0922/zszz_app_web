@@ -8,9 +8,9 @@
       <base-cell>
         <base-cell-header></base-cell-header>
         <base-cell-body>{{$t('iAccount.deposit.ways.text_3')}}</base-cell-body>
-        <base-cell-footer>
+        <!-- <base-cell-footer>
           <a class="guide-link" :href="getComputedLink">{{$t('iAccount.deposit.eBanking.text_7')}}</a>
-        </base-cell-footer>
+        </base-cell-footer> -->
       </base-cell>
     </header>
 

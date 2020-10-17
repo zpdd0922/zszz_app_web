@@ -4,7 +4,7 @@ import commonI18n from "@/main/locale/i18n/zh_HK";
 export default {
   pageName: "資料填寫",
   contact: {
-    title: "聯繫資訊",
+    title: "聯繫信息",
     tips: "請上傳地址證明",
     radioOptions: {
       cn: "大陸地區",
@@ -60,8 +60,8 @@ export default {
     },
     addressDetail: {
       label: "詳細地址",
-      placeholder: "請填寫詳細地址資訊",
-      placeholderOther: "請填寫詳細地址資訊",
+      placeholder: "請填寫詳細地址信息",
+      placeholderOther: "請填寫詳細地址信息",
     },
     addressNumber: {
       label: "樓層/門牌號",
