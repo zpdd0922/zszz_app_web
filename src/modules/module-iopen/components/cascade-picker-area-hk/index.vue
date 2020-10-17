@@ -14,23 +14,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {
-  provinceList,
-  cityList,
-  areaList,
-} from "@/main/define/province-city-area-hk";
 
 const EVENT_INPUT = "input"; // only used for v-modal
 const EVENT_PICKER_SHOW = "picker-show";
 const EVENT_PICKER_HIDE = "picker-hide";
-
-// const addressData = provinceList;
-// addressData.forEach((province) => {
-//   province.children = cityList[province.value];
-//   province.children.forEach((city) => {
-//     city.children = areaList[city.value];
-//   });
-// });
 
 export default {
   name: "CascadePickerAreaHk",
