@@ -13,7 +13,7 @@ export default {
       success: '调用成功',
       failBusy: '网络繁忙，请稍后再试',
       failLogin: '登录信息已失效，请先登录',
-      failOvertime: '网络请求超时，请稍后重试录',
+      failOvertime: '网络请求超时，请稍后重试',
     },
     comfire: {
       cancelTxt: '否',

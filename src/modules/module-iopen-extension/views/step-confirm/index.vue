@@ -135,12 +135,13 @@ export default {
           })
         }
       }).catch((err)=>{
+        const {massage = this.$t('common.toast.failBusy')} = res
         toast({
           type: 'error',
-          txt: err,
+          txt: massage,
           time: 1000,
           callback: ()=>{
-            this.$router.push()
+            // this.$router.push()
           }
         })
 

@@ -12,7 +12,7 @@ export default {
       success: '調用成功',
       failBusy: '網絡繁忙，請稍後再試',
       failLogin: '登錄信息已失效，請先登錄',
-      failOvertime: '網絡請求超時，請稍後重試錄',
+      failOvertime: '網絡請求超時，請稍後重試',
     },
     comfire: {
       cancelTxt: '否',
