@@ -1,0 +1,61 @@
+{
+    "code": 0,
+    "result": [
+        {
+            "label": "證券帳戶協議",
+            "key": "account_agreement"
+        },
+        {
+            "label": "指紋及面容ID服務協議",
+            "key": "biosignature"
+        },
+        {
+            "label": "電子認證服務協議",
+            "key": "ca_auth"
+        },
+        {
+            "label": "免責聲明",
+            "key": "disclaimer"
+        },
+        {
+            "label": "衍生產品交易風險披露",
+            "key": "disclosure_derivative"
+        },
+        {
+            "label": "保證金帳戶風險披露",
+            "key": "disclosure_margin"
+        },
+        {
+            "label": "證券協議的一般條款",
+            "key": "general_terms"
+        },
+        {
+            "label": "關於中華通之下的北向證券交易服務之附加條款",
+            "key": "north_terms"
+        },
+        {
+            "label": "隱私保護政策",
+            "key": "privacy_policy"
+        },
+        {
+            "label": "行情訂閱協議",
+            "key": "qts_data"
+        },
+        {
+            "label": "關於證券交易的風險披露聲明及免責聲明",
+            "key": "sec_trade"
+        },
+        {
+            "label": "客戶款項常設授權（適用於所有帳戶）",
+            "key": "standing_auth"
+        },
+        {
+            "label": "客戶聲明",
+            "key": "statement"
+        },
+        {
+            "label": "服務協議",
+            "key": "terms"
+        }
+    ]
+}

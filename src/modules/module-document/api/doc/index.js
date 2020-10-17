@@ -10,5 +10,5 @@ export default {
    */
   // fetchDocDetail: data => post('/common_api/fetch_document', data),
   fetchDocDetail: (key, lang) => getLocal(key, lang),
-
+  fetchDocList: ( lang) => getLocal('a_list', lang),
 };
