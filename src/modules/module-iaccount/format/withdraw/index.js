@@ -21,14 +21,14 @@ export const format_CommitData_CN = (args, form) => {
 
     payee: account.secAccountInfo.clientNameEn,             // 账号英文名
     clientId: account.secAccountInfo.tradeAccount,      // 交易账号
-    extAccount: account.secAccountInfo.fundAccount[0],     // 现金账号
-    extAccountName: "现金账户",   // 账户名称 - 默认'现金账户'
+    extAccount: form.accountValue,     // 现金账号
+    extAccountName: form.accountName,   // 账户名称 - 默认'现金账户'
 
     availableAmount: form.money, // 可提取资金
     tradePwd: form.trd,        // 交易密码密纹
     key: form.key,             // 交易密码Key
     tradeToken: form.tradeToken, // 指纹、面容解锁
-    chargeMoney: form .chargeMoney, // 手续费
+    chargeMoney: form.chargeMoney, // 手续费
     extractionAmount: form.withdrawMoney,   // 提取金额
     swiftCode: form.swiftCode,               // swiftCode
     address: form.address                  // 地址
@@ -53,14 +53,14 @@ export const format_CommitData_HK = (args, form) => {
 
     payee: account.secAccountInfo.clientNameEn,             // 账号英文名
     clientId: account.secAccountInfo.tradeAccount,      // 交易账号
-    extAccount: account.secAccountInfo.fundAccount[0],     // 现金账号
-    extAccountName: "现金账户",   // 账户名称 - 默认'现金账户'
+    extAccount: form.accountValue,     // 现金账号
+    extAccountName: form.accountName,   // 账户名称 - 默认'现金账户'
 
     availableAmount: form.money, // 可提取资金
     tradePwd: form.trd,        // 交易密码密纹
     key: form.key,             // 交易密码Key
     tradeToken: form.tradeToken, // 指纹、面容解锁
-    chargeMoney: form .chargeMoney, // 手续费
+    chargeMoney: form.chargeMoney, // 手续费
     extractionAmount: form.withdrawMoney,   // 提取金额
     swiftCode: form.swiftCode,               // swiftCode
     address: form.address                  // 地址

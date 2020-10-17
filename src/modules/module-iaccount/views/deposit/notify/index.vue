@@ -21,9 +21,9 @@ import { DEV } from '@/modules/module-iaccount/api/config'
 import commonMixin from '@/modules/module-iaccount/mixins/common'
 
 const ROUTE_NAME = {
-  funds: 'history-funds',
-  deposit: 'currency-type',
-  home: 'home'
+  funds: 'sec-funds-history',
+  deposit: 'sec-deposit-currency',
+  home: 'sec-home'
 }
 export default {
   // 返回 - 前往证券首页
@@ -35,7 +35,7 @@ export default {
       if (DEV) {
         next({ name: ROUTE_NAME.home })
       } else {
-        this.closeBack(window.MAIN_URL + window.HASH_SECRRITY_SERVICE)
+        this.closeBack()
       }
     }
   },

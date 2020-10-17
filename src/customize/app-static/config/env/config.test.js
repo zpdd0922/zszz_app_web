@@ -9,6 +9,7 @@
     serverDocument: '',
     webSign: './sign.html',
     webIOpen: 'http://106.52.75.112:6003/sunline/open-account/index.html',
+    webIAccount: 'http://106.52.75.112:6003/sunline/main/index.html',
     webDownload: './download.html',
     webInformation: 'http://106.52.75.112:6003/webstatic/Infomation/newsdetail.html',
     webHelpCenter: 'http://106.52.75.112:6003/webstatic/helpCenter1/help.html',

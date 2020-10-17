@@ -11,6 +11,8 @@ import { format_DepositFPS } from '@/modules/module-iaccount/format/deposit'
 import { format_getBankAccount } from '@/modules/module-iaccount/format/common'
 import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 import AccountApi from '@/modules/module-iaccount/api/modules/api-account'
+const envConfig = window._GLOBAL_ENV_CONFIG || {};
+const selfURL = envConfig.webIAccount;
 
 export default {
   data() {
@@ -98,15 +100,15 @@ export default {
             ])
           },
           onConfirm: () => {
-            this.closeBack(window.MAIN_URL)
+            this.closeBack()
           }
         })
       }
     },
     // 关闭回调地址
-    closeBack(url) {
+    closeBack(url = selfURL) {
       if (userAgent.isApp()) {
-        // 犇犇app
+        // app
         window.JFSTOCK.closeWebView()
       } else {
         const { source } = getURLParameters()
@@ -250,54 +252,54 @@ export default {
       let temp_wayInfo
       // 最后构造入金方式对应的数据，并进入对应路由
       switch (wayKey) {
-      case FPS:
-        const params = {
-          depositType: temp_way.code,
-          bankType: data.bankType,
-          key: data.remittanceBankCorde
-        }
-        const temp_fps = await SecApi.typeSettingInfo(params)
-        temp_wayInfo = format_DepositFPS(temp_fps)[0]
-        this.$store.dispatch('setWayInfo', temp_wayInfo)
-        console.log('再次转入-temp_wayInfo', temp_wayInfo)
-        if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
-          this.$router.push({ name: 'sec-fps-hk' })
-        } else {
-          this.$router.push({ name: 'sec-fps-other' })
-        }
-        break
-      case CHECK:
-        temp_wayInfo = this.$t('iAccount.define.CHECK_INFO')
-        this.$store.dispatch('setWayInfo', temp_wayInfo)
-        console.log('再次转入-temp_wayInfo', temp_wayInfo)
-        if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
-          this.$router.push({ name: 'sec-check-hk' })
-        } else {
-          this.$router.push({ name: 'sec-check-other' })
-        }
-        break
-      default:
-        temp_wayInfo = temp_bankItem
-        this.$store.dispatch('setWayInfo', temp_wayInfo)
-        console.log('再次转入-temp_wayInfo', temp_wayInfo)
-        // 区分大陆还是香港卡
-        // if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
-        //   this.$router.push({ name: 'sec-e-banking-hk' })
-        // } else {
-        //   this.$router.push({ name: 'sec-e-banking-cn' })
-        // }
-        switch (data.bankType) {
-        case 1:
-          this.$router.push({ name: 'sec-e-banking-cn' })
+        case FPS:
+          const params = {
+            depositType: temp_way.code,
+            bankType: data.bankType,
+            key: data.remittanceBankCorde
+          }
+          const temp_fps = await SecApi.typeSettingInfo(params)
+          temp_wayInfo = format_DepositFPS(temp_fps)[0]
+          this.$store.dispatch('setWayInfo', temp_wayInfo)
+          console.log('再次转入-temp_wayInfo', temp_wayInfo)
+          if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
+            this.$router.push({ name: 'sec-fps-hk' })
+          } else {
+            this.$router.push({ name: 'sec-fps-other' })
+          }
           break
-        case 2:
-          this.$router.push({ name: 'sec-e-banking-hk' })
+        case CHECK:
+          temp_wayInfo = this.$t('iAccount.define.CHECK_INFO')
+          this.$store.dispatch('setWayInfo', temp_wayInfo)
+          console.log('再次转入-temp_wayInfo', temp_wayInfo)
+          if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
+            this.$router.push({ name: 'sec-check-hk' })
+          } else {
+            this.$router.push({ name: 'sec-check-other' })
+          }
           break
-        case 3:
-          this.$router.push({ name: 'sec-e-banking-other' })
+        default:
+          temp_wayInfo = temp_bankItem
+          this.$store.dispatch('setWayInfo', temp_wayInfo)
+          console.log('再次转入-temp_wayInfo', temp_wayInfo)
+          // 区分大陆还是香港卡
+          // if (data.bankType === this.$t('iAccount.define.BANK_HK').value) {
+          //   this.$router.push({ name: 'sec-e-banking-hk' })
+          // } else {
+          //   this.$router.push({ name: 'sec-e-banking-cn' })
+          // }
+          switch (data.bankType) {
+            case 1:
+              this.$router.push({ name: 'sec-e-banking-cn' })
+              break
+            case 2:
+              this.$router.push({ name: 'sec-e-banking-hk' })
+              break
+            case 3:
+              this.$router.push({ name: 'sec-e-banking-other' })
+              break
+          }
           break
-        }
-        break
       }
     },
     /**
@@ -315,24 +317,24 @@ export default {
       let list = []
       const res = await SecApi.getEddaBankInfo(params)
       switch (type) {
-      case 0:
-        list = res.filter(data => data.eddaState === 0)
-        break
-      case 1:
-        list = res.filter(data => data.eddaState === 1)
-        break
-      case 2:
-        list = res.filter(data => data.eddaState === 2)
-        break
-      case 3:
-        list = res.filter(data => data.eddaState === 3)
-        break
-      case 4:
-        list = res.filter(data => data.eddaState === 4)
-        break
-      default:
-        list = res
-        break
+        case 0:
+          list = res.filter(data => data.eddaState === 0)
+          break
+        case 1:
+          list = res.filter(data => data.eddaState === 1)
+          break
+        case 2:
+          list = res.filter(data => data.eddaState === 2)
+          break
+        case 3:
+          list = res.filter(data => data.eddaState === 3)
+          break
+        case 4:
+          list = res.filter(data => data.eddaState === 4)
+          break
+        default:
+          list = res
+          break
       }
       return list
     },
