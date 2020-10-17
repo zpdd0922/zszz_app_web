@@ -25,7 +25,6 @@
         </li>
       </ul>
     </part-card>
-
     <part-card :title="$t('iAccount.withdraw.request.text_3')">
       <ul class="detail-form">
         <li>

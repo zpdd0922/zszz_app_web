@@ -501,12 +501,14 @@ export default {
     "model.depositBankAccount": function (newVal, oldVal) {
       if (!newVal) return "";
       const num = formatNumber(formatToDBC(newVal));
-      this.model.depositBankAccount = formatStepSpace(num);
+      // this.model.depositBankAccount = formatStepSpace(num);
+      this.model.depositBankAccount = num;
     },
     "model.depositBankAccountAgain": function (newVal, oldVal) {
       if (!newVal) return "";
       const num = formatNumber(formatToDBC(newVal));
-      this.model.depositBankAccountAgain = formatStepSpace(num);
+      // this.model.depositBankAccountAgain = formatStepSpace(num);
+      this.model.depositBankAccountAgain = num;
     },
     "model.depositMoney": function (newVal, oldVal) {
       if (!newVal) return "";

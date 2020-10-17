@@ -38,7 +38,7 @@
                   </li>
                   <li>
                     <span>{{ $t("iAccount.transferHistory.status") }}</span
-                    ><span>{{ slotProps.item.stock.state | filterStatusText }}</span>
+                    ><span :style="_getStatusColor(slotProps.item.stock.state)">{{ slotProps.item.stock.state | filterStatusText }}</span>
                   </li>
                 </ul>
                 <ul
