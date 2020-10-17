@@ -73,9 +73,9 @@ export const professionCodeOptions = () => [
 
 // 职位级别
 export const jobPositionOptions = () => [
-  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.topManagement"), value: 1 },
+  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.topManagement"), value: 3 },
   { text: getStepI18nValue("infoContact", "profession.jobPosition.options.middleManagement"), value: 2 },
-  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.generalStaff"), value: 3 }
+  { text: getStepI18nValue("infoContact", "profession.jobPosition.options.generalStaff"), value: 1 }
 ];
 
 
