@@ -14,7 +14,7 @@ export default {
     const reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/
     return reg.test(str)
   },
-  isChinese: str => {
+  isAllChinese: str => {
     const reg = /[\u4e00-\u9fa5]+/gi
     return reg.test(str)
   },

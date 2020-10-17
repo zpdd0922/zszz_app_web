@@ -141,6 +141,7 @@
 import onlineMixin from "../mixins/online.vue";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import { getSexFromCard, getBirthFromCard } from "@/main/utils/format/idcard";
+import { isRealLength } from "@/main/utils/format/is";
 import { getPreDay } from "@/main/utils/format/date";
 import { getAge } from "@/main/utils/format/idcard";
 import { toDBC, noSpace } from "@/main/utils/format/formatter";
@@ -385,7 +386,6 @@ export default {
         step: this.step,
         info: this.model,
       };
-      console.log(params);
       this.saveCacheInfo(params).then(() => {
         this.$router.push({ name: this.nextStep });
       });
@@ -396,8 +396,8 @@ export default {
           addressValue, 
           authority,
         } = this.model;
-        const checkAddressValue = this.checkInfo(addressValue, validate.isChinese, this.getI18n('warn.address'));
-        const checkAuthority = this.checkInfo(authority, validate.isChinese, this.getI18n('warn.authority'))
+        const checkAddressValue = this.checkInfo(addressValue, isRealLength, this.getI18n('warn.address'));
+        const checkAuthority = this.checkInfo(authority, isRealLength, this.getI18n('warn.authority'))
         if (!checkAddressValue || !checkAuthority) {
           return reject()
         }
@@ -411,17 +411,17 @@ export default {
           return reject(new Error(cardTips));
         }
         // 大于70岁不允许线上开户
-        if (age >= 70 && window.IS_CHECK_AGE) {
-          const ageTips = this.getI18n('warn.mt70');
-          toast({ type: "error", txt: ageTips });
-          return reject(new Error(ageTips));
-        }
+        // if (age >= 70 && window.IS_CHECK_AGE) {
+        //   const ageTips = this.getI18n('warn.mt70');
+        //   toast({ type: "error", txt: ageTips });
+        //   return reject(new Error(ageTips));
+        // }
 
         // 后台请求校验
         this.$store
           .dispatch("checkIdCard", { idCard, name, cardType: 1 })
           .then((res) => {
-            const { verify = false, remark = "" } = res;
+            const { verify = false, remark = this.getI18n('warn.realIdCardInfo') } = res;
             if (verify) {
               resolve(verify);
             } else {
@@ -512,14 +512,14 @@ export default {
     //   }
     // },
     "model.givenName": function (newVal, oldVal) {
-      if (newVal && !validate.isChinese(newVal)) {
+      if (newVal && !validate.isAllChinese(newVal)) {
         this.model.givenName = "";
       } else {
         this.model.givenName = toDBC(newVal);
       }
     },
     "model.familyName": function (newVal, oldVal) {
-      if (newVal && !validate.isChinese(newVal)) {
+      if (newVal && !validate.isAllChinese(newVal)) {
         this.model.familyName = "";
       } else {
         this.model.familyName = toDBC(newVal);

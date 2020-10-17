@@ -945,34 +945,32 @@ export default {
   },
   methods: {
     // 电话号码验证，只验证了全数字和长度不大于11
-    validPhoneNum() {
+    validPhoneNumMsg() {
       const phoneList = [
-        this.model.homeTelePhone,
-        this.model.contactTelePhone,
-        this.professionModel.companyTelePhone,
+        {
+          val: this.model.homeTelePhone,
+          label: this.getI18n("contact.homeTelePhone.label"),
+        },
+        {
+          val: this.model.contactTelePhone,
+          label: this.getI18n("contact.contactTelePhone.label"),
+        },
+        {
+          val: this.professionModel.companyTelePhone,
+          label: this.getI18n("profession.companyTelePhone.label"),
+        },
       ];
-      return phoneList
-        .map((val) => {
-          // 判断是否填写
-          if (val.length === 0) {
-            return true;
-          } else {
-            // 判断是否包含除数字之外的
-            if (validate.isMobile(val)) {
-              // 判断是否大于20位
-              if (val.length > 20) {
-                return false;
-              } else {
-                return true;
-              }
-            } else {
-              return false;
-            }
-          }
-        })
-        .every((val) => {
-          return val;
-        });
+      const errorTipsPre = this.getI18n("errorTipsPre");
+      let errorTips = "";
+      phoneList.some((item) => {
+        const isReal = item.val === "" || validate.isNumber(item.val);
+        if (!isReal) {
+          errorTips = errorTipsPre + item.label;
+        }
+        return !isReal;
+      });
+
+      return errorTips;
     },
     getI18n(key, type = "") {
       return this.getStepI18nValue("infoContact", key);
@@ -1112,10 +1110,10 @@ export default {
           toast({ type: "error", txt: errorTips, time: 1000 });
           return reject(new Error(errorTips));
         }
-        if (!this.validPhoneNum()) {
-          const errorTips = this.getI18n('errorTipsPhone');
-          toast({ type: "error", txt: errorTips, time: 1000 });
-          return reject(new Error(errorTips));
+        const validPhoneTips = this.validPhoneNumMsg();
+        if (validPhoneTips != "") {
+          toast({ type: "error", txt: validPhoneTips, time: 1000 });
+          return reject(new Error(validPhoneTips));
         }
 
         // 检查邮箱唯一性
@@ -1123,13 +1121,6 @@ export default {
           .dispatch("checkEmail", { email: this.model.email })
           .then((res) => {
             resolve();
-            // const { isValid = false, remark = "校验邮箱失败" } = res;
-            // if (isValid) {
-            //   resolve(isValid);
-            // } else {
-            //   toast({ type: "error", txt: remark, time: 1000 });
-            //   reject(isValid);
-            // }
           })
           .catch((err) => {
             toast({ type: "error", txt: err.message, time: 1000 });

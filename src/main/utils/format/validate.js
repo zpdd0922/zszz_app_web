@@ -6,6 +6,7 @@ export default class Validate {
   // 手机号码
   static isMobile = mobile => {
     if (typeof mobile !== 'string' || mobile === "") {
+      return false;
       // throw error('Bad Phone Number!')
     }
 
@@ -31,6 +32,7 @@ export default class Validate {
   }
   static isInternationalMobile = mobile => {
     if (typeof mobile !== 'string' || mobile === "") {
+      return false;
       // throw error('Bad Phone Number!')
     }
     const str = mobile.replace("-", "");
@@ -42,13 +44,9 @@ export default class Validate {
     const reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
     return reg.test(str);
   }
-  static isChinese = str => {
+  static isAllChinese = str => {
     const reg = /^[\u4e00-\u9fa5]+$/gi;
     return reg.test(str);
-  }
-  static isNotChinese = str => {
-    const reg = /[\u4e00-\u9fa5]+/gi;
-    return !reg.test(str);
   }
   //账户号码 限制字母和数字
   static isAccountNum = str => {
@@ -85,5 +83,9 @@ export default class Validate {
   static isHkIdCard = str => {
     const regExp = /^[A-Za-z0-9\(\)]+$/;
     return regExp.test(str)
+  }
+  static isNumber = str => {
+    const reg = /^\d+$/
+    return reg.test(str)
   }
 };

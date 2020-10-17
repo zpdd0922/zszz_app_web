@@ -514,16 +514,16 @@ export default {
             return reject(new Error(cardTips));
           }
           // 大于70岁不允许线上开户
-          if (age >= 70 && window.IS_CHECK_AGE) {
-            const ageTips = this.getI18n('ageError');
-            toast({ type: "error", txt: ageTips });
-            return reject(new Error(ageTips));
-          }
+          // if (age >= 70 && window.IS_CHECK_AGE) {
+          //   const ageTips = this.getI18n('ageError');
+          //   toast({ type: "error", txt: ageTips });
+          //   return reject(new Error(ageTips));
+          // }
           // 后台请求校验
           this.$store
             .dispatch("checkIdCard", { idCard, userName, cardType: 1 })
             .then((res) => {
-              const { verify = false, remark = "" } = res;
+              const { verify = false, remark = this.getI18n('warn.realIdCardInfo') } = res;
               if (verify) {
                 resolve(verify);
               } else {
@@ -709,14 +709,14 @@ export default {
     //   }
     // },
     "model.givenName": function (newVal, oldVal) {
-      if (!validate.isChinese(newVal)) {
+      if (!validate.isAllChinese(newVal)) {
         this.model.givenName = '';
       } else {
         this.model.givenName = toDBC(newVal);
       }
     },
     "model.familyName": function (newVal, oldVal) {
-      if (!validate.isChinese(newVal)) {
+      if (!validate.isAllChinese(newVal)) {
         this.model.familyName = '';
       } else {
         this.model.familyName = toDBC(newVal);

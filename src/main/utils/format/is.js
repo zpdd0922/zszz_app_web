@@ -40,6 +40,19 @@ export const isNumber = val => typeof val === 'number';
 export const isString = val => typeof val === 'string';
 
 /**
+ *  检查给定参数是否为字符串
+ * Example:  isString(10) -> false
+ * Example:  isString('10') -> true
+ */
+export const isNotEmpty = val => {
+  return isRealLength(val, 1);
+};
+
+export const isRealLength = (val, len = 2) => {
+  return isString(val) && val.replace(" ", "").length >= len;
+};
+
+/**
  *  检查给定参数是否为Symbol类型
  * Example:  isSymbol('x') -> false
  * Example:  isSymbol(Symbol('x')) -> true

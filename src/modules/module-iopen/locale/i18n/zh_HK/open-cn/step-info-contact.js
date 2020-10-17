@@ -138,6 +138,7 @@ export default {
     companyTelePhone: { label: "辦公室電話", placeholder: "請填寫(選填)" },
     companyAddress: { label: "公司地址", placeholder: "請填寫" },
   },
+  errorTipsPre:"請輸入正確的",
   errorTipsEmail: "請輸入正確的郵箱地址",
   errorTipsPhone: "請輸入正確的電話號碼",
 };

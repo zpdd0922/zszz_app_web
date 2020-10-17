@@ -1,5 +1,9 @@
 <template>
-  <op-wrap :isDisabled="isDisabled" :handleBefore="handleBefore" @handleNext="handleNext">
+  <op-wrap
+    :isDisabled="isDisabled"
+    :handleBefore="handleBefore"
+    @handleNext="handleNext"
+  >
     <div class="olcn-step olcn-step-info-contact">
       <!-- 联系信息 -->
       <cube-form :model="model">
@@ -8,7 +12,9 @@
           <!-- 郵箱 -->
           <cube-form-item :field="fieldsContact.email"></cube-form-item>
           <!-- 教育程度 -->
-          <cube-form-item :field="fieldsContact.educationLevel"></cube-form-item>
+          <cube-form-item
+            :field="fieldsContact.educationLevel"
+          ></cube-form-item>
           <!-- 婚姻状况 -->
           <cube-form-item :field="fieldsContact.maritalStatus"></cube-form-item>
           <!-- 住宅地址选择 -->
@@ -18,7 +24,9 @@
             <template v-if="model.homeRadio !== radioListValue.oth">
               <cube-form-item :field="fieldsContact.homeCity">
                 <!-- 住址地址大陆省市区 -->
-                <template v-if="model.homeRadio === optionsList.radioListValue.cn">
+                <template
+                  v-if="model.homeRadio === optionsList.radioListValue.cn"
+                >
                   <CascadePicker
                     :defaultCityText="defaultHomeText"
                     :defaultCity="defaultHomeCity"
@@ -26,7 +34,9 @@
                   ></CascadePicker>
                 </template>
                 <!-- 住址地址香港省市区 -->
-                <template v-if="model.homeRadio === optionsList.radioListValue.hk">
+                <template
+                  v-if="model.homeRadio === optionsList.radioListValue.hk"
+                >
                   <CascadePickerAreaHk
                     :defaultCityText="defaultHomeText"
                     :defaultCity="defaultHomeCity"
@@ -37,7 +47,9 @@
             </template>
             <!-- 住宅地址选择其他国家 -->
             <template v-else>
-              <cube-form-item :field="fieldsHomeOther.homeOtherCountry"></cube-form-item>
+              <cube-form-item
+                :field="fieldsHomeOther.homeOtherCountry"
+              ></cube-form-item>
               <template v-if="model.homeOtherCountry === 'OTH'">
                 <!-- <cube-form-item
                   :field="fieldsHomeOther.otherFamilyRepublic"
@@ -51,14 +63,24 @@
                     />
                   </div>
                 </cube-form-item> -->
-                <cube-form-item :field="fieldsHomeOther.otherFamilyRepublic"></cube-form-item>
+                <cube-form-item
+                  :field="fieldsHomeOther.otherFamilyRepublic"
+                ></cube-form-item>
               </template>
-              <cube-form-item :field="fieldsHomeOther.homeOtherProvince"></cube-form-item>
-              <cube-form-item :field="fieldsHomeOther.homeOtherCity"></cube-form-item>
-              <cube-form-item :field="fieldsHomeOther.homeOtherArea"></cube-form-item>
+              <cube-form-item
+                :field="fieldsHomeOther.homeOtherProvince"
+              ></cube-form-item>
+              <cube-form-item
+                :field="fieldsHomeOther.homeOtherCity"
+              ></cube-form-item>
+              <cube-form-item
+                :field="fieldsHomeOther.homeOtherArea"
+              ></cube-form-item>
             </template>
             <!-- 详细地址 -->
-            <cube-form-item :field="fieldsContact.homeAddressDetail"></cube-form-item>
+            <cube-form-item
+              :field="fieldsContact.homeAddressDetail"
+            ></cube-form-item>
             <template v-if="model.homeRadio !== optionsList.radioListValue.oth">
               <!-- 门牌号 -->
               <!-- <cube-form-item :field="fieldsContact.homeAddressNumber"></cube-form-item> -->
@@ -70,9 +92,14 @@
           <!-- TODO:可以做一个选择同现时住址的显示框 -->
           <cube-form-item :field="fieldsContact.contactRadio"></cube-form-item>
           <template v-if="isContactAddress">
-            <cube-form-item :field="fieldsContact.contactCity" v-if="model.contactRadio !== 3">
+            <cube-form-item
+              :field="fieldsContact.contactCity"
+              v-if="model.contactRadio !== 3"
+            >
               <!-- 大陆省市区 -->
-              <template v-if="model.contactRadio === optionsList.radioListValue.cn">
+              <template
+                v-if="model.contactRadio === optionsList.radioListValue.cn"
+              >
                 <CascadePicker
                   :defaultCityText="defaultContactText"
                   :defaultCity="defaultContactCity"
@@ -84,7 +111,9 @@
                 ></CascadePicker>
               </template>
               <!-- 香港区域选择 -->
-              <template v-if="model.contactRadio === optionsList.radioListValue.hk">
+              <template
+                v-if="model.contactRadio === optionsList.radioListValue.hk"
+              >
                 <CascadePickerAreaHk
                   :defaultCityText="defaultContactText"
                   :defaultCity="defaultContactCity"
@@ -98,8 +127,12 @@
             </cube-form-item>
 
             <!-- 联系地址选择其他国家 -->
-            <template v-if="model.contactRadio === optionsList.radioListValue.oth">
-              <cube-form-item :field="fieldsContactOther.contactOhterCountry"></cube-form-item>
+            <template
+              v-if="model.contactRadio === optionsList.radioListValue.oth"
+            >
+              <cube-form-item
+                :field="fieldsContactOther.contactOhterCountry"
+              ></cube-form-item>
               <template v-if="model.contactOhterCountry === 'OTH'">
                 <cube-form-item
                   :field="fieldsContactOther.otherContactRepublic"
@@ -109,25 +142,38 @@
                     <input
                       v-model.trim="model.otherContactRepublic"
                       class="cube-input-field"
-                      :placeholder="fieldsContactOther.otherContactRepublic.props.placeholder"
+                      :placeholder="
+                        fieldsContactOther.otherContactRepublic.props
+                          .placeholder
+                      "
                     />
                   </div>
                 </cube-form-item>
                 <!-- <cube-form-item :field="fieldsContactOther.otherContactRepublic"></cube-form-item> -->
               </template>
-              <cube-form-item :field="fieldsContactOther.contactOtherProvince"></cube-form-item>
-              <cube-form-item :field="fieldsContactOther.contactOtherCity"></cube-form-item>
-              <cube-form-item :field="fieldsContactOther.contactOtherArea"></cube-form-item>
+              <cube-form-item
+                :field="fieldsContactOther.contactOtherProvince"
+              ></cube-form-item>
+              <cube-form-item
+                :field="fieldsContactOther.contactOtherCity"
+              ></cube-form-item>
+              <cube-form-item
+                :field="fieldsContactOther.contactOtherArea"
+              ></cube-form-item>
             </template>
 
             <!-- 详细地址 -->
-            <cube-form-item :field="fieldsContact.contactAddressDetail"></cube-form-item>
+            <cube-form-item
+              :field="fieldsContact.contactAddressDetail"
+            ></cube-form-item>
 
             <template v-if="model.contactRadio !== 3">
               <!-- 门牌号 -->
               <!-- <cube-form-item :field="fieldsContact.contactAddressNumber"></cube-form-item> -->
             </template>
-            <cube-form-item :field="fieldsContact.contactTelePhone"></cube-form-item>
+            <cube-form-item
+              :field="fieldsContact.contactTelePhone"
+            ></cube-form-item>
           </template>
           <!-- <p class="tips" v-html="dStatementReceiveModeWarning"></p> -->
           <!-- 收取节单方式 -->
@@ -139,21 +185,45 @@
       <cube-form :model="professionModel">
         <cube-form-group class="step-content custom-form-group">
           <head-title :title="titleValues.professionTitle"></head-title>
-          <cube-form-item :field="fieldsProfession.professionCode"></cube-form-item>
-          <template v-if="professionModel.professionCode === optionsList.professionCodeValue.other">
-            <cube-form-item :field="fieldsProfession.professionCodeOther"></cube-form-item>
+          <cube-form-item
+            :field="fieldsProfession.professionCode"
+          ></cube-form-item>
+          <template
+            v-if="
+              professionModel.professionCode ===
+              optionsList.professionCodeValue.other
+            "
+          >
+            <cube-form-item
+              :field="fieldsProfession.professionCodeOther"
+            ></cube-form-item>
           </template>
           <template
-            v-if="professionModel.professionCode === optionsList.professionCodeValue.employed || professionModel.professionCode === optionsList.professionCodeValue.selfEmployed"
+            v-if="
+              professionModel.professionCode ===
+                optionsList.professionCodeValue.employed ||
+              professionModel.professionCode ===
+                optionsList.professionCodeValue.selfEmployed
+            "
           >
-            <cube-form-item :field="fieldsProfession.companyName"></cube-form-item>
+            <cube-form-item
+              :field="fieldsProfession.companyName"
+            ></cube-form-item>
 
-            <cube-form-item :field="fieldsProfession.industryRange"></cube-form-item>
+            <cube-form-item
+              :field="fieldsProfession.industryRange"
+            ></cube-form-item>
             <!-- <template v-if="professionModel.professionCode === 1"> -->
-            <cube-form-item :field="fieldsProfession.jobPosition"></cube-form-item>
+            <cube-form-item
+              :field="fieldsProfession.jobPosition"
+            ></cube-form-item>
             <!-- </template> -->
-            <cube-form-item :field="fieldsProfession.workingSeniority"></cube-form-item>
-            <cube-form-item :field="fieldsProfession.companyTelePhone"></cube-form-item>
+            <cube-form-item
+              :field="fieldsProfession.workingSeniority"
+            ></cube-form-item>
+            <cube-form-item
+              :field="fieldsProfession.companyTelePhone"
+            ></cube-form-item>
             <!-- 公司地址 -->
             <cube-form-item
               :field="fieldsProfession.companyAddress"
@@ -201,8 +271,8 @@ export default {
       model: {
         // 联络信息字段
         email: "", // 邮箱地址
-        educationLevel: "", // 
-        maritalStatus: "", // 
+        educationLevel: "", //
+        maritalStatus: "", //
         homeRadio: optionsList.radioListValue.cn, // 住宅地址单选
         homeCity: [], // 住宅地址省市区
         homeAddressDetail: "", // 住宅地址省市区详细
@@ -425,7 +495,7 @@ export default {
         },
         contactTelePhone: {
           type: "input",
-          modelKey: "homeTelePhone",
+          modelKey: "contactTelePhone",
           label: this.getI18n("contact.contactTelePhone.label"),
           props: {
             placeholder: this.getI18n("contact.contactTelePhone.placeholder"),
@@ -454,7 +524,6 @@ export default {
           },
           trigger: "blur",
         },
-      
       },
       // 住址选择其他
       fieldsHomeOther: {
@@ -873,8 +942,7 @@ export default {
     },
     // 验证提交按钮
     isDisabled() {
-      const status =
-        this.validProfession && this.validContact;
+      const status = this.validProfession && this.validContact;
       return !status;
     },
     // 默认显示上一次选择城市下拉框的值(家庭地址)
@@ -907,34 +975,32 @@ export default {
   },
   methods: {
     // 电话号码验证，只验证了全数字和长度不大于11
-    validPhoneNum() {
+    validPhoneNumMsg() {
       const phoneList = [
-        this.model.homeTelePhone,
-        this.model.contactTelePhone,
-        this.professionModel.companyTelePhone,
+        {
+          val: this.model.homeTelePhone,
+          label: this.getI18n("contact.homeTelePhone.label"),
+        },
+        {
+          val: this.model.contactTelePhone,
+          label: this.getI18n("contact.contactTelePhone.label"),
+        },
+        {
+          val: this.professionModel.companyTelePhone,
+          label: this.getI18n("profession.companyTelePhone.label"),
+        },
       ];
-      return phoneList
-        .map((val) => {
-          // 判断是否填写
-          if (val.length === 0) {
-            return true;
-          } else {
-            // 判断是否包含除数字之外的
-            if (validate.isMobile(val)) {
-              // 判断是否大于11位
-              if (val.length > 20) {
-                return false;
-              } else {
-                return true;
-              }
-            } else {
-              return false;
-            }
-          }
-        })
-        .every((val) => {
-          return val;
-        });
+      const errorTipsPre = this.getI18n("errorTipsPre");
+      let errorTips = "";
+      phoneList.some((item) => {
+        const isReal = item.val === "" || validate.isNumber(item.val);
+        if (!isReal) {
+          errorTips = errorTipsPre + item.label;
+        }
+        return !isReal;
+      });
+
+      return errorTips;
     },
     getI18n(key, type = "") {
       return this.getStepI18nValue("infoContact", key);
@@ -1050,14 +1116,15 @@ export default {
 
         // 校验邮箱格式
         if (!this.validEmail()) {
-          const errorTips = this.getI18n('errorTipsEmail');
+          const errorTips = this.getI18n("errorTipsEmail");
           toast({ type: "error", txt: errorTips, time: 1000 });
           return reject(new Error(errorTips));
         }
-        if (!this.validPhoneNum()) {
-          const errorTips = this.getI18n('errorTipsPhone');
-          toast({ type: "error", txt: errorTips, time: 1000 });
-          return reject(new Error(errorTips));
+
+        const validPhoneTips = this.validPhoneNumMsg();
+        if (validPhoneTips != "") {
+          toast({ type: "error", txt: validPhoneTips, time: 1000 });
+          return reject(new Error(validPhoneTips));
         }
 
         // 检查邮箱唯一性
@@ -1065,13 +1132,6 @@ export default {
           .dispatch("checkEmail", { email: this.model.email })
           .then((res) => {
             resolve();
-            // const { isValid = false, remark = "校验邮箱失败" } = res;
-            // if (isValid) {
-            //   resolve(isValid);
-            // } else {
-            //   toast({ type: "error", txt: remark, time: 1000 });
-            //   reject(isValid);
-            // }
           })
           .catch((err) => {
             toast({ type: "error", txt: err.message, time: 1000 });
