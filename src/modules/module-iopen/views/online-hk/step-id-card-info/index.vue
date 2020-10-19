@@ -503,7 +503,7 @@ export default {
         if (!checkFamilyNameSpell || !checkGivenNameSpell) {
           return reject();
         }
-        const userName = this.cnName;
+        const name = this.cnName;
         // 判断证件类型 - 大陆身份证
         if (idKindKey === "idCardCn") {
           const age = getAge(getBirthFromCard(idCard));
@@ -521,7 +521,7 @@ export default {
           // }
           // 后台请求校验
           this.$store
-            .dispatch("checkIdCard", { idCard, userName, cardType: 1 })
+            .dispatch("checkIdCard", { idCard, name, cardType: 1 })
             .then((res) => {
               const { verify = false, remark = this.getI18n('warn.realIdCardInfo') } = res;
               if (verify) {
@@ -540,7 +540,7 @@ export default {
         } else {
           // 后台请求校验
           this.$store
-            .dispatch("checkIdCard", { idCard, userName, cardType: 0 })
+            .dispatch("checkIdCard", { idCard, name, cardType: 0 })
             .then((res) => {
               const { verify = false, remark = "" } = res;
               if (verify) {

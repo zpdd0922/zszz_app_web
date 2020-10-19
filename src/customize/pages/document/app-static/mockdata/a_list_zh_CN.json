@@ -1,0 +1,61 @@
+{
+    "code": 0,
+    "result": [
+        {
+            "label": "证券账户协议",
+            "key": "account_agreement"
+        },
+        {
+            "label": "指纹及面容ID服务协议",
+            "key": "biosignature"
+        },
+        {
+            "label": "电子认证服务协议",
+            "key": "ca_auth"
+        },
+        {
+            "label": "免责声明",
+            "key": "disclaimer"
+        },
+        {
+            "label": "衍生产品交易风险披露",
+            "key": "disclosure_derivative"
+        },
+        {
+            "label": "保证金账户风险披露",
+            "key": "disclosure_margin"
+        },
+        {
+            "label": "证券协议的一般条款",
+            "key": "general_terms"
+        },
+        {
+            "label": "关于中华通之下的北向证券交易服务之附加条款",
+            "key": "north_terms"
+        },
+        {
+            "label": "隐私保护政策",
+            "key": "privacy_policy"
+        },
+        {
+            "label": "行情订阅协议",
+            "key": "qts_data"
+        },
+        {
+            "label": "关于证券交易的风险披露声明及免责声明",
+            "key": "sec_trade"
+        },
+        {
+            "label": "客户款项常设授权（适用于所有账户）",
+            "key": "standing_auth"
+        },
+        {
+            "label": "客户声明",
+            "key": "statement"
+        },
+        {
+            "label": "服务协议",
+            "key": "terms"
+        }
+    ]
+}

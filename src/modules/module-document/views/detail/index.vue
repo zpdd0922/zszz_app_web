@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     getArticleDetail() {
+      console.log(this.lang)
       DocApi.fetchDocDetail(this.key, this.lang)
         .then((res) => {
           this.isFetched = true;
@@ -57,7 +58,9 @@ export default {
             const { documentContent, documentTitle, updateTime } = res;
             this.title = documentTitle;
             this.setTitle(documentTitle);
+            console.log(updateTime)
             this.time = dateFormat(updateTime, "yyyy-mm-dd HH:MM:SS");
+            console.log(this.time)
             this.content = documentContent;
           } else {
             this.title = `Error ID: ${this.key}`;

@@ -22,7 +22,7 @@ const updateHeaders = () => ({
 const axios = new Axios(baseURL, { updateHeaders, whiteApiList: [] });
 
 export const getLocal = (key, lang) => {
-  return axios.get(baseURL + `/static/mockdata/${key}_${lang}.json`)
+  return axios.get(baseURL + `/mockdata/${key}_${lang}.json`)
     .then(response => {
       console.log(response)
       return response;

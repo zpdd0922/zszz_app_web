@@ -8,14 +8,20 @@
 // webpack相关配置
 module.exports = {
   baseUrl: './',
-  outputDir: 'dist/sunline/document',
+  outputDir: 'dist/sunline/agreement',
   serverPort: 28004,
   pages: [
     {
       name: 'index',
       template: 'src/customize/pages/document/template/index.html',
       entry: 'src/modules/module-document/index.js',
-      title: '下载地址',
+      title: '平台文档',
+    },
+    {
+      name: 'list',
+      template: 'src/customize/pages/document/template/index.html',
+      entry: 'src/modules/module-document/list.js',
+      title: '平台文档列表',
     }
   ],
 };
