@@ -298,7 +298,7 @@ export default {
     },
     _handleNext() {
       // if (this.UaInfo.isApp()) {
-        // App 交易解锁
+      // App 交易解锁
       //   tradeUnlock({
       //     success: (res) => {
       //       const result = JSON.parse(res.data);
@@ -315,7 +315,7 @@ export default {
       //     },
       //   });
       // } else {
-        this.showCaptcha = true;
+      this.showCaptcha = true;
       // }
     },
     _closeCaptcha() {
@@ -517,7 +517,10 @@ export default {
   },
   filters: {
     format_secAccountInfo(val) {
-      return val ? val.clientNameCn + " - " + val.clientNameEn : EMPTY_LABEL;
+      if (!val || (!val.clientNameCn && !val.clientNameEn)) return EMPTY_LABEL;
+      if (!val.clientNameCn) return val.clientNameEn;
+      if (!val.clientNameEn) return val.clientNameCn;
+      return val.clientNameCn + " - " + val.clientNameEn;
     },
   },
   watch: {
