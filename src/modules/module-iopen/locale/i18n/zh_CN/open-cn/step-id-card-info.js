@@ -61,9 +61,11 @@ export default {
     warm: "温馨提示",
     wrongNum: "请输入正确身份证号码",
     mt70: "70岁以上暂不能开户，非常抱歉",
-    address: '请输入正确的证件地址',
+    addressValue: '请输入正确的证件地址',
     authority: '请输入正确的签发机关',
     realIdCardInfo: '身份信息校验不通过',
+    birthCountryTxt: '请填写正确的出生国家',
+    birthArea: '请填写正确的出生地区',
   },
   longerConfirm: '为确保您资料的准确性，请确认您的身份证是否为长期身份证！',
 };

@@ -23,6 +23,7 @@
                       v-model="model.familyName"
                       class="cube-input-field"
                       :placeholder="fields.familyName.props.placeholder"
+                      :maxlength="maxLength"
                     />
                   </div>
                   <div class="custom-form-separator">
@@ -33,6 +34,8 @@
                       v-model="model.givenName"
                       class="cube-input-field"
                       :placeholder="fields.givenName.props.placeholder"
+                      :maxlength="maxLength"
+
                     />
                   </div>
                 </div>
@@ -47,6 +50,8 @@
                       v-model="model.familyNameSpell"
                       class="cube-input-field"
                       :placeholder="fields.familyNameSpell.props.placeholder"
+                      :maxlength="maxLength"
+                      
                     />
                   </div>
                   <div class="custom-form-separator">
@@ -57,6 +62,8 @@
                       v-model="model.givenNameSpell"
                       class="cube-input-field"
                       :placeholder="fields.givenNameSpell.props.placeholder"
+                      :maxlength="maxLength"
+
                     />
                   </div>
                 </div>
@@ -72,7 +79,7 @@
                 <cube-textarea
                   v-model="model.addressValue"
                   :placeholder="fields.addressValue.props.placeholder"
-                  :maxlength="50"
+                  :maxlength="maxLength"
                   :indicator="false"
                 ></cube-textarea>
               </cube-form-item>
@@ -148,6 +155,7 @@ import { toDBC, noSpace } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
 import * as optionsList from "./options-list";
 import { modelValidator } from "./validator";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 // TODO: 減少了民族字段
 
@@ -155,6 +163,7 @@ export default {
   mixins: [onlineMixin],
   data() {
     return {
+      maxLength: MAX_LENGTH,
       longerDateText: this.getI18n("dateStartValue.endForerver"),
       model: {
         familyName: "", // 中文姓氏
@@ -179,7 +188,7 @@ export default {
           label: this.getI18n("name.familyNameLabel"),
           props: {
             placeholder: this.getI18n("name.familyNamePlaceholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH,
           },
         },
         givenName: {
@@ -188,7 +197,7 @@ export default {
           label: this.getI18n("name.givenNameLabel"),
           props: {
             placeholder: this.getI18n("name.givenNamePlaceholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH,
           },
         },
         familyNameSpell: {
@@ -197,7 +206,7 @@ export default {
           label: this.getI18n("nameSpell.familyNameLabel"),
           props: {
             placeholder: this.getI18n("nameSpell.familyNamePlaceholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH,
           },
         },
         givenNameSpell: {
@@ -206,7 +215,7 @@ export default {
           label: this.getI18n("nameSpell.givenNameLabel"),
           props: {
             placeholder: this.getI18n("nameSpell.givenNamePlaceholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH,
           },
         },
         // {
@@ -257,6 +266,8 @@ export default {
           label: this.getI18n("birthCountryTxt.label"),
           props: {
             placeholder: this.getI18n("birthCountryTxt.placeholder"),
+            maxlength: MAX_LENGTH,
+
           },
           rules: {
             required: false,
@@ -268,6 +279,8 @@ export default {
           label: this.getI18n("birthArea.label"),
           props: {
             placeholder: this.getI18n("birthArea.placeholder"),
+            maxlength: MAX_LENGTH,
+
           },
           rules: {
             required: false,
@@ -279,6 +292,8 @@ export default {
           label: this.getI18n("idCardValue.label"),
           props: {
             placeholder: this.getI18n("idCardValue.placeholder"),
+            maxlength: MAX_LENGTH,
+
           },
         },
         addressValue: {
@@ -286,7 +301,7 @@ export default {
           label: this.getI18n("addressValue.label"),
           props: {
             placeholder: this.getI18n("addressValue.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH,
           },
         },
         dateStartValue: {
@@ -392,13 +407,34 @@ export default {
     },
     handleBefore() {
       return new Promise((resolve, reject) => {
-        const {        
-          addressValue, 
-          authority,
-        } = this.model;
-        const checkAddressValue = this.checkInfo(addressValue, isRealLength, this.getI18n('warn.address'));
-        const checkAuthority = this.checkInfo(authority, isRealLength, this.getI18n('warn.authority'))
-        if (!checkAddressValue || !checkAuthority) {
+        const checkList = [
+          {
+            key: 'addressValue',
+            preCondition: true,
+            func: isRealLength,
+          },
+          {
+            key: 'authority',
+            preCondition: true,
+            func: isRealLength,
+          },
+          {
+            key: 'birthCountryTxt',
+            preCondition: this.model.birthCountry === 'OTH',
+            func: isRealLength,
+          },
+          {
+            key: 'birthArea',
+            preCondition: this.model.birthArea,
+            func: isRealLength,
+          }
+        ]
+        const checkResult = checkList.every((item) => {
+          return this.checkInfo(this.model[item.key].trim(), item.func, this.getI18n(`warn.${item.key}`), item.preCondition)
+        })
+        // const checkAddressValue = this.checkInfo(addressValue.trim(), isRealLength, this.getI18n('warn.address'));
+        // const checkAuthority = this.checkInfo(authority.trim(), isRealLength, this.getI18n('warn.authority'))
+        if (!checkResult) {
           return reject()
         }
         const { idCardValue: idCard } = this.model;

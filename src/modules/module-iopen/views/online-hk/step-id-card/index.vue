@@ -12,18 +12,18 @@
           <!-- 护照：选择国家/地区 -->
           <template v-if="model.idKindKey === 'passport'">
             <cube-form-item :field="nationFields[1]"></cube-form-item>
-          </template>
-          <!-- 其他国家/地区：填写国家/地区 -->
-          <template v-if="model.nationType === 'OTH'">
-            <cube-form-item :field="nationFields[2]" class="custom-form-enName">
-              <div class="cube-input">
-                <input
-                  v-model.trim="model.otherNationality"
-                  class="cube-input-field"
-                  :placeholder="nationFields[2].props.placeholder"
-                />
-              </div>
-            </cube-form-item>
+            <!-- 其他国家/地区：填写国家/地区 -->
+            <template v-if="model.nationType === 'OTH'">
+              <cube-form-item :field="nationFields[2]" class="custom-form-enName">
+                <div class="cube-input">
+                  <input
+                    v-model.trim="model.otherNationality"
+                    class="cube-input-field"
+                    :placeholder="nationFields[2].props.placeholder"
+                  />
+                </div>
+              </cube-form-item>
+            </template>
           </template>
         </cube-form-group>
       </cube-form>

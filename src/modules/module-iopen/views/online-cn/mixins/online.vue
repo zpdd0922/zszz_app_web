@@ -58,7 +58,11 @@ export default {
       }
     },
     //校验方法
-    checkInfo(data='', func, warn='') {
+    checkInfo(data='', func, warn='', preCondition = true) {
+      //不满足前置条件时返回真
+      if (!preCondition) {
+        return true
+      }
       if (!func || typeof func !== "function") {
         return;
       }
@@ -69,6 +73,13 @@ export default {
         return true
       }
     },
+    checkList(arr) {
+      if (arr && Array.isArray(arr)) {
+        return arr.every((item) => {
+          return this.checkInfo(item.val, item.func, item.msg, item.preCondition)
+        })
+      }
+    }
   },
 };
 </script>

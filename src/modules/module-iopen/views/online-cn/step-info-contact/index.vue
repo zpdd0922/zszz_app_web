@@ -253,11 +253,13 @@ import { deepClone } from "@/main/utils/format/object";
 import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 export default {
   mixins: [onlineMixin],
   data() {
     return {
+      maxLength: MAX_LENGTH,
       optionsList,
       // validity: {},
       // valid: undefined,
@@ -1126,7 +1128,7 @@ export default {
           idCardValue: idCard = "",
           cnNameValue: userName = "",
         } = this.openInfo;
-
+        
         // 校验邮箱格式
         if (!this.validEmail()) {
           const errorTips = this.getI18n("errorTipsEmail");
@@ -1144,7 +1146,42 @@ export default {
           toast({ type: "error", txt: errorTips, time: 1000 });
           return reject(new Error(errorTips));
         }
-
+        const checkList = [
+          {
+            val: this.model.homeAddressDetail,
+            msg: this.getI18n(`warn.homeAddressDetail`),
+            func: str => str.trim(),
+          },
+          {
+            val: this.model.homeAddressDetail,
+            msg: this.getI18n(`warn.homeAddressDetail`),
+            func: str => str.trim(),
+          },
+          {
+            val: this.model.homeAddressDetail,
+            msg: this.getI18n(`warn.homeAddressDetail`),
+            func: str => str.trim(),
+          },
+          {
+            val: this.model.homeAddressDetail,
+            msg: this.getI18n(`warn.homeAddressDetail`),
+            func: str => str.trim(),
+          },
+          {
+            val: this.model.homeAddressDetail,
+            msg: this.getI18n(`warn.homeAddressDetail`),
+            func: str => str.trim(),
+          },
+          {
+            val: this.model.homeAddressDetail,
+            msg: this.getI18n(`warn.homeAddressDetail`),
+            func: str => str.trim(),
+          },
+        ]
+        const checkResult = this.checkList(checkList);
+        if (!checkResult) {
+          return reject()
+        }
         // 检查邮箱唯一性
         this.$store
           .dispatch("checkEmail", { email: this.model.email })
