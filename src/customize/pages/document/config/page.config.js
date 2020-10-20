@@ -15,13 +15,13 @@ module.exports = {
       name: 'index',
       template: 'src/customize/pages/document/template/index.html',
       entry: 'src/modules/module-document/index.js',
-      title: '平台文档',
+      title: 'Loading...',
     },
     {
       name: 'list',
       template: 'src/customize/pages/document/template/index.html',
       entry: 'src/modules/module-document/list.js',
-      title: '平台文档列表',
+      title: '文档列表',
     }
   ],
 };

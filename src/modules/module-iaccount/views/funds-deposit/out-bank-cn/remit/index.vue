@@ -57,11 +57,9 @@
               </div>
               <div class="form-filed">
                 <div class="filed-item border-bottom-1px">
-                  <span class="txt"
-                    >{{ secAccountInfo.clientNameCn }} （{{
-                      secAccountInfo.clientNameEn
-                    }}）</span
-                  >
+                  <span class="txt">{{
+                    secAccountInfo | format_secAccountInfo
+                  }}</span>
                 </div>
               </div>
             </li>
@@ -219,8 +217,7 @@ import { format_CommitData } from "@/modules/module-iaccount/format/deposit";
 import * as tips from "@/main/utils/common/tips";
 import { OTHER, LIMIT_BANK } from "@/modules/module-iaccount/define";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
-import validate from "@/main/utils/format/validate"
-
+import validate from "@/main/utils/format/validate";
 
 const EXAMPLE_BANK = {
   foot: [
@@ -368,7 +365,11 @@ export default {
     _handleBefore() {
       return new Promise((resolve, reject) => {
         // 表单校验
-        const { depositBankAccount, depositBankAccountAgain, depositBankNameOther } = this.model;
+        const {
+          depositBankAccount,
+          depositBankAccountAgain,
+          depositBankNameOther,
+        } = this.model;
 
         // 校验银行名字是否正确
         if (this.isShowOther && !validate.isBankName(depositBankNameOther)) {
@@ -376,7 +377,7 @@ export default {
           tips.toast({ txt: msg });
           return reject(msg);
         }
-        
+
         // 过滤历史入金银行存在情况
         if (
           this.depositSelectBankAccount === "add" &&
@@ -515,6 +516,14 @@ export default {
       this.model.depositMoney = formatNumber(this.model.depositMoney, {
         digit: 2,
       });
+    },
+  },
+  filters: {
+    format_secAccountInfo(val) {
+      if (!val || (!val.clientNameCn && !val.clientNameEn)) return EMPTY_LABEL;
+      if (!val.clientNameCn) return val.clientNameEn;
+      if (!val.clientNameEn) return val.clientNameCn;
+      return val.clientNameCn + "（" + val.clientNameEn + "）";
     },
   },
   components: {

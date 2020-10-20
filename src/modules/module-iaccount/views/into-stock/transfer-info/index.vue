@@ -87,6 +87,7 @@
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import * as optionsList from "./options-list";
 import validate from "@/main/utils/format/validate";
+import { isRealLength } from "@/main/utils/format/is";
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import { mapGetters } from "vuex";
 
@@ -257,18 +258,17 @@ export default {
       "sharesList",
     ]),
     nameList() {
+      const list = [];
       if (this.secAccountInfo) {
-        return [
-          {
-            value: String(this.secAccountInfo.clientNameEn),
-            text: this.secAccountInfo.clientNameEn,
-          },
-          {
-            value: String(this.secAccountInfo.clientNameCn),
-            text: this.secAccountInfo.clientNameCn,
-          },
-        ];
+        const { clientNameEn = "", clientNameCn = "" } = this.secAccountInfo;
+        if (isRealLength(clientNameEn)) {
+          list.push({ value: String(clientNameEn), text: clientNameEn });
+        }
+        if (isRealLength(clientNameCn)) {
+          list.push({ value: String(clientNameCn), text: clientNameCn });
+        }
       }
+      return list;
     },
 
     // 账户列表
@@ -356,7 +356,7 @@ export default {
     },
   },
   methods: {
-     // 格式化现金账号选项
+    // 格式化现金账号选项
     _formatAccount() {
       const { fundAccount = [] } = this.secAccountInfo;
       this.accountList = fundAccount.map((item) => {

@@ -51,11 +51,9 @@
             </div>
             <div class="cube-form-field">
               <div class="filed-item">
-                <span class="txt"
-                  >{{ secAccountInfo.clientNameCn }} （{{
-                    secAccountInfo.clientNameEn
-                  }}）</span
-                >
+                <span class="txt">{{
+                  secAccountInfo | format_secAccountInfo
+                }}</span>
               </div>
             </div>
           </li>
@@ -224,8 +222,7 @@ import {
   LIMIT_BANK,
 } from "@/modules/module-iaccount/define";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
-import validate from "@/main/utils/format/validate"
-
+import validate from "@/main/utils/format/validate";
 
 const EXAMPLE_BANK = {
   foot: [
@@ -386,7 +383,11 @@ export default {
     _handleBefore() {
       return new Promise((resolve, reject) => {
         // 表单校验
-        const { depositBankNameOther, depositBankAccount, depositBankAccountAgain } = this.model;
+        const {
+          depositBankNameOther,
+          depositBankAccount,
+          depositBankAccountAgain,
+        } = this.model;
         // 校验银行名字是否正确
         if (this.isShowOther && !validate.isBankName(depositBankNameOther)) {
           const msg = this.$t("iAccount.commonError.wrongBankName");
@@ -567,6 +568,14 @@ export default {
       this.model.depositMoney = formatNumber(this.model.depositMoney, {
         digit: 2,
       });
+    },
+  },
+  filters: {
+    format_secAccountInfo(val) {
+      if (!val || (!val.clientNameCn && !val.clientNameEn)) return EMPTY_LABEL;
+      if (!val.clientNameCn) return val.clientNameEn;
+      if (!val.clientNameEn) return val.clientNameCn;
+      return val.clientNameCn + "（" + val.clientNameEn + "）";
     },
   },
   components: {
