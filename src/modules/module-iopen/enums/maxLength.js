@@ -2,6 +2,6 @@ export const MAX_LENGTH = {
   TWENTY:20,
   FIFTY:50,
   THIRTY_TWO:32,
-  TWO_FIVE_FIVE: 255,
+  ONE_HUNDRED: 100,
   SIXTY_FOUR:64,
 };

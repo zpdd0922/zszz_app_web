@@ -233,7 +233,7 @@
               <cube-textarea
                 v-model="professionModel.companyAddress"
                 :placeholder="fieldsProfession.companyAddress.props.placeholder"
-                :maxlength="maxLength.TWO_FIVE_FIVE"
+                :maxlength="maxLength.ONE_HUNDRED"
                 :indicator="false"
               ></cube-textarea>
             </cube-form-item>
@@ -401,7 +401,7 @@ export default {
           label: this.getI18n("contact.addressDetail.label"),
           props: {
             placeholder: this.getI18n("contact.addressDetail.placeholder"),
-            maxlength: MAX_LENGTH.TWO_FIVE_FIVE,
+            maxlength: MAX_LENGTH.ONE_HUNDRED,
           },
           rules: {
             required: false,
@@ -477,7 +477,7 @@ export default {
           label: this.getI18n("contact.addressDetail.label"),
           props: {
             placeholder: this.getI18n("contact.addressDetail.placeholder"),
-            maxlength: MAX_LENGTH.TWO_FIVE_FIVE,
+            maxlength: MAX_LENGTH.ONE_HUNDRED,
           },
           rules: {
             required: false,
@@ -733,7 +733,7 @@ export default {
           label: this.getI18n("profession.companyAddress.label"),
           props: {
             placeholder: this.getI18n("profession.companyAddress.placeholder"),
-            maxlength: MAX_LENGTH.TWO_FIVE_FIVE,
+            maxlength: MAX_LENGTH.ONE_HUNDRED,
           },
         },
         industryRange: {

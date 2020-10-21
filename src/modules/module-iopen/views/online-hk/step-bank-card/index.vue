@@ -15,7 +15,7 @@
           <cube-form-item :field="fieldsBank.bankNum">
             <div class="cube-input">
               <input
-                type="text"
+                type="number"
                 v-model="model.bankNum"
                 class="cube-input-field"
                 :maxlength="maxLength.THIRTY_TWO"

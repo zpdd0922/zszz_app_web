@@ -79,7 +79,7 @@
                 <cube-textarea
                   v-model="model.addressValue"
                   :placeholder="fields.addressValue.props.placeholder"
-                  :maxlength="maxLength.TWO_FIVE_FIVE"
+                  :maxlength="maxLength.ONE_HUNDRED"
                   :indicator="false"
                 ></cube-textarea>
               </cube-form-item>
