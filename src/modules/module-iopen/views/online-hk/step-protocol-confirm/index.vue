@@ -48,6 +48,8 @@
             v-model.trim="model.pwd"
             class="pwd"
             @focus="showWarn = false"
+            :maxlength="maxLength.TWENTY"
+
           >
           </cube-input>
           <cube-input
@@ -58,6 +60,7 @@
             v-model.trim="model.password"
             class="pwd"
             @focus="showWarn = false"
+            :maxlength="maxLength.TWENTY"
           ></cube-input>
         </cube-form>
       </div>
@@ -81,6 +84,7 @@ import storage from "@/main/utils/cache/localstorage";
 import UserAge from "@/main/utils/common/ua-info";
 import { getURLParameters } from "@/main/utils/format/url";
 import validate from '@/main/utils/format/validate';
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 const fileName = `${Signature}${SUFFIX}`;
 const idFlag = `${SignatureInfo}${SUFFIX}`;
@@ -98,6 +102,7 @@ export default {
   },
   data() {
     return {
+      maxLength: MAX_LENGTH,
       clearable: {
         visible: true,
         blurHidden: true,

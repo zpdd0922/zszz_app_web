@@ -64,8 +64,8 @@ export default {
     addressValue: '请输入正确的证件地址',
     authority: '请输入正确的签发机关',
     realIdCardInfo: '身份信息校验不通过',
-    birthCountryTxt: '请填写正确的出生国家',
-    birthArea: '请填写正确的出生地区',
+    birthCountryTxt: '请输入正确的出生国家',
+    birthArea: '请输入正确的出生地区',
   },
   longerConfirm: '为确保您资料的准确性，请确认您的身份证是否为长期身份证！',
 };

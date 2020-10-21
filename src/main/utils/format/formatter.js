@@ -97,8 +97,3 @@ export function getSpellName(cnName) {
   };
 
 }
-
-// 去除所有空格
-export function noSpace(str) {
-  return  str && str.replace(/\s+/g, '')
-} 

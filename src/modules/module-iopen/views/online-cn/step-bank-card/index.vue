@@ -10,7 +10,7 @@
                 type="text"
                 v-model="model.bankNum"
                 class="cube-input-field"
-                maxlength="30"
+                :maxlength=maxLength.THIRTY_TWO
                 :placeholder="fieldsBank.bankNum.props.placeholder"
               />
             </div>
@@ -40,13 +40,14 @@ import { getPreDay } from "@/main/utils/format/date";
 import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
-
+import { MAX_LENGTH} from '@/modules/module-iopen/enums/maxLength'
 // TODO: 處理手機號為驗證用
 export default {
   mixins: [onlineMixin],
   components: {},
   data() {
     return {
+      maxLength: MAX_LENGTH,
       model: {
         // bankName: '', // 银行名称
         // bankId: "", // 银行编码
@@ -76,7 +77,7 @@ export default {
           props: {
             placeholder: this.getI18n("bankNum.placeholder"),
             type: "number",
-            maxlength: 30,
+            maxlength: MAX_LENGTH.THIRTY_TWO,
           },
         },
         bankPhoneNum: {
@@ -85,7 +86,7 @@ export default {
           label: this.getI18n("bankPhoneNum.label"),
           props: {
             placeholder: this.getI18n("bankPhoneNum.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         bankCurrency: {

@@ -23,7 +23,7 @@
                       v-model="model.familyName"
                       class="cube-input-field"
                       :placeholder="fields.familyName.props.placeholder"
-                      :maxlength="maxLength"
+                      :maxlength="maxLength.FIFTY"
                     />
                   </div>
                   <div class="custom-form-separator">
@@ -34,7 +34,7 @@
                       v-model="model.givenName"
                       class="cube-input-field"
                       :placeholder="fields.givenName.props.placeholder"
-                      :maxlength="maxLength"
+                      :maxlength="maxLength.FIFTY"
 
                     />
                   </div>
@@ -50,7 +50,7 @@
                       v-model="model.familyNameSpell"
                       class="cube-input-field"
                       :placeholder="fields.familyNameSpell.props.placeholder"
-                      :maxlength="maxLength"
+                      :maxlength="maxLength.FIFTY"
                       
                     />
                   </div>
@@ -62,7 +62,7 @@
                       v-model="model.givenNameSpell"
                       class="cube-input-field"
                       :placeholder="fields.givenNameSpell.props.placeholder"
-                      :maxlength="maxLength"
+                      :maxlength="maxLength.FIFTY"
 
                     />
                   </div>
@@ -79,7 +79,7 @@
                 <cube-textarea
                   v-model="model.addressValue"
                   :placeholder="fields.addressValue.props.placeholder"
-                  :maxlength="maxLength"
+                  :maxlength="maxLength.TWO_FIVE_FIVE"
                   :indicator="false"
                 ></cube-textarea>
               </cube-form-item>
@@ -151,7 +151,7 @@ import { getSexFromCard, getBirthFromCard } from "@/main/utils/format/idcard";
 import { isRealLength } from "@/main/utils/format/is";
 import { getPreDay } from "@/main/utils/format/date";
 import { getAge } from "@/main/utils/format/idcard";
-import { toDBC, noSpace } from "@/main/utils/format/formatter";
+import { toDBC} from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
 import * as optionsList from "./options-list";
 import { modelValidator } from "./validator";
@@ -188,7 +188,7 @@ export default {
           label: this.getI18n("name.familyNameLabel"),
           props: {
             placeholder: this.getI18n("name.familyNamePlaceholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         givenName: {
@@ -197,7 +197,7 @@ export default {
           label: this.getI18n("name.givenNameLabel"),
           props: {
             placeholder: this.getI18n("name.givenNamePlaceholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         familyNameSpell: {
@@ -206,7 +206,7 @@ export default {
           label: this.getI18n("nameSpell.familyNameLabel"),
           props: {
             placeholder: this.getI18n("nameSpell.familyNamePlaceholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         givenNameSpell: {
@@ -215,7 +215,7 @@ export default {
           label: this.getI18n("nameSpell.givenNameLabel"),
           props: {
             placeholder: this.getI18n("nameSpell.givenNamePlaceholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         // {
@@ -266,7 +266,7 @@ export default {
           label: this.getI18n("birthCountryTxt.label"),
           props: {
             placeholder: this.getI18n("birthCountryTxt.placeholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.FIFTY,
 
           },
           rules: {
@@ -279,7 +279,7 @@ export default {
           label: this.getI18n("birthArea.label"),
           props: {
             placeholder: this.getI18n("birthArea.placeholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.FIFTY,
 
           },
           rules: {
@@ -292,7 +292,7 @@ export default {
           label: this.getI18n("idCardValue.label"),
           props: {
             placeholder: this.getI18n("idCardValue.placeholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.THIRTY_TWO,
 
           },
         },
@@ -301,7 +301,7 @@ export default {
           label: this.getI18n("addressValue.label"),
           props: {
             placeholder: this.getI18n("addressValue.placeholder"),
-            maxlength: MAX_LENGTH,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         dateStartValue: {
@@ -314,7 +314,7 @@ export default {
           label: this.getI18n("authority.label"),
           props: {
             placeholder: this.getI18n("authority.placeholder"),
-            maxlength: 20,
+            maxlength: MAX_LENGTH.TWENTY,
           },
         },
       },

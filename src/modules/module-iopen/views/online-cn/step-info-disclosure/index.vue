@@ -39,6 +39,7 @@
                   name="first"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.ourStaffKinName"
+                  :maxlength="maxLength.FIFTY"
                 />
               </div>
               <div class="list-item">
@@ -50,6 +51,7 @@
                   name="second"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.ourStaffKinRelation"
+                  :maxlength="maxLength.FIFTY"
                 />
               </div>
             </div>
@@ -89,6 +91,8 @@
                   name="first"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.hkexParterName"
+                  :maxlength="maxLength.FIFTY"
+
                 />
               </div>
               <div class="list-item">
@@ -100,6 +104,8 @@
                   name="second"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.hkexParterCENo"
+                  :maxlength="maxLength.TWENTY"
+
                 />
               </div>
             </div>
@@ -139,6 +145,8 @@
                   name="first"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.withMarginName"
+                  :maxlength="maxLength.TWENTY"
+
                 />
               </div>
               <div class="list-item">
@@ -150,6 +158,8 @@
                   name="second"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.withMarginAccount"
+                  :maxlength="maxLength.TWENTY"
+
                 />
               </div>
             </div>
@@ -190,6 +200,8 @@
                   name="first"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.otherPOorBGMarginName"
+                  :maxlength="maxLength.TWENTY"
+
                 />
               </div>
               <div class="list-item">
@@ -201,6 +213,8 @@
                   name="second"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.otherPOorBGMarginAccount"
+                  :maxlength="maxLength.TWENTY"
+
                 />
               </div>
             </div>
@@ -244,6 +258,8 @@
                   name="first"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.withOtherMarginName"
+                  :maxlength="maxLength.TWENTY"
+                  
                 />
               </div>
               <div class="list-item">
@@ -255,6 +271,8 @@
                   name="second"
                   :placeholder="getI18n('other.inputPlaceholder')"
                   v-model="item.withOtherMarginAccount"
+                  :maxlength="maxLength.TWENTY"
+
                 />
               </div>
             </div>
@@ -291,7 +309,7 @@ import onlineMixin from "../mixins/online";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import { disclosureDefine } from "@/modules/module-iopen/format/format-cn/other";
 import * as optionsList from "./option-list";
-import {noSpace} from '@/main/utils/format/formatter';
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 const emtpy = ["null", "undefined", "", undefined, null];
 
@@ -300,6 +318,7 @@ export default {
   components: {},
   data() {
     return {
+      maxLength: MAX_LENGTH,
       greenCardDeclare: this.getI18n("other.isNotUsGreenCardHolder.title"),
       model: {
         isAccountOwner: true,
@@ -385,6 +404,8 @@ export default {
           label: this.getI18n("other.ourStaffKinName"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY,
+
           },
         },
         relationship: {
@@ -393,6 +414,8 @@ export default {
           label: this.getI18n("other.ourStaffKinRelation"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
       },
@@ -407,6 +430,8 @@ export default {
               value: true,
             },
             shape: "square",
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
         hkexParterName: {
@@ -415,6 +440,8 @@ export default {
           label: this.getI18n("other.hkexParterName"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
         hkexParterCENo: {
@@ -423,6 +450,8 @@ export default {
           label: this.getI18n("other.hkexParterCENo"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
       },
@@ -437,6 +466,8 @@ export default {
               value: true,
             },
             shape: "square",
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
         withMarginName: {
@@ -445,6 +476,8 @@ export default {
           label: this.getI18n("other.withMarginName"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
         withMarginAccount: {
@@ -453,6 +486,8 @@ export default {
           label: this.getI18n("other.withMarginAccount"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
       },
@@ -467,6 +502,7 @@ export default {
               value: true,
             },
             shape: "square",
+
           },
         },
         otherPOorBGMarginName: {
@@ -475,6 +511,8 @@ export default {
           label: this.getI18n("other.otherBOorPGAccountName"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
         otherPOorBGMarginAccount: {
@@ -483,6 +521,8 @@ export default {
           label: this.getI18n("other.otherBOorPGAccountNumber"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
       },
@@ -505,6 +545,8 @@ export default {
           label: this.getI18n("other.withOtherMarginName"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
         withOtherMarginAccount: {
@@ -513,6 +555,8 @@ export default {
           label: this.getI18n("other.withOtherMarginAccount"),
           props: {
             placeholder: this.getI18n("other.inputPlaceholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
         },
       },
@@ -557,7 +601,7 @@ export default {
 
       //   return true;
       // }
-      return this.staff.every((item) => Object.values(item).every((val) => noSpace(val)))
+      return this.staff.every((item) => Object.values(item).every((val) => val.trim()))
 ;
     },
     // 第4个复选框校验
@@ -573,7 +617,7 @@ export default {
       // if (hkexParterName && hkexParterCENo) {
       //   return true;
       // }
-      return this.hkexParter.every((item) => Object.values(item).every((val) => noSpace(val)))
+      return this.hkexParter.every((item) => Object.values(item).every((val) => val.trim()))
 
     },
     // 第5个复选框校验
@@ -589,7 +633,7 @@ export default {
       // if (withMarginName && withMarginAccount) {
       //   return true;
       // }
-      return this.margin.every((item) => Object.values(item).every((val) => noSpace(val)))
+      return this.margin.every((item) => Object.values(item).every((val) => val.trim()))
 
     },
     BOorPGStatusCheck() {
@@ -604,7 +648,7 @@ export default {
       // if (otherPOorBGMarginName && otherPOorBGMarginAccount) {
       //   return true;
       // }
-      return this.otherMargin.every((item) => Object.values(item).every((val) => noSpace(val)))
+      return this.otherMargin.every((item) => Object.values(item).every((val) => val.trim()))
 
     },
     // 第五个复选框校验
@@ -620,7 +664,7 @@ export default {
       // if (withOtherMarginName && withOtherMarginAccount) {
       //   return true;
       // }
-      return this.withOtherMargin.every((item) => Object.values(item).every((val) => noSpace(val)))
+      return this.withOtherMargin.every((item) => Object.values(item).every((val) => val.trim()))
 
     },
     // 第六个复选框校验
@@ -797,7 +841,7 @@ export default {
       //  else {
       //   // 如果两项有一项未填，则去除这列
       //   arr.forEach((item, index) => {
-      //     const empty = Object.values(item).some((val) => !noSpace(val))
+      //     const empty = Object.values(item).some((val) => !val.trim())
       //     if (empty) {
       //       arr.splice(index, 1)
       //     }

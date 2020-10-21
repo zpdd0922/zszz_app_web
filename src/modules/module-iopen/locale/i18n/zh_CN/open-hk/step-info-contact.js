@@ -142,5 +142,23 @@ export default {
   errorTipsPre:"请输入正确的",
   errorTipsEmail: "请输入正确的邮箱地址",
   errorTipsPhone: "请输入正确的电话号码",
-  empty: '必填信息不能为空'
+  empty: '必填信息不能为空',
+  warn: {
+    homeAddressDetail: '请输入正确的现时住址中的详细地址',
+    otherFamilyRepublic: '请输入正确的现时住址中的国家或地区',
+    homeOtherProvince: '请输入正确的现时住址中的省份',
+    homeOtherCity: '请输入正确的现时住址中的城市',
+    homeOtherArea: '请输入正确的现时住址中的区域',
+    contactAddressDetail: '请输入正确的通讯地址中的详细地址',
+    otherContactRepublic: '请输入正确的通讯地址中的国家或地区',
+    contactOtherProvince: '请输入正确的通讯地址中的省份',
+    contactOtherCity: '请输入正确的通讯地址中的城市',
+    contactOtherArea: '请输入正确的通讯地址中的区域',
+    professionCodeOther: '请输入正确的就业情况',
+    companyName: '请输入正确的公司名称',
+    companyAddress: '请输入正确的公司地址',
+    industryRange: '请输入正确的营业范围',
+
+  }
+
 };

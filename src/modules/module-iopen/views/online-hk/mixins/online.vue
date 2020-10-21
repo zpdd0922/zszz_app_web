@@ -5,7 +5,6 @@ import { mapGetters, mapActions } from "vuex";
 import { formatCommitData } from "@/modules/module-iopen/format/format-hk/index";
 import validate from "@/main/utils/format/validate";
 import { toast } from "@/main/utils/common/tips";
-import { noSpace } from "@/main/utils/format/formatter.js";
 
 export default {
   data() {},
@@ -59,16 +58,26 @@ export default {
       }
     },
     //校验方法
-    checkInfo(val = "", func, warn = "") {
-      const data = val.replace(/\s+/g, "");
+    checkInfo(data='', func, warn='', preCondition = true) {
+      //不满足前置条件时返回真
+      if (!preCondition) {
+        return true
+      }
       if (!func || typeof func !== "function") {
         return;
       }
       if (!func(data)) {
         this.commonToast(warn);
-        return false;
+        return false
       } else {
-        return true;
+        return true
+      }
+    },
+    checkList(arr) {
+      if (arr && Array.isArray(arr)) {
+        return arr.every((item) => {
+          return this.checkInfo(item.val, item.func, item.msg, item.preCondition)
+        })
       }
     },
     // 检查空值，并且提示
@@ -77,7 +86,7 @@ export default {
         return false;
       }
       let msg = warnMsg || this.$t('iOpen.common.warn.emptyMsg')
-      if (!noSpace(checkedValue)) {
+      if (!checkedValue.trim()) {
         this.commonToast(msg);
         return false;
       } else {

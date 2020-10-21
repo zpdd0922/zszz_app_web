@@ -49,7 +49,7 @@ export const isNotEmpty = val => {
 };
 
 export const isRealLength = (val, len = 2) => {
-  return isString(val) && val.replace(" ", "").length >= len;
+  return isString(val) && val.trim().length >= len;
 };
 
 /**

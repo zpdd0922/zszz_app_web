@@ -1,1 +1,7 @@
-export const MAX_LENGTH = 50;
+export const MAX_LENGTH = {
+  TWENTY:20,
+  FIFTY:50,
+  THIRTY_TWO:32,
+  TWO_FIVE_FIVE: 255,
+  SIXTY_FOUR:64,
+};

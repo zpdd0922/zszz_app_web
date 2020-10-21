@@ -30,6 +30,8 @@ import * as optionsList from "./options-list";
 import * as validForm from "./validator";
 import { AO_INVEST_TARGET } from "@/modules/module-iopen/api/params-define";
 import validate from "@/main/utils/format/validate";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
+
 
 const defaultModelExperience = {
   stocksInvestmentExperience: 0,
@@ -44,6 +46,7 @@ export default {
   mixins: [onlineMixin],
   data() {
     return {
+      maxLength: MAX_LENGTH,
       validity: {},
       valid: undefined,
       isShowCapitalList: false,
@@ -169,6 +172,7 @@ export default {
             placeholder: this.getI18n(
               "experience.otherProductsName.placeholder"
             ),
+            maxlength: MAX_LENGTH.TWENTY,
           },
           rules: {
             required: false,

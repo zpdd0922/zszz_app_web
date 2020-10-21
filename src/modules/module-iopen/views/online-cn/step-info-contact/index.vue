@@ -146,6 +146,7 @@
                         fieldsContactOther.otherContactRepublic.props
                           .placeholder
                       "
+                      :maxlength="maxLength.SIXTY_FOUR"
                     />
                   </div>
                 </cube-form-item>
@@ -232,7 +233,7 @@
               <cube-textarea
                 v-model="professionModel.companyAddress"
                 :placeholder="fieldsProfession.companyAddress.props.placeholder"
-                :maxlength="50"
+                :maxlength="maxLength.TWO_FIVE_FIVE"
                 :indicator="false"
               ></cube-textarea>
             </cube-form-item>
@@ -244,7 +245,7 @@
   </op-wrap>
 </template>
 
-<script type="text/ecmascript-6">
+<script type="text/ecm模块，吧和vascript-6">
 import onlineMixin from "../mixins/online.vue";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import * as optionsList from "./options-list";
@@ -254,6 +255,7 @@ import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
 import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
+import { isRealLength } from "@/main/utils/format/is";
 
 export default {
   mixins: [onlineMixin],
@@ -322,7 +324,7 @@ export default {
           label: this.getI18n("contact.email.label"),
           props: {
             placeholder: this.getI18n("contact.email.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
           trigger: "blur",
         },
@@ -399,7 +401,7 @@ export default {
           label: this.getI18n("contact.addressDetail.label"),
           props: {
             placeholder: this.getI18n("contact.addressDetail.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.TWO_FIVE_FIVE,
           },
           rules: {
             required: false,
@@ -412,7 +414,7 @@ export default {
           label: this.getI18n("contact.addressNumber.label"),
           props: {
             placeholder: this.getI18n("contact.addressNumber.placeholder"),
-            maxlength: 20,
+            maxlength: MAX_LENGTH.TWENTY,
           },
           rules: {
             required: false,
@@ -425,7 +427,7 @@ export default {
           label: this.getI18n("contact.homeTelePhone.label"),
           props: {
             placeholder: this.getI18n("contact.homeTelePhone.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: {
             required: false,
@@ -475,7 +477,7 @@ export default {
           label: this.getI18n("contact.addressDetail.label"),
           props: {
             placeholder: this.getI18n("contact.addressDetail.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.TWO_FIVE_FIVE,
           },
           rules: {
             required: false,
@@ -488,7 +490,7 @@ export default {
           label: this.getI18n("contact.addressNumber.label"),
           props: {
             placeholder: this.getI18n("contact.addressNumber.placeholder"),
-            maxlength: 20,
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: {
             required: false,
@@ -501,7 +503,7 @@ export default {
           label: this.getI18n("contact.contactTelePhone.label"),
           props: {
             placeholder: this.getI18n("contact.contactTelePhone.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: {
             required: false,
@@ -556,7 +558,7 @@ export default {
             placeholder: this.getI18n(
               "contact.addressOtherProvince.placeholder"
             ),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           rules: {
             required: false,
@@ -569,7 +571,7 @@ export default {
           label: this.getI18n("contact.addressOtherCity.label"),
           props: {
             placeholder: this.getI18n("contact.addressOtherCity.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           rules: {
             required: false,
@@ -582,7 +584,7 @@ export default {
           label: this.getI18n("contact.addressOtherArea.label"),
           props: {
             placeholder: this.getI18n("contact.addressOtherArea.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           rules: {
             required: false,
@@ -598,7 +600,7 @@ export default {
             placeholder: this.getI18n(
               "contact.addressOtherRepublic.placeholder"
             ),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           trigger: "blur",
         },
@@ -632,7 +634,7 @@ export default {
             placeholder: this.getI18n(
               "contact.addressOtherProvince.placeholder"
             ),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           rules: {
             required: false,
@@ -645,7 +647,7 @@ export default {
           label: this.getI18n("contact.addressOtherCity.label"),
           props: {
             placeholder: this.getI18n("contact.addressOtherCity.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           rules: {
             required: false,
@@ -658,7 +660,7 @@ export default {
           label: this.getI18n("contact.addressOtherArea.label"),
           props: {
             placeholder: this.getI18n("contact.addressOtherArea.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           rules: {
             required: false,
@@ -673,7 +675,7 @@ export default {
             placeholder: this.getI18n(
               "contact.addressOtherRepublic.placeholder"
             ),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           trigger: "blur",
         },
@@ -707,6 +709,7 @@ export default {
             placeholder: this.getI18n(
               "profession.professionCodeOther.placeholder"
             ),
+            maxlength: MAX_LENGTH.SIXTY_FOUR,
           },
           rules: {
             required: false,
@@ -718,7 +721,7 @@ export default {
           label: this.getI18n("profession.companyName.label"),
           props: {
             placeholder: this.getI18n("profession.companyName.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: {
             required: false,
@@ -730,7 +733,7 @@ export default {
           label: this.getI18n("profession.companyAddress.label"),
           props: {
             placeholder: this.getI18n("profession.companyAddress.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.TWO_FIVE_FIVE,
           },
         },
         industryRange: {
@@ -739,6 +742,8 @@ export default {
           label: this.getI18n("profession.industryRange.label"),
           props: {
             placeholder: this.getI18n("profession.industryRange.placeholder"),
+            maxlength: MAX_LENGTH.FIFTY,
+
           },
           rules: {
             required: false,
@@ -767,7 +772,7 @@ export default {
             placeholder: this.getI18n(
               "profession.companyTelePhone.placeholder"
             ),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: {
             required: false,
@@ -931,7 +936,8 @@ export default {
           }
           return Boolean(item);
         } else if (
-          data.professionCode === this.optionsList.professionCodeValue.others
+          data.professionCode === this.optionsList.professionCodeValue.other
+
         ) {
           return !!(
             data.professionCodeOther && data.professionCodeOther.trim().length
@@ -1053,19 +1059,6 @@ export default {
         this.professionModel.professionCode = args;
       }
     },
-    // 空字符校验字符
-    validateEmpty() {
-      if (this.professionModel.professionCode === optionsList.professionCodeValue.employed || this.professionModel.professionCode === optionsList.professionCodeValue.selfEmployed) {
-        const {
-          companyName,
-          companyAddress,
-          industryRange,
-        } = this.professionModel
-        return companyName.replace(/\s+/g, '') && companyAddress.replace(/\s+/g, '') && industryRange.replace(/\s+/g, '')
-      } else {
-        return true
-      }
-    },
     // 验证邮箱的准确性
     validEmail() {
       const { email } = this.model;
@@ -1141,42 +1134,93 @@ export default {
           toast({ type: "error", txt: validPhoneTips, time: 1000 });
           return reject(new Error(validPhoneTips));
         }
-        if (!this.validateEmpty()) {
-          const errorTips = this.getI18n('empty');
-          toast({ type: "error", txt: errorTips, time: 1000 });
-          return reject(new Error(errorTips));
-        }
         const checkList = [
           {
             val: this.model.homeAddressDetail,
             msg: this.getI18n(`warn.homeAddressDetail`),
-            func: str => str.trim(),
+            func: isRealLength,
           },
           {
-            val: this.model.homeAddressDetail,
-            msg: this.getI18n(`warn.homeAddressDetail`),
-            func: str => str.trim(),
+            val: this.model.otherFamilyRepublic,
+            msg: this.getI18n(`warn.otherFamilyRepublic`),
+            func: isRealLength,
+            preCondition: this.model.homeOtherCountry === 'OTH'
           },
           {
-            val: this.model.homeAddressDetail,
-            msg: this.getI18n(`warn.homeAddressDetail`),
-            func: str => str.trim(),
+            val: this.model.homeOtherProvince,
+            msg: this.getI18n(`warn.homeOtherProvince`),
+            func: isRealLength,
+            preCondition: this.model.homeRadio === this.radioListValue.oth
           },
           {
-            val: this.model.homeAddressDetail,
-            msg: this.getI18n(`warn.homeAddressDetail`),
-            func: str => str.trim(),
+            val: this.model.homeOtherCity,
+            msg: this.getI18n(`warn.homeOtherCity`),
+            func: isRealLength,
+            preCondition: this.model.homeRadio === this.radioListValue.oth
           },
           {
-            val: this.model.homeAddressDetail,
-            msg: this.getI18n(`warn.homeAddressDetail`),
-            func: str => str.trim(),
+            val: this.model.homeOtherArea,
+            msg: this.getI18n(`warn.homeOtherArea`),
+            func: isRealLength,
+            preCondition: this.model.homeRadio === this.radioListValue.oth
+          },
+          // //联系地址
+          {
+            val: this.model.contactAddressDetail,
+            msg: this.getI18n(`warn.contactAddressDetail`),
+            func: isRealLength,
+            preCondition: this.model.contactRadio !== this.optionsList.radioListValue.home
           },
           {
-            val: this.model.homeAddressDetail,
-            msg: this.getI18n(`warn.homeAddressDetail`),
-            func: str => str.trim(),
+            val: this.model.otherContactRepublic,
+            msg: this.getI18n(`warn.otherContactRepublic`),
+            func: isRealLength,
+            preCondition: this.model.contactOhterCountry === 'OTH'
           },
+          {
+            val: this.model.contactOtherProvince,
+            msg: this.getI18n(`warn.contactOtherProvince`),
+            func: isRealLength,
+            preCondition: this.model.contactRadio === optionsList.radioListValue.oth
+          },
+          {
+            val: this.model.contactOtherCity,
+            msg: this.getI18n(`warn.contactOtherCity`),
+            func: isRealLength,
+            preCondition: this.model.contactRadio === optionsList.radioListValue.oth
+          },
+          {
+            val: this.model.contactOtherArea,
+            msg: this.getI18n(`warn.contactOtherArea`),
+            func: isRealLength,
+            preCondition: this.model.contactRadio === optionsList.radioListValue.oth
+          },
+          //职业
+          {
+            val: this.professionModel.professionCodeOther,
+            msg: this.getI18n(`warn.professionCodeOther`),
+            func: isRealLength,
+            preCondition: this.professionModel.professionCode === this.optionsList.professionCodeValue.other
+          },
+          {
+            val: this.professionModel.companyName,
+            msg: this.getI18n(`warn.companyName`),
+            func: isRealLength,
+            preCondition: this.professionModel.professionCode === this.optionsList.professionCodeValue.selfEmployed || this.professionModel.professionCode === this.optionsList.professionCodeValue.employed 
+          },
+          {
+            val: this.professionModel.companyAddress,
+            msg: this.getI18n(`warn.companyAddress`),
+            func: isRealLength,
+            preCondition: this.professionModel.professionCode === this.optionsList.professionCodeValue.selfEmployed || this.professionModel.professionCode === this.optionsList.professionCodeValue.employed 
+          },
+          {
+            val: this.professionModel.industryRange,
+            msg: this.getI18n(`warn.industryRange`),
+            func: isRealLength,
+            preCondition: this.professionModel.professionCode === this.optionsList.professionCodeValue.selfEmployed || this.professionModel.professionCode === this.optionsList.professionCodeValue.employed 
+          },
+
         ]
         const checkResult = this.checkList(checkList);
         if (!checkResult) {

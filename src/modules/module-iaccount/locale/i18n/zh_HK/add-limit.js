@@ -56,7 +56,7 @@ export const addLimit = {
   ],
   history: {
     status: {
-      unProcessed: "未處理",
+      unProcessed: "待處理",
       processing: "處理中",
       success: "已成功",
       backed: "已退回",

@@ -36,7 +36,7 @@
                   type="text"
                   :placeholder="getI18n('tax.countryKey.placeholder')"
                   v-model="taxModel.defaultCountryCn"
-                  maxlength="50"
+                  :maxlength="maxLength.FIFTY"
                 />
               </template>
               <template v-if="isHK">
@@ -45,7 +45,7 @@
                   type="text"
                   :placeholder="getI18n('tax.countryKey.placeholder')"
                   v-model="taxModel.defaultCountryHk"
-                  maxlength="50"
+                  :maxlength="maxLength.FIFTY"
                 />
               </template>
               <template v-if="isOther">
@@ -54,7 +54,7 @@
                   type="text"
                   :placeholder="getI18n('tax.countryKey.placeholder')"
                   v-model="taxModel.defaultCountryOther"
-                  maxlength="50"
+                  :maxlength="maxLength.FIFTY"
                 />
               </template>
             </div>
@@ -65,7 +65,7 @@
             <div class="cube-form-field">
               <input
                 class="cube-input-field"
-                maxlength="18"
+                :maxlength="maxLength.TWENTY"
                 type="text"
                 :placeholder="getI18n('tax.privacyNum.placeholder')"
                 v-model="taxModel.defaultPrivacyNum"
@@ -100,6 +100,7 @@ import onlineMixin from "../mixins/online.vue";
 import { toast, alert, confirm } from "@/main/utils/common/tips";
 import { disclosureDefine } from "@/modules/module-iopen/format/format-hk/other";
 import ComPrivacyForm from "./com-privacy-form";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 const emtpy = ["null", "undefined", "", undefined, null];
 
@@ -110,6 +111,7 @@ export default {
   },
   data() {
     return {
+      maxLength: MAX_LENGTH,
       model: {
         isAllowProvidePrivacy: 1,
         // northTrade: 1,
@@ -304,22 +306,22 @@ export default {
       for (let i = 0; i < this.privacyArray.length; i++) {
         if (
           this.privacyArray[i].offerPrivacyKey &&
-          this.privacyArray[i].countryKey &&
+          this.privacyArray[i].countryKey.trim() &&
           this.privacyArray[i].offerPrivacyKey === "can" &&
-          Boolean(this.privacyArray[i].canPrivacyNumKey)
+          Boolean(this.privacyArray[i].canPrivacyNumKey.trim())
         ) {
           isCanNextInfo = true;
         } else if (
           this.privacyArray[i].offerPrivacyKey &&
-          this.privacyArray[i].countryKey &&
+          this.privacyArray[i].countryKey.trim() &&
           this.privacyArray[i].noOfferPrivacyKey &&
           this.privacyArray[i].noOfferPrivacyKey === "B" &&
-          this.privacyArray[i].reasonDescKey
+          this.privacyArray[i].reasonDescKey.trim()
         ) {
           isCanNextInfo = true;
         } else if (
           this.privacyArray[i].offerPrivacyKey &&
-          this.privacyArray[i].countryKey &&
+          this.privacyArray[i].countryKey.trim() &&
           this.privacyArray[i].noOfferPrivacyKey &&
           this.privacyArray[i].noOfferPrivacyKey !== "B"
         ) {

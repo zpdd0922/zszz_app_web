@@ -112,6 +112,7 @@ import * as optionsList from "./options-list";
 import * as validForm from "./validator";
 import { AO_INVEST_TARGET } from "@/modules/module-iopen/api/params-define";
 import validate from "@/main/utils/format/validate";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 const defaultModel = {
   income: 1,
@@ -211,6 +212,7 @@ export default {
           label: this.getI18n("finance.capital.label"),
           props: {
             placeholder: this.getI18n("finance.capital.placeholder"),
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: {
             required: false,
@@ -250,6 +252,7 @@ export default {
           label: this.getI18n("finance.investTargetOther.label"),
           props: {
             placeholder: this.getI18n("finance.investTargetOther.placeholder"),
+            maxlength: MAX_LENGTH.FIFTY
           },
           rules: { required: false, maxlength: 50 },
         },
@@ -274,6 +277,7 @@ export default {
           label: this.getI18n("finance.residenceOther.label"),
           props: {
             placeholder: this.getI18n("finance.residenceOther.placeholder"),
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: { required: false, maxlength: 50 },
         },
@@ -530,6 +534,7 @@ export default {
   created() {},
   mounted() {
     this.initData();
+    console.log(MAX_LENGTH);
   },
 };
 </script>

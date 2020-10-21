@@ -18,7 +18,7 @@
                 type="text"
                 v-model="model.bankNum"
                 class="cube-input-field"
-                maxlength="30"
+                :maxlength="maxLength.THIRTY_TWO"
                 :placeholder="fieldsBank.bankNum.props.placeholder"
               />
             </div>
@@ -64,6 +64,7 @@ import { getPreDay } from "@/main/utils/format/date";
 import { getAge } from "@/main/utils/format/idcard";
 import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 import {
   SUFFIX,
@@ -97,6 +98,7 @@ export default {
 
   data() {
     return {
+      maxLength: MAX_LENGTH,
       bankValue,
       model: {
         bankUserName: "",
@@ -136,8 +138,7 @@ export default {
           label: this.getI18n("bankNum.label"),
           props: {
             placeholder: this.getI18n("bankNum.placeholder"),
-            type: "number",
-            maxlength: 5,
+            maxlength: MAX_LENGTH.THIRTY_TWO,
           },
         },
         otherBankName: {
@@ -146,7 +147,7 @@ export default {
           label: this.getI18n("otherBankName.label"),
           props: {
             placeholder: this.getI18n("otherBankName.placeholder"),
-            maxlength: 30,
+            maxlength: MAX_LENGTH.THIRTY_TWO,
           },
         },
         bankCurrency: {

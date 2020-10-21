@@ -18,6 +18,7 @@
                     v-model="model.familyName"
                     class="cube-input-field"
                     :placeholder="familyNamePlaceHolder"
+                    :maxlength="maxLength.FIFTY"
                   />
                 </div>
               </cube-form-item>
@@ -27,6 +28,8 @@
                     v-model.trim="model.givenName"
                     class="cube-input-field"
                     :placeholder="givenNamePlaceHolder"
+                    :maxlength="maxLength.FIFTY"
+                    
                   />
                 </div>
               </cube-form-item>
@@ -38,7 +41,7 @@
                     :type="fields.idCardValue.props.type"
                     v-model="model.idCardValue"
                     class="cube-input-field"
-                    maxlength="50"
+                    :maxlength="maxLength.FIFTY"
                     :placeholder="fields.idCardValue.props.placeholder"
                   />
                 </div>
@@ -49,7 +52,7 @@
                   <cube-textarea
                     v-model="model.addressValue"
                     :placeholder="fields.addressValue.props.placeholder"
-                    :maxlength="50"
+                    :maxlength="maxLength.FIFTY"
                     :indicator="false"
                   ></cube-textarea>
                 </cube-form-item>
@@ -180,11 +183,14 @@ import { toDBC } from "@/main/utils/format/formatter";
 import validate from "@/main/utils/format/validate";
 import * as optionsList from "./options-list";
 import { modelValidator } from "./validator";
+import { isRealLength } from "@/main/utils/format/is";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 export default {
   mixins: [onlineMixin],
   data() {
     return {
+      maxLength: MAX_LENGTH,
       selectIcon: false,
       longerDateText: this.getI18n("dateStartValue.endForerver"),
       model: {
@@ -212,7 +218,7 @@ export default {
           label: this.getI18n("familyName.label"),
           props: {
             placeholder: this.getI18n("familyName.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         givenName: {
@@ -221,7 +227,7 @@ export default {
           label: this.getI18n("givenName.label"),
           props: {
             placeholder: this.getI18n("givenName.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         familyNameSpell: {
@@ -230,7 +236,7 @@ export default {
           label: this.getI18n("familyNameSpell.label"),
           props: {
             placeholder: this.getI18n("familyNameSpell.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         givenNameSpell: {
@@ -239,7 +245,7 @@ export default {
           label: this.getI18n("givenNameSpell.label"),
           props: {
             placeholder: this.getI18n("givenNameSpell.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         idCardValue: {
@@ -248,6 +254,7 @@ export default {
           label: this.getI18n("idCardValue.label"),
           props: {
             placeholder: this.getI18n("idCardValue.placeholder"),
+            maxlength: MAX_LENGTH.THIRTY_TWO,
           },
         },
         addressValue: {
@@ -255,7 +262,7 @@ export default {
           label: this.getI18n("addressValue.label"),
           props: {
             placeholder: this.getI18n("addressValue.placeholder"),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
         },
         dateStartValue: {
@@ -312,6 +319,7 @@ export default {
           label: this.getI18n("birthCountryTxt.label"),
           props: {
             placeholder: this.getI18n("birthCountryTxt.placeholder"),
+            maxlength: MAX_LENGTH.FIFTY,
           },
           rules: {
             required: false,
@@ -323,6 +331,8 @@ export default {
           label: this.getI18n("birthArea.label"),
           props: {
             placeholder: this.getI18n("birthArea.placeholder"),
+            maxlength: MAX_LENGTH.FIFTY,
+
           },
           rules: {
             required: false,
@@ -496,23 +506,54 @@ export default {
       return new Promise((resolve, reject) => {
         const { idKindKey } = this.openInfo;
         const { idCardValue: idCard } = this.model;
-        const { familyNameSpell, givenNameSpell} = this.model
-        const checkFamilyNameSpell = this.checkInfo(familyNameSpell, validate.isEnName, this.getI18n('warn.familyNameSpell'))
-        const checkGivenNameSpell = this.checkInfo(givenNameSpell, validate.isEnName, this.getI18n('warn.givenNameSpell'))
+        const { familyNameSpell, givenNameSpell, addressValue, birthCountryTxt, birthArea} = this.model
 
-        if (!checkFamilyNameSpell || !checkGivenNameSpell) {
-          return reject();
+        const checkList = [
+          {
+            val: familyNameSpell,
+            func: validate.isEnName,
+            msg: this.getI18n('warn.familyNameSpell'),
+          },
+          {
+            val: givenNameSpell,
+            func: validate.isEnName,
+            msg: this.getI18n('warn.givenNameSpell'),
+          },
+          {
+            val: addressValue,
+            func: isRealLength,
+            msg: this.getI18n('warn.addressValue'),
+            preCondition: idKindKey === "idCardCn"
+          },
+          {
+            val: birthCountryTxt,
+            preCondition: this.model.birthCountry === 'OTH',
+            func: isRealLength,
+            msg: this.getI18n('warn.birthCountryTxt'),
+
+          },
+          {
+            val: birthArea,
+            preCondition: Boolean(birthArea),
+            func: isRealLength,
+            msg: this.getI18n('warn.birthArea'),
+          }
+
+        ]
+        const checkResult = this.checkList(checkList);
+        if (!checkResult) {
+          return reject()
         }
         const name = this.cnName;
         // 判断证件类型 - 大陆身份证
         if (idKindKey === "idCardCn") {
           const age = getAge(getBirthFromCard(idCard));
           // 校验身份证
-          if (!validate.isIdCard(idCard)) {
-            const cardTips = this.getI18n('cardError');
-            toast({ type: "error", txt: cardTips });
-            return reject(new Error(cardTips));
-          }
+          // if (!validate.isIdCard(idCard)) {
+          //   const cardTips = this.getI18n('cardError');
+          //   toast({ type: "error", txt: cardTips });
+          //   return reject(new Error(cardTips));
+          // }
           // 大于70岁不允许线上开户
           // if (age >= 70 && window.IS_CHECK_AGE) {
           //   const ageTips = this.getI18n('ageError');
@@ -520,23 +561,24 @@ export default {
           //   return reject(new Error(ageTips));
           // }
           // 后台请求校验
-          this.$store
-            .dispatch("checkIdCard", { idCard, name, cardType: 1 })
-            .then((res) => {
-              const { verify = false, remark = this.getI18n('warn.realIdCardInfo') } = res;
-              if (verify) {
-                resolve(verify);
-              } else {
-                alert({
-                  title: this.getI18n('warmTips'),
-                  content: remark,
-                });
-                reject(verify);
-              }
-            })
-            .catch((err) => {
-              reject(err);
-            });
+          // this.$store
+          //   .dispatch("checkIdCard", { idCard, name, cardType: 1 })
+          //   .then((res) => {
+          //     const { verify = false, remark = this.getI18n('warn.realIdCardInfo') } = res;
+          //     if (verify) {
+                // resolve(verify);
+                resolve();
+          //     } else {
+          //       alert({
+          //         title: this.getI18n('warmTips'),
+          //         content: remark,
+          //       });
+          //       reject(verify);
+          //     }
+          //   })
+          //   .catch((err) => {
+          //     reject(err);
+          //   });
         } else {
           // 后台请求校验
           this.$store

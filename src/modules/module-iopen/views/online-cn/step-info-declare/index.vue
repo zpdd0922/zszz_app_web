@@ -1,17 +1,27 @@
 <template>
-  <op-wrap :isDisabled="isDisableNext" :btnText="getI18n('nextBtn')" @handleNext="handleNext">
+  <op-wrap
+    :isDisabled="isDisableNext"
+    :btnText="getI18n('nextBtn')"
+    @handleNext="handleNext"
+  >
     <div class="olcn-step olcn-step-info-declare">
       <cube-form :model="model" class="step-content">
-        <head-title :title="i18nValues.isAllowProvidePrivacy.title"></head-title>
+        <head-title
+          :title="i18nValues.isAllowProvidePrivacy.title"
+        ></head-title>
         <!-- 是否允許作為促銷 -->
-        <p class="declare-item-content">{{i18nValues.isAllowProvidePrivacy.tipsContent}}</p>
+        <p class="declare-item-content">
+          {{ i18nValues.isAllowProvidePrivacy.tipsContent }}
+        </p>
         <cube-form-group class="custom-form-group">
           <cube-form-item :field="fieldsOther.isAllowProvidePrivacy" />
         </cube-form-group>
-        <p class="declare-item-content">{{i18nValues.isAllowProvidePrivacy.content}}</p>
+        <p class="declare-item-content">
+          {{ i18nValues.isAllowProvidePrivacy.content }}
+        </p>
       </cube-form>
       <div class="margin-bottom"></div>
-        <!-- 是否北向交易 -->
+      <!-- 是否北向交易 -->
       <!-- <cube-form :model="model" class="step-content">
         <head-title :title="i18nValues.northTrade.title"></head-title>
         <p class="declare-item-content">{{i18nValues.northTrade.tipsContent}}</p>
@@ -28,13 +38,17 @@
         <div class="custom-form-group privacy-block-group">
           <div class="cube-form-item privacy-block-item">
             <em class="triangle-icon triangle-icon-1" />
-            <label class="cube-form-label">{{getI18n('tax.countryKey.label')}}</label>
+            <label class="cube-form-label">{{
+              getI18n("tax.countryKey.label")
+            }}</label>
             <div class="cube-form-field">
-              <span>{{getI18n('tax.taxCn')}}</span>
+              <span>{{ getI18n("tax.taxCn") }}</span>
             </div>
           </div>
           <div class="cube-form-item privacy-block-item">
-            <label class="cube-form-label">{{getI18n('tax.privacyNum.label')}}</label>
+            <label class="cube-form-label">{{
+              getI18n("tax.privacyNum.label")
+            }}</label>
             <div class="cube-form-field">
               <input
                 class="cube-input-field"
@@ -55,14 +69,16 @@
           @changeReasonDesc="changeReasonDesc"
         ></com-privacy-form>
         <div class="btn-box">
-          <div class="add" @click="addTaxInfo">+ {{getI18n('tax.add')}}</div>
+          <div class="add" @click="addTaxInfo">+ {{ getI18n("tax.add") }}</div>
           <div
             class="dele"
-            :class="{'no-del': isGrayRemoveBtnForTax}"
+            :class="{ 'no-del': isGrayRemoveBtnForTax }"
             @click="delTaxInfo"
-          >- {{getI18n('tax.remove')}}</div>
+          >
+            - {{ getI18n("tax.remove") }}
+          </div>
         </div>
-        <p class="error-tips">{{getI18n('tax.tips')}}</p>
+        <p class="error-tips">{{ getI18n("tax.tips") }}</p>
       </div>
     </div>
   </op-wrap>
@@ -276,22 +292,22 @@ export default {
       for (let i = 0; i < this.privacyArray.length; i++) {
         if (
           this.privacyArray[i].offerPrivacyKey &&
-          this.privacyArray[i].countryKey &&
+          this.privacyArray[i].countryKey.trim() &&
           this.privacyArray[i].offerPrivacyKey === "can" &&
-          Boolean(this.privacyArray[i].canPrivacyNumKey)
+          Boolean(this.privacyArray[i].canPrivacyNumKey.trim())
         ) {
           isCanNextInfo = true;
         } else if (
           this.privacyArray[i].offerPrivacyKey &&
-          this.privacyArray[i].countryKey &&
+          this.privacyArray[i].countryKey.trim() &&
           this.privacyArray[i].noOfferPrivacyKey &&
           this.privacyArray[i].noOfferPrivacyKey === "B" &&
-          this.privacyArray[i].reasonDescKey
+          this.privacyArray[i].reasonDescKey.trim()
         ) {
           isCanNextInfo = true;
         } else if (
           this.privacyArray[i].offerPrivacyKey &&
-          this.privacyArray[i].countryKey &&
+          this.privacyArray[i].countryKey.trim() &&
           this.privacyArray[i].noOfferPrivacyKey &&
           this.privacyArray[i].noOfferPrivacyKey !== "B"
         ) {

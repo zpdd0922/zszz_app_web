@@ -56,10 +56,12 @@ export default {
   warn: {
     warm: "溫馨提示",
     wrongNum: "請輸入正確身份證號碼",
-    mt70: '70歲以上暫不能開戶，非常抱歉',
-    address: '請輸入正確的證件地址',
-    authority: '請輸入正確的簽發機關',
-    realIdCardInfo: '身份信息校驗未通過',
+    mt70: "70歲以上暫不能開戶，非常抱歉",
+    addressValue: "請輸入正確的證件地址",
+    authority: "請輸入正確的簽發機關",
+    realIdCardInfo: "身份資訊校驗不通過",
+    birthCountryTxt: "請輸入正確的出生國家",
+    birthArea: "請輸入正確的出生地區",
   },
-  longerConfirm: '為確保您資料的準確性，請確認您的身份證是否為長期身份證！',
+  longerConfirm: "為確保您資料的準確性，請確認您的身份證是否為長期身份證！",
 };

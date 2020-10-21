@@ -20,6 +20,7 @@
                     v-model.trim="model.otherNationality"
                     class="cube-input-field"
                     :placeholder="nationFields[2].props.placeholder"
+                    :maxlength="maxLength.FIFTY"
                   />
                 </div>
               </cube-form-item>
@@ -168,6 +169,7 @@ import { toDBC } from "@/main/utils/format/formatter";
 // import initNC from '@/main/utils/common/nc';
 // OCR
 import { getOcrIDCardData } from "../../../format/common/formateOcrId";
+import { MAX_LENGTH } from "@/modules/module-iopen/enums/maxLength";
 
 // 身份证正面
 const defaultIDCardCnFace = {
@@ -224,6 +226,7 @@ export default {
   mixins: [onlineMixin],
   data() {
     return {
+      maxLength: MAX_LENGTH,
       SUFFIX,
       // 下一页用户信息暂存表
       modelCardInfo: {},
@@ -315,7 +318,7 @@ export default {
           label: "",
           props: {
             placeholder: this.getI18n('inputOtherCountry'),
-            maxlength: 50,
+            maxlength: MAX_LENGTH.FIFTY,
           },
           trigger: "blur",
         },

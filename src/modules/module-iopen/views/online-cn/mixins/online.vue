@@ -7,7 +7,10 @@ import validate from "@/main/utils/format/validate";
 import { toast } from "@/main/utils/common/tips";
 
 export default {
-  data() {},
+  data() {
+    return {
+    }
+  },
   metaInfo() {
     return {
       title: this.$route.meta.title,
