@@ -16,6 +16,8 @@
               @focus="goToSearch(idx)"
               @keyup="debouncedGetStockList(idx)"
               :disabled="!item.isInputActive"
+              :maxlength="maxLength.TWENTY"
+
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
             <!-- <div class="list-box" v-if="true"> -->
@@ -41,18 +43,20 @@
                 <div class="no-result" v-else>
                   <span>{{getI18n('noResult')}}</span>
                 </div>
-                <div class="close-search" @click="closeSearch(idx)">X</div>
               </template>
+              <div class="close-search" @click="closeSearch(idx)">X</div>
             </div>
           </div>
           <div class="item-column">
             <label for="sharesNum">{{getI18n('sharesNum')}}</label>
             <input
-              type="text"
+              type="tel"
               name="sharesNum"
               v-model.trim="stockList[idx].sharesNum"
               :placeholder="getI18n('quantityPlaceholder')"
               :disabled="!item.isInputActive"
+              :maxlength="maxLength.TWENTY"
+
             />
           </div>
           <!-- <cube-form-item :field="numberField"></cube-form-item> -->
@@ -78,11 +82,15 @@ import commonMixin from "@/modules/module-iaccount/mixins/common";
 import { mapGetters } from "vuex";
 import Storage from "@/main/utils/cache/localstorage";
 import { debounce } from "@/modules/module-iaccount/utils/common";
+import { MAX_LENGTH } from "@/modules/module-iaccount/define/maxLength";
 
 
 export default {
+  mixins: [commonMixin],
   data() {
     return {
+      maxLength: MAX_LENGTH,
+
       isUpdating: false, // 刷新状态
       searchStockList: [], // 搜索结果
       isAddBtnActive: true, // 添加按钮激活状态
@@ -203,6 +211,15 @@ export default {
       //   };
       // });
       let data = {};
+            const inputVal = this.stockList[idx].sharesCode.replace(/\s+/g, '');
+      this.$nextTick(() => {
+        this.stockList[idx].sharesCode = inputVal; 
+      })
+
+      if (!inputVal) {
+        return
+      }
+
       if (Number(this.isSharesOut) === 1) {
         data = {
           info: "",
@@ -287,66 +304,34 @@ export default {
     saveStock(idx) {
       const stockClicked = this.stockList[idx];
       if (!stockClicked.sharesCode) {
-        this.showNoStockNameWarn();
+        // this.showNoStockNameWarn();
+        this.commonToast(this.getI18n("noStockNameWarn"))
         return;
       }
-      //判断股票数量格式是否正确
       if (!/^[1-9]+[\d]*$/.test(stockClicked.sharesNum)) {
-        this.showNoQuantityWarn();
+        // this.showNoQuantityWarn();
+        this.commonToast(this.getI18n("noQuantityWarn"))
         return;
       }
-      // 判断是否取到股票名称
       if (!stockClicked.sharesName) {
-        this.showNoSharesNameWarn();
+        // this.showNoSharesNameWarn();
+        this.commonToast(this.getI18n("noSharesNameWarn"))
         return
       }
-      // 超过两只股票时判断是否重复
       if (this.stockList.length > 1) {
         const list = this.stockList
           .slice(0, idx)
           .concat(this.stockList.slice(idx + 1));
         if (list.some((item) => item.sharesCode === stockClicked.sharesCode)) {
-          this.showRepeatWarn();
-          return; 
+          // this.showRepeatWarn();
+        this.commonToast(this.getI18n("repeatWarn"))
+          return;
         }
       }
       this.stockList[idx].isInputActive = false;
       //所有按钮激活，输入框禁用
       this.isCanOperate = true;
       this.isAddBtnActive = true;
-    },
-    // 提示框
-    showNoStockNameWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("noStockNameWarn"),
-      });
-      toast.show();
-    },
-    showNoQuantityWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("noQuantityWarn"),
-      });
-      toast.show();
-    },
-    showRepeatWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("repeatWarn"),
-      });
-      toast.show();
-    },
-    showNoSharesNameWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("noSharesNameWarn"), 
-      });
-      toast.show();
     },
     goToSearch(index) {
       if (!this.isCanOperate && this.stockList[index].isInputActive) {

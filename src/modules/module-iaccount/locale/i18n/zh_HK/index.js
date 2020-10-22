@@ -153,8 +153,8 @@ export default {
       text_23: "刪除",
       text_24: "確定執行此操作嗎？",
       alertWaiting: "功能代開放",
-      tradePwd: '交易密碼驗證',
-      mt5: '密碼輸錯五次，您的帳戶將被鎖定'
+      tradePwd: "交易密碼驗證",
+      mt5: "密碼輸錯五次，您的帳戶將被鎖定",
     },
     deposit: {
       name: "存入資金",
@@ -511,7 +511,7 @@ export default {
         text_33: "手續費",
         text_34: "實際提取金額",
         text_35: "抱歉，您的實際提取金額不足",
-        wrongBankName: '請輸入正確的銀行名稱',
+        wrongBankName: "請輸入正確的銀行名稱",
       },
     },
     notify: {
@@ -655,8 +655,11 @@ export default {
         text_33: "證券流向",
       },
     },
-    commonError: {
-      wrongBankName: '請輸入正確的銀行名稱',
-    }
+    commonWarn: {
+      depositBankNameOther: "請輸入正確的銀行名稱",
+      swiftCode: "請輸入正確的swiftCode",
+      address: "請輸入正確的地址",
+      withdrawBankNameOther: '請輸入正確的銀行名稱'
+    },
   },
 };

@@ -9,6 +9,7 @@
           v-model="value"
           :placeholder="$t('iAccount.company_act.placeholder.text_1')"
           @input="debouncedGetStockList()"
+          :maxlength="maxLength.TWENTY"
         />
       </div>
       <!-- <div class="search-text">
@@ -37,11 +38,13 @@
 import { mapGetters } from 'vuex'
 import SecuritiesApi from '@/modules/module-iaccount/api/modules/api-securities'
 import { debounce } from "@/modules/module-iaccount/utils/common";
+import { MAX_LENGTH } from "@/modules/module-iaccount/define/maxLength";
 
 
 export default {
   data () {
     return {
+      maxLength: MAX_LENGTH,
       value: '',
       options: []
     }
@@ -95,6 +98,11 @@ export default {
     //     this.options = stks.filter(val => val.id.toUpperCase().endsWith('.HK'))
     //   })
     // }
+    value(newVal, oldVal) {
+      if (newVal.includes(' ')) {
+        this.value = oldVal
+      }
+    }
   },
   mounted() {
     this.$nextTick(() => {

@@ -13,6 +13,7 @@ import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 import AccountApi from '@/modules/module-iaccount/api/modules/api-account'
 const envConfig = window._GLOBAL_ENV_CONFIG || {};
 const selfURL = envConfig.webIAccount;
+import { toast } from "@/main/utils/common/tips";
 
 export default {
   data() {
@@ -38,9 +39,9 @@ export default {
     getPhone_HK() {
       return window.PHONE_HK
     },
-    getPhone_HK_CHECK() {
-      return window.PHONE_HK_CHECK
-    }
+    // getPhone_HK_CHECK() {
+    //   return window.PHONE_HK_CHECK
+    // }
   },
   methods: {
     // 处理调整地址方法 - 针对帮助中心指引
@@ -341,7 +342,41 @@ export default {
     //提交后台缓存
     commitInfoCache(data) {
       this.$store.dispatch('sendTransferredStockCache', data)
+    },
+      //提醒方法
+      commonToast(text = "") {
+        if (typeof text === "string") {
+          return toast({
+          type: "txt",
+          txt: text,
+          time: 1000,
+        });
+      }
+    },
+    //校验方法
+    checkInfo(data='', func, warn='', preCondition = true) {
+      //不满足前置条件时返回真
+      if (!preCondition) {
+        return true
+      }
+      if (!func || typeof func !== "function") {
+        return;
+      }
+      if (!func(data)) {
+        this.commonToast(warn);
+        return false
+      } else {
+        return true
+      }
+    },
+    checkList(arr) {
+      if (arr && Array.isArray(arr)) {
+        return arr.every((item) => {
+          return this.checkInfo(item.val, item.func, item.msg, item.preCondition)
+        })
+      }
     }
+
 
   },
   filters: {

@@ -89,6 +89,7 @@
                 :placeholder="$t('iAccount.withdraw.request.text_18')"
                 @focus="_focusMoneyInput"
                 @blur="_blurMoneyInput"
+                :maxlength="maxLength.FIFTY"
               />
             </div>
             <div class="filed-msg">
@@ -198,12 +199,15 @@ import * as tips from "@/modules/module-iaccount/utils/tips";
 import { tradeUnlock } from "@/main/utils/native-app/";
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
+import { MAX_LENGTH } from "@/modules/module-iaccount/define/maxLength";
 
 export default {
   mixins: [commonMixin],
   data() {
     const currencyOptions = this.$t("iAccount.define.CURRENCY");
     return {
+      maxLength: MAX_LENGTH,
+
       showCaptcha: false,
       bank_hk: [],
       currencyOptions: currencyOptions,
@@ -524,7 +528,7 @@ export default {
     },
   },
   watch: {
-    "model.withdrawMoney": function (newVal, oldVal) {
+    "model.withdrawMoney": function(newVal, oldVal) {
       if (!newVal) return "";
       this.model.withdrawMoney = formatNumber(this.model.withdrawMoney, {
         digit: 2,

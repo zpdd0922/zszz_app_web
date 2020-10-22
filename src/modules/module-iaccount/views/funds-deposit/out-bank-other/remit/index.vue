@@ -73,7 +73,7 @@
                   v-else
                   v-model="model.depositBankNameOther"
                   type="text"
-                  maxlength="150"
+                  :maxlength="maxLength.ONE_HUNDRED"
                   :placeholder="$t('iAccount.deposit.remit.text_13')"
                 />
               </div>
@@ -118,7 +118,7 @@
                   <input
                     v-model="model.depositBankAccount"
                     type="text"
-                    maxlength="30"
+                    :maxlength="maxLength.THIRTY_TWO"
                     :placeholder="$t('iAccount.deposit.remit.text_5')"
                   />
                   <div
@@ -151,7 +151,7 @@
                   <input
                     v-model="model.depositBankAccountAgain"
                     type="text"
-                    maxlength="30"
+                    :maxlength="maxLength.THIRTY_TWO"
                     :placeholder="$t('iAccount.deposit.remit.text_5')"
                   />
                   <div
@@ -178,10 +178,11 @@
                 <div class="cube-input">
                   <input
                     v-model="model.depositMoney"
-                    type="text"
+                    type="tel"
                     :placeholder="$t('iAccount.deposit.remit.text_6')"
                     @focus="_focusMoneyInput"
                     @blur="_blurMoneyInput"
+                    :maxlength="maxLength.THIRTY_TWO"
                   />
                   <div class="cube-input-append">
                     <span class="txt">{{ depositCurrency.name }}</span>
@@ -220,6 +221,7 @@ import {
 } from "@/modules/module-iaccount/define";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
 import validate from "@/main/utils/format/validate";
+import {MAX_LENGTH} from "@/modules/module-iaccount/define/maxLength";
 
 const EXAMPLE_BANK = {
   foot: [
@@ -232,6 +234,8 @@ const EXAMPLE_BANK = {
 export default {
   data() {
     return {
+      maxLength: MAX_LENGTH,
+
       dataRemit: EXAMPLE_BANK,
       file: {},
       depositSelectBankAccount: "",
@@ -391,13 +395,19 @@ export default {
           depositBankAccountAgain,
         } = this.model;
 
-        // 校验银行名字是否正确
-        if (this.isShowOther && !validate.isBankName(depositBankNameOther)) {
-          const msg = this.$t("iAccount.commonError.wrongBankName");
-          tips.toast({ txt: msg });
-          return reject(msg);
+        //校验银行名字字段
+        const checkList = [
+          {
+            val: this.model.depositBankNameOther,
+            msg: this.$t('iAccount.commonWarn.depositBankNameOther'),
+            func: validate.isBankName,
+            preCondition: this.isShowOther
+          }
+        ]
+        const result = this.checkList(checkList)
+        if (!result) {
+          return reject();
         }
-
         // 过滤历史入金银行存在情况
         if (
           this.depositSelectBankAccount === "add" &&

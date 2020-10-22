@@ -49,7 +49,7 @@
               <input
                 v-model="model.withdrawBankNameOther"
                 type="text"
-                maxlength="150"
+                :maxlength="maxLength.ONE_HUNDRED"
                 :placeholder="$t('iAccount.withdraw.request.text_32')"
               />
             </div>
@@ -76,7 +76,7 @@
                 v-else
                 v-model="model.withdrawBankAccount"
                 type="text"
-                maxlength="30"
+                :maxlength="maxLength.THIRTY_TWO"
                 :placeholder="$t('iAccount.withdraw.request.text_7')"
               />
             </div>
@@ -102,8 +102,8 @@
             <div class="filed-item border-bottom-1px">
               <input
                 v-model="model.withdrawBankAccountAgain"
-                type="text"
-                maxlength="30"
+                type="tel"
+                :maxlength="maxLength.THIRTY_TWO"
                 :placeholder="$t('iAccount.withdraw.request.text_9')"
               />
             </div>
@@ -126,8 +126,8 @@
               <div class="filed-item border-bottom-1px">
                 <input
                   v-model="model.swiftCode"
-                  type="text"
-                  maxlength="50"
+                  type="tel"
+                  :maxlength="maxLength.FIFTY"
                   :placeholder="
                     $t('iAccount.withdraw.request.text_11', {
                       name: getSwiftCodeName,
@@ -157,7 +157,7 @@
                 <input
                   v-model="model.address"
                   type="text"
-                  maxlength="50"
+                  :maxlength="maxLength.ONE_HUNDRED"
                   :placeholder="$t('iAccount.withdraw.request.text_14')"
                 />
               </div>
@@ -211,6 +211,7 @@
                 :placeholder="$t('iAccount.withdraw.request.text_18')"
                 @focus="_focusMoneyInput"
                 @blur="_blurMoneyInput"
+                :maxlength="maxLength.THIRTY_TWO"
               />
             </div>
             <div class="filed-msg">
@@ -321,12 +322,16 @@ import { tradeUnlock } from "@/main/utils/native-app/";
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
 import validate from "@/main/utils/format/validate";
+import { MAX_LENGTH } from "@/modules/module-iaccount/define/maxLength";
+import { isRealLength } from "@/main/utils/format/is";
 
 export default {
   mixins: [commonMixin],
   data() {
     const currencyOptions = this.$t("iAccount.define.CURRENCY");
     return {
+      maxLength: MAX_LENGTH,
+
       showCaptcha: false,
       currencyOptions: currencyOptions,
       money: "",
@@ -447,11 +452,31 @@ export default {
           withdrawMoney,
           withdrawBankNameOther,
         } = this.model;
-        // 校验银行名字是否正确
-        if (!validate.isBankName(withdrawBankNameOther) && this.isShowOther) {
-          const msg = this.$t("iAccount.withdraw.request.wrongBankName");
-          tips.toast({ txt: msg });
-          return reject(msg);
+
+        //校验银行名字字段
+        const checkList = [
+          {
+            val: this.model.withdrawBankNameOther,
+            msg: this.$t("iAccount.commonWarn.withdrawBankNameOther"),
+            func: validate.isBankName,
+            preCondition: this.isShowOther,
+          },
+          {
+            val: this.model.swiftCode,
+            msg: this.$t("iAccount.commonWarn.swiftCode"),
+            func: validate.isAccountNum,
+            preCondition: this.isBank_CN || this.isBank_other,
+          },
+          {
+            val: this.model.address,
+            msg: this.$t("iAccount.commonWarn.address"),
+            func: isRealLength,
+            preCondition: this.isBank_CN || this.isBank_other,
+          },
+        ];
+        const result = this.checkList(checkList);
+        if (!result) {
+          return reject();
         }
         // 过滤历史出金银行存在情况
         if (
@@ -487,7 +512,7 @@ export default {
     },
     _handleNext() {
       // if (this.UaInfo.isApp()) {
-        // App 交易解锁
+      // App 交易解锁
       //   tradeUnlock({
       //     success: (res) => {
       //       const result = JSON.parse(res.data);
@@ -504,7 +529,7 @@ export default {
       //     },
       //   });
       // } else {
-        this.showCaptcha = true;
+      this.showCaptcha = true;
       // }
       // this.showCaptcha = true;
     },
@@ -615,19 +640,19 @@ export default {
     },
   },
   watch: {
-    "model.withdrawBankAccount": function (newVal, oldVal) {
+    "model.withdrawBankAccount": function(newVal, oldVal) {
       if (!newVal) return "";
       const num = formatNumber(formatToDBC(newVal));
       // this.model.withdrawBankAccount = formatStepSpace(num);
       this.model.withdrawBankAccount = num;
     },
-    "model.withdrawBankAccountAgain": function (newVal, oldVal) {
+    "model.withdrawBankAccountAgain": function(newVal, oldVal) {
       if (!newVal) return "";
       const num = formatNumber(formatToDBC(newVal));
       // this.model.withdrawBankAccountAgain = formatStepSpace(num);
       this.model.withdrawBankAccountAgain = num;
     },
-    "model.withdrawMoney": function (newVal, oldVal) {
+    "model.withdrawMoney": function(newVal, oldVal) {
       if (!newVal) return "";
       this.model.withdrawMoney = formatNumber(this.model.withdrawMoney, {
         digit: 2,
@@ -636,4 +661,3 @@ export default {
   },
 };
 </script>
-

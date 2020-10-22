@@ -72,6 +72,7 @@
             <cube-input
               v-model="otherValue"
               :placeholder="$t('iAccount.company_act.placeholder.text_2')"
+              :maxlength="maxLength.TWENTY"
             ></cube-input>
           </div>
         </div>
@@ -85,9 +86,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="scriptStockNum"
               :placeholder="$t('iAccount.company_act.placeholder.text_3')"
+              @input="toMaxLength('scriptStockNum')"
             ></cube-input>
           </div>
         </div>
@@ -98,9 +100,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="scriptCashNum"
               :placeholder="$t('iAccount.company_act.placeholder.text_4')"
+              @input="toMaxLength('scriptCashNum')"
             ></cube-input>
           </div>
         </div>
@@ -114,9 +117,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="shareExchangeNum"
               :placeholder="$t('iAccount.company_act.placeholder.text_5')"
+              @input="toMaxLength('shareExchangeNum')"
             ></cube-input>
           </div>
         </div>
@@ -130,9 +134,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="rightSubscriptionNum2"
               :placeholder="$t('iAccount.company_act.placeholder.text_6')"
+              @input="toMaxLength('rightSubscriptionNum2')"
             ></cube-input>
           </div>
         </div>
@@ -144,9 +149,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="rightSubscriptionNum3"
               :placeholder="$t('iAccount.company_act.placeholder.text_7')"
+              @input="toMaxLength('rightSubscriptionNum3')"
             ></cube-input>
           </div>
         </div>
@@ -160,9 +166,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="offerSubscriptionNum2"
               :placeholder="$t('iAccount.company_act.placeholder.text_6')"
+              @input="toMaxLength('offerSubscriptionNum2')"
             ></cube-input>
           </div>
         </div>
@@ -174,9 +181,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="offerSubscriptionNum3"
               :placeholder="$t('iAccount.company_act.placeholder.text_7')"
+              @input="toMaxLength('offerSubscriptionNum3')"
             ></cube-input>
           </div>
         </div>
@@ -190,9 +198,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="cashOfferNum"
               :placeholder="$t('iAccount.company_act.placeholder.text_9')"
+              @input="toMaxLength('cashOfferNum')"
             ></cube-input>
           </div>
         </div>
@@ -206,9 +215,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="warrantsConversionNum"
               :placeholder="$t('iAccount.company_act.placeholder.text_10')"
+              @input="toMaxLength('warrantsConversionNum')"
             ></cube-input>
           </div>
         </div>
@@ -222,9 +232,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="preferentialOfferNum2"
               :placeholder="$t('iAccount.company_act.placeholder.text_6')"
+              @input="toMaxLength('preferentialOfferNum2')"
             ></cube-input>
           </div>
         </div>
@@ -236,9 +247,10 @@
           </div>
           <div class="content border-bottom-1px">
             <cube-input
-              type="tel"
+              type="number"
               v-model="preferentialOfferNum3"
               :placeholder="$t('iAccount.company_act.placeholder.text_7')"
+              @input="toMaxLength('preferentialOfferNum3')"
             ></cube-input>
           </div>
         </div>
@@ -247,7 +259,7 @@
         <div class="label">{{ $t("iAccount.company_act.label.text_12") }}</div>
         <div class="content border-bottom-1px">
           <cube-textarea
-            v-model="remark"
+            v-model.trim="remark"
             :maxlength="200"
             :indicator="{ negtive: true, remain: true }"
             :autoExpand="true"
@@ -370,6 +382,7 @@ import i18n from '@/modules/module-iaccount/locale'
 import SecApi from '@/modules/module-iaccount/api/modules/api-sec'
 import SecuritiesApi from '@/modules/module-iaccount/api/modules/api-securities'
 import { toast } from '@/main/utils/common/tips/';
+import { MAX_LENGTH } from "@/modules/module-iaccount/define/maxLength";
 
 
 
@@ -397,6 +410,7 @@ const PREFERENTIAL_OFFER = i18n.t('iAccount.define.PREFERENTIAL_OFFER')
 export default {
   data () {
     return {
+      maxLength: MAX_LENGTH,
       remark: '',
       options: [],
       bourseValue: this.$route.query.market || 'HKEX',
@@ -728,6 +742,16 @@ export default {
       this.handleBefore().then(() => {
         this.dialogStatus = true
       })
+    },
+    //控制输入的字符串长度
+    toMaxLength(key) {
+      const val = this.$data[key]
+      if (val && val.length> MAX_LENGTH.TWENTY) {
+        const temp = val.substring(0, MAX_LENGTH.TWENTY)
+        this.$nextTick(() => {
+          this.$data[key] = temp
+        })
+      }
     }
   }
 }

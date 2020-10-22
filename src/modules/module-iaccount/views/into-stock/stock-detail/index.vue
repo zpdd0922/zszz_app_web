@@ -18,12 +18,13 @@
             <input
               type="text"
               name="sharesCode"
-              v-model="stockList[idx].sharesCode"
+              v-model.trim="stockList[idx].sharesCode"
               @keyup="debouncedGetStockList(idx)"
               autocomplete="off"
               :placeholder="getI18n('stockNamePlaceholder')"
               @focus="goToSearch(idx)"
               :disabled="!item.isInputActive"
+              :maxlength="maxLength.TWENTY"
             />
             <div class="list-box" v-if="isSearch && item.isInputActive">
               <!-- <div class="list-box" v-if="true"> -->
@@ -51,18 +52,19 @@
                 <div class="no-result" v-else>
                   <span>{{ getI18n("noResult") }}</span>
                 </div>
-                <div class="close-search" @click="closeSearch(idx)">X</div>
               </template>
+              <div class="close-search" @click="closeSearch(idx)">X</div>
             </div>
           </div>
           <div class="item-column">
             <label for="sharesNum">{{ getI18n("sharesNum") }}</label>
             <input
-              type="text"
+              type="tel"
               name="sharesNum"
               v-model="stockList[idx].sharesNum"
               :placeholder="getI18n('quantityPlaceholder')"
               :disabled="!item.isInputActive"
+              :maxlength="maxLength.TWENTY"
             />
           </div>
           <!-- <cube-form-item :field="numberField"></cube-form-item> -->
@@ -89,10 +91,13 @@ import { mapGetters } from "vuex";
 import Storage from "@/main/utils/cache/localstorage";
 import { debounce } from "@/modules/module-iaccount/utils/common";
 // import _ from "lodash";
+import { MAX_LENGTH } from "@/modules/module-iaccount/define/maxLength";
 
 export default {
+  mixins: [commonMixin],
   data() {
     return {
+      maxLength: MAX_LENGTH,
       // debounce,
       isUpdating: false, // 刷新状态
       searchStockList: [], // 搜索结果
@@ -153,7 +158,14 @@ export default {
 
     getStockList(idx) {
       let data = {};
-      const inputVal = this.stockList[idx].sharesCode;
+      const inputVal = this.stockList[idx].sharesCode.replace(/\s+/g, '');
+      this.$nextTick(() => {
+        this.stockList[idx].sharesCode = inputVal; 
+      })
+
+      if (!inputVal) {
+        return
+      }
       if (inputVal.length === 0) {
         this.searchStockList = [];
         return;
@@ -296,15 +308,18 @@ export default {
     saveStock(idx) {
       const stockClicked = this.stockList[idx];
       if (!stockClicked.sharesCode) {
-        this.showNoStockNameWarn();
+        // this.showNoStockNameWarn();
+        this.commonToast(this.getI18n("noStockNameWarn"))
         return;
       }
       if (!/^[1-9]+[\d]*$/.test(stockClicked.sharesNum)) {
-        this.showNoQuantityWarn();
+        // this.showNoQuantityWarn();
+        this.commonToast(this.getI18n("noQuantityWarn"))
         return;
       }
       if (!stockClicked.sharesName) {
-        this.showNoSharesNameWarn();
+        // this.showNoSharesNameWarn();
+        this.commonToast(this.getI18n("noSharesNameWarn"))
         return
       }
       if (this.stockList.length > 1) {
@@ -312,7 +327,8 @@ export default {
           .slice(0, idx)
           .concat(this.stockList.slice(idx + 1));
         if (list.some((item) => item.sharesCode === stockClicked.sharesCode)) {
-          this.showRepeatWarn();
+          // this.showRepeatWarn();
+        this.commonToast(this.getI18n("repeatWarn"))
           return;
         }
       }
@@ -320,39 +336,6 @@ export default {
       //所有按钮激活，输入框禁用
       this.isCanOperate = true;
       this.isAddBtnActive = true;
-    },
-    // 提示框
-    showNoStockNameWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("noStockNameWarn"),
-      });
-      toast.show();
-    },
-    showNoQuantityWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("noQuantityWarn"),
-      });
-      toast.show();
-    },
-    showRepeatWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("repeatWarn"),
-      });
-      toast.show();
-    },
-    showNoSharesNameWarn() {
-      const toast = this.$createToast({
-        type: "txt",
-        time: 1000,
-        txt: this.getI18n("noSharesNameWarn"),
-      });
-      toast.show();
     },
     goToSearch(index) {
       if (!this.isCanOperate && this.stockList[index].isInputActive) {

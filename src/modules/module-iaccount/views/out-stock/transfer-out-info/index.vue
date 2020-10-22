@@ -90,6 +90,7 @@ import validate from "@/main/utils/format/validate";
 import { isRealLength } from "@/main/utils/format/is";
 import commonMixin from "@/modules/module-iaccount/mixins/common";
 import { mapGetters } from "vuex";
+import { MAX_LENGTH } from "@/modules/module-iaccount/define/maxLength";
 
 export default {
   mixins: [commonMixin],
@@ -142,6 +143,8 @@ export default {
           props: {
             // title: this.$t("common.cubeComponents.select.title"),
             placeholder: this.getI18n("receiveInfo.accountNumber.placeholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
           rules: {
             required: false,
@@ -156,6 +159,8 @@ export default {
             title: this.$t("common.cubeComponents.select.title"),
             readonly: true,
             placeholder: this.getI18n("receiveInfo.accountName.placeholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
           rules: {
             required: false,
@@ -170,6 +175,8 @@ export default {
             placeholder: this.getI18n(
               "receiveInfo.otherReceiveCompanyName.placeholder"
             ),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
           rules: {
             required: false,
@@ -182,6 +189,8 @@ export default {
           label: this.getI18n("receiveInfo.ccass.label"),
           props: {
             placeholder: this.getI18n("receiveInfo.ccass.placeholder"),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
           rules: {
             required: false,
@@ -196,6 +205,8 @@ export default {
             placeholder: this.getI18n(
               "receiveInfo.rolloutContacts.placeholder"
             ),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
           rules: {
             required: false,
@@ -210,6 +221,8 @@ export default {
             placeholder: this.getI18n(
               "receiveInfo.contactsPhoneNum.placeholder"
             ),
+            maxlength: MAX_LENGTH.TWENTY
+
           },
           rules: {
             required: false,
@@ -485,24 +498,45 @@ export default {
     },
     // 如果券商选择为其他，数据校验
     handleBefore() {
-      if (this.transferOutInfoModel.transferOutCompany === "OTH") {
-        // 检测ccass号码格式正确
-        const validateCCASS =
-          this.transferOutInfoModel.ccass &&
-          /^[A-Za-z0-9]+$/.test(this.transferOutInfoModel.ccass);
-        console.log(validateCCASS);
-        // 检测手机号格式正确
-        const validateContactsPhoneNum =
-          this.transferOutInfoModel.contactsPhoneNum &&
-          /^[0-9]+$/.test(this.transferOutInfoModel.contactsPhoneNum);
-        if (!validateCCASS) {
-          this.showCCASSWarn();
-          return false;
-        }
-        if (!validateContactsPhoneNum) {
-          this.showContactsPhoneNumWarn();
-          return false;
-        }
+      const checkList = [
+        {
+          val: this.transferOutInfoModel.otherTransferOutCompanyName,
+          func: isRealLength,
+          preCondition: this.transferOutInfoModel.transferOutCompany === 'OTH',
+          msg: this.getI18n('warn.otherTransferOutCompanyName'),
+        },
+        {
+          val: this.transferOutInfoModel.accountNumber,
+          func: validate.isAccountNum,
+          msg: this.getI18n('warn.accountNumber'),
+        },
+        {
+          val: this.transferOutInfoModel.accountName,
+          func: isRealLength,
+          msg: this.getI18n('warn.accountName'),
+        },
+        {
+          val: this.transferOutInfoModel.ccass,
+          func: validate.isBankNum,
+          preCondition: this.transferOutInfoModel.transferOutCompany === 'OTH',
+          msg: this.getI18n('warn.ccass'),
+        },
+        {
+          val: this.transferOutInfoModel.rolloutContacts,
+          func: isRealLength,
+          preCondition: this.transferOutInfoModel.transferOutCompany === 'OTH',
+          msg: this.getI18n('warn.rolloutContacts'),
+        },
+        {
+          val: this.transferOutInfoModel.contactsPhoneNum,
+          func: validate.isMobile,
+          preCondition: this.transferOutInfoModel.transferOutCompany === 'OTH',
+          msg: this.getI18n('warn.contactsPhoneNum'),
+        },
+      ]
+      const result = this.checkList(checkList)
+      if (!result) {
+        return false
       }
       return true;
     },
@@ -534,20 +568,6 @@ export default {
         this.$router.push({
           name: "outStockDetail",
         });
-      });
-    },
-    showCCASSWarn() {
-      toast({
-        type: "txt",
-        txt: this.getI18n("warn.ccassWarn"),
-        time: 1000,
-      });
-    },
-    showContactsPhoneNumWarn() {
-      toast({
-        type: "txt",
-        txt: this.getI18n("warn.contactsPhoneNumWarn"),
-        time: 1000,
       });
     },
   },

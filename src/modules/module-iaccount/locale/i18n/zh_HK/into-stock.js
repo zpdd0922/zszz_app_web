@@ -52,10 +52,15 @@ export const intoStock = {
       },
     },
     warn: {
-      ccassWarn: "請輸入正確的CCASS號碼",
-      contactsPhoneNumWarn: "請輸入正確的聯繫人電話",
+      otherTransferOutCompanyName: "請輸入正確的券商名稱",
+      accountNumber: "請輸入正確的帳戶號碼",
+      accountName: "請輸入正確的帳戶名稱",
+      ccass: "請輸入正確的CCASS號碼",
+      rolloutContacts: "請輸入正確的聯繫人",
+      contactsPhoneNum: "請輸入正確的聯繫人電話",
     },
-    tips:"賬戶姓名：需與立橋賬戶$clientNameCn$ ($clientNameEn$) 同名，不允許使用第三方帳戶轉入股票",
+    tips:
+      "賬戶姓名：需與立橋賬戶$clientNameCn$ ($clientNameEn$) 同名，不允許使用第三方帳戶轉入股票",
     tips1: "帳戶姓名：需與立橋帳戶同名(",
     tips2: "),不允許使用第三方帳戶轉入股票",
   },

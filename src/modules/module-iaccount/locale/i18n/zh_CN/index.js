@@ -669,8 +669,11 @@ export default {
         text_33: "证券流向",
       },
     },
-    commonError: {
-      wrongBankName: '请输入正确的银行名称',
+    commonWarn: {
+      depositBankNameOther: '请输入正确的银行名称',
+      swiftCode: '请输入正确的swiftCode',
+      address: '请输入正确的地址',
+      withdrawBankNameOther: '请输入正确的银行名称'
     }
   },
 };
