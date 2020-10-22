@@ -12,7 +12,7 @@
     webDownload: './download.html',
     webInformation: 'http://106.52.75.112:6003/webstatic/Infomation/newsdetail.html',
     webHelpCenter: 'http://106.52.75.112:6003/webstatic/helpCenter1/help.html',
-    webAgreement: 'http://106.52.75.112:6003/sunline/doucment/index.html',
+    webAgreement: 'http://106.52.75.112:6003/sunline/document/index.html',
   };
 
   window._GLOBAL_ENV_CONFIG = GLOBAL_ENV_CONFIG;
