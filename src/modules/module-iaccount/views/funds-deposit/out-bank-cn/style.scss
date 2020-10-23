@@ -1,6 +1,6 @@
-@import 'bank-list/style.scss';
-@import 'ways/style.scss';
-
+@import './bank-list/style.scss';
+@import './ways/style.scss';
+@import './remit/style.scss';
 .sec-remit {
   .other {
     display: flex;

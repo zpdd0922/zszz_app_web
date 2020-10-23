@@ -471,7 +471,7 @@ export default {
             val: this.model.address,
             msg: this.$t("iAccount.commonWarn.address"),
             func: isRealLength,
-            preCondition: this.isBank_CN || this.isBank_other,
+            preCondition: this.model.address,
           },
         ];
         const result = this.checkList(checkList);

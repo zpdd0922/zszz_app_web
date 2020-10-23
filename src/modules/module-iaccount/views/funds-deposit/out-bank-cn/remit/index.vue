@@ -221,6 +221,7 @@ import { OTHER, LIMIT_BANK } from "@/modules/module-iaccount/define";
 import SecApi from "@/modules/module-iaccount/api/modules/api-sec";
 import validate from "@/main/utils/format/validate";
 import {MAX_LENGTH} from "@/modules/module-iaccount/define/maxLength";
+import commonMixin from "@/modules/module-iaccount/mixins/common";
 
 const EXAMPLE_BANK = {
   foot: [
@@ -231,6 +232,7 @@ const EXAMPLE_BANK = {
 };
 
 export default {
+  mixins: [commonMixin],
   data() {
     return {
       maxLength: MAX_LENGTH,
